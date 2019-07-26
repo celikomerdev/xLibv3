@@ -1,13 +1,13 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 
 namespace xLib.ToolTween
 {
 	public class TweenLocalPositionAdd : Tween
 	{
-		public Transform target;
-		public Vector3 min;
-		public Vector3 max;
+		[SerializeField]private Transform target;
+		[SerializeField]private Vector3 min;
+		[SerializeField]private Vector3 max;
 		
 		override protected void SetRatio(float value)
 		{

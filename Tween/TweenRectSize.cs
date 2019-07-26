@@ -1,14 +1,14 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 
 namespace xLib.ToolTween
 {
 	public class TweenRectSize : Tween
 	{
-		public RectTransform target;
-		public RectTransform.Axis axis = RectTransform.Axis.Vertical;
-		public float from = 0;
-		public float to = 1;
+		[SerializeField]private RectTransform target;
+		[SerializeField]private RectTransform.Axis axis = RectTransform.Axis.Vertical;
+		[SerializeField]private float from = 0;
+		[SerializeField]private float to = 1;
 		
 		override protected void SetRatio(float value)
 		{

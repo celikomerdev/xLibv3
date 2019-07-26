@@ -1,13 +1,13 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 
 namespace xLib.ToolTween
 {
 	public class TweenGameObject : Tween
 	{
-		public GameObject target;
-		public float threshold = 0;
-		public bool reverse;
+		[SerializeField]private GameObject target;
+		[SerializeField]private float threshold = 0;
+		[SerializeField]private bool reverse;
 		
 		override protected void SetRatio(float value)
 		{

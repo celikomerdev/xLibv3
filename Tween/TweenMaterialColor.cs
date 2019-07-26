@@ -1,14 +1,14 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 
 namespace xLib.ToolTween
 {
 	public class TweenMaterialColor : Tween
 	{
-		public Material material;
-		public string propertyName;
-		public Color from;
-		public Color to;
+		[SerializeField]private Material material;
+		[SerializeField]private string propertyName;
+		[SerializeField]private Color from;
+		[SerializeField]private Color to;
 		
 		override protected void SetRatio(float value)
 		{

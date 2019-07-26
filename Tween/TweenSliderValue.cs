@@ -1,4 +1,4 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,9 +6,9 @@ namespace xLib.ToolTween
 {
 	public class TweenSliderValue : Tween
 	{
-		public Slider target;
-		public float from;
-		public float to;
+		[SerializeField]private Slider target;
+		[SerializeField]private float from;
+		[SerializeField]private float to;
 		
 		override protected void SetRatio(float value)
 		{

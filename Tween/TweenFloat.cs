@@ -1,14 +1,14 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
 namespace xLib.ToolTween
 {
 	public class TweenFloat : Tween
 	{
-		public float from;
-		public float to;
-		public EventFloat eventFloat;
+		[SerializeField]private float from;
+		[SerializeField]private float to;
+		[SerializeField]private EventFloat eventFloat;
 		
 		override protected void SetRatio(float value)
 		{

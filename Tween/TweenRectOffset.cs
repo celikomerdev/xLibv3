@@ -1,21 +1,21 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 
 namespace xLib.ToolTween
 {
 	public class TweenRectOffset : Tween
 	{
-		public RectTransform target;
+		[SerializeField]private RectTransform target;
 		
 		[Tooltip("Left - Bottom")]
-		public Vector2 fromMin;
+		[SerializeField]private Vector2 fromMin;
 		[Tooltip("Right - Top")]
-		public Vector2 fromMax;
+		[SerializeField]private Vector2 fromMax;
 		
 		[Tooltip("Left - Bottom")]
-		public Vector2 toMin;
+		[SerializeField]private Vector2 toMin;
 		[Tooltip("Right - Top")]
-		public Vector2 toMax;
+		[SerializeField]private Vector2 toMax;
 		
 		override protected void SetRatio(float value)
 		{

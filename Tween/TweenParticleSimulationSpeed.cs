@@ -1,14 +1,14 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 
 namespace xLib.ToolTween
 {
 	public class TweenParticleSimulationSpeed : Tween
 	{
-		public ParticleSystem target;
-		private ParticleSystem.MainModule module;
-		public float from;
-		public float to;
+		[SerializeField]private ParticleSystem target;
+		[SerializeField]private ParticleSystem.MainModule module;
+		[SerializeField]private float from;
+		[SerializeField]private float to;
 		
 		public override void Awake()
 		{

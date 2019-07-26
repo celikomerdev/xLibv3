@@ -1,13 +1,13 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 
 namespace xLib.ToolTween
 {
 	public class TweenLocalScale : Tween
 	{
-		public Transform target;
-		public Vector3 from = Vector3.one;
-		public Vector3 to = Vector3.one;
+		[SerializeField]private Transform target;
+		[SerializeField]private Vector3 from = Vector3.one;
+		[SerializeField]private Vector3 to = Vector3.one;
 		
 		override protected void SetRatio(float value)
 		{

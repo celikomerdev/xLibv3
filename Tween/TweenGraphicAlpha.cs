@@ -1,4 +1,4 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,9 +6,9 @@ namespace xLib.ToolTween
 {
 	public class TweenGraphicAlpha : Tween
 	{
-		public Graphic target;
-		public float from;
-		public float to;
+		[SerializeField]private Graphic target;
+		[SerializeField]private float from;
+		[SerializeField]private float to;
 		
 		override protected void SetRatio(float value)
 		{

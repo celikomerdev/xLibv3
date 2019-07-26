@@ -1,13 +1,13 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
 namespace xLib.ToolTween
 {
 	public class TweenGradient : Tween
 	{
-		public Gradient fromTo;
-		public EventColor eventColor;
+		[SerializeField]private Gradient fromTo;
+		[SerializeField]private EventColor eventColor;
 		
 		override protected void SetRatio(float value)
 		{

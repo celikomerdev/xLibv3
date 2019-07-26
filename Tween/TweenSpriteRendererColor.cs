@@ -1,14 +1,13 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace xLib.ToolTween
 {
 	public class TweenSpriteRendererColor : Tween
 	{
-		public SpriteRenderer target;
-		public Color from;
-		public Color to;
+		[SerializeField]private SpriteRenderer target;
+		[SerializeField]private Color from;
+		[SerializeField]private Color to;
 		
 		override protected void SetRatio(float value)
 		{

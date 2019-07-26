@@ -1,15 +1,15 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 
 namespace xLib.ToolTween
 {
 	public class TweenRectAnchor : Tween
 	{
-		public RectTransform target;
-		public Vector2 fromMin;
-		public Vector2 fromMax;
-		public Vector2 toMin;
-		public Vector2 toMax;
+		[SerializeField]private RectTransform target;
+		[SerializeField]private Vector2 fromMin;
+		[SerializeField]private Vector2 fromMax;
+		[SerializeField]private Vector2 toMin;
+		[SerializeField]private Vector2 toMax;
 		
 		override protected void SetRatio(float value)
 		{

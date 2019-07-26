@@ -1,13 +1,13 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 
 namespace xLib.ToolTween
 {
 	public class TweenCanvasAlpha : Tween
 	{
-		public CanvasGroup target;
-		public float from;
-		public float to;
+		[SerializeField]private CanvasGroup target;
+		[SerializeField]private float from;
+		[SerializeField]private float to;
 		
 		override protected void SetRatio(float value)
 		{

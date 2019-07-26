@@ -1,4 +1,4 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ namespace xLib.ToolTween
 {
 	public class TweenGroup : Tween
 	{
-		public GameObject[] target;
+		[SerializeField]private GameObject[] target;
 		private List<Tween> tweens = new List<Tween>();
 		
 		public override void Awake()

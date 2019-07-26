@@ -1,13 +1,13 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 
 namespace xLib.ToolTween
 {
 	public class TweenTransformRotation : Tween
 	{
-		public Transform target;
-		public Transform from;
-		public Transform to;
+		[SerializeField]private Transform target;
+		[SerializeField]private Transform from;
+		[SerializeField]private Transform to;
 		
 		override protected void SetRatio(float value)
 		{
