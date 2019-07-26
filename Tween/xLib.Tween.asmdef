@@ -1,0 +1,16 @@
+{
+    "name": "xLib.Tween",
+    "references": [
+        "GUID:1aa3b69454061484eb377cb147015233",
+        "GUID:b211c5d5a2fde9c4cb7274d93eb61545"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

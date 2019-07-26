@@ -1,0 +1,15 @@
+{
+    "name": "xLib.EventClass",
+    "references": [
+        "GUID:b211c5d5a2fde9c4cb7274d93eb61545"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
