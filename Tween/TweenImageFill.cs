@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace xLib.ToolTween
+namespace xLib.xTween
 {
 	public class TweenImageFill : Tween
 	{

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace xLib.ToolTween
+namespace xLib.xTween
 {
 	public class TweenGroup : Tween
 	{

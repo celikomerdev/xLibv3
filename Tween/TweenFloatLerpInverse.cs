@@ -2,7 +2,7 @@
 using UnityEngine;
 using xLib.EventClass;
 
-namespace xLib.ToolTween
+namespace xLib.xTween
 {
 	public class TweenFloatLerpInverse : Tween
 	{

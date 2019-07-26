@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace xLib.ToolTween
+namespace xLib.xTween
 {
 	public class TweenAudioMixerFloat : Tween
 	{

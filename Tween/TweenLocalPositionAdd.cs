@@ -1,7 +1,7 @@
 ﻿#if xLibv3
 using UnityEngine;
 
-namespace xLib.ToolTween
+namespace xLib.xTween
 {
 	public class TweenLocalPositionAdd : Tween
 	{
