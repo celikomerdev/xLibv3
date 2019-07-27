@@ -17,13 +17,13 @@ namespace xLib
 		public BaseRegisterInfo baseRegister = new BaseRegisterInfo();
 		
 		private static int order;
-		internal static int Order
+		public static int Order
 		{
 			get
 			{
 				return order;
 			}
-			set
+			internal set
 			{
 				if(order == value) return;
 				order = value;
@@ -80,7 +80,7 @@ namespace xLib
 		
 		
 		#if UNITY_EDITOR
-		internal override void CheckErrors()
+		public override void CheckErrors()
 		{
 			base.CheckErrors();
 			if(Order != baseRegister.order) xDebug.LogExceptionFormat(this,this.name+":Order:{0}:order:{1}",Order,baseRegister.order);

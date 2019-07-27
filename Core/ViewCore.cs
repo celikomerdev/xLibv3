@@ -60,11 +60,27 @@ namespace xLib
 		#endregion
 		
 		
-		internal static string finalId;
-		internal static void FinalizeId()
+		public static bool inRoom;
+		public static bool inRpc;
+		public static void RPC(string target,string key,string data){}
+		
+		private static string finalId;
+		public static string FinalId
 		{
-			if(isMy) finalId = "0";
-			else finalId = CurrentId;
+			get
+			{
+				return finalId;
+			}
+			private set
+			{
+				finalId = value;
+			}
+		}
+		
+		public static void FinalizeId()
+		{
+			if(isMy) FinalId = "0";
+			else FinalId = CurrentId;
 		}
 	}
 }

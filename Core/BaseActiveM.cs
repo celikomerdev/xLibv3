@@ -168,12 +168,12 @@ namespace xLib
 		
 		
 		#if UNITY_EDITOR
-		internal virtual void CheckErrors()
+		public virtual void CheckErrors()
 		{
 			if(ViewCore.CurrentId != ViewId) xDebug.LogExceptionFormat(this,this.name+":CurrentId:{0}:viewId:{1}",ViewCore.CurrentId,ViewId);
 		}
 		#else
-		internal virtual void CheckErrors(){}
+		public virtual void CheckErrors(){}
 		#endif
 		
 		internal virtual void FillStatic()

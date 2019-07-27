@@ -1,0 +1,16 @@
+{
+    "name": "xValueMulti",
+    "references": [
+        "GUID:1aa3b69454061484eb377cb147015233",
+        "GUID:851a7bb1db6a21842a6ee0c5cbb4fc8d"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
