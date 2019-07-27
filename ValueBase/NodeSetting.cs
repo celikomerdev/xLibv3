@@ -61,15 +61,13 @@ namespace xLib
 			}
 		}
 		
-		public static bool inRoom;
 		private bool useRpc;
 		internal bool UseRpc
 		{
 			get
 			{
+				if(!ViewCore.inRoom) return false;
 				if(!useRpc) return false;
-				if(!inRoom) return false;
-				//if(!MnMulti.ins.inRoom.Value) return false;
 				return useRpc;
 			}
 			set

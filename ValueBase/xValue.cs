@@ -12,7 +12,7 @@ namespace xLib
 		
 		#region Field
 		[Header("Value")]
-		[SerializeField]internal V value;
+		[SerializeField]internal V value = default(V);
 		#if UNITY_EDITOR
 		private V valueDebug;
 		#endif
