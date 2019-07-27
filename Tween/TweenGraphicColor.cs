@@ -6,9 +6,9 @@ namespace xLib.xTween
 {
 	public class TweenGraphicColor : Tween
 	{
-		[SerializeField]private Graphic target;
-		[SerializeField]private Color from;
-		[SerializeField]private Color to;
+		[SerializeField]private Graphic target = null;
+		[SerializeField]private Color from = Color.white;
+		[SerializeField]private Color to = Color.white;
 		
 		override protected void SetRatio(float value)
 		{

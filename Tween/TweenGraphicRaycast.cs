@@ -6,7 +6,7 @@ namespace xLib.xTween
 {
 	public class TweenGraphicRaycast : Tween
 	{
-		[SerializeField]private Graphic target;
+		[SerializeField]private Graphic target = null;
 		[SerializeField]private float threshold = 0;
 		
 		override protected void SetRatio(float value)

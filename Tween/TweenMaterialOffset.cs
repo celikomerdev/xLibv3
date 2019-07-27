@@ -5,10 +5,10 @@ namespace xLib.xTween
 {
 	public class TweenMaterialOffset : Tween
 	{
-		[SerializeField]private Material material;
-		[SerializeField]private string propertyName;
-		[SerializeField]private Vector2 from;
-		[SerializeField]private Vector2 to;
+		[SerializeField]private Material material = null;
+		[SerializeField]private string propertyName = "";
+		[SerializeField]private Vector2 from = Vector2.zero;
+		[SerializeField]private Vector2 to = Vector2.one;
 		
 		override protected void SetRatio(float value)
 		{

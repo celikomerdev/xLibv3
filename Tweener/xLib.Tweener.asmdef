@@ -2,8 +2,7 @@
     "name": "xLib.Tweener",
     "references": [
         "GUID:1aa3b69454061484eb377cb147015233",
-        "GUID:a7309a0bb7a59f844b33adbf1c65d601",
-        "GUID:0b71c1468e14b984f8e2df6d03462f16"
+        "GUID:a7309a0bb7a59f844b33adbf1c65d601"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

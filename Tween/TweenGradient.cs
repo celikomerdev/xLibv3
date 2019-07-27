@@ -6,8 +6,8 @@ namespace xLib.xTween
 {
 	public class TweenGradient : Tween
 	{
-		[SerializeField]private Gradient fromTo;
-		[SerializeField]private EventColor eventColor;
+		[SerializeField]private Gradient fromTo = new Gradient();
+		[SerializeField]private EventColor eventColor = new EventColor();
 		
 		override protected void SetRatio(float value)
 		{

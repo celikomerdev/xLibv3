@@ -5,9 +5,9 @@ namespace xLib.xTween
 {
 	public class TweenCanvasAlpha : Tween
 	{
-		[SerializeField]private CanvasGroup target;
-		[SerializeField]private float from;
-		[SerializeField]private float to;
+		[SerializeField]private CanvasGroup target = null;
+		[SerializeField]private float from = 0;
+		[SerializeField]private float to = 1;
 		
 		override protected void SetRatio(float value)
 		{

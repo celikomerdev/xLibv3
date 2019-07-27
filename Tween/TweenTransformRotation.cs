@@ -5,9 +5,9 @@ namespace xLib.xTween
 {
 	public class TweenTransformRotation : Tween
 	{
-		[SerializeField]private Transform target;
-		[SerializeField]private Transform from;
-		[SerializeField]private Transform to;
+		[SerializeField]private Transform target = null;
+		[SerializeField]private Transform from = null;
+		[SerializeField]private Transform to = null;
 		
 		override protected void SetRatio(float value)
 		{

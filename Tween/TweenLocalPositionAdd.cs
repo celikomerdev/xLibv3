@@ -5,9 +5,9 @@ namespace xLib.xTween
 {
 	public class TweenLocalPositionAdd : Tween
 	{
-		[SerializeField]private Transform target;
-		[SerializeField]private Vector3 min;
-		[SerializeField]private Vector3 max;
+		[SerializeField]private Transform target = null;
+		[SerializeField]private Vector3 min = Vector3.zero;
+		[SerializeField]private Vector3 max = Vector3.zero;
 		
 		override protected void SetRatio(float value)
 		{

@@ -5,7 +5,7 @@ namespace xLib.xTween
 {
 	public class TweenRectSize : Tween
 	{
-		[SerializeField]private RectTransform target;
+		[SerializeField]private RectTransform target = null;
 		[SerializeField]private RectTransform.Axis axis = RectTransform.Axis.Vertical;
 		[SerializeField]private float from = 0;
 		[SerializeField]private float to = 1;

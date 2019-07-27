@@ -1,6 +1,7 @@
 {
     "name": "xLib.xTween",
     "references": [
+        "GUID:6e197b04eff5d4749b379cc042fe32aa",
         "GUID:1aa3b69454061484eb377cb147015233",
         "GUID:a7309a0bb7a59f844b33adbf1c65d601"
     ],

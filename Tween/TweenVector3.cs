@@ -6,9 +6,9 @@ namespace xLib.xTween
 {
 	public class TweenVector3 : Tween
 	{
-		[SerializeField]private Vector3 from;
-		[SerializeField]private Vector3 to;
-		[SerializeField]private EventVector3 eventVector3;
+		[SerializeField]private Vector3 from = Vector3.zero;
+		[SerializeField]private Vector3 to = Vector3.one;
+		[SerializeField]private EventVector3 eventVector3 = new EventVector3();
 		
 		override protected void SetRatio(float value)
 		{

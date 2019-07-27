@@ -1,9 +1,8 @@
 ﻿#if xLibv3
-#if UnityVideo
 using UnityEngine;
 using UnityEngine.Video;
 
-namespace xLib.ToolTween
+namespace xLib.xTween
 {
 	public class TweenVideoPlayerAlpha : Tween
 	{
@@ -17,5 +16,4 @@ namespace xLib.ToolTween
 		}
 	}
 }
-#endif
 #endif

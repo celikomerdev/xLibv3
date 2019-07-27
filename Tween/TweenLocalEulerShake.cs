@@ -5,9 +5,9 @@ namespace xLib.xTween
 {
 	public class TweenLocalEulerShake : Tween
 	{
-		[SerializeField]private Transform target;
-		[SerializeField]private Vector3 from;
-		[SerializeField]private Vector3 to;
+		[SerializeField]private Transform target = null;
+		[SerializeField]private Vector3 from = Vector3.zero;
+		[SerializeField]private Vector3 to = Vector3.zero;
 		
 		override protected void SetRatio(float value)
 		{

@@ -6,7 +6,7 @@ namespace xLib.xTween
 {
 	public class TweenGroup : Tween
 	{
-		[SerializeField]private GameObject[] target;
+		[SerializeField]private GameObject[] target = new GameObject[0];
 		private List<Tween> tweens = new List<Tween>();
 		
 		public override void Awake()

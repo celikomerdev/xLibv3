@@ -5,17 +5,17 @@ namespace xLib.xTween
 {
 	public class TweenRectOffset : Tween
 	{
-		[SerializeField]private RectTransform target;
+		[SerializeField]private RectTransform target = null;
 		
 		[Tooltip("Left - Bottom")]
-		[SerializeField]private Vector2 fromMin;
+		[SerializeField]private Vector2 fromMin = Vector2.zero;
 		[Tooltip("Right - Top")]
-		[SerializeField]private Vector2 fromMax;
+		[SerializeField]private Vector2 fromMax = Vector2.one;
 		
 		[Tooltip("Left - Bottom")]
-		[SerializeField]private Vector2 toMin;
+		[SerializeField]private Vector2 toMin = Vector2.zero;
 		[Tooltip("Right - Top")]
-		[SerializeField]private Vector2 toMax;
+		[SerializeField]private Vector2 toMax = Vector2.one;
 		
 		override protected void SetRatio(float value)
 		{

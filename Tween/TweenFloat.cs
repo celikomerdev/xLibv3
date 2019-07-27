@@ -6,9 +6,9 @@ namespace xLib.xTween
 {
 	public class TweenFloat : Tween
 	{
-		[SerializeField]private float from;
-		[SerializeField]private float to;
-		[SerializeField]private EventFloat eventFloat;
+		[SerializeField]private float from = 0;
+		[SerializeField]private float to = 1;
+		[SerializeField]private EventFloat eventFloat = new EventFloat();
 		
 		override protected void SetRatio(float value)
 		{

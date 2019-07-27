@@ -6,9 +6,9 @@ namespace xLib.xTween
 {
 	public class TweenSliderValue : Tween
 	{
-		[SerializeField]private Slider target;
-		[SerializeField]private float from;
-		[SerializeField]private float to;
+		[SerializeField]private Slider target = null;
+		[SerializeField]private float from = 0;
+		[SerializeField]private float to = 1;
 		
 		override protected void SetRatio(float value)
 		{

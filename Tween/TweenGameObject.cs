@@ -5,9 +5,9 @@ namespace xLib.xTween
 {
 	public class TweenGameObject : Tween
 	{
-		[SerializeField]private GameObject target;
+		[SerializeField]private GameObject target = null;
 		[SerializeField]private float threshold = 0;
-		[SerializeField]private bool reverse;
+		[SerializeField]private bool reverse = false;
 		
 		override protected void SetRatio(float value)
 		{

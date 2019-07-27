@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if WWW
 using System;
 using UnityEngine;
 using xLib.EventBase;
@@ -16,4 +17,5 @@ namespace xLib.EventClass
 		}
 	}
 }
+#endif
 #endif
