@@ -39,6 +39,10 @@ namespace xLib
 			}
 		}
 		
+		
+		[Header("Analytics")]
+		[SerializeField]internal AnalyticsType analytics = AnalyticsType.Disabled;
+		
 		[Header("Multi")]
 		[SerializeField]internal bool isMulti = false;
 		
@@ -57,13 +61,15 @@ namespace xLib
 			}
 		}
 		
+		public static bool inRoom;
 		private bool useRpc;
 		internal bool UseRpc
 		{
 			get
 			{
-				if(!ViewCore.inRoom) return false;
 				if(!useRpc) return false;
+				if(!inRoom) return false;
+				//if(!MnMulti.ins.inRoom.Value) return false;
 				return useRpc;
 			}
 			set
@@ -72,6 +78,13 @@ namespace xLib
 				if(canDebug) Debug.LogFormat(objDebug,Name+":UseRpc:{0}",useRpc);
 			}
 		}
+	}
+	
+	internal enum AnalyticsType:int
+	{
+		Disabled = 0,
+		Name = 1,
+		Key = 2
 	}
 }
 #endif

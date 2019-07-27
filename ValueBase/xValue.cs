@@ -6,13 +6,13 @@ using UnityEngine.Events;
 
 namespace xLib
 {
-	public abstract class xValue<V>
+	public abstract class xValue<V> : IAnalyticsSend
 	{
 		[SerializeField]internal NodeSetting nodeSetting = new NodeSetting();
 		
 		#region Field
 		[Header("Value")]
-		[SerializeField]internal V value = default(V);
+		[SerializeField]internal V value;
 		#if UNITY_EDITOR
 		private V valueDebug;
 		#endif
@@ -70,8 +70,20 @@ namespace xLib
 			
 			actionSortedBase.Invoke(Value);
 			actionSortedBaseCall.Invoke();
+			AnalyticsRegister();
 			
 			ViewCore.CurrentId = tempId;
+		}
+		
+		private bool analyticsRegister;
+		private void AnalyticsRegister()
+		{
+			if(analyticsRegister) return;
+			if(nodeSetting.analytics==AnalyticsType.Disabled) return;
+			if(!ViewCore.IsMy) return;
+			
+			analyticsRegister = true;
+			ViewCore.arrayAnalytics.Add(this);
 		}
 		
 		#region VirtualAnalytics
@@ -91,6 +103,16 @@ namespace xLib
 			}
 		}
 		#endregion
+		
+		void IAnalyticsSend.AnalyticsSend()
+		{
+			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":AnalyticsSend:{0}:{1}",ViewCore.CurrentId,ValueToString);
+			
+			if(nodeSetting.analytics==AnalyticsType.Name) ViewCore.LogEvent("Value",nodeSetting.objDebug.name,AnalyticLabel,AnalyticValue);
+			else ViewCore.LogEvent("Value",nodeSetting.Key,AnalyticLabel,AnalyticValue);
+			
+			analyticsRegister = false;
+		}
 		#endregion
 		
 		
