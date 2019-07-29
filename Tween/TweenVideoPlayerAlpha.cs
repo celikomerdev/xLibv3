@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if UnityVideo
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -16,4 +17,5 @@ namespace xLib.xTween
 		}
 	}
 }
+#endif
 #endif
