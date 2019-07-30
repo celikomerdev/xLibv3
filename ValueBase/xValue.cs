@@ -8,7 +8,7 @@ namespace xLib
 {
 	public abstract class xValue<V> : IAnalyticsSend
 	{
-		[SerializeField]internal NodeSetting nodeSetting = new NodeSetting();
+		[SerializeField]public NodeSetting nodeSetting = new NodeSetting();
 		
 		#region Field
 		[Header("Value")]
@@ -18,7 +18,7 @@ namespace xLib
 		#endif
 		
 		private ValueBase<V> valueBase = new ValueSingle<V>();
-		internal V ValueDefault
+		public V ValueDefault
 		{
 			get
 			{
@@ -29,14 +29,12 @@ namespace xLib
 				valueBase.valueDefault = value;
 			}
 		}
-		
-		
 		#endregion
 		
 		
 		#region Init
 		private bool isInit;
-		internal void Init(bool init)
+		public void Init(bool init)
 		{
 			if(isInit == init) return;
 			isInit = init;
@@ -256,7 +254,7 @@ namespace xLib
 			}
 		}
 		
-		internal void CallMulti()
+		public void CallMulti()
 		{
 			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallMulti:{0}:{1}",ViewCore.CurrentId,ValueToString);
 			ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObject.ToString());
@@ -305,7 +303,7 @@ namespace xLib
 		
 		
 		#region SerializedObject
-		internal virtual object SerializedObject
+		public virtual object SerializedObject
 		{
 			get
 			{
@@ -328,7 +326,7 @@ namespace xLib
 			}
 		}
 		
-		internal virtual object SerializedObjectName
+		public virtual object SerializedObjectName
 		{
 			get
 			{

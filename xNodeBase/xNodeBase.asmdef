@@ -1,7 +1,8 @@
 {
     "name": "xNodeBase",
     "references": [
-        "GUID:1aa3b69454061484eb377cb147015233"
+        "GUID:1aa3b69454061484eb377cb147015233",
+        "GUID:4a573d61dba2e9a47a70999cc59326d2"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

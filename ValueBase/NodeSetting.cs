@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace xLib
 {
-	[System.Serializable]internal class NodeSetting
+	[System.Serializable]public class NodeSetting
 	{
 		[Header("Debug")]
-		internal bool canDebug = false;
-		internal Object objDebug = null;
+		[HideInInspector]public bool canDebug = false;
+		[HideInInspector]public Object objDebug = null;
 		
 		
 		[Header("Key")]
@@ -48,7 +48,7 @@ namespace xLib
 		
 		
 		private string rpcTarget;
-		internal string RpcTarget
+		public string RpcTarget
 		{
 			get
 			{
@@ -62,7 +62,7 @@ namespace xLib
 		}
 		
 		private bool useRpc;
-		internal bool UseRpc
+		public bool UseRpc
 		{
 			get
 			{
