@@ -30,9 +30,9 @@ namespace xLib.xValueClass
 		#region Call
 		public virtual void Call()
 		{
-			if(nodeSetting.UseRpc && !MnRPC.inRpc)
+			if(nodeSetting.UseRpc && !ViewCore.inRpc)
 			{
-				if(MnPlayer.IsMy)
+				if(ViewCore.IsMy)
 				{
 					CallMulti();
 					return;
@@ -44,20 +44,20 @@ namespace xLib.xValueClass
 		
 		internal void CallMulti()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallMulti:{0}",MnPlayer.CurrentId);
-			MnPhoton.ins.RPC(nodeSetting.RpcTarget,nodeSetting.Key,"");
+			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallMulti:{0}",ViewCore.CurrentId);
+			ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,"");
 		}
 		
 		private void CallClient()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClient:{0}",MnPlayer.CurrentId);
+			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClient:{0}",ViewCore.CurrentId);
 			
-			string tempId = MnPlayer.CurrentId;
+			string tempId = ViewCore.CurrentId;
 			
 			actionSortedBase.Invoke();
 			AnalyticsRegister();
 			
-			MnPlayer.CurrentId = tempId;
+			ViewCore.CurrentId = tempId;
 		}
 		
 		private bool analyticsRegister;
@@ -65,17 +65,17 @@ namespace xLib.xValueClass
 		{
 			if(analyticsRegister) return;
 			if(nodeSetting.analytics==AnalyticsType.Disabled) return;
-			if(!MnPlayer.IsMy) return;
+			if(!ViewCore.IsMy) return;
 			
 			analyticsRegister = true;
-			StAnalytics.arrayAnalytics.Add(this);
+			ViewCore.arrayAnalytics.Add(this);
 		}
 		
 		void IAnalyticsSend.AnalyticsSend()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":AnalyticsSend:{0}",MnPlayer.CurrentId);
-			if(nodeSetting.analytics==AnalyticsType.Name) StAnalytics.LogEvent("Void",nodeSetting.objDebug.name);
-			else StAnalytics.LogEvent("Void",nodeSetting.Key);
+			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":AnalyticsSend:{0}",ViewCore.CurrentId);
+			if(nodeSetting.analytics==AnalyticsType.Name) ViewCore.LogEvent("Void",nodeSetting.objDebug.name);
+			else ViewCore.LogEvent("Void",nodeSetting.Key);
 			analyticsRegister = false;
 		}
 		#endregion
