@@ -27,7 +27,7 @@ namespace xLib.xValueClass
 		#endregion
 		
 		#region Override
-		protected override string ValueToString
+		public override string ValueToString
 		{
 			get
 			{

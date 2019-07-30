@@ -37,6 +37,14 @@ namespace xLib.xNode.NodeObject
 			}
 		}
 		
+		public override string ValueToString
+		{
+			get
+			{
+				return Node.ValueToString;
+			}
+		}
+		
 		protected override void OnInit(bool init)
 		{
 			Node.Init(init);

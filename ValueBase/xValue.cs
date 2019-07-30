@@ -196,7 +196,7 @@ namespace xLib
 		
 		
 		#region Virtual
-		protected virtual string ValueToString
+		public virtual string ValueToString
 		{
 			get
 			{

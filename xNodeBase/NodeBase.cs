@@ -17,6 +17,14 @@ namespace xLib.xNode.NodeObject
 			get;
 		}
 		
+		public virtual string ValueToString
+		{
+			get
+			{
+				return "";
+			}
+		}
+		
 		[ContextMenu ("Key = Name")]
 		public void KeyName()
 		{
