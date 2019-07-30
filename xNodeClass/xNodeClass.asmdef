@@ -1,0 +1,18 @@
+{
+    "name": "xNodeClass",
+    "references": [
+        "GUID:1aa3b69454061484eb377cb147015233",
+        "GUID:dfab4530c32d02e43beb838eaa01436a",
+        "GUID:4a573d61dba2e9a47a70999cc59326d2",
+        "GUID:0915a629c2502fe4293c69852d7383aa"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
