@@ -1,4 +1,4 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using System;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -37,7 +37,7 @@ namespace xLib.xValueClass
 		#endregion
 		
 		#region ISerializableBase
-		internal override object SerializedObject
+		public override object SerializedObject
 		{
 			get
 			{

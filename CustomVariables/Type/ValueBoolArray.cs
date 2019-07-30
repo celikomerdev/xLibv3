@@ -1,6 +1,5 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using System;
-using UnityEngine;
 
 namespace xLib.xValueClass
 {

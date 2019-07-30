@@ -66,7 +66,7 @@ namespace xLib
 		public static void RPC(string target,string key,string data){}
 		
 		public static List<IAnalyticsSend> arrayAnalytics = new List<IAnalyticsSend>();
-		public static void LogEvent(string type,string key,string label,string data){}
+		public static void LogEvent(string type="",string key="",string label="",string data=""){}
 		
 		private static string finalId;
 		public static string FinalId

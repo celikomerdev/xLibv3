@@ -1,4 +1,4 @@
-﻿#if xLibv2Discard
+﻿#if xLibv3
 using System;
 
 namespace xLib.xValueClass
