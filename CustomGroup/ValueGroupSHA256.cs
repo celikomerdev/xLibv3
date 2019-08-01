@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 namespace xLib.xValueClass
 {
 	[System.Serializable]
-	public class ValueGroupSHA256 : ValueGroup
+	public class ValueGroupSHA256 : ValueGroupCrypto
 	{
 		#region ISerializableBase
 		internal override object SerializedObject

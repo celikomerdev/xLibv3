@@ -5,7 +5,7 @@ using xLib.ToolCrypto;
 namespace xLib.xValueClass
 {
 	[System.Serializable]
-	public class ValueGroupCipher : ValueGroup
+	public class ValueGroupCipher : ValueGroupCrypto
 	{
 		#region ISerializableBase
 		internal override object SerializedObject

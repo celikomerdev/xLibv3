@@ -10,30 +10,6 @@ namespace xLib.xValueClass
 	{
 		[SerializeField]internal NodeSetting nodeSetting = new NodeSetting();
 		
-		[Header("Crypto")]
-		[SerializeField]private string keyEncrypt = "KeyEncrypt";
-		protected string KeyEncrypt
-		{
-			get
-			{
-				return nodeSetting.Key+keyEncrypt+KeyExtra;
-			}
-		}
-		
-		[SerializeField]private xNode.NodeObject.NodeBase[] nodeEncrypt;
-		private string KeyExtra
-		{
-			get
-			{
-				string tempString = "";
-				for (int i = 0; i < nodeEncrypt.Length; i++)
-				{
-					tempString += nodeEncrypt[i].ValueToString;
-				}
-				return tempString;
-			}
-		}
-		
 		internal int indexCurrent = 0;
 		public ISerializableObject[] iSerializableObject;
 		private ICall[] iCall;
@@ -74,7 +50,6 @@ namespace xLib.xValueClass
 		
 		
 		#region ISerializableBase
-		//private ValueMulti<long> timeLong = new ValueMulti<long>();
 		internal virtual object SerializedObjectRaw
 		{
 			get
