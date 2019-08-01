@@ -9,9 +9,9 @@ namespace xLib.EventClass
 	public class EventBool
 	{
 		[SerializeField]public EventBaseBool eventBool = new EventBaseBool();
-		[SerializeField]private EventBaseBool eventReverse = new EventBaseBool();
-		[SerializeField]private EventBaseUnity eventTrue = new EventBaseUnity();
-		[SerializeField]private EventBaseUnity eventFalse = new EventBaseUnity();
+		[SerializeField]public EventBaseBool eventReverse = new EventBaseBool();
+		[SerializeField]public EventBaseUnity eventTrue = new EventBaseUnity();
+		[SerializeField]public EventBaseUnity eventFalse = new EventBaseUnity();
 		
 		public void Invoke(bool arg0)
 		{

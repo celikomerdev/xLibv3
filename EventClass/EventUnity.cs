@@ -8,7 +8,7 @@ namespace xLib.EventClass
 	[Serializable]
 	public class EventUnity
 	{
-		[SerializeField]internal EventBaseUnity eventUnity = new EventBaseUnity();
+		[SerializeField]public EventBaseUnity eventUnity = new EventBaseUnity();
 		
 		public void Invoke()
 		{
