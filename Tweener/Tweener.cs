@@ -25,8 +25,15 @@ namespace xLib.xTweener
 		public EventUnity onFinishBackward;
 		public EventUnity onComplete;
 		
-		protected abstract AnimationCurve CurveForward{get;}
-		protected abstract AnimationCurve CurveBackward{get;}
+		protected virtual float RatioForward(float value)
+		{
+			return value;
+		}
+		
+		protected virtual float RatioBackward(float value)
+		{
+			return value;
+		}
 		
 		#region Mono
 		protected override void Awaked()
@@ -87,8 +94,8 @@ namespace xLib.xTweener
 		private float curveValue;
 		private void CurveValue()
 		{
-			if (playDirection>0) curveValue = CurveForward.Evaluate(normalTime);
-			else curveValue = CurveBackward.Evaluate(normalTime);
+			if (playDirection>0) curveValue = RatioForward(normalTime);
+			else curveValue = RatioBackward(normalTime);
 		}
 		
 		private List<Tween> tweens;

@@ -1,0 +1,15 @@
+{
+    "name": "xLib.xUtil",
+    "references": [
+        "GUID:1aa3b69454061484eb377cb147015233"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

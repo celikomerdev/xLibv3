@@ -7,21 +7,15 @@ namespace xLib.xTweener
 	{
 		[Header("Curve")]
 		[SerializeField]private AnimationCurve curveForward = AnimationCurve.Linear(0,0,1,1);
-		protected override AnimationCurve CurveForward
+		protected override float RatioForward(float value)
 		{
-			get
-			{
-				return curveForward;
-			}
+			return curveForward.Evaluate(value);
 		}
 		
 		[SerializeField]private AnimationCurve curveBackward = AnimationCurve.Linear(0,0,1,1);
-		protected override AnimationCurve CurveBackward
+		protected override float RatioBackward(float value)
 		{
-			get
-			{
-				return curveBackward;
-			}
+			return curveBackward.Evaluate(value);
 		}
 	}
 }
