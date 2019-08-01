@@ -1,4 +1,4 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 using xLib.xValueClass;
 
@@ -8,7 +8,7 @@ namespace xLib.xNode.NodeObject
 	public class MonoGroupCipher : MonoGroup
 	{
 		[SerializeField]internal ValueGroupCipher nodeValue = new ValueGroupCipher();
-		public override ValueGroup Node
+		protected override ValueGroup Node
 		{
 			get
 			{

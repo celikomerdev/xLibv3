@@ -11,37 +11,12 @@ namespace xLib.xValueClass
 		[SerializeField]internal NodeSetting nodeSetting = new NodeSetting();
 		
 		[Header("Crypto")]
-		[SerializeField]protected string keyEncrypt = "KeyEncrypt";
-		
-		protected string KeyEncryptv2Key
+		[SerializeField]private string keyEncrypt = "KeyEncrypt";
+		protected string KeyEncrypt
 		{
 			get
 			{
 				return nodeSetting.Key+keyEncrypt+KeyExtra;
-			}
-		}
-		
-		protected string KeyEncryptv2Name
-		{
-			get
-			{
-				return nodeSetting.Name+keyEncrypt+KeyExtra;
-			}
-		}
-		
-		protected string KeyEncryptv1Key
-		{
-			get
-			{
-				return SystemInfo.deviceUniqueIdentifier+keyEncrypt+nodeSetting.Key;
-			}
-		}
-		
-		protected string KeyEncryptv1Name
-		{
-			get
-			{
-				return SystemInfo.deviceUniqueIdentifier+keyEncrypt+nodeSetting.Name;
 			}
 		}
 		
@@ -105,17 +80,6 @@ namespace xLib.xValueClass
 			get
 			{
 				JObject jObject = new JObject();
-				
-				// if(MnWorldTime.ins)
-				// {
-				// 	timeLong.Value = MnWorldTime.ins.worldTimeBase.DateTime.Ticks;
-				// }
-				// else
-				// {
-				// 	timeLong.Value++;
-				// }
-				// jObject.Add("Time",timeLong.Value);
-				
 				JObject Values = new JObject();
 				for (int i = 0; i < iSerializableObject.Length; i++)
 				{
@@ -145,24 +109,6 @@ namespace xLib.xValueClass
 				}
 				
 				JObject jObject = JObject.Parse(stringJson);
-				
-				// try
-				// {
-				// 	long Time = jObject.Value<long>("Time");
-				// 	if(timeLong.Value >= Time)
-				// 	{
-				// 		if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Data:Expired:{0}",MnPlayer.CurrentId);
-				// 		return;
-				// 	}
-					
-				// 	if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Data:Fresh:{0}",MnPlayer.CurrentId);
-				// 	timeLong.Value = Time;
-				// }
-				// catch(System.Exception ex)
-				// {
-				// 	if(nodeSetting.canDebug) xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Time:Exception:{0}:{1}",MnPlayer.CurrentId,ex);
-				// }
-				
 				JObject Values = (JObject)jObject.GetValue("Values");
 				if(Values==null) Values = jObject;
 				

@@ -1,6 +1,5 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using Newtonsoft.Json.Linq;
-using UnityEngine;
 using xLib.ToolCrypto;
 
 namespace xLib.xValueClass
@@ -15,7 +14,7 @@ namespace xLib.xValueClass
 			{
 				JObject jObject = new JObject();
 				
-				string Content = StringCipher.Encrypt(SerializedObjectRaw.ToString(),KeyEncryptv2Key);
+				string Content = StringCipher.Encrypt(SerializedObjectRaw.ToString(),KeyEncrypt);
 				jObject.Add("Content",Content);
 				
 				return jObject;
@@ -31,11 +30,7 @@ namespace xLib.xValueClass
 				string stringJObject = "";
 				
 				if(stringJObject != "") xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Test!!!");
-				else if(string.IsNullOrEmpty(stringJObject)) stringJObject = StringCipher.Decrypt(Content,KeyEncryptv2Key);
-				else if(string.IsNullOrEmpty(stringJObject)) stringJObject = StringCipher.Decrypt(Content,KeyEncryptv2Name);
-				else if(string.IsNullOrEmpty(stringJObject)) stringJObject = StringCipher.Decrypt(Content,KeyEncryptv1Key);
-				else if(string.IsNullOrEmpty(stringJObject)) stringJObject = StringCipher.Decrypt(Content,KeyEncryptv1Name);
-				else if(string.IsNullOrEmpty(stringJObject)) stringJObject = StringCipher.Decrypt(Content,keyEncrypt);
+				else if(string.IsNullOrEmpty(stringJObject)) stringJObject = StringCipher.Decrypt(Content,KeyEncrypt);
 				
 				if(string.IsNullOrEmpty(stringJObject))
 				{

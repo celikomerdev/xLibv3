@@ -1,4 +1,4 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 using xLib.xValueClass;
 
@@ -8,7 +8,7 @@ namespace xLib.xNode.NodeObject
 	public class MonoGroupSHA256 : MonoGroup
 	{
 		[SerializeField]internal ValueGroupSHA256 nodeValue = new ValueGroupSHA256();
-		public override ValueGroup Node
+		protected override ValueGroup Node
 		{
 			get
 			{

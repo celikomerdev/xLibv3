@@ -8,7 +8,7 @@ namespace xLib.xNode.NodeObject
 	public class MonoGroupBasic : MonoGroup
 	{
 		[SerializeField]internal ValueGroup nodeValue = new ValueGroup();
-		public override ValueGroup Node
+		protected override ValueGroup Node
 		{
 			get
 			{

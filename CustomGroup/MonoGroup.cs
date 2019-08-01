@@ -7,7 +7,7 @@ namespace xLib.xNode.NodeObject
 {
 	public abstract class MonoGroup : MonoSave, ICall
 	{
-		public abstract ValueGroup Node
+		protected abstract ValueGroup Node
 		{
 			get;
 		}
