@@ -7,9 +7,9 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueTexture2D : OnValue
 	{
-		[SerializeField]private NodeTexture2D[] target;
-		[SerializeField]private MonoTexture2D[] targetMono;
-		[SerializeField]private EventTexture eventTexture;
+		[SerializeField]private NodeTexture2D[] target = new NodeTexture2D[0];
+		[SerializeField]private MonoTexture2D[] targetMono = new MonoTexture2D[0];
+		[SerializeField]private EventTexture eventTexture = new EventTexture();
 		
 		public void OnCall(Texture2D value)
 		{

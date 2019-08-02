@@ -7,9 +7,9 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueTransform : OnValue
 	{
-		[SerializeField]private NodeTransform[] target;
-		[SerializeField]private MonoTransform[] targetMono;
-		[SerializeField]private EventTransform eventTransform;
+		[SerializeField]private NodeTransform[] target = new NodeTransform[0];
+		[SerializeField]private MonoTransform[] targetMono = new MonoTransform[0];
+		[SerializeField]private EventTransform eventTransform = new EventTransform();
 		
 		public void OnCall(Transform value)
 		{

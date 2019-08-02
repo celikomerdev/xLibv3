@@ -7,9 +7,9 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueTexture : OnValue
 	{
-		[SerializeField]private NodeTexture[] target;
-		[SerializeField]private MonoTexture[] targetMono;
-		[SerializeField]private EventTexture eventTexture;
+		[SerializeField]private NodeTexture[] target = new NodeTexture[0];
+		[SerializeField]private MonoTexture[] targetMono = new MonoTexture[0];
+		[SerializeField]private EventTexture eventTexture = new EventTexture();
 		
 		public void OnCall(Texture value)
 		{

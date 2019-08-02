@@ -7,9 +7,9 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueBool : OnValue
 	{
-		[SerializeField]private NodeBool[] target;
-		[SerializeField]private MonoBool[] targetMono;
-		[SerializeField]private EventBool eventBool;
+		[SerializeField]private NodeBool[] target = new NodeBool[0];
+		[SerializeField]private MonoBool[] targetMono = new MonoBool[0];
+		[SerializeField]private EventBool eventBool = new EventBool();
 		
 		public void OnCall(bool value)
 		{

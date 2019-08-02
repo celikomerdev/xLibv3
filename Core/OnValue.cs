@@ -5,7 +5,7 @@ namespace xLib.xValueClass.Listener
 {
 	public abstract class OnValue : BaseRegisterM
 	{
-		[SerializeField]internal bool forceClient;
+		[SerializeField]internal bool forceClient = false;
 		
 		protected void TryForceClient()
 		{

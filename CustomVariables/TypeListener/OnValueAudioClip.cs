@@ -7,9 +7,9 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueAudioClip : OnValue
 	{
-		[SerializeField]private NodeAudioClip[] target;
-		[SerializeField]private MonoAudioClip[] targetMono;
-		[SerializeField]private EventAudioClip eventAudioClip;
+		[SerializeField]private NodeAudioClip[] target = new NodeAudioClip[0];
+		[SerializeField]private MonoAudioClip[] targetMono = new MonoAudioClip[0];
+		[SerializeField]private EventAudioClip eventAudioClip = new EventAudioClip();
 		
 		public void OnCall(AudioClip value)
 		{

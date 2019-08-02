@@ -6,10 +6,10 @@ namespace xLib
 	public abstract class SingletonM<T> : BaseWorkM where T : Component
 	{
 		[Header("Singleton")]
-		[SerializeField]private bool keepOld;
+		[SerializeField]private bool keepOld = false;
 		
-		private static SingletonM<T> insBase;
-		public static T ins;
+		private static SingletonM<T> insBase = null;
+		public static T ins = null;
 		
 		protected virtual void Awaked(){}
 		protected virtual void Awake()

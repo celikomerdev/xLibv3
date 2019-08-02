@@ -6,8 +6,8 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueCall : OnValue
 	{
-		[SerializeField]private Object[] target;
-		[SerializeField]private EventUnity eventUnity;
+		[SerializeField]private Object[] target = new Object[0];
+		[SerializeField]private EventUnity eventUnity = new EventUnity();
 		
 		public void OnCall()
 		{

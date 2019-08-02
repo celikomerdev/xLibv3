@@ -7,9 +7,9 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueColor : OnValue
 	{
-		[SerializeField]private NodeColor[] target;
-		[SerializeField]private MonoColor[] targetMono;
-		[SerializeField]private EventColor eventColor;
+		[SerializeField]private NodeColor[] target = new NodeColor[0];
+		[SerializeField]private MonoColor[] targetMono = new MonoColor[0];
+		[SerializeField]private EventColor eventColor = new EventColor();
 		
 		public void OnCall(Color value)
 		{

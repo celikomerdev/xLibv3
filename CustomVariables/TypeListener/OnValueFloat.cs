@@ -7,9 +7,9 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueFloat : OnValue
 	{
-		[SerializeField]private NodeFloat[] target;
-		[SerializeField]private MonoFloat[] targetMono;
-		[SerializeField]private EventFloat eventFloat;
+		[SerializeField]private NodeFloat[] target = new NodeFloat[0];
+		[SerializeField]private MonoFloat[] targetMono = new MonoFloat[0];
+		[SerializeField]private EventFloat eventFloat = new EventFloat();
 		
 		public void OnCall(float value)
 		{

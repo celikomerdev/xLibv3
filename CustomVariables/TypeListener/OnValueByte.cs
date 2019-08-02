@@ -7,9 +7,9 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueByte : OnValue
 	{
-		[SerializeField]private NodeByte[] target;
-		[SerializeField]private MonoByte[] targetMono;
-		[SerializeField]private EventByte eventByte;
+		[SerializeField]private NodeByte[] target = new NodeByte[0];
+		[SerializeField]private MonoByte[] targetMono = new MonoByte[0];
+		[SerializeField]private EventByte eventByte = new EventByte();
 		
 		public void OnCall(byte value)
 		{

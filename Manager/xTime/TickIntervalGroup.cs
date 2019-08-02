@@ -8,13 +8,13 @@ namespace xLib.xTick
 {
 	[Serializable]public class TickIntervalGroup
 	{
-		private MonoBehaviour mono;
-		[SerializeField]private TickInterval[] tickInterval;
+		private MonoBehaviour mono = null;
+		[SerializeField]private TickInterval[] tickInterval = new TickInterval[0];
 		[Serializable]public class TickInterval
 		{
-			[SerializeField]internal bool unscaled;
-			[SerializeField]internal float interval;
-			[SerializeField]private NodeFloat tickInterval;
+			[SerializeField]internal bool unscaled = true;
+			[SerializeField]internal float interval = 1;
+			[SerializeField]private NodeFloat tickInterval = null;
 			
 			internal IEnumerator Tick()
 			{

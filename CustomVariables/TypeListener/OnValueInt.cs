@@ -7,9 +7,9 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueInt : OnValue
 	{
-		[SerializeField]private NodeInt[] target;
-		[SerializeField]private MonoInt[] targetMono;
-		[SerializeField]private EventInt eventInt;
+		[SerializeField]private NodeInt[] target = new NodeInt[0];
+		[SerializeField]private MonoInt[] targetMono = new MonoInt[0];
+		[SerializeField]private EventInt eventInt = new EventInt();
 		
 		public void OnCall(int value)
 		{

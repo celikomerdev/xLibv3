@@ -7,9 +7,9 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueSprite : OnValue
 	{
-		[SerializeField]private NodeSprite[] target;
-		[SerializeField]private MonoSprite[] targetMono;
-		[SerializeField]private EventSprite eventSprite;
+		[SerializeField]private NodeSprite[] target = new NodeSprite[0];
+		[SerializeField]private MonoSprite[] targetMono = new MonoSprite[0];
+		[SerializeField]private EventSprite eventSprite = new EventSprite();
 		
 		public void OnCall(Sprite value)
 		{

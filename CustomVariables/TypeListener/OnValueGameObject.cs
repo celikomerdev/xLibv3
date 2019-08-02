@@ -7,9 +7,9 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueGameObject : OnValue
 	{
-		[SerializeField]private NodeGameObject[] target;
-		[SerializeField]private MonoGameObject[] targetMono;
-		[SerializeField]private EventGameObject eventGameObject;
+		[SerializeField]private NodeGameObject[] target = new NodeGameObject[0];
+		[SerializeField]private MonoGameObject[] targetMono = new MonoGameObject[0];
+		[SerializeField]private EventGameObject eventGameObject = new EventGameObject();
 		
 		public void OnCall(GameObject value)
 		{

@@ -4,7 +4,6 @@ namespace xLib
 	public class BaseActiveInfo
 	{
 		internal bool isActive;
-		internal bool inDisable;
 	}
 }
 #endif

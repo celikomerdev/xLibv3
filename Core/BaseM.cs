@@ -6,7 +6,7 @@ namespace xLib
 	public abstract class BaseM : MonoBehaviour
 	{
 		#region BaseViewWork
-		internal View view;
+		internal View view = null;
 		protected bool isMy = true;
 		private string viewId = "Client";
 		protected string lastViewId = "Client";

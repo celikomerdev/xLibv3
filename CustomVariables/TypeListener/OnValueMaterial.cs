@@ -7,9 +7,9 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueMaterial : OnValue
 	{
-		[SerializeField]private NodeMaterial[] target;
-		[SerializeField]private MonoMaterial[] targetMono;
-		[SerializeField]private EventMaterial eventMaterial;
+		[SerializeField]private NodeMaterial[] target = new NodeMaterial[0];
+		[SerializeField]private MonoMaterial[] targetMono = new MonoMaterial[0];
+		[SerializeField]private EventMaterial eventMaterial = new EventMaterial();
 		
 		public void OnCall(Material value)
 		{

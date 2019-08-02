@@ -9,31 +9,31 @@ namespace xLib.xTick
 		private static float timeScale = 1;
 		
 		[Header("Update")]
-		[SerializeField]private NodeFloat tickUpdate;
-		[SerializeField]private NodeFloat tickUnscaledUpdate;
+		[SerializeField]private NodeFloat tickUpdate = null;
+		[SerializeField]private NodeFloat tickUnscaledUpdate = null;
 		
 		[Header("Smooth")]
-		[SerializeField]private NodeFloat tickSmooth;
-		[SerializeField]private NodeFloat tickUnscaledSmooth;
+		[SerializeField]private NodeFloat tickSmooth = null;
+		[SerializeField]private NodeFloat tickUnscaledSmooth = null;
 		
 		[Header("Late")]
-		[SerializeField]private NodeFloat tickLate;
-		[SerializeField]private NodeFloat tickUnscaledLate;
+		[SerializeField]private NodeFloat tickLate = null;
+		[SerializeField]private NodeFloat tickUnscaledLate = null;
 		
 		[Header("Fixed")]
-		[SerializeField]private NodeFloat tickFixed;
-		[SerializeField]private NodeFloat tickUnscaledFixed;
+		[SerializeField]private NodeFloat tickFixed = null;
+		[SerializeField]private NodeFloat tickUnscaledFixed = null;
 		
 		[Header("Start")]
-		[SerializeField]private NodeFloat tickStart;
-		[SerializeField]private NodeFloat tickUnscaledStart;
+		[SerializeField]private NodeFloat tickStart = null;
+		[SerializeField]private NodeFloat tickUnscaledStart = null;
 		
 		[Header("Level")]
-		[SerializeField]private NodeFloat tickLevel;
-		[SerializeField]private NodeFloat tickUnscaledLevel;
+		[SerializeField]private NodeFloat tickLevel = null;
+		[SerializeField]private NodeFloat tickUnscaledLevel = null;
 		
 		[Header("Interval")]
-		[SerializeField]private TickIntervalGroup tickIntervalGroup;
+		[SerializeField]private TickIntervalGroup tickIntervalGroup = new TickIntervalGroup();
 		
 		private void Start()
 		{

@@ -6,12 +6,12 @@ namespace xLib
 		protected virtual void Awaked(){}
 		internal virtual void Awake()
 		{
-			if(Id == "-1") gameObject.SetActive(false);
+			if(Id == "NotSet") gameObject.SetActive(false);
 			Awaked();
 		}
 		
 		#region Info
-		protected bool isMy = true;
+		// protected bool isMy = true;
 		public bool IsMy
 		{
 			get

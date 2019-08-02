@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 using UnityEngine;
+using xLib.xNode.NodeObject;
 
 namespace xLib.xValueClass
 {
@@ -16,7 +17,7 @@ namespace xLib.xValueClass
 			}
 		}
 		
-		[SerializeField]private xNode.NodeObject.NodeBase[] nodeEncrypt;
+		[SerializeField]private NodeBase[] nodeEncrypt = new NodeBase[0];
 		private string KeyExtra
 		{
 			get

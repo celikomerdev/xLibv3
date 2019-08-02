@@ -7,9 +7,9 @@ namespace xLib.xValueClass.Listener
 {
 	public class OnValueLong : OnValue
 	{
-		[SerializeField]private NodeLong[] target;
-		[SerializeField]private MonoLong[] targetMono;
-		[SerializeField]private EventLong eventLong;
+		[SerializeField]private NodeLong[] target = new NodeLong[0];
+		[SerializeField]private MonoLong[] targetMono = new MonoLong[0];
+		[SerializeField]private EventLong eventLong = new EventLong();
 		
 		public void OnCall(long value)
 		{

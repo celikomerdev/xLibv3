@@ -6,7 +6,7 @@ namespace xLib
 {
 	public class MnSingleton : SingletonM<MnSingleton>
 	{
-		[SerializeField]private NodeBool nodeDebug;
+		[SerializeField]private NodeBool nodeDebug = null;
 		
 		protected override void Awaked()
 		{
