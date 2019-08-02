@@ -23,6 +23,8 @@ namespace xLib
 		public static V[] GetGenerics<V>(this object target)
 		{
 			List<V> genericClass = new List<V>();
+			if(target==null) return genericClass.ToArray();
+			
 			if(target.GetType() == typeof(GameObject))
 			{
 				genericClass.AddRange(((GameObject)target).GetComponents<V>());
@@ -40,6 +42,7 @@ namespace xLib
 			List<V> genericClass = new List<V>();
 			for (int i = 0; i < target.Length; i++)
 			{
+				if(target[i] == null) continue;
 				genericClass.AddRange(target[i].GetGenerics<V>());
 			}
 			return genericClass.ToArray();

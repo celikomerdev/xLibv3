@@ -23,11 +23,13 @@ namespace xLib.xValueClass.Listener
 		{
 			for (int i = 0; i < target.Length; i++)
 			{
+				if(!target[i]) continue;
 				target[i].ListenerEditor(register,this);
 				target[i].Listener(register,OnCall,baseRegister.onRegister);
 			}
 			for (int i = 0; i < targetMono.Length; i++)
 			{
+				if(!targetMono[i]) continue;
 				targetMono[i].ListenerEditor(register,this);
 				targetMono[i].Listener(register,OnCall,baseRegister.onRegister);
 			}
