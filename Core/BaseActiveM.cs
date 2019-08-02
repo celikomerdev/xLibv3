@@ -75,6 +75,8 @@ namespace xLib
 			ApplyViewIdWithDebug();
 			OnDestroyed();
 			ApplyLastIdWithDebug();
+			
+			IsActive = false;
 		}
 		#endregion
 		

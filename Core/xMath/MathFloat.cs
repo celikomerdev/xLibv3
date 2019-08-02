@@ -1,4 +1,4 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 
 namespace xLib.Mathx
