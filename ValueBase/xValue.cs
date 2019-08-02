@@ -257,9 +257,12 @@ namespace xLib
 		
 		public void Call()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Call:{0}:{1}",ViewCore.CurrentId,ValueToString);
 			if(!nodeSetting.UseRpc) CallClient();
-			else ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObject.ToString());
+			else
+			{
+				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Call:{0}:{1}",ViewCore.CurrentId,ValueToString);
+				ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObject.ToString());
+			}
 		}
 		
 		private V valueCache;

@@ -3,7 +3,16 @@ using System;
 
 namespace xLib.xValueClass
 {
-	[Serializable]public class ValueVoid : xValue<Void>{}
 	[Serializable]public struct Void{}
+	[Serializable]public class ValueVoid : xValue<Void>
+	{
+		public override string ValueToString
+		{
+			get
+			{
+				return "";
+			}
+		}
+	}
 }
 #endif
