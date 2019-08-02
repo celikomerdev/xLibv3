@@ -1,0 +1,6 @@
+﻿#if xLibv3
+namespace xLib.xTick
+{
+	public class Tickp1 : Tick{}
+}
+#endif
