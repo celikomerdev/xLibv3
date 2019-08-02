@@ -12,12 +12,6 @@ namespace xLib
 		}
 		protected virtual void Tick(float tickTime){}
 		#endregion
-		
-		
-		private void Update()
-		{
-			if(IsRegister) TickMulti(UnityEngine.Time.unscaledDeltaTime);
-		}
 	}
 }
 #endif
