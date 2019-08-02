@@ -70,7 +70,7 @@ namespace xLib.xNode.NodeObject
 		}
 		#endregion
 		
-		public virtual void CallMulti(){}
+		public virtual void Call(){}
 	}
 }
 #endif

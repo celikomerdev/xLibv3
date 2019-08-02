@@ -47,13 +47,13 @@ namespace xLib
 			set
 			{
 				if(baseRegister.isRegister == value) return;
-				ApplyViewId();
+				ApplyViewIdWithDebug();
 				
 				if(CanDebug && BaseRegisterM.Order!=Order) Debug.LogWarningFormat("BaseRegisterM:Order:{0}:order:{1}",BaseRegisterM.Order,baseRegister.order);
 				BaseRegisterM.Order = baseRegister.order;
 				
 				baseRegister.isRegister = Register(value);
-				ApplyLastId();
+				ApplyLastIdWithDebug();
 			}
 		}
 		

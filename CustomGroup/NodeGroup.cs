@@ -143,9 +143,9 @@ namespace xLib.xNode.NodeObject
 		#endregion
 		
 		
-		public override void CallMulti()
+		public override void Call()
 		{
-			Node.CallMulti();
+			Node.Call();
 		}
 		
 		public void ListenerCall(bool register,UnityAction call,bool onRegister=false)

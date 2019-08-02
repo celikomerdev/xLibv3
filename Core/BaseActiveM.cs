@@ -15,11 +15,11 @@ namespace xLib
 			isStarted = false;
 			if(!CanWork) return;
 			FindView();
-			ApplyViewId();
+			ApplyViewIdWithDebug();
 			
 			Awaked();
 			
-			ApplyLastId();
+			ApplyLastIdWithDebug();
 		}
 		
 		private bool isStarted;
@@ -30,11 +30,11 @@ namespace xLib
 			isStarted = false;
 			if(!CanWork) return;
 			FindView();
-			ApplyViewId();
+			ApplyViewIdWithDebug();
 			
 			Started();
 			
-			ApplyLastId();
+			ApplyLastIdWithDebug();
 			
 			isStarted = true;
 			OnEnable();
@@ -47,12 +47,12 @@ namespace xLib
 			if(!isStarted) return;
 			if(!CanWork) return;
 			FindView();
-			ApplyViewId();
+			ApplyViewIdWithDebug();
 			
 			OnEnabled();
 			IsActive = true;
 			
-			ApplyLastId();
+			ApplyLastIdWithDebug();
 		}
 		
 		protected virtual void OnDisabled(){}
@@ -61,14 +61,14 @@ namespace xLib
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnDisable");
 			if(!isStarted) return;
 			if(!CanWork) return;
-			ApplyViewId();
+			ApplyViewIdWithDebug();
 			
 			activeInfo.inDisable = true;
 			OnDisabled();
 			IsActive = false;
 			activeInfo.inDisable = false;
 			
-			ApplyLastId();
+			ApplyLastIdWithDebug();
 		}
 		
 		protected virtual void OnDestroyed(){}
@@ -77,12 +77,12 @@ namespace xLib
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnDestroy");
 			isStarted = false;
 			if(!CanWork) return;
-			ApplyViewId();
+			ApplyViewIdWithDebug();
 			
 			OnDestroyed();
 			IsActive = false;
 			
-			ApplyLastId();
+			ApplyLastIdWithDebug();
 		}
 		#endregion
 		
@@ -101,9 +101,9 @@ namespace xLib
 				activeInfo.isActive = value;
 				
 				if(value) FindView();
-				ApplyViewId();
+				ApplyViewIdWithDebug();
 				SetActive(value);
-				ApplyLastId();
+				ApplyLastIdWithDebug();
 			}
 		}
 		protected virtual void SetActive(bool value){}
@@ -113,7 +113,8 @@ namespace xLib
 		#region GroupId
 		internal View view;
 		protected bool isMy = true;
-		private string viewId = "0";
+		private string viewId = "Client";
+		protected string lastViewId = "Client";
 		public string ViewId
 		{
 			get
@@ -138,31 +139,23 @@ namespace xLib
 		
 		protected void ApplyViewId()
 		{
-			//if(MnPlayer.CurrentId == ViewId) return;
-			if(ViewCore.canDebug && ViewCore.CurrentId != ViewId) Debug.LogFormat(this,"CurrentId:{0}:{1}",ViewCore.CurrentId,ViewId);
-			lastId = ViewCore.CurrentId;
+			lastViewId = ViewCore.CurrentId;
 			ViewCore.CurrentId = ViewId;
 		}
-		
-		protected void ApplyViewIdTick()
+		protected void ApplyViewIdWithDebug()
 		{
-			//if(MnPlayer.CurrentId == ViewId) return;
-			lastId = ViewCore.CurrentId;
-			ViewCore.CurrentId = ViewId;
+			if(ViewCore.canDebug && ViewCore.CurrentId != ViewId) Debug.LogFormat(this,"CurrentId:{0}:{1}",ViewCore.CurrentId,ViewId);
+			ApplyViewId();
 		}
 		
-		protected string lastId = "0";
 		protected void ApplyLastId()
 		{
-			if(ViewCore.canDebug && ViewCore.CurrentId != lastId) Debug.LogFormat(this,"CurrentId:{0}:{1}",ViewCore.CurrentId,lastId);
-			ViewCore.CurrentId = lastId;
-			lastId = ViewId;
+			ViewCore.CurrentId = lastViewId;
 		}
-		
-		protected void ApplyLastIdTick()
+		protected void ApplyLastIdWithDebug()
 		{
-			ViewCore.CurrentId = lastId;
-			lastId = ViewId;
+			if(ViewCore.canDebug && ViewCore.CurrentId != lastViewId) Debug.LogFormat(this,"CurrentId:{0}:{1}",ViewCore.CurrentId,lastViewId);
+			ApplyLastId();
 		}
 		#endregion
 		
@@ -175,11 +168,6 @@ namespace xLib
 		#else
 		public virtual void CheckErrors(){}
 		#endif
-		
-		internal virtual void FillStatic()
-		{
-			//MnPlayer.CurrentId = viewId;
-		}
 	}
 }
 #endif

@@ -162,9 +162,9 @@ namespace xLib.xNode.NodeObject
 			Node.CleanListener();
 		}
 		
-		public override void CallMulti()
+		public override void Call()
 		{
-			Node.CallMulti();
+			Node.Call();
 		}
 	}
 }

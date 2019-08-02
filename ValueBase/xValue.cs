@@ -64,13 +64,14 @@ namespace xLib
 		{
 			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClient:{0}:{1}",ViewCore.CurrentId,ValueToString);
 			
-			string tempId = ViewCore.CurrentId;
+			string lastViewId = ViewCore.CurrentId;
 			
+			ViewCore.CurrentId = "Client";
 			actionSortedBase.Invoke(Value);
 			actionSortedBaseCall.Invoke();
 			AnalyticsRegister();
 			
-			ViewCore.CurrentId = tempId;
+			ViewCore.CurrentId = lastViewId;
 		}
 		
 		private bool analyticsRegister;
@@ -245,7 +246,7 @@ namespace xLib
 				{
 					if(ViewCore.IsMy)
 					{
-						CallMulti();
+						Call();
 						return;
 					}
 				}
@@ -254,10 +255,11 @@ namespace xLib
 			}
 		}
 		
-		public void CallMulti()
+		public void Call()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallMulti:{0}:{1}",ViewCore.CurrentId,ValueToString);
-			ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObject.ToString());
+			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Call:{0}:{1}",ViewCore.CurrentId,ValueToString);
+			if(!nodeSetting.UseRpc) CallClient();
+			else ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObject.ToString());
 		}
 		
 		private V valueCache;

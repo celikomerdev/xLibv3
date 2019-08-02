@@ -77,7 +77,7 @@ namespace xLib.xValueClass
 				{
 					if(ViewCore.IsMy)
 					{
-						if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallMulti:{0}",ViewCore.CurrentId);
+						if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Call:{0}",ViewCore.CurrentId);
 						ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,stringJson);
 						return;
 					}
@@ -192,9 +192,9 @@ namespace xLib.xValueClass
 		#endregion
 		
 		
-		internal void CallMulti()
+		internal void Call()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallMulti:{0}",ViewCore.CurrentId);
+			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Call:{0}",ViewCore.CurrentId);
 			ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObjectRaw.ToString());
 		}
 		
