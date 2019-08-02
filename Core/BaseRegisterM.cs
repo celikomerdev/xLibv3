@@ -87,12 +87,6 @@ namespace xLib
 		}
 		#endif
 		
-		internal override void FillStatic()
-		{
-			base.FillStatic();
-			Order = baseRegister.order;
-		}
-		
 		protected override void OnDestroyed()
 		{
 			IsRegister = false;
