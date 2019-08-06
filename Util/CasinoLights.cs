@@ -14,6 +14,7 @@ namespace xLib.xNew
 		
 		public void Animate(bool value)
 		{
+			if(!isActiveAndEnabled) return;
 			StopAllCoroutines();
 			if(CanDebug) Debug.LogFormat(this,this.name+":Animate:{0}",value);
 			
