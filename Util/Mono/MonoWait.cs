@@ -1,7 +1,7 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using System.Collections;
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
 namespace xLib.ToolMono
 {
@@ -17,8 +17,7 @@ namespace xLib.ToolMono
 			
 			if(!gameObject.activeInHierarchy) return;
 			if(isSingle && inWait) return;
-			//StartCoroutine(eWait(MnPlayer.CurrentId,time));
-			StartCoroutine(eWait(MnPlayer.MyId,time));
+			StartCoroutine(eWait(time));
 		}
 		
 		public void CancelAll()
@@ -31,7 +30,7 @@ namespace xLib.ToolMono
 		}
 		
 		private bool inWait;
-		private IEnumerator eWait(string invokeId,float time)
+		private IEnumerator eWait(float time)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":MonoWait:{0}",time);
 			
@@ -40,13 +39,11 @@ namespace xLib.ToolMono
 			else yield return new WaitForSeconds(time);
 			
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnWait:{0}",time);
-			string tempId = MnPlayer.CurrentId;
-			MnPlayer.CurrentId = invokeId;
+			ApplyViewIdWithDebug();
 			onWait.Invoke();
-			MnPlayer.CurrentId = tempId;
+			ApplyLastIdWithDebug();
 			
 			inWait = false;
-			yield return null;
 		}
 		
 		private void OnDisable()
