@@ -54,6 +54,14 @@ namespace xLib
 			if(CanDebug) Debug.LogWarningFormat(this,this.name+":Init");
 		}
 		
+		protected virtual void OnEnabled(){}
+		protected virtual void OnEnable()
+		{
+			if(ins!=this) return;
+			if(CanDebug) Debug.LogWarningFormat(this,this.name+":OnEnabled");
+			OnEnabled();
+		}
+		
 		protected virtual void OnDisabled(){}
 		protected virtual void OnDisable()
 		{
