@@ -6,8 +6,8 @@ namespace xLib
 	[System.Serializable]public class NodeSetting
 	{
 		[Header("Debug")]
-		[HideInInspector]public bool canDebug = false;
-		[HideInInspector]public Object objDebug = null;
+		[System.NonSerialized]public bool canDebug = false;
+		[System.NonSerialized]public Object objDebug = null;
 		
 		
 		[Header("Key")]
