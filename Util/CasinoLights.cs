@@ -12,10 +12,15 @@ namespace xLib.xNew
 		public Image[] array;
 		private int count;
 		
+		private void OnEnable()
+		{
+			Animate(false);
+		}
+		
 		public void Animate(bool value)
 		{
-			if(!isActiveAndEnabled) return;
 			StopAllCoroutines();
+			if(!isActiveAndEnabled) return;
 			if(CanDebug) Debug.LogFormat(this,this.name+":Animate:{0}",value);
 			
 			for (int i = 0; i < array.Length; i++)
