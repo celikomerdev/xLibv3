@@ -10,7 +10,7 @@ namespace xLib.ToolSpace
 		protected override void Tick(float tickTime)
 		{
 			if(transform.position.sqrMagnitude<sqrMagnitude) return;
-			MnSpace.ins.Translate(-transform.position);
+			ExtSpace.Translate(-transform.position);
 		}
 	}
 }

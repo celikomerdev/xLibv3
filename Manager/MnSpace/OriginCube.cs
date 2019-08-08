@@ -22,7 +22,7 @@ namespace xLib.ToolSpace
 			
 			else return;
 			
-			MnSpace.ins.Translate(-translate);
+			ExtSpace.Translate(-translate);
 			translate = Vector3.zero;
 		}
 		

@@ -10,13 +10,7 @@ namespace xLib.ToolSpace
 		protected override bool Register(bool value)
 		{
 			if(!trans) trans = transform;
-			
-			if(MnSpace.ins==null)
-			{
-				//Debug.LogWarning("MnSpace.ins==null",this);
-				return false;
-			}
-			MnSpace.ins.Listener(OnCall,value);
+			ExtSpace.Listener(OnCall,value);
 			return value;
 		}
 		

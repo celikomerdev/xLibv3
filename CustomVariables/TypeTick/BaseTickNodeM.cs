@@ -3,7 +3,7 @@ using xLib.xNode.NodeObject;
 
 namespace xLib
 {
-	public abstract class OnTickFloat : BaseTickM
+	public abstract class BaseTickNodeM : BaseTickM
 	{
 		public NodeFloat tickTime;
 		

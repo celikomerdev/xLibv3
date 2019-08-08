@@ -6,7 +6,7 @@ using xLib.xTween;
 
 namespace xLib.xTweener
 {
-	public abstract class Tweener : OnTickFloat
+	public abstract class Tweener : BaseTickNodeM
 	{
 		[Header("Tweening")]
 		public bool playAuto = true;
