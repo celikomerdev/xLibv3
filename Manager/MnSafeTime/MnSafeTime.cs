@@ -8,16 +8,37 @@ namespace xLib
 	public class MnSafeTime : SingletonM<MnSafeTime>
 	{
 		[SerializeField]private xDateTime dateTimeDefault;
-		[SerializeField]private EventUnity onRefresh = new EventUnity();
+		[SerializeField]private EventUnity onCalibrate = new EventUnity();
 		
-		private DateTime dateTimeAnchor;
-		public DateTime DateTimeUtc
+		public DateTime UtcNow
 		{
 			set
 			{
-				if(CanDebug) Debug.LogFormat(this,this.name+"DateTimeUtc:{0}",value.ToString());
+				if(CanDebug) Debug.LogFormat(this,this.name+"UtcNow:{0}",value.ToString());
+				SafeTime.UtcNow = value;
+				onCalibrate.Invoke();
+			}
+		}
+		
+		protected override void Awaked()
+		{
+			dateTimeDefault.Init();
+			UtcNow = dateTimeDefault.dateTime;
+		}
+	}
+	
+	public static class SafeTime
+	{
+		public static EventUnity onCalibrate = new EventUnity();
+		
+		private static DateTime dateTimeAnchor;
+		public static DateTime UtcNow
+		{
+			set
+			{
+				if(xDebug.CanDebug) Debug.LogFormat("SafeTime:UtcNow:{0}",value.ToString());
 				dateTimeAnchor = value.AddSeconds(-Time.unscaledTime);
-				onRefresh.Invoke();
+				onCalibrate.Invoke();
 			}
 			get
 			{
@@ -25,10 +46,16 @@ namespace xLib
 			}
 		}
 		
-		protected override void Awaked()
+		public static DateTime Now
 		{
-			dateTimeDefault.Init();
-			DateTimeUtc = dateTimeDefault.dateTime;
+			set
+			{
+				UtcNow = value.ToUniversalTime();
+			}
+			get
+			{
+				return UtcNow.ToLocalTime();
+			}
 		}
 	}
 }
