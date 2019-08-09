@@ -30,17 +30,6 @@ namespace xLib
 		{
 			this.dateTime = new DateTime(year,month,day,hour,minute,second);
 		}
-		
-		#region StartOfDateTime
-		public static DateTime StartOfWeek(DateTime dateTime,DayOfWeek startDayOfWeek=DayOfWeek.Monday)
-		{
-			int deltaDay = 0;
-			deltaDay = dateTime.DayOfWeek-startDayOfWeek;
-			deltaDay += 7;
-			deltaDay %= 7;
-			return dateTime.AddDays(-deltaDay).Date;
-		}
-		#endregion
 	}
 }
 #endif
