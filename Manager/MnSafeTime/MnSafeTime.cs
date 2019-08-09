@@ -1,6 +1,7 @@
 ﻿#if xLibv3
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using xLib.EventClass;
 
 namespace xLib
@@ -10,28 +11,41 @@ namespace xLib
 		[SerializeField]private xDateTime dateTimeDefault;
 		[SerializeField]private EventUnity onCalibrate = new EventUnity();
 		
+		protected override void Awaked()
+		{
+			SafeTime.onCalibrate.AddListener(OnCalibrate);
+			dateTimeDefault.Init();
+			if(dateTimeDefault.dateTime>UtcNow) UtcNow = dateTimeDefault.dateTime;
+		}
+		
+		protected override void OnDestroyed()
+		{
+			SafeTime.onCalibrate.RemoveListener(OnCalibrate);
+		}
+		
 		public DateTime UtcNow
 		{
 			set
 			{
-				if(CanDebug) Debug.LogFormat(this,this.name+"UtcNow:{0}",value.ToString());
 				SafeTime.UtcNow = value;
-				onCalibrate.Invoke();
+			}
+			get
+			{
+				return SafeTime.UtcNow;
 			}
 		}
 		
-		protected override void Awaked()
+		private void OnCalibrate()
 		{
-			dateTimeDefault.Init();
-			UtcNow = dateTimeDefault.dateTime;
+			onCalibrate.Invoke();
 		}
 	}
 	
 	public static class SafeTime
 	{
-		public static EventUnity onCalibrate = new EventUnity();
+		public static UnityEvent onCalibrate = new UnityEvent();
 		
-		private static DateTime dateTimeAnchor;
+		private static DateTime dateTimeAnchor = DateTime.MinValue;
 		public static DateTime UtcNow
 		{
 			set
