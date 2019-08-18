@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace xLib
 {
-	public abstract class xValue<V> : IAnalyticsSend
+	public abstract class xValue<V>
 	{
 		[SerializeField]public NodeSetting nodeSetting = new NodeSetting();
 		
@@ -38,13 +38,12 @@ namespace xLib
 		{
 			if(isInit == init) return;
 			isInit = init;
-			Init();
+			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Init:{0}",isInit);
+			OnInit(init);
 		}
 		
-		private void Init()
+		protected virtual void OnInit(bool value)
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Init:{0}",isInit);
-			
 			CleanValue();
 			CleanListener();
 			
@@ -69,48 +68,9 @@ namespace xLib
 			ViewCore.CurrentId = "Client";
 			actionSortedBase.Invoke(Value);
 			actionSortedBaseCall.Invoke();
-			AnalyticsRegister();
+			analyticDirty = true;
 			
 			ViewCore.CurrentId = lastViewId;
-		}
-		
-		private bool analyticsRegister;
-		private void AnalyticsRegister()
-		{
-			if(analyticsRegister) return;
-			if(nodeSetting.analytics==AnalyticsType.Disabled) return;
-			if(!ViewCore.IsMy) return;
-			
-			analyticsRegister = true;
-			ViewCore.arrayAnalytics.Add(this);
-		}
-		
-		#region VirtualAnalytics
-		protected virtual string AnalyticLabel
-		{
-			get
-			{
-				return ValueToString;
-			}
-		}
-		
-		protected virtual string AnalyticValue
-		{
-			get
-			{
-				return "0";
-			}
-		}
-		#endregion
-		
-		void IAnalyticsSend.AnalyticsSend()
-		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":AnalyticsSend:{0}:{1}",ViewCore.CurrentId,ValueToString);
-			
-			if(nodeSetting.analytics==AnalyticsType.Name) ViewCore.LogEvent("Value",nodeSetting.objDebug.name,AnalyticLabel,AnalyticValue);
-			else ViewCore.LogEvent("Value",nodeSetting.Key,AnalyticLabel,AnalyticValue);
-			
-			analyticsRegister = false;
 		}
 		#endregion
 		
@@ -128,7 +88,7 @@ namespace xLib
 		}
 		
 		private ActionSortedBase actionSortedBaseCall = new ActionSortedSingle();
-		public void ListenerCall(bool register,UnityAction call,bool onRegister=false)
+		public virtual void ListenerCall(bool register,UnityAction call,bool onRegister=false)
 		{
 			actionSortedBaseCall.Listener(register,call);
 			
@@ -141,7 +101,7 @@ namespace xLib
 		#region Editor
 		#if UNITY_EDITOR
 		private List<BaseActiveM> listenerEditor = new List<BaseActiveM>();
-		public void ListenerEditor(bool addition,BaseActiveM call)
+		public virtual void ListenerEditor(bool addition,BaseActiveM call)
 		{
 			call.CheckErrors();
 			if(addition)
@@ -164,7 +124,7 @@ namespace xLib
 			}
 		}
 		#else
-		public void ListenerEditor(bool addition,BaseActiveM call){}
+		public virtual void ListenerEditor(bool addition,BaseActiveM call){}
 		#endif
 		#endregion
 		
@@ -255,7 +215,7 @@ namespace xLib
 			}
 		}
 		
-		public void Call()
+		public virtual void Call()
 		{
 			if(!nodeSetting.UseRpc) CallClient();
 			else
@@ -286,7 +246,7 @@ namespace xLib
 		{
 			set
 			{
-				//Value = value;
+				Value = value;
 			}
 		}
 		#endregion
@@ -316,11 +276,6 @@ namespace xLib
 				if(Value.Equals(null)) jToken = JToken.FromObject("");
 				else jToken = JToken.FromObject(Value);
 				return jToken;
-				
-				// JsonSerializer jsonSerializer = new JsonSerializer();
-				// jsonSerializer.Formatting = Formatting.Indented;
-				// if(Value.Equals(null)) jToken = JToken.FromObject("",jsonSerializer);
-				// else jToken = JToken.FromObject(Value,jsonSerializer);
 			}
 			set
 			{
@@ -336,6 +291,27 @@ namespace xLib
 			get
 			{
 				return SerializedObject;
+			}
+		}
+		#endregion
+		
+		
+		#region Analytics
+		internal bool analyticDirty = false;
+		
+		internal virtual string AnalyticString
+		{
+			get
+			{
+				return ValueToString;
+			}
+		}
+		
+		internal virtual string AnalyticDigit
+		{
+			get
+			{
+				return "0";
 			}
 		}
 		#endregion

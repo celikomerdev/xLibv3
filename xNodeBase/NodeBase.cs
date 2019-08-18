@@ -3,8 +3,16 @@ using UnityEngine;
 
 namespace xLib.xNode.NodeObject
 {
-	public abstract class NodeBase : NodeInit, ISerializableObject, IRpc
+	public abstract class NodeBase : NodeInit, ISerializableObject, IRpc, IAnalyticObject
 	{
+		public Object UnityObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+		
 		#region Key
 		public abstract string Key
 		{
@@ -79,6 +87,25 @@ namespace xLib.xNode.NodeObject
 		#endregion
 		
 		public virtual void Call(){}
+		
+		
+		#region IAnalyticObject
+		public abstract bool AnalyticDirty
+		{
+			get;
+			set;
+		}
+		
+		public abstract string AnalyticString
+		{
+			get;
+		}
+		
+		public abstract string AnalyticDigit
+		{
+			get;
+		}
+		#endregion
 	}
 }
 #endif

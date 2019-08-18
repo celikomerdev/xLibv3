@@ -7,8 +7,8 @@ namespace xLib.xNode.NodeObject
 	[CreateAssetMenu(menuName = "xLib/Node/Group/Basic")]
 	public class NodeGroupBasic : NodeGroup
 	{
-		[SerializeField]internal ValueGroup nodeValue = new ValueGroup();
-		protected override ValueGroup Node
+		[SerializeField]private ValueGroup nodeValue = new ValueGroup();
+		protected override xValue<ObjectGroup> Node
 		{
 			get
 			{
