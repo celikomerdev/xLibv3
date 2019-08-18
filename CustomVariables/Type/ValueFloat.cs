@@ -43,15 +43,15 @@ namespace xLib.xValueClass
 		
 		
 		#region OverrideAnalytics
-		protected override string AnalyticLabel
+		internal override string AnalyticString
 		{
 			get
 			{
-				return "100x";
+				return "Float100x";
 			}
 		}
 		
-		protected override string AnalyticValue
+		internal override string AnalyticDigit
 		{
 			get
 			{
