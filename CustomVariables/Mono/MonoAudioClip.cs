@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if ModAudio
 using UnityEngine;
 using xLib.xValueClass;
 
@@ -17,4 +18,5 @@ namespace xLib.xNode.NodeObject
 		}
 	}
 }
+#endif
 #endif

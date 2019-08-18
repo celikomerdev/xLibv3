@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if PackUI
 using UnityEngine.UI;
 
 namespace xLib.ToolLocalize
@@ -42,4 +43,5 @@ namespace xLib.ToolLocalize
 		}
 	}
 }
+#endif
 #endif

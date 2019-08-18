@@ -1,18 +1,19 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
-namespace xLib.ToolMono
+namespace xLib
 {
 	public class MonoOnApplicationFocus : BaseWorkM
 	{
-		public EventBool onApplicationFocus;
+		[UnityEngine.Serialization.FormerlySerializedAs("onApplicationFocus")]
+		[SerializeField]private EventBool eventApplicationFocus = new EventBool();
 		
 		private void OnApplicationFocus(bool value)
 		{
 			if(!CanWork) return;
 			if(CanDebug) Debug.LogFormat(this,this.name+":MonoOnApplicationFocus:{0}",value);
-			onApplicationFocus.Invoke(value);
+			eventApplicationFocus.Invoke(value);
 		}
 	}
 }

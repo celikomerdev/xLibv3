@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if PackUI
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,4 +19,5 @@ namespace xLib.xTween
 		}
 	}
 }
+#endif
 #endif

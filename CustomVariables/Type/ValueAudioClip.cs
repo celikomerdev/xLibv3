@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if ModAudio
 using System;
 using UnityEngine;
 
@@ -16,4 +17,5 @@ namespace xLib.xValueClass
 		#endregion
 	}
 }
+#endif
 #endif

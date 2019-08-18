@@ -96,11 +96,11 @@ namespace xLib
 				FindView();
 				
 				ApplyViewIdWithDebug();
-				SetActive(value);
+				OnActive(value);
 				ApplyLastIdWithDebug();
 			}
 		}
-		protected virtual void SetActive(bool value){}
+		protected virtual void OnActive(bool value){}
 		#endregion
 	}
 }

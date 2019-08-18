@@ -8,7 +8,7 @@ namespace xLib
 		public NodeFloat tickTime;
 		
 		#region Custom
-		protected override bool Register(bool register)
+		protected override bool OnRegister(bool register)
 		{
 			tickTime.ListenerEditor(register,this);
 			tickTime.Listener(register,TickMulti,baseRegister.onRegister);

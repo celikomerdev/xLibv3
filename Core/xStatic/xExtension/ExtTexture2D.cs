@@ -46,10 +46,27 @@ namespace xLib
 			}
 			
 			Texture2D texture2D = value.Uncompress();
+			
+			#if ModImageConversion
 			bytes = texture2D.EncodeToPNG();
+			#else
+			Debug.LogWarningFormat("!ModImageConversion");
+			bytes = texture2D.GetRawTextureData();
+			#endif
+			
 			texture2D.Compress(true);
 			texture2D.Apply(true);
 			return bytes;
+		}
+		
+		public static void Load(this Texture2D value,byte[] data)
+		{
+			#if ModImageConversion
+			value.LoadImage(data);
+			#else
+			Debug.LogWarningFormat("!ModImageConversion");
+			value.LoadRawTextureData(data);
+			#endif
 		}
 	}
 }

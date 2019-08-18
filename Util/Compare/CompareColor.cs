@@ -1,78 +1,64 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
-namespace xLib.ToolCompare
+namespace xLib
 {
 	public class CompareColor : BaseWorkM
 	{
-		#region Comparison
-		[SerializeField]private bool onChange;
-		[SerializeField]private Color left;
-		[SerializeField]private Color right;
-		[SerializeField]private bool isEqual;
-		
-		private bool Comparison()
-		{
-			bool result = (left == right);
-			if(isEqual) return (result);
-			else
-			{
-				Debug.LogWarningFormat(this,this.name+":Simplify");
-				return (!result);
-			}
-			
-			// string v1 = ColorUtility.ToHtmlStringRGBA(this.left);
-			// string v2 = ColorUtility.ToHtmlStringRGBA(this.right);
-			
-			// if(isEqual) return (v1==v2);
-			// else return (v1!=v2);
-		}
-		#endregion
-		
-		#region Compare
-		public EventBool onCompare;
-		public void Compare(Color value)
-		{
-			Right = value;
-			Compare();
-		}
-		
-		public void Compare()
-		{
-			if(!CanWork) return;
-			
-			bool result = Comparison();
-			if(CanDebug) Debug.LogFormat(this,this.name+":CompareColor:{0}",result);
-			onCompare.Invoke(result);
-		}
-		#endregion
-		
-		#region Property
+		#region Values
+		[Header("Values")]
+		[SerializeField]private Color left = Color.white;
 		public Color Left
 		{
 			get
 			{
-				return this.left;
+				return left;
 			}
 			set
 			{
-				this.left = value;
-				if(onChange) Compare();
+				if(!CanWork) return;
+				if(left == value) return;
+				left = value;
+				Compare();
 			}
 		}
 		
+		[SerializeField]private Color right = Color.white;
 		public Color Right
 		{
 			get
 			{
-				return this.right;
+				return right;
 			}
 			set
 			{
-				this.right = value;
-				if(onChange) Compare();
+				if(!CanWork) return;
+				if(right == value) return;
+				right = value;
+				Compare();
 			}
+		}
+		#endregion
+		
+		
+		#region Comparison
+		private bool Comparison()
+		{
+			return (left == right);
+		}
+		#endregion
+		
+		
+		#region Compare
+		[Header("Result")]
+		[UnityEngine.Serialization.FormerlySerializedAs("onCompare")]
+		[SerializeField]private EventBool eventCompare = new EventBool();
+		private void Compare()
+		{
+			bool result = Comparison();
+			if(CanDebug) Debug.LogFormat(this,this.name+":CompareColor:{0}",result);
+			eventCompare.Invoke(result);
 		}
 		#endregion
 	}

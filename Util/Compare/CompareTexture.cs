@@ -1,28 +1,65 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
-namespace xLib.ToolCompare
+namespace xLib
 {
 	public class CompareTexture : BaseWorkM
 	{
-		#region Comparison
-		[SerializeField]private Texture value;
-		
-		private bool Comparison(Texture value)
+		#region Values
+		[Header("Values")]
+		[UnityEngine.Serialization.FormerlySerializedAs("value")]
+		[SerializeField]private Texture left = null;
+		public Texture Left
 		{
-			return (this.value == value);
+			get
+			{
+				return left;
+			}
+			set
+			{
+				if(!CanWork) return;
+				if(left == value) return;
+				left = value;
+				Compare();
+			}
+		}
+		
+		[SerializeField]private Texture right = null;
+		public Texture Right
+		{
+			get
+			{
+				return right;
+			}
+			set
+			{
+				if(!CanWork) return;
+				if(right == value) return;
+				right = value;
+				Compare();
+			}
 		}
 		#endregion
 		
-		#region Compare
-		public EventBool onCompare;
-		public void Compare(Texture value)
+		
+		#region Comparison
+		private bool Comparison()
 		{
-			if(!CanWork) return;
-			bool result = Comparison(value);
+			return (left == right);
+		}
+		#endregion
+		
+		
+		#region Compare
+		[Header("Result")]
+		[UnityEngine.Serialization.FormerlySerializedAs("onCompare")]
+		[SerializeField]private EventBool eventCompare = new EventBool();
+		private void Compare()
+		{
+			bool result = Comparison();
 			if(CanDebug) Debug.LogFormat(this,this.name+":CompareTexture:{0}",result);
-			onCompare.Invoke(result);
+			eventCompare.Invoke(result);
 		}
 		#endregion
 	}

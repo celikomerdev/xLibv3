@@ -33,7 +33,7 @@ namespace xLib
 		
 		
 		#region Custom
-		protected override void SetActive(bool value)
+		protected override void OnActive(bool value)
 		{
 			IsRegister = value;
 		}
@@ -52,12 +52,12 @@ namespace xLib
 				if(CanDebug && BaseRegisterM.Order!=Order) Debug.LogWarningFormat("BaseRegisterM:Order:{0}:order:{1}",BaseRegisterM.Order,baseRegister.order);
 				BaseRegisterM.Order = baseRegister.order;
 				
-				baseRegister.isRegister = Register(value);
+				baseRegister.isRegister = OnRegister(value);
 				ApplyLastIdWithDebug();
 			}
 		}
 		
-		protected virtual bool Register(bool value)
+		protected virtual bool OnRegister(bool value)
 		{
 			return value;
 		}

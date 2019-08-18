@@ -1,28 +1,65 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
-namespace xLib.ToolCompare
+namespace xLib
 {
 	public class CompareGameObject : BaseWorkM
 	{
-		#region Comparison
-		[SerializeField]private GameObject value;
-		
-		private bool Comparison(GameObject value)
+		#region Values
+		[Header("Values")]
+		[UnityEngine.Serialization.FormerlySerializedAs("value")]
+		[SerializeField]private GameObject left = null;
+		public GameObject Left
 		{
-			return (value == this.value);
+			get
+			{
+				return left;
+			}
+			set
+			{
+				if(!CanWork) return;
+				if(left == value) return;
+				left = value;
+				Compare();
+			}
+		}
+		
+		[SerializeField]private GameObject right = null;
+		public GameObject Right
+		{
+			get
+			{
+				return right;
+			}
+			set
+			{
+				if(!CanWork) return;
+				if(right == value) return;
+				right = value;
+				Compare();
+			}
 		}
 		#endregion
 		
-		#region Compare
-		public EventBool onCompare;
-		public void Compare(GameObject value)
+		
+		#region Comparison
+		private bool Comparison()
 		{
-			if(!CanWork) return;
-			bool result = Comparison(value);
+			return (left == right);
+		}
+		#endregion
+		
+		
+		#region Compare
+		[Header("Result")]
+		[UnityEngine.Serialization.FormerlySerializedAs("onCompare")]
+		[SerializeField]private EventBool eventCompare = new EventBool();
+		private void Compare()
+		{
+			bool result = Comparison();
 			if(CanDebug) Debug.LogFormat(this,this.name+":CompareGameObject:{0}",result);
-			onCompare.Invoke(result);
+			eventCompare.Invoke(result);
 		}
 		#endregion
 	}

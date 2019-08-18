@@ -1,5 +1,5 @@
 ﻿#if xLibv3
-#if UnityVideo
+#if ModVideo
 using UnityEngine;
 using UnityEngine.Video;
 

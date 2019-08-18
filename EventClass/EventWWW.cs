@@ -1,5 +1,5 @@
 ﻿#if xLibv3
-#if WWW
+#if ModWebWWW
 using System;
 using UnityEngine;
 using xLib.EventBase;

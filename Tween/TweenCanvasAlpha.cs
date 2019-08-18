@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if ModUI
 using UnityEngine;
 
 namespace xLib.xTween
@@ -15,4 +16,5 @@ namespace xLib.xTween
 		}
 	}
 }
+#endif
 #endif

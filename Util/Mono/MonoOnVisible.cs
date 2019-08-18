@@ -1,18 +1,19 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
-namespace xLib.ToolMono
+namespace xLib
 {
 	public class MonoOnVisible : BaseWorkM
 	{
-		public EventBool eventBool;
+		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
+		[SerializeField]private EventBool eventVisible = new EventBool();
 		
 		private void OnVisible(bool value)
 		{
 			if(!CanWork) return;
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnVisible:{0}",value);
-			eventBool.Invoke(value);
+			eventVisible.Invoke(value);
 		}
 		
 		private void OnBecameVisible()

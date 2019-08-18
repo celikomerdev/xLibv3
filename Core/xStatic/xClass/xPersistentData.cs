@@ -1,5 +1,4 @@
 ﻿#if xLibv3
-using System;
 using System.IO;
 using UnityEngine;
 
@@ -84,7 +83,7 @@ namespace xLib
 			if(File.Exists(xApp.xPath(file)))
 			{
 				Texture2D texture2D = new Texture2D(2,2);
-				texture2D.LoadImage(File.ReadAllBytes(xApp.xPath(file)));
+				texture2D.Load(File.ReadAllBytes(xApp.xPath(file)));
 				texture2D.Compress(true);
 				texture2D.Apply();
 				return texture2D;

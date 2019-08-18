@@ -19,7 +19,7 @@ namespace xLib.xValueClass.Listener
 			TryRestoreLastClient();
 		}
 		
-		protected override bool Register(bool register)
+		protected override bool OnRegister(bool register)
 		{
 			for (int i = 0; i < target.Length; i++)
 			{

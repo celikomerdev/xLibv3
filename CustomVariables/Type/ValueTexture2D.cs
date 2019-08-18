@@ -64,7 +64,7 @@ namespace xLib.xValueClass
 				//if(CanDebug) Debug.Log(this.name+": DataLenghtSet: "+stringData.Length,this);
 				
 				Texture2D texture2D = new Texture2D(2,2);
-				texture2D.LoadImage(System.Convert.FromBase64String(stringData));
+				texture2D.Load(System.Convert.FromBase64String(stringData));
 				texture2D.Compress(true);
 				texture2D.Apply(true);
 				

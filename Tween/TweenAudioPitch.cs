@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if ModAudio
 using UnityEngine;
 
 namespace xLib.xTween
@@ -16,4 +17,5 @@ namespace xLib.xTween
 		}
 	}
 }
+#endif
 #endif

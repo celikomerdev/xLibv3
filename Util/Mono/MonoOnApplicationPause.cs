@@ -1,18 +1,19 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
-namespace xLib.ToolMono
+namespace xLib
 {
 	public class MonoOnApplicationPause : BaseWorkM
 	{
-		public EventBool onApplicationPause;
+		[UnityEngine.Serialization.FormerlySerializedAs("onApplicationPause")]
+		[SerializeField]private EventBool eventApplicationPause = new EventBool();
 		
 		private void OnApplicationPause(bool value)
 		{
 			if(!CanWork) return;
 			if(CanDebug) Debug.LogFormat(this,this.name+":MonoOnApplicationPause:{0}",value);
-			onApplicationPause.Invoke(value);
+			eventApplicationPause.Invoke(value);
 		}
 	}
 }

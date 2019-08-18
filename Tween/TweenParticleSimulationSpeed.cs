@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if ModParticleSystem
 using UnityEngine;
 
 namespace xLib.xTween
@@ -21,4 +22,5 @@ namespace xLib.xTween
 		}
 	}
 }
+#endif
 #endif

@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if PackUI
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -85,4 +86,5 @@ namespace xLib.xUtil
 		#endif
 	}
 }
+#endif
 #endif

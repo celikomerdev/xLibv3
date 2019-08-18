@@ -1,35 +1,65 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
-namespace xLib.ToolCompare
+namespace xLib
 {
 	public class CompareString : BaseWorkM
 	{
-		#region Comparison
-		[SerializeField]private string value;
-		[SerializeField]private bool isEqual = true;
-		
-		private bool Comparison(string value)
+		#region Values
+		[Header("Values")]
+		[UnityEngine.Serialization.FormerlySerializedAs("value")]
+		[SerializeField]private string left = "";
+		public string Left
 		{
-			if(!isEqual)
+			get
 			{
-				Debug.LogWarningFormat(this,this.name+":Simplify");
+				return left;
 			}
-			
-			if(isEqual && value == this.value) return true;
-			else return false;
+			set
+			{
+				if(!CanWork) return;
+				if(left == value) return;
+				left = value;
+				Compare();
+			}
+		}
+		
+		[SerializeField]private string right = "";
+		public string Right
+		{
+			get
+			{
+				return right;
+			}
+			set
+			{
+				if(!CanWork) return;
+				if(right == value) return;
+				right = value;
+				Compare();
+			}
 		}
 		#endregion
 		
-		#region Compare
-		public EventBool onCompare;
-		public void Compare(string value)
+		
+		#region Comparison
+		private bool Comparison()
 		{
-			if(!CanWork) return;
-			bool result = Comparison(value);
+			return (left == right);
+		}
+		#endregion
+		
+		
+		#region Compare
+		[Header("Result")]
+		[UnityEngine.Serialization.FormerlySerializedAs("onCompare")]
+		[SerializeField]private EventBool eventCompare = new EventBool();
+		private void Compare()
+		{
+			bool result = Comparison();
 			if(CanDebug) Debug.LogFormat(this,this.name+":CompareString:{0}",result);
-			onCompare.Invoke(result);
+			eventCompare.Invoke(result);
 		}
 		#endregion
 	}

@@ -1,18 +1,19 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
-namespace xLib.ToolMono
+namespace xLib
 {
 	public class MonoOnDestroy : BaseWorkM
 	{
-		public EventUnity onDestroy;
+		[UnityEngine.Serialization.FormerlySerializedAs("onDestroy")]
+		[SerializeField]private EventUnity eventDestroy = new EventUnity();
 		
 		private void OnDestroy()
 		{
 			if(!CanWork) return;
 			if(CanDebug) Debug.LogFormat(this,this.name+":MonoOnDestroy");
-			onDestroy.Invoke();
+			eventDestroy.Invoke();
 		}
 	}
 }

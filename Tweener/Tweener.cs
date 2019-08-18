@@ -41,7 +41,7 @@ namespace xLib.xTweener
 			RefreshTarget();
 		}
 		
-		protected override void SetActive(bool value)
+		protected override void OnActive(bool value)
 		{
 			if(!value && iteration == 0)
 			{

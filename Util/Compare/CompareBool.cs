@@ -1,34 +1,67 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
-namespace xLib.ToolCompare
+namespace xLib
 {
 	public class CompareBool : BaseWorkM
 	{
-		[SerializeField]private bool value;
-		public bool Value
+		#region Values
+		[Header("Values")]
+		[UnityEngine.Serialization.FormerlySerializedAs("value")]
+		[SerializeField]private bool left = false;
+		public bool Left
 		{
 			get
 			{
-				return this.value;
+				return left;
 			}
 			set
 			{
-				this.value = value;
+				if(!CanWork) return;
+				if(left == value) return;
+				left = value;
+				Compare();
 			}
 		}
 		
-		public EventUnity onEqual;
-		public void Compare(bool value)
+		[SerializeField]private bool right = false;
+		public bool Right
 		{
-			if(!CanWork) return;
-			bool result = (this.value == value);
-			if(CanDebug) Debug.LogFormat(this,this.name+":CompareBool:{0}",result);
-			
-			if(!result) return;
-			onEqual.Invoke();
+			get
+			{
+				return right;
+			}
+			set
+			{
+				if(!CanWork) return;
+				if(right == value) return;
+				right = value;
+				Compare();
+			}
 		}
+		#endregion
+		
+		
+		#region Comparison
+		private bool Comparison()
+		{
+			return (left == right);
+		}
+		#endregion
+		
+		
+		#region Compare
+		[Header("Result")]
+		[UnityEngine.Serialization.FormerlySerializedAs("onEqual")]
+		[SerializeField]private EventBool eventCompare = new EventBool();
+		private void Compare()
+		{
+			bool result = Comparison();
+			if(CanDebug) Debug.LogFormat(this,this.name+":CompareBool:{0}",result);
+			eventCompare.Invoke(result);
+		}
+		#endregion
 	}
 }
 #endif

@@ -1,35 +1,49 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
-namespace xLib.ToolCompare
+namespace xLib
 {
 	public class CompareNull : BaseWorkM
 	{
-		#region Comparison
-		private bool Comparison(Object value)
+		#region Values
+		private Object right = null;
+		public Object Right
 		{
-			return (value==null);
+			get
+			{
+				return right;
+			}
+			set
+			{
+				if(!CanWork) return;
+				if(right == value) return;
+				right = value;
+				Compare();
+			}
 		}
 		#endregion
+		
+		
+		#region Comparison
+		private bool Comparison()
+		{
+			return (right==null);
+		}
+		#endregion
+		
 		
 		#region Compare
-		public EventBool onCompare;
-		public void Compare(Object value)
+		[Header("Result")]
+		[UnityEngine.Serialization.FormerlySerializedAs("onCompare")]
+		[SerializeField]private EventBool eventCompare = new EventBool();
+		private void Compare()
 		{
-			if(!CanWork) return;
-			bool result = Comparison(value);
+			bool result = Comparison();
 			if(CanDebug) Debug.LogFormat(this,this.name+":CompareNull:{0}",result);
-			onCompare.Invoke(result);
+			eventCompare.Invoke(result);
 		}
 		#endregion
-		
-		[Header("ToDelete")]
-		[SerializeField]private bool isNull = true;
-		protected override void OnValidatedForced()
-		{
-			if(!isNull) Debug.LogFormat(this,this.name+":REVERSE CALL!!!");
-		}
 	}
 }
 #endif
