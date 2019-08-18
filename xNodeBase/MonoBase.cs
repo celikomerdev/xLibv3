@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib.xNode.NodeObject
 {
-	public abstract class MonoBase : MonoInit, ISerializableObject, IRpc, IAnalyticObject
+	public abstract class MonoBase : MonoInit, ISerializableObject, IRpc
 	{
 		public Object UnityObject
 		{

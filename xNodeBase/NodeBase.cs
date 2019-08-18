@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib.xNode.NodeObject
 {
-	public abstract class NodeBase : NodeInit, ISerializableObject, IRpc, IAnalyticObject
+	public abstract class NodeBase : NodeInit, ISerializableObject, IRpc
 	{
 		public Object UnityObject
 		{
