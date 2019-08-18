@@ -45,6 +45,34 @@ namespace xLib.xNode.NodeObject
 			}
 		}
 		
+		public override bool AnalyticDirty
+		{
+			get
+			{
+				return Node.analyticDirty;
+			}
+			set
+			{
+				Node.analyticDirty = value;
+			}
+		}
+		
+		public override string AnalyticString
+		{
+			get
+			{
+				return Node.AnalyticString;
+			}
+		}
+		
+		public override string AnalyticDigit
+		{
+			get
+			{
+				return Node.AnalyticDigit;
+			}
+		}
+		
 		protected override void OnInit(bool init)
 		{
 			Node.Init(init);
