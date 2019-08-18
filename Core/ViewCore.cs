@@ -1,5 +1,4 @@
 ﻿#if xLibv3
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace xLib
@@ -64,9 +63,6 @@ namespace xLib
 		public static bool inRoom;
 		public static bool inRpc;
 		public static void RPC(string target,string key,string data){}
-		
-		public static List<IAnalyticsSend> arrayAnalytics = new List<IAnalyticsSend>();
-		public static void LogEvent(string type="",string key="",string label="",string data=""){}
 		
 		private static string finalId;
 		public static string FinalId

@@ -39,10 +39,6 @@ namespace xLib
 			}
 		}
 		
-		
-		[Header("Analytics")]
-		[SerializeField]internal AnalyticsType analytics = AnalyticsType.Disabled;
-		
 		[Header("Multi")]
 		[SerializeField]internal bool isMulti = false;
 		
@@ -76,13 +72,6 @@ namespace xLib
 				if(canDebug) Debug.LogFormat(objDebug,Name+":UseRpc:{0}",useRpc);
 			}
 		}
-	}
-	
-	internal enum AnalyticsType:int
-	{
-		Disabled = 0,
-		Name = 1,
-		Key = 2
 	}
 }
 #endif
