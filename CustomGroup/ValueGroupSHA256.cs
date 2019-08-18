@@ -7,7 +7,7 @@ namespace xLib.xValueClass
 	public class ValueGroupSHA256 : ValueGroupCrypto
 	{
 		#region ISerializableBase
-		internal override object SerializedObject
+		public override object SerializedObject
 		{
 			get
 			{

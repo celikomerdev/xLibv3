@@ -8,7 +8,7 @@ namespace xLib.xValueClass
 	public class ValueGroupCipher : ValueGroupCrypto
 	{
 		#region ISerializableBase
-		internal override object SerializedObject
+		public override object SerializedObject
 		{
 			get
 			{

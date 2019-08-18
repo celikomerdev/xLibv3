@@ -7,8 +7,8 @@ namespace xLib.xNode.NodeObject
 	[CreateAssetMenu(menuName = "xLib/Node/Group/Cipher")]
 	public class NodeGroupCipher : NodeGroup
 	{
-		[SerializeField]internal ValueGroupCipher nodeValue = new ValueGroupCipher();
-		protected override ValueGroup Node
+		[SerializeField]private ValueGroupCipher nodeValue = new ValueGroupCipher();
+		protected override xValue<ObjectGroup> Node
 		{
 			get
 			{
