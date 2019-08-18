@@ -2,49 +2,44 @@
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using xLib.xValueClass;
 
-namespace xLib.xValueClass
+namespace xLib
 {
 	[System.Serializable]
-	public class ValueGroup
+	public class ValueGroup : xValue<ObjectGroup>
 	{
-		[SerializeField]internal NodeSetting nodeSetting = new NodeSetting();
-		
-		internal int indexCurrent = 0;
-		public ISerializableObject[] iSerializableObject;
-		private ICall[] iCall;
-		
-		[Header("ISerializableObject")]
-		[SerializeField]private Object[] arrayObject = new Object[0];
-		public Object[] ArrayObject
+		protected override void OnInit(bool init)
 		{
-			get
-			{
-				return arrayObject;
-			}
+			base.OnInit(init);
+			Value.Init(init);
 		}
 		
 		
-		#region SetActive
-		private bool isInit;
-		internal void Init(bool value)
+		#region Call
+		public override void Call()
 		{
-			if(isInit == value) return;
-			isInit = value;
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Init:{0}",isInit);
-			Init();
-			for (int i = 0; i < iSerializableObject.Length; i++)
+			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Call:{0}",ViewCore.CurrentId);
+			ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObjectRaw.ToString());
+		}
+		
+		
+		public override void ListenerCall(bool register,UnityAction call,bool onRegister=false)
+		{
+			for (int i = 0; i < Value.iCall.Length; i++)
 			{
-				ISerializableObject jsonInterface = iSerializableObject[i];
-				jsonInterface.Init(value);
+				Value.iCall[i].ListenerCall(register,call,onRegister);
 			}
 		}
 		
-		private void Init()
+		public override void ListenerEditor(bool addition,BaseActiveM call)
 		{
-			indexCurrent = 0;
-			iSerializableObject = arrayObject.GetGenericsArray<ISerializableObject>();
-			iCall = arrayObject.GetGenericsArray<ICall>();
+			#if UNITY_EDITOR
+			for (int i = 0; i < Value.iCall.Length; i++)
+			{
+				Value.iCall[i].ListenerEditor(addition,call);
+			}
+			#endif
 		}
 		#endregion
 		
@@ -56,9 +51,9 @@ namespace xLib.xValueClass
 			{
 				JObject jObject = new JObject();
 				JObject Values = new JObject();
-				for (int i = 0; i < iSerializableObject.Length; i++)
+				for (int i = 0; i < Value.iSerializableObject.Length; i++)
 				{
-					ISerializableObject jsonInterface = iSerializableObject[i];
+					ISerializableObject jsonInterface = Value.iSerializableObject[i];
 					Values.Add(jsonInterface.Key,(JToken)jsonInterface.SerializedObjectRaw);
 				}
 				jObject.Add("Values",Values);
@@ -90,9 +85,9 @@ namespace xLib.xValueClass
 				if(Values != null)
 				{
 					if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Values:true:{0}",ViewCore.CurrentId);
-					for (int i = 0; i < iSerializableObject.Length; i++)
+					for (int i = 0; i < Value.iSerializableObject.Length; i++)
 					{
-						ISerializableObject jsonInterface = iSerializableObject[i];
+						ISerializableObject jsonInterface = Value.iSerializableObject[i];
 						
 						JToken token = Values.GetValue(jsonInterface.Key);
 						if(token==null) token = Values.GetValue(jsonInterface.Name);
@@ -103,7 +98,7 @@ namespace xLib.xValueClass
 			}
 		}
 		
-		internal virtual object SerializedObject
+		public override object SerializedObject
 		{
 			get
 			{
@@ -115,14 +110,14 @@ namespace xLib.xValueClass
 			}
 		}
 		
-		internal virtual object SerializedObjectName
+		public override object SerializedObjectName
 		{
 			get
 			{
 				JObject jObject = new JObject();
-				for (int i = 0; i < iSerializableObject.Length; i++)
+				for (int i = 0; i < Value.iSerializableObject.Length; i++)
 				{
-					ISerializableObject jsonInterface = iSerializableObject[i];
+					ISerializableObject jsonInterface = Value.iSerializableObject[i];
 					jObject.Add(jsonInterface.Name,(JToken)jsonInterface.SerializedObjectName);
 				}
 				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":SerializedObjectName:Get:{0}:{1}",ViewCore.CurrentId,jObject.ToString());
@@ -130,92 +125,6 @@ namespace xLib.xValueClass
 			}
 		}
 		#endregion
-		
-		
-		#region ISerializableBaseContext
-		#if UNITY_EDITOR
-		internal void ChildKeyName()
-		{
-			Init();
-			for (int i = 0; i < iSerializableObject.Length; i++)
-			{
-				iSerializableObject[i].KeyName();
-			}
-		}
-		
-		internal void ChildKeyGuid()
-		{
-			Init();
-			for (int i = 0; i < iSerializableObject.Length; i++)
-			{
-				iSerializableObject[i].KeyGuid();
-			}
-		}
-		#endif
-		#endregion
-		
-		
-		#region Database
-		public ISerializableObject GetByIndex(int value)
-		{
-			indexCurrent = Mathx.MathInt.Repeat(value,iSerializableObject.Length);
-			return iSerializableObject[indexCurrent];
-		}
-		
-		public ISerializableObject GetByOrder(int value)
-		{
-			return GetByIndex(indexCurrent+value);
-		}
-		
-		public ISerializableObject GetByRandom()
-		{
-			return GetByIndex(UnityEngine.Random.Range(0,iSerializableObject.Length));
-		}
-		
-		public ISerializableObject GetByKey(string value)
-		{
-			indexCurrent = -1;
-			if(iSerializableObject!=null && iSerializableObject.Length>0)
-			{
-				try
-				{
-					indexCurrent = iSerializableObject.FindIndex(asset => ((ISerializableObject)asset).Key == value);
-				}
-				catch (System.Exception ex)
-				{
-					xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+"GetByKey:{0}",ex);
-				}
-			}
-			if(indexCurrent==-1) indexCurrent=0;
-			return GetByIndex(indexCurrent);
-		}
-		#endregion
-		
-		
-		internal void Call()
-		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Call:{0}",ViewCore.CurrentId);
-			ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObjectRaw.ToString());
-		}
-		
-		
-		public void ListenerCall(bool register,UnityAction call,bool onRegister=false)
-		{
-			for (int i = 0; i < iCall.Length; i++)
-			{
-				iCall[i].ListenerCall(register,call,onRegister);
-			}
-		}
-		
-		public void ListenerEditor(bool addition,BaseActiveM call)
-		{
-			#if UNITY_EDITOR
-			for (int i = 0; i < iCall.Length; i++)
-			{
-				iCall[i].ListenerEditor(addition,call);
-			}
-			#endif
-		}
 	}
 }
 #endif
