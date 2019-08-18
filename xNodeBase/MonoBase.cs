@@ -3,8 +3,16 @@ using UnityEngine;
 
 namespace xLib.xNode.NodeObject
 {
-	public abstract class MonoBase : MonoInit, ISerializableObject, IRpc
+	public abstract class MonoBase : MonoInit, ISerializableObject, IRpc, IAnalyticObject
 	{
+		public Object UnityObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+		
 		#region Key
 		public abstract string Key
 		{
@@ -15,6 +23,14 @@ namespace xLib.xNode.NodeObject
 		public abstract string Name
 		{
 			get;
+		}
+		
+		public virtual string ValueToString
+		{
+			get
+			{
+				return "";
+			}
 		}
 		
 		[ContextMenu ("Key = Name")]
@@ -71,6 +87,25 @@ namespace xLib.xNode.NodeObject
 		#endregion
 		
 		public virtual void Call(){}
+		
+		
+		#region IAnalyticObject
+		public abstract bool AnalyticDirty
+		{
+			get;
+			set;
+		}
+		
+		public abstract string AnalyticString
+		{
+			get;
+		}
+		
+		public abstract string AnalyticDigit
+		{
+			get;
+		}
+		#endregion
 	}
 }
 #endif
