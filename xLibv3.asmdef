@@ -9,8 +9,17 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [
-        "xLibv3"
-    ],
-    "versionDefines": []
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.ugui",
+            "expression": "0.0.0",
+            "define": "PackUI"
+        },
+        {
+            "name": "com.unity.modules.ui",
+            "expression": "0.0.0",
+            "define": "ModUI"
+        }
+    ]
 }
