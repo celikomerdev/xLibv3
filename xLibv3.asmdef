@@ -1,7 +1,8 @@
 {
     "name": "xLibv3",
-    "references": [],
-    "optionalUnityReferences": [],
+    "references": [
+        "GUID:4558e0f6e6a555a4fa628eb81c631799"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
