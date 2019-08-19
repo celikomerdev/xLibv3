@@ -4,7 +4,7 @@ using xLib.EventClass;
 
 namespace xLib
 {
-	public class CompareTexture : BaseWorkM
+	public class CompareTexture : CompareBase
 	{
 		#region Values
 		[Header("Values")]

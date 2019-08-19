@@ -4,7 +4,7 @@ using xLib.EventClass;
 
 namespace xLib
 {
-	public class CompareTransform : BaseWorkM
+	public class CompareTransform : CompareBase
 	{
 		#region Values
 		[Header("Values")]
