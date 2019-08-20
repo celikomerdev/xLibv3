@@ -13,7 +13,6 @@ namespace xLib
 		[SerializeField]private bool autoRestore = true;
 		[SerializeField]private bool useValidate = true;
 		
-		
 		#region Init
 		private bool inInit;
 		public override void Init()
@@ -28,8 +27,17 @@ namespace xLib
 			module.useFakeStoreUIMode = FakeStoreUIMode.StandardUser;
 			ConfigurationBuilder builder = ConfigurationBuilder.Instance(module);
 			
-			catalog = ProductCatalog.LoadDefaultCatalog();
-			IAPConfigurationHelper.PopulateConfigurationBuilder(ref builder,catalog);
+			if(useManagerCatalog)
+			{
+				AddSkuList(ref builder,skuConsumable,ProductType.Consumable);
+				AddSkuList(ref builder,skuNonconsumable,ProductType.NonConsumable);
+				AddSkuList(ref builder,skuSubscription,ProductType.Subscription);
+			}
+			else
+			{
+				catalog = ProductCatalog.LoadDefaultCatalog();
+				IAPConfigurationHelper.PopulateConfigurationBuilder(ref builder,catalog);
+			}
 			
 			HelperSubscription.CanDebug = CanDebug;
 			ProductValidator.CanDebug = CanDebug;
@@ -198,6 +206,19 @@ namespace xLib
 			isRestore.Value = false;
 		}
 		#endregion
+		
+		[Header("SKU")]
+		[SerializeField]private bool useManagerCatalog = true;
+		[SerializeField]private string[] skuConsumable;
+		[SerializeField]private string[] skuNonconsumable;
+		[SerializeField]private string[] skuSubscription;
+		private void AddSkuList(ref ConfigurationBuilder builder,string[] skuList,ProductType productType)
+		{
+			for (int i = 0; i < skuConsumable.Length; i++)
+			{
+				builder.AddProduct(skuConsumable[i],productType);
+			}
+		}
 	}
 }
 #else
@@ -215,7 +236,7 @@ namespace xLib
 		public NodeBool isInit;
 		public NodeBool isPurchase;
 		public NodeBool isRestore;
-		#pragma warning restore
+		
 		
 		public void Purchase(string key)
 		{
@@ -228,6 +249,13 @@ namespace xLib
 			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
 			isRestore.Value = false;
 		}
+		
+		[Header("SKU")]
+		[SerializeField]private bool useManagerCatalog = true;
+		[SerializeField]private string[] skuConsumable;
+		[SerializeField]private string[] skuNonconsumable;
+		[SerializeField]private string[] skuSubscription;
+		#pragma warning restore
 	}
 }
 #endif
