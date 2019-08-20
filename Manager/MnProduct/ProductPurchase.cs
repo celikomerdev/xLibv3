@@ -1,23 +1,31 @@
-﻿#if xLibv2
-#if IapUnity
+﻿#if xLibv3
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Purchasing;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
 namespace xLib.ToolPurchase
 {
 	public class ProductPurchase : BaseActiveM
 	{
-		private Product product;
 		[SerializeField]private string key;
 		[SerializeField]private Text textPrice;
 		[SerializeField]public EventBool eventBool;
+		
+		#if IapUnity
+		private UnityEngine.Purchasing.Product product;
+		#else
+		private string product;
+		#endif
 		
 		#region Behavior
 		protected override void Started()
 		{
 			MnProduct.ins.isInit.Listener(true,ListenInit,true);
+		}
+		
+		protected override void OnEnabled()
+		{
+			RefreshProduct();
 		}
 		
 		protected override void OnDestroyed()
@@ -29,25 +37,14 @@ namespace xLib.ToolPurchase
 		{
 			if(!value) return;
 			MnProduct.ins.isInit.Listener(false,ListenInit);
-			
-			product = MnProduct.ins.GetProduct(key);
-			if(textPrice) textPrice.text = product.metadata.localizedPriceString;
+			RefreshProduct();
 		}
 		
-		protected override void OnEnabled()
+		private void RefreshProduct()
 		{
-			if(product==null) return;
+			if(product == null) product = MnProduct.ins.GetProduct(key);
+			if(product == null) return;
 			if(textPrice) textPrice.text = product.metadata.localizedPriceString;
-		}
-		#endregion
-		
-		#region Fuction
-		public void Purchase()
-		{
-			if(Application.internetReachability == NetworkReachability.NotReachable) return;
-			if(product==null) return;
-			Register(true);
-			MnProduct.ins.Purchase(product);
 		}
 		#endregion
 		
@@ -57,59 +54,34 @@ namespace xLib.ToolPurchase
 		{
 			if(isRegister == value) return;
 			isRegister = value;
-			
-			if(value)
-			{
-				StPopupBar.MessageLocalized("please wait");
-			}
-			
 			MnProduct.ins.isPurchase.Listener(value,IsPuchase);
 		}
 		#endregion
 		
-		#region Callback
+		#region Fuction
+		public void Purchase()
+		{
+			if(Application.internetReachability == NetworkReachability.NotReachable) return;
+			RefreshProduct();
+			
+			if(product == null) return;
+			Register(true);
+			MnProduct.ins.Purchase(product);
+		}
+		
 		private void IsPuchase(bool value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":IsPuchase:{0}",value);
-			if(product!=MnProduct.currentProduct) return;
+			if(product != MnProduct.currentProduct)
+			{
+				xDebug.LogExceptionFormat(this,"product id does not match:{0}",product);
+				return;
+			}
+			
 			Register(false);
-			
-			
-			if(!value)
-			{
-				StPopupBar.MessageLocalized("purchase failed");
-			}
-			else
-			{
-				StPopupBar.MessageLocalized("purchase successful");
-			}
-			
-			
 			eventBool.Invoke(value);
 		}
 		#endregion
 	}
 }
-#else
-using UnityEngine;
-using UnityEngine.UI;
-using xLib.ToolEventClass;
-
-namespace xLib.ToolPurchase
-{
-	public class ProductPurchase : BaseM
-	{
-		[SerializeField]private string key;
-		[SerializeField]private Text textPrice;
-		[SerializeField]public EventBool eventBool;
-		
-		public void Purchase()
-		{
-			StPopupBar.MessageLocalized("purchase successful");
-			MnProduct.ins.isPurchase.Value = true;
-			eventBool.Invoke(true);
-		}
-	}
-}
-#endif
 #endif

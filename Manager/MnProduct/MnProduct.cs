@@ -11,6 +11,7 @@ namespace xLib
 	public class MnProduct : SingletonM<MnProduct>, IStoreListener
 	{
 		[SerializeField]private bool autoRestore = true;
+		[SerializeField]private bool useValidate = true;
 		
 		
 		#region Init
@@ -32,10 +33,11 @@ namespace xLib
 			
 			HelperSubscription.CanDebug = CanDebug;
 			ProductValidator.CanDebug = CanDebug;
+			ProductValidator.UseValidate = useValidate;
 			ProductValidator.module = module;
 			ProductValidator.Init();
 			
-			UnityPurchasing.Initialize(this, builder);
+			UnityPurchasing.Initialize(this,builder);
 		}
 		#endregion
 		
@@ -208,6 +210,8 @@ namespace xLib
 	{
 		#pragma warning disable
 		[SerializeField]private bool autoRestore = true;
+		[SerializeField]private bool useValidate = true;
+		
 		public NodeBool isInit;
 		public NodeBool isPurchase;
 		public NodeBool isRestore;
