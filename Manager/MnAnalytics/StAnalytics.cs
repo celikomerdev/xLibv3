@@ -17,6 +17,11 @@ namespace xLib
 			MnAnalytics.ins.LogEvent(category,action,label,value);
 		}
 		
+		public static void LogPurchase(string sku,double price,string currency,string receipt)
+		{
+			// GGAnalytics.instance.LogPurchase(args.purchasedProduct.definition.storeSpecificId, (double)args.purchasedProduct.metadata.localizedPrice, args.purchasedProduct.metadata.isoCurrencyCode, args.purchasedProduct.receipt);
+		}
+		
 		// internal static List<IAnalyticsSend> arrayAnalytics = new List<IAnalyticsSend>();
 		// internal static void AnalyticsSend()
 		// {
