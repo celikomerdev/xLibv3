@@ -8,7 +8,7 @@ namespace xLib.EventClass
 	[Serializable]
 	public class EventVector4
 	{
-		[SerializeField]private EventBaseVector4 eventVector4 = new EventBaseVector4();
+		[SerializeField]public EventBaseVector4 eventVector4 = new EventBaseVector4();
 		
 		public void Invoke(Vector4 arg0)
 		{

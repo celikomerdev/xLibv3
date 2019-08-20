@@ -8,7 +8,7 @@ namespace xLib.EventClass
 	[Serializable]
 	public class EventByte
 	{
-		[SerializeField]private EventBaseByte eventByte = new EventBaseByte();
+		[SerializeField]public EventBaseByte eventByte = new EventBaseByte();
 		
 		public void Invoke(byte arg0)
 		{

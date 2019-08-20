@@ -8,7 +8,7 @@ namespace xLib.EventClass
 	[Serializable]
 	public class EventColor
 	{
-		[SerializeField]private EventBaseColor eventColor = new EventBaseColor();
+		[SerializeField]public EventBaseColor eventColor = new EventBaseColor();
 		
 		public void Invoke(Color arg0)
 		{

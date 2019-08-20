@@ -8,7 +8,7 @@ namespace xLib.EventClass
 	[Serializable]
 	public class EventTimeSpan
 	{
-		[SerializeField]private EventBaseTimeSpan eventLong = new EventBaseTimeSpan();
+		[SerializeField]public EventBaseTimeSpan eventLong = new EventBaseTimeSpan();
 		
 		public void Invoke(TimeSpan arg0)
 		{

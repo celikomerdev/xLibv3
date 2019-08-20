@@ -9,7 +9,7 @@ namespace xLib.EventClass
 	[Serializable]
 	public class EventWWW
 	{
-		[SerializeField]private EventBaseWWW eventWWW = new EventBaseWWW();
+		[SerializeField]public EventBaseWWW eventWWW = new EventBaseWWW();
 		
 		public void Invoke(WWW arg0)
 		{

@@ -8,7 +8,7 @@ namespace xLib.EventClass
 	[Serializable]
 	public class EventFloat
 	{
-		[SerializeField]private EventBaseFloat eventFloat = new EventBaseFloat();
+		[SerializeField]public EventBaseFloat eventFloat = new EventBaseFloat();
 		
 		public void Invoke(float arg0)
 		{

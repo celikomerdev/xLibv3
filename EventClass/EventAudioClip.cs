@@ -9,7 +9,7 @@ namespace xLib.EventClass
 	[Serializable]
 	public class EventAudioClip
 	{
-		[SerializeField]private EventBaseAudioClip eventAudioClip = new EventBaseAudioClip();
+		[SerializeField]public EventBaseAudioClip eventAudioClip = new EventBaseAudioClip();
 		
 		public void Invoke(AudioClip arg0)
 		{

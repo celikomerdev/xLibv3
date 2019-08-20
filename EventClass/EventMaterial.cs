@@ -8,7 +8,7 @@ namespace xLib.EventClass
 	[Serializable]
 	public class EventMaterial
 	{
-		[SerializeField]private EventBaseMaterial eventMaterial = new EventBaseMaterial();
+		[SerializeField]public EventBaseMaterial eventMaterial = new EventBaseMaterial();
 		
 		public void Invoke(Material arg0)
 		{

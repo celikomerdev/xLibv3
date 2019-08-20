@@ -8,7 +8,7 @@ namespace xLib.EventClass
 	[Serializable]
 	public class EventLong
 	{
-		[SerializeField]private EventBaseLong eventLong = new EventBaseLong();
+		[SerializeField]public EventBaseLong eventLong = new EventBaseLong();
 		
 		public void Invoke(long arg0)
 		{

@@ -8,7 +8,7 @@ namespace xLib.EventClass
 	[Serializable]
 	public class EventSprite
 	{
-		[SerializeField]private EventBaseSprite eventSprite = new EventBaseSprite();
+		[SerializeField]public EventBaseSprite eventSprite = new EventBaseSprite();
 		
 		public void Invoke(Sprite arg0)
 		{
