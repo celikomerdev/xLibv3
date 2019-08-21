@@ -9,13 +9,10 @@ namespace xLib
 {
 	public class MnLocalize : SingletonM<MnLocalize>
 	{
-		[SerializeField]private StringModification modification = StringModification.ToUpper;
-		
 		public static string GetValue(string key)
 		{
 			string temp = LocalizationManager.GetTranslation(key);
 			if(string.IsNullOrEmpty(temp)) temp = key;
-			temp = xStringModification.ApplyModification(temp,ins.modification);
 			return temp;
 		}
 		
@@ -71,15 +68,10 @@ namespace xLib
 {
 	public class MnLocalize : SingletonM<MnLocalize>
 	{
-		[SerializeField]private StringModification modification = StringModification.ToUpper;
-		
 		#region Public
 		public static string GetValue(string key)
 		{
-			string temp = key;
-			if(string.IsNullOrEmpty(temp)) temp = key;
-			temp = xStringModification.ApplyModification(temp,ins.modification);
-			return temp;
+			return key;
 		}
 		
 		public static List<string> GetLanguages()
