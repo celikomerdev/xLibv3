@@ -4,29 +4,29 @@ using xLib.EventClass;
 
 namespace xLib.ToolLocalize
 {
-	public class MnLocalizeGetValue : BaseActiveM
+	public class MnLocalizeGetValue : BaseRegisterM
 	{
-		#region Value
 		[SerializeField]private string value = "";
 		public string Value
 		{
 			set
 			{
+				if(this.value == value) return;
 				this.value = value;
-				GetValue();
+				Work();
 			}
-		}
-		#endregion
-		
-		protected override void OnEnabled()
-		{
-			GetValue();
 		}
 		
 		[SerializeField]private EventString eventString = new EventString();
-		public void GetValue()
+		private void Work()
 		{
 			eventString.Invoke(MnLocalize.GetValue(value));
+		}
+		
+		protected override bool OnRegister(bool value)
+		{
+			MnLocalize.ins.eventLocalize.Listener(value,(Void)=>Work(),true);
+			return value;
 		}
 	}
 }

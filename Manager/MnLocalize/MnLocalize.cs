@@ -80,10 +80,11 @@ namespace xLib
 			OnLocalize();
 		}
 		
+		[SerializeField]public NodeVoid eventLocalize;
 		private static void OnLocalize()
 		{
-			Debug.Log("OnLocalize");
 			CurrentUICulture = CurrentUICulture;
+			ins?.eventLocalize.Call();
 		}
 	}
 }
