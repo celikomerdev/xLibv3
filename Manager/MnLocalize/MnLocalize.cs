@@ -1,6 +1,7 @@
 ﻿#if xLibv3
 #if I2Loc
 using System.Collections.Generic;
+using System.Globalization;
 using I2.Loc;
 using UnityEngine;
 using xLib.xNode.NodeObject;
@@ -57,10 +58,38 @@ namespace xLib
 				Language = GetLanguages()[value];
 			}
 		}
+		
+		public static CultureInfo CurrentUICulture
+		{
+			get
+			{
+				return LocalizationManager.CurrentCulture;
+			}
+			set
+			{
+				if(value == null) value = CultureInfo.InvariantCulture;
+				if(CultureInfo.CurrentUICulture == value) return;
+				CultureInfo.CurrentUICulture = value;
+			}
+		}
+		
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+		private static void Register()
+		{
+			LocalizationManager.OnLocalizeEvent += OnLocalize;
+			OnLocalize();
+		}
+		
+		private static void OnLocalize()
+		{
+			Debug.Log("OnLocalize");
+			CurrentUICulture = CurrentUICulture;
+		}
 	}
 }
 #else
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using xLib.xNode.NodeObject;
 
@@ -68,7 +97,6 @@ namespace xLib
 {
 	public class MnLocalize : SingletonM<MnLocalize>
 	{
-		#region Public
 		public static string GetValue(string key)
 		{
 			return key;
@@ -103,7 +131,20 @@ namespace xLib
 			{
 			}
 		}
-		#endregion
+		
+		public static CultureInfo CurrentUICulture
+		{
+			get
+			{
+				return CultureInfo.CurrentUICulture;
+			}
+			set
+			{
+				if(value == null) value = CultureInfo.InvariantCulture;
+				if(CultureInfo.CurrentUICulture == value) return;
+				CultureInfo.CurrentUICulture = value;
+			}
+		}
 	}
 }
 #endif
