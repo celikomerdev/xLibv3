@@ -11,7 +11,6 @@ namespace xLib.Purchasing.Security
 	{
 		internal static bool CanDebug = true;
 		internal static bool UseValidate = true;
-		internal static StandardPurchasingModule module;
 		private static CrossPlatformValidator validator;
 		
 		internal static void Init()
@@ -22,8 +21,6 @@ namespace xLib.Purchasing.Security
 			validator = new CrossPlatformValidator(GooglePlayTangle.Data(),AppleTangle.Data(),UnityChannelTangle.Data(),Application.identifier);
 			if(validator == null) xDebug.LogExceptionFormat("ProductValidator:validator=null!");
 			#endif
-			
-			if(module == null) xDebug.LogExceptionFormat("ProductValidator:module=null");
 		}
 		
 		internal static bool IsValid(PurchaseEventArgs args)
@@ -32,8 +29,8 @@ namespace xLib.Purchasing.Security
 			if(!UseValidate) return true;
 			
 			bool canValidate = false;
-			if(module.appStore == AppStore.GooglePlay) canValidate = true;
-			if(module.appStore == AppStore.AppleAppStore) canValidate = true;
+			if(StandardPurchasingModule.Instance().appStore == AppStore.GooglePlay) canValidate = true;
+			if(StandardPurchasingModule.Instance().appStore == AppStore.AppleAppStore) canValidate = true;
 			if(!canValidate) return true;
 			
 			

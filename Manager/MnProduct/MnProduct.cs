@@ -12,6 +12,7 @@ namespace xLib
 	{
 		[SerializeField]private bool autoRestore = true;
 		[SerializeField]private bool useValidate = true;
+		[SerializeField]private FakeStoreUIMode fakeStoreUIMode = FakeStoreUIMode.StandardUser;
 		
 		#region Init
 		private bool inInit;
@@ -23,26 +24,15 @@ namespace xLib
 			inInit = true;
 			if(CanDebug) Debug.LogFormat(this,this.name+":Init");
 			
-			module = StandardPurchasingModule.Instance();
-			module.useFakeStoreUIMode = FakeStoreUIMode.StandardUser;
-			ConfigurationBuilder builder = ConfigurationBuilder.Instance(module);
+			StandardPurchasingModule.Instance().useFakeStoreUIMode = fakeStoreUIMode;
+			ConfigurationBuilder builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 			
-			if(useManagerCatalog)
-			{
-				AddSkuList(ref builder,skuConsumable,ProductType.Consumable);
-				AddSkuList(ref builder,skuNonconsumable,ProductType.NonConsumable);
-				AddSkuList(ref builder,skuSubscription,ProductType.Subscription);
-			}
-			else
-			{
-				catalog = ProductCatalog.LoadDefaultCatalog();
-				IAPConfigurationHelper.PopulateConfigurationBuilder(ref builder,catalog);
-			}
+			ProductCatalog catalog = ProductCatalog.LoadDefaultCatalog();
+			IAPConfigurationHelper.PopulateConfigurationBuilder(ref builder,catalog);
 			
 			HelperSubscription.CanDebug = CanDebug;
 			ProductValidator.CanDebug = CanDebug;
 			ProductValidator.UseValidate = useValidate;
-			ProductValidator.module = module;
 			ProductValidator.Init();
 			
 			UnityPurchasing.Initialize(this,builder);
@@ -51,12 +41,9 @@ namespace xLib
 		
 		
 		#region Implementation
-		private static StandardPurchasingModule module;
 		private static IStoreController m_Controller;
 		private static IExtensionProvider m_extensions;
 		private static ITransactionHistoryExtensions m_TransactionHistoryExtensions;
-		
-		private static ProductCatalog catalog;
 		
 		#pragma warning disable
 		private static IGooglePlayStoreExtensions m_GooglePlayStoreExtensions;
@@ -84,6 +71,20 @@ namespace xLib
 			}
 			
 			IsInit(true);
+			
+			if(!CanDebug) return;
+			foreach (var item in controller.products.all)
+			{
+				Debug.Log(string.Join("-",
+				new[]
+				{
+					item.definition.id,
+					item.definition.storeSpecificId,
+					item.definition.type.ToString(),
+					item.metadata.localizedPrice.ToString(),
+					item.metadata.localizedPriceString
+				}));
+			}
 		}
 		
 		void IStoreListener.OnInitializeFailed(InitializationFailureReason error)
@@ -206,19 +207,6 @@ namespace xLib
 			isRestore.Value = false;
 		}
 		#endregion
-		
-		[Header("SKU")]
-		[SerializeField]private bool useManagerCatalog = true;
-		[SerializeField]private string[] skuConsumable;
-		[SerializeField]private string[] skuNonconsumable;
-		[SerializeField]private string[] skuSubscription;
-		private void AddSkuList(ref ConfigurationBuilder builder,string[] skuList,ProductType productType)
-		{
-			for (int i = 0; i < skuConsumable.Length; i++)
-			{
-				builder.AddProduct(skuConsumable[i],productType);
-			}
-		}
 	}
 }
 #else
@@ -232,11 +220,11 @@ namespace xLib
 		#pragma warning disable
 		[SerializeField]private bool autoRestore = true;
 		[SerializeField]private bool useValidate = true;
+		[SerializeField]private int fakeStoreUIMode = 1;
 		
 		public NodeBool isInit;
 		public NodeBool isPurchase;
 		public NodeBool isRestore;
-		
 		
 		public void Purchase(string key)
 		{
@@ -249,12 +237,6 @@ namespace xLib
 			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
 			isRestore.Value = false;
 		}
-		
-		[Header("SKU")]
-		[SerializeField]private bool useManagerCatalog = true;
-		[SerializeField]private string[] skuConsumable;
-		[SerializeField]private string[] skuNonconsumable;
-		[SerializeField]private string[] skuSubscription;
 		#pragma warning restore
 	}
 }
