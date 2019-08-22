@@ -16,7 +16,6 @@ namespace xLib
 			}
 			set
 			{
-				if(!CanWork) return;
 				if(right == value) return;
 				right = value;
 				Compare();
@@ -39,6 +38,7 @@ namespace xLib
 		[SerializeField]private EventBool eventCompare = new EventBool();
 		private void Compare()
 		{
+			if(!CanWork) return;
 			bool result = Comparison();
 			if(CanDebug) Debug.LogFormat(this,this.name+":CompareNull:{0}",result);
 			eventCompare.Invoke(result);
