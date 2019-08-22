@@ -1,7 +1,7 @@
 ﻿#if xLibv3
 namespace xLib
 {
-	public interface ISerializableObject:IInit,IKey,IName
+	public interface ISerializableObject:IKey,IName
 	{
 		object SerializedObjectRaw
 		{

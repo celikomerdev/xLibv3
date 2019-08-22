@@ -31,10 +31,10 @@ namespace xLib.xValueClass
 			indexCurrent = 0;
 			iSerializableObject = arrayObject.GetGenericsArray<ISerializableObject>();
 			iCall = arrayObject.GetGenericsArray<ICall>();
-			for (int i = 0; i < iSerializableObject.Length; i++)
-			{
-				iSerializableObject[i].Init(value);
-			}
+			// for (int i = 0; i < iSerializableObject.Length; i++)
+			// {
+			// 	iSerializableObject[i].Init(value);
+			// }
 		}
 		#endregion
 		
