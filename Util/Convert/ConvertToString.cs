@@ -9,34 +9,36 @@ namespace xLib.ToolConvert
 	{
 		[SerializeField]private string format = "F0";
 		[UnityEngine.Serialization.FormerlySerializedAs("onConvert")]
-		[SerializeField]private EventString eventConvert;
-		private void OnConvert(string value)
+		[SerializeField]private EventString eventResult;
+		private string result = "";
+		private string Result
 		{
-			eventConvert.Invoke(value);
+			set
+			{
+				if(result == value) return;
+				result = value;
+				eventResult.Invoke(result);
+			}
 		}
 		
 		public void FromByte(byte value)
 		{
-			string result = value.ToString(format);
-			OnConvert(result);
+			Result = value.ToString(format);
 		}
 		
 		public void FromInt(int value)
 		{
-			string result = value.ToString(format);
-			OnConvert(result);
+			Result = value.ToString(format);
 		}
 		
 		public void FromFloat(float value)
 		{
-			string result = value.ToString(format);
-			OnConvert(result);
+			Result = value.ToString(format);
 		}
 		
 		public void FromTimeSpan(TimeSpan value)
 		{
-			string result = value.ToStringCustom(format);
-			OnConvert(result);
+			Result = value.ToStringCustom(format);
 		}
 		
 		public void FromTimeTick(long value)
@@ -46,8 +48,7 @@ namespace xLib.ToolConvert
 		
 		public void FromWWW(WWW value)
 		{
-			string result = value.text;
-			OnConvert(result);
+			Result = value.text;
 		}
 	}
 }

@@ -58,7 +58,7 @@ namespace xLib.ToolOperation
 		}
 		
 		[UnityEngine.Serialization.FormerlySerializedAs("eventFloat")]
-		public EventLong eventResult;
+		[SerializeField]private EventLong eventResult;
 		private long result = 0;
 		private long Result
 		{
