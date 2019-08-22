@@ -4,10 +4,11 @@ using xLib.EventClass;
 
 namespace xLib.ToolOperation
 {
-	public class OperationLong : BaseM
+	public class OperationLong : MonoInit
 	{
-		private void Awake()
+		protected override void OnInit(bool init)
 		{
+			if(!init) return;
 			operationDelegate = CreateOperation();
 		}
 		

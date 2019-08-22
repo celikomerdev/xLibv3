@@ -16,6 +16,13 @@ namespace xLib
 		}
 		protected virtual void OnInit(bool init){}
 		
+		
+		#region Flow
+		public MonoInit()
+		{
+			MnThread.Register(Awake);
+		}
+		
 		private void Awake()
 		{
 			Init(true);
@@ -32,6 +39,7 @@ namespace xLib
 			Init(!isInit);
 			Init(!isInit);
 		}
+		#endregion
 	}
 }
 #endif
