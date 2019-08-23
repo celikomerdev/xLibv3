@@ -8,8 +8,6 @@ namespace xLib.ToolConvert
 	public class ConvertToString : BaseM
 	{
 		[SerializeField]private string format = "F0";
-		[UnityEngine.Serialization.FormerlySerializedAs("onConvert")]
-		[SerializeField]private EventString eventResult;
 		private string result = "";
 		private string Result
 		{
@@ -20,6 +18,9 @@ namespace xLib.ToolConvert
 				eventResult.Invoke(result);
 			}
 		}
+		
+		[UnityEngine.Serialization.FormerlySerializedAs("onConvert")]
+		[SerializeField]private EventString eventResult;
 		
 		public void FromByte(byte value)
 		{
