@@ -11,7 +11,7 @@ namespace xLib
 			
 			if(MnPopupBar.ins)
 			{
-				MnPopupBar.ins.QueueMessage(value);
+				MnPopupBar.ins.queueString.QueueMessage(value);
 				return;
 			}
 			
