@@ -20,6 +20,14 @@ namespace xLib.xNode.NodeObject
 		{
 			Value = !Value;
 		}
+		
+		public int ValueInt
+		{
+			set
+			{
+				Value = (value>0);
+			}
+		}
 	}
 }
 #endif

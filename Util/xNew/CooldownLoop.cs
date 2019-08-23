@@ -24,7 +24,6 @@ namespace xLib.xNew
 		protected override void Tick(float tickTime)
 		{
 			Call();
-			eventDeltaTick.Invoke(deltaTick);
 		}
 		
 		public void Call()
@@ -38,6 +37,7 @@ namespace xLib.xNew
 			if(deltaTick>0)
 			{
 				eventReady.Invoke(false);
+				eventDeltaTick.Invoke(deltaTick);
 				return;
 			}
 			
@@ -66,11 +66,13 @@ namespace xLib.xNew
 		public void StartCooldown()
 		{
 			nextTime.Value = currentTime.Value+cooldown;
+			Call();
 		}
 		
 		public void TickAdd(long value)
 		{
 			nextTime.Value += value;
+			Call();
 		}
 		
 		public void TickMultiply(float value)
