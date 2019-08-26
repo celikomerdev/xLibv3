@@ -5,6 +5,11 @@ namespace xLib.Mathx
 {
 	public static class MathFloat
 	{
+		public static float LerpSin(float a,float b,float t)
+		{
+			return Mathf.Lerp(a,b,Mathf.Sin(t));
+		}
+		
 		public static bool IsClamp(ref float value, float min = -1, float max = 1)
 		{
 			bool returnValue = false;
@@ -25,19 +30,6 @@ namespace xLib.Mathx
 		{
 			return Mathf.Round(input/step)*step;
 		}
-		
-		#region Mod
-		public static float Repeat(float value,float lenght)
-		{
-			return Mathf.Repeat(value,lenght);
-			//while (value >= max) value -= max;
-			//while (value < 0) value += max;
-			
-			//value %= max;
-			//if(value < 0) value += max;
-			//return value;
-		}
-		#endregion
 		
 		#region Normalize
 		public static float Normalize(float minOutput,float medOutput,float maxOutput,float minInput,float medInput,float maxInput,float input)
@@ -66,7 +58,6 @@ namespace xLib.Mathx
 		
 		public static float Normalize(float minInput,float maxInput,float input)
 		{
-			//return (input-minInput)/(maxInput-minInput);
 			return Mathf.InverseLerp(minInput,maxInput,input);
 		}
 		

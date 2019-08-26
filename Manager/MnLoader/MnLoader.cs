@@ -44,7 +44,7 @@ namespace xLib
 			inLoad = true;
 			loadingProgress.Value = 0;
 			UpdateProgress(0);
-			MnCoroutine.ins.NewCoroutine(LoadLevelAsync(value));
+			MnCoroutine.NewCoroutine(LoadLevelAsync(value));
 		}
 		#endregion
 		

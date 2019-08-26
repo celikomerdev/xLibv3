@@ -8,41 +8,53 @@ namespace xLib
 	public class MnCoroutine : SingletonM<MnCoroutine>
 	{
 		#region NewCoroutine
-		public Coroutine NewCoroutine(IEnumerator routine)
+		public static Coroutine NewCoroutine(IEnumerator enumerator)
 		{
-			if(gameObject.activeInHierarchy) return StartCoroutine(routine);
+			if(!ins)
+			{
+				xDebug.LogExceptionFormat("MnCoroutine.ins:null");
+				return null;
+			}
 			
-			Debug.LogWarningFormat(this,this.name+":NewCoroutine:Disabled");
-			return null;
+			return ins.newCoroutine(enumerator);
+		}
+		
+		private Coroutine newCoroutine(IEnumerator enumerator)
+		{
+			if(!gameObject.activeInHierarchy)
+			{
+				xDebug.LogExceptionFormat(this,this.name+":!gameObject.activeInHierarchy");
+				return null;
+			}
+			
+			if(CanDebug) Debug.LogFormat(this,this.name+":newCoroutine:{0}",enumerator.ToString());
+			return StartCoroutine(enumerator);
 		}
 		#endregion
 		
-		
 		#region Scaled
-		public Coroutine WaitForSeconds(float delay,UnityAction call)
+		public static Coroutine WaitForSeconds(float delay,UnityAction call)
 		{
-			return NewCoroutine(eWaitForSeconds(delay,call));
+			return NewCoroutine(waitForSeconds(delay,call));
 		}
 		
-		private IEnumerator eWaitForSeconds(float delay,UnityAction call)
+		private static IEnumerator waitForSeconds(float delay,UnityAction call)
 		{
 			yield return new WaitForSeconds(delay);
 			call();
-			yield return null;
 		}
 		#endregion
 		
 		#region Unscaled
-		public Coroutine WaitForSecondsRealtime(float delay,UnityAction call)
+		public static Coroutine WaitForSecondsRealtime(float delay,UnityAction call)
 		{
-			return NewCoroutine(eWaitForSecondsRealtime(delay,call));
+			return NewCoroutine(waitForSecondsRealtime(delay,call));
 		}
 		
-		private IEnumerator eWaitForSecondsRealtime(float delay,UnityAction call)
+		private static IEnumerator waitForSecondsRealtime(float delay,UnityAction call)
 		{
 			yield return new WaitForSecondsRealtime(delay);
 			call();
-			yield return null;
 		}
 		#endregion
 	}
