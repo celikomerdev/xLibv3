@@ -22,6 +22,6 @@ MonoBehaviour:
     nodeSetting:
       key: f82867e076610ab4380e94a36650bc0d
       isMulti: 0
-    value: 0
+    value: 1
     skipCompareRpc: 1
     isCompare: 1
