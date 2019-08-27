@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c47f3d7fa3e3424439269f207f15244e, type: 3}
-  m_Name: Canvas-Game
+  m_Script: {fileID: 11500000, guid: 9e8bf1502a1b9694c9c70a7bb8cc3987, type: 3}
+  m_Name: EventLocalize
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,8 +20,5 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: f82867e076610ab4380e94a36650bc0d
+      key: 26aafd705a54e9e4ba0e77109a25528f
       isMulti: 0
-    value: 0
-    skipCompareRpc: 1
-    isCompare: 1
