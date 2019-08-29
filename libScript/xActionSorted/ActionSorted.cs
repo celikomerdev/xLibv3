@@ -19,6 +19,7 @@ namespace xLib
 			else
 			{
 				sortedList[BaseRegisterM.Order] -= call;
+				ClearOrder();
 			}
 		}
 		
@@ -49,6 +50,15 @@ namespace xLib
 			if(sortedList.ContainsKey(BaseRegisterM.Order)) return;
 			sortedList.Add(BaseRegisterM.Order,null);
 		}
+		
+		private void ClearOrder()
+		{
+			if(!sortedList.ContainsKey(BaseRegisterM.Order)) return;
+			if(sortedList[BaseRegisterM.Order]==null)
+			{
+				sortedList.Remove(BaseRegisterM.Order);
+			}
+		}
 	}
 	
 	public class ActionSorted<T0>
@@ -65,6 +75,7 @@ namespace xLib
 			else
 			{
 				sortedList[BaseRegisterM.Order] -= call;
+				ClearOrder();
 			}
 		}
 		
@@ -94,6 +105,15 @@ namespace xLib
 		{
 			if(sortedList.ContainsKey(BaseRegisterM.Order)) return;
 			sortedList.Add(BaseRegisterM.Order,null);
+		}
+		
+		private void ClearOrder()
+		{
+			if(!sortedList.ContainsKey(BaseRegisterM.Order)) return;
+			if(sortedList[BaseRegisterM.Order]==null)
+			{
+				sortedList.Remove(BaseRegisterM.Order);
+			}
 		}
 	}
 }
