@@ -22,6 +22,20 @@ namespace xLib
 			actionSortedMulti[ViewCore.FinalId].Invoke();
 		}
 		
+		public override void InvokeFirst()
+		{
+			ViewCore.FinalizeId();
+			if(!actionSortedMulti.ContainsKey(ViewCore.FinalId)) return;
+			actionSortedMulti[ViewCore.FinalId].InvokeFirst();
+		}
+		
+		public override void InvokeLast()
+		{
+			ViewCore.FinalizeId();
+			if(!actionSortedMulti.ContainsKey(ViewCore.FinalId)) return;
+			actionSortedMulti[ViewCore.FinalId].InvokeLast();
+		}
+		
 		private void CreateId()
 		{
 			if(actionSortedMulti.ContainsKey(ViewCore.FinalId)) return;
@@ -45,6 +59,20 @@ namespace xLib
 			ViewCore.FinalizeId();
 			if(!actionSortedMulti.ContainsKey(ViewCore.FinalId)) return;
 			actionSortedMulti[ViewCore.FinalId].Invoke(arg0);
+		}
+		
+		public override void InvokeFirst(T0 arg0)
+		{
+			ViewCore.FinalizeId();
+			if(!actionSortedMulti.ContainsKey(ViewCore.FinalId)) return;
+			actionSortedMulti[ViewCore.FinalId].InvokeFirst(arg0);
+		}
+		
+		public override void InvokeLast(T0 arg0)
+		{
+			ViewCore.FinalizeId();
+			if(!actionSortedMulti.ContainsKey(ViewCore.FinalId)) return;
+			actionSortedMulti[ViewCore.FinalId].InvokeLast(arg0);
 		}
 		
 		private void CreateId()

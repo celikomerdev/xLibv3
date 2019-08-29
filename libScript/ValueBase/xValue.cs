@@ -64,10 +64,38 @@ namespace xLib
 			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClient:{0}:{1}",ViewCore.CurrentId,ValueToString);
 			
 			string lastViewId = ViewCore.CurrentId;
-			
 			ViewCore.CurrentId = "Client";
+			
 			actionSortedBase.Invoke(Value);
 			actionSortedBaseCall.Invoke();
+			analyticDirty = true;
+			
+			ViewCore.CurrentId = lastViewId;
+		}
+		
+		private void CallClientFirst()
+		{
+			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClientFirst:{0}:{1}",ViewCore.CurrentId,ValueToString);
+			
+			string lastViewId = ViewCore.CurrentId;
+			ViewCore.CurrentId = "Client";
+			
+			actionSortedBase.InvokeFirst(Value);
+			actionSortedBaseCall.InvokeFirst();
+			analyticDirty = true;
+			
+			ViewCore.CurrentId = lastViewId;
+		}
+		
+		private void CallClientLast()
+		{
+			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClientLast:{0}:{1}",ViewCore.CurrentId,ValueToString);
+			
+			string lastViewId = ViewCore.CurrentId;
+			ViewCore.CurrentId = "Client";
+			
+			actionSortedBase.InvokeLast(Value);
+			actionSortedBaseCall.InvokeLast();
 			analyticDirty = true;
 			
 			ViewCore.CurrentId = lastViewId;
@@ -221,6 +249,26 @@ namespace xLib
 			else
 			{
 				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Call:{0}:{1}",ViewCore.CurrentId,ValueToString);
+				ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObject.ToString());
+			}
+		}
+		
+		public virtual void CallFirst()
+		{
+			if(!nodeSetting.UseRpc) CallClientFirst();
+			else
+			{
+				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallFirst:{0}:{1}",ViewCore.CurrentId,ValueToString);
+				ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObject.ToString());
+			}
+		}
+		
+		public virtual void CallLast()
+		{
+			if(!nodeSetting.UseRpc) CallClientLast();
+			else
+			{
+				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallLast:{0}:{1}",ViewCore.CurrentId,ValueToString);
 				ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObject.ToString());
 			}
 		}

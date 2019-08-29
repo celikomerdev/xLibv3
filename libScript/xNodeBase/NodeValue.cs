@@ -194,6 +194,16 @@ namespace xLib.xNode.NodeObject
 		{
 			Node.Call();
 		}
+		
+		public override void CallFirst()
+		{
+			Node.CallFirst();
+		}
+		
+		public override void CallLast()
+		{
+			Node.CallLast();
+		}
 	}
 }
 #endif

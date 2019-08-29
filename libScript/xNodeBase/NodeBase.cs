@@ -87,6 +87,8 @@ namespace xLib.xNode.NodeObject
 		#endregion
 		
 		public virtual void Call(){}
+		public virtual void CallFirst(){}
+		public virtual void CallLast(){}
 		
 		
 		#region IAnalyticObject

@@ -30,10 +30,24 @@ namespace xLib
 			}
 		}
 		
+		public void InvokeFirst()
+		{
+			if(sortedList.Count==0) return;
+			UnityAction temp = (UnityAction)sortedList.FirstOrDefault().Value.GetInvocationList().FirstOrDefault();
+			temp.Invoke();
+		}
+		
+		public void InvokeLast()
+		{
+			if(sortedList.Count==0) return;
+			UnityAction temp = (UnityAction)sortedList.LastOrDefault().Value.GetInvocationList().LastOrDefault();
+			temp.Invoke();
+		}
+		
 		private void CreateOrder()
 		{
 			if(sortedList.ContainsKey(BaseRegisterM.Order)) return;
-			sortedList.Add(BaseRegisterM.Order,delegate(){});
+			sortedList.Add(BaseRegisterM.Order,null);
 		}
 	}
 	
@@ -62,10 +76,24 @@ namespace xLib
 			}
 		}
 		
+		public void InvokeFirst(T0 arg0)
+		{
+			if(sortedList.Count==0) return;
+			UnityAction<T0> temp = (UnityAction<T0>)sortedList.FirstOrDefault().Value.GetInvocationList().FirstOrDefault();
+			temp.Invoke(arg0);
+		}
+		
+		public void InvokeLast(T0 arg0)
+		{
+			if(sortedList.Count==0) return;
+			UnityAction<T0> temp = (UnityAction<T0>)sortedList.LastOrDefault().Value.GetInvocationList().LastOrDefault();
+			temp.Invoke(arg0);
+		}
+		
 		private void CreateOrder()
 		{
 			if(sortedList.ContainsKey(BaseRegisterM.Order)) return;
-			sortedList.Add(BaseRegisterM.Order,delegate(T0 arg0){});
+			sortedList.Add(BaseRegisterM.Order,null);
 		}
 	}
 }

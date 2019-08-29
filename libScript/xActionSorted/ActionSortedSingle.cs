@@ -16,6 +16,16 @@ namespace xLib
 		{
 			actionSortedSingle.Invoke();
 		}
+		
+		public override void InvokeFirst()
+		{
+			actionSortedSingle.InvokeFirst();
+		}
+		
+		public override void InvokeLast()
+		{
+			actionSortedSingle.InvokeLast();
+		}
 	}
 	
 	public class ActionSortedSingle<T0> : ActionSortedBase<T0>
@@ -30,6 +40,16 @@ namespace xLib
 		public override void Invoke(T0 arg0)
 		{
 			actionSortedSingle.Invoke(arg0);
+		}
+		
+		public override void InvokeFirst(T0 arg0)
+		{
+			actionSortedSingle.InvokeFirst(arg0);
+		}
+		
+		public override void InvokeLast(T0 arg0)
+		{
+			actionSortedSingle.InvokeLast(arg0);
 		}
 	}
 }
