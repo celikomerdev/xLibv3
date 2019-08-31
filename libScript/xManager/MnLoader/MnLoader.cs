@@ -6,7 +6,7 @@ using xLib.xNode.NodeObject;
 
 namespace xLib
 {
-	public class MnLoader : BaseWorkM
+	public class MnLoader : SingletonM<MnLoader>
 	{
 		#region Field
 		[Header("Manager")]
