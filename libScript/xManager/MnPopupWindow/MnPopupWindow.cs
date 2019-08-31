@@ -1,6 +1,6 @@
 ﻿#if xLibv3
 using UnityEngine;
-using UnityEngine.UI;
+using xLib.EventClass;
 using xLib.xNode.NodeObject;
 using xLib.xTweener;
 
@@ -36,13 +36,12 @@ namespace xLib
 		#endregion
 		
 		
-		
 		#region Header
-		[SerializeField]private Text header;
+		[SerializeField]private EventString stringHeader;
 		public void Header(string value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Header:{0}",value);
-			header.text = value;
+			stringHeader.Invoke(value);
 		}
 		
 		public void HeaderLocalized(string value)
@@ -52,11 +51,11 @@ namespace xLib
 		#endregion
 		
 		#region Body
-		[SerializeField]private Text body;
+		[SerializeField]private EventString stringBody;
 		public void Body(string value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Body:{0}",value);
-			body.text = value;
+			stringBody.Invoke(value);
 		}
 		
 		public void BodyLocalized(string value)
@@ -66,13 +65,14 @@ namespace xLib
 		#endregion
 		
 		#region Accept
-		[SerializeField]private Text accept;
-		[SerializeField]private GameObject objAccept;
+		[Header("Accept")]
+		[SerializeField]private EventString stringAccept;
+		[SerializeField]private EventBool activeAccept;
 		public void Accept(string value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Accept:{0}",value);
-			objAccept.SetActive(!string.IsNullOrEmpty(value));
-			accept.text = value;
+			stringAccept.Invoke(value);
+			activeAccept.Invoke(!string.IsNullOrEmpty(value));
 		}
 		
 		public void AcceptLocalized(string value)
@@ -82,13 +82,14 @@ namespace xLib
 		#endregion
 		
 		#region Decline
-		[SerializeField]private Text decline;
-		[SerializeField]private GameObject objDecline;
+		[Header("Decline")]
+		[SerializeField]private EventString stringDecline;
+		[SerializeField]private EventBool activeDecline;
 		public void Decline(string value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Decline:{0}",value);
-			objDecline.SetActive(!string.IsNullOrEmpty(value));
-			decline.text = value;
+			stringDecline.Invoke(value);
+			activeDecline.Invoke(!string.IsNullOrEmpty(value));
 		}
 		
 		public void DeclineLocalized(string value)
