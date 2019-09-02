@@ -14,7 +14,8 @@ namespace xLib
 		#region Mono
 		protected override void OnInit(bool init)
 		{
-			if(init) queue.limit = queueLimit;
+			if(!init) return;
+			queue = new QueueLimited<string>(queueLimit);
 		}
 		#endregion
 		

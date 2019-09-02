@@ -7,7 +7,7 @@ namespace xLib
 	{
 		public static void QueueMessage(string value,bool isLocalized=true)
 		{
-			// if(isLocalized) value = MnLocalize.GetValue(value);
+			if(isLocalized) value = MnLocalize.GetValue(value);
 			
 			if(MnPopupBar.ins)
 			{

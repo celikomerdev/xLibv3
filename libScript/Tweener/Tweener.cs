@@ -21,8 +21,7 @@ namespace xLib.xTweener
 		public GameObject[] target;
 		
 		[Header("Event")]
-		public EventUnity onFinishForward;
-		public EventUnity onFinishBackward;
+		public EventBool onIterate;
 		public EventUnity onComplete;
 		
 		protected virtual float RatioForward(float value)
@@ -115,25 +114,20 @@ namespace xLib.xTweener
 		private byte currentIteration;
 		private void OnIterate()
 		{
+			onIterate.Invoke(playDirection>0);
+			
 			currentIteration++;
+			if(iteration <= 0) currentIteration = 0;
 			
-			if(!isPingPong)
-			{
-				// if (iteration == 0 || currentIteration < iteration) currentTime = Mathx.MathFloat.Repeat(currentTime,duration);
-			}
+			if (isPingPong) playDirection = -playDirection;
+			else if (currentIteration < iteration) currentTime = (byte)Mathf.Repeat(currentTime,duration);
 			
-			if (playDirection > 0) onFinishForward.Invoke();
-			else onFinishBackward.Invoke();
-			//onIterate.Invoke();
-			
-			if(isPingPong) playDirection = -playDirection;
-			if (iteration == 0) return;
 			if (currentIteration >= iteration) OnComplete();
 		}
 		
 		private void OnComplete()
 		{
-			// currentIteration = Mathx.MathByte.Repeat(currentIteration,iteration);
+			currentIteration = (byte)Mathf.Repeat(currentIteration,iteration);
 			currentTime = Mathf.Clamp(currentTime, 0, duration);
 			onComplete.Invoke();
 			IsRegister = false;
@@ -192,7 +186,7 @@ namespace xLib.xTweener
 		{
 			if (direction != 0) playDirection = direction;
 			else playDirection = -playDirection;
-			// currentIteration = Mathx.MathByte.Repeat(currentIteration,iteration);
+			currentIteration = (byte)Mathf.Repeat(currentIteration,iteration);
 			if(!Application.isPlaying) SetNormalTime(playDirection);
 			IsRegister = true;
 		}
