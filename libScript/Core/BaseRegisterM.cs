@@ -1,13 +1,10 @@
 ﻿#if xLibv3
-using System;
-using UnityEngine;
-
 namespace xLib
 {
 	public abstract class BaseRegisterM : BaseActiveM
 	{
 		#region Object
-		[Serializable]
+		[System.Serializable]
 		public class BaseRegisterInfo
 		{
 			public int order;
@@ -16,19 +13,10 @@ namespace xLib
 		}
 		public BaseRegisterInfo baseRegister = new BaseRegisterInfo();
 		
-		private static int order;
-		public static int Order
-		{
-			get
-			{
-				return order;
-			}
-			internal set
-			{
-				if(order == value) return;
-				order = value;
-			}
-		}
+		public static int Order;
+		#if CanDebug
+		public static UnityEngine.Object OrderObject;
+		#endif
 		#endregion
 		
 		
@@ -49,8 +37,10 @@ namespace xLib
 				if(baseRegister.isRegister == value) return;
 				ApplyViewIdWithDebug();
 				
-				if(CanDebug && BaseRegisterM.Order!=Order) Debug.LogWarningFormat("BaseRegisterM:Order:{0}:order:{1}",BaseRegisterM.Order,baseRegister.order);
 				BaseRegisterM.Order = baseRegister.order;
+				#if CanDebug
+				BaseRegisterM.OrderObject = this;
+				#endif
 				
 				baseRegister.isRegister = OnRegister(value);
 				ApplyLastIdWithDebug();

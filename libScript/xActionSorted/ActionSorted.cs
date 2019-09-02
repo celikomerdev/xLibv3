@@ -74,6 +74,7 @@ namespace xLib
 			}
 			else
 			{
+				if(!sortedList.ContainsKey(BaseRegisterM.Order)) return;
 				sortedList[BaseRegisterM.Order] -= call;
 				ClearOrder();
 			}
@@ -104,16 +105,22 @@ namespace xLib
 		private void CreateOrder()
 		{
 			if(sortedList.ContainsKey(BaseRegisterM.Order)) return;
+			
+			// #if CanDebug
+			// xDebug.LogTempFormat(BaseRegisterM.OrderObject,"sortedList.Add{0}",BaseRegisterM.Order);
+			// #endif
 			sortedList.Add(BaseRegisterM.Order,null);
 		}
 		
 		private void ClearOrder()
 		{
 			if(!sortedList.ContainsKey(BaseRegisterM.Order)) return;
-			if(sortedList[BaseRegisterM.Order]==null)
-			{
-				sortedList.Remove(BaseRegisterM.Order);
-			}
+			if(sortedList[BaseRegisterM.Order]!=null) return;
+			
+			// #if CanDebug
+			// xDebug.LogTempFormat(BaseRegisterM.OrderObject,"sortedList.Remove{0}",BaseRegisterM.Order);
+			// #endif
+			sortedList.Remove(BaseRegisterM.Order);
 		}
 	}
 }
