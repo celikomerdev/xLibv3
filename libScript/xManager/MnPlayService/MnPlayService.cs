@@ -64,18 +64,17 @@ namespace xLib
 		#region Tokens
 		public void OnLogin(bool value)
 		{
-			if(!ins) return;
 			if(value)
 			{
-				ins.displayName.Value = PlayGamesPlatform.Instance.GetUserDisplayName();
-				ins.idToken.Value = PlayGamesPlatform.Instance.GetIdToken();
-				ins.authCode.Value = PlayGamesPlatform.Instance.GetServerAuthCode();
+				displayName.Value = PlayGamesPlatform.Instance.GetUserDisplayName();
+				if(requestIdToken) idToken.Value = PlayGamesPlatform.Instance.GetIdToken();
+				if(requestServerAuthCode) authCode.Value = PlayGamesPlatform.Instance.GetServerAuthCode();
 			}
 			else
 			{
-				ins.displayName.Value = "Guest";
-				ins.idToken.Value = "";
-				ins.authCode.Value = "";
+				displayName.Value = "Guest";
+				idToken.Value = "";
+				authCode.Value = "";
 			}
 		}
 		#endregion
@@ -152,11 +151,11 @@ namespace xLib
 		[SerializeField]private NodeString displayName;
 		[SerializeField]private NodeString idToken;
 		[SerializeField]private NodeString authCode;
-		#pragma warning restore
 		
 		public void OnLogin(bool value){}
 		public void ShowLeaderboardUI(string id){}
 		public void ShowAchievementsUI(string id){}
+		#pragma warning restore
 	}
 }
 #endif
