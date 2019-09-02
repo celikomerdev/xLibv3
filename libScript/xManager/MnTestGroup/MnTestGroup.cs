@@ -18,15 +18,22 @@ namespace xLib
 			WorkInt();
 		}
 		
-		public NodeInt[] nodeInt;
+		[SerializeField]private NodeInt[] nodeInt;
 		private void WorkInt()
 		{
 			for (int i = 0; i < nodeInt.Length; i++)
 			{
 				#if GuruAnalytics
-				nodeInt[i].Value = Gameguru.Analytics.Analytics.GetGroupForABTest(nodeInt[i].Key);
+				nodeInt[i].Value = GetGroup(nodeInt[i].Key);
 				#endif
 			}
+		}
+		
+		public static int GetGroup(string key)
+		{
+			#if GuruAnalytics
+			return Gameguru.Analytics.Analytics.GetGroupForABTest(key);
+			#endif
 		}
 		#endregion
 	}

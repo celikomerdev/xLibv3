@@ -2,9 +2,9 @@
 using UnityEngine;
 using xLib.EventClass;
 
-namespace xLib.ToolLocalize
+namespace xLib
 {
-	public class MnLocalizeGetValue : BaseRegisterM
+	public class MnTestGroupGetGroup : BaseRegisterM
 	{
 		[SerializeField]private string value = "";
 		public string Value
@@ -17,15 +17,15 @@ namespace xLib.ToolLocalize
 			}
 		}
 		
-		[SerializeField]private EventString eventString = new EventString();
+		[SerializeField]private EventInt eventGroup = new EventInt();
 		private void Work()
 		{
-			eventString.Invoke(MnLocalize.GetValue(value));
+			eventGroup.Invoke(MnTestGroup.GetGroup(value));
 		}
 		
 		protected override bool OnRegister(bool value)
 		{
-			MnLocalize.ins.eventLocalize.Listener(value,(Void)=>Work(),baseRegister.onRegister);
+			if(baseRegister.onRegister) Work();
 			return value;
 		}
 	}
