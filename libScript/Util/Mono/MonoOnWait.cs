@@ -9,6 +9,7 @@ namespace xLib
 	{
 		[SerializeField]private bool isUnscaled = true;
 		[SerializeField]private bool isSingle = true;
+		[SerializeField]private bool isDisabled = false;
 		
 		[UnityEngine.Serialization.FormerlySerializedAs("onWait")]
 		[SerializeField]private EventUnity eventWaited = new EventUnity();
@@ -19,11 +20,18 @@ namespace xLib
 			
 			if(!gameObject.activeInHierarchy) return;
 			if(isSingle && processCount>0) return;
-			StartCoroutine(eWait(time));
+			
+			if(isDisabled) MnCoroutine.NewCoroutine(eWait(ViewCore.CurrentId,time));
+			else StartCoroutine(eWait(ViewCore.CurrentId,time));
 		}
 		
 		public void CancelAll()
 		{
+			if(isDisabled)
+			{
+				Debug.LogWarningFormat(this,this.name+":CanNotCancel");
+				return;
+			}
 			if(processCount==0) return;
 			if(CanDebug) Debug.LogFormat(this,this.name+":CancelAll");
 			StopAllCoroutines();
@@ -31,7 +39,7 @@ namespace xLib
 		}
 		
 		private int processCount = 0;
-		private IEnumerator eWait(float time)
+		private IEnumerator eWait(string invokeId,float time)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":MonoOnWait:{0}",time);
 			
@@ -41,9 +49,10 @@ namespace xLib
 			processCount--;
 			
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnWait:{0}",time);
-			ApplyViewIdWithDebug();
+			string tempId = ViewCore.CurrentId;
+			ViewCore.CurrentId = invokeId;
 			eventWaited.Invoke();
-			ApplyLastIdWithDebug();
+			ViewCore.CurrentId = tempId;
 		}
 		
 		private void OnDisable()
