@@ -80,7 +80,7 @@ namespace xLib
 			OnLocalize();
 		}
 		
-		[SerializeField]public NodeVoid eventLocalize;
+		[SerializeField]public NodeVoid eventLocalize = null;
 		private static void OnLocalize()
 		{
 			CurrentUICulture = CurrentUICulture;
@@ -146,6 +146,8 @@ namespace xLib
 				CultureInfo.CurrentUICulture = value;
 			}
 		}
+		
+		[SerializeField]public NodeVoid eventLocalize = null;
 	}
 }
 #endif

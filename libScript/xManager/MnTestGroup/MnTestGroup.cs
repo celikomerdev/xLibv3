@@ -34,6 +34,7 @@ namespace xLib
 			#if GuruAnalytics
 			return Gameguru.Analytics.Analytics.GetGroupForABTest(key);
 			#endif
+			return 0;
 		}
 		#endregion
 	}
