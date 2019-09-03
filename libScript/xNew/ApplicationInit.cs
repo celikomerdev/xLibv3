@@ -13,7 +13,7 @@ namespace xLib
 			StartCoroutine(LoadLevelAsync(1));
 		}
 		
-		[SerializeField]private EventUnity finished;
+		[SerializeField]private EventUnity finished = new EventUnity();
 		private IEnumerator LoadLevelAsync(int value)
 		{
 			AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(value);

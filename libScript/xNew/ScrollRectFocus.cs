@@ -7,12 +7,12 @@ namespace xLib
 {
 	public class ScrollRectFocus : MonoInit
 	{
-		[SerializeField]private ScrollRect scrollRect;
-		private RectTransform transScrollRect;
-		private RectTransform transContent;
-		private RectTransform transViewport;
+		[SerializeField]private ScrollRect scrollRect = null;
+		private RectTransform transScrollRect = null;
+		private RectTransform transContent = null;
+		private RectTransform transViewport = null;
 		
-		[SerializeField]private EventVector2 eventNormalizedPosition;
+		[SerializeField]private EventVector2 eventNormalizedPosition = new EventVector2();
 		
 		protected override void OnInit(bool init)
 		{

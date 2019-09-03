@@ -10,8 +10,8 @@ namespace xLib.ToolPurchase
 {
 	public class ProductSubscribe : BaseRegisterM
 	{
-		[SerializeField]private string key;
-		[SerializeField]private EventBool eventBool;
+		[SerializeField]private string key = "";
+		[SerializeField]private EventBool eventBool = new EventBool();
 		
 		
 		protected override bool OnRegister(bool value)
@@ -55,8 +55,8 @@ namespace xLib.ToolPurchase
 {
 	public class ProductSubscribe : BaseRegisterM
 	{
-		[SerializeField]private string key;
-		[SerializeField]private EventBool eventBool;
+		[SerializeField]private string key = "";
+		[SerializeField]private EventBool eventBool = new EventBool();
 		
 		protected override bool OnRegister(bool value)
 		{

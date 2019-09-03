@@ -6,7 +6,7 @@ namespace xLib.ToolDate
 {
 	public class DateWeek : BaseTickNodeM
 	{
-		[SerializeField]private EventLong eventResult;
+		[SerializeField]private EventLong eventResult = new EventLong();
 		
 		protected override void Tick(float tickTime)
 		{

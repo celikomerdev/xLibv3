@@ -20,7 +20,7 @@ namespace xLib.ToolConvert
 		}
 		
 		[UnityEngine.Serialization.FormerlySerializedAs("onConvert")]
-		[SerializeField]private EventString eventResult;
+		[SerializeField]private EventString eventResult = new EventString();
 		
 		public void FromByte(byte value)
 		{

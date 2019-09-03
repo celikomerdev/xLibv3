@@ -7,9 +7,9 @@ namespace xLib.ToolPurchase
 {
 	public class ProductPurchase : BaseActiveM
 	{
-		[SerializeField]private string key;
-		[SerializeField]private Text textPrice;
-		[SerializeField]public EventBool eventBool;
+		[SerializeField]private string key = "";
+		[SerializeField]private Text textPrice = null;
+		[SerializeField]public EventBool eventBool = new EventBool();
 		
 		#if IapUnity
 		private UnityEngine.Purchasing.Product product;

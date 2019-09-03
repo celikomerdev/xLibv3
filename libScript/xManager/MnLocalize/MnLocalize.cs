@@ -22,7 +22,7 @@ namespace xLib
 			return LocalizationManager.GetAllLanguages();
 		}
 		
-		[SerializeField]private NodeString language;
+		[SerializeField]private NodeString language = null;
 		public static string Language
 		{
 			get
@@ -37,7 +37,7 @@ namespace xLib
 			}
 		}
 		
-		[SerializeField]private NodeInt languageIndex;
+		[SerializeField]private NodeInt languageIndex = null;
 		public static int LanguageIndex
 		{
 			get

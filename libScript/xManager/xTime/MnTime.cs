@@ -7,9 +7,9 @@ namespace xLib
 	public class MnTime : SingletonM<MnTime>
 	{
 		[Header("Manager")]
-		[SerializeField]private NodeBool timePause;
-		[SerializeField]private NodeFloat timeScale;
-		[SerializeField]private NodeFloat timeScaleCache;
+		[SerializeField]private NodeBool timePause = null;
+		[SerializeField]private NodeFloat timeScale = null;
+		[SerializeField]private NodeFloat timeScaleCache = null;
 		
 		public float TimeScale
 		{

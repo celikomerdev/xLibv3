@@ -8,7 +8,7 @@ namespace xLib
 {
 	public class MnPopupWindow : SingletonM<MnPopupWindow>
 	{
-		[SerializeField]private Tweener window;
+		[SerializeField]private Tweener window = null;
 		
 		#region Result
 		public NodeBool result;
@@ -37,7 +37,7 @@ namespace xLib
 		
 		
 		#region Header
-		[SerializeField]private EventString stringHeader;
+		[SerializeField]private EventString stringHeader = new EventString();
 		public void Header(string value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Header:{0}",value);
@@ -51,7 +51,7 @@ namespace xLib
 		#endregion
 		
 		#region Body
-		[SerializeField]private EventString stringBody;
+		[SerializeField]private EventString stringBody = new EventString();
 		public void Body(string value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Body:{0}",value);
@@ -66,8 +66,8 @@ namespace xLib
 		
 		#region Accept
 		[Header("Accept")]
-		[SerializeField]private EventString stringAccept;
-		[SerializeField]private EventBool activeAccept;
+		[SerializeField]private EventString stringAccept = new EventString();
+		[SerializeField]private EventBool activeAccept = new EventBool();
 		public void Accept(string value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Accept:{0}",value);
@@ -83,8 +83,8 @@ namespace xLib
 		
 		#region Decline
 		[Header("Decline")]
-		[SerializeField]private EventString stringDecline;
-		[SerializeField]private EventBool activeDecline;
+		[SerializeField]private EventString stringDecline = new EventString();
+		[SerializeField]private EventBool activeDecline = new EventBool();
 		public void Decline(string value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Decline:{0}",value);

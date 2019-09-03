@@ -18,7 +18,7 @@ namespace xLib
 			WorkInt();
 		}
 		
-		[SerializeField]private NodeInt[] nodeInt;
+		[SerializeField]private NodeInt[] nodeInt = new NodeInt[0];
 		private void WorkInt()
 		{
 			for (int i = 0; i < nodeInt.Length; i++)

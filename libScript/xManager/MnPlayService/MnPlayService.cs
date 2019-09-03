@@ -11,15 +11,15 @@ namespace xLib
 {
 	public class MnPlayService : SingletonM<MnPlayService>
 	{
-		[SerializeField]private bool enableHidePopups;
-		[SerializeField]private bool savedGames;
-		[SerializeField]private bool requestIdToken;
-		[SerializeField]private bool requestServerAuthCode;
-		[SerializeField]private bool requestEmail;
+		[SerializeField]private bool enableHidePopups = false;
+		[SerializeField]private bool savedGames = false;
+		[SerializeField]private bool requestIdToken = false;
+		[SerializeField]private bool requestServerAuthCode = false;
+		[SerializeField]private bool requestEmail = false;
 		
-		[SerializeField]private NodeString displayName;
-		[SerializeField]private NodeString idToken;
-		[SerializeField]private NodeString authCode;
+		[SerializeField]private NodeString displayName = null;
+		[SerializeField]private NodeString idToken = null;
+		[SerializeField]private NodeString authCode = null;
 		
 		#region Mono
 		protected override void Awaked()

@@ -6,8 +6,8 @@ namespace xLib.xTool.xInput
 {
 	public class InputGetKeyUp : BaseM
 	{
-		[SerializeField]private string key;
-		[SerializeField]private EventBool eventBool;
+		[SerializeField]private string key = "";
+		[SerializeField]private EventBool eventBool = new EventBool();
 		
 		private void Update()
 		{

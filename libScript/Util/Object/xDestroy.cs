@@ -5,7 +5,7 @@ namespace xLib.ToolObject
 {
 	public class xDestroy : BaseM
 	{
-		[SerializeField]private Object target;
+		[SerializeField]private Object target = null;
 		
 		public void Call()
 		{

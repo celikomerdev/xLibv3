@@ -26,6 +26,11 @@
             "define": "ModUI"
         },
         {
+            "name": "com.unity.modules.unitywebrequestwww",
+            "expression": "0.0.0",
+            "define": "ModWebWWW"
+        },
+        {
             "name": "com.unity.purchasing",
             "expression": "0.0.0",
             "define": "IapUnity"

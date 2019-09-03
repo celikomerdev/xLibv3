@@ -6,7 +6,7 @@ namespace xLib.ToolDate
 {
 	public class DateNow : BaseTickNodeM
 	{
-		[SerializeField]private EventLong eventResult;
+		[SerializeField]private EventLong eventResult = null;
 		
 		protected override void Tick(float tickTime)
 		{
