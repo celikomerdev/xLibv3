@@ -35,7 +35,7 @@ namespace xLib
 			set
 			{
 				if(baseRegister.isRegister == value) return;
-				ApplyViewIdWithDebug();
+				ViewIdApply();
 				
 				BaseRegisterM.Order = baseRegister.order;
 				#if CanDebug
@@ -43,7 +43,7 @@ namespace xLib
 				#endif
 				
 				baseRegister.isRegister = OnRegister(value);
-				ApplyLastIdWithDebug();
+				ViewIdRestore();
 			}
 		}
 		

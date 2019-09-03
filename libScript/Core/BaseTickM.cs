@@ -6,9 +6,9 @@ namespace xLib
 		#region Virtual
 		protected void TickMulti(float tickTime)
 		{
-			ApplyViewId();
+			ViewIdApplyFast();
 			Tick(tickTime);
-			ApplyLastId();
+			ViewIdRestoreFast();
 		}
 		protected virtual void Tick(float tickTime){}
 		#endregion

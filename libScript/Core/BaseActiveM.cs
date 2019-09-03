@@ -15,9 +15,9 @@ namespace xLib
 			if(!CanWork) return;
 			FindView();
 			
-			ApplyViewIdWithDebug();
+			ViewIdApply();
 			Awaked();
-			ApplyLastIdWithDebug();
+			ViewIdRestore();
 		}
 		
 		private bool isStarted = false;
@@ -28,9 +28,9 @@ namespace xLib
 			if(!CanWork) return;
 			FindView();
 			
-			ApplyViewIdWithDebug();
+			ViewIdApply();
 			Started();
-			ApplyLastIdWithDebug();
+			ViewIdRestore();
 			
 			isStarted = true;
 			OnEnable();
@@ -44,9 +44,9 @@ namespace xLib
 			if(!CanWork) return;
 			FindView();
 			
-			ApplyViewIdWithDebug();
+			ViewIdApply();
 			OnEnabled();
-			ApplyLastIdWithDebug();
+			ViewIdRestore();
 			
 			IsActive = true;
 		}
@@ -58,9 +58,9 @@ namespace xLib
 			if(!CanWork) return;
 			FindView();
 			
-			ApplyViewIdWithDebug();
+			ViewIdApply();
 			OnDisabled();
-			ApplyLastIdWithDebug();
+			ViewIdRestore();
 			
 			IsActive = false;
 		}
@@ -72,9 +72,9 @@ namespace xLib
 			if(!CanWork) return;
 			FindView();
 			
-			ApplyViewIdWithDebug();
+			ViewIdApply();
 			OnDestroyed();
-			ApplyLastIdWithDebug();
+			ViewIdRestore();
 			
 			IsActive = false;
 		}
@@ -95,9 +95,9 @@ namespace xLib
 				activeInfo.isActive = value;
 				FindView();
 				
-				ApplyViewIdWithDebug();
+				ViewIdApply();
 				OnActive(value);
-				ApplyLastIdWithDebug();
+				ViewIdRestore();
 			}
 		}
 		protected virtual void OnActive(bool value){}

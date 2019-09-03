@@ -32,25 +32,25 @@ namespace xLib
 			isMy = view.IsMy;
 		}
 		
-		protected void ApplyViewId()
+		protected void ViewIdApplyFast()
 		{
 			lastViewId = ViewCore.CurrentId;
 			ViewCore.CurrentId = ViewId;
 		}
-		protected void ApplyViewIdWithDebug()
+		protected void ViewIdApply()
 		{
 			if(ViewCore.canDebug && ViewCore.CurrentId != ViewId) Debug.LogFormat(this,"CurrentId:{0}:{1}",ViewCore.CurrentId,ViewId);
-			ApplyViewId();
+			ViewIdApplyFast();
 		}
 		
-		protected void ApplyLastId()
+		protected void ViewIdRestoreFast()
 		{
 			ViewCore.CurrentId = lastViewId;
 		}
-		protected void ApplyLastIdWithDebug()
+		protected void ViewIdRestore()
 		{
 			if(ViewCore.canDebug && ViewCore.CurrentId != lastViewId) Debug.LogFormat(this,"CurrentId:{0}:{1}",ViewCore.CurrentId,lastViewId);
-			ApplyLastId();
+			ViewIdRestoreFast();
 		}
 		
 		#if UNITY_EDITOR
