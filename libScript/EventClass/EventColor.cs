@@ -14,6 +14,14 @@ namespace xLib.EventClass
 		{
 			eventColor.Invoke(arg0);
 		}
+		
+		public Color Value
+		{
+			set
+			{
+				Invoke(value);
+			}
+		}
 	}
 }
 #endif

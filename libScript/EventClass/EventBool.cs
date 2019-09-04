@@ -21,6 +21,14 @@ namespace xLib.EventClass
 			if(arg0) eventTrue.Invoke();
 			else eventFalse.Invoke();
 		}
+		
+		public bool Value
+		{
+			set
+			{
+				Invoke(value);
+			}
+		}
 	}
 }
 #endif

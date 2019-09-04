@@ -14,6 +14,14 @@ namespace xLib.EventClass
 		{
 			eventObject.Invoke(arg0);
 		}
+		
+		public object Value
+		{
+			set
+			{
+				Invoke(value);
+			}
+		}
 	}
 }
 #endif

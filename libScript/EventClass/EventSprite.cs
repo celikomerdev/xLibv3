@@ -14,6 +14,14 @@ namespace xLib.EventClass
 		{
 			eventSprite.Invoke(arg0);
 		}
+		
+		public Sprite Value
+		{
+			set
+			{
+				Invoke(value);
+			}
+		}
 	}
 }
 #endif

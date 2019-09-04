@@ -14,6 +14,14 @@ namespace xLib.EventClass
 		{
 			eventTransform.Invoke(arg0);
 		}
+		
+		public Transform Value
+		{
+			set
+			{
+				Invoke(value);
+			}
+		}
 	}
 }
 #endif

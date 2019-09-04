@@ -14,6 +14,14 @@ namespace xLib.EventClass
 		{
 			eventTexture.Invoke(arg0);
 		}
+		
+		public Texture Value
+		{
+			set
+			{
+				Invoke(value);
+			}
+		}
 	}
 }
 #endif

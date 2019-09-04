@@ -14,6 +14,14 @@ namespace xLib.EventClass
 		{
 			eventLong.Invoke(arg0);
 		}
+		
+		public TimeSpan Value
+		{
+			set
+			{
+				Invoke(value);
+			}
+		}
 	}
 }
 #endif

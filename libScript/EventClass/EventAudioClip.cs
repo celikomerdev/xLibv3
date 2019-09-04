@@ -15,6 +15,14 @@ namespace xLib.EventClass
 		{
 			eventAudioClip.Invoke(arg0);
 		}
+		
+		public AudioClip Value
+		{
+			set
+			{
+				Invoke(value);
+			}
+		}
 	}
 }
 #endif

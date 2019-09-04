@@ -14,6 +14,14 @@ namespace xLib.EventClass
 		{
 			eventMaterial.Invoke(arg0);
 		}
+		
+		public Material Value
+		{
+			set
+			{
+				Invoke(value);
+			}
+		}
 	}
 }
 #endif

@@ -15,6 +15,14 @@ namespace xLib.EventClass
 		{
 			eventWWW.Invoke(arg0);
 		}
+		
+		public WWW Value
+		{
+			set
+			{
+				Invoke(value);
+			}
+		}
 	}
 }
 #endif

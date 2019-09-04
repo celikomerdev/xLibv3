@@ -14,6 +14,14 @@ namespace xLib.EventClass
 		{
 			eventVector4.Invoke(arg0);
 		}
+		
+		public Vector4 Value
+		{
+			set
+			{
+				Invoke(value);
+			}
+		}
 	}
 }
 #endif
