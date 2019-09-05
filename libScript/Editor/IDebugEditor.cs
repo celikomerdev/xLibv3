@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -33,4 +34,5 @@ namespace xLib
 		}
 	}
 }
+#endif
 #endif
