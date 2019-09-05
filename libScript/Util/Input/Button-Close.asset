@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e8bf1502a1b9694c9c70a7bb8cc3987, type: 3}
-  m_Name: Button-Cancel
+  m_Name: Button-Close
   m_EditorClassIdentifier: 
   note:
     value: 
