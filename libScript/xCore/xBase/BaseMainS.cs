@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib
 {
-	public abstract class BaseS : ScriptableObject
+	public abstract class BaseMainS : ScriptableObject
 	{
 		[SerializeField]private Note note;
 	}

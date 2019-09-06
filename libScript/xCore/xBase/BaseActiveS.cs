@@ -3,10 +3,8 @@ using UnityEngine;
 
 namespace xLib
 {
-	public abstract class BaseActiveM : BaseWorkM
+	public abstract class BaseActiveS : BaseWorkerS
 	{
-		public BaseActiveInfo activeInfo = new BaseActiveInfo();
-		
 		#region Mono
 		protected virtual void Awaked(){}
 		internal virtual void Awake()
@@ -82,17 +80,18 @@ namespace xLib
 		
 		
 		#region Custom
+		private bool isActive;
 		public bool IsActive
 		{
 			get
 			{
-				return activeInfo.isActive;
+				return isActive;
 			}
 			set
 			{
 				if(!CanWork) return;
-				if(activeInfo.isActive == value) return;
-				activeInfo.isActive = value;
+				if(isActive == value) return;
+				isActive = value;
 				FindView();
 				
 				ViewIdApply();

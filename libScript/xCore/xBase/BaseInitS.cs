@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib
 {
-	public abstract class NodeInit : BaseWorkS
+	public abstract class BaseInitS : BaseWorkS
 	{
 		protected bool isInit;
 		public void Init(bool value)
@@ -18,7 +18,7 @@ namespace xLib
 		
 		
 		#region Flow
-		// public NodeInit()
+		// public BaseInitS()
 		// {
 		// 	MnThread.Register(OnEnable);
 		// }

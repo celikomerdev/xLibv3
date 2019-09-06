@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib
 {
-	public abstract class MonoInit : BaseWorkM
+	public abstract class BaseInitM : BaseWorkM
 	{
 		protected bool isInit;
 		public void Init(bool value)
@@ -18,7 +18,7 @@ namespace xLib
 		
 		
 		#region Flow
-		public MonoInit()
+		public BaseInitM()
 		{
 			MnThread.Register(Awake);
 		}

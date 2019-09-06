@@ -3,9 +3,8 @@ using UnityEngine;
 
 namespace xLib
 {
-	public abstract class BaseM : MonoBehaviour
+	public abstract class BaseWorkerS : BaseWorkS
 	{
-		#region BaseViewWork
 		internal View view = null;
 		protected bool isMy = true;
 		private string viewId = "Client";
@@ -24,7 +23,7 @@ namespace xLib
 		
 		protected void FindView()
 		{
-			if(!view) GetComponentInParent<View>();
+			// if(!view) GetComponentInParent<View>();
 			if(!view) return;
 			
 			view.FindId();
@@ -61,7 +60,6 @@ namespace xLib
 		#else
 		public virtual void CheckErrors(){}
 		#endif
-		#endregion
 	}
 }
 #endif

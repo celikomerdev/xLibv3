@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib
 {
-	public abstract class BaseWorkM : BaseM, IDebug
+	public abstract class BaseWorkM : BaseMainM, IDebug
 	{
 		[SerializeField]private BaseWorkInfo baseWork = new BaseWorkInfo();
 		
