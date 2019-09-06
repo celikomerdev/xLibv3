@@ -9,7 +9,7 @@ namespace xLib
 	internal class MnOneSignal : SingletonM<MnOneSignal>
 	{
 		#region Init
-		[SerializeField]private NodeBool isInit;
+		[SerializeField]private NodeBool isInit = null;
 		private bool inInit;
 		public override void Init()
 		{
@@ -52,9 +52,9 @@ namespace xLib
 		
 		
 		#region Callback
-		[SerializeField]private NodeString userID;
-		[SerializeField]private NodeString pushToken;
-		[SerializeField]private NodeString lastNotificationId;
+		[SerializeField]private NodeString userID = null;
+		[SerializeField]private NodeString pushToken = null;
+		[SerializeField]private NodeString lastNotificationId = null;
 		private void IdsAvailable(string userID, string pushToken)
 		{
 			this.userID.Value = userID;
@@ -126,7 +126,7 @@ namespace xLib
 		
 		
 		#region Tag
-		[SerializeField]private Object[] arrayTag;
+		[SerializeField]private Object[] arrayTag = new Object[0];
 		public void SendTags()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":SendTags");
@@ -145,7 +145,7 @@ namespace xLib
 		
 		
 		#region Payload
-		[SerializeField]private Object[] arrayPayload;
+		[SerializeField]private Object[] arrayPayload = new Object[0];
 		private Dictionary<string,ISerializableObject> dictPayload = new Dictionary<string,ISerializableObject>();
 		private void InitPayload()
 		{
@@ -208,20 +208,20 @@ namespace xLib
 {
 	internal class MnOneSignal : SingletonM<MnOneSignal>
 	{
-		[SerializeField]private NodeBool isInit;
-		[SerializeField]private NodeString userID;
-		[SerializeField]private NodeString pushToken;
-		[SerializeField]private NodeString lastNotificationId;
+		[SerializeField]private NodeBool isInit = null;
+		[SerializeField]private NodeString userID = null;
+		[SerializeField]private NodeString pushToken = null;
+		[SerializeField]private NodeString lastNotificationId = null;
 		
 		public void UserDidProvideConsent(bool value){}
 		public void SetRequiresUserPrivacyConsent(bool value){}
 		public void SetExternalUserId(string value){}
 		public void PauseInAppMessages(bool value){}
 		
-		[SerializeField]private Object[] arrayTag;
+		[SerializeField]private Object[] arrayTag = new Object[0];
 		public void SendTags(){}
 		
-		[SerializeField]private Object[] arrayPayload;
+		[SerializeField]private Object[] arrayPayload = new Object[0];
 		public void TryConsumePayload(){}
 	}
 }
