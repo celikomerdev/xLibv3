@@ -7,7 +7,7 @@ using xLib.xTween;
 
 namespace xLib
 {
-	public class FortuneWheel : BaseM
+	public class LuckySpin : BaseM
 	{
 		[SerializeField]private Rigidbody2D rigid = null;
 		[SerializeField]private Tween tween = null;
