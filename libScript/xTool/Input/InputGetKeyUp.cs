@@ -4,15 +4,16 @@ using xLib.EventClass;
 
 namespace xLib.xTool.xInput
 {
-	public class InputGetKeyUp : BaseM
+	public class InputGetKeyUp : BaseTickNodeM
 	{
 		[SerializeField]private string key = "";
-		[SerializeField]private EventBool eventBool = new EventBool();
+		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
+		[SerializeField]private EventBool eventKeyUp = new EventBool();
 		
-		private void Update()
+		protected override void Tick(float tickTime)
 		{
-			if(Input.GetKeyDown(key)) eventBool.Invoke(false);
-			else if(Input.GetKeyUp(key)) eventBool.Invoke(true);
+			if(Input.GetKeyDown(key)) eventKeyUp.Invoke(false);
+			else if(Input.GetKeyUp(key)) eventKeyUp.Invoke(true);
 		}
 	}
 }
