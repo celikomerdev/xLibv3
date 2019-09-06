@@ -14,7 +14,7 @@ namespace xLib
 			{
 				if(!nodeSetting.UseRpc) return false;
 				if(!ViewCore.inRpc) return false;
-				if(ViewCore.CurrentId != "0") return true;
+				if(ViewCore.CurrentId != "Client") return true;
 				return skipCompareRpc;
 			}
 		}
