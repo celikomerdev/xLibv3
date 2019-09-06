@@ -44,6 +44,7 @@ namespace xLib
 		
 		private void AddAsset(TextAsset value)
 		{
+			if(!value) return;
 			JObject root = JObject.Parse(value.text);
 			foreach(KeyValuePair<string,JToken> kvp in root)
 			{

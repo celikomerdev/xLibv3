@@ -17,7 +17,6 @@ namespace xLib
 			if(isInit.Value) return;
 			if(inInit) return;
 			inInit = true;
-			if(CanDebug) Debug.LogFormat(this,this.name+":Init");
 			
 			InitPayload();
 			
@@ -30,12 +29,18 @@ namespace xLib
 			OneSignal.inFocusDisplayType = OneSignal.OSInFocusDisplayOption.Notification;
 			
 			OneSignal.UnityBuilder builder = OneSignal.StartInit(appId,googleProjectNumber);
-			builder.notificationReceivedDelegate += OnReceive;
-			builder.notificationOpenedDelegate += OnOpen;
+			builder.notificationReceivedDelegate += OnNotificationReceive;
+			builder.notificationOpenedDelegate += OnNotificationOpen;
+			builder.inAppMessageClickHandlerDelegate += OnMessageClick;
 			builder.EndInit();
 			
-			OneSignal.IdsAvailable(IdsAvailable);
-			OneSignal.inFocusDisplayType = OneSignal.OSInFocusDisplayOption.Notification;
+			OneSignal.permissionObserver += ObserverPermission;
+			OneSignal.subscriptionObserver += ObserverSubscription;
+			OneSignal.emailSubscriptionObserver += ObserverSubscriptionEmail;
+			OneSignal.idsAvailableDelegate += IdsAvailable;
+			OneSignal.IdsAvailable();
+			
+			OSPermissionSubscriptionState pushState = OneSignal.GetPermissionSubscriptionState();
 		}
 		
 		private void OnInit()
@@ -57,18 +62,38 @@ namespace xLib
 			OnInit();
 		}
 		
-		private void OnReceive(OSNotification notification)
+		private void OnNotificationReceive(OSNotification notification)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnReceive:{0}",notification);
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnNotificationReceive:{0}",notification);
 			StPopupBar.QueueMessage("you have new notification",true);
 		}
 		
 		private OSNotificationPayload payload;
-		private void OnOpen(OSNotificationOpenedResult result)
+		private void OnNotificationOpen(OSNotificationOpenedResult result)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnOpen:{0}",result);
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnNotificationOpen:{0}",result);
 			payload = result.notification.payload;
 			TryConsumePayload();
+		}
+		
+		private void OnMessageClick(OSInAppMessageAction result)
+		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnMessageClick:{0}",result);
+		}
+		
+		private void ObserverPermission(OSPermissionStateChanges result)
+		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":ObserverPermission:{0}",result);
+		}
+		
+		private void ObserverSubscription(OSSubscriptionStateChanges result)
+		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":ObserverSubscription:{0}",result);
+		}
+		
+		private void ObserverSubscriptionEmail(OSEmailSubscriptionStateChanges result)
+		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":ObserverSubscriptionEmail:{0}",result);
 		}
 		#endregion
 		
@@ -76,13 +101,26 @@ namespace xLib
 		#region General
 		public void UserDidProvideConsent(bool value)
 		{
+			if(inInit || isInit.Value) Debug.LogWarningFormat(this,this.name+"CallBeforeInit");
 			OneSignal.UserDidProvideConsent(value);
+		}
+		
+		public void SetRequiresUserPrivacyConsent(bool value)
+		{
+			if(inInit || isInit.Value) Debug.LogWarningFormat(this,this.name+"CallBeforeInit");
+			if(true) UserDidProvideConsent(true);
+			OneSignal.SetRequiresUserPrivacyConsent(value);
 		}
 		
 		public void SetExternalUserId(string value)
 		{
-			if(string.IsNullOrEmpty(value)) return;
+			if(string.IsNullOrWhiteSpace(value)) return;
 			OneSignal.SetExternalUserId(value);
+		}
+		
+		public void PauseInAppMessages(bool value)
+		{
+			OneSignal.PauseInAppMessages(value);
 		}
 		#endregion
 		
@@ -175,9 +213,10 @@ namespace xLib
 		[SerializeField]private NodeString pushToken;
 		[SerializeField]private NodeString lastNotificationId;
 		
-		
 		public void UserDidProvideConsent(bool value){}
+		public void SetRequiresUserPrivacyConsent(bool value){}
 		public void SetExternalUserId(string value){}
+		public void PauseInAppMessages(bool value){}
 		
 		[SerializeField]private Object[] arrayTag;
 		public void SendTags(){}
