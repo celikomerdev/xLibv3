@@ -1,7 +1,7 @@
 ﻿#if xLibv3
 namespace xLib.ToolLocalize
 {
-	public class MnLocalizeLanguage : BaseM
+	public class MnLocalizeLanguage : BaseMainM
 	{
 		public string Language
 		{

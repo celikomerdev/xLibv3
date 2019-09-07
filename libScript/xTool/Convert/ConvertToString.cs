@@ -5,7 +5,7 @@ using xLib.EventClass;
 
 namespace xLib.ToolConvert
 {
-	public class ConvertToString : BaseM
+	public class ConvertToString : BaseMainM
 	{
 		[SerializeField]private string format = "F0";
 		private string result = "";
@@ -47,10 +47,12 @@ namespace xLib.ToolConvert
 			FromTimeSpan(TimeSpan.FromTicks(value));
 		}
 		
+		#if ModWebWWW
 		public void FromWWW(WWW value)
 		{
 			Result = value.text;
 		}
+		#endif
 	}
 }
 #endif

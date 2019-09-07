@@ -4,7 +4,7 @@ using xLib.ToolEventClass;
 
 namespace xLib.ToolManager
 {
-	public class MnKeyGetValue : BaseM
+	public class MnKeyGetValue : BaseMainM
 	{
 		public string key;
 		public EventString eventString;

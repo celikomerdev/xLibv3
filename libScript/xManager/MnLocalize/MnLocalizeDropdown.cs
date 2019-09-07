@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace xLib.ToolLocalize
 {
-	public class MnLocalizeDropdown : BaseM
+	public class MnLocalizeDropdown : BaseMainM
 	{
 		public Dropdown dropdown;
 		

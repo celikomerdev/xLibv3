@@ -208,6 +208,7 @@ namespace xLib
 {
 	internal class MnOneSignal : SingletonM<MnOneSignal>
 	{
+		#pragma warning disable
 		[SerializeField]private NodeBool isInit = null;
 		[SerializeField]private NodeString userID = null;
 		[SerializeField]private NodeString pushToken = null;
@@ -223,6 +224,7 @@ namespace xLib
 		
 		[SerializeField]private Object[] arrayPayload = new Object[0];
 		public void TryConsumePayload(){}
+		#pragma warning restore
 	}
 }
 #endif

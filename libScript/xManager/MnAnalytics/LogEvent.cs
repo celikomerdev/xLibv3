@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib.ToolManager
 {
-	public class LogEvent : BaseM
+	public class LogEvent : BaseMainM
 	{
 		[SerializeField]private string category = "category";
 		public string Category

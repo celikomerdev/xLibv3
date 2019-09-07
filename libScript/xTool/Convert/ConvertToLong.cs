@@ -4,7 +4,7 @@ using xLib.EventClass;
 
 namespace xLib.ToolConvert
 {
-	public class ConvertToLong : BaseM
+	public class ConvertToLong : BaseMainM
 	{
 		private long result = 0;
 		private long Result

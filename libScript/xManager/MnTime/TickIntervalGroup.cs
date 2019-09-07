@@ -40,7 +40,7 @@ namespace xLib.xTick
 			}
 		}
 		
-		internal void IntervalStart(BaseM monoBehaviour)
+		internal void IntervalStart(BaseMainM monoBehaviour)
 		{
 			mono = monoBehaviour;
 			for (int i = 0; i < tickInterval.Length; i++)

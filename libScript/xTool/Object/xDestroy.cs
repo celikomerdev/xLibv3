@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib.ToolObject
 {
-	public class xDestroy : BaseM
+	public class xDestroy : BaseMainM
 	{
 		[SerializeField]private Object target = null;
 		

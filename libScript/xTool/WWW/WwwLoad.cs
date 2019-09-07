@@ -1,12 +1,12 @@
 ﻿#if xLibv3
-// #if ModWebWWW
+#if ModWebWWW
 using System.Collections;
 using UnityEngine;
 using xLib.EventClass;
 
 namespace xLib
 {
-	public class WwwLoad : BaseM
+	public class WwwLoad : BaseMainM
 	{
 		[SerializeField]private EventWWW eventWWW = new EventWWW();
 		
@@ -49,5 +49,5 @@ namespace xLib
 		#endregion
 	}
 }
-// #endif
+#endif
 #endif

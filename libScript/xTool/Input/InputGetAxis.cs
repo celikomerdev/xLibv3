@@ -7,7 +7,7 @@ namespace xLib.xTool.xInput
 	public class InputGetAxis : BaseTickNodeM
 	{
 		[UnityEngine.Serialization.FormerlySerializedAs("key")]
-		[SerializeField]private string axis;
+		[SerializeField]private string axis = "";
 		[UnityEngine.Serialization.FormerlySerializedAs("eventFloat")]
 		[SerializeField]private EventFloat eventAxisValue = new EventFloat();
 		

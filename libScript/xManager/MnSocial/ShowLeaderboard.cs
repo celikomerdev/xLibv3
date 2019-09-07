@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib.ToolSocial
 {
-	public class ShowLeaderboard : BaseM
+	public class ShowLeaderboard : BaseMainM
 	{
 		public string key;
 		

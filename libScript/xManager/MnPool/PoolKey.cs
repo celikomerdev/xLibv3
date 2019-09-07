@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib.ToolPool
 {
-	public class PoolKey : BaseM
+	public class PoolKey : BaseMainM
 	{
 		internal GameObject key;
 		

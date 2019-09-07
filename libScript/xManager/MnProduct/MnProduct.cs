@@ -22,7 +22,6 @@ namespace xLib
 			if(isInit.Value) return;
 			if(inInit) return;
 			inInit = true;
-			if(CanDebug) Debug.LogFormat(this,this.name+":Init");
 			
 			StandardPurchasingModule.Instance().useFakeStoreUIMode = fakeStoreUIMode;
 			ConfigurationBuilder builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
@@ -222,13 +221,19 @@ namespace xLib
 		[SerializeField]private bool useValidate = true;
 		[SerializeField]private int fakeStoreUIMode = 1;
 		
-		public NodeBool isInit;
-		public NodeBool isPurchase;
-		public NodeBool isRestore;
+		public NodeBool isInit = null;
+		public NodeBool isPurchase = null;
+		public NodeBool isRestore = null;
 		
-		public void Purchase(string key)
+		public override void Init()
+		{
+			isInit.Value = true;
+		}
+		
+		public void Purchase(string value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase");
+			currentProduct = value;
 			isPurchase.Value = true;
 		}
 		
@@ -236,6 +241,13 @@ namespace xLib
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
 			isRestore.Value = false;
+		}
+		
+		public static string currentProduct = null;
+		public string GetProduct(string key)
+		{
+			if(isInit.Value) return key;
+			else return null;
 		}
 		#pragma warning restore
 	}

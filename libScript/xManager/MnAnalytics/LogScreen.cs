@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib.ToolManager
 {
-	public class LogScreen : BaseM
+	public class LogScreen : BaseMainM
 	{
 		[SerializeField]private string screen = "null";
 		public string Screen

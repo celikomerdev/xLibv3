@@ -4,7 +4,7 @@ using xLib.EventClass;
 
 namespace xLib
 {
-	public class MonoOnInit : MonoInit
+	public class MonoOnInit : BaseInitM
 	{
 		[SerializeField]private EventBool eventInit = new EventBool();
 		

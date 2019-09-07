@@ -4,7 +4,7 @@ using xLib.EventClass;
 
 namespace xLib.xTool
 {
-	public class FPSCounter : BaseM
+	public class FPSCounter : BaseMainM
 	{
 		[SerializeField]private float intervalTime = 1f;
 		[SerializeField]private EventFloat eventFloat = new EventFloat();

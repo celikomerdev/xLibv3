@@ -1,12 +1,12 @@
 ﻿#if xLibv3
-// #if ModWebWWW
+#if ModWebWWW
 using System.Collections;
 using UnityEngine;
 using xLib.EventClass;
 
 namespace xLib
 {
-	public class WwwFormLoad : BaseM
+	public class WwwFormLoad : BaseMainM
 	{
 		[Header("ISerializableObject")]
 		[SerializeField]private Object[] arrayObjectKey = new Object[0];
@@ -77,5 +77,5 @@ namespace xLib
 		}
 	}
 }
-// #endif
+#endif
 #endif

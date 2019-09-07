@@ -1,7 +1,7 @@
 ﻿#if xLibv3
 namespace xLib
 {
-	public abstract class View : BaseM
+	public abstract class View : BaseWorkerM
 	{
 		protected virtual void Awaked(){}
 		internal virtual void Awake()
@@ -11,7 +11,6 @@ namespace xLib
 		}
 		
 		#region Info
-		// protected bool isMy = true;
 		public bool IsMy
 		{
 			get

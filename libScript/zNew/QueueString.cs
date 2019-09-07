@@ -4,7 +4,7 @@ using xLib.EventClass;
 
 namespace xLib
 {
-	public class QueueString : MonoInit
+	public class QueueString : BaseInitM
 	{
 		#region Queue
 		private QueueLimited<string> queue = new QueueLimited<string>();

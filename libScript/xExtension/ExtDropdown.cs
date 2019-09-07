@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if ModUI
 using UnityEngine.UI;
 
 namespace xLib
@@ -23,4 +24,5 @@ namespace xLib
 		}
 	}
 }
+#endif
 #endif

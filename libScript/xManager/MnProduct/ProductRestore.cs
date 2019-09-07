@@ -9,7 +9,8 @@ namespace xLib.ToolPurchase
 	public class ProductRestore : BaseRegisterM
 	{
 		[SerializeField]private string key = "";
-		[SerializeField]private EventBool eventBool = new EventBool();
+		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
+		[SerializeField]private EventBool eventRestore = new EventBool();
 		
 		protected override bool OnRegister(bool value)
 		{
@@ -27,7 +28,7 @@ namespace xLib.ToolPurchase
 			if(product == null) return;
 			if(product.definition.type != ProductType.NonConsumable) return;
 			
-			eventBool.Invoke(product.hasReceipt);
+			eventRestore.Invoke(product.hasReceipt);
 		}
 	}
 }
@@ -40,7 +41,8 @@ namespace xLib.ToolPurchase
 	public class ProductRestore : BaseRegisterM
 	{
 		[SerializeField]private string key;
-		[SerializeField]private EventBool eventBool;
+		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
+		[SerializeField]private EventBool eventRestore = new EventBool();
 		
 		protected override bool OnRegister(bool value)
 		{
@@ -50,7 +52,7 @@ namespace xLib.ToolPurchase
 		
 		private void ListenResult(bool value)
 		{
-			eventBool.Invoke(value);
+			eventRestore.Invoke(value);
 		}
 	}
 }

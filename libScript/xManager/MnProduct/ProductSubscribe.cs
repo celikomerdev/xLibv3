@@ -11,7 +11,8 @@ namespace xLib.ToolPurchase
 	public class ProductSubscribe : BaseRegisterM
 	{
 		[SerializeField]private string key = "";
-		[SerializeField]private EventBool eventBool = new EventBool();
+		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
+		[SerializeField]private EventBool eventSubscribe = new EventBool();
 		
 		
 		protected override bool OnRegister(bool value)
@@ -43,20 +44,21 @@ namespace xLib.ToolPurchase
 				if(subscriptionInfo.getRemainingTime() <= TimeSpan.Zero) result = false;
 			}
 			
-			eventBool.Invoke(result);
+			eventSubscribe.Invoke(result);
 		}
 	}
 }
 #else
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
 namespace xLib.ToolPurchase
 {
 	public class ProductSubscribe : BaseRegisterM
 	{
-		[SerializeField]private string key = "";
-		[SerializeField]private EventBool eventBool = new EventBool();
+		[SerializeField]private string key;
+		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
+		[SerializeField]private EventBool eventSubscribe = new EventBool();
 		
 		protected override bool OnRegister(bool value)
 		{
@@ -67,7 +69,7 @@ namespace xLib.ToolPurchase
 		private void ListenResult(bool value)
 		{
 			if(!value) return;
-			eventBool.Invoke(value);
+			eventSubscribe.Invoke(value);
 		}
 	}
 }

@@ -5,7 +5,7 @@ using xLib.EventClass;
 
 namespace xLib.ToolSceneUtility
 {
-	public class GetBuildIndexByScenePath : BaseM
+	public class GetBuildIndexByScenePath : BaseMainM
 	{
 		[UnityEngine.Serialization.FormerlySerializedAs("eventInt")]
 		[SerializeField]private EventInt eventIndex = new EventInt();

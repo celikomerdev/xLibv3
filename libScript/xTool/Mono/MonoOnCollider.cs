@@ -4,7 +4,7 @@ using xLib.EventClass;
 
 namespace xLib
 {
-	public class MonoOnCollider : BaseM
+	public class MonoOnCollider : BaseMainM
 	{
 		[Header("Listen")]
 		#pragma warning disable

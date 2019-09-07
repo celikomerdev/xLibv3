@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib.ToolSocial
 {
-	public class ShowAchievement : BaseM
+	public class ShowAchievement : BaseMainM
 	{
 		public string key;
 		

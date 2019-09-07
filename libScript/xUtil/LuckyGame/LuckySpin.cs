@@ -7,9 +7,9 @@ using xLib.xTween;
 
 namespace xLib
 {
-	public class LuckySpin : BaseM
+	public class LuckySpin : BaseMainM
 	{
-		[SerializeField]private Rigidbody2D rigid = null;
+		[SerializeField]private Transform trans = null;
 		[SerializeField]private Tween tween = null;
 		[SerializeField]private int loop = 2;
 		[SerializeField]private int duration = 1;
@@ -38,11 +38,12 @@ namespace xLib
 		
 		private IEnumerator eSpin(float value)
 		{
-			float rotStart = rigid.rotation%360;
-			rigid.rotation = rotStart;
+			Vector3 rotStart = trans.eulerAngles;
+			rotStart.z %= 360f;
+			trans.eulerAngles = rotStart;
 			
 			float rotFinal = 360*loop;
-			rotFinal -= rotStart;
+			rotFinal -= rotStart.z;
 			rotFinal -= value;
 			
 			float timer = 0.0f;
@@ -52,11 +53,11 @@ namespace xLib
 				tween.SetBaseRatio(curveOutput);
 				
 				float rotFrame = rotFinal*curveOutput;
-				rigid.MoveRotation(rotStart+rotFrame);
+				trans.eulerAngles = rotStart+Vector3.forward*rotFrame;
 				timer += Time.deltaTime;
 				yield return new WaitForEndOfFrame();
 			}
-			rigid.MoveRotation(rotStart+rotFinal);
+			trans.eulerAngles = rotStart+Vector3.forward*rotFinal;
 			
 			inSpin = false;
 			onSpin.Invoke(inSpin);

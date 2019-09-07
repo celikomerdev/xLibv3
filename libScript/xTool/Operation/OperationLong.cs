@@ -4,7 +4,7 @@ using xLib.EventClass;
 
 namespace xLib.ToolOperation
 {
-	public class OperationLong : MonoInit
+	public class OperationLong : BaseInitM
 	{
 		protected override void OnInit(bool init)
 		{

@@ -6,7 +6,7 @@ using xLib.EventClass;
 
 namespace xLib
 {
-	public class ApplicationInit : BaseM
+	public class ApplicationInit : BaseMainM
 	{
 		public void Call()
 		{

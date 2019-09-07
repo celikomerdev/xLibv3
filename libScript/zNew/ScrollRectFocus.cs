@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if ModUI
 using UnityEngine;
 using UnityEngine.UI;
 using xLib.EventClass;
@@ -83,4 +84,5 @@ namespace xLib
 		}
 	}
 }
+#endif
 #endif

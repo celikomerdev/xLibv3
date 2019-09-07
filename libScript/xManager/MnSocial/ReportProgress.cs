@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib.ToolSocial
 {
-	public class ReportProgress : BaseM
+	public class ReportProgress : BaseMainM
 	{
 		public string key;
 		

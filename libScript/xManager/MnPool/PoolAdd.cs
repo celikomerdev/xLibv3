@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib.ToolPool
 {
-	public class PoolAdd : BaseM
+	public class PoolAdd : BaseMainM
 	{
 		public GameObject[] value;
 		public int count;
