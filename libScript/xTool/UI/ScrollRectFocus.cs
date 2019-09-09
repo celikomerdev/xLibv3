@@ -6,7 +6,7 @@ using xLib.EventClass;
 
 namespace xLib
 {
-	public class ScrollRectFocus : MonoInit
+	public class ScrollRectFocus : BaseInitM
 	{
 		[SerializeField]private ScrollRect scrollRect = null;
 		private RectTransform transScrollRect = null;
