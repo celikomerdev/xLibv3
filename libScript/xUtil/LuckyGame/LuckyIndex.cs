@@ -7,6 +7,19 @@ namespace xLib.ToolRandom
 	[System.Serializable]public class LuckyIndex : BaseWorkM
 	{
 		[SerializeField]private float[] arrayLuck = new float[0];
+		public float[] ArrayLuck
+		{
+			get
+			{
+				return arrayLuck;
+			}
+			set
+			{
+				arrayLuck = value;
+				LuckMax = 0;
+			}
+		}
+		
 		
 		public int GetRandom()
 		{

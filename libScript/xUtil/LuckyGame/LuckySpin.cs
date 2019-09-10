@@ -14,7 +14,7 @@ namespace xLib
 		[SerializeField]private int duration = 1;
 		[SerializeField]private AnimationCurve curve = AnimationCurve.Linear(0,0,1,1);
 		
-		[SerializeField]private int[] arrayRotation = new int[0];
+		[SerializeField]public float[] arrayRotation = new float[0];
 		
 		private bool inSpin = false;
 		[SerializeField]private EventBool onSpin = new EventBool();
