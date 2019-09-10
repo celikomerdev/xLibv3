@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace xLib.xNew
 {
-	public class CasinoLights : BaseWorkM
+	public class MiniGameLights : BaseWorkM
 	{
 		public int [] headIndex;
 		public Sprite[] sprite = new Sprite[2];

@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine;
 using xLib.EventClass;
-using xLib.ToolRandom;
 using xLib.xTween;
 
 namespace xLib
@@ -15,20 +14,17 @@ namespace xLib
 		[SerializeField]private int duration = 1;
 		[SerializeField]private AnimationCurve curve = AnimationCurve.Linear(0,0,1,1);
 		
-		[SerializeField]private LuckyIndex luckyIndex = null;
-		
-		[Tooltip("Rotation of prizes - sync with luckyIndex")]
-		[SerializeField]private int[] rotArray = new int[0];
+		[SerializeField]private int[] arrayRotation = new int[0];
 		
 		private bool inSpin = false;
 		[SerializeField]private EventBool onSpin = new EventBool();
 		
-		public void Call()
+		public void CallIndex(int index)
 		{
-			Call(rotArray[luckyIndex.GetRandom()]);
+			CallRotation(arrayRotation[index]);
 		}
 		
-		public void Call(float value)
+		public void CallRotation(float value)
 		{
 			if(inSpin) return;
 			inSpin = true;
