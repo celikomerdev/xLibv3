@@ -23,7 +23,7 @@ namespace xLib
 				timeScale.Value = value;
 				timePause.Value = (value==0);
 				
-				Time.timeScale = Mathf.Lerp(0.001f,1f,value);
+				StTime.timeScale = Mathf.Lerp(0.001f,1f,value);
 			}
 		}
 		
@@ -37,6 +37,23 @@ namespace xLib
 			{
 				timePause.Value = value;
 				timeScale.Value = (value? 0:timeScaleCache.Value);
+			}
+		}
+	}
+	
+	public static class StTime
+	{
+		public static float timeScale
+		{
+			get
+			{
+				return Time.timeScale;
+			}
+			set
+			{
+				if(Time.timeScale == value) return;
+				if(xDebug.CanDebug) Debug.LogFormat("Time.timeScale:{0}:{1}",Time.timeScale,value);
+				Time.timeScale = value;
 			}
 		}
 	}
