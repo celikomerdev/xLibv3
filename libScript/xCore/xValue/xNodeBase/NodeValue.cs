@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 using UnityEngine.Events;
+using xLib.xValueClass;
 
 namespace xLib.xNode.NodeObject
 {
@@ -175,7 +176,7 @@ namespace xLib.xNode.NodeObject
 			Node.Listener(register,call,onRegister);
 		}
 		
-		public void ListenerCall(bool register,UnityAction call,bool onRegister=false)
+		public void ListenerCall(bool register,UnityAction<object> call,bool onRegister=false)
 		{
 			Node.ListenerCall(register,call,onRegister);
 		}

@@ -3,14 +3,6 @@ using UnityEngine.Events;
 
 namespace xLib
 {
-	public abstract class ActionSortedBase
-	{
-		public abstract void Listener(bool register,UnityAction call);
-		public abstract void Invoke();
-		public abstract void InvokeFirst();
-		public abstract void InvokeLast();
-	}
-	
 	public abstract class ActionSortedBase<T0>
 	{
 		public abstract void Listener(bool register,UnityAction<T0> call);

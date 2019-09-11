@@ -9,7 +9,7 @@ namespace xLib.xValueClass.Listener
 		[SerializeField]private Object[] target = new Object[0];
 		[SerializeField]private EventUnity eventUnity = new EventUnity();
 		
-		public void OnCall()
+		public void OnCall(object value)
 		{
 			TryForceClient();
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnCall:{0}",ViewCore.CurrentId);

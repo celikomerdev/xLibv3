@@ -24,7 +24,7 @@ namespace xLib
 		}
 		
 		
-		public override void ListenerCall(bool register,UnityAction call,bool onRegister=false)
+		public override void ListenerCall(bool register,UnityAction<object> call,bool onRegister=false)
 		{
 			for (int i = 0; i < Value.iCall.Length; i++)
 			{

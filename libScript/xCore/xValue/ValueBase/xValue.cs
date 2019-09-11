@@ -67,7 +67,7 @@ namespace xLib
 			ViewCore.CurrentId = "Client";
 			
 			actionSortedBase.Invoke(Value);
-			actionSortedBaseCall.Invoke();
+			actionSortedBaseCall.Invoke(Value);
 			analyticDirty = true;
 			
 			ViewCore.CurrentId = lastViewId;
@@ -81,7 +81,7 @@ namespace xLib
 			ViewCore.CurrentId = "Client";
 			
 			actionSortedBase.InvokeFirst(Value);
-			actionSortedBaseCall.InvokeFirst();
+			actionSortedBaseCall.InvokeFirst(Value);
 			analyticDirty = true;
 			
 			ViewCore.CurrentId = lastViewId;
@@ -95,7 +95,7 @@ namespace xLib
 			ViewCore.CurrentId = "Client";
 			
 			actionSortedBase.InvokeLast(Value);
-			actionSortedBaseCall.InvokeLast();
+			actionSortedBaseCall.InvokeLast(Value);
 			analyticDirty = true;
 			
 			ViewCore.CurrentId = lastViewId;
@@ -115,14 +115,14 @@ namespace xLib
 			call.Invoke(Value);
 		}
 		
-		private ActionSortedBase actionSortedBaseCall = new ActionSortedSingle();
-		public virtual void ListenerCall(bool register,UnityAction call,bool onRegister=false)
+		private ActionSortedBase<object> actionSortedBaseCall = new ActionSortedSingle<object>();
+		public virtual void ListenerCall(bool register,UnityAction<object> call,bool onRegister=false)
 		{
 			actionSortedBaseCall.Listener(register,call);
 			
 			if(!register) return;
 			if(!onRegister) return;
-			call.Invoke();
+			call.Invoke(Value);
 		}
 		#endregion
 		
@@ -168,12 +168,12 @@ namespace xLib
 			if(nodeSetting.isMulti)
 			{
 				actionSortedBase = new ActionSortedMulti<V>();
-				actionSortedBaseCall = new ActionSortedMulti();
+				actionSortedBaseCall = new ActionSortedMulti<object>();
 			}
 			else
 			{
 				actionSortedBase = new ActionSortedSingle<V>();
-				actionSortedBaseCall = new ActionSortedSingle();
+				actionSortedBaseCall = new ActionSortedSingle<object>();
 			}
 			
 			#if UNITY_EDITOR
