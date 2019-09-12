@@ -12,7 +12,7 @@ namespace xLib.ToolPurchase
 	{
 		[SerializeField]private string key = "";
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
-		[SerializeField]private EventBool eventSubscribe = new EventBool();
+		[SerializeField]private EventBool isSubscribed = new EventBool();
 		
 		
 		protected override bool OnRegister(bool value)
@@ -40,11 +40,13 @@ namespace xLib.ToolPurchase
 			}
 			else
 			{
+				if(subscriptionInfo.isSubscribed() == Result.True) result = true;
+				if(subscriptionInfo.isSubscribed() == Result.False) result = false;
 				if(subscriptionInfo.isExpired() == Result.True) result = false;
 				if(subscriptionInfo.getRemainingTime() <= TimeSpan.Zero) result = false;
 			}
 			
-			eventSubscribe.Invoke(result);
+			isSubscribed.Invoke(result);
 		}
 	}
 }
@@ -58,7 +60,7 @@ namespace xLib.ToolPurchase
 	{
 		[SerializeField]private string key;
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
-		[SerializeField]private EventBool eventSubscribe = new EventBool();
+		[SerializeField]private EventBool isSubscribed = new EventBool();
 		
 		protected override bool OnRegister(bool value)
 		{
@@ -69,7 +71,7 @@ namespace xLib.ToolPurchase
 		private void ListenResult(bool value)
 		{
 			if(!value) return;
-			eventSubscribe.Invoke(value);
+			isSubscribed.Invoke(value);
 		}
 	}
 }
