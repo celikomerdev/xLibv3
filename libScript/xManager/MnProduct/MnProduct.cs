@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 #if IapUnity
+using System;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using xLib.Purchasing;
@@ -19,7 +20,7 @@ namespace xLib
 		public override void Init()
 		{
 			base.Init();
-			if(isInit.Value) return;
+			if(onInit.Value) return;
 			if(inInit) return;
 			inInit = true;
 			
@@ -69,7 +70,7 @@ namespace xLib
 				//introductory_info_dict = m_AppleExtensions.GetIntroductoryPriceDictionary();
 			}
 			
-			IsInit(true);
+			OnInit(true);
 			
 			if(!CanDebug) return;
 			foreach (var item in controller.products.all)
@@ -89,7 +90,7 @@ namespace xLib
 		void IStoreListener.OnInitializeFailed(InitializationFailureReason error)
 		{
 			xDebug.LogExceptionFormat(this,this.name+":OnInitializeFailed:{0}",error);
-			IsInit(false);
+			OnInit(false);
 		}
 		
 		PurchaseProcessingResult IStoreListener.ProcessPurchase(PurchaseEventArgs args)
@@ -100,7 +101,7 @@ namespace xLib
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchaseProcess:{0}:{1}",isValid,args.purchasedProduct.definition.id);
 			StAnalytics.LogEvent("IAP","OnPurchaseProcess:"+isValid,args.purchasedProduct.definition.id);
 			
-			IsPurchase(isValid);
+			OnPurchase(isValid,args.purchasedProduct.definition.id);
 			
 			return PurchaseProcessingResult.Complete;
 		}
@@ -112,52 +113,83 @@ namespace xLib
 			xDebug.LogExceptionFormat(this,this.name+":OnPurchaseFailed:{0}:{1}",productFailureReason,product.definition.id);
 			StAnalytics.LogEvent("IAP","OnPurchaseFailed:"+productFailureReason,product.definition.id);
 			
-			IsPurchase(false);
+			OnPurchase(false,product.definition.id);
 		}
 		#endregion
 		
 		
 		#region Fuctions
 		#region Purchase
-		private bool inPurchase;
-		public void Purchase(Product value)
+		public NodeBool inPurchase;
+		public void Purchase(Product product)
 		{
-			if(value==null) return;
-			if(inPurchase) return;
-			inPurchase = true;
+			currentProduct = product;
+			
+			if(product == null) return;
+			if(inPurchase.Value) return;
+			inPurchase.Value = true;
 			if(CanDebug) Debug.LogFormat(this,this.name+":Waiting");
 			
+			#if UNITY_EDITOR
+			StPopupWindow.Reset();
+			StPopupWindow.HeaderLocalized("warning");
+			StPopupWindow.Body(string.Format("{0}\n{1}\nbuy?",product.definition.id,product.metadata.localizedPriceString));
+			StPopupWindow.AcceptLocalized("yes");
+			StPopupWindow.DeclineLocalized("no");
+			StPopupWindow.Listener(Listener,true);
+			void Listener(bool result)
+			{
+				StPopupWindow.Listener(Listener,false);
+				OnPurchase(result,product.definition.id);
+			}
+			StPopupWindow.Show();
+			return;
+			#else
 			m_Controller.InitiatePurchase(value);
+			#endif
+		}
+		
+		public void Purchase(string key)
+		{
+			Product temp = GetProduct(key);
+			
+			if(temp == null)
+			{
+				OnPurchase(false,key);
+				return;
+			}
+			
+			Purchase(temp);
 		}
 		#endregion
 		
 		#region Restore
-		private bool inRestore;
+		public NodeBool inRestore;
 		public void Restore()
 		{
-			if(inRestore) return;
-			inRestore = true;
+			if(inRestore.Value) return;
+			inRestore.Value = true;
 			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
 			
-			if(!isInit.Value)
+			if(!onInit.Value)
 			{
 				Init();
-				IsRestoreFalse();
+				OnRestoreFalse();
 				return;
 			}
 			
 			if(StandardPurchasingModule.Instance().appStore == AppStore.GooglePlay)
 			{
-				IsRestoreTrue(false);
+				OnRestoreTrue(false);
 			}
 			else if(StandardPurchasingModule.Instance().appStore == AppStore.AppleAppStore)
 			{
-				m_AppleExtensions.RestoreTransactions(IsRestoreTrue);
+				m_AppleExtensions.RestoreTransactions(OnRestoreTrue);
 			}
 			else
 			{
 				if(CanDebug) Debug.LogWarningFormat(this,this.name+":NotSupported:{0}",StandardPurchasingModule.Instance().appStore);
-				IsRestoreFalse();
+				OnRestoreFalse();
 			}
 		}
 		#endregion
@@ -166,44 +198,51 @@ namespace xLib
 		
 		#region Callback
 		public static Product currentProduct = null;
+		public static string currentProductId
+		{
+			get{return currentProduct.definition.id;}
+		}
+		
 		public Product GetProduct(string key)
 		{
-			if(isInit.Value) return m_Controller.products.WithID(key);
+			if(onInit.Value) return m_Controller.products.WithID(key);
 			else return null;
 		}
 		
-		public NodeBool isInit;
-		private void IsInit(bool value)
+		public NodeBool onInit;
+		private void OnInit(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":IsInit:{0}",value);
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnInit:{0}",value);
 			inInit = false;
-			isInit.Value = value;
+			onInit.Value = value;
 			if(!value) return;
 			if(autoRestore) Restore();
 		}
 		
-		public NodeBool isPurchase;
-		private void IsPurchase(bool value)
+		public NodeBool onPurchase;
+		public static Action<bool,string> onPurchaseProduct;
+		private void OnPurchase(bool result,string productId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":IsPurchase:{0}",value);
-			inPurchase = false;
-			isPurchase.Value = value;
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchase:{0}:{1}",result,productId);
+			inPurchase.Value = false;
+			onPurchase.Value = result;
+			onPurchaseProduct(result,productId);
 		}
 		
-		public NodeBool isRestore;
-		private void IsRestoreTrue(bool value)
+		public NodeBool onRestore;
+		private void OnRestoreTrue(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":IsRestoreTrue");
-			if(CanDebug) Debug.LogFormat(this,this.name+":IsRestoreTrueContinue:{0}",value);
-			inRestore = false;
-			isRestore.Value = true;
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestoreTrue");
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestoreTrueContinue:{0}",value);
+			inRestore.Value = false;
+			onRestore.Value = true;
 		}
 		
-		private void IsRestoreFalse()
+		private void OnRestoreFalse()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":IsRestoreFalse");
-			inRestore = false;
-			isRestore.Value = false;
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestoreFalse");
+			inRestore.Value = false;
+			onRestore.Value = false;
 		}
 		#endregion
 	}

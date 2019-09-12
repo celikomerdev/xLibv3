@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c47f3d7fa3e3424439269f207f15244e, type: 3}
-  m_Name: MnProduct-IsInit
+  m_Name: MnProduct-InRestore
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,7 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 159fccc96197a384395391a7db9cd2df
+      key: c2c9dc5bc8a7176499cdeb951905504d
       isMulti: 0
     value: 0
     skipCompareRpc: 1

@@ -15,6 +15,7 @@ namespace xLib.Purchasing.Security
 		
 		internal static void Init()
 		{
+			if(!UseValidate) return;
 			if(CanDebug) Debug.LogFormat("ProductValidator:Init");
 			
 			#if UNITY_ANDROID || UNITY_IPHONE || UNITY_STANDALONE_OSX || UNITY_TVOS
