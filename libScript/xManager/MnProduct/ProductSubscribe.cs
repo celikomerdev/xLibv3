@@ -16,39 +16,41 @@ namespace xLib.ToolPurchase
 		
 		protected override bool OnRegister(bool value)
 		{
-			MnProduct.ins.onInit.Listener(value,ListenResult,true);
-			MnProduct.ins.onRestore.Listener(value,ListenResult,true);
-			MnProduct.ins.onPurchase.Listener(value,ListenResult,true);
+			MnProduct.ins.onInit.Listener(value,ListenResult,baseRegister.onRegister);
+			MnProduct.ins.onRestore.Listener(value,ListenResult,baseRegister.onRegister);
+			MnProduct.ins.onPurchase.Listener(value,ListenResult,baseRegister.onRegister);
 			return value;
 		}
 		
-		private Product product = null;
 		private void ListenResult(bool value)
 		{
 			if(!value) return;
+			
+			Product product = null;
 			if(product == null) product = MnProduct.ins.GetProduct(key);
 			if(product == null) return;
 			if(product.definition.type != ProductType.Subscription) return;
 			
-			bool result = product.hasReceipt;
+			bool resultSubscribed = product.hasReceipt;
 			
 			if(!Application.isEditor)
 			{
 				SubscriptionInfo subscriptionInfo = HelperSubscription.GetInfo(product);
 				if(subscriptionInfo == null)
 				{
-					result = false;
+					resultSubscribed = false;
 				}
 				else
 				{
-					if(subscriptionInfo.isSubscribed() == Result.True) result = true;
-					if(subscriptionInfo.isSubscribed() == Result.False) result = false;
-					if(subscriptionInfo.isExpired() == Result.True) result = false;
-					if(subscriptionInfo.getRemainingTime() <= TimeSpan.Zero) result = false;
+					if(subscriptionInfo.isSubscribed() == Result.True) resultSubscribed = true;
+					if(subscriptionInfo.isSubscribed() == Result.False) resultSubscribed = false;
+					if(subscriptionInfo.isExpired() == Result.True) resultSubscribed = false;
+					if(subscriptionInfo.getRemainingTime() <= TimeSpan.Zero) resultSubscribed = false;
 				}
 			}
 			
-			isSubscribed.Invoke(result);
+			if(CanDebug) Debug.LogFormat(this,this.name+":isSubscribed:{0}",resultSubscribed);
+			isSubscribed.Invoke(resultSubscribed);
 		}
 	}
 }

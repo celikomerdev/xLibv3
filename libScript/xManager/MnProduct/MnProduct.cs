@@ -214,17 +214,16 @@ namespace xLib
 		}
 		
 		public NodeBool onRestore;
-		private void OnRestoreTrue(bool value)
+		private void OnRestoreTrue(bool isContinue)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestoreTrue");
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestoreTrueContinue:{0}",value);
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestore:True:isContinue:{0}",isContinue);
 			inRestore.Value = false;
 			onRestore.Value = true;
 		}
 		
 		private void OnRestoreFalse()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestoreFalse");
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestore:False");
 			inRestore.Value = false;
 			onRestore.Value = false;
 		}
@@ -255,7 +254,7 @@ namespace xLib
 		
 		public void Purchase(string value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase");
+			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",value);
 			currentProduct = value;
 			isPurchase.Value = true;
 		}
