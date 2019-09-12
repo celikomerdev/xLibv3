@@ -8,9 +8,9 @@ namespace xLib.xNew
 	public class CooldownLoop : BaseTickNodeM
 	{
 		[Header("Target")]
-		[SerializeField]private long cooldown = 600000000;
-		[SerializeField]private NodeLong currentTime = null;
-		[SerializeField]private NodeLong nextTime = null;
+		[SerializeField]public long cooldown = 600000000;
+		[SerializeField]public NodeLong currentTime = null;
+		[SerializeField]public NodeLong nextTime = null;
 		
 		[Header("Work")]
 		[SerializeField]private int maxLoop = 1;
