@@ -128,25 +128,9 @@ namespace xLib
 			if(product == null) return;
 			if(inPurchase.Value) return;
 			inPurchase.Value = true;
-			if(CanDebug) Debug.LogFormat(this,this.name+":Waiting");
+			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",product.definition.id);
 			
-			#if UNITY_EDITOR
-			StPopupWindow.Reset();
-			StPopupWindow.HeaderLocalized("warning");
-			StPopupWindow.Body(string.Format("{0}\n{1}\nbuy?",product.definition.id,product.metadata.localizedPriceString));
-			StPopupWindow.AcceptLocalized("yes");
-			StPopupWindow.DeclineLocalized("no");
-			StPopupWindow.Listener(Listener,true);
-			void Listener(bool result)
-			{
-				StPopupWindow.Listener(Listener,false);
-				OnPurchase(result,product.definition.id);
-			}
-			StPopupWindow.Show();
-			return;
-			#else
-			m_Controller.InitiatePurchase(value);
-			#endif
+			m_Controller.InitiatePurchase(product);
 		}
 		
 		public void Purchase(string key)

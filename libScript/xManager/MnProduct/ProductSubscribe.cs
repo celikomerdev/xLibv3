@@ -14,7 +14,6 @@ namespace xLib.ToolPurchase
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
 		[SerializeField]private EventBool isSubscribed = new EventBool();
 		
-		
 		protected override bool OnRegister(bool value)
 		{
 			MnProduct.ins.onInit.Listener(value,ListenResult,true);
@@ -33,17 +32,20 @@ namespace xLib.ToolPurchase
 			
 			bool result = product.hasReceipt;
 			
-			SubscriptionInfo subscriptionInfo = HelperSubscription.GetInfo(product);
-			if(subscriptionInfo == null)
+			if(!Application.isEditor)
 			{
-				result = false;
-			}
-			else
-			{
-				if(subscriptionInfo.isSubscribed() == Result.True) result = true;
-				if(subscriptionInfo.isSubscribed() == Result.False) result = false;
-				if(subscriptionInfo.isExpired() == Result.True) result = false;
-				if(subscriptionInfo.getRemainingTime() <= TimeSpan.Zero) result = false;
+				SubscriptionInfo subscriptionInfo = HelperSubscription.GetInfo(product);
+				if(subscriptionInfo == null)
+				{
+					result = false;
+				}
+				else
+				{
+					if(subscriptionInfo.isSubscribed() == Result.True) result = true;
+					if(subscriptionInfo.isSubscribed() == Result.False) result = false;
+					if(subscriptionInfo.isExpired() == Result.True) result = false;
+					if(subscriptionInfo.getRemainingTime() <= TimeSpan.Zero) result = false;
+				}
 			}
 			
 			isSubscribed.Invoke(result);
