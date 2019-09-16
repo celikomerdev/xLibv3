@@ -42,6 +42,7 @@ namespace xLib
 		public void Call()
 		{
 			if(!CanWork) return;
+			if(!transScrollRect) return;
 			Vector3 itemCenterPositionInScroll = GetWorldPointInWidget(transScrollRect, GetWidgetWorldPoint(Target));
 			Vector3 targetPositionInScroll = GetWorldPointInWidget(transScrollRect, GetWidgetWorldPoint(transViewport));
 			Vector3 difference = targetPositionInScroll - itemCenterPositionInScroll;
