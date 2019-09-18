@@ -18,7 +18,8 @@ namespace xLib.xNew
 			set
 			{
 				cooldown = value;
-				this.enabled = (cooldown>0);
+				this.enabled = true;
+				Call();
 			}
 		}
 		[SerializeField]public NodeLong currentTime = null;
