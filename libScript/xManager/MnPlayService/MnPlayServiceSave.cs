@@ -21,7 +21,7 @@ namespace xLib
 			ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 			if(savedGameClient == null)
 			{
-				xDebug.LogExceptionFormat(this,this.name+"OpenSavedGamesPopup:null");
+				xDebug.LogExceptionFormat(this,this.name+":OpenSavedGamesPopup:null");
 				return;
 			}
 			savedGameClient.ShowSelectSavedGameUI(MnLocalize.GetValue("select your saved game").ToTitleExt(),maxDisplayedSavedGames,showCreateSaveUI,showDeleteSaveUI,OnGameSelected);
