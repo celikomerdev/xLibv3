@@ -11,6 +11,18 @@ namespace xLib
 		[SerializeField]public NodeSetting nodeSetting = new NodeSetting();
 		
 		#region Field
+		public string Key
+		{
+			get
+			{
+				return nodeSetting.Key;
+			}
+			set
+			{
+				nodeSetting.Key = value;
+			}
+		}
+		
 		[Header("Value")]
 		[SerializeField]internal V value = default(V);
 		#if UNITY_EDITOR
@@ -249,7 +261,7 @@ namespace xLib
 			else
 			{
 				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Call:{0}:{1}",ViewCore.CurrentId,ValueToString);
-				ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObject.ToString());
+				ViewCore.RPC(nodeSetting.RpcTarget,Key,SerializedObject.ToString());
 			}
 		}
 		
@@ -259,7 +271,7 @@ namespace xLib
 			else
 			{
 				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallFirst:{0}:{1}",ViewCore.CurrentId,ValueToString);
-				ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObject.ToString());
+				ViewCore.RPC(nodeSetting.RpcTarget,Key,SerializedObject.ToString());
 			}
 		}
 		
@@ -269,7 +281,7 @@ namespace xLib
 			else
 			{
 				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallLast:{0}:{1}",ViewCore.CurrentId,ValueToString);
-				ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObject.ToString());
+				ViewCore.RPC(nodeSetting.RpcTarget,Key,SerializedObject.ToString());
 			}
 		}
 		
