@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c47f3d7fa3e3424439269f207f15244e, type: 3}
-  m_Name: Prize-Star-Active
+  m_Script: {fileID: 11500000, guid: b513263c51538944bac985320074d3e0, type: 3}
+  m_Name: Reward-Star-Next
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,8 +20,11 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: c0e406cf8279e1d4b960bce901ac474b
+      key: c1bcecdf5deeff74c9dcfa4bbbdc042c
       isMulti: 0
-    value: 0
+    value: 30
     skipCompareRpc: 1
     isCompare: 1
+    snapDefault: 0
+    useThreshold: 0
+    valueThreshold: 0

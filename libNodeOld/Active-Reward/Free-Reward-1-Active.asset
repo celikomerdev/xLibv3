@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c47f3d7fa3e3424439269f207f15244e, type: 3}
-  m_Name: Menu-PrizeStar
+  m_Name: Free-Reward-1-Active
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,7 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 75aabf07a32b90348a052c21609b3d37
+      key: 696f1c88d5ad45e4e84b29cb58ebccfe
       isMulti: 0
     value: 0
     skipCompareRpc: 1

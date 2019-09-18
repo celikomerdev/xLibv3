@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e8bf1502a1b9694c9c70a7bb8cc3987, type: 3}
-  m_Name: Fx-Prize
+  m_Script: {fileID: 11500000, guid: ad218f9553c1811429833d03aa4b7c08, type: 3}
+  m_Name: Reward-String-Loc
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,5 +20,8 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: b52b4e948bb5afe48b65c6ccaa06f840
+      key: bd3e75005215e1544990047e22765fea
       isMulti: 0
+    value: 
+    skipCompareRpc: 1
+    isCompare: 0
