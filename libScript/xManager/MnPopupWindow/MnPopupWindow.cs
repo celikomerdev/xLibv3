@@ -26,6 +26,7 @@ namespace xLib
 			Header("");
 			Body("");
 			Accept("");
+			Decline("");
 		}
 		
 		public void Show()

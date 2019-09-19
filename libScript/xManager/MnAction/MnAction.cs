@@ -8,22 +8,26 @@ namespace xLib
 {
 	public class MnAction : SingletonM<MnAction>
 	{
-		public static List<UnityAction> customAction = new List<UnityAction>();
+		public static List<UnityAction> listAction = new List<UnityAction>();
 		
-		public static void CallNextAction()
+		public static void CallActionNext(float delay = 0)
 		{
-			MnCoroutine.NewCoroutine(callNextAction());
+			xDebug.LogTempFormat("MnAction.CallActionNext");
+			MnCoroutine.NewCoroutine(callActionNext(delay));
 		}
 		
-		private static IEnumerator callNextAction()
+		private static float lastTime = 0;
+		private static IEnumerator callActionNext(float delay)
 		{
-			yield return new WaitForSecondsRealtime(0.5f);
+			yield return new WaitForSecondsRealtime(delay);
 			
-			if(customAction.Count>0)
-			{
-				customAction[0]();
-				customAction.RemoveAt(0);
-			}
+			if(listAction.Count==0) yield break;
+			if(0.5f>Time.unscaledTime-lastTime) yield break;
+			lastTime = Time.unscaledTime;
+			
+			UnityAction tempAction = listAction[0];
+			listAction.RemoveAt(0);
+			tempAction.Invoke();
 		}
 	}
 }
