@@ -7,6 +7,7 @@ using xLib.Purchasing;
 using xLib.Purchasing.Security;
 using xLib.xNode.NodeObject;
 
+
 namespace xLib
 {
 	public class MnProduct : SingletonM<MnProduct>, IStoreListener
@@ -130,6 +131,7 @@ namespace xLib
 			inPurchase.Value = true;
 			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",product.definition.id);
 			
+			StPopupBar.QueueMessage(MnLocalize.GetValue("please wait").ToTitleExt());
 			m_Controller.InitiatePurchase(product);
 		}
 		
@@ -209,6 +211,10 @@ namespace xLib
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchase:{0}:{1}",result,productId);
 			inPurchase.Value = false;
+			
+			if(!result) StPopupBar.QueueMessage(MnLocalize.GetValue("purchase failed").ToTitleExt());
+			else StPopupBar.QueueMessage(MnLocalize.GetValue("purchase successful").ToTitleExt());
+			
 			onPurchase.Value = result;
 			onPurchaseProduct(result,productId);
 		}
@@ -217,6 +223,7 @@ namespace xLib
 		private void OnRestoreTrue(bool isContinue)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestore:True:isContinue:{0}",isContinue);
+			StPopupBar.QueueMessage(MnLocalize.GetValue("restore successful").ToTitleExt());
 			inRestore.Value = false;
 			onRestore.Value = true;
 		}
@@ -224,6 +231,7 @@ namespace xLib
 		private void OnRestoreFalse()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestore:False");
+			StPopupBar.QueueMessage(MnLocalize.GetValue("restore failed").ToTitleExt());
 			inRestore.Value = false;
 			onRestore.Value = false;
 		}
@@ -255,6 +263,7 @@ namespace xLib
 		public void Purchase(string value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",value);
+			StPopupBar.QueueMessage(MnLocalize.GetValue("purchase successful").ToTitleExt());
 			currentProduct = value;
 			isPurchase.Value = true;
 		}
@@ -262,6 +271,7 @@ namespace xLib
 		public void Restore()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
+			StPopupBar.QueueMessage(MnLocalize.GetValue("restore failed").ToTitleExt());
 			isRestore.Value = false;
 		}
 		

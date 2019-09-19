@@ -43,9 +43,9 @@ namespace xLib
 				if(string.IsNullOrWhiteSpace(value)) return;
 				StPopupWindow.Reset();
 				StPopupWindow.Header(MnLocalize.GetValue("warning").ToTitleExt());
-				StPopupWindow.Body(MnLocalize.GetValue("everything will be deleted").ToUpperExt());
-				StPopupWindow.Accept(MnLocalize.GetValue("reset").ToUpperExt());
-				StPopupWindow.Decline(MnLocalize.GetValue("cancel").ToUpperExt());
+				StPopupWindow.Body(MnLocalize.GetValue("everything will be deleted").ToTitleExt());
+				StPopupWindow.Accept(MnLocalize.GetValue("reset").ToTitleExt());
+				StPopupWindow.Decline(MnLocalize.GetValue("cancel").ToTitleExt());
 				StPopupWindow.Listener(Listener,true);
 				void Listener(bool result)
 				{
