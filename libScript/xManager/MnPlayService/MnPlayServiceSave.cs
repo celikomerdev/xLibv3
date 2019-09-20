@@ -24,17 +24,17 @@ namespace xLib
 				xDebug.LogExceptionFormat(this,this.name+":OpenSavedGamesPopup:null");
 				return;
 			}
-			savedGameClient.ShowSelectSavedGameUI(MnLocalize.GetValue("select your saved game").ToTitleExt(),maxDisplayedSavedGames,showCreateSaveUI,showDeleteSaveUI,OnGameSelected);
+			savedGameClient.ShowSelectSavedGameUI(MnLocalize.GetValue("select your saved game"),maxDisplayedSavedGames,showCreateSaveUI,showDeleteSaveUI,OnGameSelected);
 		}
 		
 		private void OnGameSelected(SelectUIStatus status, ISavedGameMetadata game)
 		{
 			if(status != SelectUIStatus.SavedGameSelected)
 			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("game could not be selected").ToTitleExt()+"\n"+status.ToString());
+				StPopupBar.QueueMessage(MnLocalize.GetValue("game could not be selected")+"\n"+status.ToString());
 				return;
 			}
-			StPopupBar.QueueMessage(MnLocalize.GetValue("game selected").ToTitleExt());
+			StPopupBar.QueueMessage(MnLocalize.GetValue("game selected"));
 			
 			OpenSavedGame(game.Filename);
 			
@@ -55,10 +55,10 @@ namespace xLib
 		{
 			if(status != SavedGameRequestStatus.Success)
 			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("game could not be opened").ToTitleExt()+"\n"+status.ToString());
+				StPopupBar.QueueMessage(MnLocalize.GetValue("game could not be opened")+"\n"+status.ToString());
 				return;
 			}
-			StPopupBar.QueueMessage(MnLocalize.GetValue("game opened").ToTitleExt());
+			StPopupBar.QueueMessage(MnLocalize.GetValue("game opened"));
 			
 			if(string.IsNullOrWhiteSpace(game.Filename)) SaveGame(game);
 			else LoadGame(game);
@@ -83,10 +83,10 @@ namespace xLib
 		{
 			if (status != SavedGameRequestStatus.Success)
 			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("game could not be saved").ToTitleExt()+"\n"+status.ToString());
+				StPopupBar.QueueMessage(MnLocalize.GetValue("game could not be saved")+"\n"+status.ToString());
 				return;
 			}
-			StPopupBar.QueueMessage(MnLocalize.GetValue("game saved").ToTitleExt());
+			StPopupBar.QueueMessage(MnLocalize.GetValue("game saved"));
 		}
 		#endregion
 		
@@ -102,10 +102,10 @@ namespace xLib
 		{
 			if(status != SavedGameRequestStatus.Success)
 			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("game could not be loaded").ToTitleExt()+"\n"+status.ToString());
+				StPopupBar.QueueMessage(MnLocalize.GetValue("game could not be loaded")+"\n"+status.ToString());
 				return;
 			}
-			StPopupBar.QueueMessage(MnLocalize.GetValue("game loaded").ToTitleExt());
+			StPopupBar.QueueMessage(MnLocalize.GetValue("game loaded"));
 			MnSnapshot.SnapshotByte = data;
 		}
 		#endregion

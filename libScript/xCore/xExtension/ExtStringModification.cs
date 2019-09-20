@@ -25,7 +25,7 @@ namespace xLib
 			return CultureInfo.CurrentUICulture.TextInfo.ToLower(value);
 		}
 		
-		public static string ApplyModificationExt(this string value,StringModification modification)
+		public static string ApplyModificationExt(this string value,StringModification modification = StringModification.DontModify)
 		{
 			switch(modification)
 			{

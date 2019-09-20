@@ -65,7 +65,7 @@ namespace xLib
 		private void OnNotificationReceive(OSNotification notification)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnNotificationReceive:{0}",notification);
-			StPopupBar.QueueMessage(MnLocalize.GetValue("you have new notification").ToTitleExt());
+			StPopupBar.QueueMessage(MnLocalize.GetValue("you have new notification"));
 		}
 		
 		private OSNotificationPayload payload;
@@ -166,7 +166,7 @@ namespace xLib
 			
 			if(lastNotificationId.Value == payload.notificationID)
 			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("you have already used this").ToTitleExt());
+				StPopupBar.QueueMessage(MnLocalize.GetValue("you have already used this"));
 				return;
 			}
 			lastNotificationId.Value = payload.notificationID;

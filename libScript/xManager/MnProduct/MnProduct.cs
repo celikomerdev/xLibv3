@@ -131,7 +131,7 @@ namespace xLib
 			inPurchase.Value = true;
 			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",product.definition.id);
 			
-			StPopupBar.QueueMessage(MnLocalize.GetValue("please wait").ToTitleExt());
+			StPopupBar.QueueMessage(MnLocalize.GetValue("please wait"));
 			m_Controller.InitiatePurchase(product);
 		}
 		
@@ -212,8 +212,8 @@ namespace xLib
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchase:{0}:{1}",result,productId);
 			inPurchase.Value = false;
 			
-			if(!result) StPopupBar.QueueMessage(MnLocalize.GetValue("purchase failed").ToTitleExt());
-			else StPopupBar.QueueMessage(MnLocalize.GetValue("purchase successful").ToTitleExt());
+			if(!result) StPopupBar.QueueMessage(MnLocalize.GetValue("purchase failed"));
+			else StPopupBar.QueueMessage(MnLocalize.GetValue("purchase successful"));
 			
 			onPurchase.Value = result;
 			onPurchaseProduct(result,productId);
@@ -223,7 +223,7 @@ namespace xLib
 		private void OnRestoreTrue(bool isContinue)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestore:True:isContinue:{0}",isContinue);
-			StPopupBar.QueueMessage(MnLocalize.GetValue("restore successful").ToTitleExt());
+			StPopupBar.QueueMessage(MnLocalize.GetValue("restore successful"));
 			inRestore.Value = false;
 			onRestore.Value = true;
 		}
@@ -231,7 +231,7 @@ namespace xLib
 		private void OnRestoreFalse()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestore:False");
-			StPopupBar.QueueMessage(MnLocalize.GetValue("restore failed").ToTitleExt());
+			StPopupBar.QueueMessage(MnLocalize.GetValue("restore failed"));
 			inRestore.Value = false;
 			onRestore.Value = false;
 		}
