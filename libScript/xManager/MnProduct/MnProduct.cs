@@ -131,7 +131,7 @@ namespace xLib
 			inPurchase.Value = true;
 			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",product.definition.id);
 			
-			StPopupBar.QueueMessage(MnLocalize.GetValue("please wait"));
+			StPopupBar.QueueMessage(MnLocalize.GetValue("Please Wait"));
 			m_Controller.InitiatePurchase(product);
 		}
 		
@@ -212,8 +212,8 @@ namespace xLib
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchase:{0}:{1}",result,productId);
 			inPurchase.Value = false;
 			
-			if(!result) StPopupBar.QueueMessage(MnLocalize.GetValue("purchase failed"));
-			else StPopupBar.QueueMessage(MnLocalize.GetValue("purchase successful"));
+			if(!result) StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Failed"));
+			else StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Successful"));
 			
 			onPurchase.Value = result;
 			onPurchaseProduct(result,productId);
@@ -223,7 +223,7 @@ namespace xLib
 		private void OnRestoreTrue(bool isContinue)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestore:True:isContinue:{0}",isContinue);
-			StPopupBar.QueueMessage(MnLocalize.GetValue("restore successful"));
+			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Successful"));
 			inRestore.Value = false;
 			onRestore.Value = true;
 		}
@@ -231,7 +231,7 @@ namespace xLib
 		private void OnRestoreFalse()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestore:False");
-			StPopupBar.QueueMessage(MnLocalize.GetValue("restore failed"));
+			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Failed"));
 			inRestore.Value = false;
 			onRestore.Value = false;
 		}
@@ -263,7 +263,7 @@ namespace xLib
 		public void Purchase(string value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",value);
-			StPopupBar.QueueMessage(MnLocalize.GetValue("purchase successful").ToTitleExt());
+			StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Successful").ToTitleExt());
 			currentProduct = value;
 			isPurchase.Value = true;
 		}
@@ -271,7 +271,7 @@ namespace xLib
 		public void Restore()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
-			StPopupBar.QueueMessage(MnLocalize.GetValue("restore failed").ToTitleExt());
+			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Failed").ToTitleExt());
 			isRestore.Value = false;
 		}
 		
