@@ -253,27 +253,48 @@ namespace xLib
 		[SerializeField]private int fakeStoreUIMode = 1;
 		
 		public NodeBool onInit = null;
-		
-		public NodeBool inPurchase = null;
-		public NodeBool onPurchase = null;
-		public static Action<bool,string> onPurchaseProduct;
-		
-		public NodeBool inRestore = null;
-		public NodeBool onRestore = null;
-		
 		public override void Init()
 		{
 			onInit.Value = true;
 		}
 		
-		public void Purchase(string value)
+		public NodeBool inPurchase = null;
+		public void Purchase(string productId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",value);
-			StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Successful").ToTitleExt());
-			currentProductId = value;
-			onPurchase.Value = true;
+			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",productId);
+			currentProductId = productId;
+			
+			StPopupWindow.Reset();
+			StPopupWindow.HeaderLocalized("warning");
+			StPopupWindow.Body(string.Format("{0}\n{1}\nbuy?",productId,"0.00$"));
+			StPopupWindow.AcceptLocalized("yes");
+			StPopupWindow.DeclineLocalized("no");
+			StPopupWindow.Listener(Listener,true);
+			void Listener(bool result)
+			{
+				StPopupWindow.Listener(Listener,false);
+				OnPurchase(result,productId);
+			}
+			StPopupWindow.Show();
 		}
 		
+		public NodeBool onPurchase = null;
+		public static Action<bool,string> onPurchaseProduct;
+		private void OnPurchase(bool result,string productId)
+		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchase:{0}:{1}",result,productId);
+			currentProductId = productId;
+			inPurchase.Value = false;
+			
+			if(!result) StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Failed"));
+			else StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Successful"));
+			
+			onPurchase.Value = result;
+			onPurchaseProduct(result,productId);
+		}
+		
+		public NodeBool inRestore = null;
+		public NodeBool onRestore = null;
 		public void Restore()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
