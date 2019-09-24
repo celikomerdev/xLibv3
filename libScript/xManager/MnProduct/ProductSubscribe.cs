@@ -68,7 +68,7 @@ namespace xLib.ToolPurchase
 		
 		protected override bool OnRegister(bool value)
 		{
-			MnProduct.ins.isPurchase.Listener(value,ListenResult,true);
+			MnProduct.ins.onPurchase.Listener(value,ListenResult,true);
 			return value;
 		}
 		

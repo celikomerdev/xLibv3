@@ -239,6 +239,7 @@ namespace xLib
 	}
 }
 #else
+using System;
 using UnityEngine;
 using xLib.xNode.NodeObject;
 
@@ -251,34 +252,39 @@ namespace xLib
 		[SerializeField]private bool useValidate = true;
 		[SerializeField]private int fakeStoreUIMode = 1;
 		
-		public NodeBool isInit = null;
-		public NodeBool isPurchase = null;
-		public NodeBool isRestore = null;
+		public NodeBool onInit = null;
+		
+		public NodeBool inPurchase = null;
+		public NodeBool onPurchase = null;
+		public static Action<bool,string> onPurchaseProduct;
+		
+		public NodeBool inRestore = null;
+		public NodeBool onRestore = null;
 		
 		public override void Init()
 		{
-			isInit.Value = true;
+			onInit.Value = true;
 		}
 		
 		public void Purchase(string value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",value);
 			StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Successful").ToTitleExt());
-			currentProduct = value;
-			isPurchase.Value = true;
+			currentProductId = value;
+			onPurchase.Value = true;
 		}
 		
 		public void Restore()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
 			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Failed").ToTitleExt());
-			isRestore.Value = false;
+			onRestore.Value = false;
 		}
 		
-		public static string currentProduct = null;
+		public static string currentProductId = null;
 		public string GetProduct(string key)
 		{
-			if(isInit.Value) return key;
+			if(onInit.Value) return key;
 			else return null;
 		}
 		#pragma warning restore
