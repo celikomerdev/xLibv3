@@ -15,7 +15,7 @@ namespace xLib.xUtil
 		[SerializeField]private Color selectedColor = Color.white;
 		[SerializeField]private Color highlightedColor = Color.white;
 		[SerializeField]private Color pressedColor = Color.white;
-		private Color TargetColor
+		private Color m_TargetColor
 		{
 			get
 			{
@@ -72,7 +72,7 @@ namespace xLib.xUtil
 		{
 			if(!IsActive()) return;
 			if(!m_TargetGraphic) return;
-			Color targetColor = TargetColor;
+			Color targetColor = m_TargetColor;
 			m_TargetGraphic.CrossFadeColor(targetColor,fadeDuration,true,true);
 		}
 		

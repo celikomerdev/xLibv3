@@ -8,6 +8,18 @@ namespace xLib
 	public class MnCoroutine : SingletonM<MnCoroutine>
 	{
 		#region NewCoroutine
+		public static void KillCoroutine(Coroutine coroutine)
+		{
+			if(!ins)
+			{
+				xDebug.LogExceptionFormat("MnCoroutine.ins:null");
+				return;
+			}
+			
+			if(coroutine == null) return;
+			ins.StopCoroutine(coroutine);
+		}
+		
 		public static Coroutine NewCoroutine(IEnumerator enumerator)
 		{
 			if(!ins)
