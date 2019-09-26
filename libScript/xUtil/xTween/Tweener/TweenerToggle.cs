@@ -13,7 +13,7 @@ namespace xLib.xUtil
 		[SerializeField]private float duration = 0.1f;
 		[SerializeField]private bool ignoreTimeScale = true;
 		
-		private void Awake()
+		private void Start()
 		{
 			Fill();
 			toggle.onValueChanged.AddListener(Work); Work(toggle.isOn);
