@@ -15,6 +15,15 @@ namespace xLib.xTween
 		{
 			target.color = Color.LerpUnclamped(from,to,value);
 		}
+		
+		#if UNITY_EDITOR
+		[ContextMenu("Fill")]
+		private void Fill()
+		{
+			if(!target) target = GetComponent<Graphic>();
+			if(!target) target = GetComponentInParent<Graphic>();
+		}
+		#endif
 	}
 }
 #endif

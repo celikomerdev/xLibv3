@@ -1,4 +1,4 @@
-﻿#if xLibv3
+﻿#if xLibv3Discard
 #if PackUI
 using UnityEngine;
 using UnityEngine.UI;
