@@ -33,6 +33,7 @@ namespace xLib.xNode.NodeObject
 			SerializedObject = value;
 		}
 		
+		[ContextMenu("Delete")]
 		public void Delete()
 		{
 			if(!xPersistentData.HasKey(Key)) return;

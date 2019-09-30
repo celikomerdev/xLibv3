@@ -8,6 +8,16 @@ namespace xLib
 	public class MnThread : SingletonM<MnThread>
 	{
 		#region Mono
+		protected override void Awaked()
+		{
+			Call();
+		}
+		
+		protected override void Started()
+		{
+			Call();
+		}
+		
 		private void Update()
 		{
 			Call();

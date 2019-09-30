@@ -41,7 +41,11 @@ namespace xLib.xValueClass
 		private bool IsValid(string hash,string content)
 		{
 			string contentRaw = content.Replace(System.Environment.NewLine,"");
-			if(hash == (KeyEncrypt+contentRaw).HashSHA256UTF8()) return true;
+			
+			for (int i = 0; i < cryptoVersion.Length; i++)
+			{
+				if(hash == (KeyEncryptVersion(i)+contentRaw).HashSHA256UTF8()) return true;
+			}
 			
 			xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":HackDetected!!!");
 			return false;

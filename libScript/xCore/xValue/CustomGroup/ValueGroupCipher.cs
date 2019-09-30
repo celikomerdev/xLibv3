@@ -30,16 +30,24 @@ namespace xLib.xValueClass
 				string stringJObject = "";
 				
 				if(stringJObject != "") xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Test!!!");
-				else if(string.IsNullOrEmpty(stringJObject)) stringJObject = StringCipher.Decrypt(Content,KeyEncrypt);
 				
-				if(string.IsNullOrEmpty(stringJObject))
-				{
-					xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":HackDetected!!!");
-					return;
-				}
-				
-				SerializedObjectRaw = stringJObject;
+				SerializedObjectRaw = Decrypt(Content);
 			}
+		}
+		#endregion
+		
+		
+		#region CheckValid
+		private string Decrypt(string content)
+		{
+			for (int i = 0; i < cryptoVersion.Length; i++)
+			{
+				string stringJObject = StringCipher.Decrypt(content,KeyEncryptVersion(i));
+				if(!string.IsNullOrEmpty(stringJObject)) return stringJObject;
+			}
+			
+			xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":HackDetected!!!");
+			return "";
 		}
 		#endregion
 	}
