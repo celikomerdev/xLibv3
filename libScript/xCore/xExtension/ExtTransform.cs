@@ -50,6 +50,12 @@ namespace xLib
 				GameObject.Destroy(trans.GetChild(i).gameObject);
 			}
 		}
+		
+		public static Transform GetChildLast(this Transform trans)
+		{
+			if(trans.childCount == 0) return null;
+			return trans.GetChild(trans.childCount-1);
+		}
 	}
 }
 #endif
