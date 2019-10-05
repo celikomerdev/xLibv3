@@ -39,26 +39,6 @@ namespace xLib.Mathx
 			else return angle;
 		}
 		
-		public static float Angle180(Vector2 center,Vector2 target)
-		{
-			float angle = Vector2.Angle(Vector2.right,target-center);
-			if(center.y > target.y)
-			{
-				angle = -angle;
-			}
-			return angle;
-		}
-		
-		public static float Angle360(Vector2 center, Vector2 target)
-		{
-			float angle = Vector2.Angle(Vector2.right,target-center);
-			if(center.y > target.y)
-			{
-				angle = 360-angle;
-			}
-			return angle;
-		}
-		
 		public static float DeltaAngle(float prevAngle,float curAngle)
 		{
 			float difference = curAngle-prevAngle;
