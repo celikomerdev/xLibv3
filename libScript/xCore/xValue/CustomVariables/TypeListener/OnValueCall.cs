@@ -12,7 +12,7 @@ namespace xLib.xValueClass.Listener
 		public void OnCall(object value)
 		{
 			TryForceClient();
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnCall:{0}",ViewId);
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnCall:{0}",ViewCore.CurrentId);
 			eventUnity.Invoke();
 			TryRestoreLastClient();
 		}

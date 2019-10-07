@@ -14,7 +14,7 @@ namespace xLib.xValueClass.Listener
 		public void OnCall(byte value)
 		{
 			TryForceClient();
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnCall:{0}:{1}",ViewId,value);
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnCall:{0}:{1}",ViewCore.CurrentId,value);
 			eventByte.Invoke(value);
 			TryRestoreLastClient();
 		}
