@@ -1,5 +1,4 @@
 ﻿#if xLibv3
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,7 +13,7 @@ namespace xLib
 		
 		protected override bool OnRegister(bool value)
 		{
-			MnTutorial.ins.onTutorialClick.Listener(value,Void=>OnClick());
+			MnTutorial.ins.onTutorialClick.Listener(value,call:Void=>OnClick(),order:baseRegister.order);
 			
 			if(value)
 			{

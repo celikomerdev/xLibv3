@@ -98,7 +98,7 @@ namespace xLib.ToolPurchase
 		#region Behavior
 		protected override void Started()
 		{
-			MnProduct.ins.onInit.Listener(true,ListenInit,true);
+			MnProduct.ins.onInit.Listener(true,call:ListenInit,onRegister:true);
 		}
 		
 		protected override void OnEnabled()
@@ -108,13 +108,13 @@ namespace xLib.ToolPurchase
 		
 		protected override void OnDestroyed()
 		{
-			MnProduct.ins.onInit.Listener(false,ListenInit);
+			MnProduct.ins.onInit.Listener(false,call:ListenInit);
 		}
 		
 		private void ListenInit(bool value)
 		{
 			if(!value) return;
-			MnProduct.ins.onInit.Listener(false,ListenInit);
+			MnProduct.ins.onInit.Listener(false,call:ListenInit);
 			RefreshProduct();
 		}
 		
@@ -128,11 +128,11 @@ namespace xLib.ToolPurchase
 		
 		#region Register
 		private bool isRegister;
-		private void Register(bool value)
+		private void Register(bool register)
 		{
-			if(isRegister == value) return;
-			isRegister = value;
-			MnProduct.ins.onPurchase.Listener(value,IsPuchase);
+			if(isRegister == register) return;
+			isRegister = register;
+			MnProduct.ins.onPurchase.Listener(register,call:IsPuchase);
 		}
 		#endregion
 		

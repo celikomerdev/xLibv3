@@ -1,6 +1,5 @@
 ﻿#if xLibv3
 using UnityEngine.Events;
-using xLib.xValueClass;
 
 namespace xLib.xNode.NodeObject
 {
@@ -171,19 +170,19 @@ namespace xLib.xNode.NodeObject
 			Node.Consume();
 		}
 		
-		public void Listener(bool register,UnityAction<V> call,bool onRegister=false)
+		public void Listener(bool register,UnityAction<V> call,int order=0,bool onRegister=false)
 		{
-			Node.Listener(register,call,onRegister);
+			Node.Listener(register,call,order,onRegister);
 		}
 		
-		public void ListenerCall(bool register,UnityAction<object> call,bool onRegister=false)
+		public void ListenerCall(bool register,UnityAction<object> call,int order=0,bool onRegister=false)
 		{
-			Node.ListenerCall(register,call,onRegister);
+			Node.ListenerCall(register,call,order,onRegister);
 		}
 		
-		public void ListenerEditor(bool addition,BaseActiveM call)
+		public void ListenerEditor(bool register,BaseActiveM call)
 		{
-			Node.ListenerEditor(addition,call);
+			Node.ListenerEditor(register, call);
 		}
 		
 		public void CleanListener()

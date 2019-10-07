@@ -23,7 +23,7 @@ namespace xLib.xValueClass.Listener
 			for (int i = 0; i < array.Length; i++)
 			{
 				array[i].ListenerEditor(register,this);
-				array[i].ListenerCall(register,OnCall,baseRegister.onRegister);
+				array[i].ListenerCall(register,call:OnCall,order:baseRegister.order,onRegister:baseRegister.onRegister);
 			}
 			return register;
 		}

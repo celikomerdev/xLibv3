@@ -24,20 +24,20 @@ namespace xLib
 		}
 		
 		
-		public override void ListenerCall(bool register,UnityAction<object> call,bool onRegister=false)
+		public override void ListenerCall(bool register,UnityAction<object> call,int order,bool onRegister=false)
 		{
 			for (int i = 0; i < Value.iCall.Length; i++)
 			{
-				Value.iCall[i].ListenerCall(register,call,onRegister);
+				Value.iCall[i].ListenerCall(register,call,order,onRegister);
 			}
 		}
 		
-		public override void ListenerEditor(bool addition,BaseActiveM call)
+		public override void ListenerEditor(bool register,BaseActiveM call)
 		{
 			#if UNITY_EDITOR
 			for (int i = 0; i < Value.iCall.Length; i++)
 			{
-				Value.iCall[i].ListenerEditor(addition,call);
+				Value.iCall[i].ListenerEditor(register,call);
 			}
 			#endif
 		}

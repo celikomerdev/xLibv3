@@ -9,18 +9,18 @@ namespace xLib
 	{
 		private SortedList<int,UnityAction<T0>> sortedList = new SortedList<int,UnityAction<T0>>();
 		
-		public void Listener(bool register,UnityAction<T0> call)
+		public void Listener(bool register,UnityAction<T0> call,int order)
 		{
 			if(register)
 			{
-				CreateOrder();
-				sortedList[BaseRegisterM.Order] += call;
+				CreateOrder(order);
+				sortedList[order] += call;
 			}
 			else
 			{
-				if(!sortedList.ContainsKey(BaseRegisterM.Order)) return;
-				sortedList[BaseRegisterM.Order] -= call;
-				ClearOrder();
+				if(!sortedList.ContainsKey(order)) return;
+				sortedList[order] -= call;
+				ClearOrder(order);
 			}
 		}
 		
@@ -46,25 +46,17 @@ namespace xLib
 			temp.Invoke(arg0);
 		}
 		
-		private void CreateOrder()
+		private void CreateOrder(int order)
 		{
-			if(sortedList.ContainsKey(BaseRegisterM.Order)) return;
-			
-			// #if CanDebug
-			// xDebug.LogTempFormat(BaseRegisterM.OrderObject,"sortedList.Add{0}",BaseRegisterM.Order);
-			// #endif
-			sortedList.Add(BaseRegisterM.Order,null);
+			if(sortedList.ContainsKey(order)) return;
+			sortedList.Add(order,null);
 		}
 		
-		private void ClearOrder()
+		private void ClearOrder(int order)
 		{
-			if(!sortedList.ContainsKey(BaseRegisterM.Order)) return;
-			if(sortedList[BaseRegisterM.Order]!=null) return;
-			
-			// #if CanDebug
-			// xDebug.LogTempFormat(BaseRegisterM.OrderObject,"sortedList.Remove{0}",BaseRegisterM.Order);
-			// #endif
-			sortedList.Remove(BaseRegisterM.Order);
+			if(!sortedList.ContainsKey(order)) return;
+			if(sortedList[order]!=null) return;
+			sortedList.Remove(order);
 		}
 	}
 }

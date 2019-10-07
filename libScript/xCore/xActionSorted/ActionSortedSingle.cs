@@ -7,9 +7,9 @@ namespace xLib
 	{
 		private ActionSorted<T0> actionSortedSingle = new ActionSorted<T0>();
 		
-		public override void Listener(bool register,UnityAction<T0> call)
+		public override void Listener(bool register,UnityAction<T0> call,int order)
 		{
-			actionSortedSingle.Listener(register,call);
+			actionSortedSingle.Listener(register,call,order);
 		}
 		
 		public override void Invoke(T0 arg0)

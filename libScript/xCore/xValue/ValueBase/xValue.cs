@@ -118,9 +118,9 @@ namespace xLib
 		#region Listener
 		#region Runtime
 		private ActionSortedBase<V> actionSortedBase = new ActionSortedSingle<V>();
-		public void Listener(bool register,UnityAction<V> call,bool onRegister=false)
+		public void Listener(bool register,UnityAction<V> call,int order,bool onRegister=false)
 		{
-			actionSortedBase.Listener(register,call);
+			actionSortedBase.Listener(register,call,order);
 			
 			if(!register) return;
 			if(!onRegister) return;
@@ -128,9 +128,9 @@ namespace xLib
 		}
 		
 		private ActionSortedBase<object> actionSortedBaseCall = new ActionSortedSingle<object>();
-		public virtual void ListenerCall(bool register,UnityAction<object> call,bool onRegister=false)
+		public virtual void ListenerCall(bool register,UnityAction<object> call,int order,bool onRegister=false)
 		{
-			actionSortedBaseCall.Listener(register,call);
+			actionSortedBaseCall.Listener(register,call,order);
 			
 			if(!register) return;
 			if(!onRegister) return;
@@ -141,10 +141,10 @@ namespace xLib
 		#region Editor
 		#if UNITY_EDITOR
 		private List<BaseActiveM> listenerEditor = new List<BaseActiveM>();
-		public virtual void ListenerEditor(bool addition,BaseActiveM call)
+		public virtual void ListenerEditor(bool register,BaseActiveM call)
 		{
 			call.CheckErrors();
-			if(addition)
+			if(register)
 			{
 				if(listenerEditor.Contains(call))
 				{

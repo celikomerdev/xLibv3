@@ -8,11 +8,11 @@ namespace xLib
 	{
 		private Dictionary<string,ActionSorted<T0>> actionSortedMulti = new Dictionary<string,ActionSorted<T0>>();
 		
-		public override void Listener(bool register,UnityAction<T0> call)
+		public override void Listener(bool register,UnityAction<T0> call,int order)
 		{
 			ViewCore.FinalizeId();
 			if(register) CreateId();
-			actionSortedMulti[ViewCore.FinalId].Listener(register,call);
+			actionSortedMulti[ViewCore.FinalId].Listener(register,call,order);
 		}
 		
 		public override void Invoke(T0 arg0)

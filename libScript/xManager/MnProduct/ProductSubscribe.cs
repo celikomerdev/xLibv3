@@ -66,10 +66,10 @@ namespace xLib.ToolPurchase
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
 		[SerializeField]private EventBool isSubscribed = new EventBool();
 		
-		protected override bool OnRegister(bool value)
+		protected override bool OnRegister(bool register)
 		{
-			MnProduct.ins.onPurchase.Listener(value,ListenResult,true);
-			return value;
+			MnProduct.ins.onPurchase.Listener(register,call:ListenResult,order:baseRegister.order,onRegister:true);
+			return register;
 		}
 		
 		private void ListenResult(bool value)

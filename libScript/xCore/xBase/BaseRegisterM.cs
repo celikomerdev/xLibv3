@@ -12,11 +12,6 @@ namespace xLib
 			internal bool isRegister;
 		}
 		public BaseRegisterInfo baseRegister = new BaseRegisterInfo();
-		
-		public static int Order;
-		#if CanDebug
-		public static UnityEngine.Object OrderObject;
-		#endif
 		#endregion
 		
 		
@@ -36,11 +31,6 @@ namespace xLib
 			{
 				if(baseRegister.isRegister == value) return;
 				ViewIdApply();
-				
-				BaseRegisterM.Order = baseRegister.order;
-				#if CanDebug
-				BaseRegisterM.OrderObject = this;
-				#endif
 				
 				baseRegister.isRegister = OnRegister(value);
 				ViewIdRestore();
@@ -67,15 +57,6 @@ namespace xLib
 			IsRegister = !baseRegister.isRegister;
 		}
 		#endregion
-		
-		
-		#if UNITY_EDITOR
-		public override void CheckErrors()
-		{
-			base.CheckErrors();
-			if(Order != baseRegister.order) xDebug.LogExceptionFormat(this,this.name+":Order:{0}:order:{1}",Order,baseRegister.order);
-		}
-		#endif
 		
 		protected override void OnDestroyed()
 		{
