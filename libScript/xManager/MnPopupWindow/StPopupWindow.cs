@@ -9,7 +9,7 @@ namespace xLib
 		public static void Listener(bool register,UnityAction<bool> call,string viewId="Client",int order=0)
 		{
 			if(MnPopupWindow.ins==null) return;
-			MnPopupWindow.ins.result.Listener(register,call:call,viewId:viewId,order:order);
+			MnPopupWindow.ins.result.Listener(register,call,viewId:viewId,order:order);
 		}
 		
 		public static bool autoAccept = false;
