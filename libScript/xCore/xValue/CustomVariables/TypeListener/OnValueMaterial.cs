@@ -14,7 +14,7 @@ namespace xLib.xValueClass.Listener
 		public void OnCall(Material value)
 		{
 			TryForceClient();
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnCall:{0}:{1}",ViewCore.CurrentId,value);
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnCall:{0}:{1}",ViewId,value);
 			eventMaterial.Invoke(value);
 			TryRestoreLastClient();
 		}

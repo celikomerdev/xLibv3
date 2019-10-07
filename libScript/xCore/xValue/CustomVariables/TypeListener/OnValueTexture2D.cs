@@ -14,7 +14,7 @@ namespace xLib.xValueClass.Listener
 		public void OnCall(Texture2D value)
 		{
 			TryForceClient();
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnCall:{0}:{1}",ViewCore.CurrentId,value);
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnCall:{0}:{1}",ViewId,value);
 			eventTexture.Invoke(value);
 			TryRestoreLastClient();
 		}
