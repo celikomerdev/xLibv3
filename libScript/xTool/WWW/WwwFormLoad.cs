@@ -22,15 +22,15 @@ namespace xLib
 			set
 			{
 				if(string.IsNullOrEmpty(value)) return;
-				if(url.Value == value) return;
-				url.Value = value;
+				if(url.ValueGet(viewId:ViewCore.CurrentId) == value) return;
+				url.ValueSet(value,viewId:ViewCore.CurrentId);
 				MnCoroutine.NewCoroutine(eDownload(ViewCore.CurrentId,value));
 			}
 		}
 		#endregion
 		
 		#region Download
-		private IEnumerator eDownload(string invokeId,string url)
+		private IEnumerator eDownload(string url,string viewId)
 		{
 			WWW www = new WWW(url,FormData);
 			yield return www;
@@ -38,7 +38,7 @@ namespace xLib
 			if (string.IsNullOrEmpty(www.error))
 			{
 				string tempId = ViewCore.CurrentId;
-				ViewCore.CurrentId = invokeId;
+				ViewCore.CurrentId = viewId;
 				eventWWW.Invoke(www);
 				ViewCore.CurrentId = tempId;
 			}

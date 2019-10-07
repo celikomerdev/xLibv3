@@ -13,7 +13,7 @@ namespace xLib
 		
 		protected override bool OnRegister(bool value)
 		{
-			MnTutorial.ins.onTutorialClick.Listener(value,call:Void=>OnClick(),order:baseRegister.order);
+			MnTutorial.ins.onTutorialClick.Listener(value,call:Void=>OnClick(),viewId:ViewId,order:baseRegister.order);
 			
 			if(value)
 			{

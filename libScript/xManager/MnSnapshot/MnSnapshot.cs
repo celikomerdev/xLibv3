@@ -46,10 +46,10 @@ namespace xLib
 				StPopupWindow.Body(MnLocalize.GetValue("Everything Will Be Deleted"));
 				StPopupWindow.Accept(MnLocalize.GetValue("Reset"));
 				StPopupWindow.Decline(MnLocalize.GetValue("Cancel"));
-				StPopupWindow.Listener(Listener,true);
+				StPopupWindow.Listener(true,Listener);
 				void Listener(bool result)
 				{
-					StPopupWindow.Listener(Listener,false);
+					StPopupWindow.Listener(false,Listener);
 					if(!result) return;
 					snapshot.JsonString = value;
 				}

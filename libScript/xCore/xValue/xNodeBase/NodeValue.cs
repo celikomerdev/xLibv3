@@ -170,14 +170,14 @@ namespace xLib.xNode.NodeObject
 			Node.Consume();
 		}
 		
-		public void Listener(bool register,UnityAction<V> call,int order=0,bool onRegister=false)
+		public void Listener(bool register,UnityAction<V> call,string viewId="Client",int order=0,bool onRegister=false)
 		{
-			Node.Listener(register,call,order,onRegister);
+			Node.Listener(register,call,viewId,order,onRegister);
 		}
 		
-		public void ListenerCall(bool register,UnityAction<object> call,int order=0,bool onRegister=false)
+		public void ListenerCall(bool register,UnityAction<object> call,string viewId="Client",int order=0,bool onRegister=false)
 		{
-			Node.ListenerCall(register,call,order,onRegister);
+			Node.ListenerCall(register,call,viewId,order,onRegister);
 		}
 		
 		public void ListenerEditor(bool register,BaseActiveM call)

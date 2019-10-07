@@ -64,7 +64,7 @@ namespace xLib
 			#endif
 			
 			ValueDefault = this.value;
-			valueBase.Value = this.value;
+			valueBase.ValueSet(this.value,"Client");
 			valueCache = this.value;
 		}
 		#endregion
@@ -73,44 +73,26 @@ namespace xLib
 		#region Call
 		private void CallClient()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClient:{0}:{1}",ViewCore.CurrentId,ValueToString);
-			
-			string lastViewId = ViewCore.CurrentId;
-			ViewCore.CurrentId = "Client";
-			
-			actionSortedBase.Invoke(Value);
-			actionSortedBaseCall.Invoke(Value);
+			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClient:{0}",ValueToString);
+			actionSortedBase.Invoke(Value,viewId:"Client");
+			actionSortedBaseCall.Invoke(Value,viewId:"Client");
 			analyticDirty = true;
-			
-			ViewCore.CurrentId = lastViewId;
 		}
 		
 		private void CallClientFirst()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClientFirst:{0}:{1}",ViewCore.CurrentId,ValueToString);
-			
-			string lastViewId = ViewCore.CurrentId;
-			ViewCore.CurrentId = "Client";
-			
-			actionSortedBase.InvokeFirst(Value);
-			actionSortedBaseCall.InvokeFirst(Value);
+			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClientFirst:{0}",ValueToString);
+			actionSortedBase.InvokeFirst(Value,viewId:"Client");
+			actionSortedBaseCall.InvokeFirst(Value,viewId:"Client");
 			analyticDirty = true;
-			
-			ViewCore.CurrentId = lastViewId;
 		}
 		
 		private void CallClientLast()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClientLast:{0}:{1}",ViewCore.CurrentId,ValueToString);
-			
-			string lastViewId = ViewCore.CurrentId;
-			ViewCore.CurrentId = "Client";
-			
-			actionSortedBase.InvokeLast(Value);
-			actionSortedBaseCall.InvokeLast(Value);
+			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClientLast:{0}",ValueToString);
+			actionSortedBase.InvokeLast(Value,viewId:"Client");
+			actionSortedBaseCall.InvokeLast(Value,viewId:"Client");
 			analyticDirty = true;
-			
-			ViewCore.CurrentId = lastViewId;
 		}
 		#endregion
 		
@@ -118,9 +100,9 @@ namespace xLib
 		#region Listener
 		#region Runtime
 		private ActionSortedBase<V> actionSortedBase = new ActionSortedSingle<V>();
-		public void Listener(bool register,UnityAction<V> call,int order,bool onRegister=false)
+		public void Listener(bool register,UnityAction<V> call,string viewId,int order,bool onRegister=false)
 		{
-			actionSortedBase.Listener(register,call,order);
+			actionSortedBase.Listener(register,call,viewId,order);
 			
 			if(!register) return;
 			if(!onRegister) return;
@@ -128,9 +110,9 @@ namespace xLib
 		}
 		
 		private ActionSortedBase<object> actionSortedBaseCall = new ActionSortedSingle<object>();
-		public virtual void ListenerCall(bool register,UnityAction<object> call,int order,bool onRegister=false)
+		public virtual void ListenerCall(bool register,UnityAction<object> call,string viewId,int order,bool onRegister=false)
 		{
-			actionSortedBaseCall.Listener(register,call,order);
+			actionSortedBaseCall.Listener(register,call,viewId,order);
 			
 			if(!register) return;
 			if(!onRegister) return;
@@ -225,7 +207,7 @@ namespace xLib
 		{
 			get
 			{
-				return valueBase.Value;
+				return valueBase.ValueGet(ViewCore.CurrentId);
 			}
 			set
 			{
@@ -240,7 +222,7 @@ namespace xLib
 				if(ViewCore.IsMy) valueDebug = value;
 				#endif
 				
-				valueBase.Value = value;
+				valueBase.ValueSet(value,ViewCore.CurrentId);
 				
 				if(nodeSetting.UseRpc && !ViewCore.inRpc)
 				{

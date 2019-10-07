@@ -11,7 +11,7 @@ namespace xLib
 		protected override bool OnRegister(bool register)
 		{
 			tickTime.ListenerEditor(register,this);
-			tickTime.Listener(register,call:TickMulti,order:baseRegister.order,onRegister:baseRegister.onRegister);
+			tickTime.Listener(register,call:TickMulti,viewId:ViewId,order:baseRegister.order,onRegister:baseRegister.onRegister);
 			return register;
 		}
 		#endregion

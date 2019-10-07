@@ -6,10 +6,10 @@ namespace xLib
 	public static class StPopupWindow
 	{
 		#region Result
-		public static void Listener(UnityAction<bool> call,bool register,int order = 0)
+		public static void Listener(bool register,UnityAction<bool> call,string viewId="Client",int order=0)
 		{
 			if(MnPopupWindow.ins==null) return;
-			MnPopupWindow.ins.result.Listener(register,call:call,order:order);
+			MnPopupWindow.ins.result.Listener(register,call:call,viewId:viewId,order:order);
 		}
 		
 		public static bool autoAccept = false;

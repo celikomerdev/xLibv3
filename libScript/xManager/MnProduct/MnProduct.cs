@@ -269,10 +269,10 @@ namespace xLib
 			StPopupWindow.Body(string.Format("{0}\n{1}\nbuy?",productId,"0.00$"));
 			StPopupWindow.AcceptLocalized("yes");
 			StPopupWindow.DeclineLocalized("no");
-			StPopupWindow.Listener(Listener,true);
+			StPopupWindow.Listener(true,Listener);
 			void Listener(bool result)
 			{
-				StPopupWindow.Listener(Listener,false);
+				StPopupWindow.Listener(false,Listener);
 				OnPurchase(result,productId);
 			}
 			StPopupWindow.Show();

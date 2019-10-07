@@ -6,25 +6,24 @@ namespace xLib
 	public class ValueMulti<T0> : ValueBase<T0>
 	{
 		private Dictionary<string,T0> valueMulti = new Dictionary<string,T0>();
-		public override T0 Value
+		
+		public override T0 ValueGet(string viewId)
 		{
-			get
-			{
-				CreateId();
-				return valueMulti[ViewCore.FinalId];
-			}
-			set
-			{
-				CreateId();
-				valueMulti[ViewCore.FinalId] = value;
-			}
+			CreateId(viewId);
+			return valueMulti[viewId];
 		}
 		
-		private void CreateId()
+		public override void ValueSet(T0 value,string viewId)
+		{
+			CreateId(viewId);
+			valueMulti[viewId] = value;
+		}
+		
+		private void CreateId(string viewId)
 		{
 			ViewCore.FinalizeId();
-			if(valueMulti.ContainsKey(ViewCore.FinalId)) return;
-			valueMulti.Add(ViewCore.FinalId,valueDefault);
+			if(valueMulti.ContainsKey(viewId)) return;
+			valueMulti.Add(viewId,valueDefault);
 		}
 	}
 }

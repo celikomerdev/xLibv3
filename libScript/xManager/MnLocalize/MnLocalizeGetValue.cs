@@ -25,7 +25,7 @@ namespace xLib.ToolLocalize
 		
 		protected override bool OnRegister(bool value)
 		{
-			MnLocalize.ins.eventLocalize.Listener(value,call:(Void)=>Work(),order:baseRegister.order,onRegister:baseRegister.onRegister);
+			MnLocalize.ins.eventLocalize.Listener(value,call:(Void)=>Work(),viewId:ViewId,order:baseRegister.order,onRegister:baseRegister.onRegister);
 			return value;
 		}
 	}

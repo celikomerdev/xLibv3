@@ -20,20 +20,19 @@ namespace xLib.xValueClass.Listener
 			TryRestoreLastClient();
 		}
 		
-		protected override bool Register(bool register)
+		protected override bool OnRegister(bool register)
 		{
 			for (int i = 0; i < target.Length; i++)
 			{
 				if(!target[i]) continue;
 				target[i].ListenerEditor(register,this);
-				target[i].Listener(register,OnCall,baseRegister.order,baseRegister.onRegister);
+				target[i].Listener(register,call:OnCall,viewId:ViewId,order:baseRegister.order,onRegister:baseRegister.onRegister);
 			}
 			for (int i = 0; i < targetMono.Length; i++)
 			{
 				if(!targetMono[i]) continue;
 				targetMono[i].ListenerEditor(register,this);
-				targetMono[i].Listener(register,OnCall,baseRegister.order,baseRegister.onRegister);
-				targetMono[i].Listener(register,OnCall,baseRegister.onRegister);
+				targetMono[i].Listener(register,call:OnCall,viewId:ViewId,order:baseRegister.order,onRegister:baseRegister.onRegister);
 			}
 			return register;
 		}

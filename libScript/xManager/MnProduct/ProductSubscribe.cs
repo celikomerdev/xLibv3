@@ -68,7 +68,7 @@ namespace xLib.ToolPurchase
 		
 		protected override bool OnRegister(bool register)
 		{
-			MnProduct.ins.onPurchase.Listener(register,call:ListenResult,order:baseRegister.order,onRegister:true);
+			MnProduct.ins.onPurchase.Listener(register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:true);
 			return register;
 		}
 		

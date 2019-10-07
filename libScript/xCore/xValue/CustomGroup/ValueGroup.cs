@@ -24,11 +24,11 @@ namespace xLib
 		}
 		
 		
-		public override void ListenerCall(bool register,UnityAction<object> call,int order,bool onRegister=false)
+		public override void ListenerCall(bool register,UnityAction<object> call,string view,int order,bool onRegister=false)
 		{
 			for (int i = 0; i < Value.iCall.Length; i++)
 			{
-				Value.iCall[i].ListenerCall(register,call,order,onRegister);
+				Value.iCall[i].ListenerCall(register,call,view,order,onRegister);
 			}
 		}
 		
