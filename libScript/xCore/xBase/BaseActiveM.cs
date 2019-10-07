@@ -11,11 +11,12 @@ namespace xLib
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Awake");
 			if(!CanWork) return;
-			FindView();
 			
-			ViewIdApply();
+			FindView();
+			string tempId = ViewCore.CurrentId;
+			ViewCore.CurrentId = ViewId;
 			Awaked();
-			ViewIdRestore();
+			ViewCore.CurrentId = tempId;
 		}
 		
 		private bool isStarted = false;
@@ -24,11 +25,12 @@ namespace xLib
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Start");
 			if(!CanWork) return;
-			FindView();
 			
-			ViewIdApply();
+			FindView();
+			string tempId = ViewCore.CurrentId;
+			ViewCore.CurrentId = ViewId;
 			Started();
-			ViewIdRestore();
+			ViewCore.CurrentId = tempId;
 			
 			isStarted = true;
 			OnEnable();
@@ -40,11 +42,12 @@ namespace xLib
 			if(!isStarted) return;
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnEnable");
 			if(!CanWork) return;
-			FindView();
 			
-			ViewIdApply();
+			FindView();
+			string tempId = ViewCore.CurrentId;
+			ViewCore.CurrentId = ViewId;
 			OnEnabled();
-			ViewIdRestore();
+			ViewCore.CurrentId = tempId;
 			
 			IsActive = true;
 		}
@@ -54,11 +57,12 @@ namespace xLib
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnDisable");
 			if(!CanWork) return;
-			FindView();
 			
-			ViewIdApply();
+			FindView();
+			string tempId = ViewCore.CurrentId;
+			ViewCore.CurrentId = ViewId;
 			OnDisabled();
-			ViewIdRestore();
+			ViewCore.CurrentId = tempId;
 			
 			IsActive = false;
 		}
@@ -68,11 +72,12 @@ namespace xLib
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnDestroy");
 			if(!CanWork) return;
-			FindView();
 			
-			ViewIdApply();
+			FindView();
+			string tempId = ViewCore.CurrentId;
+			ViewCore.CurrentId = ViewId;
 			OnDestroyed();
-			ViewIdRestore();
+			ViewCore.CurrentId = tempId;
 			
 			IsActive = false;
 		}
@@ -92,11 +97,12 @@ namespace xLib
 				if(!CanWork) return;
 				if(isActive == value) return;
 				isActive = value;
-				FindView();
 				
-				ViewIdApply();
+				FindView();
+				string tempId = ViewCore.CurrentId;
+				ViewCore.CurrentId = ViewId;
 				OnActive(value);
-				ViewIdRestore();
+				ViewCore.CurrentId = tempId;
 			}
 		}
 		protected virtual void OnActive(bool value){}

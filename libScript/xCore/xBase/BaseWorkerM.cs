@@ -1,6 +1,4 @@
 ﻿#if xLibv3
-using UnityEngine;
-
 namespace xLib
 {
 	public abstract class BaseWorkerM : BaseWorkM
@@ -29,27 +27,6 @@ namespace xLib
 			view.FindId();
 			ViewId = view.Id;
 			isMy = view.IsMy;
-		}
-		
-		protected void ViewIdApplyFast()
-		{
-			lastViewId = ViewCore.CurrentId;
-			ViewCore.CurrentId = ViewId;
-		}
-		protected void ViewIdApply()
-		{
-			if(ViewCore.canDebug && ViewCore.CurrentId != ViewId) Debug.LogFormat(this,"CurrentId:{0}:{1}",ViewCore.CurrentId,ViewId);
-			ViewIdApplyFast();
-		}
-		
-		protected void ViewIdRestoreFast()
-		{
-			ViewCore.CurrentId = lastViewId;
-		}
-		protected void ViewIdRestore()
-		{
-			if(ViewCore.canDebug && ViewCore.CurrentId != lastViewId) Debug.LogFormat(this,"CurrentId:{0}:{1}",ViewCore.CurrentId,lastViewId);
-			ViewIdRestoreFast();
 		}
 		
 		#if UNITY_EDITOR

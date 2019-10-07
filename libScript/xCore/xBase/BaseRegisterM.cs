@@ -30,10 +30,12 @@ namespace xLib
 			set
 			{
 				if(baseRegister.isRegister == value) return;
-				ViewIdApply();
 				
+				FindView();
+				string tempId = ViewCore.CurrentId;
+				ViewCore.CurrentId = ViewId;
 				baseRegister.isRegister = OnRegister(value);
-				ViewIdRestore();
+				ViewCore.CurrentId = tempId;
 			}
 		}
 		

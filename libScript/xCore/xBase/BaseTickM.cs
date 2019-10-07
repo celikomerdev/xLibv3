@@ -3,12 +3,14 @@ namespace xLib
 {
 	public abstract class BaseTickM : BaseRegisterM
 	{
+		private string tempId = "Client";
 		#region Virtual
 		protected void TickMulti(float tickTime)
 		{
-			ViewIdApplyFast();
+			tempId = ViewCore.CurrentId;
+			ViewCore.CurrentId = ViewId;
 			Tick(tickTime);
-			ViewIdRestoreFast();
+			ViewCore.CurrentId = tempId;
 		}
 		protected virtual void Tick(float tickTime){}
 		#endregion
