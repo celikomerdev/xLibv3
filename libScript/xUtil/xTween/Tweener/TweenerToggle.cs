@@ -37,7 +37,6 @@ namespace xLib.xUtil
 			m_Coroutine = tweenGroup.CrossFade(valueTarget,duration);
 		}
 		
-		#if UNITY_EDITOR
 		[ContextMenu("Fill")]
 		private void Fill()
 		{
@@ -47,7 +46,6 @@ namespace xLib.xUtil
 			if(!tweenGroup) tweenGroup = GetComponent<TweenGroup>();
 			if(!tweenGroup) tweenGroup = GetComponentInChildren<TweenGroup>();
 		}
-		#endif
 	}
 }
 #endif
