@@ -10,6 +10,7 @@ namespace xLib
 		
 		protected override void OnInit(bool init)
 		{
+			if(!CanWork) return;
 			eventInit.Invoke(init);
 		}
 	}
