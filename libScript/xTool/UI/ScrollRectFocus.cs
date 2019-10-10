@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 #if ModUI
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using xLib.EventClass;
@@ -13,19 +14,7 @@ namespace xLib
 		private RectTransform transContent = null;
 		private RectTransform transViewport = null;
 		
-		[SerializeField]private EventVector2 eventNormalizedPosition = new EventVector2();
-		
-		protected override void OnInit(bool init)
-		{
-			if(init)
-			{
-				transScrollRect = (RectTransform)scrollRect.transform;
-				transContent = scrollRect.content;
-				transViewport = scrollRect.viewport;
-			}
-		}
-		
-		private RectTransform m_target;
+		[SerializeField]private RectTransform m_target;
 		public RectTransform Target
 		{
 			get
@@ -39,6 +28,18 @@ namespace xLib
 			}
 		}
 		
+		protected override void OnInit(bool init)
+		{
+			if(init)
+			{
+				if(!Target) Target = (RectTransform)transform;
+				transScrollRect = (RectTransform)scrollRect.transform;
+				transContent = scrollRect.content;
+				transViewport = scrollRect.viewport;
+			}
+		}
+		
+		[SerializeField]private EventVector2 eventNormalizedPosition = new EventVector2();
 		public void Call()
 		{
 			if(!CanWork) return;
@@ -65,6 +66,26 @@ namespace xLib
 			}
 			
 			eventNormalizedPosition.Invoke(newNormalizedPosition);
+			
+			if(gameObject.activeInHierarchy) StartCoroutine(LerpFocus(newNormalizedPosition));
+			else MnCoroutine.NewCoroutine(LerpFocus(newNormalizedPosition));
+		}
+		
+		private IEnumerator LerpFocus(Vector2 newNormalizedPosition)
+		{
+			float duration = 0.5f;
+			float elapsedTime = 0.0f;
+			
+			Vector2 valueTemp = scrollRect.normalizedPosition;
+			while (elapsedTime < duration)
+			{
+				elapsedTime += Time.unscaledDeltaTime;
+				float ratio = Mathf.Clamp01(elapsedTime/duration);
+				valueTemp = Vector2.Lerp(valueTemp,newNormalizedPosition,ratio);
+				scrollRect.normalizedPosition = valueTemp;
+				yield return null;
+			}
+			scrollRect.normalizedPosition = newNormalizedPosition;
 		}
 		
 		private Vector3 GetWorldPointInWidget(RectTransform target, Vector3 worldPoint)
@@ -76,8 +97,8 @@ namespace xLib
 		{
 			var pivotOffset = new Vector3
 			(
-				(0.5f-target.pivot.x)*target.rect.size.x,
-				(0.5f-target.pivot.y)*target.rect.size.y,
+				target.rect.size.x*(0.5f-target.pivot.x),
+				target.rect.size.y*(0.5f-target.pivot.y),
 				0f
 			);
 			Vector3 localPosition = target.localPosition+pivotOffset;
