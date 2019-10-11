@@ -18,6 +18,8 @@ namespace xLib
 		public static T SelectTokenSafe<T>(this JObject jObject,string path,T defaultValue)
 		{
 			if(jObject == null) return defaultValue;
+			// if(path.Contains("..")) return defaultValue;
+			
 			JToken valueToken = jObject.SelectToken(path);
 			if(valueToken == null) return defaultValue;
 			return valueToken.ToObject<T>();
@@ -25,5 +27,3 @@ namespace xLib
 	}
 }
 #endif
-
-// JToken vehicle = MnConfig.data.SelectToken($"$.arrayVehicle[?(@.id == '{carData.model}')]");

@@ -9,7 +9,7 @@ namespace xLib
 	{
 		public static TextAsset assetConfigData;
 		public static JObject data = null;
-		public static Action onUpdateData;
+		public static Action onUpdateData = delegate{};
 		
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		private static void InitStatic()
@@ -17,7 +17,7 @@ namespace xLib
 			Debug.Log("MnConfig");
 			assetConfigData = Resources.Load<TextAsset>("ConfigData");
 			data = JObject.Parse(assetConfigData.text);
-			onUpdateData?.Invoke();
+			onUpdateData.Invoke();
 		}
 	}
 }
