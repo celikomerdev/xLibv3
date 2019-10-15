@@ -1,6 +1,5 @@
 ﻿#if xLibv3
 using System.Threading;
-using UnityEngine;
 using UnityEngine.Events;
 
 namespace xLib
@@ -8,22 +7,11 @@ namespace xLib
 	public class MnThread : SingletonM<MnThread>
 	{
 		#region Mono
-		protected override void Awaked()
-		{
-			Call();
-		}
-		
-		protected override void Started()
-		{
-			Call();
-		}
-		
 		private void Update()
 		{
 			Call();
 		}
 		
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
 		private static void Call()
 		{
 			if(!willCall) return;

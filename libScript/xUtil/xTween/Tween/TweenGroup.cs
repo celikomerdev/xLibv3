@@ -15,6 +15,7 @@ namespace xLib.xTween
 			Setup();
 		}
 		
+		[ContextMenu("Setup")]
 		private void Setup()
 		{
 			tweens = new List<Tween>();

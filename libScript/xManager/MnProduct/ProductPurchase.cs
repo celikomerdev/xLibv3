@@ -122,7 +122,7 @@ namespace xLib.ToolPurchase
 		{
 			if(product == null) product = MnProduct.ins.GetProduct(key);
 			if(product == null) return;
-			eventPrice.Value = "0.99$";
+			eventPrice.Value = "0.00$";
 		}
 		#endregion
 		

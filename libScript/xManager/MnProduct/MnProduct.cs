@@ -12,7 +12,6 @@ namespace xLib
 {
 	public class MnProduct : SingletonM<MnProduct>, IStoreListener
 	{
-		[SerializeField]private bool autoRestore = true;
 		[SerializeField]private bool useValidate = true;
 		[SerializeField]private FakeStoreUIMode fakeStoreUIMode = FakeStoreUIMode.StandardUser;
 		
@@ -202,7 +201,6 @@ namespace xLib
 			inInit = false;
 			onInit.Value = value;
 			if(!value) return;
-			if(autoRestore) Restore();
 		}
 		
 		public NodeBool onPurchase;
@@ -248,7 +246,6 @@ namespace xLib
 	public class MnProduct : SingletonM<MnProduct>
 	{
 		#pragma warning disable
-		[SerializeField]private bool autoRestore = true;
 		[SerializeField]private bool useValidate = true;
 		[SerializeField]private int fakeStoreUIMode = 1;
 		
