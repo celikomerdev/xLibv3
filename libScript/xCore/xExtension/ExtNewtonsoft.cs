@@ -5,24 +5,22 @@ namespace xLib
 {
 	public static class ExtNewtonsoft
 	{
-		public static T GetValueSafe<T>(this JToken jToken,object key,T defaultValue)
+		public static bool TryGetToken<T>(this JObject jObject,string path,ref T outValue)
 		{
-			if(jToken == null) return defaultValue;
-			
-			JToken valueToken = jToken[key];
-			T returnValue = valueToken.Type == JTokenType.Null? defaultValue:valueToken.Value<T>();
-			
-			return returnValue;
-		}
-		
-		public static T SelectTokenSafe<T>(this JObject jObject,string path,T defaultValue)
-		{
-			if(jObject == null) return defaultValue;
+			if(jObject == null) return false;
 			// if(path.Contains("..")) return defaultValue;
 			
 			JToken valueToken = jObject.SelectToken(path);
-			if(valueToken == null) return defaultValue;
-			return valueToken.ToObject<T>();
+			if(valueToken == null) return false;
+			
+			outValue = valueToken.ToObject<T>();
+			return true;
+		}
+		
+		public static T GetTokenSafe<T>(this JObject jObject,string path,T defaultValue)
+		{
+			jObject.TryGetToken(path,ref defaultValue);
+			return defaultValue;
 		}
 	}
 }

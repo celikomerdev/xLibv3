@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+using System;
 using UnityEngine;
 using xLib.EventClass;
 
@@ -9,7 +10,7 @@ namespace xLib.ToolOperation
 		protected override void OnInit(bool init)
 		{
 			if(!init) return;
-			operationDelegate = CreateOperation();
+			operationAction = CreateOperation();
 		}
 		
 		#region Property
@@ -24,7 +25,7 @@ namespace xLib.ToolOperation
 			{
 				if(left == value) return;
 				left = value;
-				operationDelegate();
+				operationAction();
 			}
 		}
 		
@@ -39,7 +40,7 @@ namespace xLib.ToolOperation
 			{
 				if(right == value) return;
 				right = value;
-				operationDelegate();
+				operationAction();
 			}
 		}
 		
@@ -54,7 +55,7 @@ namespace xLib.ToolOperation
 			{
 				if(operation == value) return;
 				operation = value;
-				operationDelegate = CreateOperation();
+				operationAction = CreateOperation();
 			}
 		}
 		
@@ -75,9 +76,8 @@ namespace xLib.ToolOperation
 		
 		
 		#region Operation
-		private delegate void OperationDelegate();
-		private OperationDelegate operationDelegate = delegate(){};
-		private OperationDelegate CreateOperation()
+		private Action operationAction = delegate(){};
+		private Action CreateOperation()
 		{
 			switch(operation)
 			{
@@ -111,7 +111,7 @@ namespace xLib.ToolOperation
 		
 		private void Op_Null()
 		{
-			xDebug.LogExceptionFormat(this,this.name+":Op_Null");
+			xDebug.LogTempFormat(this,this.name+":Op_Null");
 		}
 		#endregion
 	}
