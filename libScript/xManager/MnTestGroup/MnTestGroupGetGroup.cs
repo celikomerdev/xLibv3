@@ -6,13 +6,13 @@ namespace xLib
 {
 	public class MnTestGroupGetGroup : BaseRegisterM
 	{
-		[SerializeField]private string value = "";
-		public string Value
+		[SerializeField]private string key = "";
+		public string Key
 		{
 			set
 			{
-				if(this.value == value) return;
-				this.value = value;
+				if(key == value) return;
+				key = value;
 				Work();
 			}
 		}
@@ -20,7 +20,7 @@ namespace xLib
 		[SerializeField]private EventInt eventGroup = new EventInt();
 		private void Work()
 		{
-			eventGroup.Invoke(MnTestGroup.GetGroup(value));
+			eventGroup.Invoke(MnTestGroup.GetGroup(key));
 		}
 		
 		protected override bool OnRegister(bool value)
