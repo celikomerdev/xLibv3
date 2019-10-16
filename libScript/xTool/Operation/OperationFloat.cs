@@ -5,7 +5,7 @@ using xLib.EventClass;
 
 namespace xLib.ToolOperation
 {
-	public class OperationLong : BaseInitM
+	public class OperationFloat : BaseInitM
 	{
 		protected override void OnInit(bool init)
 		{
@@ -14,8 +14,8 @@ namespace xLib.ToolOperation
 		}
 		
 		#region Property
-		[SerializeField]private long left;
-		public long Left
+		[SerializeField]private float left;
+		public float Left
 		{
 			get
 			{
@@ -29,8 +29,8 @@ namespace xLib.ToolOperation
 			}
 		}
 		
-		[SerializeField]private long right;
-		public long Right
+		[SerializeField]private float right;
+		public float Right
 		{
 			get
 			{
@@ -59,9 +59,9 @@ namespace xLib.ToolOperation
 			}
 		}
 		
-		[SerializeField]private EventLong eventResult = new EventLong();
-		private long result = 0;
-		private long Result
+		[SerializeField]private EventFloat eventResult = new EventFloat();
+		private float result = 0;
+		private float Result
 		{
 			set
 			{

@@ -18,8 +18,6 @@ namespace xLib.xNew
 			set
 			{
 				cooldown = value;
-				this.enabled = true;
-				Call();
 			}
 		}
 		[SerializeField]public NodeLong currentTime = null;
@@ -28,7 +26,7 @@ namespace xLib.xNew
 		[Header("Work")]
 		[SerializeField]private int maxLoop = 1;
 		[SerializeField]private EventUnity eventLoop = new EventUnity();
-		[SerializeField]private EventLong eventDeltaTick = new EventLong();
+		[SerializeField]private EventInt eventLoopCount = new EventInt();
 		
 		
 		protected override void Tick(float tickTime)
@@ -44,41 +42,45 @@ namespace xLib.xNew
 			long deltaTick = nextTime.Value-currentTime.Value;
 			if(CanDebug) Debug.LogFormat(this,this.name+":deltaTick:{0}",deltaTick);
 			
-			if(deltaTick>0)
-			{
-				eventDeltaTick.Invoke(deltaTick);
-				return;
-			}
-			this.enabled = false;
+			if(deltaTick>0) return;
 			
 			int currentLoop = 0;
 			while(currentTime.Value > nextTime.Value)
 			{
 				currentLoop++;
 				if(currentLoop < maxLoop) nextTime.Value += cooldown;
-				else nextTime.Value = currentTime.Value+cooldown;
+				else nextTime.Value = currentTime.Value;
+				// else nextTime.Value = currentTime.Value+cooldown;
 				
-				if(CanDebug) Debug.LogFormat(this,this.name+":Reward:{0}",currentLoop);
+				if(CanDebug) Debug.LogFormat(this,this.name+":eventLoop:{0}",currentLoop);
 				eventLoop.Invoke();
 			}
+			if(CanDebug) Debug.LogFormat(this,this.name+":eventLoopCount:{0}",currentLoop);
+			eventLoopCount.Value = currentLoop;
 		}
 		
 		public void CooldownReStart()
 		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":CooldownReStart");
 			nextTime.Value = currentTime.Value+cooldown;
-			this.enabled = true;
-			Call();
+		}
+		
+		public void CooldownStart()
+		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":CooldownStart");
+			if(nextTime.Value>currentTime.Value) return;
+			CooldownReStart();
 		}
 		
 		public void TickAdd(long value)
 		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":TickAdd:{0}",value);
 			nextTime.Value += value;
-			this.enabled = true;
-			Call();
 		}
 		
 		public void TickMultiply(float value)
 		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":TickMultiply:{0}",value);
 			long deltaTick = nextTime.Value - currentTime.Value;
 			deltaTick = (long)(deltaTick*value);
 			TickAdd(deltaTick);
