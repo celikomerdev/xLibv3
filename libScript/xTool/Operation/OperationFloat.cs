@@ -113,6 +113,19 @@ namespace xLib.ToolOperation
 			xDebug.LogTempFormat(this,this.name+":Op_Null");
 		}
 		#endregion
+		
+		
+		#region Convert
+		public void LongLeft(long value)
+		{
+			Left = value;
+		}
+		
+		public void LongRight(long value)
+		{
+			Right = value;
+		}
+		#endregion
 	}
 }
 #endif
