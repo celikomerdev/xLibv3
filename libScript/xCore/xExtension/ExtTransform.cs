@@ -56,6 +56,20 @@ namespace xLib
 			if(trans.childCount == 0) return null;
 			return trans.GetChild(trans.childCount-1);
 		}
+		
+		public static Transform FindChildDeep(this Transform trans,string name)
+		{
+			foreach(Transform child in trans)
+			{
+				if(child.name == name) return child;
+			}
+			foreach(Transform child in trans)
+			{
+				Transform result = child.FindChildDeep(name);
+				if(result != null) return result;
+			}
+			return null;
+		}
 	}
 }
 #endif
