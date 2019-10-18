@@ -13,6 +13,10 @@ namespace xLib
 			{
 				genericClass = (((GameObject)target).GetComponent<V>());
 			}
+			else if(target.GetType() == typeof(Transform))
+			{
+				genericClass = (((Transform)target).GetComponent<V>());
+			}
 			else
 			{
 				genericClass = (V)target;
@@ -28,6 +32,10 @@ namespace xLib
 			if(target.GetType() == typeof(GameObject))
 			{
 				genericClass.AddRange(((GameObject)target).GetComponents<V>());
+			}
+			else if(target.GetType() == typeof(Transform))
+			{
+				genericClass.AddRange(((Transform)target).GetComponents<V>());
 			}
 			else
 			{
@@ -54,6 +62,10 @@ namespace xLib
 			if(target.GetType() == typeof(GameObject))
 			{
 				genericClass.AddRange(((GameObject)target).GetComponentsInChildren<V>(includeInactive));
+			}
+			else if(target.GetType() == typeof(Transform))
+			{
+				genericClass.AddRange(((Transform)target).GetComponentsInChildren<V>(includeInactive));
 			}
 			else
 			{

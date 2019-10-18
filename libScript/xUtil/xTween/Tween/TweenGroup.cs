@@ -21,7 +21,7 @@ namespace xLib.xTween
 			tweens = new List<Tween>();
 			for (int i = 0; i < target.Length; i++)
 			{
-				tweens.AddRange(target[i].GetComponents<Tween>());
+				tweens.AddRange(target[i].GetGenerics<Tween>());
 			}
 			tweens.Remove(this);
 			tweens.RemoveAll(item => item.CanWork == false);
@@ -42,19 +42,15 @@ namespace xLib.xTween
 			}
 		}
 		
-		// #if UNITY_EDITOR
-		// [ContextMenu("Fill")]
-		// private void Fill()
-		// {
-		// 	List<Tween> tempList = new List<Tween>();
-		// 	tempList.AddRange(target);
-		// 	tempList.AddRange(GetComponentsInChildren<Tween>(true));
-			
-		// 	// Setup();
-		// 	// if(!target) target = GetComponent<Graphic>();
-		// 	// if(!target) target = GetComponentInParent<Graphic>();
-		// }
-		// #endif
+		#if UNITY_EDITOR
+		[ContextMenu("Fill")]
+		private void Fill()
+		{
+			if(target.Length>0) return;
+			target = Array.ConvertAll(transform.FindWithComponent<Tween>(true).ToArray(),item=>item.gameObject);
+			Setup();
+		}
+		#endif
 	}
 }
 #endif

@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace xLib
@@ -69,6 +70,26 @@ namespace xLib
 				if(result != null) return result;
 			}
 			return null;
+		}
+		
+		public static List<Transform> FindWithComponent<T>(this Transform trans,bool recursive=false)
+		{
+			List<Transform> tempList = new List<Transform>();
+			
+			foreach(Transform child in trans)
+			{
+				if(child.GetComponent<T>() != null)
+				{
+					tempList.Add(child);
+				}
+			}
+			
+			foreach(Transform child in trans.transform)
+			{
+				tempList.AddRange(child.FindWithComponent<T>(recursive));
+			}
+			
+			return tempList;
 		}
 	}
 }
