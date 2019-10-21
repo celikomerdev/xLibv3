@@ -7,7 +7,7 @@ namespace xLib.ToolConvert
 {
 	public class ConvertToString : BaseMainM
 	{
-		[SerializeField]private string format = "F0";
+		[SerializeField]private string format = @"{0:F0}";
 		private string result = "";
 		private string Result
 		{
@@ -24,35 +24,47 @@ namespace xLib.ToolConvert
 		
 		public void FromByte(byte value)
 		{
-			Result = value.ToString(format);
+			Result = string.Format(@format,value);
 		}
 		
 		public void FromInt(int value)
 		{
-			Result = value.ToString(format);
+			Result = string.Format(@format,value);
 		}
 		
 		public void FromFloat(float value)
 		{
-			Result = value.ToString(format);
+			Result = string.Format(@format,value);
 		}
 		
 		public void FromTimeSpan(TimeSpan value)
 		{
-			Result = value.ToStringCustom(format);
-		}
-		
-		public void FromTimeTick(long value)
-		{
-			FromTimeSpan(TimeSpan.FromTicks(value));
+			Result = String.Format(@format,(xTimeSpan)value);
 		}
 		
 		#if ModWebWWW
 		public void FromWWW(WWW value)
 		{
-			Result = value.text;
+			Result = string.Format(@format,value);
 		}
 		#endif
+		
+		#region FromTime
+		public void FromTimeTick(long value)
+		{
+			FromTimeSpan(TimeSpan.FromTicks(value));
+		}
+		
+		public void FromTimeSecond(float value)
+		{
+			FromTimeSpan(TimeSpan.FromSeconds(value));
+		}
+		
+		public void FromTimeSecond(int value)
+		{
+			FromTimeSpan(TimeSpan.FromSeconds(value));
+		}
+		#endregion
 	}
 }
 #endif
