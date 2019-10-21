@@ -6,6 +6,7 @@ namespace xLib
 	public static class xDebug
 	{
 		#region Debug
+		public static bool isTesting = false;
 		public static bool CanDebug = true;
 		#endregion
 		
