@@ -39,7 +39,7 @@ namespace xLib.ToolConvert
 		
 		public void FromTimeSpan(TimeSpan value)
 		{
-			Result = String.Format(@format,(xTimeSpan)value);
+			Result = string.Format(@format,(xTimeSpan)value);
 		}
 		
 		#if ModWebWWW
