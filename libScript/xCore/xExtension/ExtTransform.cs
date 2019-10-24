@@ -43,10 +43,10 @@ namespace xLib
 		}
 		#endregion
 		
-		public static void DestroyChildren(this Transform trans)
+		public static void DestroyChildren(this Transform trans,int startAfter=0,int endBefore=0)
 		{
 			int childCount = trans.childCount;
-			for (int i = 0; i < childCount; i++)
+			for (int i=startAfter; i<childCount-endBefore; i++)
 			{
 				GameObject.Destroy(trans.GetChild(i).gameObject);
 			}
