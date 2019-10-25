@@ -39,6 +39,15 @@ namespace xLib
 			}
 		}
 		
+		public void Enabled(bool value)
+		{
+			enabled = (value && CanEnable());
+		}
+		protected virtual bool CanEnable()
+		{
+			return true;
+		}
+		
 		protected virtual void OnValidatedForced(){}
 		protected virtual void OnValidated(){}
 		private void OnValidate()
