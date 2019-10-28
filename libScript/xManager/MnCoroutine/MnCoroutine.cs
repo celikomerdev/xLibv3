@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -44,28 +45,46 @@ namespace xLib
 		}
 		#endregion
 		
-		#region Scaled
-		public static Coroutine WaitForSeconds(float delay,UnityAction call)
+		#region WaitForSeconds
+		public static Coroutine WaitForSeconds(UnityAction call,float delay=0,bool unscaled=true)
 		{
-			return NewCoroutine(waitForSeconds(delay,call));
+			return NewCoroutine(waitForSeconds(call,delay,unscaled));
 		}
 		
-		private static IEnumerator waitForSeconds(float delay,UnityAction call)
+		private static IEnumerator waitForSeconds(UnityAction call,float delay=0,bool unscaled=true)
 		{
-			yield return new WaitForSeconds(delay);
+			if(unscaled)yield return new WaitForSecondsRealtime(delay);
+			else yield return new WaitForSeconds(delay);
 			call();
 		}
 		#endregion
 		
-		#region Unscaled
-		public static Coroutine WaitForSecondsRealtime(float delay,UnityAction call)
+		#region WaitUntil
+		public static Coroutine WaitUntil(Func<bool> predicate,UnityAction call,float delay=0,bool unscaled=true)
 		{
-			return NewCoroutine(waitForSecondsRealtime(delay,call));
+			return NewCoroutine(waitUntil(predicate,call,delay,unscaled));
 		}
 		
-		private static IEnumerator waitForSecondsRealtime(float delay,UnityAction call)
+		private static IEnumerator waitUntil(Func<bool> predicate,UnityAction call,float delay=0,bool unscaled=true)
 		{
-			yield return new WaitForSecondsRealtime(delay);
+			yield return new WaitUntil(predicate);
+			if(unscaled)yield return new WaitForSecondsRealtime(delay);
+			else yield return new WaitForSeconds(delay);
+			call();
+		}
+		#endregion
+		
+		#region WaitWhile
+		public static Coroutine WaitWhile(Func<bool> predicate,UnityAction call,float delay=0,bool unscaled=true)
+		{
+			return NewCoroutine(waitWhile(predicate,call,delay,unscaled));
+		}
+		
+		private static IEnumerator waitWhile(Func<bool> predicate,UnityAction call,float delay=0,bool unscaled=true)
+		{
+			yield return new WaitWhile(predicate);
+			if(unscaled)yield return new WaitForSecondsRealtime(delay);
+			else yield return new WaitForSeconds(delay);
 			call();
 		}
 		#endregion

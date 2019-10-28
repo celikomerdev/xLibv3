@@ -59,7 +59,7 @@ namespace xLib.libAdvert
 			if(Application.isEditor)
 			{
 				Register();
-				MnCoroutine.WaitForSecondsRealtime(3f,OnClose);
+				MnCoroutine.WaitForSeconds(delay:3f,call:OnClose);
 				return;
 			}
 			#endif
@@ -72,7 +72,7 @@ namespace xLib.libAdvert
 			}
 			
 			Register();
-			MnCoroutine.WaitForSecondsRealtime(0.5f,MnAdvert.ins.interstitial.ShowBase);
+			MnCoroutine.WaitForSeconds(delay:0.5f,call:MnAdvert.ins.interstitial.ShowBase);
 		}
 		
 		public void TryShowRewarded()
@@ -84,7 +84,7 @@ namespace xLib.libAdvert
 			if(Application.isEditor)
 			{
 				Register();
-				MnCoroutine.WaitForSecondsRealtime(3f,delegate{OnReward(1);});
+				MnCoroutine.WaitForSeconds(delay:3f,call:delegate{OnReward(1);});
 				return;
 			}
 			#endif
@@ -97,7 +97,7 @@ namespace xLib.libAdvert
 			}
 			
 			Register();
-			MnCoroutine.WaitForSecondsRealtime(0.5f,MnAdvert.ins.rewarded.ShowBase);
+			MnCoroutine.WaitForSeconds(delay:0.5f,call:MnAdvert.ins.rewarded.ShowBase);
 		}
 		#endregion
 		

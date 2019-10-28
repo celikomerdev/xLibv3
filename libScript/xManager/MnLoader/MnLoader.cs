@@ -10,11 +10,11 @@ namespace xLib
 	{
 		#region Field
 		[Header("Manager")]
-		[SerializeField]private NodeInt loadedLevel = null;
-		[SerializeField]private NodeFloat loadingProgress = null;
+		[SerializeField]public NodeInt loadedLevel = null;
+		[SerializeField]public NodeFloat loadingProgress = null;
 		
-		[SerializeField]private NodeBool loadingVisual = null;
-		[SerializeField]private NodeBool loadingReal = null;
+		[SerializeField]public NodeBool loadingVisual = null;
+		[SerializeField]public NodeBool loadingReal = null;
 		[SerializeField]private float delay = 1;
 		#endregion
 		
