@@ -9,20 +9,28 @@ namespace xLib.xTween
 		
 		private void OnEnable()
 		{
-			SetBaseRatio(1);
+			BaseRatio = 1;
 		}
 		
 		private void OnDisable()
 		{
-			SetBaseRatio(0);
+			BaseRatio = 0;
 		}
 		
 		public bool isClamped = false;
+		public float BaseRatio
+		{
+			set
+			{
+				if (!CanWork) return;
+				if (isClamped) value = Mathf.Clamp01(value);
+				SetRatio(value);
+			}
+		}
+		
 		public void SetBaseRatio(float value)
 		{
-			if (!CanWork) return;
-			if (isClamped) value = Mathf.Clamp01(value);
-			SetRatio(value);
+			BaseRatio = value;
 		}
 		
 		protected abstract void SetRatio(float value);

@@ -9,6 +9,11 @@ namespace xLib
 		{
 			gameObject.SetActive(!gameObject.activeSelf);
 		}
+		
+		public static GameObject FindChildDeep(this GameObject gameObject,string name)
+		{
+			return gameObject.transform.FindChildDeep(name).gameObject;
+		}
 	}
 }
 #endif
