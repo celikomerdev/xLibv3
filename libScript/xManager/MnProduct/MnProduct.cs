@@ -295,7 +295,7 @@ namespace xLib
 		public void Restore()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
-			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Failed").ToTitleExt());
+			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Failed"));
 			onRestore.Value = false;
 		}
 		

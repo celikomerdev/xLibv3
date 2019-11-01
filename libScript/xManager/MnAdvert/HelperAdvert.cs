@@ -59,7 +59,7 @@ namespace xLib.libAdvert
 			if(Application.isEditor)
 			{
 				Register();
-				MnCoroutine.WaitForSeconds(delay:3f,call:OnClose);
+				MnCoroutine.WaitForSeconds(delay:3.0f,call:OnClose);
 				return;
 			}
 			#endif
@@ -84,7 +84,7 @@ namespace xLib.libAdvert
 			if(Application.isEditor)
 			{
 				Register();
-				MnCoroutine.WaitForSeconds(delay:3f,call:delegate{OnReward(1);});
+				MnCoroutine.WaitForSeconds(delay:3.0f,call:delegate{OnReward(1);});
 				return;
 			}
 			#endif
