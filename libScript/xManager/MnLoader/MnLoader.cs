@@ -55,8 +55,10 @@ namespace xLib
 			
 			if(!isAsync)
 			{
-				SceneManager.LoadScene(value);
 				loadingProgress.Value = 0.5f;
+				yield return null;
+				SceneManager.LoadScene(value);
+				yield return null;
 			}
 			else
 			{
@@ -69,6 +71,7 @@ namespace xLib
 			}
 			
 			yield return null;
+			loadingProgress.Value = 1f;
 			inLoad = false;
 			loadedLevel.Value = value;
 			loadingReal.Value = false;
