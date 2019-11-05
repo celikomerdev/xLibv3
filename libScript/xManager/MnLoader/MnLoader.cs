@@ -10,6 +10,7 @@ namespace xLib
 	{
 		#region Field
 		[Header("Manager")]
+		[SerializeField]private bool isAsync = true;
 		[SerializeField]public NodeInt loadedLevel = null;
 		[SerializeField]public NodeFloat loadingProgress = null;
 		
@@ -50,13 +51,24 @@ namespace xLib
 			yield return new WaitForSecondsRealtime(delay);
 			
 			loadingReal.Value = true;
-			AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(value);
-			while(!asyncLoad.isDone)
+			yield return null;
+			
+			if(!isAsync)
 			{
-				yield return null;
-				loadingProgress.Value = asyncLoad.progress + 0.1f;
+				SceneManager.LoadScene(value);
+				loadingProgress.Value = 0.5f;
+			}
+			else
+			{
+				AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(value);
+				while(!asyncLoad.isDone)
+				{
+					loadingProgress.Value = asyncLoad.progress + 0.1f;
+					yield return null;
+				}
 			}
 			
+			yield return null;
 			inLoad = false;
 			loadedLevel.Value = value;
 			loadingReal.Value = false;
