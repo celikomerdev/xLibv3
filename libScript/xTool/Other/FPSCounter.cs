@@ -7,6 +7,7 @@ namespace xLib.xTool
 	public class FPSCounter : BaseMainM
 	{
 		[SerializeField]private float intervalTime = 1f;
+		[SerializeField]private float lerp = 1f;
 		[SerializeField]private EventFloat eventFloat = new EventFloat();
 		
 		#region Mono
@@ -27,7 +28,7 @@ namespace xLib.xTool
 			totalTime += Time.unscaledDeltaTime;
 			
 			if(totalTime<intervalTime) return;
-			fps = Mathf.Lerp(fps,totalFrame/totalTime,totalTime);
+			fps = Mathf.Lerp(fps,totalFrame/totalTime,lerp*totalTime);
 			totalFrame = 0;
 			totalTime = 0;
 			
