@@ -27,7 +27,7 @@ namespace xLib.xTool
 			totalTime += Time.unscaledDeltaTime;
 			
 			if(totalTime<intervalTime) return;
-			fps = totalFrame/totalTime;
+			fps = Mathf.Lerp(fps,totalFrame/totalTime,totalTime);
 			totalFrame = 0;
 			totalTime = 0;
 			
