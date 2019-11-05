@@ -4,7 +4,7 @@ using xLib.EventClass;
 
 namespace xLib.xTool
 {
-	public class FPSCounter : BaseMainM
+	public class FPSCounter2 : BaseMainM
 	{
 		[SerializeField]private float intervalTime = 1f;
 		[SerializeField]private EventFloat eventFloat = new EventFloat();
@@ -26,10 +26,10 @@ namespace xLib.xTool
 			totalFrame++;
 			totalTime += Time.unscaledDeltaTime;
 			
+			fps += ((1f/Time.unscaledDeltaTime)-fps)/totalFrame;
 			if(totalTime<intervalTime) return;
-			fps = totalFrame/totalTime;
-			totalFrame = 0;
 			totalTime = 0;
+			totalFrame = 0;
 			
 			eventFloat.Invoke(fps);
 		}
