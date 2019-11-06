@@ -10,7 +10,7 @@ namespace xLib
 	{
 		#region Field
 		[Header("Manager")]
-		[SerializeField]private bool isAsync = true;
+		[SerializeField]private bool isAsync = false;
 		[SerializeField]public NodeInt loadedLevel = null;
 		[SerializeField]public NodeFloat loadingProgress = null;
 		

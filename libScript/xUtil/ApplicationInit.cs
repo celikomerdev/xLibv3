@@ -13,18 +13,29 @@ namespace xLib
 			StartCoroutine(LoadLevelAsync(1));
 		}
 		
+		[SerializeField]private bool isAsync = false;
 		[SerializeField]private EventUnity finished = new EventUnity();
 		private IEnumerator LoadLevelAsync(int value)
 		{
-			AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(value);
-			while(!asyncLoad.isDone)
+			yield return null;
+			
+			if(!isAsync)
 			{
-				yield return new WaitForEndOfFrame();
+				yield return null;
+				SceneManager.LoadScene(value);
+				yield return null;
+			}
+			else
+			{
+				AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(value);
+				while(!asyncLoad.isDone)
+				{
+					yield return null;
+				}
 			}
 			
-			yield return new WaitForEndOfFrame();
-			finished.Invoke();
 			yield return null;
+			finished.Invoke();
 		}
 	}
 }
