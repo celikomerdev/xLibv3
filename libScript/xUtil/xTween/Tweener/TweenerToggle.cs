@@ -34,7 +34,7 @@ namespace xLib.xUtil
 			if(!toggle.isOn) valueTarget = 0f;
 			
 			MnCoroutine.KillCoroutine(m_Coroutine);
-			m_Coroutine = tweenGroup.CrossFade(valueTarget,duration);
+			m_Coroutine = tweenGroup.CrossFade(valueTarget,duration,ignoreTimeScale);
 		}
 		
 		[ContextMenu("Fill")]

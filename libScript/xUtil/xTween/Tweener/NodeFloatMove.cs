@@ -7,11 +7,11 @@ namespace xLib.ToolTweener
 {
 	public class NodeFloatMove : BaseTickNodeM
 	{
-		[SerializeField]private NodeFloat assetFloat;
-		[SerializeField]private Tween target;
+		[SerializeField]private NodeFloat assetFloat = null;
+		[SerializeField]private Tween target = null;
 		[SerializeField]private float lerp = 4;
 		[SerializeField]private float multiplier = 1;
-		[SerializeField]private bool isAbsolute;
+		[SerializeField]private bool isAbsolute = false;
 		
 		#region Behavior
 		protected override void Tick(float tickTime)

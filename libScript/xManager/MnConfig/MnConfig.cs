@@ -8,7 +8,7 @@ namespace xLib
 {
 	public class MnConfig : SingletonM<MnConfig>
 	{
-		public static TextAsset assetConfigData;
+		public static TextAsset assetConfigData = null;
 		public static JObject data = null;
 		public static Action onUpdateData = delegate{};
 		
@@ -31,7 +31,7 @@ namespace xLib
 			MnConfig.onUpdateData -= OnUpdateConfigData;
 		}
 		
-		[SerializeField]private ObjectGroup objectGroup;
+		[SerializeField]private ObjectGroup objectGroup = null;
 		private void OnUpdateConfigData()
 		{
 			objectGroup.Init(true);
