@@ -11,12 +11,14 @@ namespace xLib
 		#region Field
 		[Header("Manager")]
 		[SerializeField]private bool isAsync = false;
+		[SerializeField]private float delay = 1;
+		[SerializeField]private ThreadPriority backgroundLoadingPriority = ThreadPriority.Normal;
+		
 		[SerializeField]public NodeInt loadedLevel = null;
 		[SerializeField]public NodeFloat loadingProgress = null;
 		
 		[SerializeField]public NodeBool loadingVisual = null;
 		[SerializeField]public NodeBool loadingReal = null;
-		[SerializeField]private float delay = 1;
 		#endregion
 		
 		#region Public
@@ -35,6 +37,7 @@ namespace xLib
 				xDebug.LogExceptionFormat(this,this.name+":LoadLevel:{0}",value);
 				return;
 			}
+			Application.backgroundLoadingPriority = backgroundLoadingPriority;
 			MnCoroutine.NewCoroutine(LoadLevelAsync(value));
 		}
 		#endregion

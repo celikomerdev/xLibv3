@@ -6,7 +6,6 @@ namespace xLib
 {
 	public class MnDebug : BaseRegisterM
 	{
-		[Header("referance")]
 		[SerializeField]private int length = 1000;
 		[SerializeField]private EventString eventString = null;
 		
