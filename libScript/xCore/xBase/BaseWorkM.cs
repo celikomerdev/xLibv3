@@ -39,9 +39,16 @@ namespace xLib
 			}
 		}
 		
-		public void Enabled(bool value)
+		public bool Enabled
 		{
-			enabled = (value && CanEnable());
+			get
+			{
+				return enabled;
+			}
+			set
+			{
+				enabled = (value && CanEnable());
+			}
 		}
 		protected virtual bool CanEnable()
 		{
