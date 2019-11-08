@@ -37,7 +37,7 @@ namespace xLib
 				xDebug.LogExceptionFormat(this,this.name+":LoadLevel:{0}",value);
 				return;
 			}
-			Application.backgroundLoadingPriority = backgroundLoadingPriority;
+			// Application.backgroundLoadingPriority = backgroundLoadingPriority;
 			MnCoroutine.NewCoroutine(LoadLevelAsync(value));
 		}
 		#endregion

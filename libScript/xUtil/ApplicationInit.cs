@@ -17,7 +17,7 @@ namespace xLib
 		[SerializeField]private EventUnity finished = new EventUnity();
 		private IEnumerator LoadLevelAsync(int value)
 		{
-			Application.backgroundLoadingPriority = ThreadPriority.High;
+			// Application.backgroundLoadingPriority = ThreadPriority.High;
 			yield return null;
 			
 			if(!isAsync)
