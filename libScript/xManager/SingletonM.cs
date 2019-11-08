@@ -6,7 +6,7 @@ namespace xLib
 	public abstract class SingletonM<T> : BaseWorkM where T : Component
 	{
 		[Header("Singleton")]
-		[SerializeField]private bool keepOld = false;
+		[SerializeField]private bool isPrimary = false;
 		
 		private static SingletonM<T> insBase = null;
 		public static T ins = null;
@@ -36,8 +36,8 @@ namespace xLib
 		
 		private void TryReplace()
 		{
-			if(keepOld) return;
 			if(!ins) return;
+			if(insBase.isPrimary && !isPrimary) return;
 			insBase.DestroyImmediate();
 			Debug.LogWarningFormat(this,this.name+":Replaced");
 		}

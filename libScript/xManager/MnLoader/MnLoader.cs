@@ -37,7 +37,6 @@ namespace xLib
 				xDebug.LogExceptionFormat(this,this.name+":LoadLevel:{0}",value);
 				return;
 			}
-			// Application.backgroundLoadingPriority = backgroundLoadingPriority;
 			MnCoroutine.NewCoroutine(LoadLevelAsync(value));
 		}
 		#endregion
@@ -56,6 +55,10 @@ namespace xLib
 			loadingReal.Value = true;
 			yield return null;
 			
+			ThreadPriority backgroundLoadingPriorityCache = Application.backgroundLoadingPriority;
+			Application.backgroundLoadingPriority = backgroundLoadingPriority;
+			
+			yield return null;
 			if(!isAsync)
 			{
 				loadingProgress.Value = 0.5f;
@@ -72,6 +75,9 @@ namespace xLib
 					yield return null;
 				}
 			}
+			yield return null;
+			
+			Application.backgroundLoadingPriority = backgroundLoadingPriorityCache;
 			
 			yield return null;
 			loadingProgress.Value = 1f;
