@@ -37,7 +37,10 @@ namespace xLib
 		private void AddLog(string value)
 		{
 			stringDebug += "\n"+value;
-			if(stringDebug.Length > length*2) stringDebug = stringDebug.Remove(0,length);
+			while(stringDebug.Length > length*2)
+			{
+				stringDebug = stringDebug.Remove(0,length);
+			}
 			isClean = false;
 		}
 		
