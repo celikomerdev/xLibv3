@@ -10,25 +10,25 @@ namespace xLib
 	{
 		public static TextAsset assetConfigData = null;
 		public static JObject data = null;
-		public static Action onUpdateData = delegate{};
+		public static Action onUpdateConfig = delegate{};
 		
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void InitStatic()
+		public static void UpdateConfig()
 		{
 			Debug.Log("MnConfig");
 			assetConfigData = Resources.Load<TextAsset>("ConfigData");
 			data = JObject.Parse(assetConfigData.text);
-			onUpdateData.Invoke();
+			onUpdateConfig.Invoke();
 		}
 		
 		protected override void Started()
 		{
-			MnConfig.onUpdateData += OnUpdateConfigData; OnUpdateConfigData();
+			MnConfig.onUpdateConfig += OnUpdateConfigData; OnUpdateConfigData();
 		}
 		
 		protected override void OnDestroyed()
 		{
-			MnConfig.onUpdateData -= OnUpdateConfigData;
+			MnConfig.onUpdateConfig -= OnUpdateConfigData;
 		}
 		
 		[SerializeField]private ObjectGroup objectGroup = null;
