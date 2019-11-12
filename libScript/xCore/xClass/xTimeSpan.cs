@@ -40,6 +40,18 @@ namespace xLib
 			foreach (Match piece in matches)
 			{
 				string piece_format = new string('0',piece.Value.Length);
+				
+				// if(timeSpan.Ticks<0)
+				// {
+				// 	switch (piece.Value[0])
+				// 	{
+				// 		default:
+				// 			result += "-";
+				// 			break;
+				// 	}
+				// 	return result;
+				// }
+				
 				switch (piece.Value[0])
 				{
 					case 'F':

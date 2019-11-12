@@ -26,6 +26,11 @@ namespace xLib.xDictionary
 			if (!dictionary.ContainsKey(key)) return defaultValue;
 			return dictionary[key];
 		}
+		
+		public V GetRandom()
+		{
+			return array[UnityEngine.Random.Range(0,array.Length)].value;
+		}
 	}
 	
 	[Serializable]public class ObjectKV<K,V>
