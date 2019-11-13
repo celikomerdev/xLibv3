@@ -45,7 +45,7 @@ namespace xLib.xNew
 		private IEnumerator Idle(Sprite sp1,Sprite sp2)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Idle");
-			yield return new WaitForSeconds(0.2f);
+			yield return new WaitForSecondsRealtime(0.2f);
 			count++;
 			
 			for (int i = 0; i < array.Length; i++)
@@ -77,7 +77,7 @@ namespace xLib.xNew
 			else
 			{
 				array[index].sprite = sprite[1];
-				yield return new WaitForSeconds(0.1f);
+				yield return new WaitForSecondsRealtime(0.1f);
 				array[index].sprite = sprite[0];
 				StartCoroutine(Symetric(index+1));
 			}
@@ -90,7 +90,7 @@ namespace xLib.xNew
 			if(CanDebug) Debug.LogFormat(this,this.name+":Play:{0}",index);
 			
 			array[index].sprite = sprite[1];
-			yield return new WaitForSeconds(0.1f);
+			yield return new WaitForSecondsRealtime(0.1f);
 			array[index].sprite = sprite[0];
 			StartCoroutine(Play(index+1));
 		}

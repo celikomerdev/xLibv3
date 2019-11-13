@@ -15,15 +15,15 @@ namespace xLib
 		{
 			get
 			{
-				return timeScale.Value;
+				return StTime.timeScale;
 			}
 			set
 			{
-				if(timeScale.Value!=0) timeScaleCache.Value = timeScale.Value;
+				if(StTime.timeScale == value) return;
+				if(timeScale.Value!=0) timeScaleCache.Value = StTime.timeScale;
+				StTime.timeScale = value;
 				timeScale.Value = value;
-				timePause.Value = (value==0);
-				
-				StTime.timeScale = Mathf.Lerp(0.001f,1f,value);
+				TimePause = (value==0);
 			}
 		}
 		
@@ -35,23 +35,28 @@ namespace xLib
 			}
 			set
 			{
+				if(timePause.Value == value) return;
 				timePause.Value = value;
-				timeScale.Value = (value? 0:timeScaleCache.Value);
+				TimeScale = (value? 0:timeScaleCache.Value);
 			}
 		}
 	}
 	
 	public static class StTime
 	{
+		private static float m_timeScale = 1f;
 		public static float timeScale
 		{
 			get
 			{
-				return Time.timeScale;
+				return m_timeScale;
 			}
 			set
 			{
-				if(Time.timeScale == value) return;
+				if(m_timeScale == value) return;
+				m_timeScale = value;
+				
+				value = Mathf.LerpUnclamped(0.001f,1f,value);
 				if(xDebug.CanDebug) Debug.LogFormat("Time.timeScale:{0}:{1}",Time.timeScale,value);
 				Time.timeScale = value;
 			}
