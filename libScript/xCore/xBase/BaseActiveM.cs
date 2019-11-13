@@ -17,6 +17,8 @@ namespace xLib
 			ViewCore.CurrentId = ViewId;
 			Awaked();
 			ViewCore.CurrentId = tempId;
+			
+			IsActive = false;
 		}
 		
 		private bool isStarted = false;
