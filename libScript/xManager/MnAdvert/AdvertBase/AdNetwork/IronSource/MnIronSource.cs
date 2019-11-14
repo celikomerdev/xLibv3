@@ -47,5 +47,15 @@ namespace xLib.xIronSource
 		#endregion
 	}
 }
+#else
+using UnityEngine;
+
+namespace xLib.xIronSource
+{
+	public class MnIronSource : BaseWorkM
+	{
+		[SerializeField]private string key;
+	}
+}
 #endif
 #endif

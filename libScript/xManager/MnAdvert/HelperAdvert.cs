@@ -84,7 +84,7 @@ namespace xLib.libAdvert
 			if(Application.isEditor)
 			{
 				Register();
-				MnCoroutine.WaitForSeconds(delay:3.0f,call:delegate{OnReward(1);});
+				FakeRewarded();
 				return;
 			}
 			#endif
@@ -99,6 +99,15 @@ namespace xLib.libAdvert
 			Register();
 			MnCoroutine.WaitForSeconds(delay:0.5f,call:MnAdvert.ins.rewarded.ShowBase);
 		}
+		
+		#if UNITY_EDITOR
+		private static Coroutine fakeReward;
+		private void FakeRewarded()
+		{
+			MnCoroutine.KillCoroutine(fakeReward);
+			fakeReward = MnCoroutine.WaitForSeconds(delay:3.0f,call:()=>OnReward(1));
+		}
+		#endif
 		#endregion
 		
 		
@@ -132,6 +141,9 @@ namespace xLib.libAdvert
 		public EventInt onReward;
 		private void OnReward(int value)
 		{
+			#if UNITY_EDITOR
+			if(!MnAdvert.ins.inShow.Value) return;
+			#endif
 			MnAdvert.ins.inShow.Value = false;
 			lastTime = Time.realtimeSinceStartup;
 			onReward.Invoke(value);
