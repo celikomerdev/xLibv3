@@ -8,16 +8,43 @@ namespace xLib
 {
 	public class MnConfig : SingletonM<MnConfig>
 	{
-		public static TextAsset assetConfigData = null;
-		public static JObject data = null;
+		public static JObject data = new JObject();
 		public static Action onUpdateConfig = delegate{};
 		
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		public static void UpdateConfig()
+		private static void LoadConfig()
 		{
-			Debug.Log("MnConfig");
-			assetConfigData = Resources.Load<TextAsset>("ConfigData");
-			data = JObject.Parse(assetConfigData.text);
+			xDebug.LogTempFormat("MnConfig:LoadConfig");
+			TextAsset textAsset = Resources.Load<TextAsset>("ConfigData");
+			if(!textAsset)
+			{
+				xDebug.LogExceptionFormat("MnConfig:textAsset:null");
+				return;
+			}
+			UpdateConfig(textAsset.text);
+		}
+		
+		public static void UpdateConfig(string json)
+		{
+			xDebug.LogTempFormat("MnConfig:UpdateConfig:{0}",json);
+			if(string.IsNullOrWhiteSpace(json))
+			{
+				xDebug.LogExceptionFormat("MnConfig:UpdateConfig::json:null");
+				return;
+			}
+			
+			JObject newData = null;
+			try
+			{
+				newData = JObject.Parse(json);
+			}
+			catch (Exception ex)
+			{
+				xDebug.LogExceptionFormat("MnConfig:UpdateConfig:{0}:{1}",ex,json);
+				return;
+			}
+			
+			data = newData;
 			onUpdateConfig.Invoke();
 		}
 		
