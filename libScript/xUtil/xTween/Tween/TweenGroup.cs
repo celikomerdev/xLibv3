@@ -7,6 +7,7 @@ namespace xLib.xTween
 {
 	public class TweenGroup : Tween
 	{
+		[SerializeField]private Vector2 remap = new Vector2(0,1);
 		[SerializeField]private GameObject[] target = new GameObject[0];
 		private List<Tween> tweens = new List<Tween>();
 		
@@ -32,8 +33,14 @@ namespace xLib.xTween
 			}
 		}
 		
+		protected override void SetRatio(float value)
+		{
+			value = Mathf.InverseLerp(remap.x,remap.y,value);
+			ApplyRatio(value);
+		}
+		
 		[NonSerialized]public float currentRatio = 0f;
-		override protected void SetRatio(float value)
+		protected virtual void ApplyRatio(float value)
 		{
 			currentRatio = value;
 			for(int i=0; i < tweens.Count; i++)

@@ -7,9 +7,9 @@ namespace xLib.xTween
 	{
 		[SerializeField]private AnimationCurve curve = AnimationCurve.Linear(0,0,1,1);
 		
-		override protected void SetRatio(float value)
+		protected override void ApplyRatio(float value)
 		{
-			base.SetRatio(curve.Evaluate(value));
+			base.ApplyRatio(curve.Evaluate(value));
 		}
 	}
 }
