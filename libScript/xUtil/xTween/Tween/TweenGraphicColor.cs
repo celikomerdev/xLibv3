@@ -11,7 +11,7 @@ namespace xLib.xTween
 		[SerializeField]private Color from = Color.white;
 		[SerializeField]private Color to = Color.white;
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			target.color = Color.LerpUnclamped(from,to,value);
 		}

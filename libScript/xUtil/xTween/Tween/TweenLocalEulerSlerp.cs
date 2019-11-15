@@ -9,7 +9,7 @@ namespace xLib.xTween
 		[SerializeField]private Vector3 from = Vector3.zero;
 		[SerializeField]private Vector3 to = Vector3.one;
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			target.localEulerAngles = Vector3.SlerpUnclamped(from,to,value);
 		}

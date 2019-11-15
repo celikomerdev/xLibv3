@@ -16,7 +16,7 @@ namespace xLib.xTween
 			module = target.main;
 		}
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			module.simulationSpeed = Mathf.LerpUnclamped(from,to,value);
 		}

@@ -10,7 +10,7 @@ namespace xLib.xTween
 		[SerializeField]private float from = 0;
 		[SerializeField]private float to = 0;
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			if(!target) return;
 			target.pitch = Mathf.LerpUnclamped(from,to,value);

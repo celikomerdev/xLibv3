@@ -10,7 +10,7 @@ namespace xLib.xTween
 		[SerializeField]private Vector3 to = Vector3.one;
 		[SerializeField]private EventVector3 eventVector3 = new EventVector3();
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			eventVector3.Invoke(Vector3.LerpUnclamped(from,to,value));
 		}

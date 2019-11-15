@@ -9,7 +9,7 @@ namespace xLib.xTween
 		[SerializeField]private Transform from = null;
 		[SerializeField]private Transform to = null;
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			target.rotation = Quaternion.LerpUnclamped(from.rotation,to.rotation,value);
 		}

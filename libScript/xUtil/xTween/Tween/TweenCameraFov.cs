@@ -9,7 +9,7 @@ namespace xLib.xTween
 		[SerializeField]private float from = 0;
 		[SerializeField]private float to = 1;
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			target.fieldOfView = Mathf.LerpUnclamped(from,to,value);
 		}

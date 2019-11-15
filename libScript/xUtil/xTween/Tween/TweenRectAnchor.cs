@@ -11,7 +11,7 @@ namespace xLib.xTween
 		[SerializeField]private Vector2 toMin = Vector2.zero;
 		[SerializeField]private Vector2 toMax = Vector2.one;
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			target.anchorMin = Vector3.LerpUnclamped(fromMin, toMin, value);
 			target.anchorMax = Vector3.LerpUnclamped(fromMax, toMax, value);

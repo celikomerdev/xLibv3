@@ -10,7 +10,7 @@ namespace xLib.xTween
 		[SerializeField]private Graphic target = null;
 		[SerializeField]private float threshold = 0;
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			target.raycastTarget = (value>threshold);
 		}

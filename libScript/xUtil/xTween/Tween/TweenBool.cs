@@ -10,7 +10,7 @@ namespace xLib.xTween
 		[SerializeField]private float threshold = 0;
 		[SerializeField]private EventBool eventBool = new EventBool();
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			if(result == (value>threshold)) return;
 			result = !result;

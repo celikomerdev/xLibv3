@@ -10,7 +10,7 @@ namespace xLib.xTween
 		[SerializeField]private float max = 1;
 		[SerializeField]private EventFloat eventFloat = new EventFloat();
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			eventFloat.Invoke(Mathf.InverseLerp(min,max,value));
 		}

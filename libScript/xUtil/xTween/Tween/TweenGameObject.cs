@@ -9,7 +9,7 @@ namespace xLib.xTween
 		[SerializeField]private float threshold = 0;
 		[SerializeField]private bool reverse = false;
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			bool result = (value>threshold);
 			if(reverse) result = !result;

@@ -17,7 +17,7 @@ namespace xLib.xTween
 		[Tooltip("Right - Top")]
 		[SerializeField]private Vector2 toMax = Vector2.one;
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			target.offsetMin = Vector2.LerpUnclamped(fromMin,toMin,value);
 			target.offsetMax = Vector2.LerpUnclamped(fromMax,toMax,value);

@@ -9,7 +9,7 @@ namespace xLib.xTween
 		[SerializeField]private Vector3 min = Vector3.zero;
 		[SerializeField]private Vector3 max = Vector3.zero;
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			target.localEulerAngles += Vector3.LerpUnclamped(min,max,value);
 		}

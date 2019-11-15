@@ -9,7 +9,7 @@ namespace xLib.xTween
 		[SerializeField]private Gradient fromTo = new Gradient();
 		[SerializeField]private EventColor eventColor = new EventColor();
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			eventColor.Invoke(fromTo.Evaluate(value));
 		}

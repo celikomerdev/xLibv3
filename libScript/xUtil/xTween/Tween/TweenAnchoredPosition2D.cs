@@ -9,7 +9,7 @@ namespace xLib.xTween
 		[SerializeField]private Vector2 from = Vector2.zero;
 		[SerializeField]private Vector2 to = Vector2.zero;
 		
-		override protected void SetRatio(float value)
+		protected override void SetRatio(float value)
 		{
 			target.anchoredPosition = Vector2.LerpUnclamped(from,to,value);
 		}
