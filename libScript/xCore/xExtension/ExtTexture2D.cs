@@ -68,6 +68,12 @@ namespace xLib
 			value.LoadRawTextureData(data);
 			#endif
 		}
+		
+		
+		public static Sprite ToSprite(this Texture2D value)
+		{
+			return Sprite.Create(value,new Rect(0.0f,0.0f,value.width,value.height),new Vector2(0.5f,0.5f));
+		}
 	}
 }
 #endif

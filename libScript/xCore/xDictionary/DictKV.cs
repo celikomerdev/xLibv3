@@ -6,6 +6,7 @@ namespace xLib.xDictionary
 {
 	[Serializable]public class DictKV<K,V,T> where T:ObjectKV<K,V>
 	{
+		public V defaultValue = default;
 		public T[] array;
 		public Dictionary<K,V> dictionary = new Dictionary<K,V>();
 		
@@ -21,10 +22,12 @@ namespace xLib.xDictionary
 			}
 		}
 		
-		public V GetValue(K key,V defaultValue = default)
+		public V GetValue(K key,V defaultCustom = default(V))
 		{
-			if (!dictionary.ContainsKey(key)) return defaultValue;
-			return dictionary[key];
+			if(dictionary.ContainsKey(key)) return dictionary[key];
+			
+			// if(!defaultCustom.Equals(default(V))) return defaultCustom; //error
+			return defaultValue;
 		}
 		
 		public V GetRandom()
