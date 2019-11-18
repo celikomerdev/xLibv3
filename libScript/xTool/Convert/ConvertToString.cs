@@ -5,15 +5,30 @@ using xLib.EventClass;
 
 namespace xLib.ToolConvert
 {
-	public class ConvertToString : BaseMainM
+	public class ConvertToString : BaseWorkM
 	{
 		[SerializeField]private string format = @"{0:F0}";
+		public string Format
+		{
+			get
+			{
+				return format;
+			}
+			set
+			{
+				if(CanDebug) xDebug.LogTempFormat(this,this.name+":format:{0}:{1}",format,value);
+				format = value;
+				FromString("");
+			}
+		}
+		
 		private string result = "";
 		private string Result
 		{
 			set
 			{
 				if(result == value) return;
+				if(CanDebug) xDebug.LogTempFormat(this,this.name+":Result:{0}:{1}",result,value);
 				result = value;
 				eventResult.Invoke(result);
 			}
@@ -21,6 +36,11 @@ namespace xLib.ToolConvert
 		
 		[UnityEngine.Serialization.FormerlySerializedAs("onConvert")]
 		[SerializeField]private EventString eventResult = new EventString();
+		
+		public void FromString(string value)
+		{
+			Result = string.Format(@format,value);
+		}
 		
 		public void FromByte(byte value)
 		{
