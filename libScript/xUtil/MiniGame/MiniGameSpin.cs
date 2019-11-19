@@ -6,7 +6,7 @@ using xLib.xTween;
 
 namespace xLib
 {
-	public class LuckySpin : BaseMainM
+	public class MiniGameSpin : BaseMainM
 	{
 		[SerializeField]private Transform trans = null;
 		[SerializeField]private Tween tween = null;
