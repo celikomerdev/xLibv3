@@ -4,7 +4,7 @@ using xLib.EventClass;
 
 namespace xLib.xTween
 {
-	public class TweenFloatLerpInverse : Tween
+	public class TweenFloatRemap : Tween
 	{
 		[SerializeField]private float min = 0;
 		[SerializeField]private float max = 1;
@@ -12,7 +12,7 @@ namespace xLib.xTween
 		
 		protected override void SetRatio(float value)
 		{
-			eventFloat.Invoke(Mathf.InverseLerp(min,max,value));
+			eventFloat.Invoke(Mathx.MathFloat.Remap(min,max,value));
 		}
 		
 		public float Min

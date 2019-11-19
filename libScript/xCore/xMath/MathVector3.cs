@@ -82,7 +82,7 @@ namespace xLib.Mathx
 		}
 		#endregion
 		
-		public static float InverseLerp(Vector3 a, Vector3 b, Vector3 value)
+		public static float Remap(Vector3 a, Vector3 b, Vector3 value)
 		{
 			Vector3 AB = b-a;
 			Vector3 AV = value-a;

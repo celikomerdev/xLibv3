@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using xLib.Mathx;
 
 namespace xLib.xTween
 {
@@ -35,7 +36,7 @@ namespace xLib.xTween
 		
 		protected override void SetRatio(float value)
 		{
-			value = Mathf.InverseLerp(remap.x,remap.y,value);
+			value = MathFloat.Remap(remap.x,remap.y,value);
 			ApplyRatio(value);
 		}
 		

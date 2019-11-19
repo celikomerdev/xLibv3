@@ -32,7 +32,7 @@ namespace xLib.Mathx
 		}
 		
 		#region Normalize
-		public static float Normalize(float minOutput,float medOutput,float maxOutput,float minInput,float medInput,float maxInput,float input)
+		public static float Remap(float minOutput,float medOutput,float maxOutput,float minInput,float medInput,float maxInput,float input)
 		{
 			if(input==medInput) return medOutput;
 			else
@@ -47,23 +47,18 @@ namespace xLib.Mathx
 					maxInput=medInput;
 					maxOutput=medOutput;
 				}
-				return Normalize(minOutput,maxOutput,minInput,maxInput,input);
+				return Remap(minOutput,maxOutput,minInput,maxInput,input);
 			}
 		}
 		
-		public static float Normalize(float minOutput,float maxOutput,float minInput,float maxInput,float input)
+		public static float Remap(float minOutput,float maxOutput,float minInput,float maxInput,float input)
 		{
-			return Mathf.Lerp(minOutput,maxOutput,Normalize(minInput,maxInput,input));
+			return Mathf.Lerp(minOutput,maxOutput,Remap(minInput,maxInput,input));
 		}
 		
-		public static float Normalize(float minInput,float maxInput,float input)
+		public static float Remap(float minInput,float maxInput,float input)
 		{
-			return Mathf.InverseLerp(minInput,maxInput,input);
-		}
-		
-		public static float Normalize01(float minInput,float maxInput,float input)
-		{
-			return Mathf.Clamp01(Normalize(minInput,maxInput,input));
+			return (input-minInput)/(maxInput-minInput);
 		}
 		#endregion
 	}
