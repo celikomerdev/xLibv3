@@ -82,6 +82,7 @@ namespace xLib.libAdvert.xIronSource
 		
 		
 		#region Override
+		#if !UNITY_EDITOR
 		protected override void NameAdapter()
 		{
 			nameAdepter = "IronSource";
@@ -107,6 +108,7 @@ namespace xLib.libAdvert.xIronSource
 			IronSource.Agent.hideBanner();
 			base.Hide();
 		}
+		#endif
 		#endregion
 		
 		

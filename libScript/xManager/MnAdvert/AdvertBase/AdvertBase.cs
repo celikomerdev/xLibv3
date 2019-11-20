@@ -118,7 +118,6 @@ namespace xLib.libAdvert
 		
 		#region Public
 		private bool inLoad;
-		protected virtual void Load(){}
 		public void LoadBase()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":LoadBase");
@@ -128,13 +127,25 @@ namespace xLib.libAdvert
 			inLoad = true;
 			Load();
 		}
+		protected virtual void Load()
+		{
+			SetLoadedBase(true);
+		}
 		
-		protected virtual void Show(){}
 		public void ShowBase()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":ShowBase");
 			if(!isLoad) return;
 			Show();
+		}
+		protected virtual void Show()
+		{
+			OnShowBase();
+			MnCoroutine.WaitForSeconds(delay:1.0f,call:delegate
+			{
+				OnRewardBase(1);
+				OnCloseBase();
+			});
 		}
 		#endregion
 	}

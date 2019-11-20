@@ -67,19 +67,36 @@ namespace xLib
 		public EventUnity onShow;
 		public void OnShow()
 		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnShow");
+			inShow.Value = true;
 			onShow.Invoke();
 		}
 		
 		public EventUnity onClose;
 		public void OnClose()
 		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnClose");
+			inShow.Value = false;
 			onClose.Invoke();
 		}
 		
 		public EventInt onReward;
 		public void OnReward(int value)
 		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnReward:{0}",value);
+			#if UNITY_EDITOR
+			if(!inShow.Value) return;
+			#endif
+			inShow.Value = false;
 			onReward.Invoke(value);
+		}
+		
+		public void RemoveAllListeners()
+		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":RemoveAllListeners");
+			onShow.eventUnity.RemoveAllListeners();
+			onClose.eventUnity.RemoveAllListeners();
+			onReward.eventInt.RemoveAllListeners();
 		}
 		#endregion
 	}

@@ -100,6 +100,7 @@ namespace xLib.libAdvert.xIronSource
 		
 		
 		#region Override
+		#if !UNITY_EDITOR
 		protected override void NameAdapter()
 		{
 			nameAdepter = "IronSource";
@@ -116,6 +117,7 @@ namespace xLib.libAdvert.xIronSource
 			if(CanDebug) Debug.LogFormat(this,this.name+":Show");
 			IronSource.Agent.showInterstitial();
 		}
+		#endif
 		#endregion
 	}
 }

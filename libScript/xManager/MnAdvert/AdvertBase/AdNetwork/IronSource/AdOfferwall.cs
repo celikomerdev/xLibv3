@@ -87,9 +87,15 @@ namespace xLib.libAdvert.xIronSource
 		
 		
 		#region Override
+		#if !UNITY_EDITOR
 		protected override void NameAdapter()
 		{
 			nameAdepter = "IronSource";
+		}
+		
+		protected override void Load()
+		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":Load");
 		}
 		
 		protected override void Show()
@@ -98,7 +104,11 @@ namespace xLib.libAdvert.xIronSource
 			if(string.IsNullOrEmpty(key)) IronSource.Agent.showOfferwall();
 			else IronSource.Agent.showOfferwall(key);
 		}
+		#endif
+		#endregion
 		
+		
+		#region Custom
 		public void RefreshRewards()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":RefreshRewards");
@@ -108,13 +118,13 @@ namespace xLib.libAdvert.xIronSource
 	}
 }
 #else
-using UnityEngine;
-
 namespace xLib.libAdvert.xIronSource
 {
 	public class AdOfferwall : AdvertBase
 	{
+		#region Custom
 		public void RefreshRewards(){}
+		#endregion
 	}
 }
 #endif

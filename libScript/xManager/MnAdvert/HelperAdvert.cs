@@ -52,17 +52,7 @@ namespace xLib.libAdvert
 		#region Public
 		public void TryShowInterstitial()
 		{
-			if(MnAdvert.ins.inShow.Value) return;
 			if(!TimeReady) return;
-			
-			#if UNITY_EDITOR
-			if(Application.isEditor)
-			{
-				Register();
-				MnCoroutine.WaitForSeconds(delay:3.0f,call:OnClose);
-				return;
-			}
-			#endif
 			
 			MnAdvert.ins.interstitial.LoadBase();
 			if(!MnAdvert.ins.interstitial.isLoad)
@@ -71,23 +61,16 @@ namespace xLib.libAdvert
 				return;
 			}
 			
+			if(MnAdvert.ins.inShow.Value) return;
+			MnAdvert.ins.inShow.Value = true;
+			
 			Register();
 			MnCoroutine.WaitForSeconds(delay:0.5f,call:MnAdvert.ins.interstitial.ShowBase);
 		}
 		
 		public void TryShowRewarded()
 		{
-			if(MnAdvert.ins.inShow.Value) return;
 			if(!TimeReady) return;
-			
-			#if UNITY_EDITOR
-			if(Application.isEditor)
-			{
-				Register();
-				FakeRewarded();
-				return;
-			}
-			#endif
 			
 			MnAdvert.ins.rewarded.LoadBase();
 			if(!MnAdvert.ins.rewarded.isLoad)
@@ -96,18 +79,12 @@ namespace xLib.libAdvert
 				return;
 			}
 			
+			if(MnAdvert.ins.inShow.Value) return;
+			MnAdvert.ins.inShow.Value = true;
+			
 			Register();
 			MnCoroutine.WaitForSeconds(delay:0.5f,call:MnAdvert.ins.rewarded.ShowBase);
 		}
-		
-		#if UNITY_EDITOR
-		private static Coroutine fakeReward;
-		private void FakeRewarded()
-		{
-			MnCoroutine.KillCoroutine(fakeReward);
-			fakeReward = MnCoroutine.WaitForSeconds(delay:3.0f,call:()=>OnReward(1));
-		}
-		#endif
 		#endregion
 		
 		
@@ -115,8 +92,8 @@ namespace xLib.libAdvert
 		#region Callback
 		private void Register()
 		{
-			MnAdvert.ins.inShow.Value = true;
 			lastTime = Time.realtimeSinceStartup;
+			MnAdvert.ins.RemoveAllListeners();
 			MnAdvert.ins.onShow.eventUnity.AddListener(OnShow);
 			MnAdvert.ins.onClose.eventUnity.AddListener(OnClose);
 			MnAdvert.ins.onReward.eventInt.AddListener(OnReward);
@@ -125,7 +102,6 @@ namespace xLib.libAdvert
 		public EventUnity onShow;
 		private void OnShow()
 		{
-			MnAdvert.ins.inShow.Value = true;
 			lastTime = Time.realtimeSinceStartup;
 			onShow.Invoke();
 		}
@@ -133,7 +109,6 @@ namespace xLib.libAdvert
 		public EventUnity onClose;
 		private void OnClose()
 		{
-			MnAdvert.ins.inShow.Value = false;
 			lastTime = Time.realtimeSinceStartup;
 			onClose.Invoke();
 		}
@@ -141,10 +116,6 @@ namespace xLib.libAdvert
 		public EventInt onReward;
 		private void OnReward(int value)
 		{
-			#if UNITY_EDITOR
-			if(!MnAdvert.ins.inShow.Value) return;
-			#endif
-			MnAdvert.ins.inShow.Value = false;
 			lastTime = Time.realtimeSinceStartup;
 			onReward.Invoke(value);
 		}
