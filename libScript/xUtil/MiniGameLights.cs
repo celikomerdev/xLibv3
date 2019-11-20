@@ -59,7 +59,15 @@ namespace xLib.xNew
 			}
 			else
 			{
-				StartCoroutine(Symetric(1));
+				if(Random.Range(0,5)==0)
+				{
+					Animate(true);
+					MnCoroutine.WaitForSeconds(()=>Animate(false),0.1f*array.Length);
+				}
+				else
+				{
+					StartCoroutine(Symetric(1));
+				}
 			}
 		}
 		
@@ -82,7 +90,6 @@ namespace xLib.xNew
 				StartCoroutine(Symetric(index+1));
 			}
 		}
-		
 		
 		private IEnumerator Play(int index)
 		{
