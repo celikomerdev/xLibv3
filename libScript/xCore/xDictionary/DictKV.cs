@@ -24,6 +24,7 @@ namespace xLib.xDictionary
 		
 		public V GetValue(K key,V defaultCustom = default(V))
 		{
+			if(key==null) return defaultValue;
 			if(dictionary.ContainsKey(key)) return dictionary[key];
 			
 			// if(!defaultCustom.Equals(default(V))) return defaultCustom; //error

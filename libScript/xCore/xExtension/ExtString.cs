@@ -1,4 +1,6 @@
 ﻿#if xLibv3
+using System.Text.RegularExpressions;
+
 namespace xLib
 {
 	public static class ExtString
@@ -25,6 +27,20 @@ namespace xLib
 				result[i] = (byte)((ch < (char)0x80) ? ch : '?');
 			}
 			return result;
+		}
+		
+		public static string Rasterize(this string value)
+		{
+			string temp = value.RasterizeLocalize();
+			return temp;
+		}
+		
+		// private const string regexFormatLocalize = @"\b<loc>\S*</loc>\b";
+		private const string regexFormatLocalize = "<loc>(.*?)</loc>";
+		private static string RasterizeLocalize(this string value)
+		{
+			Regex regex = new Regex(regexFormatLocalize);
+			return value;
 		}
 	}
 }

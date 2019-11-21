@@ -70,6 +70,11 @@ namespace xLib.ToolOperation
 				eventResult.Invoke(result);
 			}
 		}
+		
+		public void Recall()
+		{
+			eventResult.Invoke(result);
+		}
 		#endregion
 		
 		
@@ -80,11 +85,22 @@ namespace xLib.ToolOperation
 		{
 			switch(operation)
 			{
-				case "+":	return Op_Add;
-				case "-":	return Op_Substract;
-				case "*":	return Op_Multiply;
-				case "/":	return Op_Divide;
-				default:	return Op_Null;
+				case "+":
+				case "left+right":
+					return Op_Add;
+				case "-":
+				case "left-right":
+					return Op_Substract;
+				case "*":
+				case "left*right":
+					return Op_Multiply;
+				case "/":
+				case "left/right":
+					return Op_Divide;
+				case "100-left/right*100":
+					return Op_Discount;
+				default:
+					return Op_Null;
 			}
 		}
 		
@@ -106,6 +122,11 @@ namespace xLib.ToolOperation
 		private void Op_Divide()
 		{
 			Result = left/right;
+		}
+		
+		private void Op_Discount()
+		{
+			Result = 100-left/right*100;
 		}
 		
 		private void Op_Null()

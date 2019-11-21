@@ -10,7 +10,12 @@ namespace xLib.ToolPurchase
 	{
 		private Product product = null;
 		[SerializeField]private string key = "";
-		[SerializeField]public EventString eventPrice = new EventString();
+		
+		[UnityEngine.Serialization.FormerlySerializedAs("eventPrice")]
+		[SerializeField]public EventString eventPriceString = new EventString();
+		
+		[SerializeField]public EventFloat eventPrice = new EventFloat();
+		
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
 		[SerializeField]public EventBool eventPurchase = new EventBool();
 		
@@ -91,7 +96,12 @@ namespace xLib.ToolPurchase
 	{
 		private string product = null;
 		[SerializeField]private string key = "";
-		[SerializeField]public EventString eventPrice = new EventString();
+		
+		[UnityEngine.Serialization.FormerlySerializedAs("eventPrice")]
+		[SerializeField]public EventString eventPriceString = new EventString();
+		
+		[SerializeField]public EventFloat eventPrice = new EventFloat();
+		
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
 		[SerializeField]public EventBool eventPurchase = new EventBool();
 		
@@ -122,7 +132,8 @@ namespace xLib.ToolPurchase
 		{
 			if(product == null) product = MnProduct.ins.GetProduct(key);
 			if(product == null) return;
-			eventPrice.Value = "0.00$";
+			eventPrice.Value = 1.00f;
+			eventPriceString.Value = "1.00$";
 		}
 		#endregion
 		
