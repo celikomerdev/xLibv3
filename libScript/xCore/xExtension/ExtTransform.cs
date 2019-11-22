@@ -52,6 +52,16 @@ namespace xLib
 			}
 		}
 		
+		public static void RemapChildren(this Transform trans,Transform target,int startAfter=0,int endBefore=0)
+		{
+			int childCount = trans.childCount;
+			for (int i=startAfter; i<childCount-endBefore; i++)
+			{
+				xDebug.LogTempFormat(trans,trans.name+"RemapChildren:{0}",i);
+				trans.GetChild(i).localPosition = target.GetChild(i).localPosition;
+			}
+		}
+		
 		public static Transform GetChildLast(this Transform trans)
 		{
 			if(trans.childCount == 0) return null;
