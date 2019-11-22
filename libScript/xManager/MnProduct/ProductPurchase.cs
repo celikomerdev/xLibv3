@@ -10,6 +10,19 @@ namespace xLib.ToolPurchase
 	{
 		private Product product = null;
 		[SerializeField]private string key = "";
+		public string Key
+		{
+			get
+			{
+				return key;
+			}
+			set
+			{
+				key = value;
+				ClearProduct();
+				RefreshProduct();
+			}
+		}
 		
 		[UnityEngine.Serialization.FormerlySerializedAs("eventPrice")]
 		[SerializeField]public EventString eventPriceString = new EventString();
@@ -42,11 +55,19 @@ namespace xLib.ToolPurchase
 			RefreshProduct();
 		}
 		
+		private void ClearProduct()
+		{
+			product = null;
+			eventPrice.Value = 1.00f;
+			eventPriceString.Value = "1.00$";
+		}
+		
 		private void RefreshProduct()
 		{
 			if(product == null) product = MnProduct.ins.GetProduct(key);
 			if(product == null) return;
-			eventPrice.Value = product.metadata.localizedPriceString;
+			eventPrice.Value = product.metadata.localizedPrice;
+			eventPriceString.Value = product.metadata.localizedPriceString;
 		}
 		#endregion
 		
@@ -96,6 +117,19 @@ namespace xLib.ToolPurchase
 	{
 		private string product = null;
 		[SerializeField]private string key = "";
+		public string Key
+		{
+			get
+			{
+				return key;
+			}
+			set
+			{
+				key = value;
+				ClearProduct();
+				RefreshProduct();
+			}
+		}
 		
 		[UnityEngine.Serialization.FormerlySerializedAs("eventPrice")]
 		[SerializeField]public EventString eventPriceString = new EventString();
@@ -126,6 +160,13 @@ namespace xLib.ToolPurchase
 			if(!value) return;
 			MnProduct.ins.onInit.Listener(false,ListenInit,viewId:ViewId);
 			RefreshProduct();
+		}
+		
+		private void ClearProduct()
+		{
+			product = null;
+			eventPrice.Value = 1.00f;
+			eventPriceString.Value = "1.00$";
 		}
 		
 		private void RefreshProduct()
