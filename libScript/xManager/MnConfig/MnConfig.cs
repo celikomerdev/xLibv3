@@ -26,10 +26,10 @@ namespace xLib
 		
 		public static void UpdateConfig(string json)
 		{
-			xDebug.LogTempFormat("MnConfig:UpdateConfig:{0}",json);
+			// xDebug.LogTempFormat("MnConfig:UpdateConfig:{0}",json);
 			if(string.IsNullOrWhiteSpace(json))
 			{
-				xDebug.LogExceptionFormat("MnConfig:UpdateConfig::json:null");
+				xDebug.LogExceptionFormat("MnConfig:UpdateConfig:json:null");
 				return;
 			}
 			

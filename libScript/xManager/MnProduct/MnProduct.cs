@@ -269,7 +269,7 @@ namespace xLib
 			
 			StPopupWindow.Reset();
 			StPopupWindow.HeaderLocalized("warning");
-			StPopupWindow.Body(string.Format("{0}\n{1}\nbuy?",productId,"0.00$"));
+			StPopupWindow.Body(string.Format("{0}\n{1}\nbuy?",productId,"1.00$"));
 			StPopupWindow.AcceptLocalized("yes");
 			StPopupWindow.DeclineLocalized("no");
 			StPopupWindow.Listener(true,Listener);
