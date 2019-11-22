@@ -261,6 +261,12 @@ namespace xLib
 			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",productId);
 			currentProductId = productId;
 			
+			if(string.IsNullOrWhiteSpace(productId)) return;
+			if(inPurchase.Value) return;
+			inPurchase.Value = true;
+			
+			StPopupBar.QueueMessage(MnLocalize.GetValue("Please Wait"));
+			
 			StPopupWindow.Reset();
 			StPopupWindow.HeaderLocalized("warning");
 			StPopupWindow.Body(string.Format("{0}\n{1}\nbuy?",productId,"0.00$"));
@@ -294,8 +300,12 @@ namespace xLib
 		public NodeBool onRestore = null;
 		public void Restore()
 		{
+			if(inRestore.Value) return;
+			inRestore.Value = true;
+			
 			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
 			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Failed"));
+			inRestore.Value = false;
 			onRestore.Value = false;
 		}
 		
