@@ -208,13 +208,14 @@ namespace xLib
 		private void OnPurchase(bool result,string productId)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchase:{0}:{1}",result,productId);
-			inPurchase.Value = false;
 			
 			if(!result) StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Failed"));
 			else StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Successful"));
 			
 			onPurchase.Value = result;
 			onPurchaseProduct(result,productId);
+			
+			inPurchase.Value = false;
 		}
 		
 		public NodeBool onRestore;
@@ -287,13 +288,14 @@ namespace xLib
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchase:{0}:{1}",result,productId);
 			currentProductId = productId;
-			inPurchase.Value = false;
 			
 			if(!result) StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Failed"));
 			else StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Successful"));
 			
 			onPurchase.Value = result;
 			onPurchaseProduct(result,productId);
+			
+			inPurchase.Value = false;
 		}
 		
 		public NodeBool inRestore = null;
