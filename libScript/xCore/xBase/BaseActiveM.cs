@@ -99,6 +99,7 @@ namespace xLib
 				if(!CanWork) return;
 				if(isActive == value) return;
 				isActive = value;
+				if(CanDebug) Debug.LogFormat(this,this.name+":IsActive:{0}",value);
 				
 				FindView();
 				string tempId = ViewCore.CurrentId;
