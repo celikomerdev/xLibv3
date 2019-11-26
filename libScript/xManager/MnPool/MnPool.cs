@@ -33,16 +33,15 @@ namespace xLib
 			if(!temp && ins) temp = ins.GetStack(original).Pop();
 			if(!temp)
 			{
-				xDebug.LogTempFormat(original,original.name+":Instantiate:{0}",original.name);
+				xDebug.LogTempFormat(original,"MnPool:Instantiate:{0}",original.name);
 				bool originalState = original.activeSelf;
 				original.SetActive(false);
 				temp = Instantiate(original);
 				original.SetActive(originalState);
 			}
 			
-			temp.SetActive(false);
 			if(usePool) temp.AddComponent<PoolKey>().original = original;
-			xDebug.LogTempFormat(temp,original.name+":Get:{0}",temp.name);
+			xDebug.LogTempFormat(temp,"MnPool:Spawn:{0}",temp.name);
 			return temp;
 		}
 		
@@ -58,7 +57,7 @@ namespace xLib
 				return;
 			}
 			
-			xDebug.LogTempFormat(obj,obj.name+":Add:{0}",obj.name);
+			xDebug.LogTempFormat(obj,"MnPool:Pool:{0}",obj.name);
 			obj.transform.SetParent(ins.container);
 			ins.GetStack(poolKey.original).Push(obj);
 		}

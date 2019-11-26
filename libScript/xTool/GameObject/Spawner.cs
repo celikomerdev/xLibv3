@@ -6,7 +6,7 @@ namespace xLib.ToolGameObject
 	public class Spawner : BaseActiveM
 	{
 		[SerializeField]private Transform target;
-		[SerializeField]private GameObject[] prefab;
+		[SerializeField]private GameObject prefab;
 		[SerializeField]private bool spawnMulti;
 		[SerializeField]private bool usePool;
 		[SerializeField]private bool resetScale = true;
@@ -31,6 +31,7 @@ namespace xLib.ToolGameObject
 		
 		public void Spawn(GameObject original)
 		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":Spawn:{0}",original);
 			if(destroy) Destroy();
 			if(temp) return;
 			if(!original) return;
@@ -45,13 +46,14 @@ namespace xLib.ToolGameObject
 		[ContextMenu("Spawn")]
 		public void Spawn()
 		{
-			Spawn(prefab[Random.Range(0,prefab.Length)]);
+			Spawn(prefab);
 		}
 		
 		
 		[ContextMenu("Destroy")]
 		public void Destroy()
 		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":Destroy:{0}",temp);
 			if(!temp) return;
 			
 			if(destroyImmediate || !Application.isPlaying)
@@ -64,6 +66,22 @@ namespace xLib.ToolGameObject
 			}
 			
 			temp = null;
+		}
+		
+		
+		public GameObject Prefab
+		{
+			get
+			{
+				return prefab;
+			}
+			set
+			{
+				if(prefab==value) return;
+				if(CanDebug) Debug.LogFormat(this,this.name+":Prefab:{0}:{1}",prefab,value);
+				prefab = value;
+				Spawn();
+			}
 		}
 	}
 }

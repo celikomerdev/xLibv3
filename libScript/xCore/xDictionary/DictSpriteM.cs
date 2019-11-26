@@ -6,11 +6,12 @@ namespace xLib.xDictionary
 {
 	public class DictSpriteM : BaseInitM
 	{
-		public DictSprite dictSprite = new DictSprite();
+		[UnityEngine.Serialization.FormerlySerializedAs("dictSprite")]
+		public DictSprite dict = new DictSprite();
 		
 		protected override void OnInit(bool init)
 		{
-			if(init) dictSprite.Init();
+			if(init) dict.Init();
 		}
 	}
 	
