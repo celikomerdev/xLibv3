@@ -9,44 +9,6 @@ namespace xLib
 	{
 		public Transform container;
 		
-		#region Main
-		public GameObject Get(GameObject value)
-		{
-			GameObject key = value;
-			
-			if(GetStack(key).Count == 0)
-			{
-				if(CanDebug) Debug.LogWarningFormat(value,this.name+":Instantiate:{0}",value.name);
-				GameObject spawn = (GameObject)Instantiate(value,container.position,Quaternion.identity,container);
-				spawn.AddComponent<PoolKey>().key = key;
-				spawn.name = value.name;
-				Add(spawn);
-			}
-			
-			GameObject temp = GetStack(key).Pop();
-			temp.SetActive(false);
-			temp.transform.parent = null;
-			if(CanDebug) Debug.LogFormat(temp,this.name+":Get:{0}",temp.name);
-			return temp;
-		}
-		
-		public void Add(GameObject value)
-		{
-			if(value==null) return;
-			
-			PoolKey poolKey = value.GetComponent<PoolKey>();
-			if(!poolKey)
-			{
-				Destroy(value);
-				return;
-			}
-			
-			if(CanDebug) Debug.LogFormat(value,this.name+":Add:{0}",value.name);
-			value.transform.SetParent(container);
-			GetStack(poolKey.key).Push(value);
-		}
-		#endregion
-		
 		#region Collection
 		private Dictionary<GameObject,Stack<GameObject>> dictionary = new Dictionary<GameObject,Stack<GameObject>>();
 		private Stack<GameObject> GetStack(GameObject key)
@@ -59,6 +21,46 @@ namespace xLib
 				dictionary.Add(key,stack);
 				return stack;
 			}
+		}
+		#endregion
+		
+		
+		#region Main
+		public static GameObject Spawn(GameObject original,bool usePool)
+		{
+			GameObject temp = null;
+			
+			if(!temp && ins) temp = ins.GetStack(original).Pop();
+			if(!temp)
+			{
+				xDebug.LogTempFormat(original,original.name+":Instantiate:{0}",original.name);
+				bool originalState = original.activeSelf;
+				original.SetActive(false);
+				temp = Instantiate(original);
+				original.SetActive(originalState);
+			}
+			
+			temp.SetActive(false);
+			if(usePool) temp.AddComponent<PoolKey>().original = original;
+			xDebug.LogTempFormat(temp,original.name+":Get:{0}",temp.name);
+			return temp;
+		}
+		
+		public static void Pool(GameObject obj)
+		{
+			if(obj == null) return;
+			obj.SetActive(false);
+			
+			PoolKey poolKey = obj.GetComponent<PoolKey>();
+			if(!poolKey || !ins)
+			{
+				Destroy(obj);
+				return;
+			}
+			
+			xDebug.LogTempFormat(obj,obj.name+":Add:{0}",obj.name);
+			obj.transform.SetParent(ins.container);
+			ins.GetStack(poolKey.original).Push(obj);
 		}
 		#endregion
 	}

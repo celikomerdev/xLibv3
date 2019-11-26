@@ -5,11 +5,11 @@ namespace xLib.ToolPool
 {
 	public class PoolKey : BaseMainM
 	{
-		internal GameObject key;
+		internal GameObject original;
 		
 		public void Pool()
 		{
-			MnPool.ins.Add(gameObject);
+			MnPool.Pool(gameObject);
 		}
 	}
 }

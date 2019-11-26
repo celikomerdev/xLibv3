@@ -14,7 +14,7 @@ namespace xLib.ToolPool
 			{
 				for (int indexCount = 0; indexCount < count; indexCount++)
 				{
-					MnPool.ins.Get(value[indexArray]).GetComponent<PoolKey>().Pool();
+					MnPool.Pool(MnPool.Spawn(value[indexArray],true));
 				}
 			}
 		}
