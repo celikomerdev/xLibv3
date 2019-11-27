@@ -9,6 +9,7 @@ namespace xLib.xNew
 		public float durationTemp = 5f;
 		public float tick = 0.1f;
 		public bool defaultState = false;
+		public byte idleMod = 2;
 		public int [] headIndex;
 		public GameObject[] array;
 		
@@ -53,7 +54,7 @@ namespace xLib.xNew
 			{
 				for (int i = 0; i < array.Length; i++)
 				{
-					array[i].SetActive((i%2==0)? state:!state);
+					array[i].SetActive((i%idleMod==0)? state:!state);
 				}
 				state = !state;
 				yield return new WaitForSecondsRealtime(tick*2f);
