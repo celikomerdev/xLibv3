@@ -19,7 +19,7 @@ namespace xLib
 				if(string.IsNullOrEmpty(value)) return;
 				if(url.ValueGet(viewId:ViewCore.CurrentId) == value) return;
 				url.ValueSet(value,viewId:ViewCore.CurrentId);
-				MnCoroutine.NewCoroutine(eDownload(value,ViewCore.CurrentId));
+				MnCoroutine.ins.NewCoroutine(eDownload(value,ViewCore.CurrentId));
 			}
 		}
 		#endregion

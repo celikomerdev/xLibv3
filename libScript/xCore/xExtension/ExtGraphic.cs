@@ -10,7 +10,7 @@ namespace xLib
 	{
 		public static Coroutine TweenColor(this Graphic graphic, Color targetColor, float duration = 0.1f, bool ignoreTimeScale=true, bool useAlpha=true, bool useRGB=false)
 		{
-			return MnCoroutine.NewCoroutine(Flow());
+			return MnCoroutine.ins.NewCoroutine(Flow());
 			
 			IEnumerator Flow()
 			{

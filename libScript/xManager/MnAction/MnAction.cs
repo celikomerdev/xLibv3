@@ -13,7 +13,7 @@ namespace xLib
 		public static void CallActionNext(float delay = 0)
 		{
 			xDebug.LogTempFormat("MnAction.CallActionNext");
-			MnCoroutine.NewCoroutine(callActionNext(delay));
+			MnCoroutine.ins.NewCoroutine(callActionNext(delay));
 		}
 		
 		private static float lastTime = 0;

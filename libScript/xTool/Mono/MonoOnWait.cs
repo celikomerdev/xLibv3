@@ -21,7 +21,7 @@ namespace xLib
 			if(!gameObject.activeInHierarchy) return;
 			if(isSingle && processCount>0) return;
 			
-			if(isDisabled) MnCoroutine.NewCoroutine(eWait(ViewCore.CurrentId,time));
+			if(isDisabled) MnCoroutine.ins.NewCoroutine(eWait(ViewCore.CurrentId,time));
 			else StartCoroutine(eWait(ViewCore.CurrentId,time));
 		}
 		

@@ -141,7 +141,7 @@ namespace xLib.libAdvert
 		protected virtual void Show()
 		{
 			OnShowBase();
-			MnCoroutine.WaitForSeconds(delay:1.0f,call:delegate
+			MnCoroutine.ins.WaitForSeconds(delay:1.0f,call:delegate
 			{
 				OnRewardBase(1);
 				OnCloseBase();

@@ -68,7 +68,7 @@ namespace xLib
 			eventNormalizedPosition.Invoke(newNormalizedPosition);
 			
 			if(gameObject.activeInHierarchy) StartCoroutine(LerpFocus(newNormalizedPosition));
-			else MnCoroutine.NewCoroutine(LerpFocus(newNormalizedPosition));
+			else MnCoroutine.ins.NewCoroutine(LerpFocus(newNormalizedPosition));
 		}
 		
 		private IEnumerator LerpFocus(Vector2 newNormalizedPosition)

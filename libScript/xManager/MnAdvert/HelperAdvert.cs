@@ -65,7 +65,7 @@ namespace xLib.libAdvert
 			MnAdvert.ins.inShow.Value = true;
 			
 			Register();
-			MnCoroutine.WaitForSeconds(delay:0.5f,call:MnAdvert.ins.interstitial.ShowBase);
+			MnCoroutine.ins.WaitForSeconds(delay:0.5f,call:MnAdvert.ins.interstitial.ShowBase);
 		}
 		
 		public void TryShowRewarded()
@@ -83,7 +83,7 @@ namespace xLib.libAdvert
 			MnAdvert.ins.inShow.Value = true;
 			
 			Register();
-			MnCoroutine.WaitForSeconds(delay:0.5f,call:MnAdvert.ins.rewarded.ShowBase);
+			MnCoroutine.ins.WaitForSeconds(delay:0.5f,call:MnAdvert.ins.rewarded.ShowBase);
 		}
 		#endregion
 		

@@ -33,7 +33,7 @@ namespace xLib.xUtil
 			float valueTarget = 1f;
 			if(!toggle.isOn) valueTarget = 0f;
 			
-			MnCoroutine.KillCoroutine(m_Coroutine);
+			MnCoroutine.ins.KillCoroutine(m_Coroutine);
 			m_Coroutine = tweenGroup.CrossFade(valueTarget,duration,ignoreTimeScale);
 		}
 		
