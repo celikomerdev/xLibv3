@@ -1,107 +1,94 @@
 ﻿#if xLibv3
-#if PackUI
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace xLib.xNew
 {
 	public class MiniGameLights : BaseWorkM
 	{
+		public float durationTemp = 5f;
+		public float tick = 0.1f;
+		public bool defaultState = false;
 		public int [] headIndex;
-		public Sprite[] sprite = new Sprite[2];
-		public Image[] array;
-		private int count;
+		public GameObject[] array;
 		
+		#region Main
 		private void OnEnable()
 		{
 			Animate(false);
 		}
 		
+		private void ResetState()
+		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":ResetState");
+			StopAllCoroutines();
+			for (int i = 0; i < array.Length; i++)
+			{
+				array[i].SetActive(defaultState);
+			}
+		}
+		
 		public void Animate(bool value)
 		{
-			StopAllCoroutines();
-			if(!isActiveAndEnabled) return;
 			if(CanDebug) Debug.LogFormat(this,this.name+":Animate:{0}",value);
-			
-			for (int i = 0; i < array.Length; i++)
+			if(value) Symetric(durationTemp);
+			else Idle(Random.Range(1f,3f));
+		}
+		#endregion
+		
+		
+		#region Idle
+		public void Idle(float time)
+		{
+			ResetState();
+			if(CanDebug) Debug.LogFormat(this,this.name+":Idle:{0}",time);
+			StartCoroutine(FlowIdle());
+			this.WaitForSeconds(call:()=>Symetric(tick*array.Length*2),delay:time);
+		}
+		
+		private IEnumerator FlowIdle()
+		{
+			bool state = defaultState;
+			while(true)
 			{
-				array[i].sprite = sprite[0];
+				for (int i = 0; i < array.Length; i++)
+				{
+					array[i].SetActive((i%2==0)? state:!state);
+				}
+				state = !state;
+				yield return new WaitForSecondsRealtime(tick*2f);
 			}
-			
-			if (value)
+		}
+		#endregion
+		
+		
+		#region Symetric
+		public void Symetric(float time)
+		{
+			ResetState();
+			if(CanDebug) Debug.LogFormat(this,this.name+":Symetric:{0}",time);
+			StartCoroutine(FlowSymetric());
+			this.WaitForSeconds(call:()=>Idle(Random.Range(1f,3f)),delay:time);
+		}
+		
+		private IEnumerator FlowSymetric()
+		{
+			int offset = 0;
+			while(true)
 			{
+				for (int i = 0; i < array.Length; i++)
+				{
+					array[i].SetActive(defaultState);
+				}
 				for (int i = 0; i < headIndex.Length; i++)
 				{
-					StartCoroutine(Play(headIndex[i]));
+					array[(headIndex[i]+offset)%array.Length].SetActive(!defaultState);
 				}
-			}
-			else
-			{
-				StartCoroutine(Idle(sprite[0],sprite[1]));
+				offset++;
+				yield return new WaitForSecondsRealtime(tick);
 			}
 		}
-		
-		private IEnumerator Idle(Sprite sp1,Sprite sp2)
-		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Idle");
-			yield return new WaitForSecondsRealtime(0.2f);
-			count++;
-			
-			for (int i = 0; i < array.Length; i++)
-			{
-				array[i].sprite = (i%2 == 0)? sp1:sp2;
-			}
-			
-			if (count < Random.Range(10,30))
-			{
-				StartCoroutine(Idle(sp2,sp1));
-			}
-			else
-			{
-				if(Random.Range(0,5)==0)
-				{
-					Animate(true);
-					MnCoroutine.WaitForSeconds(()=>Animate(false),0.1f*array.Length);
-				}
-				else
-				{
-					StartCoroutine(Symetric(1));
-				}
-			}
-		}
-		
-		
-		private IEnumerator Symetric(int index)
-		{
-			index = index%array.Length;
-			if(CanDebug) Debug.LogFormat(this,this.name+":Symetric:{0}",index);
-			
-			if(index==0)
-			{
-				count = 0;
-				StartCoroutine(Idle(sprite[0],sprite[1]));
-			}
-			else
-			{
-				array[index].sprite = sprite[1];
-				yield return new WaitForSecondsRealtime(0.1f);
-				array[index].sprite = sprite[0];
-				StartCoroutine(Symetric(index+1));
-			}
-		}
-		
-		private IEnumerator Play(int index)
-		{
-			index = index%array.Length;
-			if(CanDebug) Debug.LogFormat(this,this.name+":Play:{0}",index);
-			
-			array[index].sprite = sprite[1];
-			yield return new WaitForSecondsRealtime(0.1f);
-			array[index].sprite = sprite[0];
-			StartCoroutine(Play(index+1));
-		}
+		#endregion
 	}
 }
-#endif
 #endif
