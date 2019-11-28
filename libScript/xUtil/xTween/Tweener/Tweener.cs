@@ -188,7 +188,7 @@ namespace xLib.xTweener
 			if (direction != 0) playDirection = direction;
 			else playDirection = -playDirection;
 			currentIteration = (byte)Mathf.Repeat(currentIteration,iteration);
-			if(!Application.isPlaying) SetNormalTime(playDirection);
+			if(!Application.isPlaying) SetNormalTime(playDirection>0);
 			IsRegister = true;
 		}
 		
