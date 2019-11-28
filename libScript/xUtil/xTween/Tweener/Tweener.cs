@@ -120,7 +120,7 @@ namespace xLib.xTweener
 			if (iteration <= 0) currentIteration = 0;
 			
 			if (isPingPong) playDirection = -playDirection;
-			else if (currentIteration <= iteration) currentTime = (byte)Mathf.Repeat(currentTime,duration);
+			else if ((iteration <= 0) || (iteration>currentIteration)) currentTime = (byte)Mathf.Repeat(currentTime,duration);
 			
 			if (iteration <= 0) return;
 			if (currentIteration >= iteration) OnComplete();
