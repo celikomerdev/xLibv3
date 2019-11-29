@@ -6,7 +6,7 @@ using xLib.xTween;
 
 namespace xLib.xTweener
 {
-	public abstract class Tweener : BaseTickNodeM
+	public class Tweener : BaseTickNodeM
 	{
 		[Header("Tweening")]
 		public bool playAuto = true;
@@ -19,25 +19,16 @@ namespace xLib.xTweener
 		
 		[Header("Target")]
 		public GameObject[] target;
+		private List<Tween> tween;
 		
 		[Header("Event")]
 		public EventBool onIterate;
 		public EventUnity onComplete;
 		
-		protected virtual float RatioForward(float value)
-		{
-			return value;
-		}
-		
-		protected virtual float RatioBackward(float value)
-		{
-			return value;
-		}
-		
 		#region Mono
 		protected override void Awaked()
 		{
-			RefreshTarget();
+			RefreshTweens();
 		}
 		
 		protected override void OnActive(bool value)
@@ -54,26 +45,24 @@ namespace xLib.xTweener
 		protected override void Tick(float tickTime)
 		{
 			NormalTime(tickTime);
-			CurveValue();
 			Iterate();
-			
 			SetAll();
 		}
 		#endregion
 		
 		
-		#region RefreshTarget
-		private void RefreshTarget()
+		#region RefreshTweens
+		private void RefreshTweens()
 		{
-			tweens = new List<Tween>();
+			tween = new List<Tween>();
 			for (int i = 0; i < target.Length; i++)
 			{
-				tweens.AddRange(target[i].GetComponents<Tween>());
+				tween.AddRange(target[i].GetComponents<Tween>());
 			}
-			tweens.RemoveAll(item => item.CanWork == false);
-			for (int i = 0; i < tweens.Count; i++)
+			tween.RemoveAll(item => item.CanWork == false);
+			for (int i = 0; i < tween.Count; i++)
 			{
-				tweens[i].Awake();
+				tween[i].Awake();
 			}
 		}
 		#endregion
@@ -85,24 +74,15 @@ namespace xLib.xTweener
 		private void NormalTime(float tickTime)
 		{
 			currentTime += playDirection * tickTime;
-			
 			currentTime = Mathf.Clamp(currentTime, 0, duration);
 			normalTime = Mathf.Clamp01(currentTime / duration);
 		}
 		
-		private float curveValue;
-		private void CurveValue()
-		{
-			if (playDirection>0) curveValue = RatioForward(normalTime);
-			else curveValue = RatioBackward(normalTime);
-		}
-		
-		private List<Tween> tweens;
 		private void SetAll()
 		{
-			for(int i=0; i < tweens.Count; i++)
+			for(int i=0; i < tween.Count; i++)
 			{
-				tweens[i].SetBaseRatio(curveValue);
+				tween[i].SetBaseRatio(normalTime);
 			}
 		}
 		
@@ -143,36 +123,24 @@ namespace xLib.xTweener
 			currentIteration = 0;
 			SetNormalTime(0);
 		}
-		
-		#region SetRatio
-		public void SetRatio(float value)
+		public void PlayOrReset(bool value)
 		{
-			#if UNITY_EDITOR
-			if(!Application.isPlaying) RefreshTarget();
-			#endif
-			
-			if(value == curveValue) return;
-			curveValue = value;
-			SetAll();
+			if(value) PlayForward();
+			else ResetMotor();
 		}
-		
-		public void SetRatio(bool isForward)
-		{
-			SetRatio(isForward ? 1 : 0);
-		}
-		#endregion
 		
 		#region SetNormalTime
 		public void SetNormalTime(float value)
 		{
+			if(normalTime == value) return;
+			
 			#if UNITY_EDITOR
-			if(!Application.isPlaying) RefreshTarget();
+			if(!Application.isPlaying) RefreshTweens();
 			#endif
 			
 			playDirection = (value > normalTime) ? 1 : -1;
 			normalTime = value;
 			currentTime = normalTime*duration;
-			CurveValue();
 			SetAll();
 		}
 		
@@ -237,12 +205,6 @@ namespace xLib.xTweener
 		}
 		#endregion
 		#endregion
-		
-		public void PlayOrReset(bool value)
-		{
-			if(value) PlayForward();
-			else ResetMotor();
-		}
 	}
 }
 #endif

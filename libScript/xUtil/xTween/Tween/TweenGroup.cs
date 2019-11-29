@@ -60,5 +60,28 @@ namespace xLib.xTween
 		}
 		#endif
 	}
+	
+	public abstract class TweenGroup2 : TweenGroup
+	{
+		private bool isForward = false;
+		private float valueLast = 0;
+		protected override void ApplyRatio(float value)
+		{
+			if(value!=valueLast) isForward = (value>valueLast);
+			valueLast = value;
+			
+			if(isForward)
+			{
+				base.ApplyRatio(RatioForward(value));
+			}
+			else
+			{
+				base.ApplyRatio(RatioBackward(value));
+			}
+		}
+		
+		protected abstract float RatioForward(float value);
+		protected abstract float RatioBackward(float value);
+	}
 }
 #endif
