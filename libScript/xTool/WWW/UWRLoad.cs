@@ -1,14 +1,14 @@
 ﻿#if xLibv3
-#if ModWebWWW
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 using xLib.EventClass;
 
 namespace xLib
 {
-	public class WwwLoad : BaseMainM
+	public class UWRLoad : BaseWorkM
 	{
-		[SerializeField]private EventWWW eventWWW = new EventWWW();
+		[SerializeField]private EventUWR eventUWR = new EventUWR();
 		
 		#region Url
 		private ValueBase<string> url = new ValueMulti<string>();
@@ -27,26 +27,31 @@ namespace xLib
 		#region Download
 		private IEnumerator eDownload(string url,string viewId)
 		{
-			WWW www = new WWW(url);
-			yield return www;
+			UnityWebRequest uwr = UnityWebRequest.Get(url);
+			UnityWebRequestAsyncOperation uwrOp = uwr.SendWebRequest();
 			
-			if (string.IsNullOrEmpty(www.error))
+			while (!uwr.isDone)
+			{
+				if(CanDebug) Debug.LogFormat(this,this.name+"UWRLoad:{0}",uwrOp.progress);
+				yield return new WaitForSecondsRealtime(1f);
+			}
+			
+			if (string.IsNullOrEmpty(uwr.error))
 			{
 				string tempId = ViewCore.CurrentId;
 				ViewCore.CurrentId = viewId;
-				eventWWW.Invoke(www);
+				eventUWR.Invoke(uwr);
 				ViewCore.CurrentId = tempId;
 			}
 			else
 			{
-				xDebug.LogExceptionFormat(this,this.name+":Error:{0}:{1}",www.error,url);
+				xDebug.LogExceptionFormat(this,this.name+":Error:{0}:{1}",uwr.error,url);
 			}
 			
-			www.Dispose();
-			www = null;
+			uwr.Dispose();
+			uwr = null;
 		}
 		#endregion
 	}
 }
-#endif
 #endif
