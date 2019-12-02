@@ -31,7 +31,7 @@ namespace xLib.xValueClass
 				string returnValue = "Hashtable:";
 				foreach(DictionaryEntry pair in Value)
 				{
-					returnValue += String.Format("Pair:{0}:{1}",pair.Key,pair.Value);
+					returnValue += string.Format("--:{0}:{1}:--",pair.Key,pair.Value);
 				}
 				return returnValue;
 			}
