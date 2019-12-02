@@ -54,8 +54,10 @@ namespace xLib
 			OnInit(init);
 		}
 		
+		protected virtual void CreateDefault(){}
 		protected virtual void OnInit(bool value)
 		{
+			CreateDefault();
 			CleanValue();
 			CleanListener();
 			
@@ -215,7 +217,7 @@ namespace xLib
 			{
 				if(!CanChange(value))
 				{
-					if(nodeSetting.canDebug) Debug.LogWarningFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":!CanChange:{0}:{1}",ViewCore.CurrentId,value.ToString());
+					if(nodeSetting.canDebug) Debug.LogWarningFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":!CanChange:{0}:{1}",ViewCore.CurrentId,ValueToString);
 					return;
 				}
 				KeepProperties(value);

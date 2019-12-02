@@ -33,6 +33,12 @@ namespace xLib.xNode.NodeObject
 			}
 		}
 		
+		[ContextMenu ("ValueToString")]
+		public void ValueToStringDebug()
+		{
+			Debug.LogFormat(this,this.name+":ValueToString:{0}",ValueToString);
+		}
+		
 		[ContextMenu ("Key = Name")]
 		public void KeyName()
 		{

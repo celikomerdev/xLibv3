@@ -27,11 +27,7 @@ namespace xLib
 		
 		public void CancelAll()
 		{
-			if(isDisabled)
-			{
-				Debug.LogWarningFormat(this,this.name+":CanNotCancel");
-				return;
-			}
+			if(isDisabled) return;
 			if(processCount==0) return;
 			if(CanDebug) Debug.LogFormat(this,this.name+":CancelAll");
 			StopAllCoroutines();
