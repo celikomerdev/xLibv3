@@ -1,8 +1,6 @@
 ﻿#if xLibv3
 using System;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using UnityEngine;
 
 namespace xLib.xValueClass
 {
@@ -22,7 +20,6 @@ namespace xLib.xValueClass
 		}
 		#endregion
 		
-		[SerializeField]private TypeNameHandling typeNameHandling = TypeNameHandling.Auto;
 		#region ISerializableBase
 		public override object SerializedObject
 		{
