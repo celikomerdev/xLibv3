@@ -5,7 +5,7 @@ using xLib.xValueClass;
 
 namespace xLib.xNode.NodeObject
 {
-	[CreateAssetMenu(menuName = "xLib/Node/HashTable")]
+	// [CreateAssetMenu(menuName = "xLib/Node/HashTable")]
 	public class MonoHashTable : MonoValue<Hashtable>
 	{
 		[SerializeField]private ValueHashTable nodeValue = new ValueHashTable();
