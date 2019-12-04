@@ -1,0 +1,14 @@
+{
+    "name": "xLib.xGameSparks",
+    "references": [
+        "xProject",
+        "xExtension"
+    ],
+    "includePlatforms": [
+        "Android",
+        "Editor",
+        "iOS",
+        "WindowsStandalone64"
+    ],
+    "excludePlatforms": []
+}

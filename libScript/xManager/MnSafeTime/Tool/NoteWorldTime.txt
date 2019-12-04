@@ -1,0 +1,33 @@
+
+
+Socket
+{
+	pool.ntp.org
+	time.windows.com
+	time.google.com
+	time.nist.gov
+	wwv.nist.gov
+	
+	time-b.nist.gov
+	time-a.nist.gov
+	time-c.nist.gov
+	time-d.nist.gov
+	
+	nist.netservicesgroup.com
+	utcnist.colorado.edu
+	utcnist2.colorado.edu
+}
+
+WWW
+{
+	@"(?<=\btime="")[^""]*";
+	https://nist.time.gov/actualtime.cgi
+	http://nist.time.gov/actualtime.cgi?lzbc=siqm9b
+}
+
+
+Note
+{
+	https://stackoverflow.com/questions/35800589/unity-freezes-when-client-tries-to-connect-to-c-sharp-server-which-is-not-runnin
+	https://stackoverflow.com/questions/1193955/how-to-query-an-ntp-server-using-c
+}

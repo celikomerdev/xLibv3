@@ -22,6 +22,11 @@ namespace xLib
 			jObject.TryGetToken(path,ref defaultValue);
 			return defaultValue;
 		}
+		
+		public static void SetSafe(this JObject jObject,string path,object value)
+		{
+			jObject[path] = JToken.FromObject(value);
+		}
 	}
 }
 #endif
