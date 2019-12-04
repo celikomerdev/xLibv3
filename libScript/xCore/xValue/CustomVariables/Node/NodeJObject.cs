@@ -16,6 +16,11 @@ namespace xLib.xNode.NodeObject
 				return nodeValue;
 			}
 		}
+		
+		public void SetTokenSafe(string path,object value)
+		{
+			if(Node.Value.SetTokenSafe(path,value)) Node.Call();
+		}
 	}
 }
 #endif

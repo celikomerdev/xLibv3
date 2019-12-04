@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 using Newtonsoft.Json.Linq;
+using xLib.xNode.NodeObject;
 
 namespace xLib
 {
@@ -10,10 +11,10 @@ namespace xLib
 			if(jObject == null) return false;
 			// if(path.Contains("..")) return defaultValue;
 			
-			JToken valueToken = jObject.SelectToken(path);
-			if(valueToken == null) return false;
+			JToken jToken = jObject.SelectToken(path);
+			if(jToken == null) return false;
 			
-			outValue = valueToken.ToObject<T>();
+			outValue = jToken.ToObject<T>();
 			return true;
 		}
 		
@@ -23,9 +24,34 @@ namespace xLib
 			return defaultValue;
 		}
 		
-		public static void SetSafe(this JObject jObject,string path,object value)
+		public static bool SetTokenSafe(this JObject jObject,string path,object value)
 		{
-			jObject[path] = JToken.FromObject(value);
+			bool isChange = true;
+			JToken jToken = jObject.SelectToken(path);
+			if (jToken == null)
+			{
+				jToken = jObject;
+				string[] segments = path.Split('.');
+				foreach(string segment in segments)
+				{
+					if(jToken[segment]==null) jToken[segment] = new JObject();
+					jToken = jToken[segment];
+				}
+			}
+			jToken.Replace(JToken.FromObject(value));
+			return isChange;
+		}
+		
+		public static T GetTokenSafe<T>(this MonoJObject jObject,string path,T defaultValue)
+		{
+			jObject.Value.TryGetToken(path,ref defaultValue);
+			return defaultValue;
+		}
+		
+		public static T GetTokenSafe<T>(this NodeJObject jObject,string path,T defaultValue)
+		{
+			jObject.Value.TryGetToken(path,ref defaultValue);
+			return defaultValue;
 		}
 	}
 }
