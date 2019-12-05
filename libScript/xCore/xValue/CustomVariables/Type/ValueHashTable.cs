@@ -1,4 +1,4 @@
-﻿#if xLibv3
+﻿#if xLibv2
 using System;
 using System.Collections;
 using Newtonsoft.Json;

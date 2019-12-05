@@ -52,7 +52,7 @@ namespace xLib
 			jObject.SetTokenSafe(path,new JObject());
 		}
 		
-		public static void SetTokenSafe(this MonoJObject jObject,string path,object value)
+		public static void SetTokenSafe<T>(this MonoJObject jObject,string path,T value)
 		{
 			if(jObject.Value.SetTokenSafe(path,value)) jObject.Call();
 		}
@@ -62,7 +62,7 @@ namespace xLib
 			return defaultValue;
 		}
 		
-		public static void SetTokenSafe(this NodeJObject jObject,string path,object value)
+		public static void SetTokenSafe<T>(this NodeJObject jObject,string path,T value)
 		{
 			if(jObject.Value.SetTokenSafe(path,value)) jObject.Call();
 		}
