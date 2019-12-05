@@ -24,7 +24,7 @@ namespace xLib
 			return defaultValue;
 		}
 		
-		public static bool SetTokenSafe(this JObject jObject,string path,object value)
+		public static bool SetTokenSafe<T>(this JObject jObject,string path,T value)
 		{
 			bool isChange = true;
 			JToken jToken = jObject.SelectToken(path);
@@ -42,12 +42,30 @@ namespace xLib
 			return isChange;
 		}
 		
+		public static bool HasPath(this JObject jObject,string path)
+		{
+			return (jObject.SelectToken(path) != null);
+		}
+		
+		public static void DeletePath(this JObject jObject,string path)
+		{
+			jObject.SetTokenSafe(path,new JObject());
+		}
+		
+		public static void SetTokenSafe(this MonoJObject jObject,string path,object value)
+		{
+			if(jObject.Value.SetTokenSafe(path,value)) jObject.Call();
+		}
 		public static T GetTokenSafe<T>(this MonoJObject jObject,string path,T defaultValue)
 		{
 			jObject.Value.TryGetToken(path,ref defaultValue);
 			return defaultValue;
 		}
 		
+		public static void SetTokenSafe(this NodeJObject jObject,string path,object value)
+		{
+			if(jObject.Value.SetTokenSafe(path,value)) jObject.Call();
+		}
 		public static T GetTokenSafe<T>(this NodeJObject jObject,string path,T defaultValue)
 		{
 			jObject.Value.TryGetToken(path,ref defaultValue);

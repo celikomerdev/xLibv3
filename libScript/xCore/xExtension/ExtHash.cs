@@ -6,19 +6,6 @@ namespace xLib
 {
 	public static class ExtHash
 	{
-		#region ToStringx2
-		public static string ToStringx2(this byte[] input)
-		{
-			var stringBuilder = new StringBuilder();
-			foreach (byte element in input)
-			{
-				stringBuilder.Append(element.ToString("x2"));
-			}
-			return stringBuilder.ToString();
-		}
-		#endregion
-		
-		
 		#region SHA256
 		public static string HashSHA256(this byte[] input)
 		{
@@ -28,12 +15,12 @@ namespace xLib
 		
 		public static string HashSHA256UTF8(this string value)
 		{
-			return Encoding.UTF8.GetBytes(value).HashSHA256();
+			return Encoding.UTF8.GetBytes(value.RemoveSpecials()).HashSHA256();
 		}
 		
 		public static string HashSHA256ASCII(this string value)
 		{
-			return Encoding.ASCII.GetBytes(value).HashSHA256();
+			return Encoding.ASCII.GetBytes(value.RemoveSpecials()).HashSHA256();
 		}
 		#endregion
 		
@@ -47,12 +34,12 @@ namespace xLib
 		
 		public static string HashMD5UTF8(this string value)
 		{
-			return Encoding.UTF8.GetBytes(value).HashMD5();
+			return Encoding.UTF8.GetBytes(value.RemoveSpecials()).HashMD5();
 		}
 		
 		public static string HashMD5ASCII(this string value)
 		{
-			return Encoding.ASCII.GetBytes(value).HashMD5();
+			return Encoding.ASCII.GetBytes(value.RemoveSpecials()).HashMD5();
 		}
 		#endregion
 	}

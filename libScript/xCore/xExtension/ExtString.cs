@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace xLib
@@ -42,6 +43,40 @@ namespace xLib
 			Regex regex = new Regex(regexFormatLocalize);
 			return value;
 		}
+		
+		public static string RemoveSpecials(this string input)
+		{
+			string returnValue = input;
+			returnValue = returnValue.Replace("\n","");
+			returnValue = returnValue.Replace("\r","");
+			returnValue = returnValue.Replace("\t","");
+			return returnValue;
+		}
+		
+		public static string RemoveNewline(this string input)
+		{
+			string returnValue = input;
+			returnValue = returnValue.Replace("\n","");
+			returnValue = returnValue.Replace("\r","");
+			return returnValue;
+		}
+		
+		public static string RemoveWhiteSpace(this string input)
+		{
+			return Regex.Replace(input,@"\s+",string.Empty);
+		}
+		
+		#region ToStringx2
+		public static string ToStringx2(this byte[] input)
+		{
+			var stringBuilder = new StringBuilder();
+			foreach (byte element in input)
+			{
+				stringBuilder.Append(element.ToString("x2"));
+			}
+			return stringBuilder.ToString();
+		}
+		#endregion
 	}
 }
 #endif

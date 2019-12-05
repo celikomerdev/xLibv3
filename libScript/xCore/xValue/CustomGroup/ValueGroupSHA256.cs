@@ -13,10 +13,9 @@ namespace xLib.xValueClass
 			{
 				JObject jObject = new JObject();
 				JToken Content = (JToken)SerializedObjectRaw;
-				string ContentString = Content.ToString().Replace(System.Environment.NewLine,"");
 				
 				jObject.Add("WARNING!!","Your data will be deleted if you edit this file!!!!");
-				jObject.Add("Hash",(KeyEncrypt+ContentString).HashSHA256UTF8());
+				jObject.Add("Hash",(KeyEncrypt+Content.ToString()).HashSHA256UTF8());
 				jObject.Add("Content",Content);
 				
 				return jObject;
@@ -25,7 +24,7 @@ namespace xLib.xValueClass
 			{
 				if(value==null) return;
 				string stringJson = value.ToString();
-				if(string.IsNullOrEmpty(stringJson)) return;
+				if(string.IsNullOrWhiteSpace(stringJson)) return;
 				JObject jObject = JObject.Parse(stringJson);
 				
 				string Hash = jObject.GetValue("Hash").ToString();
@@ -40,11 +39,9 @@ namespace xLib.xValueClass
 		#region CheckValid
 		private bool IsValid(string hash,string content)
 		{
-			string contentRaw = content.Replace(System.Environment.NewLine,"");
-			
 			for (int i = 0; i < cryptoVersion.Length; i++)
 			{
-				if(hash == (KeyEncryptVersion(i)+contentRaw).HashSHA256UTF8()) return true;
+				if(hash == (KeyEncryptVersion(i)+content).HashSHA256UTF8()) return true;
 			}
 			
 			xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":HackDetected!!!");

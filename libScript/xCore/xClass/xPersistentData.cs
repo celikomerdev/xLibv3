@@ -48,7 +48,7 @@ namespace xLib
 		public static string GetString(string key)
 		{
 			string data = "";
-			data = File.ReadAllText(PathKey(key));
+			if(HasKey(key)) data = File.ReadAllText(PathKey(key));
 			return data;
 		}
 		#endregion
@@ -63,7 +63,7 @@ namespace xLib
 		public static byte[] GetBytes(string key)
 		{
 			byte[] data = new byte[0];
-			data = File.ReadAllBytes(PathKey(key));
+			if(HasKey(key)) data = File.ReadAllBytes(PathKey(key));
 			return data;
 		}
 		#endregion
