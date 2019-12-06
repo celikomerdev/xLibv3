@@ -50,7 +50,7 @@ namespace xLib
 			#if ModImageConversion
 			bytes = texture2D.EncodeToPNG();
 			#else
-			Debug.LogWarningFormat("!ModImageConversion");
+			xDebug.LogTempFormat("!ModImageConversion");
 			// bytes = texture2D.GetRawTextureData();
 			#endif
 			
@@ -67,7 +67,7 @@ namespace xLib
 			#if ModImageConversion
 			value.LoadImage(data);
 			#else
-			Debug.LogWarningFormat("!ModImageConversion");
+			xDebug.LogTempFormat("!ModImageConversion");
 			// value.LoadRawTextureData(data);
 			#endif
 			

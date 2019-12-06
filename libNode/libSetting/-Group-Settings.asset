@@ -24,6 +24,7 @@ MonoBehaviour:
       isMulti: 0
     value:
       arrayObject:
+      - {fileID: 11400000, guid: 4cb35d5be029dd646b193ff29e1a3c20, type: 2}
       - {fileID: 11400000, guid: 57e0e88920679a04e9457ea1f69f78ce, type: 2}
       - {fileID: 11400000, guid: 331bdbcd5d3079743a24f4c58811c649, type: 2}
       - {fileID: 11400000, guid: 617f6ab5b1ac8b54c90c50931b24cc4f, type: 2}
