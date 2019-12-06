@@ -9,7 +9,7 @@ namespace xLib
 		public static bool TryGetToken<T>(this JObject jObject,string path,ref T outValue)
 		{
 			if(jObject == null) return false;
-			// if(path.Contains("..")) return defaultValue;
+			if(path.Contains("..")) return false;
 			
 			JToken jToken = jObject.SelectToken(path);
 			if(jToken == null) return false;

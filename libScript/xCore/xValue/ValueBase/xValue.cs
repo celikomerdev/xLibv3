@@ -137,7 +137,7 @@ namespace xLib
 			{
 				if(listenerEditor.Contains(call))
 				{
-					xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":ListenerEditorAdd:{0}",call.name);
+					xDebug.LogExceptionFormat(nodeSetting.objDebug,$"{nodeSetting.objDebug.name}:ListenerEditorAdd:Contains:{call.name}");
 					return;
 				}
 				listenerEditor.Add(call);
@@ -146,7 +146,7 @@ namespace xLib
 			{
 				if(!listenerEditor.Contains(call))
 				{
-					xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":ListenerEditorRemove:{0}",call.name);
+					xDebug.LogExceptionFormat(nodeSetting.objDebug,$"{nodeSetting.objDebug.name}:ListenerEditorAdd:NotContains:{call.name}");
 					return;
 				}
 				listenerEditor.Remove(call);

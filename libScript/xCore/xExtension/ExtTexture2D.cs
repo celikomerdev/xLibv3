@@ -51,7 +51,7 @@ namespace xLib
 			bytes = texture2D.EncodeToPNG();
 			#else
 			Debug.LogWarningFormat("!ModImageConversion");
-			bytes = texture2D.GetRawTextureData();
+			// bytes = texture2D.GetRawTextureData();
 			#endif
 			
 			texture2D.Compress(true);
@@ -61,14 +61,20 @@ namespace xLib
 		
 		public static void Load(this Texture2D value,byte[] data)
 		{
+			if(data==null) return;
+			if(data.Length<0) return;
+			
 			#if ModImageConversion
 			value.LoadImage(data);
 			#else
 			Debug.LogWarningFormat("!ModImageConversion");
-			value.LoadRawTextureData(data);
+			// value.LoadRawTextureData(data);
 			#endif
+			
+			if(value==null) return;
+			value.Compress(true);
+			value.Apply(true);
 		}
-		
 		
 		public static Sprite ToSprite(this Texture2D value)
 		{

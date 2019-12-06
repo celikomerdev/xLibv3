@@ -29,14 +29,12 @@ namespace xLib
 			isMy = view.IsMy;
 		}
 		
-		#if UNITY_EDITOR
 		public virtual void CheckErrors()
 		{
-			if(ViewCore.CurrentId != ViewId) xDebug.LogExceptionFormat(this,this.name+":CurrentId:{0}:viewId:{1}",ViewCore.CurrentId,ViewId);
+			#if UNITY_EDITOR
+			if(ViewCore.CurrentId != ViewId) xDebug.LogExceptionFormat(this,$"{this.name}:CurrentId:{0}:ViewId:{1}",ViewCore.CurrentId,ViewId);
+			#endif
 		}
-		#else
-		public virtual void CheckErrors(){}
-		#endif
 	}
 }
 #endif

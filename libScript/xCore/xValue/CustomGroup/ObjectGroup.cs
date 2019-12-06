@@ -1,5 +1,4 @@
 ﻿#if xLibv3
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace xLib.xValueClass
@@ -8,16 +7,19 @@ namespace xLib.xValueClass
 	public class ObjectGroup
 	{
 		internal int indexCurrent = 0;
-		internal List<ISerializableObject> iSerializableObject = new List<ISerializableObject>();
-		internal List<ICall> iCall = new List<ICall>();
+		internal ISerializableObject[] iSerializableObject = new ISerializableObject[0];
+		internal ICall[] iCall = new ICall[0];
 		
 		[Header("ISerializableObject")]
-		[SerializeField]private Group[] group = new Group[0];
-		[System.Serializable]private class Group
+		[SerializeField]private Object[] arrayObject = new Object[0];
+		public Object[] ArrayObject
 		{
-			public string info = "Info";
-			[SerializeField]internal Object[] arrayObject = new Object[0];
+			get
+			{
+				return arrayObject;
+			}
 		}
+		
 		
 		#region Init
 		private bool isInit;
@@ -27,11 +29,8 @@ namespace xLib.xValueClass
 			isInit = value;
 			
 			indexCurrent = 0;
-			for (int i = 0; i < group.Length; i++)
-			{
-				iSerializableObject.AddRange(group[i].arrayObject.GetGenericsArray<ISerializableObject>());
-				iCall.AddRange(group[i].arrayObject.GetGenericsArray<ICall>());
-			}
+			iSerializableObject = arrayObject.GetGenericsArray<ISerializableObject>();
+			iCall = arrayObject.GetGenericsArray<ICall>();
 		}
 		#endregion
 		
@@ -39,7 +38,7 @@ namespace xLib.xValueClass
 		#region Database
 		public ISerializableObject GetByIndex(int value)
 		{
-			indexCurrent = Mathx.MathInt.Repeat(value,iSerializableObject.Count);
+			indexCurrent = Mathx.MathInt.Repeat(value,iSerializableObject.Length);
 			return iSerializableObject[indexCurrent];
 		}
 		
@@ -50,13 +49,13 @@ namespace xLib.xValueClass
 		
 		public ISerializableObject GetByRandom()
 		{
-			return GetByIndex(UnityEngine.Random.Range(0,iSerializableObject.Count));
+			return GetByIndex(UnityEngine.Random.Range(0,iSerializableObject.Length));
 		}
 		
 		public ISerializableObject GetByKey(string value)
 		{
 			indexCurrent = -1;
-			if(iSerializableObject!=null && iSerializableObject.Count>0)
+			if(iSerializableObject!=null && iSerializableObject.Length>0)
 			{
 				try
 				{
@@ -78,7 +77,7 @@ namespace xLib.xValueClass
 		public void ChildKeyName()
 		{
 			Init(true);
-			for (int i = 0; i < iSerializableObject.Count; i++)
+			for (int i = 0; i < iSerializableObject.Length; i++)
 			{
 				iSerializableObject[i].KeyName();
 			}
@@ -87,7 +86,7 @@ namespace xLib.xValueClass
 		public void ChildKeyGuid()
 		{
 			Init(true);
-			for (int i = 0; i < iSerializableObject.Count; i++)
+			for (int i = 0; i < iSerializableObject.Length; i++)
 			{
 				iSerializableObject[i].KeyGuid();
 			}

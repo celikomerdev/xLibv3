@@ -17,11 +17,13 @@ namespace xLib.xValueClass
 		
 		protected override void KeepProperties(Texture2D value)
 		{
-			if(value==null) return;
-			if(ValueDefault!=null)
+			if(value == null) return;
+			if(ValueDefault != null)
 			{
 				value.filterMode = ValueDefault.filterMode;
 				value.anisoLevel = ValueDefault.anisoLevel;
+				value.mipMapBias = ValueDefault.mipMapBias;
+				value.wrapMode = ValueDefault.wrapMode;
 			}
 			value.Compress(true);
 			value.Apply();
@@ -65,8 +67,6 @@ namespace xLib.xValueClass
 				
 				Texture2D texture2D = new Texture2D(2,2);
 				texture2D.Load(System.Convert.FromBase64String(stringData));
-				texture2D.Compress(true);
-				texture2D.Apply(true);
 				
 				Value = texture2D;
 			}
