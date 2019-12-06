@@ -152,6 +152,11 @@ namespace xLib.xNode.NodeObject
 			}
 		}
 		
+		public void ValueDefaultReset(V value)
+		{
+			Node.ValueDefaultReset(value);
+		}
+		
 		public V ValueAdd
 		{
 			set

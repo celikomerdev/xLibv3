@@ -61,13 +61,16 @@ namespace xLib
 			CleanValue();
 			CleanListener();
 			
-			#if UNITY_EDITOR
-			valueDebug = this.value;
-			#endif
-			
-			ValueDefault = this.value;
-			valueBase.ValueSet(this.value,"Client");
-			valueCache = this.value;
+			ValueDefaultReset(this.value);
+		}
+		
+		public void ValueDefaultReset(V value)
+		{
+			ValueDefault = value;
+			string lastViewId = ViewCore.CurrentId;
+			ViewCore.CurrentId = "Client";
+			Value = ValueDefault;
+			ViewCore.CurrentId = lastViewId;
 		}
 		#endregion
 		
