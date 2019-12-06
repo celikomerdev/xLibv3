@@ -62,7 +62,7 @@ namespace xLib
 		private void OnUpdateConfigData()
 		{
 			objectGroup.Init(true);
-			for (int i = 0; i < objectGroup.iSerializableObject.Length; i++)
+			for (int i = 0; i < objectGroup.iSerializableObject.Count; i++)
 			{
 				objectGroup.iSerializableObject[i].SerializedObjectRaw = data.SelectToken(objectGroup.iSerializableObject[i].Key);
 			}

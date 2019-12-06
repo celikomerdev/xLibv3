@@ -26,7 +26,7 @@ namespace xLib
 		
 		public override void ListenerCall(bool register,UnityAction<object> call,string view,int order,bool onRegister=false)
 		{
-			for (int i = 0; i < Value.iCall.Length; i++)
+			for (int i = 0; i < Value.iCall.Count; i++)
 			{
 				Value.iCall[i].ListenerCall(register,call,view,order,onRegister);
 			}
@@ -35,7 +35,7 @@ namespace xLib
 		public override void ListenerEditor(bool register,BaseActiveM call)
 		{
 			#if UNITY_EDITOR
-			for (int i = 0; i < Value.iCall.Length; i++)
+			for (int i = 0; i < Value.iCall.Count; i++)
 			{
 				Value.iCall[i].ListenerEditor(register,call);
 			}
@@ -51,7 +51,7 @@ namespace xLib
 			{
 				JObject jObject = new JObject();
 				JObject Values = new JObject();
-				for (int i = 0; i < Value.iSerializableObject.Length; i++)
+				for (int i = 0; i < Value.iSerializableObject.Count; i++)
 				{
 					ISerializableObject jsonInterface = Value.iSerializableObject[i];
 					Values.Add(jsonInterface.Key,(JToken)jsonInterface.SerializedObjectRaw);
@@ -85,7 +85,7 @@ namespace xLib
 				if(Values != null)
 				{
 					if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Values:true:{0}",ViewCore.CurrentId);
-					for (int i = 0; i < Value.iSerializableObject.Length; i++)
+					for (int i = 0; i < Value.iSerializableObject.Count; i++)
 					{
 						ISerializableObject jsonInterface = Value.iSerializableObject[i];
 						
@@ -115,7 +115,7 @@ namespace xLib
 			get
 			{
 				JObject jObject = new JObject();
-				for (int i = 0; i < Value.iSerializableObject.Length; i++)
+				for (int i = 0; i < Value.iSerializableObject.Count; i++)
 				{
 					ISerializableObject jsonInterface = Value.iSerializableObject[i];
 					jObject.Add(jsonInterface.Name,(JToken)jsonInterface.SerializedObjectName);
