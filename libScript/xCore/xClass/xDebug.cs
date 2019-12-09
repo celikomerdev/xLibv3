@@ -3,11 +3,26 @@ using UnityEngine;
 
 namespace xLib
 {
-	public static class xDebug
+	public class xDebug : BaseMainM
 	{
 		#region Debug
-		public static bool isTesting = false;
 		public static bool CanDebug = true;
+		public bool SetDebug
+		{
+			set
+			{
+				xDebug.CanDebug = value;
+			}
+		}
+		
+		public static bool CanTest = false;
+		public bool SetTest
+		{
+			set
+			{
+				xDebug.CanTest = value;
+			}
+		}
 		#endregion
 		
 		
