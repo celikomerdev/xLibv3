@@ -1,9 +1,9 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 
 namespace xLib.ToolApplication
 {
-	public class ApplicationOpenURL : BaseM
+	public class ApplicationOpenURL : BaseMainM
 	{
 		[SerializeField]private string value;
 		public string Value

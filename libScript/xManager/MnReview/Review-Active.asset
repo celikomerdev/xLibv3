@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c47f3d7fa3e3424439269f207f15244e, type: 3}
-  m_Name: Rate-Active
+  m_Name: Review-Active
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -22,6 +22,6 @@ MonoBehaviour:
     nodeSetting:
       key: 1cbd87383d0c3a040aaf3c9f173926f8
       isMulti: 0
-    value: 0
+    value: 1
     skipCompareRpc: 1
     isCompare: 1

@@ -1,10 +1,10 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
 namespace xLib.ToolConvert
 {
-	public class ConvertToInt : BaseM
+	public class ConvertToInt : BaseMainM
 	{
 		[UnityEngine.Serialization.FormerlySerializedAs("onConvert")]
 		[SerializeField]private EventInt eventResult = new EventInt();
