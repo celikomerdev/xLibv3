@@ -16,13 +16,11 @@ namespace xLib
 		{
 			if(playerReview.Value!=0) return;
 			
-			#if UNITY_IOS
 			if(useIOS && UnityEngine.iOS.Device.RequestStoreReview())
 			{
 				playerReview.Value = -1;
 				return;
 			}
-			#endif
 			
 			PopupCustom();
 			PopupStandard();
