@@ -1,0 +1,11 @@
+{
+	"name": "com.xproject.xlibv3",
+	"version": "3.0.0",
+	"displayName": "xLibv3",
+	"description": "xLibv3",
+	"author":
+	{
+		"name": "Omer Ercan CELİK",
+		"email": "celikomerdev@example.com"
+	}
+}
