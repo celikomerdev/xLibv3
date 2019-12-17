@@ -7,13 +7,8 @@ namespace xLib
 	public class MnDebug : BaseRegisterM
 	{
 		[SerializeField]private int length = 1000;
-		[SerializeField]private EventString eventString = null;
-		
 		[SerializeField]private DebugLevel debugLevel = new DebugLevel();
-		
-		private bool isClean = true;
-		private string stringDebug = "";
-		
+		[SerializeField]private EventString eventString = null;
 		
 		#region Register
 		protected override bool OnRegister(bool value)
@@ -34,6 +29,8 @@ namespace xLib
 			if(debugLevel.trace) AddLog(stackTrace);
 		}
 		
+		private bool isClean = true;
+		private string stringDebug = "";
 		private void AddLog(string value)
 		{
 			stringDebug += "\n"+value;

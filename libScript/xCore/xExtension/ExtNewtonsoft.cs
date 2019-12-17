@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 using Newtonsoft.Json.Linq;
+using xLib.xNode.NodeObject;
 
 namespace xLib
 {
@@ -8,18 +9,66 @@ namespace xLib
 		public static bool TryGetToken<T>(this JObject jObject,string path,ref T outValue)
 		{
 			if(jObject == null) return false;
-			// if(path.Contains("..")) return defaultValue;
+			if(path.Contains("..")) return false;
 			
-			JToken valueToken = jObject.SelectToken(path);
-			if(valueToken == null) return false;
+			JToken jToken = jObject.SelectToken(path);
+			if(jToken == null) return false;
 			
-			outValue = valueToken.ToObject<T>();
+			outValue = jToken.ToObject<T>();
 			return true;
 		}
 		
 		public static T GetTokenSafe<T>(this JObject jObject,string path,T defaultValue)
 		{
 			jObject.TryGetToken(path,ref defaultValue);
+			return defaultValue;
+		}
+		
+		public static bool SetTokenSafe<T>(this JObject jObject,string path,T value)
+		{
+			bool isChange = true;
+			JToken jToken = jObject.SelectToken(path);
+			if (jToken == null)
+			{
+				jToken = jObject;
+				string[] segments = path.Split('.');
+				foreach(string segment in segments)
+				{
+					if(jToken[segment]==null) jToken[segment] = new JObject();
+					jToken = jToken[segment];
+				}
+			}
+			jToken.Replace(JToken.FromObject(value));
+			return isChange;
+		}
+		
+		public static bool HasPath(this JObject jObject,string path)
+		{
+			return (jObject.SelectToken(path) != null);
+		}
+		
+		public static void DeletePath(this JObject jObject,string path)
+		{
+			jObject.SetTokenSafe(path,new JObject());
+		}
+		
+		public static void SetTokenSafe<T>(this MonoJObject jObject,string path,T value)
+		{
+			if(jObject.Value.SetTokenSafe(path,value)) jObject.Call();
+		}
+		public static T GetTokenSafe<T>(this MonoJObject jObject,string path,T defaultValue)
+		{
+			jObject.Value.TryGetToken(path,ref defaultValue);
+			return defaultValue;
+		}
+		
+		public static void SetTokenSafe<T>(this NodeJObject jObject,string path,T value)
+		{
+			if(jObject.Value.SetTokenSafe(path,value)) jObject.Call();
+		}
+		public static T GetTokenSafe<T>(this NodeJObject jObject,string path,T defaultValue)
+		{
+			jObject.Value.TryGetToken(path,ref defaultValue);
 			return defaultValue;
 		}
 	}

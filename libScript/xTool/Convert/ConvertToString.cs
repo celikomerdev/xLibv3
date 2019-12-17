@@ -69,6 +69,11 @@ namespace xLib.ToolConvert
 		}
 		#endif
 		
+		public void FromUWR(UnityEngine.Networking.UnityWebRequest value)
+		{
+			Result = string.Format(@format,value);
+		}
+		
 		#region FromTime
 		public void FromTimeTick(long value)
 		{

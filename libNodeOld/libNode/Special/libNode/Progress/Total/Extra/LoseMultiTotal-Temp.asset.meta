@@ -1,8 +1,5 @@
 fileFormatVersion: 2
 guid: c3c6925298056c24487a05b628d73d77
-labels:
-- Group-Player
-- Group-Save
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000

@@ -5,6 +5,8 @@ namespace xLib.xTween
 {
 	public class TweenGroupCurve : TweenGroup
 	{
+		[Header("Curve")]
+		[UnityEngine.Serialization.FormerlySerializedAs("curveForward")]
 		[SerializeField]private AnimationCurve curve = AnimationCurve.Linear(0,0,1,1);
 		
 		protected override void ApplyRatio(float value)

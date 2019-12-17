@@ -54,18 +54,23 @@ namespace xLib
 			OnInit(init);
 		}
 		
+		protected virtual void CreateDefault(){}
 		protected virtual void OnInit(bool value)
 		{
+			CreateDefault();
 			CleanValue();
 			CleanListener();
 			
-			#if UNITY_EDITOR
-			valueDebug = this.value;
-			#endif
-			
-			ValueDefault = this.value;
-			valueBase.ValueSet(this.value,"Client");
-			valueCache = this.value;
+			ValueDefaultReset(this.value);
+		}
+		
+		public void ValueDefaultReset(V value)
+		{
+			ValueDefault = value;
+			string lastViewId = ViewCore.CurrentId;
+			ViewCore.CurrentId = "Client";
+			Value = ValueDefault;
+			ViewCore.CurrentId = lastViewId;
 		}
 		#endregion
 		
@@ -132,7 +137,7 @@ namespace xLib
 			{
 				if(listenerEditor.Contains(call))
 				{
-					xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":ListenerEditorAdd:{0}",call.name);
+					xDebug.LogExceptionFormat(nodeSetting.objDebug,$"{nodeSetting.objDebug.name}:ListenerEditorAdd:Contains:{call.name}");
 					return;
 				}
 				listenerEditor.Add(call);
@@ -141,7 +146,7 @@ namespace xLib
 			{
 				if(!listenerEditor.Contains(call))
 				{
-					xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":ListenerEditorRemove:{0}",call.name);
+					xDebug.LogExceptionFormat(nodeSetting.objDebug,$"{nodeSetting.objDebug.name}:ListenerEditorAdd:NotContains:{call.name}");
 					return;
 				}
 				listenerEditor.Remove(call);
@@ -215,7 +220,7 @@ namespace xLib
 			{
 				if(!CanChange(value))
 				{
-					if(nodeSetting.canDebug) Debug.LogWarningFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":!CanChange:{0}:{1}",ViewCore.CurrentId,value.ToString());
+					if(nodeSetting.canDebug) Debug.LogWarningFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":!CanChange:{0}:{1}",ViewCore.CurrentId,ValueToString);
 					return;
 				}
 				KeepProperties(value);

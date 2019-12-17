@@ -10,6 +10,11 @@ namespace xLib
 	{
 		public static List<UnityAction> listAction = new List<UnityAction>();
 		
+		public void CallActionNextStatic(float delay = 0)
+		{
+			CallActionNext(delay);
+		}
+		
 		public static void CallActionNext(float delay = 0)
 		{
 			xDebug.LogTempFormat("MnAction.CallActionNext");

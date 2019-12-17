@@ -44,7 +44,6 @@ namespace xLib
 			
 			www.Dispose();
 			www = null;
-			yield return null;
 		}
 		#endregion
 	}

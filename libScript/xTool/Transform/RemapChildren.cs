@@ -5,10 +5,10 @@ namespace xLib
 {
 	public class RemapChildren : BaseMainM
 	{
-		[SerializeField]private Transform trans;
-		[SerializeField]private Transform target;
-		[SerializeField]private int startAfter;
-		[SerializeField]private int endBefore;
+		[SerializeField]private Transform trans = null;
+		[SerializeField]private Transform target = null;
+		[SerializeField]private int startAfter = 0;
+		[SerializeField]private int endBefore = 0;
 		
 		private void OnTransformChildrenChanged()
 		{

@@ -33,6 +33,11 @@
             "define": "ModWebWWW"
         },
         {
+            "name": "com.unity.modules.imageconversion",
+            "expression": "0.0.0",
+            "define": "ModImageConversion"
+        },
+        {
             "name": "com.unity.purchasing",
             "expression": "0.0.0",
             "define": "PackIAP"

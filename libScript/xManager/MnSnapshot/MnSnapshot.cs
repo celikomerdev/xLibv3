@@ -13,6 +13,10 @@ namespace xLib
 			{
 				return snapshot.PlayTime;
 			}
+			set
+			{
+				snapshot.PlayTime = value;
+			}
 		}
 		
 		public static byte[] SnapshotByte
@@ -65,6 +69,10 @@ namespace xLib
 			get
 			{
 				return SafeTime.UtcNow.Ticks;
+			}
+			set
+			{
+				xDebug.LogTempFormat($"SetPlayTime:{value}");
 			}
 		}
 		

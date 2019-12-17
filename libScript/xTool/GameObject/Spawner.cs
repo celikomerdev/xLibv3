@@ -5,10 +5,10 @@ namespace xLib.ToolGameObject
 {
 	public class Spawner : BaseActiveM
 	{
-		[SerializeField]private Transform target;
-		[SerializeField]private GameObject prefab;
-		[SerializeField]private bool spawnMulti;
-		[SerializeField]private bool usePool;
+		[SerializeField]private Transform target = null;
+		[SerializeField]private GameObject prefab = null;
+		[SerializeField]private bool spawnMulti = false;
+		[SerializeField]private bool usePool = false;
 		[SerializeField]private bool resetScale = true;
 		[SerializeField]private bool destroy = true;
 		[SerializeField]private bool destroyImmediate = false;

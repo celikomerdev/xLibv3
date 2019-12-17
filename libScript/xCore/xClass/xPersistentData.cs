@@ -48,7 +48,7 @@ namespace xLib
 		public static string GetString(string key)
 		{
 			string data = "";
-			data = File.ReadAllText(PathKey(key));
+			if(HasKey(key)) data = File.ReadAllText(PathKey(key));
 			return data;
 		}
 		#endregion
@@ -63,7 +63,7 @@ namespace xLib
 		public static byte[] GetBytes(string key)
 		{
 			byte[] data = new byte[0];
-			data = File.ReadAllBytes(PathKey(key));
+			if(HasKey(key)) data = File.ReadAllBytes(PathKey(key));
 			return data;
 		}
 		#endregion
@@ -80,15 +80,10 @@ namespace xLib
 		
 		public static Texture GetTexture(string file,Texture data)
 		{
-			if(File.Exists(xApp.xPath(file)))
-			{
-				Texture2D texture2D = new Texture2D(2,2);
-				texture2D.Load(File.ReadAllBytes(xApp.xPath(file)));
-				texture2D.Compress(true);
-				texture2D.Apply();
-				return texture2D;
-			}
-			return data;
+			if(!File.Exists(xApp.xPath(file))) return data;
+			Texture2D texture2D = new Texture2D(2,2);
+			texture2D.Load(File.ReadAllBytes(xApp.xPath(file)));
+			return texture2D;
 		}
 		#endregion
 	}
