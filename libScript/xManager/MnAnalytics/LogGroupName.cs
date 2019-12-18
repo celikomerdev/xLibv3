@@ -5,7 +5,7 @@ namespace xLib.ToolManager
 	{
 		protected override void Send(IAnalyticObject analyticObject)
 		{
-			MnAnalytics.ins.LogEvent("Value",analyticObject.Name,analyticObject.AnalyticString,analyticObject.AnalyticDigit);
+			StAnalytics.LogEvent("Value",analyticObject.Name,analyticObject.AnalyticString,analyticObject.AnalyticDigit);
 		}
 	}
 }

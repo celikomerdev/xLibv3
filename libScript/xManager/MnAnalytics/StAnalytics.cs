@@ -1,36 +1,36 @@
 ﻿#if xLibv3
+using System.Collections.Generic;
+
 namespace xLib
 {
 	public static class StAnalytics
 	{
-		public static void LogScreen(string valueName)
+		public static void LogScreen(string key,bool canSend=true)
 		{
+			if(!canSend) return;
 			if(!MnAnalytics.ins) return;
-			MnAnalytics.ins.LogScreen(valueName);
+			MnAnalytics.ins.LogScreen(key);
 		}
 		
-		// public delegate void LogEventDeletage(string category="",string action="",string label="",string value="0");
-		// public static event LogEventDeletage logEventDeletage = new LogEventDeletage();
-		public static void LogEvent(string category="",string action="",string label="",string value="0")
+		public static void LogEvent(string key="",string action="",string label="",string value="0",bool canSend=true)
 		{
+			
+		}
+		
+		public static void LogEvent(string key,Dictionary<string, object> parameters,bool canSend=true)
+		{
+			if(!canSend) return;
 			if(!MnAnalytics.ins) return;
-			MnAnalytics.ins.LogEvent(category,action,label,value);
+			MnAnalytics.ins.LogEvent(key,parameters);
 		}
 		
-		public static void LogPurchase(string sku,double price,string currency,string receipt)
+		// public static void LogPurchase(string sku,double price,string currency,string receipt,bool canSend=true)
+		public static void LogPurchase(string key,Dictionary<string, object> parameters,bool canSend=true)
 		{
-			// GGAnalytics.instance.LogPurchase(args.purchasedProduct.definition.storeSpecificId, (double)args.purchasedProduct.metadata.localizedPrice, args.purchasedProduct.metadata.isoCurrencyCode, args.purchasedProduct.receipt);
+			if(!canSend) return;
+			if(!MnAnalytics.ins) return;
+			MnAnalytics.ins.LogPurchase(key,parameters);
 		}
-		
-		// internal static List<IAnalyticsSend> arrayAnalytics = new List<IAnalyticsSend>();
-		// internal static void AnalyticsSend()
-		// {
-		// 	for (int i = 0; i < arrayAnalytics.Count; i++)
-		// 	{
-		// 		arrayAnalytics[i].AnalyticsSend();
-		// 	}
-		// 	arrayAnalytics.Clear();
-		// }
 	}
 }
 #endif

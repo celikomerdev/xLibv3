@@ -28,7 +28,7 @@ namespace xLib.ToolManager
 		
 		protected virtual void Send(IAnalyticObject analyticObject)
 		{
-			MnAnalytics.ins.LogEvent("Value",analyticObject.Key,analyticObject.AnalyticString,analyticObject.AnalyticDigit);
+			StAnalytics.LogEvent("Value",analyticObject.Key,analyticObject.AnalyticString,analyticObject.AnalyticDigit);
 		}
 	}
 }

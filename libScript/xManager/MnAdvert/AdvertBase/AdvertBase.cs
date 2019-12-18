@@ -8,18 +8,19 @@ namespace xLib.libAdvert
 	public abstract class AdvertBase : BaseRegisterM
 	{
 		[Header("Key")]
-		public string key;
-		protected string idPlatform;
+		public string key = "";
+		protected string idPlatform = "";
+		public bool isAnalytics = false;
 		
 		[Header("Adapter")]
-		protected string nameAdepter = "AdapterNull";
+		protected string nameAdepter = "adapter_null";
 		protected virtual void NameAdapter(){}
 		private string NameAdapterBase
 		{
 			get
 			{
 				NameAdapter();
-				if(string.IsNullOrEmpty(nameAdepter)) nameAdepter = "AdapterNull";
+				if(string.IsNullOrEmpty(nameAdepter)) nameAdepter = "adapter_null";
 				return nameAdepter;
 			}
 		}
@@ -59,7 +60,7 @@ namespace xLib.libAdvert
 			if(isLoad == value) return;
 			isLoad = value;
 			
-			if(isLoad) StAnalytics.LogEvent("Ads",this.name+":OnLoad",NameAdapterBase);
+			if(isLoad) StAnalytics.LogEvent("advert",this.name+"_on_load_success",NameAdapterBase,canSend:isAnalytics);
 			
 			SetLoaded(value);
 			onLoad.Invoke(isLoad);
@@ -69,7 +70,7 @@ namespace xLib.libAdvert
 		protected void OnLoadFailBase()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnLoadFailBase");
-			StAnalytics.LogEvent("Ads",this.name+":OnLoadFail",NameAdapterBase);
+			StAnalytics.LogEvent("advert",this.name+"_on_load_fail",NameAdapterBase,canSend:isAnalytics);
 			onLoadFail.Invoke();
 			SetLoadedBase(false);
 		}
@@ -78,7 +79,7 @@ namespace xLib.libAdvert
 		protected void OnShowBase()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnShowBase");
-			StAnalytics.LogEvent("Ads",this.name+":OnShow",NameAdapterBase);
+			StAnalytics.LogEvent("advert",this.name+"_on_show",NameAdapterBase,canSend:isAnalytics);
 			onShow.Invoke();
 		}
 		
@@ -87,7 +88,7 @@ namespace xLib.libAdvert
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnRewardBase:{0}",value);
 			if(value<1) return;
-			StAnalytics.LogEvent("Ads",this.name+":OnReward",NameAdapterBase,value.ToString());
+			StAnalytics.LogEvent("advert",this.name+"_on_reward",NameAdapterBase,value.ToString(),canSend:isAnalytics);
 			onReward.Invoke(value);
 		}
 		
@@ -95,14 +96,14 @@ namespace xLib.libAdvert
 		protected void OnClickBase()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnClickBase");
-			StAnalytics.LogEvent("Ads",this.name+":OnClick",NameAdapterBase);
+			StAnalytics.LogEvent("advert",this.name+"_on_click",NameAdapterBase,canSend:isAnalytics);
 			onClick.Invoke();
 		}
 		
 		protected void OnVisitBase()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnVisitBase");
-			StAnalytics.LogEvent("Ads",this.name+":OnVisit",NameAdapterBase);
+			StAnalytics.LogEvent("advert",this.name+"_on_visit",NameAdapterBase,canSend:isAnalytics);
 			// onVisit.Invoke();
 		}
 		
@@ -110,7 +111,7 @@ namespace xLib.libAdvert
 		protected void OnCloseBase()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnCloseBase");
-			StAnalytics.LogEvent("Ads",this.name+":OnClose",NameAdapterBase);
+			StAnalytics.LogEvent("advert",this.name+"_on_close",NameAdapterBase,canSend:isAnalytics);
 			onClose.Invoke();
 		}
 		#endregion

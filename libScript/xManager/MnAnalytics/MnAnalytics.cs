@@ -1,34 +1,38 @@
 ﻿#if xLibv3
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace xLib
 {
 	public class MnAnalytics : SingletonM<MnAnalytics>
 	{
-		protected override void Started()
+		private Dictionary<string,object> Stamp(Dictionary<string,object> dict)
 		{
-			// SetListen(true);
+			return dict;
 		}
 		
-		protected override void OnDestroyed()
+		public static Action<string> logScreen = delegate{};
+		public void LogScreen(string key)
 		{
-			// SetListen(false);
+			if(CanDebug) Debug.Log($"{this.name}:LogScreen:{key}",this);
+			logScreen(key);
 		}
 		
-		public void AnalyticsSend()
+		public static Action<string,Dictionary<string,object>> logEvent = delegate{};
+		public void LogEvent(string key,Dictionary<string,object> parameters)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":AnalyticsSend");
-			// StAnalytics.AnalyticsSend();
+			parameters = Stamp(parameters);
+			if(CanDebug) Debug.Log($"{this.name}:LogEvent:{key}:{parameters.ToJsonString()}",this);
+			logEvent(key,parameters);
 		}
 		
-		public void LogScreen(string valueName)
+		public static Action<string,Dictionary<string,object>> logPurchase = delegate{};
+		public void LogPurchase(string key,Dictionary<string,object> parameters)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":LogScreen:{0}",valueName);
-		}
-		
-		public void LogEvent(string category,string action,string label,string value)
-		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":LogEvent:{0}:{1}:{2}:{3}",category,action,label,value);
+			parameters = Stamp(parameters);
+			if(CanDebug) Debug.Log($"{this.name}:LogPurchase:{key}:{parameters.ToJsonString()}",this);
+			logPurchase(key,parameters);
 		}
 	}
 }

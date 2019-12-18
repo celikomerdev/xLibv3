@@ -1,4 +1,6 @@
 ﻿#if xLibv3
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using xLib.xNode.NodeObject;
 
@@ -70,6 +72,11 @@ namespace xLib
 		{
 			jObject.Value.TryGetToken(path,ref defaultValue);
 			return defaultValue;
+		}
+		
+		public static string ToJsonString<TKey,TValue> (this IDictionary<TKey,TValue> dictionary)
+		{
+			return JsonConvert.SerializeObject(dictionary);
 		}
 	}
 }
