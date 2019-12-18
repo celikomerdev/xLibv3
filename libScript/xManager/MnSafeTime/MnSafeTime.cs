@@ -12,14 +12,14 @@ namespace xLib
 		
 		protected override void Awaked()
 		{
-			SafeTime.onCalibrate.AddListener(OnCalibrate);
+			SafeTime.onCalibrate.eventUnity.AddListener(OnCalibrate);
 			dateTimeDefault.Init();
 			if(dateTimeDefault.dateTime>UtcNow) UtcNow = dateTimeDefault.dateTime;
 		}
 		
 		protected override void OnDestroyed()
 		{
-			SafeTime.onCalibrate.RemoveListener(OnCalibrate);
+			SafeTime.onCalibrate.eventUnity.RemoveListener(OnCalibrate);
 		}
 		
 		public DateTime UtcNow
