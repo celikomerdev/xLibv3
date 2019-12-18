@@ -1,13 +1,13 @@
 ﻿#if xLibv3
 using System;
 using UnityEngine;
-using UnityEngine.Events;
+using xLib.EventClass;
 
 namespace xLib
 {
 	public static class SafeTime
 	{
-		public static UnityEvent onCalibrate = new UnityEvent();
+		public static EventUnity onCalibrate = new EventUnity();
 		
 		private static DateTime dateTimeAnchor = DateTime.MinValue;
 		public static DateTime UtcNow

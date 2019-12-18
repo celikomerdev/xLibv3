@@ -1,6 +1,7 @@
 ﻿#if xLibv3
 using System.Threading;
 using UnityEngine.Events;
+using xLib.EventClass;
 
 namespace xLib
 {
@@ -17,27 +18,27 @@ namespace xLib
 			if(!willCall) return;
 			willCall = false;
 			
-			UnityEvent tempListener = listener;
-			listener = new UnityEvent();
+			EventUnity cacheListener = listener;
+			listener = new EventUnity();
 			
-			tempListener.Invoke();
-			tempListener.RemoveAllListeners();
+			cacheListener.Invoke();
+			cacheListener.eventUnity.RemoveAllListeners();
 		}
 		#endregion
 		
 		#region Flow
 		private static bool willCall;
-		private static UnityEvent listener = new UnityEvent();
+		private static EventUnity listener = new EventUnity();
 		public static void Register(UnityAction call)
 		{
-			listener.AddListener(call);
+			listener.eventUnity.AddListener(call);
 			willCall = true;
 		}
 		
 		public static void StartThread(UnityAction call)
 		{
-			Thread t = new Thread(new ThreadStart(call));
-			t.Start();
+			Thread thread = new Thread(new ThreadStart(call));
+			thread.Start();
 		}
 		#endregion
 	}
