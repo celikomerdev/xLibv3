@@ -44,11 +44,11 @@ namespace xLib.xValueClass
 			}
 		}
 		
-		internal override string AnalyticDigit
+		internal override double AnalyticDigit
 		{
 			get
 			{
-				return Value.ToString();
+				return Value;
 			}
 		}
 		#endregion

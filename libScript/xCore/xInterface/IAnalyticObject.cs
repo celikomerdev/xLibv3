@@ -29,7 +29,7 @@ namespace xLib
 			get;
 		}
 		
-		string AnalyticDigit
+		double AnalyticDigit
 		{
 			get;
 		}

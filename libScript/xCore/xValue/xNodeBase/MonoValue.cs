@@ -65,7 +65,7 @@ namespace xLib.xNode.NodeObject
 			}
 		}
 		
-		public override string AnalyticDigit
+		public override double AnalyticDigit
 		{
 			get
 			{

@@ -109,7 +109,7 @@ namespace xLib.xNode.NodeObject
 			get;
 		}
 		
-		public abstract string AnalyticDigit
+		public abstract double AnalyticDigit
 		{
 			get;
 		}

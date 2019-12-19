@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using Gameguru.Analytics;
 using UnityEngine;
+using xLib.EventClass;
 
 namespace xLib.xAnalytics
 {
@@ -17,16 +18,6 @@ namespace xLib.xAnalytics
 			// dict["coin_total"] = DataController.ins.coin.Value;
 			// dict["ticket_total"] = DataController.ins.ticket.Value;
 			return dict;
-		}
-		
-		protected override void OnEnabled()
-		{
-			Init();
-		}
-		
-		protected override void OnDisabled()
-		{
-			
 		}
 		
 		private static bool isInit = false;
@@ -44,6 +35,24 @@ namespace xLib.xAnalytics
 			ABTest disableIntro = new ABTest(0.5f, "disableIntro", 1);		listTestGroup.Add(disableIntro);
 			
 			Analytics.Builder.SetLogLevel(logLevel).SetAbTests(listTestGroup).Build();
+		}
+		
+		protected override void OnEnabled()
+		{
+			Init();
+			Analytics.AdvertisingIDReceived += AdvertisingIDReceived;
+		}
+		
+		protected override void OnDisabled()
+		{
+			Analytics.AdvertisingIDReceived -= AdvertisingIDReceived;
+		}
+		
+		[SerializeField]private EventString advertisingIDReceived = new EventString();
+		private void AdvertisingIDReceived(string value)
+		{
+			if(string.IsNullOrWhiteSpace(value)) return;
+			advertisingIDReceived.Value = value;
 		}
 		
 		public void LogScreen(string screenName)
@@ -67,7 +76,8 @@ namespace xLib.xAnalytics
 {
 	public class MnAnalyticsGuru : SingletonM<MnAnalyticsGuru>
 	{
-		[SerializeField]private LogLevel logLevel = LogLevel.FATAL;
+		[SerializeField]private int logLevel = 3;
+		[SerializeField]private EventString advertisingIDReceived = new EventString();
 	}
 }
 #endif

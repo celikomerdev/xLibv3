@@ -356,11 +356,11 @@ namespace xLib
 			}
 		}
 		
-		internal virtual string AnalyticDigit
+		internal virtual double AnalyticDigit
 		{
 			get
 			{
-				return "0";
+				return 0;
 			}
 		}
 		#endregion

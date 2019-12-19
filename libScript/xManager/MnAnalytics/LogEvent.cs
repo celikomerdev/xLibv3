@@ -44,8 +44,8 @@ namespace xLib.ToolManager
 			}
 		}
 		
-		[SerializeField]private string value = "0";
-		public string Value
+		[SerializeField]private double value = 0;
+		public double Value
 		{
 			get
 			{
@@ -59,7 +59,7 @@ namespace xLib.ToolManager
 		
 		public void Call()
 		{
-			StAnalytics.LogEvent(Category,Action,Label,Value);
+			StAnalytics.LogEvent(Category,Action,Label,digit:Value);
 		}
 	}
 }

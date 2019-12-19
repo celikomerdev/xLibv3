@@ -23,11 +23,11 @@ namespace xLib.xValueClass
 			}
 		}
 		
-		internal override string AnalyticDigit
+		internal override double AnalyticDigit
 		{
 			get
 			{
-				return (Value? "1":"0");
+				return (Value? 1:0);
 			}
 		}
 		#endregion
