@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace xLib.ToolManager
@@ -28,7 +29,7 @@ namespace xLib.ToolManager
 		
 		protected virtual void Send(IAnalyticObject analyticObject)
 		{
-			StAnalytics.LogEvent(key:"Value", label:analyticObject.Key, data:analyticObject.AnalyticString, digit:analyticObject.AnalyticDigit);
+			StAnalytics.LogEvent(key:"object",digit:analyticObject.AnalyticDigit,data:new Dictionary<string,object>{{"key",analyticObject.Key},{"value",analyticObject.AnalyticString}});
 		}
 	}
 }

@@ -1,65 +1,53 @@
 ﻿#if xLibv3
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace xLib.ToolManager
 {
 	public class LogEvent : BaseMainM
 	{
-		[SerializeField]private string category = "category";
-		public string Category
+		[SerializeField]private string key = "key";
+		public string Key
 		{
 			get
 			{
-				return category;
+				return key;
 			}
 			set
 			{
-				this.category = value;
+				this.key = value;
 			}
 		}
 		
-		[SerializeField]private string action = "action";
-		public string Action
+		[SerializeField]private double digit = 0;
+		public double Digit
 		{
 			get
 			{
-				return action;
+				return digit;
 			}
 			set
 			{
-				this.action = value;
+				this.digit = value;
 			}
 		}
 		
-		[SerializeField]private string label = "label";
-		public string Label
+		[SerializeField]private string data = "data";
+		public string Data
 		{
 			get
 			{
-				return label;
+				return data;
 			}
 			set
 			{
-				this.label = value;
-			}
-		}
-		
-		[SerializeField]private double value = 0;
-		public double Value
-		{
-			get
-			{
-				return value;
-			}
-			set
-			{
-				this.value = value;
+				this.data = value;
 			}
 		}
 		
 		public void Call()
 		{
-			StAnalytics.LogEvent(Category,Action,Label,digit:Value);
+			StAnalytics.LogEvent(key:key,digit:digit,data:new Dictionary<string,object>{{"data",data}});
 		}
 	}
 }

@@ -12,7 +12,7 @@ namespace xLib
 			// MnAnalytics.ins.LogScreen(key);
 		}
 		
-		public static void LogEvent(string key="",string label="",object data=null,double digit=0,bool canSend=true)
+		public static void LogEvent(string key="",double digit=0,Dictionary<string,object> data=null,bool canSend=true)
 		{
 			if(!canSend) return;
 			// if(!MnAnalytics.ins) return;
