@@ -29,7 +29,7 @@ namespace xLib.ToolManager
 		
 		protected virtual void Send(IAnalyticObject analyticObject)
 		{
-			StAnalytics.LogEvent(key:"object",digit:analyticObject.AnalyticDigit,data:new Dictionary<string,object>{{"key",analyticObject.Key},{"value",analyticObject.AnalyticString}});
+			StAnalytics.LogEvent(key:"object",label:analyticObject.Key,digit:analyticObject.AnalyticDigit,data:new Dictionary<string,object>{{"value",analyticObject.AnalyticString}});
 		}
 	}
 }

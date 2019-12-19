@@ -19,6 +19,19 @@ namespace xLib.ToolManager
 			}
 		}
 		
+		[SerializeField]private string label = "label";
+		public string Label
+		{
+			get
+			{
+				return label;
+			}
+			set
+			{
+				this.label = value;
+			}
+		}
+		
 		[SerializeField]private double digit = 0;
 		public double Digit
 		{
@@ -47,7 +60,7 @@ namespace xLib.ToolManager
 		
 		public void Call()
 		{
-			StAnalytics.LogEvent(key:key,digit:digit,data:new Dictionary<string,object>{{"data",data}});
+			StAnalytics.LogEvent(key:key,label:label,digit:digit,data:new Dictionary<string,object>{{"data",data}});
 		}
 	}
 }

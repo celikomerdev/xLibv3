@@ -40,11 +40,15 @@ namespace xLib.xAnalytics
 		protected override void OnEnabled()
 		{
 			Init();
+			MnAnalytics.logScreen += LogScreen;
+			MnAnalytics.logEvent += LogEvent;
 			Analytics.AdvertisingIDReceived += AdvertisingIDReceived;
 		}
 		
 		protected override void OnDisabled()
 		{
+			MnAnalytics.logScreen -= LogScreen;
+			MnAnalytics.logEvent -= LogEvent;
 			Analytics.AdvertisingIDReceived -= AdvertisingIDReceived;
 		}
 		
@@ -55,14 +59,16 @@ namespace xLib.xAnalytics
 			advertisingIDReceived.Value = value;
 		}
 		
-		public void LogScreen(string screenName)
+		public void LogScreen(string key)
 		{
-			Analytics.LogScreen(screenName);
+			Analytics.LogScreen(key);
 		}
 		
-		public void LogEvent(string eventName, Dictionary<string, object> parameters)
+		public void LogEvent(string key,string label,double digit,Dictionary<string,object> data)
 		{
-			Analytics.LogEvent(eventName, Stamp(parameters));
+			data["label"] = label;
+			data["digit"] = digit;
+			Analytics.LogEvent(key,Stamp(data));
 		}
 		
 		public void LogPurchase(string sku, double price, string currency, string receipt, Dictionary<string, object> parameters)

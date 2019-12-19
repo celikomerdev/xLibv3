@@ -8,15 +8,16 @@ namespace xLib
 		public static void LogScreen(string key,bool canSend=true)
 		{
 			if(!canSend) return;
-			// if(!MnAnalytics.ins) return;
-			// MnAnalytics.ins.LogScreen(key);
+			if(!MnAnalytics.ins) return;
+			MnAnalytics.ins.LogScreen(key);
 		}
 		
-		public static void LogEvent(string key="",double digit=0,Dictionary<string,object> data=null,bool canSend=true)
+		public static void LogEvent(string key="",string label="",double digit=0,Dictionary<string,object> data=null,bool canSend=true)
 		{
 			if(!canSend) return;
-			// if(!MnAnalytics.ins) return;
-			// MnAnalytics.ins.LogEvent(key,parameters);
+			if(!MnAnalytics.ins) return;
+			if(data==null) data = new Dictionary<string,object>();
+			MnAnalytics.ins.LogEvent(key,label,digit,data);
 		}
 		
 		// public static void LogPurchase(string sku,double price,string currency,string receipt,bool canSend=true)

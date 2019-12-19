@@ -7,7 +7,7 @@ namespace xLib.ToolManager
 	{
 		protected override void Send(IAnalyticObject analyticObject)
 		{
-			StAnalytics.LogEvent(key:"object",digit:analyticObject.AnalyticDigit,data:new Dictionary<string,object>{{"name",analyticObject.Name},{"value",analyticObject.AnalyticString}});
+			StAnalytics.LogEvent(key:"object",label:analyticObject.Name,digit:analyticObject.AnalyticDigit,data:new Dictionary<string,object>{{"value",analyticObject.AnalyticString}});
 		}
 	}
 }
