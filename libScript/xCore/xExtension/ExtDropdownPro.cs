@@ -6,9 +6,9 @@ namespace xLib
 {
 	public static class ExtDropdownPro
 	{
-		public static void SetValueWithString(this TMP_Dropdown dropdown,string stringValue)
+		public static int GetValueWithString(this TMP_Dropdown dropdown,string stringValue)
 		{
-			dropdown.value = dropdown.FindOptionIndex(stringValue);
+			return dropdown.FindOptionIndex(stringValue);
 		}
 		
 		public static int FindOptionIndex(this TMP_Dropdown dropdown,string stringValue)

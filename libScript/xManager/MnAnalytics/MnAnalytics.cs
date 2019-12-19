@@ -23,16 +23,16 @@ namespace xLib
 		public void LogEvent(string key,string label,double digit,Dictionary<string,object> data)
 		{
 			data = Stamp(data);
-			if(CanDebug) Debug.Log($"{this.name}:LogEvent:{key}:{data.ToJsonString()}",this);
+			if(CanDebug) Debug.Log($"{this.name}:LogEvent:{key}:label:{label}:digit:{digit}:data:{data.ToJsonString()}",this);
 			logEvent(key,label,digit,data);
 		}
 		
 		public static Action<string,Dictionary<string,object>> logPurchase = delegate{};
-		public void LogPurchase(string key,Dictionary<string,object> parameters)
+		public void LogPurchase(string key,Dictionary<string,object> data)
 		{
-			parameters = Stamp(parameters);
-			if(CanDebug) Debug.Log($"{this.name}:LogPurchase:{key}:{parameters.ToJsonString()}",this);
-			logPurchase(key,parameters);
+			data = Stamp(data);
+			if(CanDebug) Debug.Log($"{this.name}:LogPurchase:{key}:data:{data.ToJsonString()}",this);
+			logPurchase(key,data);
 		}
 	}
 }
