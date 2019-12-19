@@ -1,10 +1,10 @@
-﻿#if xLibv2
-#if xAnalyticsGoogle
+﻿#if xLibv3
+#if AnalyticsGoogle
 using System.Collections;
 using UnityEngine;
-using xLib.xAnalyticsGoogle;
+using xLib.AnalyticsGoogle;
 
-namespace xLib.Analytics
+namespace xLib.xAnalytics
 {
 	internal class MnAnalyticsGoogle : SingletonM<MnAnalyticsGoogle>
 	{
@@ -102,7 +102,7 @@ namespace xLib.Analytics
 #else
 using UnityEngine;
 
-namespace xLib.Analytics
+namespace xLib.xAnalytics
 {
 	internal class MnAnalyticsGoogle : SingletonM<MnAnalyticsGoogle>
 	{

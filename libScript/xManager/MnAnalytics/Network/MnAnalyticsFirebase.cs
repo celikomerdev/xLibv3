@@ -1,10 +1,10 @@
-﻿#if xLibv2
-#if FireBaseAnalytics
+﻿#if xLibv3
+#if AnalyticsFireBase
 using Firebase.Analytics;
 
-namespace xLib.Analytics
+namespace xLib.xAnalytics
 {
-	public class MnFirebaseAnalytics : SingletonM<MnFirebaseAnalytics>
+	public class MnAnalyticsFirebase : SingletonM<MnAnalyticsFirebase>
 	{
 		public void LogScreen(string value)
 		{
@@ -33,9 +33,9 @@ namespace xLib.Analytics
 	}
 }
 #else
-namespace xLib.Analytics
+namespace xLib.xAnalytics
 {
-	public class MnFirebaseAnalytics : SingletonM<MnFirebaseAnalytics>
+	public class MnAnalyticsFirebase : SingletonM<MnAnalyticsFirebase>
 	{
 		public void LogScreen(string value){}
 		public void LogEvent(string valueName, string value){}
