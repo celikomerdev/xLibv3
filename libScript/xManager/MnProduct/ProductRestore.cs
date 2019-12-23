@@ -9,21 +9,29 @@ namespace xLib.ToolPurchase
 	public class ProductRestore : BaseRegisterM
 	{
 		[SerializeField]private string key = "";
+		[SerializeField]private bool restoreOnce = false;
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
 		[SerializeField]private EventBool eventRestore = new EventBool();
 		
-		protected override bool OnRegister(bool value)
+		protected override bool OnRegister(bool register)
 		{
-			MnProduct.ins.onInit.Listener(value,ListenResult,true);
-			MnProduct.ins.onRestore.Listener(value,ListenResult,true);
-			MnProduct.ins.onPurchase.Listener(value,ListenResult,true);
+			if(!restoreOnce) MnProduct.ins.onInit.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
+			MnProduct.ins.onRestore.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
+			MnProduct.ins.onPurchase.Listener(register:register, call:ListenPurchase, viewId:ViewId, order:baseRegister.order, onRegister:true);
 			return value;
 		}
 		
+		private void ListenRestore(bool value)
+		{
+			if(restoreOnce && MnProduct.ins.isRestore.Value) return;
+			ListenPurchase(value);
+		}
+		
 		private Product product = null;
-		private void ListenResult(bool value)
+		private void ListenPurchase(bool value)
 		{
 			if(!value) return;
+			
 			if(product == null) product = MnProduct.ins.GetProduct(key);
 			if(product == null) return;
 			if(product.definition.type != ProductType.NonConsumable) return;
@@ -40,18 +48,27 @@ namespace xLib.ToolPurchase
 {
 	public class ProductRestore : BaseRegisterM
 	{
-		[SerializeField]private string key;
+		[SerializeField]private string key = "";
+		[SerializeField]private bool restoreOnce = false;
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
 		[SerializeField]private EventBool eventRestore = new EventBool();
 		
 		protected override bool OnRegister(bool register)
 		{
-			MnProduct.ins.onPurchase.Listener(register,ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:true);
+			MnProduct.ins.onRestore.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
+			MnProduct.ins.onPurchase.Listener(register:register, call:ListenPurchase, viewId:ViewId, order:baseRegister.order, onRegister:true);
 			return register;
 		}
 		
-		private void ListenResult(bool value)
+		private void ListenRestore(bool value)
 		{
+			if(restoreOnce && MnProduct.ins.isRestore.Value) return;
+			ListenPurchase(value);
+		}
+		
+		private void ListenPurchase(bool value)
+		{
+			if(!value) return;
 			eventRestore.Invoke(value);
 		}
 	}

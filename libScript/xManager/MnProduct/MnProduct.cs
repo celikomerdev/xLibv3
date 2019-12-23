@@ -149,7 +149,7 @@ namespace xLib
 		#endregion
 		
 		#region Restore
-		public NodeBool inRestore;
+		public NodeBool inRestore = null;
 		public void Restore()
 		{
 			if(inRestore.Value) return;
@@ -203,7 +203,7 @@ namespace xLib
 			if(!value) return;
 		}
 		
-		public NodeBool onPurchase;
+		public NodeBool onPurchase = null;
 		public static Action<bool,string> onPurchaseProduct;
 		private void OnPurchase(bool result,string productId)
 		{
@@ -218,13 +218,15 @@ namespace xLib
 			inPurchase.Value = false;
 		}
 		
-		public NodeBool onRestore;
+		public NodeBool onRestore = null;
+		public NodeBool isRestore = null;
 		private void OnRestoreTrue(bool isContinue)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestore:True:isContinue:{0}",isContinue);
 			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Successful"));
 			inRestore.Value = false;
 			onRestore.Value = true;
+			isRestore.Value = true;
 		}
 		
 		private void OnRestoreFalse()
@@ -300,15 +302,18 @@ namespace xLib
 		
 		public NodeBool inRestore = null;
 		public NodeBool onRestore = null;
+		public NodeBool isRestore = null;
 		public void Restore()
 		{
 			if(inRestore.Value) return;
 			inRestore.Value = true;
 			
 			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
-			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Failed"));
+			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Successful"));
+			
 			inRestore.Value = false;
-			onRestore.Value = false;
+			onRestore.Value = true;
+			isRestore.Value = true;
 		}
 		
 		public static string currentProductId = null;
