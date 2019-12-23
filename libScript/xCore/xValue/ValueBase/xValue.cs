@@ -348,6 +348,14 @@ namespace xLib
 		#region Analytics
 		internal bool analyticDirty = false;
 		
+		internal virtual object AnalyticObject
+		{
+			get
+			{
+				return Value;
+			}
+		}
+		
 		internal virtual string AnalyticString
 		{
 			get

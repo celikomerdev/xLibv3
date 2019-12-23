@@ -23,9 +23,7 @@ namespace xLib
 		{
 			for (int i = 0; i < nodeInt.Length; i++)
 			{
-				#if GuruAnalytics
 				nodeInt[i].Value = GetGroup(nodeInt[i].Key);
-				#endif
 			}
 		}
 		

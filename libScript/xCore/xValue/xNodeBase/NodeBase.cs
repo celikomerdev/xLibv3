@@ -104,6 +104,11 @@ namespace xLib.xNode.NodeObject
 			set;
 		}
 		
+		public abstract object AnalyticObject
+		{
+			get;
+		}
+		
 		public abstract string AnalyticString
 		{
 			get;

@@ -10,13 +10,16 @@ namespace xLib.xAnalytics
 	public class MnAnalyticsGuru : SingletonM<MnAnalyticsGuru>
 	{
 		[SerializeField]private LogLevel logLevel = LogLevel.FATAL;
+		[SerializeField]private Object[] arrayIAnalyticObject = new Object[0];
+		[SerializeField]private IAnalyticObject[] m_arrayIAnalyticObject = new IAnalyticObject[0];
 		
-		//TODO inspector
 		private Dictionary<string, object> Stamp(Dictionary<string, object> dict)
 		{
-			// dict["playerLevel"] = DataController.ins.level.Value;
-			// dict["coin_total"] = DataController.ins.coin.Value;
-			// dict["ticket_total"] = DataController.ins.ticket.Value;
+			for (int i = 0; i < m_arrayIAnalyticObject.Length; i++)
+			{
+				IAnalyticObject analyticObject = m_arrayIAnalyticObject[i];
+				dict[analyticObject.Name] = analyticObject.AnalyticObject;
+			}
 			return dict;
 		}
 		
@@ -27,14 +30,11 @@ namespace xLib.xAnalytics
 			if(isInit) return;
 			isInit = true;
 			
-			//TODO inspector
-			List<ABTest> listTestGroup = new List<ABTest>();
-			ABTest levelLockTest = new ABTest(0.5f, "levelLock", 1);		listTestGroup.Add(levelLockTest);
-			ABTest startMotoTest = new ABTest(0.5f, "startMoto", 1);		listTestGroup.Add(startMotoTest);
-			ABTest defaultCamera = new ABTest(1.0f, "defaultCamera", 4);	listTestGroup.Add(defaultCamera);
-			ABTest disableIntro = new ABTest(0.5f, "disableIntro", 1);		listTestGroup.Add(disableIntro);
+			m_arrayIAnalyticObject = m_arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>();
 			
-			Analytics.Builder.SetLogLevel(logLevel).SetAbTests(listTestGroup).Build();
+			AnalyticsBuilder builder = Analytics.Builder;
+			builder.SetLogLevel(logLevel);
+			builder.Build();
 		}
 		
 		protected override void OnEnabled()
@@ -83,6 +83,7 @@ namespace xLib.xAnalytics
 	public class MnAnalyticsGuru : SingletonM<MnAnalyticsGuru>
 	{
 		[SerializeField]private int logLevel = 3;
+		[SerializeField]private Object[] arrayIAnalyticObject = new Object[0];
 		[SerializeField]private EventString advertisingIDReceived = new EventString();
 	}
 }

@@ -24,6 +24,11 @@ namespace xLib
 			set;
 		}
 		
+		object AnalyticObject
+		{
+			get;
+		}
+		
 		string AnalyticString
 		{
 			get;

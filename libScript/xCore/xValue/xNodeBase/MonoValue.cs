@@ -57,6 +57,14 @@ namespace xLib.xNode.NodeObject
 			}
 		}
 		
+		public override object AnalyticObject
+		{
+			get
+			{
+				return Node.AnalyticObject;
+			}
+		}
+		
 		public override string AnalyticString
 		{
 			get
