@@ -30,8 +30,6 @@ namespace xLib.xAnalytics
 			if(isInit) return;
 			isInit = true;
 			
-			m_arrayIAnalyticObject = m_arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>();
-			
 			AnalyticsBuilder builder = Analytics.Builder;
 			builder.SetLogLevel(logLevel);
 			builder.Build();
@@ -40,6 +38,7 @@ namespace xLib.xAnalytics
 		protected override void OnEnabled()
 		{
 			Init();
+			m_arrayIAnalyticObject = arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>();
 			MnAnalytics.logScreen += LogScreen;
 			MnAnalytics.logEvent += LogEvent;
 			Analytics.AdvertisingIDReceived += AdvertisingIDReceived;

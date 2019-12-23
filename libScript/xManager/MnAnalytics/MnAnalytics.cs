@@ -21,6 +21,11 @@ namespace xLib
 			return dict;
 		}
 		
+		protected override void OnEnabled()
+		{
+			m_arrayIAnalyticObject = arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>();
+		}
+		
 		public static Action<string> logScreen = delegate{};
 		public void LogScreen(string key)
 		{

@@ -12,7 +12,7 @@ namespace xLib.ToolManager
 		private void Start()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Start");
-			m_arrayIAnalyticObject = m_arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>();
+			m_arrayIAnalyticObject = arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>();
 		}
 		
 		private void OnCall()
