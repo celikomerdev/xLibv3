@@ -2,13 +2,22 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = System.Object;
 
 namespace xLib
 {
 	public class MnAnalytics : SingletonM<MnAnalytics>
 	{
-		private Dictionary<string,object> Stamp(Dictionary<string,object> dict)
+		[SerializeField]private Object[] arrayIAnalyticObject = new Object[0];
+		[SerializeField]private IAnalyticObject[] m_arrayIAnalyticObject = new IAnalyticObject[0];
+		
+		private Dictionary<string, object> Stamp(Dictionary<string, object> dict)
 		{
+			for (int i = 0; i < m_arrayIAnalyticObject.Length; i++)
+			{
+				IAnalyticObject analyticObject = m_arrayIAnalyticObject[i];
+				dict[analyticObject.Name] = analyticObject.AnalyticObject;
+			}
 			return dict;
 		}
 		
@@ -27,12 +36,12 @@ namespace xLib
 			logEvent(key,label,digit,data);
 		}
 		
-		public static Action<string,Dictionary<string,object>> logPurchase = delegate{};
-		public void LogPurchase(string key,Dictionary<string,object> data)
+		public static Action<string,double,string,string,Dictionary<string,object>> logPurchase = delegate{};
+		public void LogPurchase(string sku, double price, string currency, string receipt, Dictionary<string, object> data)
 		{
 			data = Stamp(data);
-			if(CanDebug) Debug.Log($"{this.name}:LogPurchase:{key}:data:{data.ToJsonString()}",this);
-			logPurchase(key,data);
+			if(CanDebug) Debug.Log($"{this.name}:LogPurchase:{sku}:price:{price}:currency:{currency}:receipt:{price}:receipt:{data.ToJsonString()}",this);
+			logPurchase(sku,price,currency,receipt,data);
 		}
 	}
 }

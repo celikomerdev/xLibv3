@@ -61,19 +61,24 @@ namespace xLib.xAnalytics
 		
 		public void LogScreen(string key)
 		{
+			if(CanDebug) Debug.Log($"{this.name}:LogScreen:{key}",this);
 			Analytics.LogScreen(key);
 		}
 		
 		public void LogEvent(string key,string label,double digit,Dictionary<string,object> data)
 		{
+			data = Stamp(data);
 			data["label"] = label;
 			data["digit"] = digit;
-			Analytics.LogEvent(key,Stamp(data));
+			if(CanDebug) Debug.Log($"{this.name}:LogEvent:{key}:data:{data.ToJsonString()}",this);
+			Analytics.LogEvent(key,data);
 		}
 		
-		public void LogPurchase(string sku, double price, string currency, string receipt, Dictionary<string, object> parameters)
+		public void LogPurchase(string sku, double price, string currency, string receipt, Dictionary<string, object> data)
 		{
-			Analytics.LogPurchase(sku, price, currency, receipt, Stamp(parameters));
+			data = Stamp(data);
+			if(CanDebug) Debug.Log($"{this.name}:LogPurchase:{sku}:price:{price}:currency:{currency}:receipt:{price}:receipt:{data.ToJsonString()}",this);
+			Analytics.LogPurchase(sku,price,currency,receipt,data);
 		}
 	}
 }
