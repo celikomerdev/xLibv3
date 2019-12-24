@@ -11,14 +11,11 @@ namespace xLib
 		#region Init
 		[SerializeField]private NodeBool isInit = null;
 		private bool inInit;
-		public override void Init()
+		protected override void Inited()
 		{
-			base.Init();
 			if(isInit.Value) return;
 			if(inInit) return;
 			inInit = true;
-			
-			InitPayload();
 			
 			string appId = MnKey.GetValue("OneSignal-Id");
 			string googleProjectNumber = MnKey.GetValue("Google-Project-Number");
@@ -37,8 +34,7 @@ namespace xLib
 			OneSignal.permissionObserver += ObserverPermission;
 			OneSignal.subscriptionObserver += ObserverSubscription;
 			OneSignal.emailSubscriptionObserver += ObserverSubscriptionEmail;
-			OneSignal.idsAvailableDelegate += IdsAvailable;
-			OneSignal.IdsAvailable();
+			OneSignal.IdsAvailable(IdsAvailable);
 			
 			OSPermissionSubscriptionState pushState = OneSignal.GetPermissionSubscriptionState();
 		}
@@ -75,36 +71,34 @@ namespace xLib
 		
 		private void OnNotificationReceive(OSNotification notification)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnNotificationReceive:{0}",notification);
-			StPopupBar.QueueMessage(MnLocalize.GetValue("You Have New Notification"));
+			if(CanDebug) Debug.Log($"{this.name}:OnNotificationReceive:{notification}",this);
+			MnNotification.NotificationReceive();
 		}
 		
-		private OSNotificationPayload payload;
 		private void OnNotificationOpen(OSNotificationOpenedResult result)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnNotificationOpen:{0}",result);
-			payload = result.notification.payload;
-			TryConsumePayload();
+			if(CanDebug) Debug.Log($"{this.name}:OnNotificationOpen:{result}",this);
+			TryConsumePayload(result.notification.payload);
 		}
 		
 		private void OnMessageClick(OSInAppMessageAction result)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnMessageClick:{0}",result);
+			if(CanDebug) Debug.Log($"{this.name}:OnMessageClick:{result}",this);
 		}
 		
 		private void ObserverPermission(OSPermissionStateChanges result)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":ObserverPermission:{0}",result);
+			if(CanDebug) Debug.Log($"{this.name}:ObserverPermission:{result}",this);
 		}
 		
 		private void ObserverSubscription(OSSubscriptionStateChanges result)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":ObserverSubscription:{0}",result);
+			if(CanDebug) Debug.Log($"{this.name}:ObserverSubscription:{result}",this);
 		}
 		
 		private void ObserverSubscriptionEmail(OSEmailSubscriptionStateChanges result)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":ObserverSubscriptionEmail:{0}",result);
+			if(CanDebug) Debug.Log($"{this.name}:ObserverSubscriptionEmail:{result}",this);
 		}
 		#endregion
 		
@@ -112,13 +106,13 @@ namespace xLib
 		#region General
 		public void UserDidProvideConsent(bool value)
 		{
-			if(inInit || isInit.Value) Debug.LogWarningFormat(this,this.name+"CallBeforeInit");
+			if(inInit || isInit.Value) Debug.LogWarning($"{this.name}:CallBeforeInit",this);
 			OneSignal.UserDidProvideConsent(value);
 		}
 		
 		public void SetRequiresUserPrivacyConsent(bool value)
 		{
-			if(inInit || isInit.Value) Debug.LogWarningFormat(this,this.name+"CallBeforeInit");
+			if(inInit || isInit.Value) Debug.LogWarning($"{this.name}:CallBeforeInit",this);
 			if(true) UserDidProvideConsent(true);
 			OneSignal.SetRequiresUserPrivacyConsent(value);
 		}
@@ -135,7 +129,6 @@ namespace xLib
 		}
 		#endregion
 		
-		
 		#region Tag
 		private void SendTags(Dictionary<string,string> dict)
 		{
@@ -143,61 +136,19 @@ namespace xLib
 		}
 		#endregion
 		
-		
 		#region Payload
-		[SerializeField]private Object[] arrayPayload = new Object[0];
-		private Dictionary<string,ISerializableObject> dictPayload = new Dictionary<string,ISerializableObject>();
-		private void InitPayload()
+		private void TryConsumePayload(OSNotificationPayload payload)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":InitPayload");
-			
-			ISerializableObject[] array = arrayPayload.GetGenericsArray<ISerializableObject>();
-			for (int i = 0; i < array.Length; i++)
-			{
-				if(CanDebug) Debug.LogFormat(this,this.name+":InitPayload:{0}",array[i].Key);
-				dictPayload.Add(array[i].Key,array[i]);
-			}
-		}
-		
-		public void TryConsumePayload()
-		{
-			if(payload.additionalData == null) return;
-			DebugPayload();
-			
-			if(lastNotificationId.Value == payload.notificationID)
-			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("You Have Already Used This"));
-				return;
-			}
+			bool useData = (lastNotificationId.Value != payload.notificationID);
 			lastNotificationId.Value = payload.notificationID;
 			
-			ConsumePayload();
+			MnNotification.NotificationOpen(useData,payload.additionalData.ToJsonString());
 			OneSignal.ClearOneSignalNotifications();
 		}
-		
-		private void ConsumePayload()
-		{
-			string tempId = ViewCore.CurrentId;
-			ViewCore.CurrentId = "Client";
-			
-			foreach (var item in dictPayload)
-			{
-				if(!payload.additionalData.ContainsKey(item.Key)) continue;
-				item.Value.SerializedObjectRaw = payload.additionalData[item.Key];
-			}
-			
-			ViewCore.CurrentId = tempId;
-		}
-		
-		private void DebugPayload()
-		{
-			if(!CanDebug) return;
-			foreach (var item in payload.additionalData)
-			{
-				Debug.LogFormat(this,this.name+":Payload:{0}:{1}",item.Key,item.Value);
-			}
-		}
 		#endregion
+		
+		[SerializeField]private UnityEngine.Object[] arrayTag = new UnityEngine.Object[0];
+		[SerializeField]private UnityEngine.Object[] arrayPayload = new UnityEngine.Object[0];
 	}
 }
 #else

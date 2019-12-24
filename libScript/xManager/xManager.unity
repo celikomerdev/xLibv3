@@ -178,8 +178,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 30
@@ -272,8 +270,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseFloat, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &6819181
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,13 +321,9 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls:
@@ -379,8 +371,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls:
@@ -395,8 +385,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &11761774
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,7 +420,7 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
+  isPrimary: 0
   inShow: {fileID: 11400000, guid: c54699db6e149ba49a82c57f4b8713fb, type: 2}
   interstitial: {fileID: 1993092501}
   rewarded: {fileID: 644390017}
@@ -446,20 +434,14 @@ MonoBehaviour:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onClose:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onReward:
     eventInt:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &12985700
 Transform:
   m_ObjectHideFlags: 0
@@ -544,8 +526,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &25518365
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,6 +600,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9787365a173c41e4fac01e31fc69bb23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &33773555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 33773556}
+  - component: {fileID: 33773557}
+  m_Layer: 5
+  m_Name: OneSignal_IsInit?
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &33773556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33773555}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1299332718}
+  m_Father: {fileID: 285433044}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &33773557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33773555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc74ad3cd92651342a4f9cf6aec8a7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  baseRegister:
+    order: 0
+    onRegister: 0
+  forceClient: 0
+  target:
+  - {fileID: 11400000, guid: 2da806a57061fd743bd15153bd92af33, type: 2}
+  targetMono: []
+  eventBool:
+    eventBool:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1299332717}
+          m_MethodName: SetActive
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    eventReverse:
+      m_PersistentCalls:
+        m_Calls: []
+    eventTrue:
+      m_PersistentCalls:
+        m_Calls: []
+    eventFalse:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &37175215
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,8 +748,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseTexture, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &64225337
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,8 +817,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseFloat, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &77275951
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,7 +885,7 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
+  isPrimary: 0
   container: {fileID: 2040729100}
 --- !u!1 &107756612
 GameObject:
@@ -867,7 +922,7 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
+  isPrimary: 0
   general: {fileID: 4900000, guid: 9519be22254396144918bb83a8e168d4, type: 3}
   android: {fileID: 4900000, guid: 8d86997b574941549acd676335dd8dcb, type: 3}
   ios: {fileID: 4900000, guid: 7e8f115de027db24abe8c97db63a8520, type: 3}
@@ -955,8 +1010,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &144846201
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,12 +1021,12 @@ GameObject:
   m_Component:
   - component: {fileID: 144846202}
   m_Layer: 5
-  m_Name: Menu-Advert
+  m_Name: Rect_Advert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &144846202
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1034,12 +1087,12 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
+  isPrimary: 0
   enableHidePopups: 0
   savedGames: 0
   requestIdToken: 0
-  requestServerAuthCode: 0
   requestEmail: 0
+  requestServerAuthCode: 0
   displayName: {fileID: 11400000, guid: adb53858cade0a1428f4a4073e528011, type: 2}
   idToken: {fileID: 11400000, guid: 194a5f3dbcb6a3f478eea878a4b4386d, type: 2}
   authCode: {fileID: 11400000, guid: 4c3fdea4d8741014bbee562a1ddab17f, type: 2}
@@ -1141,8 +1194,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!114 &190094715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1193,8 +1244,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &190821435
 GameObject:
   m_ObjectHideFlags: 0
@@ -1257,8 +1306,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!114 &190821438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1298,8 +1345,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &198376310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,6 +1468,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c1e7261af3685c4c8b14ea1891b5c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  key: 
 --- !u!1 &272637588
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,11 +1535,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+    m_PressedColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+    m_DisabledColor: {r: 0.6, g: 0.6, b: 0.6, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1519,8 +1569,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &272637591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1540,8 +1588,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -1561,6 +1607,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272637588}
   m_CullTransparentMesh: 0
+--- !u!1 &285433043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 285433044}
+  - component: {fileID: 285433045}
+  m_Layer: 5
+  m_Name: MnOneSignal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &285433044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285433043}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1862658893}
+  - {fileID: 1570217299}
+  - {fileID: 33773556}
+  - {fileID: 2002242512}
+  m_Father: {fileID: 408679514}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &285433045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285433043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1a6a4fe80214feaa21cced503fc338, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  isPrimary: 0
+  isInit: {fileID: 11400000, guid: 2da806a57061fd743bd15153bd92af33, type: 2}
+  userID: {fileID: 11400000, guid: db431d94a38fb0a42812477ee4d97322, type: 2}
+  pushToken: {fileID: 11400000, guid: 907c7b936f9776f4b8dd6e9bf52f9a19, type: 2}
+  lastNotificationId: {fileID: 11400000, guid: 4a562c54e8615e04c84507e563b7ae9a, type: 2}
+  arrayTag: []
+  arrayPayload: []
 --- !u!1 &314849640
 GameObject:
   m_ObjectHideFlags: 0
@@ -1633,23 +1737,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &316045503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,23 +1858,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &335409862
 Transform:
   m_ObjectHideFlags: 0
@@ -1877,8 +1965,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &345543489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1951,8 +2037,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &361475350
 GameObject:
   m_ObjectHideFlags: 0
@@ -2077,23 +2161,71 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+--- !u!1 &408679513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 408679514}
+  - component: {fileID: 408679515}
+  m_Layer: 0
+  m_Name: MnNotification
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &408679514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408679513}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 601126000}
+  - {fileID: 285433044}
+  m_Father: {fileID: 1231115783}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &408679515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408679513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 822973646f055b147821acff94211b2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  isPrimary: 0
+  arrayTag:
+  - {fileID: 11400000, guid: 4fd4c79896d058b4e8919c5370f67d95, type: 2}
+  arrayPayload:
+  - {fileID: 11400000, guid: 5249eaa98535e4144becd22fa80833f1, type: 2}
+  - {fileID: 11400000, guid: 2e94a8a874cfa624a8e8087afb605850, type: 2}
+  - {fileID: 11400000, guid: 1f80bffb9dc2cda43bf4da5d6240a729, type: 2}
 --- !u!1 &409235387
 GameObject:
   m_ObjectHideFlags: 0
@@ -2372,18 +2504,12 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls:
@@ -2398,8 +2524,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &467877686
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,52 +2741,6 @@ MonoBehaviour:
     value: OnlineCount
     skipCompareRpc: 1
     isCompare: 1
---- !u!1 &529471124
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1949685828909024, guid: 01188b30f8a4b4e238cca75cbc636045,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1107429599}
-  - component: {fileID: 529471125}
-  m_Layer: 0
-  m_Name: MnOneSignal
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &529471125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114431625030574092, guid: 01188b30f8a4b4e238cca75cbc636045,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529471124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae1a6a4fe80214feaa21cced503fc338, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseWork:
-    canDebug: 0
-    canWork: 1
-    runInEditMode: 0
-  keepOld: 0
-  isInit: {fileID: 11400000, guid: 2da806a57061fd743bd15153bd92af33, type: 2}
-  userID: {fileID: 11400000, guid: db431d94a38fb0a42812477ee4d97322, type: 2}
-  pushToken: {fileID: 11400000, guid: 907c7b936f9776f4b8dd6e9bf52f9a19, type: 2}
-  lastNotificationId: {fileID: 11400000, guid: 4a562c54e8615e04c84507e563b7ae9a, type: 2}
-  arrayTag:
-  - {fileID: 11400000, guid: 4fd4c79896d058b4e8919c5370f67d95, type: 2}
-  arrayPayload:
-  - {fileID: 11400000, guid: 5249eaa98535e4144becd22fa80833f1, type: 2}
-  - {fileID: 11400000, guid: 1f80bffb9dc2cda43bf4da5d6240a729, type: 2}
-  - {fileID: 11400000, guid: 2e94a8a874cfa624a8e8087afb605850, type: 2}
 --- !u!1 &539549231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2714,13 +2792,9 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls:
@@ -2735,84 +2809,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
---- !u!1 &542150150
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 542150151}
-  - component: {fileID: 542150152}
-  m_Layer: 0
-  m_Name: OneSignal-Init
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &542150151
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 542150150}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1107429599}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &542150152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 542150150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4584e1e07024fc4090e935592c118f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseWork:
-    canDebug: 0
-    canWork: 1
-    runInEditMode: 0
-  baseRegister:
-    order: 0
-    onRegister: 0
-  forceClient: 0
-  target:
-  - {fileID: 11400000, guid: 2766bbb87cd582a4989a05440f1daec9, type: 2}
-  targetMono: []
-  eventUnity:
-    eventUnity:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 529471125}
-          m_MethodName: Init
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &545704710
 GameObject:
   m_ObjectHideFlags: 0
@@ -2919,8 +2918,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &561040367
 GameObject:
   m_ObjectHideFlags: 0
@@ -2992,13 +2989,9 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls:
@@ -3013,13 +3006,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &569911169
 GameObject:
   m_ObjectHideFlags: 0
@@ -3119,7 +3108,7 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
+  isPrimary: 0
   timePause: {fileID: 11400000, guid: e0b30ac787d113344b92f5fc57167088, type: 2}
   timeScale: {fileID: 11400000, guid: a47a03851b122184fb5989603b163796, type: 2}
   timeScaleCache: {fileID: 11400000, guid: 352e54d53cefa3944ac001c77cadc49c, type: 2}
@@ -3181,6 +3170,59 @@ Transform:
   m_Father: {fileID: 423871864}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &601125999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 601126000}
+  - component: {fileID: 601126001}
+  m_Layer: 0
+  m_Name: MnNotificationUnity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &601126000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601125999}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 408679514}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &601126001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601125999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac4cd5e589ec3944bf830d4c56f0b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  isPrimary: 0
+  lastNotificationId: {fileID: 11400000, guid: 71706eeb66fc5484ca7abea1694d4bdd, type: 2}
+  channelId: rfm_notifications
+  channelName: 'Racing Fever: Moto'
+  channelDescription: 'Racing Fever: Moto'
+  channelImportance: 4
 --- !u!1 &604718350
 GameObject:
   m_ObjectHideFlags: 0
@@ -3285,23 +3327,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &623356862
 GameObject:
   m_ObjectHideFlags: 0
@@ -3360,8 +3394,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 30
@@ -3439,57 +3471,40 @@ MonoBehaviour:
     order: 0
     onRegister: 0
   key: 
+  isAnalytics: 1
   onLoad:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onLoadFail:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onShow:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onReward:
     eventInt:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onClick:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onClose:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &656851004
 Transform:
   m_ObjectHideFlags: 0
@@ -3574,8 +3589,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &698363965
 GameObject:
   m_ObjectHideFlags: 0
@@ -3668,13 +3681,9 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls:
@@ -3689,13 +3698,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &730193950
 GameObject:
   m_ObjectHideFlags: 0
@@ -3727,6 +3732,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2eaa0d9a8ac46a5b0a31edbbb83e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  isPrimary: 0
+  sendLaunchEvent: 1
 --- !u!1 &738293307
 GameObject:
   m_ObjectHideFlags: 0
@@ -3799,8 +3810,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &754056251
 GameObject:
   m_ObjectHideFlags: 0
@@ -3863,8 +3872,6 @@ MonoBehaviour:
             m_StringArgument: login successful
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &758744807
 Transform:
   m_ObjectHideFlags: 0
@@ -3951,8 +3958,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!114 &761287863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4016,92 +4021,63 @@ MonoBehaviour:
     order: 0
     onRegister: 0
   key: Admob-Banner
+  isAnalytics: 1
   onLoad:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onLoadFail:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onShow:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onReward:
     eventInt:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onClick:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onClose:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   adSize: 
   adPosition: 1
   onDisplay:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onDisplayWidth:
     eventFloat:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseFloat, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onDisplayHeight:
     eventFloat:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseFloat, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &795390926
 GameObject:
   m_ObjectHideFlags: 0
@@ -4187,6 +4163,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973e1d8d380bf45bca865bc86b19202b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  isPrimary: 0
 --- !u!1 &825229072
 GameObject:
   m_ObjectHideFlags: 0
@@ -4245,13 +4226,9 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls:
@@ -4266,13 +4243,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &849397148
 GameObject:
   m_ObjectHideFlags: 0
@@ -4367,8 +4340,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &857043946
 Transform:
   m_ObjectHideFlags: 0
@@ -4459,95 +4430,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
---- !u!1 &871145090
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 871145091}
-  - component: {fileID: 871145092}
-  m_Layer: 0
-  m_Name: OneSignal-IsInit
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &871145091
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871145090}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1791006941}
-  m_Father: {fileID: 1107429599}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &871145092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871145090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc74ad3cd92651342a4f9cf6aec8a7c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseWork:
-    canDebug: 0
-    canWork: 1
-    runInEditMode: 0
-  baseRegister:
-    order: 0
-    onRegister: 0
-  forceClient: 0
-  target:
-  - {fileID: 11400000, guid: 2da806a57061fd743bd15153bd92af33, type: 2}
-  targetMono: []
-  eventBool:
-    eventBool:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1791006940}
-          m_MethodName: SetActive
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    eventReverse:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    eventTrue:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    eventFalse:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &881708532
 GameObject:
   m_ObjectHideFlags: 0
@@ -4611,11 +4493,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+    m_PressedColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+    m_DisabledColor: {r: 0.6, g: 0.6, b: 0.6, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4645,8 +4527,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &881708535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4666,8 +4546,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -4699,6 +4577,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c926d64aaa75de468a1f240564382ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  value: 0
+  eventBool:
+    eventBool:
+      m_PersistentCalls:
+        m_Calls: []
+    eventReverse:
+      m_PersistentCalls:
+        m_Calls: []
+    eventTrue:
+      m_PersistentCalls:
+        m_Calls: []
+    eventFalse:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &886600571
 GameObject:
   m_ObjectHideFlags: 0
@@ -4779,15 +4675,15 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
-  autoRestore: 1
+  isPrimary: 0
   useValidate: 1
   fakeStoreUIMode: 1
-  inPurchase: {fileID: 0}
-  inRestore: {fileID: 0}
   onInit: {fileID: 0}
+  inPurchase: {fileID: 0}
   onPurchase: {fileID: 0}
+  inRestore: {fileID: 0}
   onRestore: {fileID: 0}
+  isRestore: {fileID: 0}
 --- !u!4 &890002407
 Transform:
   m_ObjectHideFlags: 0
@@ -4934,23 +4830,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &912650970
 GameObject:
   m_ObjectHideFlags: 0
@@ -5067,8 +4955,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &928700798
 GameObject:
   m_ObjectHideFlags: 0
@@ -5223,8 +5109,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &981252774
 GameObject:
   m_ObjectHideFlags: 0
@@ -5294,8 +5178,83 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseFloat, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+--- !u!1 &982375934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 982375935}
+  - component: {fileID: 982375937}
+  - component: {fileID: 982375936}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &982375935
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982375934}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1947374174}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &982375936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982375934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 39
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: INIT
+--- !u!222 &982375937
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982375934}
+  m_CullTransparentMesh: 0
 --- !u!1 &991636586
 GameObject:
   m_ObjectHideFlags: 0
@@ -5360,79 +5319,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
---- !u!1 &1015538177
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1015538178}
-  - component: {fileID: 1015538179}
-  m_Layer: 0
-  m_Name: UserInfo-Changed
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1015538178
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015538177}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1791006941}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1015538179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015538177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4584e1e07024fc4090e935592c118f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseWork:
-    canDebug: 0
-    canWork: 1
-    runInEditMode: 0
-  baseRegister:
-    order: 0
-    onRegister: 1
-  forceClient: 0
-  target:
-  - {fileID: 11400000, guid: 8e11de2ffa456b84faea16d9ebe7aaa0, type: 2}
-  targetMono: []
-  eventUnity:
-    eventUnity:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 529471125}
-          m_MethodName: SendTags
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1017328860
 GameObject:
   m_ObjectHideFlags: 0
@@ -5514,31 +5400,10 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
-  eventInit:
-    eventUnity:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+  isPrimary: 0
   inLogin: {fileID: 11400000, guid: edbd7c442c5656e4ab4fbf78b9d1219f, type: 2}
   isLogin: {fileID: 11400000, guid: ae4ff8d063114fe4a957148102397283, type: 2}
   isSilent: {fileID: 11400000, guid: 9d2d738e6eee7ed45a7d47deccd317be, type: 2}
-  userID: {fileID: 11400000, guid: d549f42de50f6944699ea7233f20885d, type: 2}
-  personName: {fileID: 11400000, guid: 45667c95f8ad7cd4fab19d0310743488, type: 2}
-  personPicture: {fileID: 11400000, guid: aac9c28532c60c843931e160ad46c6ef, type: 2}
-  eventShowLeaderboard:
-    eventString:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-  eventShowAchievement:
-    eventString:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &1037090353
 Transform:
   m_ObjectHideFlags: 0
@@ -5633,8 +5498,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1057964553
 GameObject:
   m_ObjectHideFlags: 0
@@ -5684,7 +5547,7 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
+  isPrimary: 0
   Application_buildGUID: {fileID: 11400000, guid: 1aea1b73e9f4cb24d89dacffd14c88ac,
     type: 2}
   Application_genuine: {fileID: 11400000, guid: b60ebc21d68238c41ab8fec5857a3492,
@@ -5777,8 +5640,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1091827670
 GameObject:
   m_ObjectHideFlags: 0
@@ -5849,23 +5710,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1097378962
 GameObject:
   m_ObjectHideFlags: 0
@@ -5894,8 +5747,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1791006941}
-  m_RootOrder: 2
+  m_Father: {fileID: 1299332718}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1097378964
 MonoBehaviour:
@@ -5924,7 +5777,7 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 529471125}
+        - m_Target: {fileID: 0}
           m_MethodName: UserDidProvideConsent
           m_Mode: 0
           m_Arguments:
@@ -5935,23 +5788,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1101782715
 GameObject:
   m_ObjectHideFlags: 0
@@ -6035,8 +5880,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1101805923
 GameObject:
   m_ObjectHideFlags: 0
@@ -6106,8 +5949,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1104655384
 GameObject:
   m_ObjectHideFlags: 0
@@ -6188,26 +6029,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
---- !u!4 &1107429599
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4443192949430202, guid: 01188b30f8a4b4e238cca75cbc636045,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529471124}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1862658893}
-  - {fileID: 542150151}
-  - {fileID: 871145091}
-  m_Father: {fileID: 1231115783}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1142932960
 GameObject:
   m_ObjectHideFlags: 0
@@ -6313,23 +6134,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1172289129
 GameObject:
   m_ObjectHideFlags: 0
@@ -6433,7 +6246,7 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
+  isPrimary: 0
   showBanner: 1
 --- !u!1 &1189322059
 GameObject:
@@ -6497,11 +6310,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+    m_PressedColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+    m_DisabledColor: {r: 0.6, g: 0.6, b: 0.6, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -6531,8 +6344,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &1189322062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6552,8 +6363,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -6602,6 +6411,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 144846202}
+  - {fileID: 1509510756}
   m_Father: {fileID: 1898519318}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6690,23 +6500,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1202134711
 GameObject:
   m_ObjectHideFlags: 0
@@ -6777,7 +6579,7 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
+  isPrimary: 0
 --- !u!1 &1206550567
 GameObject:
   m_ObjectHideFlags: 0
@@ -6806,8 +6608,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1791006941}
-  m_RootOrder: 1
+  m_Father: {fileID: 1299332718}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1206550569
 MonoBehaviour:
@@ -6836,7 +6638,7 @@ MonoBehaviour:
     eventString:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 529471125}
+        - m_Target: {fileID: 0}
           m_MethodName: SetExternalUserId
           m_Mode: 0
           m_Arguments:
@@ -6847,8 +6649,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1207507440
 GameObject:
   m_ObjectHideFlags: 0
@@ -6918,23 +6718,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1213462916
 GameObject:
   m_ObjectHideFlags: 0
@@ -6996,7 +6788,7 @@ Transform:
   m_Children:
   - {fileID: 1362232427}
   - {fileID: 1017328861}
-  - {fileID: 1107429599}
+  - {fileID: 408679514}
   - {fileID: 1645561152}
   - {fileID: 1928591602}
   - {fileID: 493753117}
@@ -7096,7 +6888,7 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
+  isPrimary: 0
   stringModification: 0
   language: {fileID: 11400000, guid: fe49ca7ad22432c44be30185c6e42a1e, type: 2}
   languageIndex: {fileID: 11400000, guid: 4b6c5059bd11bac4e9f9f87e3028849b, type: 2}
@@ -7151,7 +6943,7 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
+  isPrimary: 0
 --- !u!1 &1283424067
 GameObject:
   m_ObjectHideFlags: 0
@@ -7199,6 +6991,79 @@ Transform:
   m_Father: {fileID: 409235388}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1299332717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1299332718}
+  - component: {fileID: 1299332719}
+  m_Layer: 5
+  m_Name: State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1299332718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299332717}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1206550568}
+  - {fileID: 1097378963}
+  m_Father: {fileID: 33773556}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1299332719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299332717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33dab4e14cee9bd4da6d69c5d057c3f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  eventActive:
+    eventBool:
+      m_PersistentCalls:
+        m_Calls: []
+    eventReverse:
+      m_PersistentCalls:
+        m_Calls: []
+    eventTrue:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 408679515}
+          m_MethodName: SendTags
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    eventFalse:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &1300666419
 GameObject:
   m_ObjectHideFlags: 0
@@ -7260,13 +7125,9 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls:
@@ -7281,8 +7142,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls:
@@ -7297,8 +7156,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1305022510
 GameObject:
   m_ObjectHideFlags: 0
@@ -7358,13 +7215,9 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls:
@@ -7379,8 +7232,6 @@ MonoBehaviour:
             m_StringArgument: connected
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls:
@@ -7395,8 +7246,6 @@ MonoBehaviour:
             m_StringArgument: disconnected
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1324364946
 GameObject:
   m_ObjectHideFlags: 0
@@ -7513,12 +7362,14 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
+  isPrimary: 0
+  isAsync: 0
+  delay: 1
+  backgroundLoadingPriority: 2
   loadedLevel: {fileID: 11400000, guid: e8db9576ac17bcb4396cc05090514635, type: 2}
   loadingProgress: {fileID: 11400000, guid: ece5e6de8fd2b4c468c08e738bd4bca7, type: 2}
-  loadingEarly: {fileID: 11400000, guid: 13012235c9eb1fa4bb5ef0e6136b644a, type: 2}
-  loadingLate: {fileID: 11400000, guid: 1246cecfe34fb5047855712842707659, type: 2}
-  delay: 1
+  loadingVisual: {fileID: 0}
+  loadingReal: {fileID: 0}
 --- !u!1 &1340499549
 GameObject:
   m_ObjectHideFlags: 0
@@ -7591,23 +7442,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1343042902
 GameObject:
   m_ObjectHideFlags: 0
@@ -7677,8 +7520,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!114 &1343042905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7711,8 +7552,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &1351950147
 Transform:
   m_ObjectHideFlags: 0
@@ -7848,8 +7687,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1392574447
 GameObject:
   m_ObjectHideFlags: 0
@@ -7952,8 +7789,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 30
@@ -8046,23 +7881,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &1431634625
 Transform:
   m_ObjectHideFlags: 0
@@ -8249,6 +8076,42 @@ Transform:
   m_Father: {fileID: 1716502845}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1509510755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1509510756}
+  m_Layer: 5
+  m_Name: Rect_OneSignal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1509510756
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509510755}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1947374174}
+  m_Father: {fileID: 1194966171}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1517909233
 GameObject:
   m_ObjectHideFlags: 0
@@ -8387,8 +8250,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!114 &1526157813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8480,8 +8341,7 @@ MonoBehaviour:
     canDebug: 1
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
-  nodeDebug: {fileID: 11400000, guid: 89359dc472b03544bb0bf8a248f4e780, type: 2}
+  isPrimary: 0
 --- !u!114 &1535463254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8573,6 +8433,75 @@ Transform:
   m_Father: {fileID: 2083826018}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1570217298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1570217299}
+  - component: {fileID: 1570217300}
+  m_Layer: 5
+  m_Name: OneSignal_Init
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1570217299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570217298}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 285433044}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1570217300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570217298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4584e1e07024fc4090e935592c118f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  baseRegister:
+    order: 0
+    onRegister: 0
+  forceClient: 0
+  target:
+  - {fileID: 11400000, guid: 2766bbb87cd582a4989a05440f1daec9, type: 2}
+  targetMono: []
+  eventUnity:
+    eventUnity:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 285433045}
+          m_MethodName: Init
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1575847616
 GameObject:
   m_ObjectHideFlags: 0
@@ -8610,39 +8539,28 @@ MonoBehaviour:
     order: 0
     onRegister: 0
   key: 
+  isAnalytics: 1
   onLoad:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onLoadFail:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onShow:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onReward:
     eventInt:
       m_PersistentCalls:
@@ -8658,14 +8576,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onClick:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onClose:
     eventUnity:
       m_PersistentCalls:
@@ -8681,8 +8595,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &1575847618
 Transform:
   m_ObjectHideFlags: 0
@@ -8767,8 +8679,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &1596041824
 Transform:
   m_ObjectHideFlags: 0
@@ -8878,18 +8788,12 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls:
@@ -8904,8 +8808,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &1645561152
 Transform:
   m_ObjectHideFlags: 0
@@ -8985,13 +8887,9 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls:
@@ -9006,13 +8904,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1673768460
 GameObject:
   m_ObjectHideFlags: 0
@@ -9085,8 +8979,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1691126283
 GameObject:
   m_ObjectHideFlags: 0
@@ -9159,8 +9051,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!114 &1691126286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9213,8 +9103,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1691620434
 GameObject:
   m_ObjectHideFlags: 0
@@ -9289,8 +9177,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!114 &1691620437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9313,19 +9199,13 @@ MonoBehaviour:
     eventFloat:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseFloat, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   eventIsReady:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls:
@@ -9340,13 +9220,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1695819796
 GameObject:
   m_ObjectHideFlags: 0
@@ -9418,8 +9294,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &1716502845
 Transform:
   m_ObjectHideFlags: 0
@@ -9567,23 +9441,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1736921448
 GameObject:
   m_ObjectHideFlags: 0
@@ -9654,23 +9520,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1742958266
 GameObject:
   m_ObjectHideFlags: 0
@@ -9733,8 +9591,6 @@ MonoBehaviour:
             m_StringArgument: login failed
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1751631386
 GameObject:
   m_ObjectHideFlags: 0
@@ -9806,23 +9662,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1767906180
 GameObject:
   m_ObjectHideFlags: 0
@@ -9947,39 +9795,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a536ca9e84585344b5451f454b1fe69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1791006940
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1791006941}
-  m_Layer: 0
-  m_Name: True
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1791006941
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1791006940}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1015538178}
-  - {fileID: 1206550568}
-  - {fileID: 1097378963}
-  m_Father: {fileID: 871145091}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1812120493
 Transform:
   m_ObjectHideFlags: 0
@@ -10038,6 +9853,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c40f140adce948009bbaebf4e56f94d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventBool:
+    eventBool:
+      m_PersistentCalls:
+        m_Calls: []
+    eventReverse:
+      m_PersistentCalls:
+        m_Calls: []
+    eventTrue:
+      m_PersistentCalls:
+        m_Calls: []
+    eventFalse:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!4 &1857433763
 Transform:
   m_ObjectHideFlags: 0
@@ -10082,7 +9910,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1107429599}
+  m_Father: {fileID: 285433044}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1862658894
@@ -10112,13 +9940,9 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls:
@@ -10133,13 +9957,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1884874366
 GameObject:
   m_ObjectHideFlags: 0
@@ -10252,13 +10072,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls:
@@ -10273,13 +10089,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1898519317
 GameObject:
   m_ObjectHideFlags: 0
@@ -10507,8 +10319,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &1928591602
 Transform:
   m_ObjectHideFlags: 0
@@ -10595,8 +10405,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseTexture, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1939213871
 GameObject:
   m_ObjectHideFlags: 0
@@ -10668,8 +10476,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!114 &1939213874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10754,8 +10560,135 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseFloat, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+--- !u!1 &1947374173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1947374174}
+  - component: {fileID: 1947374177}
+  - component: {fileID: 1947374176}
+  - component: {fileID: 1947374175}
+  m_Layer: 5
+  m_Name: Button_Init
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1947374174
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947374173}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 982375935}
+  m_Father: {fileID: 1509510756}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 300, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1947374175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947374173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+    m_PressedColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.6, g: 0.6, b: 0.6, a: 1}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1947374176}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 2766bbb87cd582a4989a05440f1daec9, type: 2}
+        m_MethodName: Call
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1947374176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947374173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1947374177
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947374173}
+  m_CullTransparentMesh: 0
 --- !u!1 &1949970999
 GameObject:
   m_ObjectHideFlags: 0
@@ -10912,13 +10845,9 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls:
@@ -10933,13 +10862,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1972161339
 GameObject:
   m_ObjectHideFlags: 0
@@ -10995,13 +10920,9 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls:
@@ -11016,13 +10937,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!114 &1972161342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11088,7 +11005,7 @@ MonoBehaviour:
     onRegister: 1
   forceClient: 0
   target:
-  - {fileID: 11400000, guid: 3fbbc157c18c94149b0e66d2fc014bdd, type: 2}
+  - {fileID: 0}
   targetMono: []
   eventBool:
     eventBool:
@@ -11105,23 +11022,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1987513451
 GameObject:
   m_ObjectHideFlags: 0
@@ -11191,8 +11100,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1990928944
 GameObject:
   m_ObjectHideFlags: 0
@@ -11255,23 +11162,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &1993092499
 GameObject:
   m_ObjectHideFlags: 0
@@ -11326,57 +11225,118 @@ MonoBehaviour:
     order: 0
     onRegister: 0
   key: 
+  isAnalytics: 1
   onLoad:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onLoadFail:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onShow:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onReward:
     eventInt:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onClick:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onClose:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+--- !u!1 &2002242511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2002242512}
+  - component: {fileID: 2002242513}
+  m_Layer: 5
+  m_Name: Privacy-Accepted?
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2002242512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002242511}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 285433044}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2002242513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002242511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc74ad3cd92651342a4f9cf6aec8a7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  baseRegister:
+    order: 0
+    onRegister: 1
+  forceClient: 0
+  target:
+  - {fileID: 11400000, guid: 9d45d5f13ce15564b9f1ec5b393da93b, type: 2}
+  targetMono: []
+  eventBool:
+    eventBool:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 285433045}
+          m_MethodName: UserDidProvideConsent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    eventReverse:
+      m_PersistentCalls:
+        m_Calls: []
+    eventTrue:
+      m_PersistentCalls:
+        m_Calls: []
+    eventFalse:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &2003466675
 GameObject:
   m_ObjectHideFlags: 0
@@ -11438,18 +11398,12 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls:
@@ -11464,8 +11418,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &2004967409
 GameObject:
   m_ObjectHideFlags: 0
@@ -11578,8 +11530,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseString, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &2040729099
 GameObject:
   m_ObjectHideFlags: 0
@@ -11682,8 +11632,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &2053293001
 GameObject:
   m_ObjectHideFlags: 0
@@ -11790,18 +11738,12 @@ MonoBehaviour:
     eventBool:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventReverse:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseBool, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
     eventFalse:
       m_PersistentCalls:
         m_Calls:
@@ -11816,8 +11758,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!114 &2056669781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11865,7 +11805,7 @@ MonoBehaviour:
     canDebug: 0
     canWork: 1
     runInEditMode: 0
-  keepOld: 0
+  isPrimary: 0
   dateTimeDefault:
     year: 2018
     month: 1
@@ -11877,8 +11817,6 @@ MonoBehaviour:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &2083117980
 GameObject:
   m_ObjectHideFlags: 0
@@ -12076,8 +12014,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!1 &2100310932
 GameObject:
   m_ObjectHideFlags: 0
@@ -12223,20 +12159,14 @@ MonoBehaviour:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onClose:
     eventUnity:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseUnity, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
   onReward:
     eventInt:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &2116348761
 Transform:
   m_ObjectHideFlags: 0
@@ -12408,8 +12338,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: xLib.EventBase.EventBaseInt, xLibv3, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &2140635795
 Transform:
   m_ObjectHideFlags: 0

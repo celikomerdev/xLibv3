@@ -1,6 +1,7 @@
 ﻿#if xLibv3
 using UnityEngine;
 using System;
+using xLib.xNode.NodeObject;
 
 #if UNITY_IOS
 using Unity.Notifications.iOS;
@@ -13,11 +14,13 @@ namespace xLib
 {
 	public class MnNotificationUnity : SingletonM<MnNotificationUnity>
 	{
+		[SerializeField]private NodeString lastNotificationId = null;
+		
+		[Header("Android")]
 		[SerializeField]private string channelId = "Unity Channel ID";
 		[SerializeField]private string channelName = "Unity Channel Name";
 		[SerializeField]private string channelDescription = "Unity Channel Description";
 		[SerializeField]private Importance channelImportance = Importance.Default;
-		
 		
 		protected override void Started()
 		{
@@ -28,14 +31,14 @@ namespace xLib
 		protected override void Inited()
 		{
 			if(isInit) return;
-			CreateChannel();
+			InitPlatform();
 			isInit = true;
 		}
 		
 		
 		#if UNITY_ANDROID
 		private static AndroidNotificationChannel channel;
-		private void CreateChannel()
+		private void InitPlatform()
 		{
 			channel = new AndroidNotificationChannel();
 			channel.Id = channelId;
@@ -43,19 +46,20 @@ namespace xLib
 			channel.Description = channelDescription;
 			channel.Importance = channelImportance;
 			AndroidNotificationCenter.RegisterNotificationChannel(channel);
+			AndroidNotificationCenter.OnNotificationReceived += receiveData =>{NotificationReceive();};
 			
-			AndroidNotificationIntentData data = AndroidNotificationCenter.GetLastNotificationIntent();
-			if(data==null) return;
-			string intentData = data.Notification.IntentData;
-			if(!string.IsNullOrWhiteSpace(intentData)) NotificationOpen(intentData);
+			AndroidNotificationIntentData lastData = AndroidNotificationCenter.GetLastNotificationIntent();
+			if(lastData!=null) NotificationOpen(lastData.Id,lastData.Notification.IntentData);
 		}
 		#endif
 		
 		
 		#if UNITY_IOS
-		private void CreateChannel()
+		private void InitPlatform()
 		{
-			
+			iOSNotificationCenter.OnRemoteNotificationReceived += receiveData =>{NotificationReceive();};
+			iOSNotification lastData = iOSNotificationCenter.GetLastRespondedNotification();
+			if(lastData!=null) NotificationOpen(lastData.Identifier,lastData.Data);
 		}
 		#endif
 		
@@ -91,12 +95,16 @@ namespace xLib
 			return id;
 		}
 		
-		
-		public static Action<string> actionNotificationOpen = delegate{};
-		public void NotificationOpen(string data)
+		private void NotificationReceive()
 		{
-			actionNotificationOpen(data);
-			MnNotification.NotificationOpen(data);
+			MnNotification.NotificationReceive();
+		}
+		
+		private void NotificationOpen(int id,string data)
+		{
+			bool useData = (lastNotificationId.Value != id.ToString());
+			lastNotificationId.Value = id.ToString();
+			MnNotification.NotificationOpen(useData,data);
 		}
 		
 		public void CancelNotification(int id)
