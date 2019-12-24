@@ -48,6 +48,17 @@ namespace xLib
 			isInit.Value = true;
 			inInit = false;
 		}
+		
+		protected override void OnEnabled()
+		{
+			Init();
+			MnNotification.actionSendTags += SendTags;
+		}
+		
+		protected override void OnDisabled()
+		{
+			MnNotification.actionSendTags -= SendTags;
+		}
 		#endregion
 		
 		
@@ -126,19 +137,8 @@ namespace xLib
 		
 		
 		#region Tag
-		[SerializeField]private Object[] arrayTag = new Object[0];
-		public void SendTags()
+		private void SendTags(Dictionary<string,string> dict)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":SendTags");
-			
-			Dictionary<string,string> dict = new Dictionary<string,string>();
-			ISerializableObject[] array = arrayTag.GetGenericsArray<ISerializableObject>();
-			for (int i = 0; i < array.Length; i++)
-			{
-				if(CanDebug) Debug.LogFormat(this,this.name+":InitDictionary:{0}",array[i].Key,array[i].SerializedObjectRaw.ToString());
-				dict.Add(array[i].Key,array[i].SerializedObjectRaw.ToString());
-			}
-			
 			OneSignal.SendTags(dict);
 		}
 		#endregion
@@ -218,12 +218,6 @@ namespace xLib
 		public void SetRequiresUserPrivacyConsent(bool value){}
 		public void SetExternalUserId(string value){}
 		public void PauseInAppMessages(bool value){}
-		
-		[SerializeField]private Object[] arrayTag = new Object[0];
-		public void SendTags(){}
-		
-		[SerializeField]private Object[] arrayPayload = new Object[0];
-		public void TryConsumePayload(){}
 		#pragma warning restore
 	}
 }

@@ -60,7 +60,7 @@ namespace xLib
 		#endif
 		
 		
-		public static int Schedule(DateTime dateTime, string title, string message, string intentData = "")
+		public static int CreateNotification(DateTime dateTime, string title, string message, string intentData = "")
 		{
 			int id = UnityEngine.Random.Range(1,9999999);
 			
@@ -96,6 +96,7 @@ namespace xLib
 		public void NotificationOpen(string data)
 		{
 			actionNotificationOpen(data);
+			MnNotification.NotificationOpen(data);
 		}
 		
 		public void CancelNotification(int id)
