@@ -47,7 +47,6 @@ namespace xLib
 		
 		protected override void OnEnabled()
 		{
-			Init();
 			MnNotification.actionSendTags += SendTags;
 		}
 		
@@ -146,9 +145,6 @@ namespace xLib
 			OneSignal.ClearOneSignalNotifications();
 		}
 		#endregion
-		
-		[SerializeField]private UnityEngine.Object[] arrayTag = new UnityEngine.Object[0];
-		[SerializeField]private UnityEngine.Object[] arrayPayload = new UnityEngine.Object[0];
 	}
 }
 #else

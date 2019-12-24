@@ -22,7 +22,7 @@ namespace xLib
 		[SerializeField]private string channelDescription = "Unity Channel Description";
 		[SerializeField]private Importance channelImportance = Importance.Default;
 		
-		protected override void Started()
+		protected override void Awaked()
 		{
 			Init();
 		}
@@ -46,10 +46,10 @@ namespace xLib
 			channel.Description = channelDescription;
 			channel.Importance = channelImportance;
 			AndroidNotificationCenter.RegisterNotificationChannel(channel);
-			AndroidNotificationCenter.OnNotificationReceived += receiveData =>{NotificationReceive();};
+			AndroidNotificationCenter.OnNotificationReceived += receiveNotification =>{NotificationReceive();};
 			
-			AndroidNotificationIntentData lastData = AndroidNotificationCenter.GetLastNotificationIntent();
-			if(lastData!=null) NotificationOpen(lastData.Id,lastData.Notification.IntentData);
+			AndroidNotificationIntentData lastNotification = AndroidNotificationCenter.GetLastNotificationIntent();
+			if(lastNotification!=null) NotificationOpen(lastNotification.Id,lastNotification.Notification.IntentData);
 		}
 		#endif
 		
@@ -57,15 +57,16 @@ namespace xLib
 		#if UNITY_IOS
 		private void InitPlatform()
 		{
-			iOSNotificationCenter.OnRemoteNotificationReceived += receiveData =>{NotificationReceive();};
-			iOSNotification lastData = iOSNotificationCenter.GetLastRespondedNotification();
-			if(lastData!=null) NotificationOpen(lastData.Identifier,lastData.Data);
+			iOSNotificationCenter.OnRemoteNotificationReceived += receiveNotification =>{NotificationReceive();};
+			iOSNotification lastNotification = iOSNotificationCenter.GetLastRespondedNotification();
+			if(lastNotification!=null) NotificationOpen(lastNotification.Identifier,lastNotification.Data);
 		}
 		#endif
 		
 		
-		public static int CreateNotification(DateTime dateTime, string title, string message, string intentData = "")
+		public int CreateNotification(DateTime dateTime, string title, string message, string data = "")
 		{
+			if(CanDebug) Debug.Log($"{this.name}:CreateNotification:{title}:{message}:{dateTime.ToLongDateString()}:{dateTime.ToLongTimeString()}:{data}",this);
 			int id = UnityEngine.Random.Range(1,9999999);
 			
 			#if UNITY_ANDROID
@@ -73,7 +74,7 @@ namespace xLib
 			notification.Title = title;
 			notification.Text = message;
 			notification.FireTime = dateTime;
-			if(!string.IsNullOrWhiteSpace(intentData)) notification.IntentData = intentData;
+			if(!string.IsNullOrWhiteSpace(data)) notification.IntentData = data;
 			id = AndroidNotificationCenter.SendNotification(notification,channel.Name);
 			#endif
 			
@@ -89,6 +90,7 @@ namespace xLib
 			};
 			notification.Trigger = trigger;
 			notification.Identifier = id.ToString();
+			if(!string.IsNullOrWhiteSpace(data)) notification.Data = data;
 			iOSNotificationCenter.ScheduleNotification(notification);
 			#endif
 			
@@ -97,11 +99,13 @@ namespace xLib
 		
 		private void NotificationReceive()
 		{
+			if(CanDebug) Debug.Log($"{this.name}:NotificationReceive",this);
 			MnNotification.NotificationReceive();
 		}
 		
 		private void NotificationOpen(int id,string data)
 		{
+			if(CanDebug) Debug.Log($"{this.name}:NotificationOpen:{id}:{data}",this);
 			bool useData = (lastNotificationId.Value != id.ToString());
 			lastNotificationId.Value = id.ToString();
 			MnNotification.NotificationOpen(useData,data);
@@ -109,6 +113,8 @@ namespace xLib
 		
 		public void CancelNotification(int id)
 		{
+			if(CanDebug) Debug.Log($"{this.name}:CancelNotification:{id}",this);
+			
 			#if UNITY_ANDROID
 			AndroidNotificationCenter.CancelNotification(id);
 			#endif
@@ -120,6 +126,8 @@ namespace xLib
 		
 		public void CancelAllNotifications()
 		{
+			if(CanDebug) Debug.Log($"{this.name}:CancelAllNotifications",this);
+			
 			#if UNITY_ANDROID
 			AndroidNotificationCenter.CancelAllNotifications();
 			#endif
