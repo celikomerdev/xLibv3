@@ -69,6 +69,7 @@ namespace xLib.ToolPurchase
 		private void ListenPurchase(bool value)
 		{
 			if(!value) return;
+			if(MnProduct.currentProductId != key) return;
 			eventRestore.Invoke(value);
 		}
 	}
