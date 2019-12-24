@@ -24,9 +24,8 @@ namespace xLib.xAnalytics
 		}
 		
 		private static bool isInit = false;
-		public override void Init()
+		protected override void Inited()
 		{
-			base.Init();
 			if(isInit) return;
 			isInit = true;
 			

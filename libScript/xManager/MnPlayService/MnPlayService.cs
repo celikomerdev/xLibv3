@@ -50,9 +50,8 @@ namespace xLib
 		
 		
 		#region Init
-		public override void Init()
+		protected override void Inited()
 		{
-			base.Init();
 			PlayGamesPlatform.DebugLogEnabled = CanDebug;
 			
 			PlayGamesClientConfiguration.Builder builder = new PlayGamesClientConfiguration.Builder();

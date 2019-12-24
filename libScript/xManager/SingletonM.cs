@@ -49,9 +49,11 @@ namespace xLib
 			Started();
 		}
 		
+		protected virtual void Inited(){}
 		public virtual void Init()
 		{
-			if(CanDebug) Debug.LogWarning($"{this.name}:Init",this);
+			if(CanDebug) Debug.LogWarning($"{this.name}:Inited",this);
+			Inited();
 		}
 		
 		protected virtual void OnEnabled(){}

@@ -21,9 +21,8 @@ namespace xLib
 		#endregion
 		
 		#region Init
-		public override void Init()
+		protected override void Inited()
 		{
-			base.Init();
 			dictionary = new Dictionary<string,string>();
 			dictionary.Clear();
 			

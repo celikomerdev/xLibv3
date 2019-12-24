@@ -9,11 +9,10 @@ namespace xLib
 		#region Init
 		private bool isInit = false;
 		public static System.Action actionInit = delegate{};
-		public override void Init()
+		protected override void Inited()
 		{
 			if(isInit) return;
 			isInit = true;
-			base.Init();
 			actionInit();
 		}
 		#endregion
