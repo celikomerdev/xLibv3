@@ -18,7 +18,7 @@ namespace xLib
 			TryReplace();
 			if(!ins)
 			{
-				if(CanDebug) Debug.LogWarningFormat(this,this.name+":Awaked");
+				if(CanDebug) Debug.LogWarning($"{this.name}:Awaked",this);
 				insBase = this;
 				ins = this as T;
 				Awaked();
@@ -39,26 +39,26 @@ namespace xLib
 			if(!ins) return;
 			if(insBase.isPrimary && !isPrimary) return;
 			insBase.DestroyImmediate();
-			Debug.LogWarningFormat(this,this.name+":Replaced");
+			if(CanDebug) Debug.LogWarning($"{this.name}:Replaced",this);
 		}
 		
 		protected virtual void Started(){}
 		protected virtual void Start()
 		{
-			if(CanDebug) Debug.LogWarningFormat(this,this.name+":Started");
+			if(CanDebug) Debug.LogWarning($"{this.name}:Started",this);
 			Started();
 		}
 		
 		public virtual void Init()
 		{
-			if(CanDebug) Debug.LogWarningFormat(this,this.name+":Init");
+			if(CanDebug) Debug.LogWarning($"{this.name}:Init",this);
 		}
 		
 		protected virtual void OnEnabled(){}
 		protected virtual void OnEnable()
 		{
 			if(ins!=this) return;
-			if(CanDebug) Debug.LogWarningFormat(this,this.name+":OnEnabled");
+			if(CanDebug) Debug.LogWarning($"{this.name}:OnEnabled",this);
 			OnEnabled();
 		}
 		
@@ -66,7 +66,7 @@ namespace xLib
 		protected virtual void OnDisable()
 		{
 			if(ins!=this) return;
-			if(CanDebug) Debug.LogWarningFormat(this,this.name+":OnDisabled");
+			if(CanDebug) Debug.LogWarning($"{this.name}:OnDisabled",this);
 			OnDisabled();
 		}
 		
@@ -74,13 +74,13 @@ namespace xLib
 		protected virtual void OnDestroy()
 		{
 			if(ins!=this) return;
-			if(CanDebug) Debug.LogWarningFormat(this,this.name+":OnDestroyed");
+			if(CanDebug) Debug.LogWarning($"{this.name}:OnDestroyed",this);
 			OnDestroyed();
 		}
 		
 		private void DestroyImmediate()
 		{
-			if(CanDebug) Debug.LogWarningFormat(this,this.name+":DestroyImmediate");
+			if(CanDebug) Debug.LogWarning($"{this.name}:DestroyImmediate",this);
 			DestroyImmediate(this.gameObject);
 			if(ins==this) ins = null;
 		}

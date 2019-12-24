@@ -1,13 +1,13 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
 
 namespace xLib.ToolApplication
 {
-	public class ApplicationTarget : BaseM
+	public class ApplicationTarget : BaseMainM
 	{
-		public RuntimePlatform[] array;
-		public EventBool eventBool;
+		[SerializeField]private RuntimePlatform[] array = new RuntimePlatform[0];
+		[SerializeField]private EventBool eventBool = new EventBool();
 		
 		private void Awake()
 		{

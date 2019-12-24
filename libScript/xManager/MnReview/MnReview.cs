@@ -8,7 +8,7 @@ namespace xLib
 	public class MnReview : SingletonM<MnReview>
 	{
 		[SerializeField]private NodeInt playerReview = null;
-		[SerializeField]private bool useIOS = false;
+		[SerializeField]private bool useNative = false;
 		[SerializeField]private bool useCustom = false;
 		[SerializeField]private EventUnity eventOpenCustom = new EventUnity();
 		
@@ -16,10 +16,15 @@ namespace xLib
 		{
 			if(playerReview.Value!=0) return;
 			
-			if(useIOS && UnityEngine.iOS.Device.RequestStoreReview())
+			if(useNative)
 			{
-				playerReview.Value = -1;
-				return;
+				#if UNITY_IOS
+				if(UnityEngine.iOS.Device.RequestStoreReview())
+				{
+					playerReview.Value = -1;
+					return;
+				}
+				#endif
 			}
 			
 			PopupCustom();
