@@ -78,6 +78,19 @@ namespace xLib
 		{
 			return JsonConvert.SerializeObject(dictionary);
 		}
+		
+		public static T FromJsonStringSafe<T>(this T output,string data)
+		{
+			try
+			{
+				return JsonConvert.DeserializeObject<T>(data);
+			}
+			catch (System.Exception ex)
+			{
+				xDebug.LogException($"FromJsonString:{data}:ex:{ex}");
+			}
+			return output;
+		}
 	}
 }
 #endif

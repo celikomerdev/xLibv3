@@ -24,13 +24,13 @@ namespace xLib
 		
 		public DateTime UtcNow
 		{
-			set
-			{
-				SafeTime.UtcNow = value;
-			}
 			get
 			{
 				return SafeTime.UtcNow;
+			}
+			set
+			{
+				SafeTime.UtcNow = value;
 			}
 		}
 		

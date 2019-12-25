@@ -22,10 +22,6 @@ namespace xLib
 		[SerializeField]private string channelDescription = "Unity Channel Description";
 		[SerializeField]private Importance channelImportance = Importance.Default;
 		
-		protected override void Awaked()
-		{
-			Init();
-		}
 		
 		private static bool isInit = false;
 		protected override void Inited()
@@ -33,6 +29,17 @@ namespace xLib
 			if(isInit) return;
 			InitPlatform();
 			isInit = true;
+			
+			CheckLast();
+			CancelAllNotifications();
+			if(CanDebug) CreateNotification(dateTime:SafeTime.Now.AddSeconds(30),title:"MnNotificationUnity",message:"Test",data:"Test");
+		}
+		
+		private void OnApplicationFocus(bool value)
+		{
+			if(!value) return;
+			if(!isInit) return;
+			CheckLast();
 		}
 		
 		
@@ -47,7 +54,10 @@ namespace xLib
 			channel.Importance = channelImportance;
 			AndroidNotificationCenter.RegisterNotificationChannel(channel);
 			AndroidNotificationCenter.OnNotificationReceived += receiveNotification =>{NotificationReceive();};
-			
+		}
+		
+		private void CheckLast()
+		{
 			AndroidNotificationIntentData lastNotification = AndroidNotificationCenter.GetLastNotificationIntent();
 			if(lastNotification!=null) NotificationOpen(lastNotification.Id,lastNotification.Notification.IntentData);
 		}
@@ -58,6 +68,10 @@ namespace xLib
 		private void InitPlatform()
 		{
 			iOSNotificationCenter.OnRemoteNotificationReceived += receiveNotification =>{NotificationReceive();};
+		}
+		
+		private void CheckLast()
+		{
 			iOSNotification lastNotification = iOSNotificationCenter.GetLastRespondedNotification();
 			if(lastNotification!=null) NotificationOpen(lastNotification.Identifier,lastNotification.Data);
 		}
@@ -74,6 +88,8 @@ namespace xLib
 			notification.Title = title;
 			notification.Text = message;
 			notification.FireTime = dateTime;
+			notification.SmallIcon = "icon_small";
+			notification.LargeIcon = "icon_large";
 			if(!string.IsNullOrWhiteSpace(data)) notification.IntentData = data;
 			id = AndroidNotificationCenter.SendNotification(notification,channel.Name);
 			#endif
@@ -100,7 +116,7 @@ namespace xLib
 		private void NotificationReceive()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:NotificationReceive",this);
-			MnNotification.NotificationReceive();
+			MnNotification.ins.NotificationReceive();
 		}
 		
 		private void NotificationOpen(int id,string data)
@@ -108,7 +124,8 @@ namespace xLib
 			if(CanDebug) Debug.Log($"{this.name}:NotificationOpen:{id}:{data}",this);
 			bool useData = (lastNotificationId.Value != id.ToString());
 			lastNotificationId.Value = id.ToString();
-			MnNotification.NotificationOpen(useData,data);
+			// if(!useData) return;
+			MnNotification.ins.NotificationOpen(useData,data);
 		}
 		
 		public void CancelNotification(int id)

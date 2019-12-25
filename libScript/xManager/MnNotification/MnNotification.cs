@@ -7,24 +7,24 @@ namespace xLib
 {
 	public class MnNotification : SingletonM<MnNotification>
 	{
-		protected override void Started()
+		protected override void Inited()
 		{
 			InitPayload();
 		}
 		
 		public static Action actionNotificationReceive = delegate{};
-		public static void NotificationReceive()
+		public void NotificationReceive()
 		{
 			StPopupBar.QueueMessage(MnLocalize.GetValue("You Have New Notification"));
 			actionNotificationReceive();
 		}
 		
 		public static Action<bool,string> actionNotificationOpen = delegate{};
-		public static void NotificationOpen(bool useData,string data)
+		public void NotificationOpen(bool useData,string data)
 		{
 			if(string.IsNullOrWhiteSpace(data)) data = "";
 			actionNotificationOpen(useData,data);
-			if(ins!=null) ins.ConsumePayload(useData,data);
+			ConsumePayload(useData,data);
 		}
 		
 		#region Tags
@@ -68,9 +68,11 @@ namespace xLib
 				return;
 			}
 			
+			Dictionary<string,object> dict = new Dictionary<string,object>();
+			dict = dict.FromJsonStringSafe(data);
+			
 			string tempId = ViewCore.CurrentId;
 			ViewCore.CurrentId = "Client";
-			Dictionary<string,object> dict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string,object>>(data);
 			foreach (KeyValuePair<string,ISerializableObject> pair in dictPayload)
 			{
 				if(dict.ContainsKey(pair.Key)) pair.Value.SerializedObjectRaw = dict[pair.Key];

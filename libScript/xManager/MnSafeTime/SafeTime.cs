@@ -12,27 +12,35 @@ namespace xLib
 		private static DateTime dateTimeAnchor = DateTime.MinValue;
 		public static DateTime UtcNow
 		{
+			get
+			{
+				return dateTimeAnchor.AddSeconds(Time.unscaledTime);
+			}
 			set
 			{
 				xDebug.LogTempFormat("SafeTime:UtcNow:{0}",value.ToString());
 				dateTimeAnchor = value.AddSeconds(-Time.unscaledTime);
 				onCalibrate.Invoke();
 			}
-			get
-			{
-				return dateTimeAnchor.AddSeconds(Time.unscaledTime);
-			}
 		}
 		
 		public static DateTime Now
 		{
+			get
+			{
+				return UtcNow.ToLocalTime();
+			}
 			set
 			{
 				UtcNow = value.ToUniversalTime();
 			}
+		}
+		
+		public static DateTime Today
+		{
 			get
 			{
-				return UtcNow.ToLocalTime();
+				return UtcNow.StartOfDay();
 			}
 		}
 	}

@@ -71,7 +71,7 @@ namespace xLib
 		private void OnNotificationReceive(OSNotification notification)
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnNotificationReceive:{notification}",this);
-			MnNotification.NotificationReceive();
+			MnNotification.ins.NotificationReceive();
 		}
 		
 		private void OnNotificationOpen(OSNotificationOpenedResult result)
@@ -103,17 +103,9 @@ namespace xLib
 		
 		
 		#region General
-		public void UserDidProvideConsent(bool value)
+		public void PauseInAppMessages(bool value)
 		{
-			if(inInit || isInit.Value) Debug.LogWarning($"{this.name}:CallBeforeInit",this);
-			OneSignal.UserDidProvideConsent(value);
-		}
-		
-		public void SetRequiresUserPrivacyConsent(bool value)
-		{
-			if(inInit || isInit.Value) Debug.LogWarning($"{this.name}:CallBeforeInit",this);
-			if(true) UserDidProvideConsent(true);
-			OneSignal.SetRequiresUserPrivacyConsent(value);
+			OneSignal.PauseInAppMessages(value);
 		}
 		
 		public void SetExternalUserId(string value)
@@ -122,9 +114,14 @@ namespace xLib
 			OneSignal.SetExternalUserId(value);
 		}
 		
-		public void PauseInAppMessages(bool value)
+		public void SetRequiresUserPrivacyConsent(bool value)
 		{
-			OneSignal.PauseInAppMessages(value);
+			OneSignal.SetRequiresUserPrivacyConsent(value);
+		}
+		
+		public void UserDidProvideConsent(bool value)
+		{
+			OneSignal.UserDidProvideConsent(value);
 		}
 		#endregion
 		
@@ -141,7 +138,7 @@ namespace xLib
 			bool useData = (lastNotificationId.Value != payload.notificationID);
 			lastNotificationId.Value = payload.notificationID;
 			
-			MnNotification.NotificationOpen(useData,payload.additionalData.ToJsonString());
+			MnNotification.ins.NotificationOpen(useData,payload.additionalData.ToJsonString());
 			OneSignal.ClearOneSignalNotifications();
 		}
 		#endregion
@@ -161,10 +158,10 @@ namespace xLib
 		[SerializeField]private NodeString pushToken = null;
 		[SerializeField]private NodeString lastNotificationId = null;
 		
-		public void UserDidProvideConsent(bool value){}
-		public void SetRequiresUserPrivacyConsent(bool value){}
-		public void SetExternalUserId(string value){}
 		public void PauseInAppMessages(bool value){}
+		public void SetExternalUserId(string value){}
+		public void SetRequiresUserPrivacyConsent(bool value){}
+		public void UserDidProvideConsent(bool value){}
 		#pragma warning restore
 	}
 }
