@@ -124,7 +124,7 @@ namespace xLib
 			if(CanDebug) Debug.Log($"{this.name}:NotificationOpen:{id}:{data}",this);
 			bool useData = (lastNotificationId.Value != id.ToString());
 			lastNotificationId.Value = id.ToString();
-			// if(!useData) return;
+			if(!useData) return;
 			MnNotification.ins.NotificationOpen(useData,data);
 		}
 		
