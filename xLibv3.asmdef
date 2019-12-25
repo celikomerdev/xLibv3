@@ -54,11 +54,6 @@
             "name": "mobi.gameguru.analytics",
             "expression": "0.0.0",
             "define": "AnalyticsGuru"
-        },
-        {
-            "name": "com.unity.mobile.notifications",
-            "expression": "0.0.0",
-            "define": "NotificationUnity"
         }
     ]
 }

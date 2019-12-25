@@ -1,14 +1,15 @@
 ﻿#if xLibv3
+#if NotificationUnity
 using UnityEngine;
 using System;
 using xLib.xNode.NodeObject;
 
 #if UNITY_IOS
 using Unity.Notifications.iOS;
-#elif UNITY_ANDROID
+#endif
+#if UNITY_ANDROID
 using Unity.Notifications.Android;
 #endif
-
 
 namespace xLib
 {
@@ -156,4 +157,40 @@ namespace xLib
 		}
 	}
 }
+#else
+using UnityEngine;
+using System;
+using xLib.xNode.NodeObject;
+
+namespace xLib
+{
+	public class MnNotificationUnity : SingletonM<MnNotificationUnity>
+	{
+		[SerializeField]private NodeString lastNotificationId = null;
+		
+		[Header("Android")]
+		[SerializeField]private string channelId = "Unity Channel ID";
+		[SerializeField]private string channelName = "Unity Channel Name";
+		[SerializeField]private string channelDescription = "Unity Channel Description";
+		[SerializeField]private int channelImportance = 4;
+		
+		public int CreateNotification(DateTime dateTime, string title, string message, string data = "")
+		{
+			if(CanDebug) Debug.Log($"{this.name}:CreateNotification:{title}:{message}:{dateTime.ToLongDateString()}:{dateTime.ToLongTimeString()}:{data}",this);
+			int id = UnityEngine.Random.Range(1,9999999);
+			return id;
+		}
+		
+		public void CancelNotification(int id)
+		{
+			if(CanDebug) Debug.Log($"{this.name}:CancelNotification:{id}",this);
+		}
+		
+		public void CancelAllNotifications()
+		{
+			if(CanDebug) Debug.Log($"{this.name}:CancelAllNotifications",this);
+		}
+	}
+}
+#endif
 #endif
