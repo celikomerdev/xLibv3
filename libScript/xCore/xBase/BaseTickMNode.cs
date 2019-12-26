@@ -1,11 +1,12 @@
 ﻿#if xLibv3
+using UnityEngine;
 using xLib.xNode.NodeObject;
 
 namespace xLib
 {
 	public abstract class BaseTickNodeM : BaseTickM
 	{
-		public NodeFloat tickTime;
+		[SerializeField]private NodeFloat tickTime = null;
 		
 		#region Custom
 		protected override bool OnRegister(bool register)

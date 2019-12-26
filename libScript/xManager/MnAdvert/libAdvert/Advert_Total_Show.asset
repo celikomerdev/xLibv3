@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e8bf1502a1b9694c9c70a7bb8cc3987, type: 3}
-  m_Name: Advert-Create
+  m_Script: {fileID: 11500000, guid: b513263c51538944bac985320074d3e0, type: 3}
+  m_Name: Advert_Total_Show
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,5 +20,11 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 4cad5dfb3399b3a4ca56ca9db99033f8
+      key: 48c4e580beb0b234da4795196022d82c
       isMulti: 0
+    value: 0
+    skipCompareRpc: 1
+    isCompare: 1
+    snapDefault: 0
+    useThreshold: 0
+    valueThreshold: 0

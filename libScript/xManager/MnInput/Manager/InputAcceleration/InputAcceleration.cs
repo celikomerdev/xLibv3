@@ -1,10 +1,10 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 using xLib.xNode.NodeObject;
 
 namespace xLib.xInput
 {
-	public class InputAcceleration : BaseTickM
+	public class InputAcceleration : BaseTickNodeM
 	{
 		[Header("Input")]
 		[SerializeField]private NodeFloat multiplier;
@@ -15,8 +15,8 @@ namespace xLib.xInput
 		
 		[Header("Output")]
 		[SerializeField]private InputFinal inputFinal;
-		[SerializeField]private Vector3 valueCurrent;
-		[SerializeField]private Vector3 valueSmooth;
+		private Vector3 valueCurrent;
+		private Vector3 valueSmooth;
 		
 		[Header("Axis")]
 		[SerializeField]private NodeFloat axisX;
@@ -25,7 +25,7 @@ namespace xLib.xInput
 		
 		
 		#region Mono
-		protected override bool Register(bool register)
+		protected override bool OnRegister(bool register)
 		{
 			if(register)
 			{
@@ -38,7 +38,7 @@ namespace xLib.xInput
 				SetAxis();
 			}
 			
-			return base.Register(register);
+			return base.OnRegister(register);
 		}
 		
 		protected override void Tick(float tickTime)

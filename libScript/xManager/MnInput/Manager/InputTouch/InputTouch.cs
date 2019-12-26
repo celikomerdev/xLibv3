@@ -1,10 +1,10 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 using xLib.xNode.NodeObject;
 
 namespace xLib.xInput
 {
-	public class InputTouch : BaseTickM
+	public class InputTouch : BaseTickNodeM
 	{
 		[Header("Output")]
 		[SerializeField]private InputFinal inputFinal;

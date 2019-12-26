@@ -9,22 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b513263c51538944bac985320074d3e0, type: 3}
-  m_Name: Advert-Total-Click
+  m_Script: {fileID: 11500000, guid: 9e8bf1502a1b9694c9c70a7bb8cc3987, type: 3}
+  m_Name: Advert_Init
   m_EditorClassIdentifier: 
   note:
     value: 
   baseWork:
-    canDebug: 0
+    canDebug: 1
     canWork: 1
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 11f489f609b173c4ab52d37781571882
+      key: 4cad5dfb3399b3a4ca56ca9db99033f8
       isMulti: 0
-    value: 0
-    skipCompareRpc: 1
-    isCompare: 1
-    snapDefault: 0
-    useThreshold: 0
-    valueThreshold: 0

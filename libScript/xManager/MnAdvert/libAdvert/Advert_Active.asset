@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2225de60c87cec046ac49a9aced7735c, type: 3}
-  m_Name: Banner-Pixel-Right
+  m_Script: {fileID: 11500000, guid: c47f3d7fa3e3424439269f207f15244e, type: 3}
+  m_Name: Advert_Active
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,12 +20,8 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: ef6312b1530b52f46a7e131e2bdba00e
+      key: fd39090e7dba40a4db1fa94fda7e1bfa
       isMulti: 0
-    value: 0
+    value: 1
     skipCompareRpc: 1
     isCompare: 1
-    snapDefault: 0
-    useThreshold: 0
-    valueThreshold: 0
-    cacheGreater: 0
