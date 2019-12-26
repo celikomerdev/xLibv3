@@ -55,8 +55,8 @@ namespace xLib
 		#region Public
 		public static string GetValue(string key)
 		{
-			if (key == "") return "";
-			string temp="";
+			if(string.IsNullOrWhiteSpace(key)) return "";
+			string temp = key;
 			dictionary.TryGetValue(key,out temp);
 			return temp;
 		}
