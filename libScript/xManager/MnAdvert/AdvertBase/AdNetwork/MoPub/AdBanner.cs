@@ -2,7 +2,7 @@
 #if AdMoPub
 using System;
 using UnityEngine;
-using xLib.xNode.NodeObject;
+using static MoPub;
 
 namespace xLib.libAdvert.xMoPub
 {
@@ -11,30 +11,27 @@ namespace xLib.libAdvert.xMoPub
 		#region Register
 		protected override bool OnRegister(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRegister:{0}:{1}",key,value);
+			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{value}",this);
 			
 			if (value)
 			{
-				IronSourceEvents.onBannerAdLoadedEvent += OnAdLoaded;
-				IronSourceEvents.onBannerAdLoadFailedEvent += OnAdLoadFailed;
-				
-				IronSourceEvents.onBannerAdClickedEvent += OnAdClicked;
-				IronSourceEvents.onBannerAdScreenPresentedEvent += OnAdScreenPresented;
-				IronSourceEvents.onBannerAdLeftApplicationEvent += OnAdLeftApplication;
-				IronSourceEvents.onBannerAdScreenDismissedEvent += OnAdScreenDismissed;
-				
+				MoPub.LoadBannerPluginsForAdUnits(new string[1]{idPlatform});
+				MoPubManager.OnImpressionTrackedEvent += OnImpressionTrackedEvent;
+				MoPubManager.OnAdLoadedEvent += OnAdLoadedEvent;
+				MoPubManager.OnAdFailedEvent += OnAdFailedEvent;
+				MoPubManager.OnAdClickedEvent += OnAdClickedEvent;
+				MoPubManager.OnAdExpandedEvent += OnAdExpandedEvent;
+				MoPubManager.OnAdCollapsedEvent += OnAdCollapsedEvent;
 				OnRegisterBase();
-				// if(IronSource.Agent.isInterstitialReady()) OnAdReady();
 			}
 			else
 			{
-				IronSourceEvents.onBannerAdLoadedEvent -= OnAdLoaded;
-				IronSourceEvents.onBannerAdLoadFailedEvent -= OnAdLoadFailed;
-				
-				IronSourceEvents.onBannerAdClickedEvent -= OnAdClicked;
-				IronSourceEvents.onBannerAdScreenPresentedEvent -= OnAdScreenPresented;
-				IronSourceEvents.onBannerAdLeftApplicationEvent -= OnAdLeftApplication;
-				IronSourceEvents.onBannerAdScreenDismissedEvent -= OnAdScreenDismissed;
+				MoPubManager.OnImpressionTrackedEvent -= OnImpressionTrackedEvent;
+				MoPubManager.OnAdLoadedEvent -= OnAdLoadedEvent;
+				MoPubManager.OnAdFailedEvent -= OnAdFailedEvent;
+				MoPubManager.OnAdClickedEvent -= OnAdClickedEvent;
+				MoPubManager.OnAdExpandedEvent -= OnAdExpandedEvent;
+				MoPubManager.OnAdCollapsedEvent -= OnAdCollapsedEvent;
 			}
 			return value;
 		}
@@ -42,62 +39,59 @@ namespace xLib.libAdvert.xMoPub
 		
 		
 		#region Callback
-		private void OnAdLoaded()
+		private void OnImpressionTrackedEvent(string adUnitId,MoPub.ImpressionData impressionData)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdLoaded");
+			if(CanDebug) Debug.Log($"{this.name}:OnImpressionTrackedEvent:{adUnitId}:{impressionData.JsonRepresentation}",this);
+			nameAdepter = impressionData.NetworkName;
+		}
+		
+		private void OnAdLoadedEvent(string adUnitId,float height)
+		{
+			if(CanDebug) Debug.Log($"{this.name}:OnAdLoadedEvent:{adUnitId}:height:{height}",this);
 			SetLoadedBase(true);
+			height = Mathf.CeilToInt(height);
 			IsDisplay = isDisplay;
 		}
 		
-		private void OnAdLoadFailed(IronSourceError error)
+		private void OnAdFailedEvent(string adUnitId,string error)
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdLoadFailed:{0}",error.ToString());
+			xDebug.LogException($"{this.name}:OnAdLoadedEvent:{adUnitId}:error:{error}",this);
 			OnLoadFailBase();
 		}
 		
-		private void OnAdClicked()
+		private void OnAdClickedEvent(string adUnitId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdClicked");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdClickedEvent:{adUnitId}",this);
 			OnClickBase();
 		}
 		
-		private void OnAdScreenPresented()
+		private void OnAdExpandedEvent(string adUnitId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdScreenPresented");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdExpandedEvent:{adUnitId}",this);
 			OnShowBase();
 		}
 		
-		private void OnAdLeftApplication()
+		private void OnAdCollapsedEvent(string adUnitId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdLeftApplication");
-			OnVisitBase();
-		}
-		
-		private void OnAdScreenDismissed()
-		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdScreenDismissed");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdCollapsedEvent:{adUnitId}",this);
 			OnCloseBase();
 		}
 		#endregion
 		
 		
 		#region Override
-		#if !UNITY_EDITOR
-		protected override void NameAdapter()
-		{
-			nameAdepter = "IronSource";
-		}
-		
+		#if UNITY_EDITOR
 		protected override void Load()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Load");
-			IronSource.Agent.loadBanner(xAdSize,xAdPosition);
+			if(CanDebug) Debug.Log($"{this.name}:Load",this);
+			MoPub.RequestBanner(idPlatform,xAdPosition,xAdSize);
+			DebugBanner();
 		}
 		
 		protected override void Show()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Show");
-			IronSource.Agent.displayBanner();
+			if(CanDebug) Debug.Log($"{this.name}:Show",this);
+			MoPub.ShowBanner(idPlatform,true);
 			OnDisplay = true;
 			OnWidth = width*multiplierPixel;
 			OnHeight = height*multiplierPixel;
@@ -105,7 +99,7 @@ namespace xLib.libAdvert.xMoPub
 		
 		protected override void Hide()
 		{
-			IronSource.Agent.hideBanner();
+			MoPub.ShowBanner(idPlatform,false);
 			base.Hide();
 		}
 		#endif
@@ -113,9 +107,7 @@ namespace xLib.libAdvert.xMoPub
 		
 		
 		#region Custom
-		private int width;
-		private int height;
-		private IronSourceBannerSize xAdSize
+		private MaxAdSize xAdSize
 		{
 			get
 			{
@@ -123,116 +115,24 @@ namespace xLib.libAdvert.xMoPub
 				height = Mathf.FloorToInt(Screen.height/multiplierPixel);
 				
 				float heightInc = ExtScreen.HeightInc;
-				IronSourceBannerSize returnObj;
-				switch (adSize)
-				{
-					case "Banner":
-					{
-						width = 320;
-						height = 50;
-						returnObj = IronSourceBannerSize.BANNER;
-						break;
-					}
-					case "Large":
-					{
-						width = 320;
-						height = 90;
-						returnObj = IronSourceBannerSize.LARGE;
-						break;
-					}
-					case "Rectangle":
-					{
-						width = 300;
-						height = 250;
-						returnObj = IronSourceBannerSize.RECTANGLE;
-						break;
-					}
-					case "Landscape":
-					{
-						if(heightInc>4.5f)
-						{
-							height = 90;
-						}
-						else if(heightInc>2.0f)
-						{
-							height = 50;
-						}
-						else
-						{
-							height = 32;
-						}
-						returnObj = new IronSourceBannerSize(width,height);
-						break;
-					}
-					case "Portrait":
-					{
-						if(heightInc>5.0f)
-						{
-							height = 90;
-						}
-						else if(heightInc>3.0f)
-						{
-							height = 50;
-						}
-						else
-						{
-							height = 32;
-						}
-						returnObj = new IronSourceBannerSize(width,height);
-						break;
-					}
-					default:
-					{
-						if(heightInc>4.5f)
-						{
-							width = 728;
-							height = 90;
-						}
-						else if(heightInc>2.5f)
-						{
-							width = 320;
-							height = 50;
-						}
-						else
-						{
-							width = 320;
-							height = 50;
-						}
-						returnObj = IronSourceBannerSize.SMART;
-						break;
-					}
-				}
+				MaxAdSize returnObj = MaxAdSize.ScreenWidthHeight90;
+				Enum.TryParse(adPosition,out MaxAdSize myStatus);
 				
-				if(CanDebug)
-				{
-					Debug.LogFormat("Screen.currentResolution:{0}",Screen.currentResolution);
-					Debug.LogFormat("Screen.width:{0}",Screen.width);
-					Debug.LogFormat("Screen.height:{0}",Screen.height);
-					Debug.LogFormat("Screen.dpi:{0}",Screen.dpi);
-					Debug.LogFormat("ExtScreen.HeightInc:{0}",ExtScreen.HeightInc);
-					Debug.LogFormat("ExtScreen.WidthInc:{0}",ExtScreen.WidthInc);
-					Debug.LogFormat("Banner.width:{0}",width);
-					Debug.LogFormat("Banner.height:{0}",height);
-					Debug.LogFormat("DeviceDisplay.scaleFactor:{0}",DeviceDisplay.scaleFactor);
-				}
+				width = Mathf.CeilToInt(AdSizeMapping.Width(returnObj));
+				height = Mathf.CeilToInt(AdSizeMapping.Height(returnObj));
 				
 				return returnObj;
 			}
 		}
 		
-		private IronSourceBannerPosition xAdPosition
+		// public enum AdPosition{TopLeft,TopCenter,TopRight,Centered,BottomLeft,BottomCenter,BottomRight}
+		private AdPosition xAdPosition
 		{
 			get
 			{
-				switch (adPosition)
-				{
-					case "Top":
-						return IronSourceBannerPosition.TOP;
-					case "Bottom":
-						return IronSourceBannerPosition.BOTTOM;
-					default:
-						return IronSourceBannerPosition.BOTTOM;
-				}
+				AdPosition returnObj = AdPosition.BottomCenter;
+				Enum.TryParse(adPosition,out AdPosition myStatus);
+				return returnObj;
 			}
 		}
 		#endregion
@@ -241,7 +141,7 @@ namespace xLib.libAdvert.xMoPub
 #else
 namespace xLib.libAdvert.xMoPub
 {
-	public class AdBanner : AdvertBase
+	public class AdBanner : AdvertBaseBanner
 	{
 	}
 }

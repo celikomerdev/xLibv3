@@ -55,7 +55,7 @@ namespace xLib.libAdvert
 			if(!TimeReady) return;
 			
 			MnAdvert.ins.interstitial.LoadBase();
-			if(!MnAdvert.ins.interstitial.isLoad)
+			if(!MnAdvert.ins.interstitial.IsLoad)
 			{
 				MessageNotLoaded();
 				return;
@@ -73,7 +73,7 @@ namespace xLib.libAdvert
 			if(!TimeReady) return;
 			
 			MnAdvert.ins.rewarded.LoadBase();
-			if(!MnAdvert.ins.rewarded.isLoad)
+			if(!MnAdvert.ins.rewarded.IsLoad)
 			{
 				MessageNotLoaded();
 				return;

@@ -11,7 +11,7 @@ namespace xLib.libAdvert.xIronSource
 		#region Register
 		protected override bool OnRegister(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRegister:{0}:{1}",key,value);
+			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{value}",this);
 			
 			if (value)
 			{
@@ -24,7 +24,6 @@ namespace xLib.libAdvert.xIronSource
 				IronSourceEvents.onBannerAdScreenDismissedEvent += OnAdScreenDismissed;
 				
 				OnRegisterBase();
-				// if(IronSource.Agent.isInterstitialReady()) OnAdReady();
 			}
 			else
 			{
@@ -92,6 +91,7 @@ namespace xLib.libAdvert.xIronSource
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Load");
 			IronSource.Agent.loadBanner(xAdSize,xAdPosition);
+			DebugBanner();
 		}
 		
 		protected override void Show()
@@ -113,8 +113,8 @@ namespace xLib.libAdvert.xIronSource
 		
 		
 		#region Custom
-		private int width;
-		private int height;
+		private int width = 0;
+		private int height = 0;
 		private IronSourceBannerSize xAdSize
 		{
 			get
@@ -126,28 +126,28 @@ namespace xLib.libAdvert.xIronSource
 				IronSourceBannerSize returnObj;
 				switch (adSize)
 				{
-					case "Banner":
+					case "BANNER":
 					{
 						width = 320;
 						height = 50;
 						returnObj = IronSourceBannerSize.BANNER;
 						break;
 					}
-					case "Large":
+					case "LARGE":
 					{
 						width = 320;
 						height = 90;
 						returnObj = IronSourceBannerSize.LARGE;
 						break;
 					}
-					case "Rectangle":
+					case "RECTANGLE":
 					{
 						width = 300;
 						height = 250;
 						returnObj = IronSourceBannerSize.RECTANGLE;
 						break;
 					}
-					case "Landscape":
+					case "LANDSCAPE":
 					{
 						if(heightInc>4.5f)
 						{
@@ -164,7 +164,7 @@ namespace xLib.libAdvert.xIronSource
 						returnObj = new IronSourceBannerSize(width,height);
 						break;
 					}
-					case "Portrait":
+					case "PORTRAIT":
 					{
 						if(heightInc>5.0f)
 						{
@@ -203,36 +203,18 @@ namespace xLib.libAdvert.xIronSource
 					}
 				}
 				
-				if(CanDebug)
-				{
-					Debug.LogFormat("Screen.currentResolution:{0}",Screen.currentResolution);
-					Debug.LogFormat("Screen.width:{0}",Screen.width);
-					Debug.LogFormat("Screen.height:{0}",Screen.height);
-					Debug.LogFormat("Screen.dpi:{0}",Screen.dpi);
-					Debug.LogFormat("ExtScreen.HeightInc:{0}",ExtScreen.HeightInc);
-					Debug.LogFormat("ExtScreen.WidthInc:{0}",ExtScreen.WidthInc);
-					Debug.LogFormat("Banner.width:{0}",width);
-					Debug.LogFormat("Banner.height:{0}",height);
-					Debug.LogFormat("DeviceDisplay.scaleFactor:{0}",DeviceDisplay.scaleFactor);
-				}
-				
 				return returnObj;
 			}
 		}
 		
+		// public enum IronSourceBannerPosition{BOTTOM,TOP}
 		private IronSourceBannerPosition xAdPosition
 		{
 			get
 			{
-				switch (adPosition)
-				{
-					case "Top":
-						return IronSourceBannerPosition.TOP;
-					case "Bottom":
-						return IronSourceBannerPosition.BOTTOM;
-					default:
-						return IronSourceBannerPosition.BOTTOM;
-				}
+				IronSourceBannerPosition returnObj = IronSourceBannerPosition.BOTTOM;
+				Enum.TryParse(adPosition,out IronSourceBannerPosition myStatus);
+				return returnObj;
 			}
 		}
 		#endregion
@@ -241,7 +223,7 @@ namespace xLib.libAdvert.xIronSource
 #else
 namespace xLib.libAdvert.xIronSource
 {
-	public class AdBanner : AdvertBase
+	public class AdBanner : AdvertBaseBanner
 	{
 	}
 }

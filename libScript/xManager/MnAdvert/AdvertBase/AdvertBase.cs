@@ -1,5 +1,4 @@
 ﻿#if xLibv3
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using xLib.EventClass;
@@ -38,19 +37,19 @@ namespace xLib.libAdvert
 		#region Register
 		protected override bool OnRegister(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRegister:{0}:{1}",key,value);
+			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{value}",this);
 			return value;
 		}
 		
 		protected void IdPlatform()
 		{
 			idPlatform = MnKey.GetValue(key);
-			if(CanDebug) Debug.LogFormat(this,this.name+":IdPlatform:{0}",idPlatform);
+			if(CanDebug) Debug.Log($"{this.name}:idPlatform:{idPlatform}",this);
 		}
 		
 		protected void OnRegisterBase()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRegisterBase");
+			if(CanDebug) Debug.Log($"{this.name}:OnRegisterBase",this);
 			isLoad = false;
 			inLoad = false;
 			if(baseRegister.onRegister) LoadBase();
@@ -59,12 +58,19 @@ namespace xLib.libAdvert
 		
 		
 		#region Callback
-		public EventBool onLoad;
-		[NonSerialized]public bool isLoad;
+		public EventBool onLoad = new EventBool();
+		protected bool isLoad = false;
+		public bool IsLoad
+		{
+			get
+			{
+				return isLoad;
+			}
+		}
 		protected virtual void SetLoaded(bool value){}
 		protected void SetLoadedBase(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":SetLoadedBase:{0}",value);
+			if(CanDebug) Debug.Log($"{this.name}:SetLoadedBase:{value}",this);
 			
 			inLoad = false;
 			if(isLoad == value) return;
@@ -76,51 +82,52 @@ namespace xLib.libAdvert
 			onLoad.Invoke(isLoad);
 		}
 		
-		public EventUnity onLoadFail;
+		public EventUnity onLoadFail = new EventUnity();
 		protected void OnLoadFailBase()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnLoadFailBase");
+			if(CanDebug) Debug.Log($"{this.name}:OnLoadFailBase",this);
 			StAnalytics.LogEvent(key:"advert_load_fail",label:this.name,data:Data,canSend:isAnalytics);
 			onLoadFail.Invoke();
 			SetLoadedBase(false);
 		}
 		
-		public EventUnity onShow;
+		public EventUnity onShow = new EventUnity();
 		protected void OnShowBase()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnShowBase");
+			if(CanDebug) Debug.Log($"{this.name}:OnShowBase",this);
 			StAnalytics.LogEvent(key:"advert_show",label:this.name,data:Data,canSend:isAnalytics);
 			onShow.Invoke();
 		}
 		
-		public EventInt onReward;
-		protected void OnRewardBase(int value)
+		public EventInt onReward = new EventInt();
+		protected void OnRewardBase(int reward)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRewardBase:{0}",value);
-			if(value<1) return;
-			StAnalytics.LogEvent(key:"advert_reward",label:this.name,digit:value,data:Data,canSend:isAnalytics);
-			onReward.Invoke(value);
+			if(CanDebug) Debug.Log($"{this.name}:OnRewardBase:reward:{reward}",this);
+			if(reward<1) return;
+			StAnalytics.LogEvent(key:"advert_reward",label:this.name,digit:reward,data:Data,canSend:isAnalytics);
+			onReward.Invoke(reward);
 		}
 		
-		public EventUnity onClick;
+		public EventUnity onClick = new EventUnity();
 		protected void OnClickBase()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnClickBase");
+
+			if(CanDebug) Debug.Log($"{this.name}:OnClickBase",this);
 			StAnalytics.LogEvent(key:"advert_click",label:this.name,data:Data,canSend:isAnalytics);
 			onClick.Invoke();
 		}
 		
 		protected void OnVisitBase()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnVisitBase");
+			if(CanDebug) Debug.Log($"{this.name}:OnVisitBase",this);
 			StAnalytics.LogEvent(key:"advert_visit",label:this.name,data:Data,canSend:isAnalytics);
 			// onVisit.Invoke();
 		}
 		
-		public EventUnity onClose;
+		public EventUnity onClose = new EventUnity();
 		protected void OnCloseBase()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnCloseBase");
+			if(CanDebug) Debug.Log($"{this.name}:OnCloseBase",this);
 			StAnalytics.LogEvent(key:"advert_close",label:this.name,data:Data,canSend:isAnalytics);
 			onClose.Invoke();
 		}
@@ -128,16 +135,17 @@ namespace xLib.libAdvert
 		
 		
 		#region Public
-		private bool inLoad;
+		private bool inLoad = false;
 		public void LoadBase()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":LoadBase");
+			if(CanDebug) Debug.Log($"{this.name}:LoadBase",this);
 			if(!IsRegister) return;
 			if(isLoad) return;
 			if(inLoad) return;
 			inLoad = true;
 			Load();
 		}
+		
 		protected virtual void Load()
 		{
 			SetLoadedBase(true);
@@ -145,10 +153,11 @@ namespace xLib.libAdvert
 		
 		public void ShowBase()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":ShowBase");
+			if(CanDebug) Debug.Log($"{this.name}:ShowBase",this);
 			if(!isLoad) return;
 			Show();
 		}
+		
 		protected virtual void Show()
 		{
 			OnShowBase();

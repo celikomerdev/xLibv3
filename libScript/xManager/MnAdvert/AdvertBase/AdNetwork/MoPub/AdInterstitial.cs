@@ -1,6 +1,5 @@
 ﻿#if xLibv3
 #if AdMoPub
-using System;
 using UnityEngine;
 
 namespace xLib.libAdvert.xMoPub
@@ -10,38 +9,31 @@ namespace xLib.libAdvert.xMoPub
 		#region Register
 		protected override bool OnRegister(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRegister:{0}:{1}",key,value);
+			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{value}",this);
 			
 			if (value)
 			{
-				IronSourceEvents.onInterstitialAdReadyEvent += OnAdReady;
-				IronSourceEvents.onInterstitialAdLoadFailedEvent += OnAdLoadFailed;
-				
-				IronSourceEvents.onInterstitialAdShowSucceededEvent += OnAdShowSucceeded;
-				IronSourceEvents.onInterstitialAdShowFailedEvent += OnAdShowFailed;
-				
-				IronSourceEvents.onInterstitialAdClickedEvent += OnAdClicked;
-				IronSourceEvents.onInterstitialAdOpenedEvent += OnAdOpened;
-				IronSourceEvents.onInterstitialAdClosedEvent += OnAdClosed;
-				
-				IronSourceEvents.onInterstitialAdRewardedEvent += OnAdRewarded;
+				MoPub.LoadInterstitialPluginsForAdUnits(new string[1]{idPlatform});
+				MoPubManager.OnImpressionTrackedEvent += OnImpressionTrackedEvent;
+				MoPubManager.OnInterstitialLoadedEvent += OnInterstitialLoadedEvent;
+				MoPubManager.OnInterstitialFailedEvent += OnInterstitialFailedEvent;
+				MoPubManager.OnInterstitialShownEvent += OnInterstitialShownEvent;
+				MoPubManager.OnInterstitialClickedEvent += OnInterstitialClickedEvent;
+				MoPubManager.OnInterstitialDismissedEvent += OnInterstitialDismissedEvent;
+				MoPubManager.OnInterstitialExpiredEvent += OnInterstitialExpiredEvent;
 				
 				OnRegisterBase();
-				if(IronSource.Agent.isInterstitialReady()) OnAdReady();
+				if(MoPub.IsInterstitialReady(idPlatform)) OnInterstitialLoadedEvent(idPlatform);
 			}
 			else
 			{
-				IronSourceEvents.onInterstitialAdReadyEvent -= OnAdReady;
-				IronSourceEvents.onInterstitialAdLoadFailedEvent -= OnAdLoadFailed;
-				
-				IronSourceEvents.onInterstitialAdShowSucceededEvent -= OnAdShowSucceeded;
-				IronSourceEvents.onInterstitialAdShowFailedEvent -= OnAdShowFailed;
-				
-				IronSourceEvents.onInterstitialAdClickedEvent -= OnAdClicked;
-				IronSourceEvents.onInterstitialAdOpenedEvent -= OnAdOpened;
-				IronSourceEvents.onInterstitialAdClosedEvent -= OnAdClosed;
-				
-				IronSourceEvents.onInterstitialAdRewardedEvent -= OnAdRewarded;
+				MoPubManager.OnImpressionTrackedEvent += OnImpressionTrackedEvent;
+				MoPubManager.OnInterstitialLoadedEvent -= OnInterstitialLoadedEvent;
+				MoPubManager.OnInterstitialFailedEvent -= OnInterstitialFailedEvent;
+				MoPubManager.OnInterstitialShownEvent -= OnInterstitialShownEvent;
+				MoPubManager.OnInterstitialClickedEvent -= OnInterstitialClickedEvent;
+				MoPubManager.OnInterstitialDismissedEvent -= OnInterstitialDismissedEvent;
+				MoPubManager.OnInterstitialExpiredEvent -= OnInterstitialExpiredEvent;
 			}
 			return value;
 		}
@@ -49,73 +41,64 @@ namespace xLib.libAdvert.xMoPub
 		
 		
 		#region Callback
-		private void OnAdReady()
+		private void OnImpressionTrackedEvent(string adUnitId,MoPub.ImpressionData impressionData)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdReady");
+			if(CanDebug) Debug.Log($"{this.name}:OnImpressionTrackedEvent:{adUnitId}:{impressionData.JsonRepresentation}",this);
+			nameAdepter = impressionData.NetworkName;
+		}
+		
+		private void OnInterstitialLoadedEvent(string adUnitId)
+		{
+			if(CanDebug) Debug.Log($"{this.name}:OnInterstitialLoadedEvent:{adUnitId}",this);
 			SetLoadedBase(true);
 		}
 		
-		private void OnAdLoadFailed(IronSourceError error)
+		private void OnInterstitialFailedEvent(string adUnitId,string errorCode)
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdLoadFailed:{0}",error.ToString());
+			xDebug.LogException($"{this.name}:OnInterstitialFailedEvent:{adUnitId}:{errorCode}",this);
 			OnLoadFailBase();
 		}
 		
-		private void OnAdShowSucceeded()
+		private void OnInterstitialShownEvent(string adUnitId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdShowSucceeded");
+			if(CanDebug) Debug.Log($"{this.name}:OnInterstitialShownEvent:{adUnitId}",this);
 			OnShowBase();
 		}
 		
-		private void OnAdShowFailed(IronSourceError error)
+		private void OnInterstitialClickedEvent(string adUnitId)
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdShowFailed:{0}",error.ToString());
-		}
-		
-		private void OnAdClicked()
-		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdClicked");
+			if(CanDebug) Debug.Log($"{this.name}:OnInterstitialClickedEvent:{adUnitId}",this);
 			OnClickBase();
 		}
 		
-		private void OnAdOpened()
+		private void OnInterstitialDismissedEvent(string adUnitId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdOpened");
-			OnVisitBase();
-		}
-		
-		private void OnAdClosed()
-		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdClosed");
+			if(CanDebug) Debug.Log($"{this.name}:OnInterstitialDismissedEvent:{adUnitId}",this);
 			OnCloseBase();
 			SetLoadedBase(false);
 		}
 		
-		private void OnAdRewarded()
+		private void OnInterstitialExpiredEvent(string adUnitId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdRewarded");
-			OnRewardBase(1);
+			if(CanDebug) Debug.Log($"{this.name}:OnInterstitialExpiredEvent:{adUnitId}",this);
+			SetLoadedBase(false);
+			LoadBase();
 		}
 		#endregion
 		
 		
 		#region Override
 		#if !UNITY_EDITOR
-		protected override void NameAdapter()
-		{
-			nameAdepter = "IronSource";
-		}
-		
 		protected override void Load()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Load");
-			IronSource.Agent.loadInterstitial();
+			if(CanDebug) Debug.Log($"{this.name}:Load",this);
+			MoPub.RequestInterstitialAd(idPlatform);
 		}
 		
 		protected override void Show()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Show");
-			IronSource.Agent.showInterstitial();
+			if(CanDebug) Debug.Log($"{this.name}:Show",this);
+			MoPub.ShowInterstitialAd(idPlatform);
 		}
 		#endif
 		#endregion

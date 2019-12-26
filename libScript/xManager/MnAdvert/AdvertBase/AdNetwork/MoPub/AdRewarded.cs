@@ -1,6 +1,5 @@
 ﻿#if xLibv3
 #if AdMoPub
-using System;
 using UnityEngine;
 
 namespace xLib.libAdvert.xMoPub
@@ -10,36 +9,37 @@ namespace xLib.libAdvert.xMoPub
 		#region Register
 		protected override bool OnRegister(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRegister:{0}:{1}",key,value);
+			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{value}",this);
 			
 			if (value)
 			{
-				IronSourceEvents.onRewardedVideoAvailabilityChangedEvent += OnAdAvailabilityChanged;
-				
-				IronSourceEvents.onRewardedVideoAdOpenedEvent += OnAdOpened;
-				IronSourceEvents.onRewardedVideoAdStartedEvent += OnAdStarted;
-				
-				IronSourceEvents.onRewardedVideoAdEndedEvent += OnAdEnded;
-				IronSourceEvents.onRewardedVideoAdClosedEvent += OnAdClosed;
-				
-				IronSourceEvents.onRewardedVideoAdRewardedEvent += OnAdRewarded;
-				IronSourceEvents.onRewardedVideoAdShowFailedEvent += OnAdShowFailed;
+				MoPub.LoadRewardedVideoPluginsForAdUnits(new string[1]{idPlatform});
+				MoPubManager.OnImpressionTrackedEvent += OnImpressionTrackedEvent;
+				MoPubManager.OnRewardedVideoLoadedEvent += OnRewardedVideoLoadedEvent;
+				MoPubManager.OnRewardedVideoFailedEvent += OnRewardedVideoFailedEvent;
+				MoPubManager.OnRewardedVideoFailedToPlayEvent += OnRewardedVideoFailedToPlayEvent;
+				MoPubManager.OnRewardedVideoShownEvent += OnRewardedVideoShownEvent;
+				MoPubManager.OnRewardedVideoClickedEvent += OnRewardedVideoClickedEvent;
+				MoPubManager.OnRewardedVideoLeavingApplicationEvent += OnRewardedVideoLeavingApplicationEvent;
+				MoPubManager.OnRewardedVideoClosedEvent += OnRewardedVideoClosedEvent;
+				MoPubManager.OnRewardedVideoReceivedRewardEvent += OnRewardedVideoReceivedRewardEvent;
+				MoPubManager.OnRewardedVideoExpiredEvent += OnRewardedVideoExpiredEvent;
 				
 				OnRegisterBase();
-				OnAdAvailabilityChanged(IronSource.Agent.isRewardedVideoAvailable());
+				if(MoPub.HasRewardedVideo(idPlatform)) OnRewardedVideoLoadedEvent(idPlatform);
 			}
 			else
 			{
-				IronSourceEvents.onRewardedVideoAvailabilityChangedEvent -= OnAdAvailabilityChanged;
-				
-				IronSourceEvents.onRewardedVideoAdOpenedEvent -= OnAdOpened;
-				IronSourceEvents.onRewardedVideoAdStartedEvent -= OnAdStarted;
-				
-				IronSourceEvents.onRewardedVideoAdEndedEvent -= OnAdEnded;
-				IronSourceEvents.onRewardedVideoAdClosedEvent -= OnAdClosed;
-				
-				IronSourceEvents.onRewardedVideoAdRewardedEvent -= OnAdRewarded;
-				IronSourceEvents.onRewardedVideoAdShowFailedEvent -= OnAdShowFailed;
+				MoPubManager.OnImpressionTrackedEvent -= OnImpressionTrackedEvent;
+				MoPubManager.OnRewardedVideoLoadedEvent -= OnRewardedVideoLoadedEvent;
+				MoPubManager.OnRewardedVideoFailedEvent -= OnRewardedVideoFailedEvent;
+				MoPubManager.OnRewardedVideoFailedToPlayEvent -= OnRewardedVideoFailedToPlayEvent;
+				MoPubManager.OnRewardedVideoShownEvent -= OnRewardedVideoShownEvent;
+				MoPubManager.OnRewardedVideoClickedEvent -= OnRewardedVideoClickedEvent;
+				MoPubManager.OnRewardedVideoLeavingApplicationEvent -= OnRewardedVideoLeavingApplicationEvent;
+				MoPubManager.OnRewardedVideoClosedEvent -= OnRewardedVideoClosedEvent;
+				MoPubManager.OnRewardedVideoReceivedRewardEvent -= OnRewardedVideoReceivedRewardEvent;
+				MoPubManager.OnRewardedVideoExpiredEvent -= OnRewardedVideoExpiredEvent;
 			}
 			return value;
 		}
@@ -47,64 +47,81 @@ namespace xLib.libAdvert.xMoPub
 		
 		
 		#region Callback
-		private void OnAdAvailabilityChanged(bool status)
+		private void OnImpressionTrackedEvent(string adUnitId,MoPub.ImpressionData impressionData)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdAvailabilityChanged:{0}",status);
-			SetLoadedBase(status);
+			if(CanDebug) Debug.Log($"{this.name}:OnImpressionTrackedEvent:{adUnitId}:{impressionData.JsonRepresentation}",this);
+			nameAdepter = impressionData.NetworkName;
 		}
 		
-		private void OnAdOpened()
+		private void OnRewardedVideoLoadedEvent(string adUnitId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdOpened");
+			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoLoadedEvent:{adUnitId}",this);
+			SetLoadedBase(true);
+		}
+		
+		private void OnRewardedVideoFailedEvent(string adUnitId,string errorMsg)
+		{
+			xDebug.LogException($"{this.name}:OnRewardedVideoFailedEvent:{adUnitId}:{errorMsg}",this);
+			OnLoadFailBase();
+		}
+		
+		private void OnRewardedVideoFailedToPlayEvent(string adUnitId,string errorMsg)
+		{
+			xDebug.LogException($"{this.name}:OnRewardedVideoFailedToPlayEvent:{adUnitId}:{errorMsg}",this);
+		}
+		
+		private void OnRewardedVideoShownEvent(string adUnitId)
+		{
+			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoShownEvent:{adUnitId}",this);
 			OnShowBase();
 		}
 		
-		private void OnAdStarted()
+		private void OnRewardedVideoClickedEvent(string adUnitId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdStarted");
+			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoClickedEvent:{adUnitId}",this);
+			OnClickBase();
 		}
 		
-		private void OnAdEnded()
+		private void OnRewardedVideoLeavingApplicationEvent(string adUnitId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdEnded");
+			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoLeavingApplicationEvent:{adUnitId}",this);
+			OnVisitBase();
 		}
 		
-		private void OnAdClosed()
+		private void OnRewardedVideoClosedEvent(string adUnitId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdClosed");
+			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoClosedEvent:{adUnitId}",this);
 			OnCloseBase();
 		}
 		
-		private void OnAdRewarded(IronSourcePlacement placement)
+		private void OnRewardedVideoReceivedRewardEvent(string adUnitId,string label,float amount)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdRewarded:{0}",placement.ToString());
-			int prize = placement.getRewardAmount();
+			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoReceivedRewardEvent:{adUnitId}:{label}:{amount}",this);
+			int prize = Mathf.RoundToInt(amount);
 			OnRewardBase(prize);
 		}
 		
-		private void OnAdShowFailed(IronSourceError error)
+		private void OnRewardedVideoExpiredEvent(string adUnitId)
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdShowFailed:{0}",error.ToString());
+			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoExpiredEvent:{adUnitId}",this);
+			SetLoadedBase(false);
+			LoadBase();
 		}
 		#endregion
 		
 		
 		#region Override
 		#if !UNITY_EDITOR
-		protected override void NameAdapter()
-		{
-			nameAdepter = "IronSource";
-		}
-		
 		protected override void Load()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Load");
+			if(CanDebug) Debug.Log($"{this.name}:Load",this);
+			MoPub.RequestRewardedVideo(idPlatform);
 		}
 		
 		protected override void Show()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Show");
-			IronSource.Agent.showRewardedVideo();
+			if(CanDebug) Debug.Log($"{this.name}:Show",this);
+			MoPub.ShowRewardedVideo(idPlatform);
 		}
 		#endif
 		#endregion
