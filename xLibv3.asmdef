@@ -47,11 +47,6 @@
             "define": "PackIAP"
         },
         {
-            "name": "com.unity.textmeshpro",
-            "expression": "0.0.0",
-            "define": "TMPro"
-        },
-        {
             "name": "mobi.gameguru.analytics",
             "expression": "0.0.0",
             "define": "AnalyticsGuru"

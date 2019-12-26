@@ -1,5 +1,5 @@
 ﻿#if xLibv3
-#if TMPro
+#if TextMeshPro
 using TMPro;
 
 namespace xLib
