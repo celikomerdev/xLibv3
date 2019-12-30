@@ -93,7 +93,7 @@ namespace xLib
 			isSilent.Value = value;
 			
 			if(!value) return;
-			if(CanDebug) Debug.Log($"{this.name}:Permissions:{AccessToken.CurrentAccessToken.Permissions}",this);
+			if(CanDebug) Debug.Log($"{this.name}:Permissions:{AccessToken.CurrentAccessToken.Permissions.ToString()}",this);
 			LoadPerson();
 		}
 		#endregion
