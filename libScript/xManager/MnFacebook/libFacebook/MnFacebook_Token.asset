@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c47f3d7fa3e3424439269f207f15244e, type: 3}
-  m_Name: MnFacebook-IsActive
+  m_Script: {fileID: 11500000, guid: ad218f9553c1811429833d03aa4b7c08, type: 3}
+  m_Name: MnFacebook_Token
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,8 +20,8 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: c4064c0368095e2488db34bfc2f63b9a
+      key: aafd5f7f03695744eaa7a2aa9a363720
       isMulti: 0
-    value: 0
+    value: 
     skipCompareRpc: 1
     isCompare: 1

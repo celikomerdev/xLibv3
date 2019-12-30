@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c47f3d7fa3e3424439269f207f15244e, type: 3}
-  m_Name: MnFacebook-IsLogin
+  m_Name: MnFacebook_IsInit
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,7 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 958a8ac47e68d0e4e84e882c9045c9a6
+      key: a91a20610cc555a4aa4e14a6803f54b3
       isMulti: 0
     value: 0
     skipCompareRpc: 1
