@@ -18,7 +18,7 @@ namespace xLib.ToolPurchase
 			if(!restoreOnce) MnProduct.ins.onInit.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
 			MnProduct.ins.onRestore.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
 			MnProduct.ins.onPurchase.Listener(register:register, call:ListenPurchase, viewId:ViewId, order:baseRegister.order, onRegister:true);
-			return value;
+			return register;
 		}
 		
 		private void ListenRestore(bool value)

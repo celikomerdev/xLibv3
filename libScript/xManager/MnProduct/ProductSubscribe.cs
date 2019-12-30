@@ -14,12 +14,12 @@ namespace xLib.ToolPurchase
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
 		[SerializeField]private EventBool isSubscribed = new EventBool();
 		
-		protected override bool OnRegister(bool value)
+		protected override bool OnRegister(bool register)
 		{
-			MnProduct.ins.onInit.Listener(value,ListenResult,baseRegister.onRegister);
-			MnProduct.ins.onRestore.Listener(value,ListenResult,baseRegister.onRegister);
-			MnProduct.ins.onPurchase.Listener(value,ListenResult,baseRegister.onRegister);
-			return value;
+			MnProduct.ins.onInit.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:false);
+			MnProduct.ins.onRestore.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:false);
+			MnProduct.ins.onPurchase.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:false);
+			return register;
 		}
 		
 		private void ListenResult(bool value)
@@ -49,7 +49,7 @@ namespace xLib.ToolPurchase
 				}
 			}
 			
-			if(CanDebug) Debug.LogFormat(this,this.name+":isSubscribed:{0}",resultSubscribed);
+			if(CanDebug) Debug.Log($"{this.name}:isSubscribed:{resultSubscribed}",this);
 			isSubscribed.Invoke(resultSubscribed);
 		}
 	}
@@ -68,7 +68,7 @@ namespace xLib.ToolPurchase
 		
 		protected override bool OnRegister(bool register)
 		{
-			MnProduct.ins.onPurchase.Listener(register,ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:true);
+			MnProduct.ins.onPurchase.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:true);
 			return register;
 		}
 		

@@ -35,7 +35,7 @@ namespace xLib.ToolPurchase
 		#region Behavior
 		protected override void Started()
 		{
-			MnProduct.ins.onInit.Listener(true,ListenInit,true);
+			MnProduct.ins.onInit.Listener(register:true,call:ListenInit,onRegister:true);
 		}
 		
 		protected override void OnEnabled()
@@ -45,13 +45,13 @@ namespace xLib.ToolPurchase
 		
 		protected override void OnDestroyed()
 		{
-			MnProduct.ins.onInit.Listener(false,ListenInit);
+			MnProduct.ins.onInit.Listener(register:false,call:ListenInit);
 		}
 		
 		private void ListenInit(bool value)
 		{
 			if(!value) return;
-			MnProduct.ins.onInit.Listener(false,ListenInit);
+			MnProduct.ins.onInit.Listener(register:false,call:ListenInit);
 			RefreshProduct();
 		}
 		
@@ -66,18 +66,18 @@ namespace xLib.ToolPurchase
 		{
 			if(product == null) product = MnProduct.ins.GetProduct(key);
 			if(product == null) return;
-			eventPrice.Value = product.metadata.localizedPrice;
+			eventPrice.Value = (float)product.metadata.localizedPrice;
 			eventPriceString.Value = product.metadata.localizedPriceString;
 		}
 		#endregion
 		
 		#region Register
-		private bool isRegister;
+		private bool isRegister = false;
 		private void Register(bool value)
 		{
 			if(isRegister == value) return;
 			isRegister = value;
-			MnProduct.ins.onPurchase.Listener(value,IsPuchase);
+			MnProduct.ins.onPurchase.Listener(register:value,call:IsPuchase);
 		}
 		#endregion
 		
@@ -94,10 +94,10 @@ namespace xLib.ToolPurchase
 		
 		private void IsPuchase(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":IsPuchase:{0}",value);
+			if(CanDebug) Debug.Log($"{this.name}:IsPuchase:{value}",this);
 			if(product != MnProduct.currentProduct)
 			{
-				xDebug.LogExceptionFormat(this,"product id does not match:{0}",product);
+				xDebug.LogException($"product id does not match:{product}",this);
 				return;
 			}
 			
@@ -142,7 +142,7 @@ namespace xLib.ToolPurchase
 		#region Behavior
 		protected override void Started()
 		{
-			MnProduct.ins.onInit.Listener(true,ListenInit,viewId:ViewId,onRegister:true);
+			MnProduct.ins.onInit.Listener(register:true,call:ListenInit,onRegister:true);
 		}
 		
 		protected override void OnEnabled()
@@ -152,13 +152,13 @@ namespace xLib.ToolPurchase
 		
 		protected override void OnDestroyed()
 		{
-			MnProduct.ins.onInit.Listener(false,ListenInit,viewId:ViewId);
+			MnProduct.ins.onInit.Listener(register:false,call:ListenInit);
 		}
 		
 		private void ListenInit(bool value)
 		{
 			if(!value) return;
-			MnProduct.ins.onInit.Listener(false,ListenInit,viewId:ViewId);
+			MnProduct.ins.onInit.Listener(register:false,call:ListenInit);
 			RefreshProduct();
 		}
 		
@@ -179,12 +179,12 @@ namespace xLib.ToolPurchase
 		#endregion
 		
 		#region Register
-		private bool isRegister;
+		private bool isRegister = false;
 		private void Register(bool register)
 		{
 			if(isRegister == register) return;
 			isRegister = register;
-			MnProduct.ins.onPurchase.Listener(register,IsPuchase,viewId:ViewId);
+			MnProduct.ins.onPurchase.Listener(register:register,call:IsPuchase);
 		}
 		#endregion
 		
@@ -201,10 +201,10 @@ namespace xLib.ToolPurchase
 		
 		private void IsPuchase(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":IsPuchase:{0}",value);
+			if(CanDebug) Debug.Log($"{this.name}:IsPuchase:{value}",this);
 			if(product != MnProduct.currentProductId)
 			{
-				xDebug.LogExceptionFormat(this,"product id does not match:{0}",product);
+				xDebug.LogException($"product id does not match:{product}",this);
 				return;
 			}
 			

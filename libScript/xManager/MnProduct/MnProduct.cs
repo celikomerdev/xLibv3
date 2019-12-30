@@ -16,7 +16,7 @@ namespace xLib
 		[SerializeField]private FakeStoreUIMode fakeStoreUIMode = FakeStoreUIMode.StandardUser;
 		
 		#region Init
-		private bool inInit;
+		private bool inInit = false;
 		public override void Init()
 		{
 			base.Init();
@@ -28,7 +28,7 @@ namespace xLib
 			ConfigurationBuilder builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 			
 			ProductCatalog catalog = ProductCatalog.LoadDefaultCatalog();
-			IAPConfigurationHelper.PopulateConfigurationBuilder(ref builder,catalog);
+			HelperCatalog.PopulateConfigurationBuilder(ref builder,catalog);
 			
 			HelperSubscription.CanDebug = CanDebug;
 			ProductValidator.CanDebug = CanDebug;
@@ -41,16 +41,16 @@ namespace xLib
 		
 		
 		#region Implementation
-		private static IStoreController m_Controller;
-		private static IExtensionProvider m_extensions;
-		private static ITransactionHistoryExtensions m_TransactionHistoryExtensions;
+		private static IStoreController m_Controller = null;
+		private static IExtensionProvider m_extensions = null;
+		private static ITransactionHistoryExtensions m_TransactionHistoryExtensions = null;
 		
 		#pragma warning disable
-		private static IGooglePlayStoreExtensions m_GooglePlayStoreExtensions;
+		private static IGooglePlayStoreExtensions m_GooglePlayStoreExtensions = null;
 		//Dictionary<string, string> google_play_store_product_SKUDetails_json;
 		#pragma warning restore
 		
-		private static IAppleExtensions m_AppleExtensions;
+		private static IAppleExtensions m_AppleExtensions = null;
 		//Dictionary<string, string> introductory_info_dict;
 		
 		
@@ -89,7 +89,7 @@ namespace xLib
 		
 		void IStoreListener.OnInitializeFailed(InitializationFailureReason error)
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnInitializeFailed:{0}",error);
+			xDebug.LogException($"{this.name}:OnInitializeFailed:{error}",this);
 			OnInit(false);
 		}
 		
@@ -98,8 +98,8 @@ namespace xLib
 			currentProduct = args.purchasedProduct;
 			bool isValid = ProductValidator.IsValid(args);
 			
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchaseProcess:{0}:{1}",isValid,args.purchasedProduct.definition.id);
-			StAnalytics.LogEvent("IAP","OnPurchaseProcess:"+isValid,args.purchasedProduct.definition.id);
+			if(CanDebug) Debug.Log($"{this.name}:OnPurchaseProcess:{isValid}:{args.purchasedProduct.definition.id}",this);
+			StAnalytics.LogEvent(key:"IAP_On_Purchase_Process_"+isValid,label:args.purchasedProduct.definition.id);
 			
 			OnPurchase(isValid,args.purchasedProduct.definition.id);
 			
@@ -110,8 +110,8 @@ namespace xLib
 		{
 			currentProduct = product;
 			
-			xDebug.LogExceptionFormat(this,this.name+":OnPurchaseFailed:{0}:{1}",productFailureReason,product.definition.id);
-			StAnalytics.LogEvent("IAP","OnPurchaseFailed:"+productFailureReason,product.definition.id);
+			xDebug.LogException($"{this.name}:OnPurchaseFailed:{productFailureReason}:{product.definition.id}",this);
+			StAnalytics.LogEvent(key:"IAP_On_Purchase_Failed_"+productFailureReason,label:product.definition.id);
 			
 			OnPurchase(false,product.definition.id);
 		}
@@ -120,7 +120,7 @@ namespace xLib
 		
 		#region Fuctions
 		#region Purchase
-		public NodeBool inPurchase;
+		public NodeBool inPurchase = null;
 		public void Purchase(Product product)
 		{
 			currentProduct = product;
@@ -128,7 +128,7 @@ namespace xLib
 			if(product == null) return;
 			if(inPurchase.Value) return;
 			inPurchase.Value = true;
-			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",product.definition.id);
+			if(CanDebug) Debug.Log($"{this.name}:Purchase:{product.definition.id}",this);
 			
 			StPopupBar.QueueMessage(MnLocalize.GetValue("Please Wait"));
 			m_Controller.InitiatePurchase(product);
@@ -154,7 +154,7 @@ namespace xLib
 		{
 			if(inRestore.Value) return;
 			inRestore.Value = true;
-			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
+			if(CanDebug) Debug.Log($"{this.name}:Restore",this);
 			
 			if(!onInit.Value)
 			{
@@ -173,7 +173,7 @@ namespace xLib
 			}
 			else
 			{
-				if(CanDebug) Debug.LogWarningFormat(this,this.name+":NotSupported:{0}",StandardPurchasingModule.Instance().appStore);
+				if(CanDebug) Debug.LogWarning($"{this.name}:NotSupported:{StandardPurchasingModule.Instance().appStore}",this);
 				OnRestoreFalse();
 			}
 		}
@@ -194,20 +194,20 @@ namespace xLib
 			else return null;
 		}
 		
-		public NodeBool onInit;
+		public NodeBool onInit = null;
 		private void OnInit(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnInit:{0}",value);
+			if(CanDebug) Debug.Log($"{this.name}:OnInit:{value}",this);
 			inInit = false;
 			onInit.Value = value;
 			if(!value) return;
 		}
 		
 		public NodeBool onPurchase = null;
-		public static Action<bool,string> onPurchaseProduct;
+		public static Action<bool,string> onPurchaseProduct = delegate{};
 		private void OnPurchase(bool result,string productId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchase:{0}:{1}",result,productId);
+			if(CanDebug) Debug.Log($"{this.name}:OnPurchase:{result}:{productId}",this);
 			
 			if(!result) StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Failed"));
 			else StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Successful"));
@@ -222,7 +222,7 @@ namespace xLib
 		public NodeBool isRestore = null;
 		private void OnRestoreTrue(bool isContinue)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestore:True:isContinue:{0}",isContinue);
+			if(CanDebug) Debug.Log($"{this.name}:OnRestore:True:isContinue:{isContinue}",this);
 			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Successful"));
 			inRestore.Value = false;
 			onRestore.Value = true;
@@ -231,7 +231,7 @@ namespace xLib
 		
 		private void OnRestoreFalse()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestore:False");
+			if(CanDebug) Debug.Log($"{this.name}:OnRestore:False",this);
 			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Failed"));
 			inRestore.Value = false;
 			onRestore.Value = false;
@@ -261,7 +261,7 @@ namespace xLib
 		public NodeBool inPurchase = null;
 		public void Purchase(string productId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",productId);
+			if(CanDebug) Debug.Log($"{this.name}:Purchase:{productId}",this);
 			currentProductId = productId;
 			
 			if(string.IsNullOrWhiteSpace(productId)) return;
@@ -272,7 +272,7 @@ namespace xLib
 			
 			StPopupWindow.Reset();
 			StPopupWindow.HeaderLocalized("warning");
-			StPopupWindow.Body(string.Format("{0}\n{1}\nbuy?",productId,"1.00$"));
+			StPopupWindow.Body(string.Format($"{productId}\n1.00$\nbuy?"));
 			StPopupWindow.AcceptLocalized("yes");
 			StPopupWindow.DeclineLocalized("no");
 			StPopupWindow.Listener(true,Listener);
@@ -285,10 +285,10 @@ namespace xLib
 		}
 		
 		public NodeBool onPurchase = null;
-		public static Action<bool,string> onPurchaseProduct;
+		public static Action<bool,string> onPurchaseProduct = delegate{};
 		private void OnPurchase(bool result,string productId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchase:{0}:{1}",result,productId);
+			if(CanDebug) Debug.Log($"{this.name}:OnPurchase:{result}:{productId}",this);
 			currentProductId = productId;
 			
 			if(!result) StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Failed"));
@@ -308,7 +308,7 @@ namespace xLib
 			if(inRestore.Value) return;
 			inRestore.Value = true;
 			
-			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
+			if(CanDebug) Debug.Log($"{this.name}:Restore",this);
 			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Successful"));
 			
 			inRestore.Value = false;

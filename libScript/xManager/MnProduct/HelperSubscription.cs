@@ -14,19 +14,19 @@ namespace xLib.Purchasing
 		{
 			if (item.definition.type != ProductType.Subscription)
 			{
-				Debug.LogWarningFormat("the product is not a subscription product");
+				Debug.LogWarning("the product is not a subscription product");
 				return null;
 			}
 			
 			if (item.receipt == null)
 			{
-				Debug.LogWarningFormat("the product should have a valid receipt");
+				Debug.LogWarning("the product should have a valid receipt");
 				return null;
 			}
 			
 			if (!IsAvailableForSubscriptionManager(item.receipt))
 			{
-				Debug.LogWarningFormat("IsAvailableForSubscriptionManager:false");
+				Debug.LogWarning("IsAvailableForSubscriptionManager:false");
 				return null;
 			}
 			
@@ -61,16 +61,16 @@ namespace xLib.Purchasing
 			var receipt_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(receipt);
 			if (!receipt_wrapper.ContainsKey("Store") || !receipt_wrapper.ContainsKey("Payload"))
 			{
-				Debug.LogWarningFormat("The product receipt does not contain enough information");
+				Debug.LogWarning("The product receipt does not contain enough information");
 				return false;
 			}
 			var store = (string)receipt_wrapper["Store"];
 			var payload = (string)receipt_wrapper["Payload"];
 			
-			if(CanDebug) Debug.LogFormat("payload:{0}",payload);
+			if(CanDebug) Debug.Log($"payload:{payload}");
 			if (payload != null)
 			{
-				if(CanDebug) Debug.LogFormat("store:{0}",store);
+				if(CanDebug) Debug.Log($"store:{store}");
 				switch (store)
 				{
 					case GooglePlay.Name:
@@ -78,14 +78,14 @@ namespace xLib.Purchasing
 						var payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(payload);
 						if (!payload_wrapper.ContainsKey("json"))
 						{
-							Debug.LogWarningFormat("The product receipt does not contain enough information, the 'json' field is missing");
+							Debug.LogWarning("The product receipt does not contain enough information, the 'json' field is missing");
 							return false;
 						}
 						
 						var original_json_payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode((string)payload_wrapper["json"]);
 						if (original_json_payload_wrapper == null || !original_json_payload_wrapper.ContainsKey("developerPayload"))
 						{
-							Debug.LogWarningFormat("The product receipt does not contain enough information, the 'developerPayload' field is missing");
+							Debug.LogWarning("The product receipt does not contain enough information, the 'developerPayload' field is missing");
 							return false;
 						}
 						
@@ -93,7 +93,7 @@ namespace xLib.Purchasing
 						var developerPayload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(developerPayloadJSON);
 						if (developerPayload_wrapper == null || !developerPayload_wrapper.ContainsKey("is_free_trial") || !developerPayload_wrapper.ContainsKey("has_introductory_price_trial"))
 						{
-							Debug.LogWarningFormat("The product receipt does not contain enough information, the product is not purchased using 1.19 or later");
+							Debug.LogWarning("The product receipt does not contain enough information, the product is not purchased using 1.19 or later");
 							return false;
 						}
 						

@@ -20,12 +20,12 @@ namespace xLib
 			MnAnalytics.ins.LogEvent(key,label,digit,data);
 		}
 		
-		// public static void LogPurchase(string sku,double price,string currency,string receipt,bool canSend=true)
-		public static void LogPurchase(string key,Dictionary<string, object> parameters,bool canSend=true)
+		public static void LogPurchase(string key="",Dictionary<string, object> data=null,bool canSend=true)
 		{
 			if(!canSend) return;
-			// if(!MnAnalytics.ins) return;
-			// MnAnalytics.ins.LogPurchase(key,parameters);
+			if(!MnAnalytics.ins) return;
+			if(data==null) data = new Dictionary<string,object>();
+			MnAnalytics.ins.LogPurchase(key,data);
 		}
 	}
 }

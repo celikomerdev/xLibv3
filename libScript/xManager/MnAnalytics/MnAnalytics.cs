@@ -41,12 +41,12 @@ namespace xLib
 			logEvent(key,label,digit,data);
 		}
 		
-		public static Action<string,double,string,string,Dictionary<string,object>> logPurchase = delegate{};
-		public void LogPurchase(string sku, double price, string currency, string receipt, Dictionary<string, object> data)
+		public static Action<string,Dictionary<string,object>> logPurchase = delegate{};
+		public void LogPurchase(string key,Dictionary<string, object> data)
 		{
 			data = Stamp(data);
-			if(CanDebug) Debug.Log($"{this.name}:LogPurchase:{sku}:price:{price}:currency:{currency}:receipt:{price}:receipt:{data.ToJsonString()}",this);
-			logPurchase(sku,price,currency,receipt,data);
+			if(CanDebug) Debug.Log($"{this.name}:LogPurchase:{key}:receipt:{data.ToJsonString()}",this);
+			logPurchase(key,data);
 		}
 	}
 }
