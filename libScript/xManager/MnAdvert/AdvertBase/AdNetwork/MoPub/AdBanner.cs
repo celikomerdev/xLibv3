@@ -40,12 +40,14 @@ namespace xLib.libAdvert.xMoPub
 		#region Callback
 		private void OnImpressionTrackedEvent(string adUnitId,MoPub.ImpressionData impressionData)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnImpressionTrackedEvent:{adUnitId}:{impressionData.JsonRepresentation}",this);
 			nameAdepter = impressionData.NetworkName;
 		}
 		
 		private void OnAdLoadedEvent(string adUnitId,float height)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnAdLoadedEvent:{adUnitId}:height:{height}",this);
 			SetLoadedBase(true);
 			height = Mathf.CeilToInt(height);
@@ -54,24 +56,28 @@ namespace xLib.libAdvert.xMoPub
 		
 		private void OnAdFailedEvent(string adUnitId,string error)
 		{
+			if(adUnitId!=idPlatform) return;
 			xDebug.LogException($"{this.name}:OnAdFailedEvent:{adUnitId}:error:{error}",this);
 			OnLoadFailBase();
 		}
 		
 		private void OnAdClickedEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnAdClickedEvent:{adUnitId}",this);
 			OnClickBase();
 		}
 		
 		private void OnAdExpandedEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnAdExpandedEvent:{adUnitId}",this);
 			OnShowBase();
 		}
 		
 		private void OnAdCollapsedEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnAdCollapsedEvent:{adUnitId}",this);
 			OnCloseBase();
 		}

@@ -47,36 +47,42 @@ namespace xLib.libAdvert.xMoPub
 		#region Callback
 		private void OnImpressionTrackedEvent(string adUnitId,MoPub.ImpressionData impressionData)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnImpressionTrackedEvent:{adUnitId}:{impressionData.JsonRepresentation}",this);
 			nameAdepter = impressionData.NetworkName;
 		}
 		
 		private void OnInterstitialLoadedEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnInterstitialLoadedEvent:{adUnitId}",this);
 			SetLoadedBase(true);
 		}
 		
 		private void OnInterstitialFailedEvent(string adUnitId,string errorCode)
 		{
+			if(adUnitId!=idPlatform) return;
 			xDebug.LogException($"{this.name}:OnInterstitialFailedEvent:{adUnitId}:{errorCode}",this);
 			OnLoadFailBase();
 		}
 		
 		private void OnInterstitialShownEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnInterstitialShownEvent:{adUnitId}",this);
 			OnShowBase();
 		}
 		
 		private void OnInterstitialClickedEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnInterstitialClickedEvent:{adUnitId}",this);
 			OnClickBase();
 		}
 		
 		private void OnInterstitialDismissedEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnInterstitialDismissedEvent:{adUnitId}",this);
 			OnCloseBase();
 			SetLoadedBase(false);
@@ -84,6 +90,7 @@ namespace xLib.libAdvert.xMoPub
 		
 		private void OnInterstitialExpiredEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnInterstitialExpiredEvent:{adUnitId}",this);
 			SetLoadedBase(false);
 			LoadBase();

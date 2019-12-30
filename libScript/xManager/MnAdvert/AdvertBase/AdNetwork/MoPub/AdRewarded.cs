@@ -53,53 +53,62 @@ namespace xLib.libAdvert.xMoPub
 		#region Callback
 		private void OnImpressionTrackedEvent(string adUnitId,MoPub.ImpressionData impressionData)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnImpressionTrackedEvent:{adUnitId}:{impressionData.JsonRepresentation}",this);
 			nameAdepter = impressionData.NetworkName;
 		}
 		
 		private void OnRewardedVideoLoadedEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoLoadedEvent:{adUnitId}",this);
 			SetLoadedBase(true);
 		}
 		
 		private void OnRewardedVideoFailedEvent(string adUnitId,string errorMsg)
 		{
+			if(adUnitId!=idPlatform) return;
 			xDebug.LogException($"{this.name}:OnRewardedVideoFailedEvent:{adUnitId}:{errorMsg}",this);
 			OnLoadFailBase();
 		}
 		
 		private void OnRewardedVideoFailedToPlayEvent(string adUnitId,string errorMsg)
 		{
+			if(adUnitId!=idPlatform) return;
 			xDebug.LogException($"{this.name}:OnRewardedVideoFailedToPlayEvent:{adUnitId}:{errorMsg}",this);
 		}
 		
 		private void OnRewardedVideoShownEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoShownEvent:{adUnitId}",this);
 			OnShowBase();
 		}
 		
 		private void OnRewardedVideoClickedEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoClickedEvent:{adUnitId}",this);
 			OnClickBase();
 		}
 		
 		private void OnRewardedVideoLeavingApplicationEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoLeavingApplicationEvent:{adUnitId}",this);
 			OnVisitBase();
 		}
 		
 		private void OnRewardedVideoClosedEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoClosedEvent:{adUnitId}",this);
 			OnCloseBase();
 		}
 		
 		private void OnRewardedVideoReceivedRewardEvent(string adUnitId,string label,float amount)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoReceivedRewardEvent:{adUnitId}:{label}:{amount}",this);
 			int prize = Mathf.RoundToInt(amount);
 			OnRewardBase(prize);
@@ -107,6 +116,7 @@ namespace xLib.libAdvert.xMoPub
 		
 		private void OnRewardedVideoExpiredEvent(string adUnitId)
 		{
+			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnRewardedVideoExpiredEvent:{adUnitId}",this);
 			SetLoadedBase(false);
 			LoadBase();
