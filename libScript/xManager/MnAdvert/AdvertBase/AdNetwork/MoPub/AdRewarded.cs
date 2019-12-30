@@ -26,7 +26,11 @@ namespace xLib.libAdvert.xMoPub
 				MoPubManager.OnRewardedVideoExpiredEvent += OnRewardedVideoExpiredEvent;
 				
 				OnRegisterBase();
-				if(MoPub.HasRewardedVideo(idPlatform)) OnRewardedVideoLoadedEvent(idPlatform);
+				if(MnMoPub.isSdkInit)
+				{
+					// MoPub.RequestRewardedVideo(idPlatform);
+					if(MoPub.HasRewardedVideo(idPlatform)) OnRewardedVideoLoadedEvent(idPlatform);
+				}
 			}
 			else
 			{
@@ -115,6 +119,11 @@ namespace xLib.libAdvert.xMoPub
 		protected override void Load()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:Load",this);
+			if(!MnMoPub.isSdkInit)
+			{
+				OnLoadFailBase();
+				return;
+			}
 			MoPub.RequestRewardedVideo(idPlatform);
 		}
 		

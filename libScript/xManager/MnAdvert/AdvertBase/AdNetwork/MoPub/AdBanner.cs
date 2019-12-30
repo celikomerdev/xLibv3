@@ -1,8 +1,6 @@
 ﻿#if xLibv3
 #if AdMoPub
-using System;
 using UnityEngine;
-using static MoPub;
 
 namespace xLib.libAdvert.xMoPub
 {
@@ -22,6 +20,7 @@ namespace xLib.libAdvert.xMoPub
 				MoPubManager.OnAdClickedEvent += OnAdClickedEvent;
 				MoPubManager.OnAdExpandedEvent += OnAdExpandedEvent;
 				MoPubManager.OnAdCollapsedEvent += OnAdCollapsedEvent;
+				
 				OnRegisterBase();
 			}
 			else
@@ -55,7 +54,7 @@ namespace xLib.libAdvert.xMoPub
 		
 		private void OnAdFailedEvent(string adUnitId,string error)
 		{
-			xDebug.LogException($"{this.name}:OnAdLoadedEvent:{adUnitId}:error:{error}",this);
+			xDebug.LogException($"{this.name}:OnAdFailedEvent:{adUnitId}:error:{error}",this);
 			OnLoadFailBase();
 		}
 		
@@ -80,11 +79,16 @@ namespace xLib.libAdvert.xMoPub
 		
 		
 		#region Override
-		#if UNITY_EDITOR
+		#if !UNITY_EDITOR
 		protected override void Load()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:Load",this);
-			MoPub.RequestBanner(idPlatform,xAdPosition,xAdSize);
+			if(!MnMoPub.isSdkInit)
+			{
+				OnLoadFailBase();
+				return;
+			}
+			MoPub.RequestBanner(idPlatform,AdPosition,AdSize);
 			DebugBanner();
 		}
 		
@@ -107,34 +111,58 @@ namespace xLib.libAdvert.xMoPub
 		
 		
 		#region Custom
-		private MaxAdSize xAdSize
+		private MoPub.AdPosition AdPosition
 		{
 			get
 			{
-				width = Mathf.FloorToInt(Screen.width/multiplierPixel);
-				height = Mathf.FloorToInt(Screen.height/multiplierPixel);
+				MoPub.AdPosition returnObj = MoPub.AdPosition.BottomCenter;
+				if(System.Enum.TryParse(adPosition,out MoPub.AdPosition outObj)) returnObj = outObj;
 				
-				float heightInc = ExtScreen.HeightInc;
-				MaxAdSize returnObj = MaxAdSize.ScreenWidthHeight90;
-				Enum.TryParse(adPosition,out MaxAdSize myStatus);
+				if(CanDebug) Debug.Log($"{this.name}:AdPosition:{returnObj.ToString()}",this);
+				return returnObj;
+			}
+		}
+		// public enum AdPosition
+		// {
+		// 	TopLeft,
+		// 	TopCenter,
+		// 	TopRight,
+		// 	Centered,
+		// 	BottomLeft,
+		// 	BottomCenter,
+		// 	BottomRight
+		// }
+		
+		
+		private MoPub.MaxAdSize AdSize
+		{
+			get
+			{
+				MoPub.MaxAdSize returnObj = MoPub.MaxAdSize.ScreenWidthHeight90;
+				if(System.Enum.TryParse(adSize,out MoPub.MaxAdSize outObj)) returnObj = outObj;
 				
 				width = Mathf.CeilToInt(AdSizeMapping.Width(returnObj));
 				height = Mathf.CeilToInt(AdSizeMapping.Height(returnObj));
 				
+				if(CanDebug) Debug.Log($"{this.name}:AdSize:{returnObj.ToString()}",this);
 				return returnObj;
 			}
 		}
-		
-		// public enum AdPosition{TopLeft,TopCenter,TopRight,Centered,BottomLeft,BottomCenter,BottomRight}
-		private AdPosition xAdPosition
-		{
-			get
-			{
-				AdPosition returnObj = AdPosition.BottomCenter;
-				Enum.TryParse(adPosition,out AdPosition myStatus);
-				return returnObj;
-			}
-		}
+		// public enum MaxAdSize
+		// {
+		// 	Width300Height50,
+		// 	Width300Height250,
+		// 	Width320Height50,
+		// 	Width336Height280,
+		// 	Width468Height60,
+		// 	Width728Height90,
+		// 	Width970Height90,
+		// 	Width970Height250,
+		// 	ScreenWidthHeight50,
+		// 	ScreenWidthHeight90,
+		// 	ScreenWidthHeight250,
+		// 	ScreenWidthHeight280
+		// }
 		#endregion
 	}
 }

@@ -23,7 +23,11 @@ namespace xLib.libAdvert.xMoPub
 				MoPubManager.OnInterstitialExpiredEvent += OnInterstitialExpiredEvent;
 				
 				OnRegisterBase();
-				if(MoPub.IsInterstitialReady(idPlatform)) OnInterstitialLoadedEvent(idPlatform);
+				if(MnMoPub.isSdkInit)
+				{
+					// MoPub.RequestInterstitialAd(idPlatform);
+					if(MoPub.IsInterstitialReady(idPlatform)) OnInterstitialLoadedEvent(idPlatform);
+				}
 			}
 			else
 			{
@@ -92,6 +96,11 @@ namespace xLib.libAdvert.xMoPub
 		protected override void Load()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:Load",this);
+			if(!MnMoPub.isSdkInit)
+			{
+				OnLoadFailBase();
+				return;
+			}
 			MoPub.RequestInterstitialAd(idPlatform);
 		}
 		

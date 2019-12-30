@@ -34,6 +34,12 @@ namespace xLib.libAdvert
 			}
 		}
 		
+		protected override void Awaked()
+		{
+			IdPlatform();
+			base.Awaked();
+		}
+		
 		#region Register
 		protected override bool OnRegister(bool value)
 		{
@@ -41,10 +47,11 @@ namespace xLib.libAdvert
 			return value;
 		}
 		
-		protected void IdPlatform()
+		public string IdPlatform()
 		{
 			idPlatform = MnKey.GetValue(key);
 			if(CanDebug) Debug.Log($"{this.name}:idPlatform:{idPlatform}",this);
+			return idPlatform;
 		}
 		
 		protected void OnRegisterBase()

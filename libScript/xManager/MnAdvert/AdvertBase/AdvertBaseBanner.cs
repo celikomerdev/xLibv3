@@ -6,8 +6,8 @@ namespace xLib.libAdvert
 {
 	public abstract class AdvertBaseBanner : AdvertBase
 	{
-		[SerializeField]protected string adSize;
-		[SerializeField]protected string adPosition;
+		[SerializeField]protected string adPosition = "";
+		[SerializeField]protected string adSize = "";
 		
 		protected override void Show()
 		{
