@@ -99,21 +99,21 @@ namespace xLib.libAdvert
 			MnAdvert.ins.onReward.eventInt.AddListener(OnReward);
 		}
 		
-		public EventUnity onShow;
+		public EventUnity onShow = new EventUnity();
 		private void OnShow()
 		{
 			lastTime = Time.realtimeSinceStartup;
 			onShow.Invoke();
 		}
 		
-		public EventUnity onClose;
+		public EventUnity onClose = new EventUnity();
 		private void OnClose()
 		{
 			lastTime = Time.realtimeSinceStartup;
 			onClose.Invoke();
 		}
 		
-		public EventInt onReward;
+		public EventInt onReward = new EventInt();
 		private void OnReward(int value)
 		{
 			lastTime = Time.realtimeSinceStartup;

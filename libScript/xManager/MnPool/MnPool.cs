@@ -7,20 +7,16 @@ namespace xLib
 {
 	public class MnPool : SingletonM<MnPool>
 	{
-		public Transform container;
+		[SerializeField]private Transform container = null;
 		
 		#region Collection
 		private Dictionary<GameObject,Stack<GameObject>> dictionary = new Dictionary<GameObject,Stack<GameObject>>();
 		private Stack<GameObject> GetStack(GameObject key)
 		{
-			Stack<GameObject> stack = null;
-			if(dictionary.TryGetValue(key,out stack)) return stack;
-			else
-			{
-				stack = new Stack<GameObject>();
-				dictionary.Add(key,stack);
-				return stack;
-			}
+			if(dictionary.ContainsKey(key)) return dictionary[key];
+			Stack<GameObject> stack = new Stack<GameObject>();
+			dictionary[key] = stack;
+			return stack;
 		}
 		#endregion
 		
@@ -28,25 +24,28 @@ namespace xLib
 		#region Main
 		public static GameObject Spawn(GameObject original,bool usePool)
 		{
-			GameObject temp = null;
+			xDebug.LogTemp($"MnPool:Spawn:original:{original.name}",original);
+			GameObject clone = null;
 			
-			if(!temp && ins) temp = ins.GetStack(original).Pop();
-			if(!temp)
+			if(ins && ins.GetStack(original).Count>0) clone = ins.GetStack(original).Pop();
+			if(!clone)
 			{
-				xDebug.LogTempFormat(original,"MnPool:Instantiate:{0}",original.name);
+				xDebug.LogTemp($"MnPool:Instantiate:{original.name}",original);
 				bool originalState = original.activeSelf;
 				original.SetActive(false);
-				temp = Instantiate(original);
+				clone = Instantiate(original);
 				original.SetActive(originalState);
 			}
 			
-			if(usePool) temp.AddComponent<PoolKey>().original = original;
-			xDebug.LogTempFormat(temp,"MnPool:Spawn:{0}",temp.name);
-			return temp;
+			if(usePool) clone.AddComponent<PoolKey>().original = original;
+			xDebug.LogTemp($"MnPool:Spawn:clone:{clone.name}",clone);
+			return clone;
 		}
 		
 		public static void Pool(GameObject obj)
 		{
+			xDebug.LogTemp($"MnPool:Pool:{obj.name}",obj);
+			
 			if(obj == null) return;
 			obj.SetActive(false);
 			
@@ -57,7 +56,6 @@ namespace xLib
 				return;
 			}
 			
-			xDebug.LogTempFormat(obj,"MnPool:Pool:{0}",obj.name);
 			obj.transform.SetParent(ins.container);
 			ins.GetStack(poolKey.original).Push(obj);
 		}

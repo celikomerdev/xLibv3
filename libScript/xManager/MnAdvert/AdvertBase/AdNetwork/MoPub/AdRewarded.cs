@@ -28,7 +28,6 @@ namespace xLib.libAdvert.xMoPub
 				OnRegisterBase();
 				if(MnMoPub.isSdkInit)
 				{
-					// MoPub.RequestRewardedVideo(idPlatform);
 					if(MoPub.HasRewardedVideo(idPlatform)) OnRewardedVideoLoadedEvent(idPlatform);
 				}
 			}
@@ -132,6 +131,11 @@ namespace xLib.libAdvert.xMoPub
 			if(!MnMoPub.isSdkInit)
 			{
 				OnLoadFailBase();
+				return;
+			}
+			if(MoPub.HasRewardedVideo(idPlatform))
+			{
+				OnRewardedVideoLoadedEvent(idPlatform);
 				return;
 			}
 			MoPub.RequestRewardedVideo(idPlatform);

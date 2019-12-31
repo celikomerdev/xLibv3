@@ -25,7 +25,6 @@ namespace xLib.libAdvert.xMoPub
 				OnRegisterBase();
 				if(MnMoPub.isSdkInit)
 				{
-					// MoPub.RequestInterstitialAd(idPlatform);
 					if(MoPub.IsInterstitialReady(idPlatform)) OnInterstitialLoadedEvent(idPlatform);
 				}
 			}
@@ -85,7 +84,6 @@ namespace xLib.libAdvert.xMoPub
 			if(adUnitId!=idPlatform) return;
 			if(CanDebug) Debug.Log($"{this.name}:OnInterstitialDismissedEvent:{adUnitId}",this);
 			OnCloseBase();
-			SetLoadedBase(false);
 		}
 		
 		private void OnInterstitialExpiredEvent(string adUnitId)
@@ -106,6 +104,11 @@ namespace xLib.libAdvert.xMoPub
 			if(!MnMoPub.isSdkInit)
 			{
 				OnLoadFailBase();
+				return;
+			}
+			if(MoPub.IsInterstitialReady(idPlatform))
+			{
+				OnInterstitialLoadedEvent(idPlatform);
 				return;
 			}
 			MoPub.RequestInterstitialAd(idPlatform);

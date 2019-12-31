@@ -34,9 +34,9 @@ namespace xLib
 		
 		private IEnumerator eSpin(float value)
 		{
-			Vector3 rotStart = trans.eulerAngles;
+			Vector3 rotStart = trans.localEulerAngles;
 			rotStart.z %= 360f;
-			trans.eulerAngles = rotStart;
+			trans.localEulerAngles = rotStart;
 			
 			float rotFinal = 360*loop;
 			rotFinal -= rotStart.z;
@@ -49,11 +49,11 @@ namespace xLib
 				tween.SetBaseRatio(curveOutput);
 				
 				float rotFrame = rotFinal*curveOutput;
-				trans.eulerAngles = rotStart+Vector3.forward*rotFrame;
+				trans.localEulerAngles = rotStart+Vector3.forward*rotFrame;
 				timer += Time.deltaTime;
 				yield return new WaitForEndOfFrame();
 			}
-			trans.eulerAngles = rotStart+Vector3.forward*rotFinal;
+			trans.localEulerAngles = rotStart+Vector3.forward*rotFinal;
 			
 			inSpin = false;
 			onSpin.Invoke(inSpin);
