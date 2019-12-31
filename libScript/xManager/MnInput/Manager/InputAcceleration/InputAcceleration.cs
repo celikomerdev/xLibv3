@@ -7,21 +7,21 @@ namespace xLib.xInput
 	public class InputAcceleration : BaseTickNodeM
 	{
 		[Header("Input")]
-		[SerializeField]private NodeFloat multiplier;
-		[SerializeField]private NodeFloat lerp;
+		[SerializeField]private NodeFloat multiplier = null;
+		[SerializeField]private NodeFloat lerp = null;
 		
 		[SerializeField]private bool calibrateAuto = false;
-		private Vector3 valueZero;
+		private Vector3 valueZero = Vector3.zero;
 		
 		[Header("Output")]
-		[SerializeField]private InputFinal inputFinal;
-		private Vector3 valueCurrent;
-		private Vector3 valueSmooth;
+		[SerializeField]private InputFinal inputFinal = null;
+		private Vector3 valueCurrent = Vector3.zero;
+		private Vector3 valueSmooth = Vector3.zero;
 		
 		[Header("Axis")]
-		[SerializeField]private NodeFloat axisX;
-		[SerializeField]private NodeFloat axisY;
-		[SerializeField]private NodeFloat axisZ;
+		[SerializeField]private NodeFloat axisX = null;
+		[SerializeField]private NodeFloat axisY = null;
+		[SerializeField]private NodeFloat axisZ = null;
 		
 		
 		#region Mono

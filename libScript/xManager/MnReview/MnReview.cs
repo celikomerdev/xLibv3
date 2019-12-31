@@ -9,37 +9,33 @@ namespace xLib
 	{
 		[SerializeField]private NodeInt playerReview = null;
 		[SerializeField]private bool useNative = false;
-		[SerializeField]private bool useCustom = false;
+		[SerializeField]private bool useStandard = false;
 		[SerializeField]private EventUnity eventOpenCustom = new EventUnity();
 		
 		public void AskRewiew()
 		{
 			if(playerReview.Value!=0) return;
-			
-			if(useNative)
-			{
-				#if UNITY_IOS
-				if(UnityEngine.iOS.Device.RequestStoreReview())
-				{
-					playerReview.Value = -1;
-					return;
-				}
-				#endif
-			}
-			
-			PopupCustom();
+			if(PopupNative()) return;
 			PopupStandard();
+			PopupCustom();
 		}
 		
-		private void PopupCustom()
+		private bool PopupNative()
 		{
-			if(!useCustom) return;
-			eventOpenCustom.Invoke();
+			if(!useNative) return false;
+			bool returnValue = false;
+			
+			#if UNITY_IOS
+			returnValue = UnityEngine.iOS.Device.RequestStoreReview();
+			#endif
+			
+			if(returnValue) playerReview.Value = -1;
+			return returnValue;
 		}
 		
 		private void PopupStandard()
 		{
-			if(useCustom) return;
+			if(!useStandard) return;
 			StPopupWindow.Reset();
 			StPopupWindow.Header(MnLocalize.GetValue(""));
 			StPopupWindow.Body(MnLocalize.GetValue("Please Rate and Write What You Think to Support"));
@@ -55,6 +51,13 @@ namespace xLib
 				Application.OpenURL(MnKey.GetValue("App-Link"));
 			}
 			StPopupWindow.Show();
+			
+		}
+		
+		private void PopupCustom()
+		{
+			if(useStandard) return;
+			eventOpenCustom.Invoke();
 		}
 	}
 }

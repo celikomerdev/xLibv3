@@ -43,16 +43,9 @@ namespace xLib
 		#region Implementation
 		private static IStoreController m_Controller = null;
 		private static IExtensionProvider m_extensions = null;
-		private static ITransactionHistoryExtensions m_TransactionHistoryExtensions = null;
 		
-		#pragma warning disable
 		private static IGooglePlayStoreExtensions m_GooglePlayStoreExtensions = null;
-		//Dictionary<string, string> google_play_store_product_SKUDetails_json;
-		#pragma warning restore
-		
 		private static IAppleExtensions m_AppleExtensions = null;
-		//Dictionary<string, string> introductory_info_dict;
-		
 		
 		void IStoreListener.OnInitialized(IStoreController controller,IExtensionProvider extensions)
 		{
@@ -62,12 +55,10 @@ namespace xLib
 			if(StandardPurchasingModule.Instance().appStore == AppStore.GooglePlay)
 			{
 				m_GooglePlayStoreExtensions = m_extensions.GetExtension<IGooglePlayStoreExtensions>();
-				//google_play_store_product_SKUDetails_json = m_GooglePlayStoreExtensions.GetProductJSONDictionary();
 			}
 			else if(StandardPurchasingModule.Instance().appStore == AppStore.AppleAppStore)
 			{
 				m_AppleExtensions = m_extensions.GetExtension<IAppleExtensions>();
-				//introductory_info_dict = m_AppleExtensions.GetIntroductoryPriceDictionary();
 			}
 			
 			OnInit(true);

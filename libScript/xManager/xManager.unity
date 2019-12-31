@@ -3476,7 +3476,6 @@ MonoBehaviour:
     order: 0
     onRegister: 0
   key: Product-RemoveAds
-  restoreOnce: 0
   eventRestore:
     eventBool:
       m_PersistentCalls:
@@ -6373,7 +6372,6 @@ MonoBehaviour:
     order: 0
     onRegister: 0
   key: Product-DoubleCash
-  restoreOnce: 0
   eventRestore:
     eventBool:
       m_PersistentCalls:
@@ -6911,12 +6909,11 @@ MonoBehaviour:
   isPrimary: 0
   useValidate: 1
   fakeStoreUIMode: 1
+  isInit: {fileID: 0}
   inPurchase: {fileID: 11400000, guid: 6f42eeb23030c9841862fda437f1643f, type: 2}
   inRestore: {fileID: 11400000, guid: c2c9dc5bc8a7176499cdeb951905504d, type: 2}
-  onInit: {fileID: 11400000, guid: 159fccc96197a384395391a7db9cd2df, type: 2}
   onPurchase: {fileID: 11400000, guid: 59d44db6d99649b47bd7e327c5aeeaca, type: 2}
   onRestore: {fileID: 11400000, guid: 9948866a4827ed94eab7780d83ad8298, type: 2}
-  isRestore: {fileID: 11400000, guid: 9948866a4827ed94eab7780d83ad8298, type: 2}
 --- !u!1 &893639020
 GameObject:
   m_ObjectHideFlags: 0
@@ -7230,7 +7227,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918744251}
   m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 100, y: 100, z: 100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12575,7 +12572,6 @@ MonoBehaviour:
     order: 0
     onRegister: 0
   key: Product-ExtraLife
-  restoreOnce: 0
   eventRestore:
     eventBool:
       m_PersistentCalls:
@@ -14120,7 +14116,6 @@ MonoBehaviour:
     order: 0
     onRegister: 0
   key: Product-Offer
-  restoreOnce: 0
   eventRestore:
     eventBool:
       m_PersistentCalls:
