@@ -16,7 +16,7 @@ namespace xLib.ToolPurchase
 		
 		protected override bool OnRegister(bool register)
 		{
-			MnProduct.ins.onInit.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:false);
+			MnProduct.ins.isInit.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:false);
 			MnProduct.ins.onRestore.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:false);
 			MnProduct.ins.onPurchase.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:false);
 			return register;

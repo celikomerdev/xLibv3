@@ -9,13 +9,12 @@ namespace xLib.ToolPurchase
 	public class ProductRestore : BaseRegisterM
 	{
 		[SerializeField]private string key = "";
-		[SerializeField]private bool restoreOnce = false;
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
 		[SerializeField]private EventBool eventRestore = new EventBool();
 		
 		protected override bool OnRegister(bool register)
 		{
-			if(!restoreOnce) MnProduct.ins.onInit.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
+			MnProduct.ins.isInit.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
 			MnProduct.ins.onRestore.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
 			MnProduct.ins.onPurchase.Listener(register:register, call:ListenPurchase, viewId:ViewId, order:baseRegister.order, onRegister:true);
 			return register;
@@ -23,7 +22,6 @@ namespace xLib.ToolPurchase
 		
 		private void ListenRestore(bool value)
 		{
-			if(restoreOnce && MnProduct.ins.isRestore.Value) return;
 			ListenPurchase(value);
 		}
 		
@@ -49,7 +47,6 @@ namespace xLib.ToolPurchase
 	public class ProductRestore : BaseRegisterM
 	{
 		[SerializeField]private string key = "";
-		[SerializeField]private bool restoreOnce = false;
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
 		[SerializeField]private EventBool eventRestore = new EventBool();
 		
@@ -62,7 +59,6 @@ namespace xLib.ToolPurchase
 		
 		private void ListenRestore(bool value)
 		{
-			if(restoreOnce && MnProduct.ins.isRestore.Value) return;
 			ListenPurchase(value);
 		}
 		

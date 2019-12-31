@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c47f3d7fa3e3424439269f207f15244e, type: 3}
-  m_Name: MnProduct_OnInit
+  m_Script: {fileID: 11500000, guid: 9e8bf1502a1b9694c9c70a7bb8cc3987, type: 3}
+  m_Name: MnNotification_SendTags
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,8 +20,5 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 159fccc96197a384395391a7db9cd2df
+      key: 25ce80530bb45c0418d927093eedf72f
       isMulti: 0
-    value: 0
-    skipCompareRpc: 1
-    isCompare: 0

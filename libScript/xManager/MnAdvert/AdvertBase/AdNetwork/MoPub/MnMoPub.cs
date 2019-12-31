@@ -16,7 +16,7 @@ namespace xLib.libAdvert.xMoPub
 			set
 			{
 				isSdkInit = value;
-				Debug.LogWarning($"isSdkInit:{isSdkInit}");
+				if(CanDebug) Debug.LogWarning($"isSdkInit:{isSdkInit}");
 			}
 		}
 	}

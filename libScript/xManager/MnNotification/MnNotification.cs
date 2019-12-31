@@ -7,8 +7,11 @@ namespace xLib
 {
 	public class MnNotification : SingletonM<MnNotification>
 	{
+		private bool isInit = false;
 		protected override void Inited()
 		{
+			if(isInit) return;
+			isInit = true;
 			InitPayload();
 		}
 		
@@ -32,7 +35,7 @@ namespace xLib
 		[SerializeField]private UnityEngine.Object[] arrayTag = new UnityEngine.Object[0];
 		public void SendTags()
 		{
-			Debug.Log($"{this.name}:SendTags",this);
+			if(CanDebug) Debug.Log($"{this.name}:SendTags",this);
 			Dictionary<string,string> dict = new Dictionary<string,string>();
 			ISerializableObject[] array = arrayTag.GetGenericsArray<ISerializableObject>();
 			for (int i = 0; i < array.Length; i++)

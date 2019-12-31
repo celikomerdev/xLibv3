@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c47f3d7fa3e3424439269f207f15244e, type: 3}
-  m_Name: MnProduct_IsRestore
+  m_Name: CanTest
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,8 +20,8 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: da759d12d66894b42b4c2ecee00aa264
+      key: 1c42c66ffcd55a44089d3359bc9698ff
       isMulti: 0
     value: 0
     skipCompareRpc: 1
-    isCompare: 0
+    isCompare: 1

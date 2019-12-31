@@ -17,10 +17,10 @@ namespace xLib
 		
 		#region Init
 		private bool inInit = false;
-		public override void Init()
+		public NodeBool isInit = null;
+		protected override void Inited()
 		{
-			base.Init();
-			if(onInit.Value) return;
+			if(isInit.Value) return;
 			if(inInit) return;
 			inInit = true;
 			
@@ -156,7 +156,7 @@ namespace xLib
 			inRestore.Value = true;
 			if(CanDebug) Debug.Log($"{this.name}:Restore",this);
 			
-			if(!onInit.Value)
+			if(!isInit.Value)
 			{
 				Init();
 				OnRestoreFalse();
@@ -190,16 +190,15 @@ namespace xLib
 		
 		public Product GetProduct(string key)
 		{
-			if(onInit.Value) return m_Controller.products.WithID(key);
+			if(isInit.Value) return m_Controller.products.WithID(key);
 			else return null;
 		}
 		
-		public NodeBool onInit = null;
 		private void OnInit(bool value)
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnInit:{value}",this);
 			inInit = false;
-			onInit.Value = value;
+			isInit.Value = value;
 			if(!value) return;
 		}
 		
@@ -219,14 +218,12 @@ namespace xLib
 		}
 		
 		public NodeBool onRestore = null;
-		public NodeBool isRestore = null;
 		private void OnRestoreTrue(bool isContinue)
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnRestore:True:isContinue:{isContinue}",this);
 			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Successful"));
 			inRestore.Value = false;
 			onRestore.Value = true;
-			isRestore.Value = true;
 		}
 		
 		private void OnRestoreFalse()
@@ -252,10 +249,10 @@ namespace xLib
 		[SerializeField]private bool useValidate = true;
 		[SerializeField]private int fakeStoreUIMode = 1;
 		
-		public NodeBool onInit = null;
-		public override void Init()
+		public NodeBool isInit = null;
+		protected override void Inited()
 		{
-			onInit.Value = true;
+			isInit.Value = true;
 		}
 		
 		public NodeBool inPurchase = null;
@@ -302,7 +299,6 @@ namespace xLib
 		
 		public NodeBool inRestore = null;
 		public NodeBool onRestore = null;
-		public NodeBool isRestore = null;
 		public void Restore()
 		{
 			if(inRestore.Value) return;
@@ -313,7 +309,6 @@ namespace xLib
 			
 			inRestore.Value = false;
 			onRestore.Value = true;
-			isRestore.Value = true;
 		}
 		
 		public static string currentProductId = null;
