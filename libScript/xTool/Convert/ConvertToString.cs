@@ -27,7 +27,7 @@ namespace xLib.ToolConvert
 		{
 			set
 			{
-				if(result == value) return;
+				// if(result == value) return;
 				if(CanDebug) xLogger.LogFormat(this,this.name+":Result:{0}:{1}",result,value);
 				result = value;
 				eventResult.Invoke(result);
