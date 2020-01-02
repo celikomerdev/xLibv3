@@ -13,7 +13,7 @@ namespace xLib
 		{
 			if(!mono)
 			{
-				xDebug.LogExceptionFormat("KillCoroutine:mono:null");
+				xLogger.LogExceptionFormat("KillCoroutine:mono:null");
 				return;
 			}
 			
@@ -25,7 +25,7 @@ namespace xLib
 		{
 			if(!mono)
 			{
-				xDebug.LogExceptionFormat("NewCoroutine:mono:null");
+				xLogger.LogExceptionFormat("NewCoroutine:mono:null");
 				return null;
 			}
 			
@@ -36,7 +36,7 @@ namespace xLib
 		{
 			if(!mono.isActiveAndEnabled)
 			{
-				xDebug.LogExceptionFormat(mono,mono.name+":!isActiveAndEnabled");
+				xLogger.LogExceptionFormat(mono,mono.name+":!isActiveAndEnabled");
 				return null;
 			}
 			

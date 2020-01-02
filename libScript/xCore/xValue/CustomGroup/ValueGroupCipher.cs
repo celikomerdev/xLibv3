@@ -29,7 +29,7 @@ namespace xLib.xValueClass
 				string Content = jObject.GetValue("Content").ToString();
 				string stringJObject = "";
 				
-				if(stringJObject != "") xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Test!!!");
+				if(stringJObject != "") xLogger.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Test!!!");
 				
 				SerializedObjectRaw = Decrypt(Content);
 			}
@@ -46,7 +46,7 @@ namespace xLib.xValueClass
 				if(!string.IsNullOrEmpty(stringJObject)) return stringJObject;
 			}
 			
-			xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":HackDetected!!!");
+			xLogger.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":HackDetected!!!");
 			return "";
 		}
 		#endregion

@@ -97,7 +97,7 @@ namespace xLib.ToolPurchase
 			if(CanDebug) Debug.Log($"{this.name}:IsPuchase:{value}",this);
 			if(product != MnProduct.currentProduct)
 			{
-				xDebug.LogException($"product id does not match:{product}",this);
+				xLogger.LogException($"product id does not match:{product}",this);
 				return;
 			}
 			

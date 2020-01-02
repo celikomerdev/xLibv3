@@ -32,7 +32,7 @@ namespace xLib
 		public virtual void CheckErrors()
 		{
 			#if UNITY_EDITOR
-			if(ViewCore.CurrentId != ViewId) xDebug.LogExceptionFormat(this,$"{this.name}:CurrentId:{0}:ViewId:{1}",ViewCore.CurrentId,ViewId);
+			if(ViewCore.CurrentId != ViewId) xLogger.LogExceptionFormat(this,$"{this.name}:CurrentId:{0}:ViewId:{1}",ViewCore.CurrentId,ViewId);
 			#endif
 		}
 	}

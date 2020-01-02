@@ -10,7 +10,7 @@ namespace xLib
 			Texture2D texture2D = new Texture2D(value.width,value.height);
 			if(value==null)
 			{
-				xDebug.LogExceptionFormat("ExtTexture2D:Uncompress:null");
+				xLogger.LogExceptionFormat("ExtTexture2D:Uncompress:null");
 				return texture2D;
 			}
 			
@@ -41,7 +41,7 @@ namespace xLib
 			byte[] bytes = new byte[0];
 			if(value==null)
 			{
-				xDebug.LogExceptionFormat("ExtTexture2D:xEncodeToPNG:null");
+				xLogger.LogExceptionFormat("ExtTexture2D:xEncodeToPNG:null");
 				return bytes;
 			}
 			

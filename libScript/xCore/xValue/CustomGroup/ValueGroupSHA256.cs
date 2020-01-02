@@ -44,7 +44,7 @@ namespace xLib.xValueClass
 				if(hash == (KeyEncryptVersion(i)+content).HashSHA256UTF8()) return true;
 			}
 			
-			xDebug.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":HackDetected!!!");
+			xLogger.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":HackDetected!!!");
 			return false;
 		}
 		#endregion

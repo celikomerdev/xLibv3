@@ -75,7 +75,7 @@ namespace xLib
 		
 		private static void CallAdvertisingIdentifierNative()
 		{
-			if(xDebug.CanDebug) Debug.Log($"DeviceAdvertID:CallAdvertisingIdentifierNative");
+			xLogger.Log($"DeviceAdvertID:CallAdvertisingIdentifierNative");
 			
 			string value = "";
 			
@@ -98,17 +98,17 @@ namespace xLib
 		
 		private static void CallAdvertisingIdentifierUnity()
 		{
-			if(xDebug.CanDebug) Debug.Log($"DeviceAdvertID:CallAdvertisingIdentifierUnity");
+			xLogger.Log($"DeviceAdvertID:CallAdvertisingIdentifierUnity");
 			Application.RequestAdvertisingIdentifierAsync(CallbackAdvertisingIdentifierUnity);
 		}
 		
 		private static void CallbackAdvertisingIdentifierUnity(string advertisingId, bool trackingEnabled, string errorMsg)
 		{
-			if(xDebug.CanDebug) Debug.Log($"DeviceAdvertID:CallbackAdvertisingIdentifierUnity");
+			xLogger.Log($"DeviceAdvertID:CallbackAdvertisingIdentifierUnity");
 			
 			if(!string.IsNullOrEmpty(errorMsg))
 			{
-				xDebug.LogException($"DeviceAdvertID:errorMsg:{errorMsg}");
+				xLogger.LogException($"DeviceAdvertID:errorMsg:{errorMsg}");
 				StAdvert.TrackingEnabled = false;
 				StAdvert.AdvertisingID = "";
 				return;

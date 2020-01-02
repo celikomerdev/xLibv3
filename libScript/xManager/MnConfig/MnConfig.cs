@@ -14,11 +14,11 @@ namespace xLib
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		private static void LoadConfig()
 		{
-			xDebug.LogFormat("MnConfig:LoadConfig");
+			xLogger.LogFormat("MnConfig:LoadConfig");
 			TextAsset textAsset = Resources.Load<TextAsset>("ConfigData");
 			if(!textAsset)
 			{
-				xDebug.LogExceptionFormat("MnConfig:textAsset:null");
+				xLogger.LogExceptionFormat("MnConfig:textAsset:null");
 				return;
 			}
 			UpdateConfig(textAsset.text);
@@ -29,7 +29,7 @@ namespace xLib
 			// xDebug.LogTempFormat("MnConfig:UpdateConfig:{0}",json);
 			if(string.IsNullOrWhiteSpace(json))
 			{
-				xDebug.LogExceptionFormat("MnConfig:UpdateConfig:json:null");
+				xLogger.LogExceptionFormat("MnConfig:UpdateConfig:json:null");
 				return;
 			}
 			
@@ -40,7 +40,7 @@ namespace xLib
 			}
 			catch (Exception ex)
 			{
-				xDebug.LogExceptionFormat("MnConfig:UpdateConfig:{0}:{1}",ex,json);
+				xLogger.LogExceptionFormat("MnConfig:UpdateConfig:{0}:{1}",ex,json);
 				return;
 			}
 			

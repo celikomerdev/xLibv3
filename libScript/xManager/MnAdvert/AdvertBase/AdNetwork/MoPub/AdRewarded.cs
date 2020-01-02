@@ -67,14 +67,14 @@ namespace xLib.libAdvert.xMoPub
 		private void OnRewardedVideoFailedEvent(string adUnitId,string errorMsg)
 		{
 			if(adUnitId!=idPlatform) return;
-			xDebug.LogException($"{this.name}:OnRewardedVideoFailedEvent:{adUnitId}:{errorMsg}",this);
+			xLogger.LogException($"{this.name}:OnRewardedVideoFailedEvent:{adUnitId}:{errorMsg}",this);
 			OnLoadFailBase();
 		}
 		
 		private void OnRewardedVideoFailedToPlayEvent(string adUnitId,string errorMsg)
 		{
 			if(adUnitId!=idPlatform) return;
-			xDebug.LogException($"{this.name}:OnRewardedVideoFailedToPlayEvent:{adUnitId}:{errorMsg}",this);
+			xLogger.LogException($"{this.name}:OnRewardedVideoFailedToPlayEvent:{adUnitId}:{errorMsg}",this);
 		}
 		
 		private void OnRewardedVideoShownEvent(string adUnitId)

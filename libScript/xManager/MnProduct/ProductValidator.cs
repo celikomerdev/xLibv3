@@ -20,7 +20,7 @@ namespace xLib.Purchasing.Security
 			
 			#if UNITY_ANDROID || UNITY_IPHONE || UNITY_STANDALONE_OSX || UNITY_TVOS
 			validator = new CrossPlatformValidator(GooglePlayTangle.Data(),AppleTangle.Data(),Application.identifier);
-			if(validator == null) xDebug.LogException($"ProductValidator:validator:null");
+			if(validator == null) xLogger.LogException($"ProductValidator:validator:null");
 			#endif
 		}
 		
@@ -44,11 +44,11 @@ namespace xLib.Purchasing.Security
 			}
 			catch(IAPSecurityException ex)
 			{
-				xDebug.LogException($"ProductValidator:IAPSecurityException:{ex}");
+				xLogger.LogException($"ProductValidator:IAPSecurityException:{ex}");
 			}
 			catch(Exception ex)
 			{
-				xDebug.LogException($"ProductValidator:Exception:{ex}");
+				xLogger.LogException($"ProductValidator:Exception:{ex}");
 			}
 			
 			DebugReceipt(receiptArray);
@@ -59,7 +59,7 @@ namespace xLib.Purchasing.Security
 		{
 			if(receiptArray == null)
 			{
-				xDebug.LogException($"ProductValidator:ReceiptArray:null");
+				xLogger.LogException($"ProductValidator:ReceiptArray:null");
 				return;
 			}
 			

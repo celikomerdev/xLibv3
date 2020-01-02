@@ -72,7 +72,7 @@ namespace xLib
 			}
 			set
 			{
-				xDebug.LogFormat($"SetPlayTime:{value}");
+				xLogger.LogFormat($"SetPlayTime:{value}");
 			}
 		}
 		

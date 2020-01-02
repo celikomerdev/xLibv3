@@ -25,7 +25,7 @@ namespace xLib.ToolRandom
 		{
 			if(LuckMax==0) LuckMax = 0;
 			float random = Random.Range(0,LuckMax);
-			if(CanDebug) Debug.LogFormat(this,this.name+":Random:{0}",random);
+			if(CanDebug) xLogger.LogFormat(this,this.name+":Random:{0}",random);
 			
 			int index = 0;
 			float totalLuck = 0;
@@ -41,7 +41,7 @@ namespace xLib.ToolRandom
 				}
 			}
 			
-			if(CanDebug) Debug.LogFormat(this,this.name+":Index:{0}",index);
+			if(CanDebug) xLogger.LogFormat(this,this.name+":Index:{0}",index);
 			return index;
 		}
 		

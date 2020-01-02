@@ -137,7 +137,7 @@ namespace xLib
 			{
 				if(listenerEditor.Contains(call))
 				{
-					xDebug.LogException($"{nodeSetting.objDebug.name}:ListenerEditor:++:{call.name}",call.gameObject);
+					xLogger.LogException($"{nodeSetting.objDebug.name}:ListenerEditor:++:{call.name}",call.gameObject);
 					return;
 				}
 				listenerEditor.Add(call);
@@ -146,7 +146,7 @@ namespace xLib
 			{
 				if(!listenerEditor.Contains(call))
 				{
-					xDebug.LogException($"{nodeSetting.objDebug.name}:ListenerEditor:--:{call.name}",call.gameObject);
+					xLogger.LogException($"{nodeSetting.objDebug.name}:ListenerEditor:--:{call.name}",call.gameObject);
 					return;
 				}
 				listenerEditor.Remove(call);

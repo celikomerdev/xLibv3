@@ -57,7 +57,7 @@ namespace xLib.libAdvert.xMoPub
 		private void OnAdFailedEvent(string adUnitId,string error)
 		{
 			if(adUnitId!=idPlatform) return;
-			xDebug.LogException($"{this.name}:OnAdFailedEvent:{adUnitId}:error:{error}",this);
+			xLogger.LogException($"{this.name}:OnAdFailedEvent:{adUnitId}:error:{error}",this);
 			OnLoadFailBase();
 		}
 		

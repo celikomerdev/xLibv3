@@ -17,7 +17,7 @@ namespace xLib
 		
 		public static void Translate(Vector3 value)
 		{
-			if(xDebug.CanDebug) Debug.LogFormat("Translate:{0}",value.ToString());
+			xLogger.Log($"ExtSpace:Translate:{value}");
 			origin += value;
 			listener.Invoke(value);
 		}

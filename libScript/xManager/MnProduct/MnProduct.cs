@@ -80,7 +80,7 @@ namespace xLib
 		
 		void IStoreListener.OnInitializeFailed(InitializationFailureReason error)
 		{
-			xDebug.LogException($"{this.name}:OnInitializeFailed:{error}",this);
+			xLogger.LogException($"{this.name}:OnInitializeFailed:{error}",this);
 			OnInit(false);
 		}
 		
@@ -101,7 +101,7 @@ namespace xLib
 		{
 			currentProduct = product;
 			
-			xDebug.LogException($"{this.name}:OnPurchaseFailed:{productFailureReason}:{product.definition.id}",this);
+			xLogger.LogException($"{this.name}:OnPurchaseFailed:{productFailureReason}:{product.definition.id}",this);
 			StAnalytics.LogEvent(key:"IAP_On_Purchase_Failed_"+productFailureReason,label:product.definition.id);
 			
 			OnPurchase(false,product.definition.id);

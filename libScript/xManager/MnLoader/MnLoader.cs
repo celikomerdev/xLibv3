@@ -34,7 +34,7 @@ namespace xLib
 			
 			if(value<0)
 			{
-				xDebug.LogExceptionFormat(this,this.name+":LoadLevel:{0}",value);
+				xLogger.LogExceptionFormat(this,this.name+":LoadLevel:{0}",value);
 				return;
 			}
 			MnCoroutine.ins.NewCoroutine(LoadLevelAsync(value));

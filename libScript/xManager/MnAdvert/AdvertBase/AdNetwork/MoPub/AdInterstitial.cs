@@ -61,7 +61,7 @@ namespace xLib.libAdvert.xMoPub
 		private void OnInterstitialFailedEvent(string adUnitId,string errorCode)
 		{
 			if(adUnitId!=idPlatform) return;
-			xDebug.LogException($"{this.name}:OnInterstitialFailedEvent:{adUnitId}:{errorCode}",this);
+			xLogger.LogException($"{this.name}:OnInterstitialFailedEvent:{adUnitId}:{errorCode}",this);
 			OnLoadFailBase();
 		}
 		

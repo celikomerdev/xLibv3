@@ -57,7 +57,7 @@ namespace xLib
 				m_timeScale = value;
 				
 				value = Mathf.LerpUnclamped(0.001f,1f,value);
-				if(xDebug.CanDebug) Debug.LogFormat("Time.timeScale:{0}:{1}",Time.timeScale,value);
+				xLogger.Log($"Time.timeScale:{Time.timeScale}:{value}");
 				Time.timeScale = value;
 			}
 		}

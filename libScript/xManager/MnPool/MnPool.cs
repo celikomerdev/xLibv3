@@ -24,13 +24,13 @@ namespace xLib
 		#region Main
 		public static GameObject Spawn(GameObject original,bool usePool)
 		{
-			xDebug.Log($"MnPool:Spawn:original:{original.name}",original);
+			xLogger.Log($"MnPool:Spawn:original:{original.name}",original);
 			GameObject clone = null;
 			
 			if(ins && ins.GetStack(original).Count>0) clone = ins.GetStack(original).Pop();
 			if(!clone)
 			{
-				xDebug.Log($"MnPool:Instantiate:{original.name}",original);
+				xLogger.Log($"MnPool:Instantiate:{original.name}",original);
 				bool originalState = original.activeSelf;
 				original.SetActive(false);
 				clone = Instantiate(original);
@@ -38,13 +38,13 @@ namespace xLib
 			}
 			
 			if(usePool) clone.AddComponent<PoolKey>().original = original;
-			xDebug.Log($"MnPool:Spawn:clone:{clone.name}",clone);
+			xLogger.Log($"MnPool:Spawn:clone:{clone.name}",clone);
 			return clone;
 		}
 		
 		public static void Pool(GameObject obj)
 		{
-			xDebug.Log($"MnPool:Pool:{obj.name}",obj);
+			xLogger.Log($"MnPool:Pool:{obj.name}",obj);
 			
 			if(obj == null) return;
 			obj.SetActive(false);

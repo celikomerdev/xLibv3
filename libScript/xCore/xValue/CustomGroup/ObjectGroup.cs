@@ -63,7 +63,7 @@ namespace xLib.xValueClass
 				}
 				catch (System.Exception ex)
 				{
-					xDebug.LogExceptionFormat("GetByKey:{0}",ex);
+					xLogger.LogExceptionFormat("GetByKey:{0}",ex);
 				}
 			}
 			if(indexCurrent==-1) indexCurrent=0;

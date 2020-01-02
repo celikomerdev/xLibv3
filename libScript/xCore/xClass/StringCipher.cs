@@ -33,7 +33,7 @@ namespace xLib.ToolCrypto
 			}
 			catch(Exception ex)
 			{
-				xDebug.LogExceptionFormat("StringCipher.Encrypt:Exception:{0}",ex);
+				xLogger.LogExceptionFormat("StringCipher.Encrypt:Exception:{0}",ex);
 			}
 			
 			return output;
@@ -65,7 +65,7 @@ namespace xLib.ToolCrypto
 			}
 			catch(Exception ex)
 			{
-				xDebug.LogExceptionFormat("StringCipher.Decrypt:Exception:{0}",ex);
+				xLogger.LogExceptionFormat("StringCipher.Decrypt:Exception:{0}",ex);
 			}
 			return output;
 		}

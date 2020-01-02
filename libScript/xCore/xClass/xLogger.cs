@@ -3,24 +3,54 @@ using UnityEngine;
 
 namespace xLib
 {
-	public class xDebug : BaseMainM
+	public class xLogger : BaseMainM
 	{
 		#region Debug
-		public static bool CanDebug = true;
+		private static bool canDebug = true;
+		public static bool CanDebug
+		{
+			get
+			{
+				#if CanDebug
+				return canDebug;
+				#else
+				return false;
+				#endif
+			}
+			set
+			{
+				canDebug = value;
+			}
+		}
 		public bool SetDebug
 		{
 			set
 			{
-				xDebug.CanDebug = value;
+				xLogger.CanDebug = value;
 			}
 		}
 		
-		public static bool CanTest = false;
+		private static bool canTest = false;
+		public static bool CanTest
+		{
+			get
+			{
+				#if CanDebug
+				return canTest;
+				#else
+				return false;
+				#endif
+			}
+			set
+			{
+				canDebug = value;
+			}
+		}
 		public bool SetTest
 		{
 			set
 			{
-				xDebug.CanTest = value;
+				xLogger.CanTest = value;
 			}
 		}
 		#endregion

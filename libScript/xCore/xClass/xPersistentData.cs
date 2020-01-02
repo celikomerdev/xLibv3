@@ -26,13 +26,13 @@ namespace xLib
 		#region Delete
 		public static void DeleteKey(string key)
 		{
-			xDebug.LogFormat("xPersistentData:DeleteKey:{0}",key);
+			xLogger.LogFormat("xPersistentData:DeleteKey:{0}",key);
 			File.Delete(PathKey(key));
 		}
 		
 		public static void DeleteAll()
 		{
-			xDebug.LogFormat("xPersistentData:DeleteAll");
+			xLogger.LogFormat("xPersistentData:DeleteAll");
 			DirectoryInfo directoryInfo = new DirectoryInfo(xApp.xPath(""));
 			directoryInfo.Delete(true);
 		}

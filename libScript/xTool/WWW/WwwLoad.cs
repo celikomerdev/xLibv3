@@ -39,7 +39,7 @@ namespace xLib
 			}
 			else
 			{
-				xDebug.LogExceptionFormat(this,this.name+":Error:{0}:{1}",www.error,url);
+				xLogger.LogExceptionFormat(this,this.name+":Error:{0}:{1}",www.error,url);
 			}
 			
 			www.Dispose();

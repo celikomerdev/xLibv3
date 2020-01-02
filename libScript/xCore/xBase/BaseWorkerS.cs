@@ -55,7 +55,7 @@ namespace xLib
 		#if UNITY_EDITOR
 		public virtual void CheckErrors()
 		{
-			if(ViewCore.CurrentId != ViewId) xDebug.LogExceptionFormat(this,this.name+":CurrentId:{0}:viewId:{1}",ViewCore.CurrentId,ViewId);
+			if(ViewCore.CurrentId != ViewId) xLogger.LogExceptionFormat(this,this.name+":CurrentId:{0}:viewId:{1}",ViewCore.CurrentId,ViewId);
 		}
 		#else
 		public virtual void CheckErrors(){}
