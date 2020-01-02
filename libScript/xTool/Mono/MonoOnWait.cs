@@ -29,7 +29,7 @@ namespace xLib
 		{
 			if(isDisabled) return;
 			if(processCount==0) return;
-			if(CanDebug) Debug.LogFormat(this,this.name+":CancelAll");
+			if(CanDebug) Debug.Log($"{this.name}:CancelAll",this);
 			StopAllCoroutines();
 			processCount = 0;
 		}
@@ -37,14 +37,14 @@ namespace xLib
 		private int processCount = 0;
 		private IEnumerator eWait(string invokeId,float time)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":MonoOnWait:{0}",time);
+			if(CanDebug) Debug.Log($"{this.name}:Wait:{invokeId}:time:{time}",this);
 			
 			processCount++;
 			if(isUnscaled) yield return new WaitForSecondsRealtime(time);
 			else yield return new WaitForSeconds(time);
 			processCount--;
 			
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnWait:{0}",time);
+			if(CanDebug) Debug.Log($"{this.name}:OnWait:{invokeId}:time:{time}",this);
 			string tempId = ViewCore.CurrentId;
 			ViewCore.CurrentId = invokeId;
 			eventWaited.Invoke();

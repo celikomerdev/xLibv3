@@ -50,7 +50,7 @@ namespace xLib
 		{
 			if(isInit == init) return;
 			isInit = init;
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Init:{0}",isInit);
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Init:{isInit}",nodeSetting.objDebug);
 			OnInit(init);
 		}
 		
@@ -78,7 +78,7 @@ namespace xLib
 		#region Call
 		private void CallClient()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClient:{0}",ValueToString);
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallClient:{ValueToString}",nodeSetting.objDebug);
 			actionSortedBase.Invoke(Value,viewId:"Client");
 			actionSortedBaseCall.Invoke(Value,viewId:"Client");
 			analyticDirty = true;
@@ -86,7 +86,7 @@ namespace xLib
 		
 		private void CallClientFirst()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClientFirst:{0}",ValueToString);
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallClientFirst:{ValueToString}",nodeSetting.objDebug);
 			actionSortedBase.InvokeFirst(Value,viewId:"Client");
 			actionSortedBaseCall.InvokeFirst(Value,viewId:"Client");
 			analyticDirty = true;
@@ -94,7 +94,7 @@ namespace xLib
 		
 		private void CallClientLast()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClientLast:{0}",ValueToString);
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallClientLast:{ValueToString}",nodeSetting.objDebug);
 			actionSortedBase.InvokeLast(Value,viewId:"Client");
 			actionSortedBaseCall.InvokeLast(Value,viewId:"Client");
 			analyticDirty = true;
@@ -107,7 +107,7 @@ namespace xLib
 		private ActionSortedBase<V> actionSortedBase = new ActionSortedSingle<V>();
 		public void Listener(bool register,UnityAction<V> call,string viewId,int order,bool onRegister=false)
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Listener:{0}:view:{1}:order:{2}:call:{3}",register,viewId,order,call.Target);
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Listener:{register}:view:{viewId}:order:{order}:call:{call.Target}",nodeSetting.objDebug);
 			actionSortedBase.Listener(register,call,viewId,order);
 			
 			if(!register) return;
@@ -118,7 +118,7 @@ namespace xLib
 		private ActionSortedBase<object> actionSortedBaseCall = new ActionSortedSingle<object>();
 		public virtual void ListenerCall(bool register,UnityAction<object> call,string viewId,int order,bool onRegister=false)
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":ListenerCall:{0}:view:{1}:order:{2}:call:{3}",register,viewId,order,call.Target);
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:ListenerCall:{register}:view:{viewId}:order:{order}:call:{call.Target}",nodeSetting.objDebug);
 			actionSortedBaseCall.Listener(register,call,viewId,order);
 			
 			if(!register) return;
@@ -137,7 +137,7 @@ namespace xLib
 			{
 				if(listenerEditor.Contains(call))
 				{
-					xDebug.LogExceptionFormat(nodeSetting.objDebug,$"{nodeSetting.objDebug.name}:ListenerEditorAdd:Contains:{call.name}");
+					xDebug.LogException($"{nodeSetting.objDebug.name}:ListenerEditor:++:{call.name}",call.gameObject);
 					return;
 				}
 				listenerEditor.Add(call);
@@ -146,7 +146,7 @@ namespace xLib
 			{
 				if(!listenerEditor.Contains(call))
 				{
-					xDebug.LogExceptionFormat(nodeSetting.objDebug,$"{nodeSetting.objDebug.name}:ListenerEditorAdd:NotContains:{call.name}");
+					xDebug.LogException($"{nodeSetting.objDebug.name}:ListenerEditor:--:{call.name}",call.gameObject);
 					return;
 				}
 				listenerEditor.Remove(call);
@@ -220,7 +220,7 @@ namespace xLib
 			{
 				if(!CanChange(value))
 				{
-					if(nodeSetting.canDebug) Debug.LogWarningFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":!CanChange:{0}:{1}",ViewCore.CurrentId,ValueToString);
+					if(nodeSetting.canDebug) Debug.LogWarning($"{nodeSetting.objDebug.name}:!CanChange:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.objDebug);
 					return;
 				}
 				KeepProperties(value);
@@ -249,7 +249,7 @@ namespace xLib
 			if(!nodeSetting.UseRpc) CallClient();
 			else
 			{
-				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Call:{0}:{1}",ViewCore.CurrentId,ValueToString);
+				if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Call:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.objDebug);
 				ViewCore.RPC(nodeSetting.RpcTarget,Key,SerializedObject.ToString());
 			}
 		}
@@ -259,7 +259,7 @@ namespace xLib
 			if(!nodeSetting.UseRpc) CallClientFirst();
 			else
 			{
-				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallFirst:{0}:{1}",ViewCore.CurrentId,ValueToString);
+				if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallFirst:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.objDebug);
 				ViewCore.RPC(nodeSetting.RpcTarget,Key,SerializedObject.ToString());
 			}
 		}
@@ -269,7 +269,7 @@ namespace xLib
 			if(!nodeSetting.UseRpc) CallClientLast();
 			else
 			{
-				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallLast:{0}:{1}",ViewCore.CurrentId,ValueToString);
+				if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallLast:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.objDebug);
 				ViewCore.RPC(nodeSetting.RpcTarget,Key,SerializedObject.ToString());
 			}
 		}

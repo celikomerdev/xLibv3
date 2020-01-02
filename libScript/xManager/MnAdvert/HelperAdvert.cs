@@ -117,7 +117,7 @@ namespace xLib.libAdvert
 		private void OnReward(int value)
 		{
 			lastTime = Time.realtimeSinceStartup;
-			onReward.Invoke(value);
+			MnCoroutine.ins.WaitForSeconds(delay:0.5f,call:delegate{onReward.Invoke(value);});
 		}
 		#endregion
 	}
