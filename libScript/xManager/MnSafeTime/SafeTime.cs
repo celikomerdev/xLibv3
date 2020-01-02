@@ -18,7 +18,7 @@ namespace xLib
 			}
 			set
 			{
-				xDebug.LogTempFormat("SafeTime:UtcNow:{0}",value.ToString());
+				xDebug.LogFormat("SafeTime:UtcNow:{0}",value.ToString());
 				dateTimeAnchor = value.AddSeconds(-Time.unscaledTime);
 				onCalibrate.Invoke();
 			}

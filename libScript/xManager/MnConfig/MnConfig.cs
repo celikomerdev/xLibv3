@@ -14,7 +14,7 @@ namespace xLib
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		private static void LoadConfig()
 		{
-			xDebug.LogTempFormat("MnConfig:LoadConfig");
+			xDebug.LogFormat("MnConfig:LoadConfig");
 			TextAsset textAsset = Resources.Load<TextAsset>("ConfigData");
 			if(!textAsset)
 			{

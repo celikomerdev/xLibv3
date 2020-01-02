@@ -57,7 +57,7 @@ namespace xLib
 			int childCount = trans.childCount;
 			for (int i=startAfter; i<childCount-endBefore; i++)
 			{
-				xDebug.LogTempFormat(trans,trans.name+"RemapChildren:{0}",i);
+				xDebug.LogFormat(trans,trans.name+"RemapChildren:{0}",i);
 				trans.GetChild(i).localPosition = target.GetChild(i).localPosition;
 			}
 		}

@@ -132,7 +132,7 @@ namespace xLib.ToolOperation
 		
 		private void Op_Null()
 		{
-			xDebug.LogTempFormat(this,this.name+":Op_Null");
+			xDebug.LogFormat(this,this.name+":Op_Null");
 		}
 		#endregion
 		

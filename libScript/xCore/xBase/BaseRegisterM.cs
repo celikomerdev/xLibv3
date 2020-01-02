@@ -18,7 +18,7 @@ namespace xLib
 		#region Custom
 		protected override void OnActive(bool value)
 		{
-			if(CanDebug) xDebug.LogTempFormat(this,this.name+":OnActive:{0}",value);
+			if(CanDebug) xDebug.LogFormat(this,this.name+":OnActive:{0}",value);
 			IsRegister = value;
 		}
 		
@@ -37,7 +37,7 @@ namespace xLib
 				ViewCore.CurrentId = ViewId;
 				
 				baseRegister.isRegister = OnRegister(value);
-				if(CanDebug) xDebug.LogTempFormat(this,this.name+":IsRegister:{0}",baseRegister.isRegister);
+				if(CanDebug) xDebug.LogFormat(this,this.name+":IsRegister:{0}",baseRegister.isRegister);
 				
 				ViewCore.CurrentId = tempId;
 			}

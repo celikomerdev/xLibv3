@@ -13,7 +13,7 @@ namespace xLib.ToolConvert
 		{
 			set
 			{
-				if(CanDebug) xDebug.LogTempFormat(this,this.name+":GetString:Value:{0}",value);
+				if(CanDebug) xDebug.LogFormat(this,this.name+":GetString:Value:{0}",value);
 				eventResult.Invoke(value);
 			}
 		}
