@@ -15,7 +15,7 @@ MonoBehaviour:
   note:
     value: 
   baseWork:
-    canDebug: 1
+    canDebug: 0
     canWork: 1
     runInEditMode: 0
   nodeValue:
