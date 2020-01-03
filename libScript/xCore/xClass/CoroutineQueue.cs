@@ -18,7 +18,7 @@ namespace xLib
 		
 		public void StartLoop()
 		{
-			m_InternalCoroutine = m_Owner.StartCoroutine(Process());
+			m_InternalCoroutine = m_Owner.NewCoroutine(Process());
 		}
 		
 		public void StopLoop()
@@ -37,7 +37,7 @@ namespace xLib
 			while (true)
 			{
 				if (actions.Count > 0)
-					yield return m_Owner.StartCoroutine(actions.Dequeue());
+					yield return m_Owner.NewCoroutine(actions.Dequeue());
 				else
 					yield return null;
 			}

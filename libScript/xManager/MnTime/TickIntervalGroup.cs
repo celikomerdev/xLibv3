@@ -36,7 +36,7 @@ namespace xLib.xTick
 				else yield return new WaitForSeconds(value.interval);
 				
 				yield return new WaitForEndOfFrame();
-				yield return mono.StartCoroutine(value.Tick());
+				yield return mono.NewCoroutine(value.Tick());
 			}
 		}
 		
@@ -45,7 +45,7 @@ namespace xLib.xTick
 			mono = monoBehaviour;
 			for (int i = 0; i < tickInterval.Length; i++)
 			{
-				mono.StartCoroutine(IntervalUpdate(tickInterval[i]));
+				mono.NewCoroutine(IntervalUpdate(tickInterval[i]));
 			}
 		}
 	}

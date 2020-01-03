@@ -41,7 +41,7 @@ namespace xLib
 				return null;
 			}
 			
-			// if(xDebug.CanDebug) Debug.LogFormat(mono,mono.name+":newCoroutine:{0}",enumerator.ToString());
+			xLogger.LogFormat($"{mono.name}:newCoroutine:{enumerator.ToString()}",mono);
 			return mono.StartCoroutine(enumerator);
 		}
 		#endregion
@@ -73,7 +73,9 @@ namespace xLib
 			yield return new WaitUntil(predicate);
 			if(unscaled)yield return new WaitForSecondsRealtime(delay);
 			else yield return new WaitForSeconds(delay);
+			Profiler.BeginSample($"{call.Method.Name}:waitUntil:{delay}");
 			call();
+			Profiler.EndSample();
 		}
 		#endregion
 		
@@ -88,7 +90,9 @@ namespace xLib
 			yield return new WaitWhile(predicate);
 			if(unscaled)yield return new WaitForSecondsRealtime(delay);
 			else yield return new WaitForSeconds(delay);
+			Profiler.BeginSample($"{call.Method.Name}:waitWhile:{delay}");
 			call();
+			Profiler.EndSample();
 		}
 		#endregion
 	}

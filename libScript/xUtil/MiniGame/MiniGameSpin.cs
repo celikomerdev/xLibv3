@@ -29,7 +29,7 @@ namespace xLib
 			if(inSpin) return;
 			inSpin = true;
 			onSpin.Invoke(inSpin);
-			StartCoroutine(eSpin(value));
+			this.NewCoroutine(eSpin(value));
 		}
 		
 		private IEnumerator eSpin(float value)

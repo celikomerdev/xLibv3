@@ -23,7 +23,7 @@ namespace xLib
 			if(isSingle && processCount>0) return;
 			
 			if(isDisabled) MnCoroutine.ins.NewCoroutine(eWait(ViewCore.CurrentId,time));
-			else StartCoroutine(eWait(ViewCore.CurrentId,time));
+			else this.NewCoroutine(eWait(ViewCore.CurrentId,time));
 		}
 		
 		public void CancelAll()

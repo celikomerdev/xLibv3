@@ -1,5 +1,4 @@
 ﻿#if xLibv3
-#if ModUI
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -67,10 +66,11 @@ namespace xLib
 			
 			eventNormalizedPosition.Invoke(newNormalizedPosition);
 			
-			if(gameObject.activeInHierarchy) StartCoroutine(LerpFocus(newNormalizedPosition));
+			if(gameObject.activeInHierarchy) this.NewCoroutine(LerpFocus(newNormalizedPosition));
 			else MnCoroutine.ins.NewCoroutine(LerpFocus(newNormalizedPosition));
 		}
 		
+		//TODO Tween
 		private IEnumerator LerpFocus(Vector2 newNormalizedPosition)
 		{
 			float duration = 0.5f;
@@ -106,5 +106,4 @@ namespace xLib
 		}
 	}
 }
-#endif
 #endif
