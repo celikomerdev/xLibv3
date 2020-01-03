@@ -19,7 +19,6 @@ namespace xLib.ToolPurchase
 			set
 			{
 				key = value;
-				ClearProduct();
 				RefreshProduct();
 			}
 		}
@@ -64,6 +63,7 @@ namespace xLib.ToolPurchase
 		
 		private void RefreshProduct()
 		{
+			ClearProduct();
 			if(product == null) product = MnProduct.ins.GetProduct(key);
 			if(product == null) return;
 			eventPrice.Value = (float)product.metadata.localizedPrice;
@@ -126,7 +126,6 @@ namespace xLib.ToolPurchase
 			set
 			{
 				key = value;
-				ClearProduct();
 				RefreshProduct();
 			}
 		}
@@ -171,6 +170,7 @@ namespace xLib.ToolPurchase
 		
 		private void RefreshProduct()
 		{
+			ClearProduct();
 			if(product == null) product = MnProduct.ins.GetProduct(key);
 			if(product == null) return;
 			eventPrice.Value = 1.00f;

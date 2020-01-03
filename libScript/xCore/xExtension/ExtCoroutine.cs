@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Profiling;
 
 namespace xLib
 {
@@ -55,7 +56,9 @@ namespace xLib
 		{
 			if(unscaled)yield return new WaitForSecondsRealtime(delay);
 			else yield return new WaitForSeconds(delay);
+			Profiler.BeginSample($"{call.Method.Name}:waitForSeconds:{delay}");
 			call();
+			Profiler.EndSample();
 		}
 		#endregion
 		

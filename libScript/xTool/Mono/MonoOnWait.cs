@@ -1,6 +1,7 @@
 ﻿#if xLibv3
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Profiling;
 using xLib.EventClass;
 
 namespace xLib
@@ -44,10 +45,14 @@ namespace xLib
 			else yield return new WaitForSeconds(time);
 			processCount--;
 			
-			if(CanDebug) Debug.Log($"{this.name}:OnWait:{invokeId}:time:{time}",this);
 			string tempId = ViewCore.CurrentId;
 			ViewCore.CurrentId = invokeId;
+			
+			if(CanDebug) Debug.Log($"{this.name}:OnWait:{invokeId}:time:{time}",this);
+			Profiler.BeginSample($"{this.name}:OnWait:{invokeId}:time:{time}",this);
 			eventWaited.Invoke();
+			Profiler.EndSample();
+			
 			ViewCore.CurrentId = tempId;
 		}
 		
