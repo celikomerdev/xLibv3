@@ -10,7 +10,7 @@ namespace xLib
 	{
 		public static Coroutine CrossFade(this TweenGroup tween, float valueTarget, float duration = 0.1f, bool ignoreTimeScale=true)
 		{
-			return MnCoroutine.ins.NewCoroutine(Flow());
+			return MnCoroutine.ins.NewCoroutine(Flow(),tween.CanDebug);
 			
 			IEnumerator Flow()
 			{

@@ -6,7 +6,7 @@ using xLib.EventClass;
 
 namespace xLib
 {
-	public class WwwLoad : BaseMainM
+	public class WwwLoad : BaseWorkM
 	{
 		[SerializeField]private EventWWW eventWWW = new EventWWW();
 		
@@ -19,7 +19,7 @@ namespace xLib
 				if(string.IsNullOrEmpty(value)) return;
 				if(url.ValueGet(viewId:ViewCore.CurrentId) == value) return;
 				url.ValueSet(value,viewId:ViewCore.CurrentId);
-				MnCoroutine.ins.NewCoroutine(eDownload(value,ViewCore.CurrentId));
+				MnCoroutine.ins.NewCoroutine(eDownload(value,ViewCore.CurrentId),CanDebug);
 			}
 		}
 		#endregion

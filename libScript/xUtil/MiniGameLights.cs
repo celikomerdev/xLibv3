@@ -43,7 +43,7 @@ namespace xLib.xNew
 		{
 			ResetState();
 			if(CanDebug) xLogger.LogFormat(this,this.name+":Idle:{0}",time);
-			this.NewCoroutine(FlowIdle());
+			this.NewCoroutine(FlowIdle(),CanDebug);
 			this.WaitForSeconds(call:()=>Symetric(tick*array.Length*2),delay:time);
 		}
 		
@@ -68,7 +68,7 @@ namespace xLib.xNew
 		{
 			ResetState();
 			if(CanDebug) xLogger.LogFormat(this,this.name+":Symetric:{0}",time);
-			this.NewCoroutine(FlowSymetric());
+			this.NewCoroutine(FlowSymetric(),CanDebug);
 			this.WaitForSeconds(call:()=>Idle(Random.Range(1f,3f)),delay:time);
 		}
 		

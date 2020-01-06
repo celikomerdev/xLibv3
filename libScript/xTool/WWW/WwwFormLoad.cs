@@ -6,7 +6,7 @@ using xLib.EventClass;
 
 namespace xLib
 {
-	public class WwwFormLoad : BaseMainM
+	public class WwwFormLoad : BaseWorkM
 	{
 		[Header("ISerializableObject")]
 		[SerializeField]private Object[] arrayObjectKey = new Object[0];
@@ -24,7 +24,7 @@ namespace xLib
 				if(string.IsNullOrEmpty(value)) return;
 				if(url.ValueGet(viewId:ViewCore.CurrentId) == value) return;
 				url.ValueSet(value,viewId:ViewCore.CurrentId);
-				MnCoroutine.ins.NewCoroutine(eDownload(ViewCore.CurrentId,value));
+				MnCoroutine.ins.NewCoroutine(eDownload(ViewCore.CurrentId,value),CanDebug);
 			}
 		}
 		#endregion

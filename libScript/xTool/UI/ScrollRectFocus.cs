@@ -66,8 +66,8 @@ namespace xLib
 			
 			eventNormalizedPosition.Invoke(newNormalizedPosition);
 			
-			if(gameObject.activeInHierarchy) this.NewCoroutine(LerpFocus(newNormalizedPosition));
-			else MnCoroutine.ins.NewCoroutine(LerpFocus(newNormalizedPosition));
+			if(gameObject.activeInHierarchy) this.NewCoroutine(LerpFocus(newNormalizedPosition),CanDebug);
+			else MnCoroutine.ins.NewCoroutine(LerpFocus(newNormalizedPosition),CanDebug);
 		}
 		
 		//TODO Tween

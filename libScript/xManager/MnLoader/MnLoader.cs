@@ -37,7 +37,7 @@ namespace xLib
 				xLogger.LogExceptionFormat(this,this.name+":LoadLevel:{0}",value);
 				return;
 			}
-			MnCoroutine.ins.NewCoroutine(LoadLevelAsync(value));
+			MnCoroutine.ins.NewCoroutine(LoadLevelAsync(value),CanDebug);
 		}
 		#endregion
 		

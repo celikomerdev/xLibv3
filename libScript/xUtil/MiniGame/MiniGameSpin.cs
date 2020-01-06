@@ -6,7 +6,7 @@ using xLib.xTween;
 
 namespace xLib
 {
-	public class MiniGameSpin : BaseMainM
+	public class MiniGameSpin : BaseWorkM
 	{
 		[SerializeField]private Transform trans = null;
 		[SerializeField]private Tween tween = null;
@@ -29,7 +29,7 @@ namespace xLib
 			if(inSpin) return;
 			inSpin = true;
 			onSpin.Invoke(inSpin);
-			this.NewCoroutine(eSpin(value));
+			this.NewCoroutine(eSpin(value),CanDebug);
 		}
 		
 		private IEnumerator eSpin(float value)

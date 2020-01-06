@@ -22,7 +22,7 @@ namespace xLib
 			mono.StopCoroutine(coroutine);
 		}
 		
-		public static Coroutine NewCoroutine(this MonoBehaviour mono,IEnumerator enumerator)
+		public static Coroutine NewCoroutine(this MonoBehaviour mono,IEnumerator enumerator,bool CanDebug = false)
 		{
 			if(!mono)
 			{
@@ -30,10 +30,10 @@ namespace xLib
 				return null;
 			}
 			
-			return newCoroutine(mono,enumerator);
+			return newCoroutine(mono,enumerator,CanDebug);
 		}
 		
-		private static Coroutine newCoroutine(MonoBehaviour mono,IEnumerator enumerator)
+		private static Coroutine newCoroutine(MonoBehaviour mono,IEnumerator enumerator,bool CanDebug)
 		{
 			if(!mono.isActiveAndEnabled)
 			{
@@ -41,7 +41,7 @@ namespace xLib
 				return null;
 			}
 			
-			xLogger.LogFormat($"{mono.name}:newCoroutine:{enumerator.ToString()}",mono);
+			if(CanDebug) xLogger.Log($"{mono.name}:newCoroutine:{enumerator.ToString()}",mono);
 			return mono.StartCoroutine(enumerator);
 		}
 		#endregion

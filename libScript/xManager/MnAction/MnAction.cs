@@ -17,7 +17,6 @@ namespace xLib
 		
 		public static void CallActionNext(float delay = 0)
 		{
-			xLogger.LogFormat("MnAction.CallActionNext");
 			MnCoroutine.ins.NewCoroutine(callActionNext(delay));
 		}
 		
