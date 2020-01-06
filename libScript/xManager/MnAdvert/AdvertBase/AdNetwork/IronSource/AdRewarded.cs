@@ -1,6 +1,5 @@
 ﻿#if xLibv3
 #if AdIronSource
-using System;
 using UnityEngine;
 
 namespace xLib.libAdvert.xIronSource
@@ -10,7 +9,7 @@ namespace xLib.libAdvert.xIronSource
 		#region Register
 		protected override bool OnRegister(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRegister:{0}:{1}",key,value);
+			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{value}",this);
 			
 			if (value)
 			{
@@ -49,42 +48,42 @@ namespace xLib.libAdvert.xIronSource
 		#region Callback
 		private void OnAdAvailabilityChanged(bool status)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdAvailabilityChanged:{0}",status);
+			if(CanDebug) Debug.Log($"{this.name}:OnAdAvailabilityChanged:{status}",this);
 			SetLoadedBase(status);
 		}
 		
 		private void OnAdOpened()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdOpened");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdOpened",this);
 			OnShowBase();
 		}
 		
 		private void OnAdStarted()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdStarted");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdStarted",this);
 		}
 		
 		private void OnAdEnded()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdEnded");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdEnded",this);
 		}
 		
 		private void OnAdClosed()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdClosed");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdClosed",this);
 			OnCloseBase();
 		}
 		
 		private void OnAdRewarded(IronSourcePlacement placement)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdRewarded:{0}",placement.ToString());
+			if(CanDebug) Debug.Log($"{this.name}:OnAdRewarded:{placement.ToString()}",this);
 			int prize = placement.getRewardAmount();
 			OnRewardBase(prize);
 		}
 		
 		private void OnAdShowFailed(IronSourceError error)
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdShowFailed:{0}",error.ToString());
+			xLogger.LogException($"{this.name}:OnAdShowFailed:{error.ToString()}",this);
 		}
 		#endregion
 		
@@ -98,12 +97,12 @@ namespace xLib.libAdvert.xIronSource
 		
 		protected override void Load()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Load");
+			if(CanDebug) Debug.Log($"{this.name}:Load",this);
 		}
 		
 		protected override void Show()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Show");
+			if(CanDebug) Debug.Log($"{this.name}:Show",this);
 			IronSource.Agent.showRewardedVideo();
 		}
 		#endif

@@ -1,7 +1,5 @@
 ﻿#if xLibv3
 #if AdIronSource
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace xLib.libAdvert.xIronSource
@@ -11,7 +9,7 @@ namespace xLib.libAdvert.xIronSource
 		#region Register
 		protected override bool OnRegister(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRegister:{0}:{1}",key,value);
+			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{value}",this);
 			
 			if (value)
 			{
@@ -44,30 +42,30 @@ namespace xLib.libAdvert.xIronSource
 		#region Callback
 		private void OnAdAvailabilityChanged(bool status)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdAvailabilityChanged:{0}",status);
+			if(CanDebug) Debug.Log($"{this.name}:OnAdAvailabilityChanged:{status}",this);
 			SetLoadedBase(status);
 		}
 		
 		private void OnAdOpened()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdOpened");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdOpened",this);
 			OnShowBase();
 		}
 		
 		private void OnAdShowFailed(IronSourceError error)
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdShowFailed:{0}",error.ToString());
+			xLogger.LogException($"{this.name}:OnAdShowFailed:{error.ToString()}",this);
 		}
 		
 		private void OnAdClosed()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdClosed");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdClosed",this);
 			OnCloseBase();
 		}
 		
-		private void OnAdRewarded(Dictionary<string,object> rewards)
+		private void OnAdRewarded(System.Collections.Generic.Dictionary<string, object> rewards)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdRewarded:{0}",Newtonsoft.Json.JsonConvert.SerializeObject(rewards));
+			if(CanDebug) Debug.Log($"{this.name}:OnAdRewarded:{rewards.ToJsonString()}",this);
 			
 			if(rewards.ContainsKey("totalCreditsFlag"))
 			{
@@ -81,7 +79,7 @@ namespace xLib.libAdvert.xIronSource
 		
 		private void OnAdRewardFailed(IronSourceError error)
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdRewardFailed:{0}",error.ToString());
+			xLogger.LogException($"{this.name}:OnAdRewardFailed:{error.ToString()}",this);
 		}
 		#endregion
 		
@@ -95,12 +93,12 @@ namespace xLib.libAdvert.xIronSource
 		
 		protected override void Load()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Load");
+			if(CanDebug) Debug.Log($"{this.name}:Load",this);
 		}
 		
 		protected override void Show()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Show");
+			if(CanDebug) Debug.Log($"{this.name}:Show",this);
 			if(string.IsNullOrEmpty(key)) IronSource.Agent.showOfferwall();
 			else IronSource.Agent.showOfferwall(key);
 		}
@@ -111,7 +109,7 @@ namespace xLib.libAdvert.xIronSource
 		#region Custom
 		public void RefreshRewards()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":RefreshRewards");
+			if(CanDebug) Debug.Log($"{this.name}:RefreshRewards",this);
 			IronSource.Agent.getOfferwallCredits();
 		}
 		#endregion

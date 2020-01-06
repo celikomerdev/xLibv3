@@ -6,7 +6,7 @@ namespace xLib.xIronSource
 {
 	public class MnIronSource : BaseWorkM
 	{
-		[SerializeField]private string key;
+		[SerializeField]private string key = "";
 		
 		#region Mono
 		private void Awake()
@@ -54,7 +54,7 @@ namespace xLib.xIronSource
 {
 	public class MnIronSource : BaseWorkM
 	{
-		[SerializeField]private string key;
+		[SerializeField]private string key = "";
 	}
 }
 #endif

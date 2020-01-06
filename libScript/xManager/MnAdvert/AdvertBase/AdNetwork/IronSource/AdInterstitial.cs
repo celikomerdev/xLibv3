@@ -1,6 +1,5 @@
 ﻿#if xLibv3
 #if AdIronSource
-using System;
 using UnityEngine;
 
 namespace xLib.libAdvert.xIronSource
@@ -10,7 +9,7 @@ namespace xLib.libAdvert.xIronSource
 		#region Register
 		protected override bool OnRegister(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRegister:{0}:{1}",key,value);
+			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{value}",this);
 			
 			if (value)
 			{
@@ -51,49 +50,49 @@ namespace xLib.libAdvert.xIronSource
 		#region Callback
 		private void OnAdReady()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdReady");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdReady",this);
 			SetLoadedBase(true);
 		}
 		
 		private void OnAdLoadFailed(IronSourceError error)
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdLoadFailed:{0}",error.ToString());
+			xLogger.LogException($"{this.name}:OnAdLoadFailed:{error.ToString()}",this);
 			OnLoadFailBase();
 		}
 		
 		private void OnAdShowSucceeded()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdShowSucceeded");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdShowSucceeded",this);
 			OnShowBase();
 		}
 		
 		private void OnAdShowFailed(IronSourceError error)
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdShowFailed:{0}",error.ToString());
+			xLogger.LogException($"{this.name}:OnAdShowFailed:{error.ToString()}",this);
 		}
 		
 		private void OnAdClicked()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdClicked");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdClicked",this);
 			OnClickBase();
 		}
 		
 		private void OnAdOpened()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdOpened");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdOpened",this);
 			OnVisitBase();
 		}
 		
 		private void OnAdClosed()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdClosed");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdClosed",this);
 			OnCloseBase();
 			SetLoadedBase(false);
 		}
 		
 		private void OnAdRewarded()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdRewarded");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdRewarded",this);
 			OnRewardBase(1);
 		}
 		#endregion
@@ -108,13 +107,13 @@ namespace xLib.libAdvert.xIronSource
 		
 		protected override void Load()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Load");
+			if(CanDebug) Debug.Log($"{this.name}:Load",this);
 			IronSource.Agent.loadInterstitial();
 		}
 		
 		protected override void Show()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Show");
+			if(CanDebug) Debug.Log($"{this.name}:Show",this);
 			IronSource.Agent.showInterstitial();
 		}
 		#endif

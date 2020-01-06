@@ -1,8 +1,6 @@
 ﻿#if xLibv3
 #if AdIronSource
-using System;
 using UnityEngine;
-using xLib.xNode.NodeObject;
 
 namespace xLib.libAdvert.xIronSource
 {
@@ -43,38 +41,38 @@ namespace xLib.libAdvert.xIronSource
 		#region Callback
 		private void OnAdLoaded()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdLoaded");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdLoaded",this);
 			SetLoadedBase(true);
 			IsDisplay = isDisplay;
 		}
 		
 		private void OnAdLoadFailed(IronSourceError error)
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdLoadFailed:{0}",error.ToString());
+			xLogger.LogException($"{this.name}:OnAdLoadFailed:{error.ToString()}",this);
 			OnLoadFailBase();
 		}
 		
 		private void OnAdClicked()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdClicked");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdClicked",this);
 			OnClickBase();
 		}
 		
 		private void OnAdScreenPresented()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdScreenPresented");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdScreenPresented",this);
 			OnShowBase();
 		}
 		
 		private void OnAdLeftApplication()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdLeftApplication");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdLeftApplication",this);
 			OnVisitBase();
 		}
 		
 		private void OnAdScreenDismissed()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdScreenDismissed");
+			if(CanDebug) Debug.Log($"{this.name}:OnAdScreenDismissed",this);
 			OnCloseBase();
 		}
 		#endregion
@@ -89,14 +87,14 @@ namespace xLib.libAdvert.xIronSource
 		
 		protected override void Load()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Load");
+			if(CanDebug) Debug.Log($"{this.name}:Load",this);
 			IronSource.Agent.loadBanner(xAdSize,xAdPosition);
 			DebugBanner();
 		}
 		
 		protected override void Show()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Show");
+			if(CanDebug) Debug.Log($"{this.name}:Show",this);
 			IronSource.Agent.displayBanner();
 			OnDisplay = true;
 			OnWidth = width*multiplierPixel;
@@ -113,8 +111,21 @@ namespace xLib.libAdvert.xIronSource
 		
 		
 		#region Custom
-		private int width = 0;
-		private int height = 0;
+		private IronSourceBannerPosition xAdPosition
+		{
+			get
+			{
+				IronSourceBannerPosition returnObj = IronSourceBannerPosition.BOTTOM;
+				System.Enum.TryParse(adPosition,out IronSourceBannerPosition myStatus);
+				return returnObj;
+			}
+		}
+		// public enum IronSourceBannerPosition
+		// {
+		// 	TOP = 1,
+		// 	BOTTOM = 2
+		// }
+		
 		private IronSourceBannerSize xAdSize
 		{
 			get
@@ -203,17 +214,6 @@ namespace xLib.libAdvert.xIronSource
 					}
 				}
 				
-				return returnObj;
-			}
-		}
-		
-		// public enum IronSourceBannerPosition{BOTTOM,TOP}
-		private IronSourceBannerPosition xAdPosition
-		{
-			get
-			{
-				IronSourceBannerPosition returnObj = IronSourceBannerPosition.BOTTOM;
-				Enum.TryParse(adPosition,out IronSourceBannerPosition myStatus);
 				return returnObj;
 			}
 		}

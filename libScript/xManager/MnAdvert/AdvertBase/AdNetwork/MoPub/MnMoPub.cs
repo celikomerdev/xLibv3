@@ -21,5 +21,20 @@ namespace xLib.libAdvert.xMoPub
 		}
 	}
 }
+#else
+namespace xLib.libAdvert.xMoPub
+{
+	public class MnMoPub : BaseWorkM
+	{
+		public bool IsSdkInit
+		{
+			get
+			{
+				return false;
+			}
+			set{}
+		}
+	}
+}
 #endif
 #endif
