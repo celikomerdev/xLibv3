@@ -94,14 +94,13 @@ namespace xLib.ToolPurchase
 		
 		private void IsPuchase(bool value)
 		{
+			Register(false);
 			if(CanDebug) Debug.Log($"{this.name}:IsPuchase:{value}",this);
 			if(product != MnProduct.currentProduct)
 			{
 				xLogger.LogException($"product id does not match:{product}",this);
 				return;
 			}
-			
-			Register(false);
 			eventPurchase.Invoke(value);
 		}
 		#endregion
@@ -201,14 +200,13 @@ namespace xLib.ToolPurchase
 		
 		private void IsPuchase(bool value)
 		{
+			Register(false);
 			if(CanDebug) Debug.Log($"{this.name}:IsPuchase:{value}",this);
 			if(product != MnProduct.currentProductId)
 			{
 				xLogger.LogException($"product id does not match:{product}",this);
 				return;
 			}
-			
-			Register(false);
 			eventPurchase.Invoke(value);
 		}
 		#endregion
