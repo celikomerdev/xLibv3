@@ -305,7 +305,7 @@ namespace xLib
 		public static string currentProductId = null;
 		public string GetProduct(string key)
 		{
-			if(onInit.Value) return key;
+			if(isInit.Value) return key;
 			else return null;
 		}
 		#pragma warning restore

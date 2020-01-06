@@ -42,7 +42,7 @@ using xLib.EventClass;
 
 namespace xLib.ToolPurchase
 {
-	public class ProductSubscribe : BaseRegisterM
+	public class ProductSubscribeInfo : BaseRegisterM
 	{
 		[SerializeField]private string key = "";
 		[SerializeField]public EventString eventStringFreeTrialPeriod = new EventString();
