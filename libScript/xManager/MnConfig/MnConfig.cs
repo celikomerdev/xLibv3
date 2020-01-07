@@ -1,7 +1,9 @@
 ﻿#if xLibv3
 using System;
+using System.Collections;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 using xLib.xNode.NodeObject;
 using xLib.xValueClass;
 
@@ -9,6 +11,7 @@ namespace xLib
 {
 	public class MnConfig : SingletonM<MnConfig>
 	{
+		[SerializeField]private bool forceLoad = false;
 		[SerializeField]private NodeGroup nodeGroup = null;
 		[SerializeField]private NodeTextAsset nodeTextAsset = null;
 		
@@ -59,11 +62,45 @@ namespace xLib
 		
 		
 		#region UpdateConfig
+		[SerializeField]private WwwFormGroup wwwFormGroup = new WwwFormGroup();
 		public void UpdateConfig()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:UpdateConfig");
-			nodeTextAsset.Value = new TextAsset("deneme");
-			nodeGroup.Save();
+			MnCoroutine.ins.NewCoroutine(eLoad());
+			
+			IEnumerator eLoad()
+			{
+				string url = MnKey.GetValue("MnConfig");
+				if(string.IsNullOrEmpty(url)) yield break;
+				
+				WWWForm wwwForm = wwwFormGroup.FormData;
+				if(CanDebug) Debug.Log($"{this.name}:wwwFormGroup:Length:{wwwForm.data.Length}:headers:{wwwForm.headers.ToJsonString()}");
+				
+				UnityWebRequest uwr = null;
+				if(wwwForm.data.Length==0) uwr = UnityWebRequest.Get(url);
+				else uwr = UnityWebRequest.Post(url,wwwForm);
+				
+				UnityWebRequestAsyncOperation uwrOp = uwr.SendWebRequest();
+				while (!uwr.isDone)
+				{
+					if(CanDebug) xLogger.LogFormat($"{this.name}:UWRLoad:progress:{uwrOp.progress}");
+					yield return new WaitForSecondsRealtime(1f);
+				}
+				
+				if (string.IsNullOrEmpty(uwr.error))
+				{
+					nodeTextAsset.Value = new TextAsset(uwr.downloadHandler.text);
+					if(forceLoad) LoadConfig(nodeTextAsset.Value.text);
+					nodeGroup.Save();
+				}
+				else
+				{
+					xLogger.LogException($"{this.name}:eLoad:error:{uwr.error}:url:{url}",this);
+				}
+				
+				uwr.Dispose();
+				uwr = null;
+			}
 		}
 		#endregion
 		

@@ -1762,13 +1762,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fe2217d81afdf419d5bfb5d79423d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseWork:
-    canDebug: 0
-    canWork: 1
-    runInEditMode: 0
-  baseRegister:
-    order: 0
-    onRegister: 0
   length: 1000
   debugLevel:
     error: 1
@@ -3949,8 +3942,12 @@ MonoBehaviour:
     canWork: 1
     runInEditMode: 0
   isPrimary: 0
+  forceLoad: 1
   nodeGroup: {fileID: 11400000, guid: b5c283b949447aa4788ee6949c05eccf, type: 2}
   nodeTextAsset: {fileID: 11400000, guid: 6c4629b93b93bed44811f25812507fee, type: 2}
+  wwwFormGroup:
+    arrayObjectKey: []
+    arrayObjectName: []
   objectGroup:
     arrayObject: []
 --- !u!1 &620872638
