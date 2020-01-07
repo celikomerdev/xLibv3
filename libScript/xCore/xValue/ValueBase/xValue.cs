@@ -347,7 +347,6 @@ namespace xLib
 		
 		#region Analytics
 		internal bool analyticDirty = false;
-		
 		internal virtual object AnalyticObject
 		{
 			get

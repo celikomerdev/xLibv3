@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace xLib.ToolManager
 {
-	public class LogGroupName : LogGroupKey
+	public class LogGroupName : LogGroup
 	{
 		protected override void Send(IAnalyticObject analyticObject)
 		{

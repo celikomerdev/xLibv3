@@ -29,7 +29,7 @@ namespace xLib
 		public static Action<string> logScreen = delegate{};
 		public void LogScreen(string key)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:LogScreen:{key}",this);
+			if(CanDebug) Debug.Log($"{this.name}:LogScreen:key:{key}",this);
 			logScreen(key);
 		}
 		
@@ -37,7 +37,7 @@ namespace xLib
 		public void LogEvent(string key,string label,double digit,Dictionary<string,object> data)
 		{
 			data = Stamp(data);
-			if(CanDebug) Debug.Log($"{this.name}:LogEvent:{key}:label:{label}:digit:{digit}:data:{data.ToJsonString()}",this);
+			if(CanDebug) Debug.Log($"{this.name}:LogEvent:key:{key}:label:{label}:digit:{digit}:data:{data.ToJsonString()}",this);
 			logEvent(key,label,digit,data);
 		}
 		
@@ -45,7 +45,7 @@ namespace xLib
 		public void LogPurchase(string key,Dictionary<string, object> data)
 		{
 			data = Stamp(data);
-			if(CanDebug) Debug.Log($"{this.name}:LogPurchase:{key}:receipt:{data.ToJsonString()}",this);
+			if(CanDebug) Debug.Log($"{this.name}:LogPurchase:key:{key}:receipt:{data.ToJsonString()}",this);
 			logPurchase(key,data);
 		}
 	}
