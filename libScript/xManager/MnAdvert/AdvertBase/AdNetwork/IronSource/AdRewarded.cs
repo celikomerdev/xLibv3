@@ -13,32 +13,32 @@ namespace xLib.libAdvert.xIronSource
 			
 			if (value)
 			{
-				IronSourceEvents.onRewardedVideoAvailabilityChangedEvent += OnAdAvailabilityChanged;
+				IronSourceEvents.onRewardedVideoAvailabilityChangedEvent += onRewardedVideoAvailabilityChangedEvent;
 				
-				IronSourceEvents.onRewardedVideoAdOpenedEvent += OnAdOpened;
-				IronSourceEvents.onRewardedVideoAdStartedEvent += OnAdStarted;
+				IronSourceEvents.onRewardedVideoAdShowFailedEvent += onRewardedVideoAdShowFailedEvent;
+				IronSourceEvents.onRewardedVideoAdOpenedEvent += onRewardedVideoAdOpenedEvent;
 				
-				IronSourceEvents.onRewardedVideoAdEndedEvent += OnAdEnded;
-				IronSourceEvents.onRewardedVideoAdClosedEvent += OnAdClosed;
+				IronSourceEvents.onRewardedVideoAdStartedEvent += onRewardedVideoAdStartedEvent;
+				IronSourceEvents.onRewardedVideoAdEndedEvent += onRewardedVideoAdEndedEvent;
 				
-				IronSourceEvents.onRewardedVideoAdRewardedEvent += OnAdRewarded;
-				IronSourceEvents.onRewardedVideoAdShowFailedEvent += OnAdShowFailed;
+				IronSourceEvents.onRewardedVideoAdRewardedEvent += onRewardedVideoAdRewardedEvent;
+				IronSourceEvents.onRewardedVideoAdClosedEvent += onRewardedVideoAdClosedEvent;
 				
 				OnRegisterBase();
-				OnAdAvailabilityChanged(IronSource.Agent.isRewardedVideoAvailable());
+				onRewardedVideoAvailabilityChangedEvent(IronSource.Agent.isRewardedVideoAvailable());
 			}
 			else
 			{
-				IronSourceEvents.onRewardedVideoAvailabilityChangedEvent -= OnAdAvailabilityChanged;
+				IronSourceEvents.onRewardedVideoAvailabilityChangedEvent -= onRewardedVideoAvailabilityChangedEvent;
 				
-				IronSourceEvents.onRewardedVideoAdOpenedEvent -= OnAdOpened;
-				IronSourceEvents.onRewardedVideoAdStartedEvent -= OnAdStarted;
+				IronSourceEvents.onRewardedVideoAdShowFailedEvent -= onRewardedVideoAdShowFailedEvent;
+				IronSourceEvents.onRewardedVideoAdOpenedEvent -= onRewardedVideoAdOpenedEvent;
 				
-				IronSourceEvents.onRewardedVideoAdEndedEvent -= OnAdEnded;
-				IronSourceEvents.onRewardedVideoAdClosedEvent -= OnAdClosed;
+				IronSourceEvents.onRewardedVideoAdStartedEvent -= onRewardedVideoAdStartedEvent;
+				IronSourceEvents.onRewardedVideoAdEndedEvent -= onRewardedVideoAdEndedEvent;
 				
-				IronSourceEvents.onRewardedVideoAdRewardedEvent -= OnAdRewarded;
-				IronSourceEvents.onRewardedVideoAdShowFailedEvent -= OnAdShowFailed;
+				IronSourceEvents.onRewardedVideoAdRewardedEvent -= onRewardedVideoAdRewardedEvent;
+				IronSourceEvents.onRewardedVideoAdClosedEvent -= onRewardedVideoAdClosedEvent;
 			}
 			return value;
 		}
@@ -46,44 +46,52 @@ namespace xLib.libAdvert.xIronSource
 		
 		
 		#region Callback
-		private void OnAdAvailabilityChanged(bool status)
+		//Invoked when there is a change in the ad availability status.
+		private void onRewardedVideoAvailabilityChangedEvent(bool status)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnAdAvailabilityChanged:{status}",this);
+			if(CanDebug) Debug.Log($"{this.name}:onRewardedVideoAvailabilityChangedEvent:{status}",this);
 			SetLoadedBase(status);
 		}
 		
-		private void OnAdOpened()
+		//Invoked when the Rewarded Video failed to show
+		private void onRewardedVideoAdShowFailedEvent(IronSourceError error)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnAdOpened",this);
-			OnShowBase();
-		}
-		
-		private void OnAdStarted()
-		{
-			if(CanDebug) Debug.Log($"{this.name}:OnAdStarted",this);
-		}
-		
-		private void OnAdEnded()
-		{
-			if(CanDebug) Debug.Log($"{this.name}:OnAdEnded",this);
-		}
-		
-		private void OnAdClosed()
-		{
-			if(CanDebug) Debug.Log($"{this.name}:OnAdClosed",this);
+			xLogger.LogException($"{this.name}:onRewardedVideoAdShowFailedEvent:{error.ToString()}",this);
 			OnCloseBase();
 		}
 		
-		private void OnAdRewarded(IronSourcePlacement placement)
+		//Invoked when the RewardedVideo ad view has opened.
+		private void onRewardedVideoAdOpenedEvent()
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnAdRewarded:{placement.ToString()}",this);
+			if(CanDebug) Debug.Log($"{this.name}:onRewardedVideoAdOpenedEvent",this);
+			OnShowBase();
+		}
+		
+		//Invoked when the video ad starts playing.
+		private void onRewardedVideoAdStartedEvent()
+		{
+			if(CanDebug) Debug.Log($"{this.name}:onRewardedVideoAdStartedEvent",this);
+		}
+		
+		//Invoked when the video ad finishes playing.
+		private void onRewardedVideoAdEndedEvent()
+		{
+			if(CanDebug) Debug.Log($"{this.name}:onRewardedVideoAdEndedEvent",this);
+		}
+		
+		//Invoked when the user completed the video and should be rewarded. 
+		private void onRewardedVideoAdRewardedEvent(IronSourcePlacement placement)
+		{
+			if(CanDebug) Debug.Log($"{this.name}:onRewardedVideoAdRewardedEvent:{placement.ToString()}",this);
 			int prize = placement.getRewardAmount();
 			OnRewardBase(prize);
 		}
 		
-		private void OnAdShowFailed(IronSourceError error)
+		//Invoked when the RewardedVideo ad view is about to be closed.
+		private void onRewardedVideoAdClosedEvent()
 		{
-			xLogger.LogException($"{this.name}:OnAdShowFailed:{error.ToString()}",this);
+			if(CanDebug) Debug.Log($"{this.name}:onRewardedVideoAdClosedEvent",this);
+			OnCloseBase();
 		}
 		#endregion
 		

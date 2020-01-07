@@ -104,14 +104,12 @@ namespace xLib.libAdvert
 			if(CanDebug) Debug.Log($"{this.name}:OnShowBase",this);
 			StAnalytics.LogEvent(key:"advert_show",label:this.name,data:Data,canSend:isAnalytics);
 			onShow.Invoke();
-			SetLoadedBase(false);
 		}
 		
 		public EventInt onReward = new EventInt();
 		protected void OnRewardBase(int reward)
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnRewardBase:reward:{reward}",this);
-			if(reward<1) return;
 			StAnalytics.LogEvent(key:"advert_reward",label:this.name,digit:reward,data:Data,canSend:isAnalytics);
 			onReward.Invoke(reward);
 		}

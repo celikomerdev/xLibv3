@@ -13,25 +13,29 @@ namespace xLib.libAdvert.xIronSource
 			
 			if (value)
 			{
-				IronSourceEvents.onBannerAdLoadedEvent += OnAdLoaded;
-				IronSourceEvents.onBannerAdLoadFailedEvent += OnAdLoadFailed;
+				IronSourceEvents.onBannerAdLoadFailedEvent += onBannerAdLoadFailedEvent;
+				IronSourceEvents.onBannerAdLoadedEvent += onBannerAdLoadedEvent;
 				
-				IronSourceEvents.onBannerAdClickedEvent += OnAdClicked;
-				IronSourceEvents.onBannerAdScreenPresentedEvent += OnAdScreenPresented;
-				IronSourceEvents.onBannerAdLeftApplicationEvent += OnAdLeftApplication;
-				IronSourceEvents.onBannerAdScreenDismissedEvent += OnAdScreenDismissed;
+				IronSourceEvents.onBannerAdClickedEvent += onBannerAdClickedEvent;
+				IronSourceEvents.onBannerAdScreenPresentedEvent += onBannerAdScreenPresentedEvent;
+				
+				IronSourceEvents.onBannerAdLeftApplicationEvent += onBannerAdLeftApplicationEvent;
+				IronSourceEvents.onBannerAdScreenDismissedEvent += onBannerAdScreenDismissedEvent;
 				
 				OnRegisterBase();
+				if(MnIronSource.hasBanner) onBannerAdLoadedEvent();
 			}
 			else
 			{
-				IronSourceEvents.onBannerAdLoadedEvent -= OnAdLoaded;
-				IronSourceEvents.onBannerAdLoadFailedEvent -= OnAdLoadFailed;
+				IronSourceEvents.onBannerAdLoadFailedEvent -= onBannerAdLoadFailedEvent;
+				IronSourceEvents.onBannerAdLoadedEvent -= onBannerAdLoadedEvent;
 				
-				IronSourceEvents.onBannerAdClickedEvent -= OnAdClicked;
-				IronSourceEvents.onBannerAdScreenPresentedEvent -= OnAdScreenPresented;
-				IronSourceEvents.onBannerAdLeftApplicationEvent -= OnAdLeftApplication;
-				IronSourceEvents.onBannerAdScreenDismissedEvent -= OnAdScreenDismissed;
+				IronSourceEvents.onBannerAdClickedEvent -= onBannerAdClickedEvent;
+				IronSourceEvents.onBannerAdScreenPresentedEvent -= onBannerAdScreenPresentedEvent;
+				
+				
+				IronSourceEvents.onBannerAdLeftApplicationEvent -= onBannerAdLeftApplicationEvent;
+				IronSourceEvents.onBannerAdScreenDismissedEvent -= onBannerAdScreenDismissedEvent;
 			}
 			return value;
 		}
@@ -39,40 +43,46 @@ namespace xLib.libAdvert.xIronSource
 		
 		
 		#region Callback
-		private void OnAdLoaded()
+		//Invoked when the banner loading process has failed.
+		private void onBannerAdLoadFailedEvent(IronSourceError error)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnAdLoaded",this);
+			xLogger.LogException($"{this.name}:onBannerAdLoadFailedEvent:{error.ToString()}",this);
+			OnLoadFailBase();
+		}
+		
+		//Invoked once the banner has loaded
+		private void onBannerAdLoadedEvent()
+		{
+			if(CanDebug) Debug.Log($"{this.name}:onBannerAdLoadedEvent",this);
 			SetLoadedBase(true);
 			IsDisplay = isDisplay;
 		}
 		
-		private void OnAdLoadFailed(IronSourceError error)
+		//Invoked when end user clicks on the banner ad
+		private void onBannerAdClickedEvent()
 		{
-			xLogger.LogException($"{this.name}:OnAdLoadFailed:{error.ToString()}",this);
-			OnLoadFailBase();
-		}
-		
-		private void OnAdClicked()
-		{
-			if(CanDebug) Debug.Log($"{this.name}:OnAdClicked",this);
+			if(CanDebug) Debug.Log($"{this.name}:onBannerAdClickedEvent",this);
 			OnClickBase();
 		}
 		
-		private void OnAdScreenPresented()
+		//Notifies the presentation of a full screen content following user click
+		private void onBannerAdScreenPresentedEvent()
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnAdScreenPresented",this);
+			if(CanDebug) Debug.Log($"{this.name}:onBannerAdScreenPresentedEvent",this);
 			OnShowBase();
 		}
 		
-		private void OnAdLeftApplication()
+		//Invoked when the user leaves the app
+		private void onBannerAdLeftApplicationEvent()
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnAdLeftApplication",this);
+			if(CanDebug) Debug.Log($"{this.name}:onBannerAdLeftApplicationEvent",this);
 			OnVisitBase();
 		}
 		
-		private void OnAdScreenDismissed()
+		//Notifies the presented screen has been dismissed
+		private void onBannerAdScreenDismissedEvent()
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnAdScreenDismissed",this);
+			if(CanDebug) Debug.Log($"{this.name}:onBannerAdScreenDismissedEvent",this);
 			OnCloseBase();
 		}
 		#endregion

@@ -2,7 +2,7 @@
 #if AdIronSource
 using UnityEngine;
 
-namespace xLib.xIronSource
+namespace xLib.libAdvert.xIronSource
 {
 	public class MnIronSource : BaseWorkM
 	{
@@ -11,9 +11,33 @@ namespace xLib.xIronSource
 		#region Mono
 		private void Awake()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Awake");
+			if(CanDebug) Debug.Log($"{this.name}:Awake",this);
 			Init();
+			Register(true);
 		}
+		
+		private void OnDestroy()
+		{
+			if(CanDebug) Debug.Log($"{this.name}:OnDestroy",this);
+			Register(false);
+		}
+		
+		#region Register
+		private bool Register(bool value)
+		{
+			if (value)
+			{
+				IronSourceEvents.onBannerAdLoadFailedEvent += onBannerAdLoadFailedEvent;
+				IronSourceEvents.onBannerAdLoadedEvent += onBannerAdLoadedEvent;
+			}
+			else
+			{
+				IronSourceEvents.onBannerAdLoadFailedEvent -= onBannerAdLoadFailedEvent;
+				IronSourceEvents.onBannerAdLoadedEvent -= onBannerAdLoadedEvent;
+			}
+			return value;
+		}
+		#endregion
 		
 		private void OnApplicationPause(bool value)
 		{
@@ -45,12 +69,26 @@ namespace xLib.xIronSource
 			// if(MnAdvert.ins.isPaying) mIronSegment.isPaying = 1;
 		}
 		#endregion
+		
+		
+		#region Banner
+		public static bool hasBanner = false;
+		private void onBannerAdLoadFailedEvent(IronSourceError error)
+		{
+			hasBanner = false;
+		}
+		
+		private void onBannerAdLoadedEvent()
+		{
+			hasBanner = true;
+		}
+		#endregion
 	}
 }
 #else
 using UnityEngine;
 
-namespace xLib.xIronSource
+namespace xLib.libAdvert.xIronSource
 {
 	public class MnIronSource : BaseWorkM
 	{

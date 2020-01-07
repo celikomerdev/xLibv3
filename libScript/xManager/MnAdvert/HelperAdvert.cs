@@ -64,7 +64,7 @@ namespace xLib.libAdvert
 			if(MnAdvert.ins.inShow.Value) return;
 			MnAdvert.ins.inShow.Value = true;
 			
-			Register();
+			RegisterListeners(true);
 			MnCoroutine.ins.WaitForSeconds(delay:0.5f,call:MnAdvert.ins.interstitial.ShowBase);
 		}
 		
@@ -82,7 +82,7 @@ namespace xLib.libAdvert
 			if(MnAdvert.ins.inShow.Value) return;
 			MnAdvert.ins.inShow.Value = true;
 			
-			Register();
+			RegisterListeners(true);
 			MnCoroutine.ins.WaitForSeconds(delay:0.5f,call:MnAdvert.ins.rewarded.ShowBase);
 		}
 		#endregion
@@ -90,34 +90,44 @@ namespace xLib.libAdvert
 		
 		
 		#region Callback
-		private void Register()
+		private void RegisterListeners(bool value)
 		{
 			lastTime = Time.realtimeSinceStartup;
 			MnAdvert.ins.RemoveAllListeners();
-			MnAdvert.ins.onShow.eventUnity.AddListener(OnShow);
-			MnAdvert.ins.onClose.eventUnity.AddListener(OnClose);
-			MnAdvert.ins.onReward.eventInt.AddListener(OnReward);
+			if(value)
+			{
+				MnAdvert.ins.onShow.eventUnity.AddListener(OnShow);
+				MnAdvert.ins.onReward.eventInt.AddListener(OnReward);
+				MnAdvert.ins.onClose.eventUnity.AddListener(OnClose);
+			}
+			else
+			{
+				MnAdvert.ins.onShow.eventUnity.RemoveListener(OnShow);
+				MnAdvert.ins.onReward.eventInt.RemoveListener(OnReward);
+				MnAdvert.ins.onClose.eventUnity.RemoveListener(OnClose);
+			}
 		}
 		
 		public EventUnity onShow = new EventUnity();
 		private void OnShow()
 		{
-			lastTime = Time.realtimeSinceStartup;
 			onShow.Invoke();
-		}
-		
-		public EventUnity onClose = new EventUnity();
-		private void OnClose()
-		{
-			lastTime = Time.realtimeSinceStartup;
-			onClose.Invoke();
 		}
 		
 		public EventInt onReward = new EventInt();
 		private void OnReward(int value)
 		{
-			lastTime = Time.realtimeSinceStartup;
 			MnCoroutine.ins.WaitForSeconds(delay:0.5f,call:delegate{onReward.Invoke(value);});
+		}
+		
+		public EventUnity onClose = new EventUnity();
+		private void OnClose()
+		{
+			MnCoroutine.ins.WaitForSeconds(delay:1f,call:delegate
+			{
+				onClose.Invoke();
+				RegisterListeners(false);
+			});
 		}
 		#endregion
 	}

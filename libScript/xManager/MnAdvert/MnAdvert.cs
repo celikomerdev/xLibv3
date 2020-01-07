@@ -44,20 +44,22 @@ namespace xLib
 			if(value)
 			{
 				interstitial.onShow.eventUnity.AddListener(OnShow);
+				interstitial.onReward.eventInt.AddListener(OnReward);
 				interstitial.onClose.eventUnity.AddListener(OnClose);
 				
 				rewarded.onShow.eventUnity.AddListener(OnShow);
-				rewarded.onClose.eventUnity.AddListener(OnClose);
 				rewarded.onReward.eventInt.AddListener(OnReward);
+				rewarded.onClose.eventUnity.AddListener(OnClose);
 			}
 			else
 			{
 				interstitial.onShow.eventUnity.RemoveListener(OnShow);
+				interstitial.onReward.eventInt.RemoveListener(OnReward);
 				interstitial.onClose.eventUnity.RemoveListener(OnClose);
 				
 				rewarded.onShow.eventUnity.RemoveListener(OnShow);
-				rewarded.onClose.eventUnity.RemoveListener(OnClose);
 				rewarded.onReward.eventInt.RemoveListener(OnReward);
+				rewarded.onClose.eventUnity.RemoveListener(OnClose);
 			}
 		}
 		#endregion
@@ -72,14 +74,6 @@ namespace xLib
 			onShow.Invoke();
 		}
 		
-		public EventUnity onClose = new EventUnity();
-		public void OnClose()
-		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnClose");
-			inShow.Value = false;
-			onClose.Invoke();
-		}
-		
 		public EventInt onReward = new EventInt();
 		public void OnReward(int value)
 		{
@@ -91,12 +85,20 @@ namespace xLib
 			onReward.Invoke(value);
 		}
 		
+		public EventUnity onClose = new EventUnity();
+		public void OnClose()
+		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnClose");
+			inShow.Value = false;
+			onClose.Invoke();
+		}
+		
 		public void RemoveAllListeners()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":RemoveAllListeners");
 			onShow.eventUnity.RemoveAllListeners();
-			onClose.eventUnity.RemoveAllListeners();
 			onReward.eventInt.RemoveAllListeners();
+			onClose.eventUnity.RemoveAllListeners();
 		}
 		#endregion
 	}
