@@ -7,7 +7,7 @@ namespace xLib
 	{
 		[SerializeField]internal bool canDebug = false;
 		[SerializeField]private bool canWork = true;
-		[SerializeField]private bool runInEditMode;
+		[SerializeField]private bool runInEditMode = false;
 		
 		internal bool CanDebug
 		{

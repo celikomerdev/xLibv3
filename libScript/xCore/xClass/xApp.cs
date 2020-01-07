@@ -49,7 +49,7 @@ namespace xLib
 			}
 			catch (System.Exception ex)
 			{
-				xLogger.LogExceptionFormat("xApp.CreateDirectory:{0}",ex);
+				xLogger.LogException($"xApp.CreateDirectory:{ex.Message}");
 			}
 		}
 		#endregion

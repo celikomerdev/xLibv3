@@ -44,11 +44,11 @@ namespace xLib.Purchasing.Security
 			}
 			catch(IAPSecurityException ex)
 			{
-				xLogger.LogException($"ProductValidator:IAPSecurityException:{ex}");
+				xLogger.LogException($"ProductValidator:IAPSecurityException:{ex.Message}");
 			}
 			catch(Exception ex)
 			{
-				xLogger.LogException($"ProductValidator:Exception:{ex}");
+				xLogger.LogException($"ProductValidator:Exception:{ex.Message}");
 			}
 			
 			DebugReceipt(receiptArray);

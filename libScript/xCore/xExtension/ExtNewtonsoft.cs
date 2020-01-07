@@ -87,7 +87,7 @@ namespace xLib
 			}
 			catch (System.Exception ex)
 			{
-				xLogger.LogException($"FromJsonString:{data}:ex:{ex}");
+				xLogger.LogException($"FromJsonString:{ex.Message}:data:{data}");
 			}
 			return output;
 		}

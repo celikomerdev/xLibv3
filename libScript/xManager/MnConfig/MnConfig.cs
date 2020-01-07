@@ -2,34 +2,50 @@
 using System;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using xLib.xNode.NodeObject;
 using xLib.xValueClass;
 
 namespace xLib
 {
 	public class MnConfig : SingletonM<MnConfig>
 	{
-		public static JObject data = new JObject();
-		public static Action onUpdateConfig = delegate{};
+		[SerializeField]private NodeGroup nodeGroup = null;
+		[SerializeField]private NodeTextAsset nodeTextAsset = null;
 		
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void LoadConfig()
+		#region Mono
+		protected override void Awaked()
 		{
-			xLogger.LogFormat("MnConfig:LoadConfig");
-			TextAsset textAsset = Resources.Load<TextAsset>("ConfigData");
-			if(!textAsset)
-			{
-				xLogger.LogExceptionFormat("MnConfig:textAsset:null");
-				return;
-			}
-			UpdateConfig(textAsset.text);
+			MnConfig.onLoadConfig += OnLoadConfig;
+			LoadConfig();
 		}
 		
-		public static void UpdateConfig(string json)
+		protected override void OnDestroyed()
 		{
-			// xDebug.LogTempFormat("MnConfig:UpdateConfig:{0}",json);
+			MnConfig.onLoadConfig -= OnLoadConfig;
+		}
+		#endregion
+		
+		
+		#region LoadConfig
+		private void LoadConfig()
+		{
+			if(CanDebug) Debug.Log($"{this.name}:LoadConfig");
+			nodeGroup.Load();
+			if(!nodeTextAsset.Value)
+			{
+				xLogger.LogException($"{this.name}:textAsset:null");
+				return;
+			}
+			LoadConfig(nodeTextAsset.Value.text);
+		}
+		
+		public static JObject data = new JObject();
+		public static Action onLoadConfig = delegate{};
+		public static void LoadConfig(string json)
+		{
 			if(string.IsNullOrWhiteSpace(json))
 			{
-				xLogger.LogExceptionFormat("MnConfig:UpdateConfig:json:null");
+				xLogger.LogException($"MnConfig:UpdateConfig:json:null");
 				return;
 			}
 			
@@ -40,26 +56,29 @@ namespace xLib
 			}
 			catch (Exception ex)
 			{
-				xLogger.LogExceptionFormat("MnConfig:UpdateConfig:{0}:{1}",ex,json);
+				xLogger.LogException($"MnConfig:UpdateConfig:{ex.Message}:data:{json}");
 				return;
 			}
 			
 			data = newData;
-			onUpdateConfig.Invoke();
+			onLoadConfig.Invoke();
 		}
+		#endregion
 		
-		protected override void Started()
+		
+		#region UpdateConfig
+		public void UpdateConfig()
 		{
-			MnConfig.onUpdateConfig += OnUpdateConfigData; OnUpdateConfigData();
+			if(CanDebug) Debug.Log($"{this.name}:UpdateConfig");
+			nodeTextAsset.Value = new TextAsset("deneme");
+			nodeGroup.Save();
 		}
+		#endregion
 		
-		protected override void OnDestroyed()
-		{
-			MnConfig.onUpdateConfig -= OnUpdateConfigData;
-		}
 		
+		#region Output
 		[SerializeField]private ObjectGroup objectGroup = null;
-		private void OnUpdateConfigData()
+		private void OnLoadConfig()
 		{
 			objectGroup.Init(true);
 			for (int i = 0; i < objectGroup.iSerializableObject.Length; i++)
@@ -67,6 +86,7 @@ namespace xLib
 				objectGroup.iSerializableObject[i].SerializedObjectRaw = data.SelectToken(objectGroup.iSerializableObject[i].Key);
 			}
 		}
+		#endregion
 	}
 }
 #endif

@@ -21,7 +21,7 @@ namespace xLib.xValueClass
 		}
 		
 		[Header("Crypto")]
-		[SerializeField]protected CryptoVersion[] cryptoVersion = new CryptoVersion[0];
+		[SerializeField]protected CryptoVersion[] cryptoVersion = new CryptoVersion[1];
 		[System.Serializable]protected class CryptoVersion
 		{
 			[SerializeField]private string keyEncrypt = "KeyEncrypt";
