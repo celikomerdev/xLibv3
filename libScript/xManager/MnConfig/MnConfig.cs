@@ -15,8 +15,10 @@ namespace xLib
 		#region Mono
 		protected override void Awaked()
 		{
-			MnConfig.onLoadConfig += OnLoadConfig;
-			LoadConfig();
+			LoadConfig(nodeTextAsset.Value.text);
+			nodeGroup.Load();
+			LoadConfig(nodeTextAsset.Value.text);
+			MnConfig.onLoadConfig += OnLoadConfig; OnLoadConfig();
 		}
 		
 		protected override void OnDestroyed()
@@ -27,25 +29,15 @@ namespace xLib
 		
 		
 		#region LoadConfig
-		private void LoadConfig()
-		{
-			if(CanDebug) Debug.Log($"{this.name}:LoadConfig");
-			nodeGroup.Load();
-			if(!nodeTextAsset.Value)
-			{
-				xLogger.LogException($"{this.name}:textAsset:null");
-				return;
-			}
-			LoadConfig(nodeTextAsset.Value.text);
-		}
-		
 		public static JObject data = new JObject();
 		public static Action onLoadConfig = delegate{};
-		public static void LoadConfig(string json)
+		private void LoadConfig(string json)
 		{
+			if(CanDebug) Debug.Log($"{this.name}:LoadConfig:json:{json}");
+			
 			if(string.IsNullOrWhiteSpace(json))
 			{
-				xLogger.LogException($"MnConfig:UpdateConfig:json:null");
+				xLogger.LogException($"{this.name}:LoadConfig:json:null");
 				return;
 			}
 			
@@ -56,7 +48,7 @@ namespace xLib
 			}
 			catch (Exception ex)
 			{
-				xLogger.LogException($"MnConfig:UpdateConfig:{ex.Message}:data:{json}");
+				xLogger.LogException($"{this.name}:LoadConfig:{ex.Message}:json:{json}");
 				return;
 			}
 			

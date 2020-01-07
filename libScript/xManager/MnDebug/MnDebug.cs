@@ -4,18 +4,22 @@ using xLib.EventClass;
 
 namespace xLib
 {
-	public class MnDebug : BaseRegisterM
+	public class MnDebug : BaseMainM
 	{
 		[SerializeField]private int length = 1000;
 		[SerializeField]private DebugLevel debugLevel = new DebugLevel();
 		[SerializeField]private EventString eventString = null;
 		
-		#region Register
-		protected override bool OnRegister(bool value)
+		#region Mono
+		private void OnEnable()
 		{
-			if (value) Application.logMessageReceived += HandleLog;
-			else Application.logMessageReceived -= HandleLog;
-			return value;
+			Application.logMessageReceived += HandleLog;
+		}
+		
+		private void OnDisable()
+		{
+			Application.logMessageReceived -= HandleLog;
+			ClearLog();
 		}
 		#endregion
 		
@@ -45,6 +49,7 @@ namespace xLib
 		{
 			stringDebug = "";
 			isClean = false;
+			eventString.Invoke(stringDebug);
 		}
 		#endregion
 		

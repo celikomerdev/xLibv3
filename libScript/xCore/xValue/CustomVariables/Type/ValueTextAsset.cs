@@ -21,7 +21,7 @@ namespace xLib.xValueClass
 		{
 			get
 			{
-				return Value.xHashCode().ToString();
+				return Value.text;
 			}
 		}
 		#endregion
