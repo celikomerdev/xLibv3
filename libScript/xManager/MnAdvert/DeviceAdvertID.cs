@@ -17,7 +17,7 @@ namespace xLib
 			{
 				if(trackingEnabled == value) return;
 				trackingEnabled = value;
-				Debug.Log($"StAdvert:trackingEnabled:{trackingEnabled}");
+				xLogger.Log($"StAdvert:trackingEnabled:{trackingEnabled}");
 			}
 		}
 		
@@ -32,7 +32,7 @@ namespace xLib
 			{
 				if(advertisingID == value) return;
 				advertisingID = value;
-				Debug.Log($"StAdvert:advertisingID:{advertisingID}");
+				xLogger.Log($"StAdvert:advertisingID:{advertisingID}");
 				
 				if(string.IsNullOrEmpty(advertisingID)) TestDeviceID = "";
 				else TestDeviceID = advertisingID.HashMD5UTF8();
@@ -52,7 +52,7 @@ namespace xLib
 				
 				if(testDeviceID == value) return;
 				testDeviceID = value;
-				Debug.Log($"StAdvert:testDeviceID:{testDeviceID}");
+				xLogger.Log($"StAdvert:testDeviceID:{testDeviceID}");
 			}
 		}
 		#endregion
