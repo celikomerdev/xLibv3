@@ -42,6 +42,7 @@ namespace xLib
 		public void Call()
 		{
 			if(!CanWork) return;
+			if(CanDebug) Debug.Log($"{this.name}:ScrollRectFocus:Call",this);
 			if(!transScrollRect) return;
 			Vector3 itemCenterPositionInScroll = GetWorldPointInWidget(transScrollRect, GetWidgetWorldPoint(Target));
 			Vector3 targetPositionInScroll = GetWorldPointInWidget(transScrollRect, GetWidgetWorldPoint(transViewport));

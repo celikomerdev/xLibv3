@@ -43,7 +43,7 @@ namespace xLib
 			}
 			set
 			{
-				canDebug = value;
+				canTest = value;
 			}
 		}
 		public bool SetTest
