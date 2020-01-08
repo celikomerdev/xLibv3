@@ -25,7 +25,7 @@ namespace xLib
 			}
 			else if(ins!=this)
 			{
-				DestroyImmediate();
+				Destroy();
 			}
 		}
 		
@@ -38,7 +38,7 @@ namespace xLib
 		{
 			if(!ins) return;
 			if(insBase.isPrimary && !isPrimary) return;
-			insBase.DestroyImmediate();
+			insBase.Destroy();
 			if(CanDebug) Debug.LogWarning($"{this.name}:Replaced",this);
 		}
 		
@@ -80,11 +80,18 @@ namespace xLib
 			OnDestroyed();
 		}
 		
+		private void Destroy()
+		{
+			if(CanDebug) Debug.LogWarning($"{this.name}:Destroy",this);
+			if(ins==this) ins = null;
+			Destroy(this.gameObject);
+		}
+		
 		private void DestroyImmediate()
 		{
 			if(CanDebug) Debug.LogWarning($"{this.name}:DestroyImmediate",this);
-			DestroyImmediate(this.gameObject);
 			if(ins==this) ins = null;
+			DestroyImmediate(this.gameObject);
 		}
 	}
 }
