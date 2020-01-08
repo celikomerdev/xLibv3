@@ -11,6 +11,7 @@ namespace xLib
 {
 	public class MnConfig : SingletonM<MnConfig>
 	{
+		private bool isLoaded = false;
 		[SerializeField]private bool forceLoad = false;
 		[SerializeField]private NodeGroup nodeGroup = null;
 		[SerializeField]private NodeTextAsset nodeTextAsset = null;
@@ -18,9 +19,9 @@ namespace xLib
 		#region Mono
 		protected override void Awaked()
 		{
-			LoadConfig(nodeTextAsset.Value.text);
 			nodeGroup.Load();
 			LoadConfig(nodeTextAsset.Value.text);
+			if(!isLoaded) LoadConfig(nodeTextAsset.ValueDefault.text);
 			MnConfig.onLoadConfig += OnLoadConfig; OnLoadConfig();
 		}
 		
@@ -55,6 +56,7 @@ namespace xLib
 				return;
 			}
 			
+			isLoaded = true;
 			data = newData;
 			onLoadConfig.Invoke();
 		}
