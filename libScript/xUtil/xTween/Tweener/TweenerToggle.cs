@@ -1,5 +1,5 @@
 ﻿#if xLibv3
-#if PackUI
+// #if PackUI
 using UnityEngine;
 using UnityEngine.UI;
 using xLib.xTween;
@@ -9,7 +9,8 @@ namespace xLib.xUtil
 	public class TweenerToggle : BaseWorkM
 	{
 		[SerializeField]private Toggle toggle = null;
-		[SerializeField]private TweenGroup tweenGroup = null;
+		[UnityEngine.Serialization.FormerlySerializedAs("tweenGroup")]
+		[SerializeField]private Tween tween = null;
 		[SerializeField]private float duration = 0.1f;
 		[SerializeField]private bool ignoreTimeScale = true;
 		
@@ -24,17 +25,22 @@ namespace xLib.xUtil
 			toggle.onValueChanged.RemoveListener(Work);
 		}
 		
+		private float currentRatio = 0f;
 		private Coroutine m_Coroutine = null;
 		private void Work(bool value)
 		{
 			if(!CanWork) return;
-			if(!tweenGroup) return;
+			if(!tween) return;
 			
 			float valueTarget = 1f;
 			if(!toggle.isOn) valueTarget = 0f;
 			
 			MnCoroutine.ins.KillCoroutine(m_Coroutine);
-			m_Coroutine = tweenGroup.CrossFade(valueTarget,duration,ignoreTimeScale);
+			m_Coroutine = ExtTween.Tween(duration:duration,call:(ratio)=>
+			{
+				currentRatio = Mathf.Lerp(currentRatio,valueTarget,ratio);
+				tween.SetBaseRatio(currentRatio);
+			});
 		}
 		
 		[ContextMenu("Fill")]
@@ -43,10 +49,10 @@ namespace xLib.xUtil
 			if(!toggle) toggle = GetComponent<Toggle>();
 			if(!toggle) toggle = GetComponentInParent<Toggle>();
 			
-			if(!tweenGroup) tweenGroup = GetComponent<TweenGroup>();
-			if(!tweenGroup) tweenGroup = GetComponentInChildren<TweenGroup>();
+			if(!tween) tween = GetComponent<Tween>();
+			if(!tween) tween = GetComponentInChildren<Tween>();
 		}
 	}
 }
-#endif
+// #endif
 #endif

@@ -8,6 +8,7 @@ namespace xLib.xTool
 	{
 		protected override bool OnRegister(bool register)
 		{
+			if(CanDebug) Debug.LogWarning($"{this.name}:systemMemorySize:{SystemInfo.systemMemorySize}:totalMemory:{totalMemory}",this);
 			if(register)
 			{
 				Application.lowMemory += MemoryLowCallback;
@@ -22,8 +23,17 @@ namespace xLib.xTool
 		[SerializeField]private EventUnity eventMemoryLow = new EventUnity();
 		private void MemoryLowCallback()
 		{
-			if(CanDebug) Debug.LogWarning($"{this.name}:MemoryLowCallback",this);
+			
+			if(CanDebug) Debug.LogWarning($"{this.name}:MemoryLowCallback:systemMemorySize:{SystemInfo.systemMemorySize}:totalMemory:{totalMemory}",this);
 			eventMemoryLow.Invoke();
+		}
+		
+		private long totalMemory
+		{
+			get
+			{
+				return System.GC.GetTotalMemory(false)/(1048576);
+			}
 		}
 	}
 }
