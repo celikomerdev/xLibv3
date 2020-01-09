@@ -7,6 +7,14 @@ namespace xLib
 	{
 		[SerializeField]private BaseWorkInfo baseWork = new BaseWorkInfo();
 		
+		public UnityEngine.Object UnityObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+		
 		protected virtual void SetDebug(){}
 		public bool CanDebug
 		{

@@ -14,7 +14,7 @@ namespace xLib.libAdvert.xIronSource
 			if(CanDebug) Debug.Log($"{this.name}:Awake",this);
 			IronSource.Agent.setAdaptersDebug(CanDebug);
 			
-			MnThread.StartThread(useThread:false,priority:1,context:this,call:delegate
+			MnThread.StartThread(iDebug:this,useThread:false,priority:1,call:delegate
 			{
 				IronSource.Agent.shouldTrackNetworkState(true);
 				FillUser();

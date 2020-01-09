@@ -30,16 +30,16 @@ namespace xLib
 		#region Flow
 		private static bool willCall = false;
 		private static EventUnity listener = new EventUnity();
-		public static void Register(UnityAction call,Object context=null)
+		public static void Register(UnityAction call,IDebug iDebug=null)
 		{
-			if(ins && ins.CanDebug) Debug.Log($"MnThread:Register:{call.Method}",context);
+			if(iDebug.CanDebug) Debug.Log($"MnThread:Register:{call.Method}",iDebug.UnityObject);
 			listener.eventUnity.AddListener(call);
 			willCall = true;
 		}
 		
-		public static void StartThread(UnityAction call,Object context=null,bool useThread=true,int priority = 2)
+		public static void StartThread(UnityAction call,bool useThread=true,int priority = 2,IDebug iDebug=null)
 		{
-			if(ins && ins.CanDebug) Debug.Log($"MnThread:StartThread:{useThread}:{call.Method}",context);
+			if(iDebug!=null && iDebug.CanDebug) Debug.Log($"MnThread:StartThread:{useThread}:{call.Method}",iDebug.UnityObject);
 			if(!useThread)
 			{
 				call();
