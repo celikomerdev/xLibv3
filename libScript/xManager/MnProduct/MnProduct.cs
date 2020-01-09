@@ -35,7 +35,7 @@ namespace xLib
 			ProductValidator.UseValidate = useValidate;
 			ProductValidator.Init();
 			
-			UnityPurchasing.Initialize(this,builder);
+			MnThread.ins.StartThread(useThread:false,priority:1,context:this,call:delegate{UnityPurchasing.Initialize(this,builder);});
 		}
 		#endregion
 		

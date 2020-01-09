@@ -52,7 +52,7 @@ namespace xLib
 		protected virtual void Inited(){}
 		public virtual void Init()
 		{
-			if(CanDebug) Debug.LogWarning($"{this.name}:Inited",this);
+			if(CanDebug) Debug.LogWarning($"{this.name}:TryInit",this);
 			Inited();
 		}
 		

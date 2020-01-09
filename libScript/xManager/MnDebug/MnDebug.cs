@@ -13,12 +13,12 @@ namespace xLib
 		#region Mono
 		private void OnEnable()
 		{
-			Application.logMessageReceived += HandleLog;
+			Application.logMessageReceivedThreaded += HandleLog;
 		}
 		
 		private void OnDisable()
 		{
-			Application.logMessageReceived -= HandleLog;
+			Application.logMessageReceivedThreaded -= HandleLog;
 			ClearLog();
 		}
 		#endregion

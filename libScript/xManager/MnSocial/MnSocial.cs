@@ -26,6 +26,7 @@ namespace xLib
 		public static System.Action<bool> actionLoginOut = delegate{};
 		public void LoginOut(bool value)
 		{
+			Init();
 			if(CanDebug) Debug.Log($"{this.name}:LoginOut:{value}",this);
 			if(isLogin.Value == value) return;
 			actionLoginOut(value);
@@ -50,6 +51,7 @@ namespace xLib
 		public static System.Action<string> actionShowLeaderboard = delegate{};
 		public void ShowLeaderBoard(string key)
 		{
+			LoginOut(true);
 			if(!isLogin.Value) return;
 			if(CanDebug) Debug.Log($"{this.name}:ShowLeaderBoard:{key}",this);
 			actionShowLeaderboard(key);
@@ -70,6 +72,7 @@ namespace xLib
 		public static System.Action<string> actionShowAchievement = delegate{};
 		public void ShowAchievement(string key)
 		{
+			LoginOut(true);
 			if(!isLogin.Value) return;
 			if(CanDebug) Debug.Log($"{this.name}:ShowAchievement:{key}",this);
 			actionShowAchievement.Invoke(key);

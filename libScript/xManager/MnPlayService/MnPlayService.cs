@@ -25,7 +25,7 @@ namespace xLib
 		#region Mono
 		protected override void OnEnabled()
 		{
-			MnSocial.actionInit += Init;
+			// MnSocial.actionInit += Init;
 			MnSocial.actionLoginOut += LoginOut;
 			
 			MnSocial.actionShowLeaderboard += ShowLeaderboard;
@@ -37,7 +37,7 @@ namespace xLib
 		
 		protected override void OnDisabled()
 		{
-			MnSocial.actionInit -= Init;
+			// MnSocial.actionInit -= Init;
 			MnSocial.actionLoginOut -= LoginOut;
 			
 			MnSocial.actionShowLeaderboard -= ShowLeaderboard;
@@ -50,22 +50,35 @@ namespace xLib
 		
 		
 		#region Init
+		private bool inInit = false;
+		private bool isInit = false;
 		protected override void Inited()
 		{
-			PlayGamesPlatform.DebugLogEnabled = CanDebug;
+			if(inInit) return;
+			if(isInit) return;
+			inInit = true;
 			
-			PlayGamesClientConfiguration.Builder builder = new PlayGamesClientConfiguration.Builder();
-			builder.WithInvitationDelegate(OnInvitationReceive);
-			builder.WithMatchDelegate(OnTurnMatchGot);
+			MnThread.ins.StartThread(useThread:true,priority:1,context:this,call:delegate
+			{
+				PlayGamesPlatform.DebugLogEnabled = CanDebug;
 			
-			if(enableHidePopups) builder.EnableHidePopups();
-			if(savedGames) builder.EnableSavedGames();
-			if(requestIdToken) builder.RequestIdToken();
-			if(requestEmail) builder.RequestEmail();
-			if(requestServerAuthCode) builder.RequestServerAuthCode(requestServerAuthCode);
-			
-			PlayGamesClientConfiguration config = builder.Build();
-			PlayGamesPlatform.InitializeInstance(config);
+				PlayGamesClientConfiguration.Builder builder = new PlayGamesClientConfiguration.Builder();
+				builder.WithInvitationDelegate(OnInvitationReceive);
+				builder.WithMatchDelegate(OnTurnMatchGot);
+				
+				if(enableHidePopups) builder.EnableHidePopups();
+				if(savedGames) builder.EnableSavedGames();
+				if(requestIdToken) builder.RequestIdToken();
+				if(requestEmail) builder.RequestEmail();
+				if(requestServerAuthCode) builder.RequestServerAuthCode(requestServerAuthCode);
+				
+				PlayGamesClientConfiguration config = builder.Build();
+				PlayGamesPlatform.InitializeInstance(config);
+				
+				inInit = false;
+				isInit = true;
+				MnThread.ins.Register(context:this,call:delegate{LoginOut(true);});
+			});
 		}
 		#endregion
 		
@@ -73,41 +86,46 @@ namespace xLib
 		#region LoginOut
 		private void LoginOut(bool value)
 		{
+			Init();
+			if(!isInit) return;
 			if(CanDebug) Debug.Log($"{this.name}:LoginOut:{value}",this);
 			
 			if(value)
 			{
 				MnSocial.ins.inLogin.Value = true;
-				PlayGamesPlatform.Instance.Authenticate(IsLogin);
+				MnThread.ins.StartThread(useThread:false,priority:1,context:this,call:delegate{PlayGamesPlatform.Instance.Authenticate(IsLogin);});
 			}
 			else
 			{
-				PlayGamesPlatform.Instance.SignOut();
+				MnThread.ins.StartThread(useThread:false,priority:1,context:this,call:delegate{PlayGamesPlatform.Instance.SignOut();});
 				IsLogin(false);
 			}
 		}
 		
 		private void IsLogin(bool value)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:IsLogin:{value}",this);
-			
-			if(value)
+			MnThread.ins.Register(context:this,call:delegate
 			{
-				// StartCoroutine(DownloadImage(PlayGamesPlatform.Instance.GetUserImageUrl())); //TODO
-				displayName.Value = PlayGamesPlatform.Instance.GetUserDisplayName();
-				if(requestIdToken) idToken.Value = PlayGamesPlatform.Instance.GetIdToken();
-				if(requestServerAuthCode) authCode.Value = PlayGamesPlatform.Instance.GetServerAuthCode();
-			}
-			else
-			{
-				displayName.ValueDefaultReset();
-				idToken.ValueDefaultReset();
-				authCode.ValueDefaultReset();
-			}
-			
-			MnSocial.ins.isLogin.Value = value;
-			MnSocial.ins.isSilent.Value = value;
-			MnSocial.ins.inLogin.Value = false;
+				if(CanDebug) Debug.Log($"{this.name}:IsLogin:{value}",this);
+				
+				if(value)
+				{
+					// StartCoroutine(DownloadImage(PlayGamesPlatform.Instance.GetUserImageUrl())); //TODO
+					displayName.Value = PlayGamesPlatform.Instance.GetUserDisplayName();
+					if(requestIdToken) idToken.Value = PlayGamesPlatform.Instance.GetIdToken();
+					if(requestServerAuthCode) authCode.Value = PlayGamesPlatform.Instance.GetServerAuthCode();
+				}
+				else
+				{
+					displayName.ValueDefaultReset();
+					idToken.ValueDefaultReset();
+					authCode.ValueDefaultReset();
+				}
+				
+				MnSocial.ins.isLogin.Value = value;
+				MnSocial.ins.isSilent.Value = value;
+				MnSocial.ins.inLogin.Value = false;
+			});
 		}
 		#endregion
 		

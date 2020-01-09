@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 using System.Threading;
+using UnityEngine;
 using UnityEngine.Events;
 using xLib.EventClass;
 
@@ -13,7 +14,7 @@ namespace xLib
 			Call();
 		}
 		
-		private static void Call()
+		private void Call()
 		{
 			if(!willCall) return;
 			willCall = false;
@@ -27,17 +28,25 @@ namespace xLib
 		#endregion
 		
 		#region Flow
-		private static bool willCall;
-		private static EventUnity listener = new EventUnity();
-		public static void Register(UnityAction call)
+		private bool willCall = false;
+		private EventUnity listener = new EventUnity();
+		public void Register(UnityAction call,Object context=null)
 		{
+			if(CanDebug) Debug.Log($"MnThread:Register:{call.Method}",context);
 			listener.eventUnity.AddListener(call);
 			willCall = true;
 		}
 		
-		public static void StartThread(UnityAction call)
+		public void StartThread(UnityAction call,Object context=null,bool useThread=true,int priority = 2)
 		{
+			if(CanDebug) Debug.Log($"MnThread:StartThread:{useThread}:{call.Method}",context);
+			if(!useThread)
+			{
+				call();
+				return;
+			}
 			Thread thread = new Thread(new ThreadStart(call));
+			thread.Priority = (System.Threading.ThreadPriority)priority;
 			thread.Start();
 		}
 		#endregion

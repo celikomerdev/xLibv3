@@ -12,8 +12,18 @@ namespace xLib.libAdvert.xIronSource
 		private void Awake()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:Awake",this);
-			Init();
-			Register(true);
+			IronSource.Agent.setAdaptersDebug(CanDebug);
+			
+			MnThread.ins.StartThread(useThread:false,priority:1,context:this,call:delegate
+			{
+				IronSource.Agent.shouldTrackNetworkState(true);
+				FillUser();
+				
+				IronSource.Agent.init(MnKey.GetValue(key),IronSourceAdUnits.REWARDED_VIDEO,IronSourceAdUnits.INTERSTITIAL,IronSourceAdUnits.OFFERWALL,IronSourceAdUnits.BANNER);
+				if(CanDebug) IronSource.Agent.validateIntegration();
+				if(CanDebug) Debug.Log($"MnIronSource:isInit:true",this);
+				Register(true);
+			});
 		}
 		
 		private void OnDestroy()
@@ -47,16 +57,6 @@ namespace xLib.libAdvert.xIronSource
 		
 		
 		#region Init
-		private void Init()
-		{
-			IronSource.Agent.setAdaptersDebug(CanDebug);
-			IronSource.Agent.shouldTrackNetworkState(true);
-			FillUser();
-			
-			IronSource.Agent.init(MnKey.GetValue(key),IronSourceAdUnits.REWARDED_VIDEO,IronSourceAdUnits.INTERSTITIAL,IronSourceAdUnits.OFFERWALL,IronSourceAdUnits.BANNER);
-			if(CanDebug) IronSource.Agent.validateIntegration();
-		}
-		
 		private void FillUser()
 		{
 			IronSource.Agent.setConsent(MnAdvert.ins.privacyAccepted);
