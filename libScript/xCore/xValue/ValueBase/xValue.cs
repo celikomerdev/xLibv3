@@ -132,12 +132,13 @@ namespace xLib
 		private List<Object> listenerEditor = new List<Object>();
 		public virtual void ListenerEditor(bool register,BaseWorkerI worker)
 		{
+			if(!Application.isPlaying) return;
 			worker.CheckErrors();
 			if(register)
 			{
 				if(listenerEditor.Contains(worker.UnityObject))
 				{
-					xLogger.LogException($"{nodeSetting.objDebug.name}:ListenerEditor:++:{worker.UnityObject.name}",worker.UnityObject);
+					Debug.LogError($"{nodeSetting.objDebug.name}:ListenerEditor:++:{worker.UnityObject.name}",worker.UnityObject);
 					return;
 				}
 				listenerEditor.Add(worker.UnityObject);
@@ -146,7 +147,7 @@ namespace xLib
 			{
 				if(!listenerEditor.Contains(worker.UnityObject))
 				{
-					xLogger.LogException($"{nodeSetting.objDebug.name}:ListenerEditor:--:{worker.UnityObject.name}",worker.UnityObject);
+					Debug.LogError($"{nodeSetting.objDebug.name}:ListenerEditor:--:{worker.UnityObject.name}",worker.UnityObject);
 					return;
 				}
 				listenerEditor.Remove(worker.UnityObject);
