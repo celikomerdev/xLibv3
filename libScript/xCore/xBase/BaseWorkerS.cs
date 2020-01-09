@@ -1,9 +1,7 @@
 ﻿#if xLibv3
-using UnityEngine;
-
 namespace xLib
 {
-	public abstract class BaseWorkerS : BaseWorkS
+	public abstract class BaseWorkerS : BaseWorkS, BaseWorkerI
 	{
 		internal View view = null;
 		protected bool isMy = true;
@@ -31,35 +29,12 @@ namespace xLib
 			isMy = view.IsMy;
 		}
 		
-		protected void ViewIdApplyFast()
-		{
-			lastViewId = ViewCore.CurrentId;
-			ViewCore.CurrentId = ViewId;
-		}
-		protected void ViewIdApply()
-		{
-			if(ViewCore.canDebug && ViewCore.CurrentId != ViewId) Debug.LogFormat(this,"CurrentId:{0}:{1}",ViewCore.CurrentId,ViewId);
-			ViewIdApplyFast();
-		}
-		
-		protected void ViewIdRestoreFast()
-		{
-			ViewCore.CurrentId = lastViewId;
-		}
-		protected void ViewIdRestore()
-		{
-			if(ViewCore.canDebug && ViewCore.CurrentId != lastViewId) Debug.LogFormat(this,"CurrentId:{0}:{1}",ViewCore.CurrentId,lastViewId);
-			ViewIdRestoreFast();
-		}
-		
-		#if UNITY_EDITOR
 		public virtual void CheckErrors()
 		{
-			if(ViewCore.CurrentId != ViewId) xLogger.LogExceptionFormat(this,this.name+":CurrentId:{0}:viewId:{1}",ViewCore.CurrentId,ViewId);
+			#if UNITY_EDITOR
+			if(ViewCore.CurrentId != ViewId) xLogger.LogExceptionFormat(this,$"{this.name}:CurrentId:{0}:ViewId:{1}",ViewCore.CurrentId,ViewId);
+			#endif
 		}
-		#else
-		public virtual void CheckErrors(){}
-		#endif
 	}
 }
 #endif

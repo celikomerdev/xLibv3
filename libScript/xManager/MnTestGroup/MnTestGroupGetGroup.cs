@@ -23,10 +23,10 @@ namespace xLib
 			eventGroup.Invoke(MnTestGroup.GetGroup(key));
 		}
 		
-		protected override bool OnRegister(bool value)
+		protected override bool OnRegister(bool register)
 		{
 			if(baseRegister.onRegister) Work();
-			return value;
+			return register;
 		}
 	}
 }

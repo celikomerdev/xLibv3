@@ -41,10 +41,10 @@ namespace xLib.libAdvert
 		}
 		
 		#region Register
-		protected override bool OnRegister(bool value)
+		protected override bool OnRegister(bool register)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{value}",this);
-			return value;
+			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{register}",this);
+			return register;
 		}
 		
 		public string IdPlatform()

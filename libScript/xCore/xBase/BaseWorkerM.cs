@@ -1,7 +1,7 @@
 ﻿#if xLibv3
 namespace xLib
 {
-	public abstract class BaseWorkerM : BaseWorkM
+	public abstract class BaseWorkerM : BaseWorkM, BaseWorkerI
 	{
 		internal View view = null;
 		protected bool isMy = true;

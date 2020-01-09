@@ -22,6 +22,7 @@ namespace xLib
 			IsRegister = value;
 		}
 		
+		protected abstract bool OnRegister(bool register);
 		public bool IsRegister
 		{
 			get
@@ -41,11 +42,6 @@ namespace xLib
 				
 				ViewCore.CurrentId = tempId;
 			}
-		}
-		
-		protected virtual bool OnRegister(bool value)
-		{
-			return value;
 		}
 		#endregion
 		

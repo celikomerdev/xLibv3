@@ -7,11 +7,11 @@ namespace xLib.libAdvert.xIronSource
 	public class AdOfferwall : AdvertBase
 	{
 		#region Register
-		protected override bool OnRegister(bool value)
+		protected override bool OnRegister(bool register)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{value}",this);
+			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{register}",this);
 			
-			if (value)
+			if (register)
 			{
 				IronSourceEvents.onOfferwallAvailableEvent += onOfferwallAvailableEvent;
 				
@@ -38,7 +38,7 @@ namespace xLib.libAdvert.xIronSource
 				
 				IronSourceEvents.onOfferwallClosedEvent -= onOfferwallClosedEvent;
 			}
-			return value;
+			return register;
 		}
 		#endregion
 		

@@ -22,8 +22,6 @@ namespace xLib
 		
 		protected override void Awaked()
 		{
-			Application.lowMemory += LowMemoryCallback;
-			
 			Application_buildGUID.Value = Application.buildGUID;
 			Application_genuine.Value = Application.genuine.ToString();
 			Application_identifier.Value = Application.identifier;
@@ -35,16 +33,6 @@ namespace xLib
 			Application_version.Value = int.Parse(Application.version);
 			
 			SystemInfo_deviceUniqueIdentifier.Value = SystemInfo.deviceUniqueIdentifier;
-		}
-		
-		protected override void OnDestroyed()
-		{
-			Application.lowMemory -= LowMemoryCallback;
-		}
-		
-		private void LowMemoryCallback()
-		{
-			Debug.LogWarning($"{this.name}:LowMemoryCallback",this);
 		}
 	}
 }

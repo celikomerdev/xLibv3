@@ -32,12 +32,12 @@ namespace xLib
 			}
 		}
 		
-		public override void ListenerEditor(bool register,BaseActiveM call)
+		public override void ListenerEditor(bool register,BaseWorkerI worker)
 		{
 			#if UNITY_EDITOR
 			for (int i = 0; i < Value.iCall.Length; i++)
 			{
-				Value.iCall[i].ListenerEditor(register,call);
+				Value.iCall[i].ListenerEditor(register,worker);
 			}
 			#endif
 		}

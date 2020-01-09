@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BaseTickS : MonoBehaviour
+﻿#if xLibv3
+namespace xLib
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public abstract class BaseTickS : BaseRegisterS
+	{
+		private string tempId = "Client";
+		#region Virtual
+		protected void TickMulti(float tickTime)
+		{
+			tempId = ViewCore.CurrentId;
+			ViewCore.CurrentId = ViewId;
+			Tick(tickTime);
+			ViewCore.CurrentId = tempId;
+		}
+		protected virtual void Tick(float tickTime){}
+		#endregion
+	}
 }
+#endif

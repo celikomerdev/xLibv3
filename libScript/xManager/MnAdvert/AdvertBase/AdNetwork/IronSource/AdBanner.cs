@@ -7,11 +7,11 @@ namespace xLib.libAdvert.xIronSource
 	public class AdBanner : AdvertBaseBanner
 	{
 		#region Register
-		protected override bool OnRegister(bool value)
+		protected override bool OnRegister(bool register)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{value}",this);
+			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{register}",this);
 			
-			if (value)
+			if (register)
 			{
 				IronSourceEvents.onBannerAdLoadFailedEvent += onBannerAdLoadFailedEvent;
 				IronSourceEvents.onBannerAdLoadedEvent += onBannerAdLoadedEvent;
@@ -37,7 +37,7 @@ namespace xLib.libAdvert.xIronSource
 				IronSourceEvents.onBannerAdLeftApplicationEvent -= onBannerAdLeftApplicationEvent;
 				IronSourceEvents.onBannerAdScreenDismissedEvent -= onBannerAdScreenDismissedEvent;
 			}
-			return value;
+			return register;
 		}
 		#endregion
 		

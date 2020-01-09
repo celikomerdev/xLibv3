@@ -129,31 +129,31 @@ namespace xLib
 		
 		#region Editor
 		#if UNITY_EDITOR
-		private List<BaseActiveM> listenerEditor = new List<BaseActiveM>();
-		public virtual void ListenerEditor(bool register,BaseActiveM call)
+		private List<Object> listenerEditor = new List<Object>();
+		public virtual void ListenerEditor(bool register,BaseWorkerI worker)
 		{
-			call.CheckErrors();
+			worker.CheckErrors();
 			if(register)
 			{
-				if(listenerEditor.Contains(call))
+				if(listenerEditor.Contains(worker.UnityObject))
 				{
-					xLogger.LogException($"{nodeSetting.objDebug.name}:ListenerEditor:++:{call.name}",call.gameObject);
+					xLogger.LogException($"{nodeSetting.objDebug.name}:ListenerEditor:++:{worker.UnityObject.name}",worker.UnityObject);
 					return;
 				}
-				listenerEditor.Add(call);
+				listenerEditor.Add(worker.UnityObject);
 			}
 			else
 			{
-				if(!listenerEditor.Contains(call))
+				if(!listenerEditor.Contains(worker.UnityObject))
 				{
-					xLogger.LogException($"{nodeSetting.objDebug.name}:ListenerEditor:--:{call.name}",call.gameObject);
+					xLogger.LogException($"{nodeSetting.objDebug.name}:ListenerEditor:--:{worker.UnityObject.name}",worker.UnityObject);
 					return;
 				}
-				listenerEditor.Remove(call);
+				listenerEditor.Remove(worker.UnityObject);
 			}
 		}
 		#else
-		public virtual void ListenerEditor(bool addition,BaseActiveM call){}
+		public virtual void ListenerEditor(bool addition,BaseWorkerI worker){}
 		#endif
 		#endregion
 		
@@ -178,7 +178,7 @@ namespace xLib
 			}
 			
 			#if UNITY_EDITOR
-			listenerEditor = new List<BaseActiveM>();
+			listenerEditor = new List<Object>();
 			#endif
 		}
 		#endregion

@@ -198,9 +198,9 @@ namespace xLib.xNode.NodeObject
 			Node.ListenerCall(register,call,viewId,order,onRegister);
 		}
 		
-		public void ListenerEditor(bool register,BaseActiveM call)
+		public void ListenerEditor(bool register,BaseWorkerI worker)
 		{
-			Node.ListenerEditor(register, call);
+			Node.ListenerEditor(register, worker);
 		}
 		
 		public void CleanListener()

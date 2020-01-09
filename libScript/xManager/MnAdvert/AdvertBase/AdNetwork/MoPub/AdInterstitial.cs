@@ -7,11 +7,11 @@ namespace xLib.libAdvert.xMoPub
 	public class AdInterstitial : AdvertBase
 	{
 		#region Register
-		protected override bool OnRegister(bool value)
+		protected override bool OnRegister(bool register)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{value}",this);
+			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{register}",this);
 			
-			if (value)
+			if (register)
 			{
 				MoPub.LoadInterstitialPluginsForAdUnits(new string[1]{idPlatform});
 				MoPubManager.OnImpressionTrackedEvent += OnImpressionTrackedEvent;
@@ -38,7 +38,7 @@ namespace xLib.libAdvert.xMoPub
 				MoPubManager.OnInterstitialDismissedEvent -= OnInterstitialDismissedEvent;
 				MoPubManager.OnInterstitialExpiredEvent -= OnInterstitialExpiredEvent;
 			}
-			return value;
+			return register;
 		}
 		#endregion
 		

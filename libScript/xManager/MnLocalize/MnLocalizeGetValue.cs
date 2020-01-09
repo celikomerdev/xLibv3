@@ -23,10 +23,10 @@ namespace xLib.ToolLocalize
 			eventString.Invoke(MnLocalize.GetValue(value));
 		}
 		
-		protected override bool OnRegister(bool value)
+		protected override bool OnRegister(bool register)
 		{
-			MnLocalize.ins.eventLocalize.Listener(value,(Void)=>Work(),viewId:ViewId,order:baseRegister.order,onRegister:baseRegister.onRegister);
-			return value;
+			MnLocalize.ins.eventLocalize.Listener(register,(Void)=>Work(),viewId:ViewId,order:baseRegister.order,onRegister:baseRegister.onRegister);
+			return register;
 		}
 	}
 }

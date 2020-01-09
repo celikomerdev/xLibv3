@@ -7,11 +7,11 @@ namespace xLib.libAdvert.xIronSource
 	public class AdInterstitial : AdvertBase
 	{
 		#region Register
-		protected override bool OnRegister(bool value)
+		protected override bool OnRegister(bool register)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{value}",this);
+			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{register}",this);
 			
-			if (value)
+			if (register)
 			{
 				IronSourceEvents.onInterstitialAdLoadFailedEvent += onInterstitialAdLoadFailedEvent;
 				IronSourceEvents.onInterstitialAdReadyEvent += onInterstitialAdReadyEvent;
@@ -42,7 +42,7 @@ namespace xLib.libAdvert.xIronSource
 				IronSourceEvents.onInterstitialAdRewardedEvent -= onInterstitialAdRewardedEvent;
 				IronSourceEvents.onInterstitialAdClosedEvent -= onInterstitialAdClosedEvent;
 			}
-			return value;
+			return register;
 		}
 		#endregion
 		
