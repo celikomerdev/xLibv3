@@ -14,7 +14,7 @@ namespace xLib
 			Call();
 		}
 		
-		private void Call()
+		private static void Call()
 		{
 			if(!willCall) return;
 			willCall = false;
@@ -28,18 +28,18 @@ namespace xLib
 		#endregion
 		
 		#region Flow
-		private bool willCall = false;
-		private EventUnity listener = new EventUnity();
-		public void Register(UnityAction call,Object context=null)
+		private static bool willCall = false;
+		private static EventUnity listener = new EventUnity();
+		public static void Register(UnityAction call,Object context=null)
 		{
-			if(CanDebug) Debug.Log($"MnThread:Register:{call.Method}",context);
+			if(ins && ins.CanDebug) Debug.Log($"MnThread:Register:{call.Method}",context);
 			listener.eventUnity.AddListener(call);
 			willCall = true;
 		}
 		
-		public void StartThread(UnityAction call,Object context=null,bool useThread=true,int priority = 2)
+		public static void StartThread(UnityAction call,Object context=null,bool useThread=true,int priority = 2)
 		{
-			if(CanDebug) Debug.Log($"MnThread:StartThread:{useThread}:{call.Method}",context);
+			if(ins && ins.CanDebug) Debug.Log($"MnThread:StartThread:{useThread}:{call.Method}",context);
 			if(!useThread)
 			{
 				call();

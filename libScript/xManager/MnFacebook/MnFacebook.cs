@@ -23,7 +23,7 @@ namespace xLib
 			
 			if(inInit) return;
 			inInit = true;
-			MnThread.ins.StartThread(useThread:false,priority:1,context:this,call:delegate{FB.Init(OnInit);});
+			MnThread.StartThread(useThread:false,priority:1,context:this,call:delegate{FB.Init(OnInit);});
 		}
 		
 		[SerializeField]private NodeBool isInit = null;

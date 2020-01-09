@@ -58,7 +58,7 @@ namespace xLib
 			if(isInit) return;
 			inInit = true;
 			
-			MnThread.ins.StartThread(useThread:true,priority:1,context:this,call:delegate
+			MnThread.StartThread(useThread:true,priority:1,context:this,call:delegate
 			{
 				PlayGamesPlatform.DebugLogEnabled = CanDebug;
 			
@@ -77,7 +77,7 @@ namespace xLib
 				
 				inInit = false;
 				isInit = true;
-				MnThread.ins.Register(context:this,call:delegate{LoginOut(true);});
+				MnThread.Register(context:this,call:delegate{LoginOut(true);});
 			});
 		}
 		#endregion
@@ -93,18 +93,18 @@ namespace xLib
 			if(value)
 			{
 				MnSocial.ins.inLogin.Value = true;
-				MnThread.ins.StartThread(useThread:false,priority:1,context:this,call:delegate{PlayGamesPlatform.Instance.Authenticate(IsLogin);});
+				MnThread.StartThread(useThread:false,priority:1,context:this,call:delegate{PlayGamesPlatform.Instance.Authenticate(IsLogin);});
 			}
 			else
 			{
-				MnThread.ins.StartThread(useThread:false,priority:1,context:this,call:delegate{PlayGamesPlatform.Instance.SignOut();});
+				MnThread.StartThread(useThread:false,priority:1,context:this,call:delegate{PlayGamesPlatform.Instance.SignOut();});
 				IsLogin(false);
 			}
 		}
 		
 		private void IsLogin(bool value)
 		{
-			MnThread.ins.Register(context:this,call:delegate
+			MnThread.Register(context:this,call:delegate
 			{
 				if(CanDebug) Debug.Log($"{this.name}:IsLogin:{value}",this);
 				
