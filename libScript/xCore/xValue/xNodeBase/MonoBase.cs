@@ -5,14 +5,6 @@ namespace xLib.xNode.NodeObject
 {
 	public abstract class MonoBase : BaseInitM, ISerializableObject, IRpc, IAnalyticObject
 	{
-		public Object UnityObject
-		{
-			get
-			{
-				return this;
-			}
-		}
-		
 		#region Key
 		public abstract string Key
 		{

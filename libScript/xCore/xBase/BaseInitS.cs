@@ -5,7 +5,7 @@ namespace xLib
 {
 	public abstract class BaseInitS : BaseWorkS
 	{
-		protected bool isInit;
+		protected bool isInit = false;
 		public void Init(bool value)
 		{
 			if(isInit == value) return;
@@ -23,12 +23,12 @@ namespace xLib
 		// 	MnThread.Register(OnEnable);
 		// }
 		
-		private void OnEnable()
+		protected virtual void OnEnable()
 		{
 			Init(true);
 		}
 		
-		private void OnDisable()
+		protected virtual void OnDisable()
 		{
 			Init(false);
 		}

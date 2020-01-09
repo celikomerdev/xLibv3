@@ -47,6 +47,22 @@ namespace xLib
 			}
 		}
 		
+		protected virtual void OnValidatedForced(){}
+		protected virtual void OnValidated(){}
+		private void OnValidate()
+		{
+			#if UNITY_EDITOR
+			runInEditMode = baseWork.RunInEditMode;
+			#endif
+			
+			OnValidatedForced();
+			SetDebug();
+			
+			if(!CanWork) return;
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnValidate");
+			OnValidated();
+		}
+		
 		public bool Enabled
 		{
 			get
@@ -64,22 +80,6 @@ namespace xLib
 			{
 				return true;
 			}
-		}
-		
-		protected virtual void OnValidatedForced(){}
-		protected virtual void OnValidated(){}
-		private void OnValidate()
-		{
-			#if UNITY_EDITOR
-			runInEditMode = baseWork.RunInEditMode;
-			#endif
-			
-			OnValidatedForced();
-			SetDebug();
-			
-			if(!CanWork) return;
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnValidate");
-			OnValidated();
 		}
 	}
 }
