@@ -46,7 +46,7 @@ namespace xLib.libAdvert
 			}
 		}
 		
-		[SerializeField]private EventBool onDisplay = new EventBool();
+		[SerializeField]public EventBool onDisplay = new EventBool();
 		protected bool OnDisplay
 		{
 			set
@@ -55,8 +55,7 @@ namespace xLib.libAdvert
 			}
 		}
 		
-		
-		[SerializeField]private EventFloat onDisplayWidth = new EventFloat();
+		[SerializeField]public EventFloat onDisplayWidth = new EventFloat();
 		protected int width = 90;
 		protected float OnWidth
 		{
@@ -67,7 +66,7 @@ namespace xLib.libAdvert
 			}
 		}
 		
-		[SerializeField]private EventFloat onDisplayHeight = new EventFloat();
+		[SerializeField]public EventFloat onDisplayHeight = new EventFloat();
 		protected int height = 90;
 		protected float OnHeight
 		{
