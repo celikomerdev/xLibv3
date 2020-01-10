@@ -80,7 +80,7 @@ namespace xLib
 		
 		void IStoreListener.OnInitializeFailed(InitializationFailureReason error)
 		{
-			xLogger.LogException($"{this.name}:OnInitializeFailed:{error}",this);
+			Debug.LogException(new UnityException($"{this.name}:OnInitializeFailed:{error}"),this);
 			OnInit(false);
 		}
 		
@@ -101,7 +101,7 @@ namespace xLib
 		{
 			currentProduct = product;
 			
-			xLogger.LogException($"{this.name}:OnPurchaseFailed:{productFailureReason}:{product.definition.id}",this);
+			Debug.LogException(new UnityException($"{this.name}:OnPurchaseFailed:{productFailureReason}:{product.definition.id}"),this);
 			StAnalytics.LogEvent(key:"IAP_On_Purchase_Failed_"+productFailureReason,label:product.definition.id);
 			
 			OnPurchase(false,product.definition.id);
@@ -260,7 +260,7 @@ namespace xLib
 			
 			StPopupWindow.Reset();
 			StPopupWindow.HeaderLocalized("warning");
-			StPopupWindow.Body(string.Format($"{productId}\n1.00$\nbuy?"));
+			StPopupWindow.Body(string.Format($"{productId}\n$1.00\nbuy?"));
 			StPopupWindow.AcceptLocalized("yes");
 			StPopupWindow.DeclineLocalized("no");
 			StPopupWindow.Listener(true,Listener);
