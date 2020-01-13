@@ -15,51 +15,57 @@ namespace xLib.Purchasing.Security
 		
 		internal static void Init()
 		{
+			TryInit();
+			if(CanDebug) Debug.Log($"ProductValidator:Init:{UseValidate}");
+		}
+		
+		private static void TryInit()
+		{
 			if(!UseValidate) return;
-			if(CanDebug) Debug.Log($"ProductValidator:Init");
+			
+			UseValidate = false;
+			if(StandardPurchasingModule.Instance().appStore == AppStore.GooglePlay) UseValidate = true;
+			if(StandardPurchasingModule.Instance().appStore == AppStore.AppleAppStore) UseValidate = true;
+			if(!UseValidate) return;
 			
 			#if UNITY_ANDROID || UNITY_IPHONE || UNITY_STANDALONE_OSX || UNITY_TVOS
+			if(CanDebug) Debug.Log($"ProductValidator:GooglePlayTangle:{GooglePlayTangle.Data().HashSHA256()}");
+			if(CanDebug) Debug.Log($"ProductValidator:AppleTangle:{AppleTangle.Data().HashSHA256()}");
 			validator = new CrossPlatformValidator(GooglePlayTangle.Data(),AppleTangle.Data(),Application.identifier);
-			if(validator == null) xLogger.LogException($"ProductValidator:validator:null");
+			if(validator == null) Debug.LogException(new UnityException($"ProductValidator:validator:null"));
 			#endif
+			
+			if(validator==null) UseValidate = false;
+			if(Application.isEditor) UseValidate = false;
 		}
 		
 		internal static bool IsValid(PurchaseEventArgs args)
 		{
-			if(Application.isEditor) return true;
+			if(CanDebug) Debug.Log($"ProductValidator:receipt:{args.purchasedProduct.receipt}");
 			if(!UseValidate) return true;
 			
-			bool canValidate = false;
-			if(StandardPurchasingModule.Instance().appStore == AppStore.GooglePlay) canValidate = true;
-			if(StandardPurchasingModule.Instance().appStore == AppStore.AppleAppStore) canValidate = true;
-			if(!canValidate) return true;
-			
-			
-			IPurchaseReceipt[] receiptArray = null;
-			bool receiptResult = false;
 			try
 			{
-				receiptArray = validator.Validate(args.purchasedProduct.receipt);
-				if(receiptArray != null) receiptResult = true;
+				IPurchaseReceipt[] receiptArray = validator.Validate(args.purchasedProduct.receipt);
+				DebugReceipt(receiptArray);
+				return (receiptArray!=null);
 			}
 			catch(IAPSecurityException ex)
 			{
-				xLogger.LogException($"ProductValidator:IAPSecurityException:{ex.Message}");
+				Debug.LogException(new UnityException($"ProductValidator:IAPSecurityException",ex));
 			}
 			catch(Exception ex)
 			{
-				xLogger.LogException($"ProductValidator:Exception:{ex.Message}");
+				Debug.LogException(new UnityException($"ProductValidator:Exception",ex));
 			}
-			
-			DebugReceipt(receiptArray);
-			return receiptResult;
+			return false;
 		}
 		
 		private static void DebugReceipt(IPurchaseReceipt[] receiptArray)
 		{
 			if(receiptArray == null)
 			{
-				xLogger.LogException($"ProductValidator:ReceiptArray:null");
+				Debug.LogException(new UnityException($"ProductValidator:ReceiptArray:null"));
 				return;
 			}
 			
