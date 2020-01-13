@@ -1,6 +1,7 @@
 ﻿#if xLibv3
 #if IapUnity
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using xLib.Purchasing;
@@ -37,6 +38,7 @@ namespace xLib
 			
 			MnThread.StartThread(iDebug:this,useThread:false,priority:1,call:delegate{UnityPurchasing.Initialize(this,builder);});
 		}
+		
 		#endregion
 		
 		
@@ -44,6 +46,7 @@ namespace xLib
 		private static IStoreController m_Controller = null;
 		private static IExtensionProvider m_extensions = null;
 		
+		public static Dictionary<string, string> productsDetails = new Dictionary<string,string>();
 		private static IGooglePlayStoreExtensions m_GooglePlayStoreExtensions = null;
 		private static IAppleExtensions m_AppleExtensions = null;
 		
@@ -55,27 +58,44 @@ namespace xLib
 			if(StandardPurchasingModule.Instance().appStore == AppStore.GooglePlay)
 			{
 				m_GooglePlayStoreExtensions = m_extensions.GetExtension<IGooglePlayStoreExtensions>();
+				productsDetails = m_GooglePlayStoreExtensions.GetProductJSONDictionary();
 			}
 			else if(StandardPurchasingModule.Instance().appStore == AppStore.AppleAppStore)
 			{
 				m_AppleExtensions = m_extensions.GetExtension<IAppleExtensions>();
+				// productDetails = m_AppleExtensions.GetIntroductoryPriceDictionary();
+				productsDetails = m_AppleExtensions.GetProductDetails();
+			}
+			
+			if(CanDebug)
+			{
+				foreach (var item in controller.products.all)
+				{
+					Debug.Log(string.Join("-",
+					new[]
+					{
+						item.definition.id,
+						item.definition.storeSpecificId,
+						item.definition.type.ToString(),
+						item.metadata.localizedPrice.ToString(),
+						item.metadata.localizedPriceString
+					}));
+				}
+				
+				if(productsDetails==null)
+				{
+					Debug.LogWarning($"{this.name}:productsDetails:null",this);
+				}
+				else
+				{
+					foreach (KeyValuePair<string,string> productDetails in productsDetails)
+					{
+						Debug.Log($"{this.name}:productsDetails:{productDetails.Key}:{productDetails.Value}",this);
+					}
+				}
 			}
 			
 			OnInit(true);
-			
-			if(!CanDebug) return;
-			foreach (var item in controller.products.all)
-			{
-				Debug.Log(string.Join("-",
-				new[]
-				{
-					item.definition.id,
-					item.definition.storeSpecificId,
-					item.definition.type.ToString(),
-					item.metadata.localizedPrice.ToString(),
-					item.metadata.localizedPriceString
-				}));
-			}
 		}
 		
 		void IStoreListener.OnInitializeFailed(InitializationFailureReason error)

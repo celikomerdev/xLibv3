@@ -25,32 +25,32 @@
     "versionDefines": [
         {
             "name": "com.unity.ugui",
-            "expression": "0.0.0",
+            "expression": "",
             "define": "PackUI"
         },
         {
             "name": "com.unity.modules.ui",
-            "expression": "0.0.0",
+            "expression": "",
             "define": "ModUI"
         },
         {
             "name": "com.unity.modules.unitywebrequestwww",
-            "expression": "0.0.0",
+            "expression": "",
             "define": "ModWebWWW"
         },
         {
             "name": "com.unity.modules.imageconversion",
-            "expression": "0.0.0",
+            "expression": "",
             "define": "ModImageConversion"
         },
         {
             "name": "com.unity.purchasing",
-            "expression": "0.0.0",
+            "expression": "",
             "define": "PackIAP"
         },
         {
             "name": "mobi.gameguru.analytics",
-            "expression": "0.0.0",
+            "expression": "",
             "define": "AnalyticsGuru"
         }
     ]

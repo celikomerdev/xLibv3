@@ -2,7 +2,6 @@
 #if IapUnity
 using UnityEngine;
 using UnityEngine.Purchasing;
-using xLib.Purchasing;
 using xLib.EventClass;
 
 namespace xLib.ToolPurchase
@@ -21,18 +20,34 @@ namespace xLib.ToolPurchase
 		private void ListenResult(bool value)
 		{
 			if(!value) return;
+			// if(Application.isEditor) return;
 			
 			Product product = null;
 			if(product == null) product = MnProduct.ins.GetProduct(key);
 			if(product == null) return;
 			if(product.definition.type != ProductType.Subscription) return;
 			
-			SubscriptionInfo subscriptionInfo = HelperSubscription.GetInfo(product);
-			if(subscriptionInfo != null)
+			string productDetails = (MnProduct.productsDetails == null || !MnProduct.productsDetails.ContainsKey(product.definition.storeSpecificId))? null:MnProduct.productsDetails[product.definition.storeSpecificId];
+			if(productDetails==null)
 			{
-				if(CanDebug) Debug.Log($"{this.name}:subscriptionInfo:{subscriptionInfo.ToString()}",this);
-				eventStringFreeTrialPeriod.Value = subscriptionInfo.getFreeTrialPeriodString();
+				Debug.LogException(new UnityException($"{key}:productDetails:null"),this);
+				return;
 			}
+			SubscriptionManager subscriptionManager = new SubscriptionManager(product,productDetails);
+			if(subscriptionManager == null)
+			{
+				Debug.LogException(new UnityException($"{key}:subscriptionInfo:null"),this);
+				return;
+			}
+			SubscriptionInfo subscriptionInfo = subscriptionManager.getSubscriptionInfo();
+			if(subscriptionInfo == null)
+			{
+				Debug.LogException(new UnityException($"{key}:subscriptionInfo:null"),this);
+				return;
+			}
+			
+			if(CanDebug) Debug.Log($"{key}:subscriptionInfo:{subscriptionInfo.ToString()}",this);
+			eventStringFreeTrialPeriod.Value = subscriptionInfo.getFreeTrialPeriodString();
 		}
 	}
 }
@@ -49,14 +64,8 @@ namespace xLib.ToolPurchase
 		
 		protected override bool OnRegister(bool register)
 		{
-			MnProduct.ins.onPurchase.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:true);
+			eventStringFreeTrialPeriod.Value = "1 Week Free Try";
 			return register;
-		}
-		
-		private void ListenResult(bool value)
-		{
-			if(!value) return;
-			eventStringFreeTrialPeriod.Value = "Free Trial Period";
 		}
 	}
 }

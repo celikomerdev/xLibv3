@@ -30,8 +30,8 @@ namespace xLib.Purchasing
 				return null;
 			}
 			
-			//string intro_json = (introductory_info_dict == null || !introductory_info_dict.ContainsKey(item.definition.storeSpecificId)) ? null : introductory_info_dict[item.definition.storeSpecificId];
-			SubscriptionManager subscriptionManager = new SubscriptionManager(item,null);
+			string productDetails = (MnProduct.productsDetails == null || !MnProduct.productsDetails.ContainsKey(item.definition.storeSpecificId))? null:MnProduct.productsDetails[item.definition.storeSpecificId];
+			SubscriptionManager subscriptionManager = new SubscriptionManager(item,productDetails);
 			SubscriptionInfo subscriptionInfo = subscriptionManager.getSubscriptionInfo();
 			
 			if(CanDebug)
