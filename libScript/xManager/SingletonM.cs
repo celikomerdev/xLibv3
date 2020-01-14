@@ -39,7 +39,7 @@ namespace xLib
 			if(!ins) return;
 			if(insBase.isPrimary && !isPrimary) return;
 			insBase.Destroy();
-			Debug.LogWarning($"{this.name}:Replaced",this);
+			if(CanDebug) Debug.LogWarning($"{this.name}:Replaced",this);
 		}
 		
 		protected virtual void Started(){}
@@ -82,14 +82,14 @@ namespace xLib
 		
 		private void Destroy()
 		{
-			Debug.LogWarning($"{this.name}:Destroy",this);
+			if(CanDebug) Debug.LogWarning($"{this.name}:Destroy",this);
 			if(ins==this) ins = null;
 			Destroy(this.gameObject);
 		}
 		
 		private void DestroyImmediate()
 		{
-			Debug.LogWarning($"{this.name}:DestroyImmediate",this);
+			if(CanDebug) Debug.LogWarning($"{this.name}:DestroyImmediate",this);
 			if(ins==this) ins = null;
 			DestroyImmediate(this.gameObject);
 		}

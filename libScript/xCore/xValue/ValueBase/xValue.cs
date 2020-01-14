@@ -107,7 +107,7 @@ namespace xLib
 		private ActionSortedBase<V> actionSortedBase = new ActionSortedSingle<V>();
 		public void Listener(bool register,UnityAction<V> call,string viewId,int order,bool onRegister=false)
 		{
-			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Listener:{register}:view:{viewId}:order:{order}:call:{call.Target}",nodeSetting.objDebug);
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Listener:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",nodeSetting.objDebug);
 			actionSortedBase.Listener(register,call,viewId,order);
 			
 			if(!register) return;
@@ -118,7 +118,7 @@ namespace xLib
 		private ActionSortedBase<object> actionSortedBaseCall = new ActionSortedSingle<object>();
 		public virtual void ListenerCall(bool register,UnityAction<object> call,string viewId,int order,bool onRegister=false)
 		{
-			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:ListenerCall:{register}:view:{viewId}:order:{order}:call:{call.Target}",nodeSetting.objDebug);
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:ListenerCall:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",nodeSetting.objDebug);
 			actionSortedBaseCall.Listener(register,call,viewId,order);
 			
 			if(!register) return;

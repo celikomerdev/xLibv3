@@ -5,11 +5,18 @@ namespace xLib
 {
 	public class xPlayerPrefsEditor
 	{
-		// [MenuItem("xLib/xPlayerPrefs/Delete/PlayerPrefs")]
-		// public static void DeletePlayerPrefs()
-		// {
-		// 	xPlayerPrefs.DeleteAll();
-		// }
+		[MenuItem("xLib/xPlayerPrefs/Delete/All")]
+		public static void DeleteAll()
+		{
+			DeletePlayerPrefs();
+			DeletePersistent();
+		}
+		
+		[MenuItem("xLib/xPlayerPrefs/Delete/PlayerPrefs")]
+		public static void DeletePlayerPrefs()
+		{
+			xPlayerPrefs.DeleteAll();
+		}
 		
 		[MenuItem("xLib/xPlayerPrefs/Delete/Persistent")]
 		public static void DeletePersistent()
