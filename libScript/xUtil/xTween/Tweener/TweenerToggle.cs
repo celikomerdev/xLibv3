@@ -1,5 +1,5 @@
 ﻿#if xLibv3
-// #if PackUI
+#if PackUI
 using UnityEngine;
 using UnityEngine.UI;
 using xLib.xTween;
@@ -36,7 +36,7 @@ namespace xLib.xUtil
 			if(!toggle.isOn) valueTarget = 0f;
 			
 			MnCoroutine.ins.KillCoroutine(m_Coroutine);
-			m_Coroutine = ExtTween.Tween(duration:duration,call:(ratio)=>
+			m_Coroutine = ExtTween.Tween(duration:duration,ignoreTimeScale:ignoreTimeScale,call:(ratio)=>
 			{
 				currentRatio = Mathf.Lerp(currentRatio,valueTarget,ratio);
 				tween.SetBaseRatio(currentRatio);
@@ -54,5 +54,5 @@ namespace xLib.xUtil
 		}
 	}
 }
-// #endif
+#endif
 #endif

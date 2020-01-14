@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+#if PackUI
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -107,4 +108,5 @@ namespace xLib
 		}
 	}
 }
+#endif
 #endif

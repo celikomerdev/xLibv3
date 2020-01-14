@@ -1,5 +1,5 @@
 ﻿#if xLibv3
-#if ModUI
+#if PackUI
 using UnityEngine.UI;
 
 namespace xLib

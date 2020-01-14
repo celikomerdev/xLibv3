@@ -24,14 +24,14 @@
     "defineConstraints": [],
     "versionDefines": [
         {
-            "name": "com.unity.ugui",
-            "expression": "",
-            "define": "PackUI"
-        },
-        {
             "name": "com.unity.modules.ui",
             "expression": "",
             "define": "ModUI"
+        },
+        {
+            "name": "com.unity.modules.imageconversion",
+            "expression": "",
+            "define": "ModImageConversion"
         },
         {
             "name": "com.unity.modules.unitywebrequestwww",
@@ -39,9 +39,9 @@
             "define": "ModWebWWW"
         },
         {
-            "name": "com.unity.modules.imageconversion",
+            "name": "com.unity.ugui",
             "expression": "",
-            "define": "ModImageConversion"
+            "define": "PackUI"
         },
         {
             "name": "com.unity.purchasing",
