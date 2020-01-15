@@ -11,8 +11,7 @@ namespace xLib
 		#region Custom
 		protected override bool OnRegister(bool register)
 		{
-			tickTime.Listener(register,TickMulti,viewId:ViewId,order:baseRegister.order,onRegister:baseRegister.onRegister);
-			tickTime.ListenerEditor(register,this);
+			tickTime.Listener(register:register,call:TickMulti,viewId:ViewId,order:baseRegister.order,onRegister:baseRegister.onRegister,worker:this);
 			return register;
 		}
 		#endregion

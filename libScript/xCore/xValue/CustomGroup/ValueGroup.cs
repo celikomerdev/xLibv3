@@ -23,23 +23,12 @@ namespace xLib
 			ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObjectRaw.ToString());
 		}
 		
-		
-		public override void ListenerCall(bool register,UnityAction<object> call,string view,int order,bool onRegister=false)
+		public override void ListenerCall(bool register,UnityAction<object> call,string view,int order,bool onRegister=false,BaseWorkerI worker=null)
 		{
 			for (int i = 0; i < Value.iCall.Length; i++)
 			{
-				Value.iCall[i].ListenerCall(register,call,view,order,onRegister);
+				Value.iCall[i].ListenerCall(register,call,view,order,onRegister,worker);
 			}
-		}
-		
-		public override void ListenerEditor(bool register,BaseWorkerI worker)
-		{
-			#if UNITY_EDITOR
-			for (int i = 0; i < Value.iCall.Length; i++)
-			{
-				Value.iCall[i].ListenerEditor(register,worker);
-			}
-			#endif
 		}
 		#endregion
 		

@@ -105,10 +105,11 @@ namespace xLib
 		#region Listener
 		#region Runtime
 		private ActionSortedBase<V> actionSortedBase = new ActionSortedSingle<V>();
-		public void Listener(bool register,UnityAction<V> call,string viewId,int order,bool onRegister=false)
+		public void Listener(bool register,UnityAction<V> call,string viewId,int order,bool onRegister=false,BaseWorkerI worker=null)
 		{
-			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Listener:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",nodeSetting.objDebug);
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Listener:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",worker.UnityObject);
 			actionSortedBase.Listener(register,call,viewId,order);
+			ListenerEditor(register,worker);
 			
 			if(!register) return;
 			if(!onRegister) return;
@@ -116,10 +117,11 @@ namespace xLib
 		}
 		
 		private ActionSortedBase<object> actionSortedBaseCall = new ActionSortedSingle<object>();
-		public virtual void ListenerCall(bool register,UnityAction<object> call,string viewId,int order,bool onRegister=false)
+		public virtual void ListenerCall(bool register,UnityAction<object> call,string viewId,int order,bool onRegister=false,BaseWorkerI worker=null)
 		{
-			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:ListenerCall:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",nodeSetting.objDebug);
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:ListenerCall:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",worker.UnityObject);
 			actionSortedBaseCall.Listener(register,call,viewId,order);
+			ListenerEditor(register,worker);
 			
 			if(!register) return;
 			if(!onRegister) return;
@@ -130,9 +132,10 @@ namespace xLib
 		#region Editor
 		#if UNITY_EDITOR
 		private List<Object> listenerEditor = new List<Object>();
-		public virtual void ListenerEditor(bool register,BaseWorkerI worker)
+		private void ListenerEditor(bool register,BaseWorkerI worker)
 		{
 			if(!Application.isPlaying) return;
+			if(worker==null) return;
 			worker.CheckErrors();
 			if(register)
 			{
@@ -154,7 +157,7 @@ namespace xLib
 			}
 		}
 		#else
-		public virtual void ListenerEditor(bool addition,BaseWorkerI worker){}
+		private void ListenerEditor(bool addition,BaseWorkerI worker){}
 		#endif
 		#endregion
 		

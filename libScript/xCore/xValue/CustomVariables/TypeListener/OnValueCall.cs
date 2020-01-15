@@ -22,8 +22,7 @@ namespace xLib.xValueClass.Listener
 			ICall[] array = target.GetGenericsArray<ICall>();
 			for (int i = 0; i < array.Length; i++)
 			{
-				array[i].ListenerCall(register,OnCall,viewId:ViewId,order:baseRegister.order,onRegister:baseRegister.onRegister);
-				array[i].ListenerEditor(register,this);
+				array[i].ListenerCall(register:register,call:OnCall,viewId:ViewId,order:baseRegister.order,onRegister:baseRegister.onRegister,worker:this);
 			}
 			return register;
 		}
