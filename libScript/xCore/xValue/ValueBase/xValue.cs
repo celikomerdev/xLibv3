@@ -107,12 +107,15 @@ namespace xLib
 		private ActionSortedBase<V> actionSortedBase = new ActionSortedSingle<V>();
 		public void Listener(bool register,UnityAction<V> call,string viewId,int order,bool onRegister=false,BaseWorkerI worker=null)
 		{
-			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Listener:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",worker.UnityObject);
-			actionSortedBase.Listener(register,call,viewId,order);
+			Object objDebug = nodeSetting.objDebug;
+			if(worker!=null) objDebug = worker.UnityObject;
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Listener:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",objDebug);
+			
 			#if UNITY_EDITOR
 			ListenerEditor(register,worker);
 			#endif
 			
+			actionSortedBase.Listener(register,call,viewId,order);
 			if(!register) return;
 			if(!onRegister) return;
 			call.Invoke(Value);
@@ -121,12 +124,15 @@ namespace xLib
 		private ActionSortedBase<object> actionSortedBaseCall = new ActionSortedSingle<object>();
 		public virtual void ListenerCall(bool register,UnityAction<object> call,string viewId,int order,bool onRegister=false,BaseWorkerI worker=null)
 		{
-			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:ListenerCall:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",worker.UnityObject);
-			actionSortedBaseCall.Listener(register,call,viewId,order);
+			Object objDebug = nodeSetting.objDebug;
+			if(worker!=null) objDebug = worker.UnityObject;
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:ListenerCall:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",objDebug);
+			
 			#if UNITY_EDITOR
 			ListenerEditor(register,worker);
 			#endif
 			
+			actionSortedBaseCall.Listener(register,call,viewId,order);
 			if(!register) return;
 			if(!onRegister) return;
 			call.Invoke(Value);
