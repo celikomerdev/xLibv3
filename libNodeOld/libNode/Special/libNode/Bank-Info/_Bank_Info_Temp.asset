@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b3ccb7185ada9469116a0f33c162d7, type: 3}
-  m_Name: AvatarTransform-Last
+  m_Script: {fileID: 11500000, guid: ad218f9553c1811429833d03aa4b7c08, type: 3}
+  m_Name: _Bank_Info_Temp
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,8 +20,8 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 3db24b3b1acffe0478e4c1600ab58aa2
+      key: 5eac979a4b7a21f4ab4f7994b8d28807
       isMulti: 0
-    value: {fileID: 0}
+    value: 
     skipCompareRpc: 1
     isCompare: 1

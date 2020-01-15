@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8352fcad21edce42b712f9d6adb07c6, type: 3}
-  m_Name: Application-Group
+  m_Script: {fileID: 11500000, guid: 2225de60c87cec046ac49a9aced7735c, type: 3}
+  m_Name: setting_volume_sfx
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,7 +20,12 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: b0d67771649fda24a91f97efbb15fbae
+      key: 51a60bc408f592c45b0dec9af6f3cebd
       isMulti: 0
-    value:
-      arrayObject: []
+    value: 1
+    skipCompareRpc: 1
+    isCompare: 1
+    snapDefault: 0
+    useThreshold: 0
+    valueThreshold: 0
+    cacheGreater: 0

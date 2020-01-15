@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b3ccb7185ada9469116a0f33c162d7, type: 3}
-  m_Name: AvatarTransform-My
+  m_Script: {fileID: 11500000, guid: d8352fcad21edce42b712f9d6adb07c6, type: 3}
+  m_Name: _Group_Quest_Weekly
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,8 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 5e56bafbbddd41246ae4b4e9e1d8b7a0
+      key: 9f02bd71b605d9c42862dcd6c21a8ce1
       isMulti: 0
-    value: {fileID: 0}
-    skipCompareRpc: 1
-    isCompare: 1
+    value:
+      arrayObject: []

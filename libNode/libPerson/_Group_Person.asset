@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2225de60c87cec046ac49a9aced7735c, type: 3}
-  m_Name: Volume-Music
+  m_Script: {fileID: 11500000, guid: d8352fcad21edce42b712f9d6adb07c6, type: 3}
+  m_Name: _Group_Person
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,12 +20,9 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 2bac5324d72bab44791e15ea4055b9e2
+      key: 9b16b26cdc749be4bb7105af0f4488c0
       isMulti: 0
-    value: 1
-    skipCompareRpc: 1
-    isCompare: 0
-    snapDefault: 0
-    useThreshold: 0
-    valueThreshold: 0
-    cacheGreater: 0
+    value:
+      arrayObject:
+      - {fileID: 11400000, guid: adc0970ab7cf2774a8ab7a5c99648954, type: 2}
+      - {fileID: 11400000, guid: cfc3963a146e39940a173a3b2fb358d9, type: 2}

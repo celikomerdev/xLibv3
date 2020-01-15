@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b513263c51538944bac985320074d3e0, type: 3}
-  m_Name: Player-Exp
+  m_Name: launch_total
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,7 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: e6d4becf27d63cc4db5f6e4d3a4cef63
+      key: 48de22785802cb24b9ed7209178dc594
       isMulti: 0
     value: 0
     skipCompareRpc: 1

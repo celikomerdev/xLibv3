@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b3ccb7185ada9469116a0f33c162d7, type: 3}
-  m_Name: AvatarTransform-First
+  m_Script: {fileID: 11500000, guid: ad218f9553c1811429833d03aa4b7c08, type: 3}
+  m_Name: player_country
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,8 +20,8 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 3c3e40ff25f25be43aa97b75da2ac25b
+      key: 9e84ff6a9f5ad0e4188dc858fd579f21
       isMulti: 0
-    value: {fileID: 0}
+    value: 
     skipCompareRpc: 1
     isCompare: 1

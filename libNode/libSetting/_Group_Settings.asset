@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8352fcad21edce42b712f9d6adb07c6, type: 3}
-  m_Name: -Group-Settings
+  m_Name: _Group_Settings
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -41,3 +41,6 @@ MonoBehaviour:
       - {fileID: 11400000, guid: b74ce5023cdfdd74fb152dbb397de816, type: 2}
       - {fileID: 11400000, guid: 0abdaff92032b0c4bb18017bf72bded8, type: 2}
       - {fileID: 11400000, guid: d96bd30c676006d438f616cc568c703b, type: 2}
+      - {fileID: 11400000, guid: 2bac5324d72bab44791e15ea4055b9e2, type: 2}
+      - {fileID: 11400000, guid: 51a60bc408f592c45b0dec9af6f3cebd, type: 2}
+      - {fileID: 11400000, guid: 13335cbc3213c3041b4e04dd07bedbe6, type: 2}

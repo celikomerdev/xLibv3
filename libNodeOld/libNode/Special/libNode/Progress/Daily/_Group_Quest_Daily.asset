@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8352fcad21edce42b712f9d6adb07c6, type: 3}
-  m_Name: -Group-Person
+  m_Name: _Group_Quest_Daily
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,9 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 9b16b26cdc749be4bb7105af0f4488c0
+      key: 9482de55131bd2a40a96c581fede8830
       isMulti: 0
     value:
-      arrayObject:
-      - {fileID: 11400000, guid: adc0970ab7cf2774a8ab7a5c99648954, type: 2}
-      - {fileID: 11400000, guid: cfc3963a146e39940a173a3b2fb358d9, type: 2}
+      arrayObject: []

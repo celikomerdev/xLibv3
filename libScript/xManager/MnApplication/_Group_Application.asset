@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad218f9553c1811429833d03aa4b7c08, type: 3}
-  m_Name: Player-Nick
+  m_Script: {fileID: 11500000, guid: d8352fcad21edce42b712f9d6adb07c6, type: 3}
+  m_Name: _Group_Application
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,8 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: ebea227a2aa0fbc45b7d142c184655d4
-      isMulti: 1
-    value: Guest
-    skipCompareRpc: 1
-    isCompare: 1
+      key: b0d67771649fda24a91f97efbb15fbae
+      isMulti: 0
+    value:
+      arrayObject: []

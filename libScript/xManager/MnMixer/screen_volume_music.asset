@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b3ccb7185ada9469116a0f33c162d7, type: 3}
-  m_Name: AvatarTransform-Null
+  m_Script: {fileID: 11500000, guid: 2225de60c87cec046ac49a9aced7735c, type: 3}
+  m_Name: screen_volume_music
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,8 +20,12 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: bac1558633705584d9d05d54c0488a58
+      key: cceb377c13478414eb36da2876a7a9b5
       isMulti: 0
-    value: {fileID: 0}
+    value: 0
     skipCompareRpc: 1
     isCompare: 1
+    snapDefault: 0
+    useThreshold: 0
+    valueThreshold: 0
+    cacheGreater: 0

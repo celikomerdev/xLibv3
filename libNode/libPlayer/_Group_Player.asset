@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8352fcad21edce42b712f9d6adb07c6, type: 3}
-  m_Name: -Group-Showcase
+  m_Name: _Group_Player
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,13 +20,13 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 3f91f03442841fc44b90678214c299de
+      key: 32b796c5226edc44dbea74872a1b2a33
       isMulti: 0
     value:
       arrayObject:
-      - {fileID: 11400000, guid: 19a863e7555c566488e958eb4baa0a3b, type: 2}
-      - {fileID: 11400000, guid: a1fe60e70eee5334586cb5f6b7e448d2, type: 2}
-      - {fileID: 11400000, guid: c1221b54fe5116142959483423b30cad, type: 2}
-      - {fileID: 11400000, guid: 6d7337cc41d179b4189db17b0773166b, type: 2}
-      - {fileID: 11400000, guid: 10f0474d619597f4c94cd3d7c8d60cbe, type: 2}
-      - {fileID: 11400000, guid: d986f9b1660ba5746b11c3b402c56566, type: 2}
+      - {fileID: 11400000, guid: 9e84ff6a9f5ad0e4188dc858fd579f21, type: 2}
+      - {fileID: 11400000, guid: 2f82e45b0cb2d484fa1b068e705a51ba, type: 2}
+      - {fileID: 11400000, guid: e6d4becf27d63cc4db5f6e4d3a4cef63, type: 2}
+      - {fileID: 11400000, guid: b720f4e9133d0c44ea9adbfa12fc776f, type: 2}
+      - {fileID: 11400000, guid: ebea227a2aa0fbc45b7d142c184655d4, type: 2}
+      - {fileID: 11400000, guid: 657595ec5e7be864daea00b8504a78ae, type: 2}
