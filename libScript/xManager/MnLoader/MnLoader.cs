@@ -11,7 +11,8 @@ namespace xLib
 		#region Field
 		[Header("Manager")]
 		[SerializeField]private bool isAsync = false;
-		[SerializeField]private float delay = 1;
+		[SerializeField]private float delayStart = 1;
+		[SerializeField]private float delayEnd = 1;
 		[SerializeField]private ThreadPriority backgroundLoadingPriority = ThreadPriority.Normal;
 		
 		[SerializeField]public NodeInt loadedLevel = null;
@@ -24,17 +25,17 @@ namespace xLib
 		#region Public
 		public void LoadLevel(string value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":LoadLevel:{0}",value);
+			if(CanDebug) Debug.Log($"{this.name}:LoadLevel:{value}",this);
 			LoadLevel(SceneUtility.GetBuildIndexByScenePath(value));
 		}
 		
 		public void LoadLevel(int value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":LoadLevel:{0}",value);
+			if(CanDebug) Debug.Log($"{this.name}:LoadLevel:{value}",this);
 			
 			if(value<0)
 			{
-				xLogger.LogExceptionFormat(this,this.name+":LoadLevel:{0}",value);
+				Debug.LogException(new UnityException($"{this.name}:LoadLevel:{value}"),this);
 				return;
 			}
 			MnCoroutine.ins.NewCoroutine(LoadLevelAsync(value),CanDebug);
@@ -50,15 +51,13 @@ namespace xLib
 			
 			loadingProgress.Value = 0;
 			loadingVisual.Value = true;
-			yield return new WaitForSecondsRealtime(delay);
+			yield return new WaitForSecondsRealtime(delayStart);
 			
 			loadingReal.Value = true;
-			yield return null;
-			
 			ThreadPriority backgroundLoadingPriorityCache = Application.backgroundLoadingPriority;
 			Application.backgroundLoadingPriority = backgroundLoadingPriority;
-			
 			yield return null;
+			
 			if(!isAsync)
 			{
 				loadingProgress.Value = 0.5f;
@@ -76,12 +75,11 @@ namespace xLib
 				}
 			}
 			yield return null;
-			
 			Application.backgroundLoadingPriority = backgroundLoadingPriorityCache;
-			
-			yield return null;
-			loadingProgress.Value = 1f;
 			inLoad = false;
+			
+			yield return new WaitForSecondsRealtime(delayEnd);
+			loadingProgress.Value = 1f;
 			loadedLevel.Value = value;
 			loadingReal.Value = false;
 			loadingVisual.Value = false;

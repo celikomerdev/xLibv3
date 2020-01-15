@@ -52,24 +52,6 @@ namespace xLib
 			ViewCore.CurrentId = tempId;
 		}
 		
-		public class WaitForFrames : CustomYieldInstruction
-		{
-			private int targetFrameCount;
-			
-			public WaitForFrames(int frame)
-			{
-				targetFrameCount = Time.frameCount+frame;
-			}
-			
-			public override bool keepWaiting
-			{
-				get
-				{
-					return Time.frameCount<targetFrameCount;
-				}
-			}
-		}
-		
 		private void OnDisable()
 		{
 			CancelAll();
