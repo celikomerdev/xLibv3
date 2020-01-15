@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c47f3d7fa3e3424439269f207f15244e, type: 3}
-  m_Name: Product-Subscribe
+  m_Name: Product_ExtraLife
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,7 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: e6f4d4bb4f4efe1468d5a01f385d7368
+      key: 42d3104dd79eeb04195df460c5b7a168
       isMulti: 0
     value: 0
     skipCompareRpc: 1
