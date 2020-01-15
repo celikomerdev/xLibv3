@@ -5,7 +5,6 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using xLib.xNode.NodeObject;
-using xLib.xValueClass;
 
 namespace xLib
 {
@@ -22,12 +21,6 @@ namespace xLib
 			nodeGroup.Load();
 			LoadConfig(nodeTextAsset.Value.text);
 			if(!isLoaded) LoadConfig(nodeTextAsset.ValueDefault.text);
-			MnConfig.onLoadConfig += OnLoadConfig; OnLoadConfig();
-		}
-		
-		protected override void OnDestroyed()
-		{
-			MnConfig.onLoadConfig -= OnLoadConfig;
 		}
 		#endregion
 		
@@ -102,19 +95,6 @@ namespace xLib
 				
 				uwr.Dispose();
 				uwr = null;
-			}
-		}
-		#endregion
-		
-		
-		#region Output
-		[SerializeField]private ObjectGroup objectGroup = null;
-		private void OnLoadConfig()
-		{
-			objectGroup.Init(true);
-			for (int i = 0; i < objectGroup.iSerializableObject.Length; i++)
-			{
-				objectGroup.iSerializableObject[i].SerializedObjectRaw = data.SelectToken(objectGroup.iSerializableObject[i].Key);
 			}
 		}
 		#endregion

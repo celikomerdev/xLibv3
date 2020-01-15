@@ -34,6 +34,7 @@ namespace xLib.ToolPurchase
 		#region Behavior
 		protected override void OnEnabled()
 		{
+			MnProduct.ins.Init();
 			MnProduct.ins.isInit.Listener(register:true,call:ListenInit,onRegister:true);
 		}
 		
@@ -77,6 +78,7 @@ namespace xLib.ToolPurchase
 		#region Fuction
 		public void Purchase()
 		{
+			MnProduct.ins.Init();
 			if(Application.internetReachability == NetworkReachability.NotReachable)
 			{
 				StPopupBar.QueueMessage(MnLocalize.GetValue("Please Check Your Connection"));

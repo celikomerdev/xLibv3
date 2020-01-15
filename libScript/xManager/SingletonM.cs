@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace xLib
 {
-	public abstract class SingletonM<T> : BaseWorkM where T : Component
+	public abstract class SingletonBase : BaseWorkM{}
+	public abstract class SingletonM<T> : SingletonBase where T : Component
 	{
 		[Header("Singleton")]
 		[SerializeField]private bool isPrimary = false;
@@ -38,7 +39,7 @@ namespace xLib
 		{
 			if(!ins) return;
 			if(insBase.isPrimary && !isPrimary) return;
-			insBase.Destroy();
+			insBase.DestroyImmediate();
 			if(CanDebug) Debug.LogWarning($"{this.name}:Replaced",this);
 		}
 		

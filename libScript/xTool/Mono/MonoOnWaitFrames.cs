@@ -6,24 +6,21 @@ using xLib.EventClass;
 
 namespace xLib
 {
-	public class MonoOnWait : BaseWorkM
+	public class MonoOnWaitFrames : BaseWorkM
 	{
-		[SerializeField]private bool isUnscaled = true;
 		[SerializeField]private bool isSingle = true;
 		[SerializeField]private bool isDisabled = false;
-		
-		[UnityEngine.Serialization.FormerlySerializedAs("onWait")]
 		[SerializeField]private EventUnity eventWaited = new EventUnity();
 		
-		public void Wait(float time)
+		public void Wait(int frame)
 		{
 			if(!CanWork) return;
 			
 			if(!gameObject.activeInHierarchy) return;
 			if(isSingle && processCount>0) return;
 			
-			if(isDisabled) MnCoroutine.ins.NewCoroutine(eWait(ViewCore.CurrentId,time),CanDebug);
-			else this.NewCoroutine(eWait(ViewCore.CurrentId,time),CanDebug);
+			if(isDisabled) MnCoroutine.ins.NewCoroutine(eWait(ViewCore.CurrentId,frame),CanDebug);
+			else this.NewCoroutine(eWait(ViewCore.CurrentId,frame),CanDebug);
 		}
 		
 		public void CancelAll()
@@ -36,24 +33,41 @@ namespace xLib
 		}
 		
 		private int processCount = 0;
-		private IEnumerator eWait(string invokeId,float time)
+		private IEnumerator eWait(string invokeId,int frame)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:Wait:{invokeId}:time:{time}",this);
+			if(CanDebug) Debug.Log($"{this.name}:Wait:{invokeId}:frame:{frame}",this);
 			
 			processCount++;
-			if(isUnscaled) yield return new WaitForSecondsRealtime(time);
-			else yield return new WaitForSeconds(time);
+			yield return new WaitForFrames(frame);
 			processCount--;
 			
 			string tempId = ViewCore.CurrentId;
 			ViewCore.CurrentId = invokeId;
 			
-			if(CanDebug) Debug.Log($"{this.name}:OnWait:{invokeId}:time:{time}",this);
-			Profiler.BeginSample($"{this.name}:OnWait:{invokeId}:time:{time}",this);
+			if(CanDebug) Debug.Log($"{this.name}:OnWait:{invokeId}:frame:{frame}",this);
+			Profiler.BeginSample($"{this.name}:OnWait:{invokeId}:frame:{frame}",this);
 			eventWaited.Invoke();
 			Profiler.EndSample();
 			
 			ViewCore.CurrentId = tempId;
+		}
+		
+		public class WaitForFrames : CustomYieldInstruction
+		{
+			private int targetFrameCount;
+			
+			public WaitForFrames(int frame)
+			{
+				targetFrameCount = Time.frameCount+frame;
+			}
+			
+			public override bool keepWaiting
+			{
+				get
+				{
+					return Time.frameCount<targetFrameCount;
+				}
+			}
 		}
 		
 		private void OnDisable()

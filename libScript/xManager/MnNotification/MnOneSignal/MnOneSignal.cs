@@ -128,6 +128,7 @@ namespace xLib
 		#region Tag
 		private void SendTags(Dictionary<string,string> dict)
 		{
+			if(!isInit.Value) return;
 			OneSignal.SendTags(dict);
 		}
 		#endregion

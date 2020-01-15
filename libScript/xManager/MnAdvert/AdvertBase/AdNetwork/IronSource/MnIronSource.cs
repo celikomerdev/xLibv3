@@ -7,6 +7,7 @@ namespace xLib.libAdvert.xIronSource
 	public class MnIronSource : BaseWorkM
 	{
 		[SerializeField]private string key = "";
+		[SerializeField]private string[] adUnits = new string[0];
 		
 		#region Mono
 		private void Awake()
@@ -19,7 +20,7 @@ namespace xLib.libAdvert.xIronSource
 				IronSource.Agent.shouldTrackNetworkState(true);
 				FillUser();
 				
-				IronSource.Agent.init(MnKey.GetValue(key),IronSourceAdUnits.REWARDED_VIDEO,IronSourceAdUnits.INTERSTITIAL,IronSourceAdUnits.OFFERWALL,IronSourceAdUnits.BANNER);
+				IronSource.Agent.init(MnKey.GetValue(key),adUnits);
 				if(CanDebug) IronSource.Agent.validateIntegration();
 				if(CanDebug) Debug.Log($"MnIronSource:isInit:true",this);
 				Register(true);
@@ -93,6 +94,7 @@ namespace xLib.libAdvert.xIronSource
 	public class MnIronSource : BaseWorkM
 	{
 		[SerializeField]private string key = "";
+		[SerializeField]private string[] adUnits = new string[0];
 	}
 }
 #endif
