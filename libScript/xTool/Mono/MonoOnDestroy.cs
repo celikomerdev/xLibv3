@@ -12,7 +12,7 @@ namespace xLib
 		private void OnDestroy()
 		{
 			if(!CanWork) return;
-			if(CanDebug) xLogger.LogFormat(this,this.name+":MonoOnDestroy");
+			if(CanDebug) Debug.LogFormat($"{this.name}:MonoOnDestroy",this);
 			eventDestroy.Invoke();
 		}
 	}

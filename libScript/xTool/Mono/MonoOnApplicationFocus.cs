@@ -12,7 +12,7 @@ namespace xLib
 		private void OnApplicationFocus(bool value)
 		{
 			if(!CanWork) return;
-			if(CanDebug) Debug.LogFormat(this,this.name+":MonoOnApplicationFocus:{0}",value);
+			if(CanDebug) Debug.LogFormat($"{this.name}:MonoOnApplicationFocus:{value}",this);
 			eventApplicationFocus.Invoke(value);
 		}
 	}

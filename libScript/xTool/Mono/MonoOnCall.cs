@@ -13,7 +13,7 @@ namespace xLib
 		public void Call()
 		{
 			if(!CanWork) return;
-			if(CanDebug) Debug.LogFormat(this,this.name+":MonoOnCall");
+			if(CanDebug) Debug.LogFormat($"{this.name}:MonoOnCall",this);
 			eventCall.Invoke();
 		}
 	}

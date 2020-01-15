@@ -11,6 +11,7 @@ namespace xLib
 		protected override void OnInit(bool init)
 		{
 			if(!CanWork) return;
+			if(CanDebug) Debug.LogFormat($"{this.name}:OnInit:{init}",this);
 			eventInit.Invoke(init);
 		}
 	}

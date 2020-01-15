@@ -12,7 +12,7 @@ namespace xLib
 		protected override void OnActive(bool value)
 		{
 			if(!CanWork) return;
-			if(CanDebug) Debug.LogFormat(this,this.name+":MonoOnActive:{0}",value);
+			if(CanDebug) Debug.LogFormat($"{this.name}:MonoOnActive:{value}",this);
 			eventActive.Invoke(value);
 		}
 	}

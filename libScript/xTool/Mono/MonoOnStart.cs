@@ -12,7 +12,7 @@ namespace xLib
 		protected override void Started()
 		{
 			if(!CanWork) return;
-			if(CanDebug) xLogger.LogFormat(this,this.name+":MonoOnStart");
+			if(CanDebug) Debug.LogFormat($"{this.name}:MonoOnStart",this);
 			eventStart.Invoke();
 		}
 	}

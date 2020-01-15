@@ -11,7 +11,7 @@ namespace xLib
 		
 		protected override void Awaked()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":MonoOnAwake");
+			if(CanDebug) Debug.LogFormat($"{this.name}:MonoOnAwake",this);
 			eventAwake.Invoke();
 		}
 	}
