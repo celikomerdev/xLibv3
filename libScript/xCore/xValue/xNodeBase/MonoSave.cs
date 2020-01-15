@@ -8,9 +8,12 @@ namespace xLib.xNode.NodeObject
 		[ContextMenu("Save")]
 		public void Save()
 		{
-			string value = SerializedObject.ToString();
-			if(CanDebug) Debug.LogFormat(this,this.name+":Save:{0}",value);
-			xPersistentData.SetString(Key,value);
+			MnThread.StartThread(useThread:false,call:delegate
+			{
+				string value = SerializedObject.ToString();
+				if(CanDebug) Debug.LogFormat(this,this.name+":Save:{0}",value);
+				xPersistentData.SetString(Key,value,useThread:true);
+			});
 			
 			// TODO enable
 			// if(Key!=Name) xPersistentData.DeleteKey(Name);

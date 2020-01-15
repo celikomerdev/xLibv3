@@ -40,9 +40,12 @@ namespace xLib
 		
 		
 		#region String
-		public static void SetString(string key,string data)
+		public static void SetString(string key,string data,bool useThread=true)
 		{
-			File.WriteAllText(PathKey(key),data);
+			MnThread.StartThread(useThread:useThread,call:delegate
+			{
+				File.WriteAllText(PathKey(key),data);
+			});
 		}
 		
 		public static string GetString(string key)
@@ -55,9 +58,12 @@ namespace xLib
 		
 		
 		#region Bytes
-		public static void SetBytes(string key,byte[] data)
+		public static void SetBytes(string key,byte[] data,bool useThread=true)
 		{
-			File.WriteAllBytes(PathKey(key),data);
+			MnThread.StartThread(useThread:useThread,call:delegate
+			{
+				File.WriteAllBytes(PathKey(key),data);
+			});
 		}
 		
 		public static byte[] GetBytes(string key)
@@ -70,12 +76,15 @@ namespace xLib
 		
 		
 		#region Texture
-		public static void SetTexture(string file,Texture data)
+		public static void SetTexture(string file,Texture data,bool useThread=true)
 		{
-			Texture2D texture2D = (Texture2D)data;
-			byte[] bytes = texture2D.xEncodeToPNG();
-			
-			File.WriteAllBytes(xApp.xPath(file),bytes);
+			MnThread.StartThread(useThread:useThread,call:delegate
+			{
+				Texture2D texture2D = (Texture2D)data;
+				byte[] bytes = texture2D.xEncodeToPNG();
+				
+				File.WriteAllBytes(xApp.xPath(file),bytes);
+			});
 		}
 		
 		public static Texture GetTexture(string file,Texture data)

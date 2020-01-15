@@ -109,7 +109,9 @@ namespace xLib
 		{
 			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Listener:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",worker.UnityObject);
 			actionSortedBase.Listener(register,call,viewId,order);
+			#if UNITY_EDITOR
 			ListenerEditor(register,worker);
+			#endif
 			
 			if(!register) return;
 			if(!onRegister) return;
@@ -121,7 +123,9 @@ namespace xLib
 		{
 			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:ListenerCall:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",worker.UnityObject);
 			actionSortedBaseCall.Listener(register,call,viewId,order);
+			#if UNITY_EDITOR
 			ListenerEditor(register,worker);
+			#endif
 			
 			if(!register) return;
 			if(!onRegister) return;
@@ -156,8 +160,6 @@ namespace xLib
 				listenerEditor.Remove(worker.UnityObject);
 			}
 		}
-		#else
-		private void ListenerEditor(bool addition,BaseWorkerI worker){}
 		#endif
 		#endregion
 		

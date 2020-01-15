@@ -14,7 +14,7 @@ namespace xLib
 		#region Work
 		private void Work()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Work");
+			if(CanDebug) Debug.Log($"{this.name}:Work",this);
 			WorkInt();
 		}
 		
@@ -29,11 +29,12 @@ namespace xLib
 		
 		public static int GetGroup(string key)
 		{
-			#if GuruAnalytics
-			return Gameguru.Analytics.Analytics.GetGroupForABTest(key);
-			#else
-			return 0;
+			#if AnalyticsGuru
+			int valueTemp = Gameguru.Analytics.Analytics.GetGroupForABTest(key);
+			if(valueTemp>0) return valueTemp;
 			#endif
+			
+			return 0;
 		}
 		#endregion
 	}

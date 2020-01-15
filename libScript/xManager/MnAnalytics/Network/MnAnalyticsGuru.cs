@@ -30,7 +30,8 @@ namespace xLib.xAnalytics
 			isInit = true;
 			
 			AnalyticsBuilder builder = Analytics.Builder;
-			builder.SetLogLevel(logLevel);
+			builder.SetLogLevel(LogLevel.WARNING);
+			if(CanDebug) builder.SetLogLevel(logLevel);
 			builder.Build();
 		}
 		
@@ -81,6 +82,9 @@ namespace xLib.xAnalytics
 	}
 }
 #else
+using UnityEngine;
+using xLib.EventClass;
+
 namespace xLib.xAnalytics
 {
 	public class MnAnalyticsGuru : SingletonM<MnAnalyticsGuru>

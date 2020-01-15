@@ -6,6 +6,13 @@ namespace xLib
 {
 	public static class xApp
 	{
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
+		private static void FillApp()
+		{
+			Debug.LogWarning($"xApp:FillApp");
+			persistentDataPath = Application.persistentDataPath;
+		}
+		
 		#region Platform
 		public static RuntimePlatform platformTarget
 		{
@@ -32,11 +39,12 @@ namespace xLib
 		}
 		
 		public static string customFolder = "/xProject/";
+		private static string persistentDataPath = "";
 		private static string xPersistentDataPath
 		{
 			get
 			{
-				return Application.persistentDataPath+customFolder;
+				return persistentDataPath+customFolder;
 			}
 		}
 		
