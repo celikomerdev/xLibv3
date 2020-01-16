@@ -30,6 +30,11 @@ namespace xLib
 			return timeSpan.ToString();
 		}
 		
+		public string ToString(string @format)
+		{
+			return ToString(@format,null);
+		}
+		
 		public string ToString(string @format,IFormatProvider provider)
 		{
 			if(provider == null) provider = CultureInfo.CurrentCulture;
