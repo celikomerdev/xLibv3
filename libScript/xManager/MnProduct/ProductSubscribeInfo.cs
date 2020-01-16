@@ -9,6 +9,7 @@ namespace xLib.ToolPurchase
 	public class ProductSubscribeInfo : BaseRegisterM
 	{
 		[SerializeField]private string key = "";
+		[SerializeField]public EventBool eventFreeTrialAvaible = new EventBool();
 		[SerializeField]public EventTimeSpan eventFreeTrialPeriod = new EventTimeSpan();
 		
 		protected override bool OnRegister(bool register)
@@ -47,6 +48,12 @@ namespace xLib.ToolPurchase
 			}
 			
 			if(CanDebug) Debug.Log($"{key}:subscriptionInfo:{subscriptionInfo.ToString()}",this);
+			
+			bool freeTrialAvaible = true;
+			if(subscriptionInfo.isFreeTrial() != Result.True) freeTrialAvaible = false;
+			if(subscriptionInfo.isExpired() == Result.True) freeTrialAvaible = false;
+			
+			eventFreeTrialAvaible.Value = freeTrialAvaible;
 			eventFreeTrialPeriod.Value = subscriptionInfo.getFreeTrialPeriod();
 		}
 	}
@@ -60,10 +67,12 @@ namespace xLib.ToolPurchase
 	public class ProductSubscribeInfo : BaseRegisterM
 	{
 		[SerializeField]private string key = "";
+		[SerializeField]public EventBool eventFreeTrialAvaible = new EventBool();
 		[SerializeField]public EventTimeSpan eventFreeTrialPeriod = new EventTimeSpan();
 		
 		protected override bool OnRegister(bool register)
 		{
+			eventFreeTrialAvaible.Value = true;
 			eventFreeTrialPeriod.Value = System.TimeSpan.FromDays(7);
 			return register;
 		}
