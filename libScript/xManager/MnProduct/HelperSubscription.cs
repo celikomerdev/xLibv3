@@ -37,19 +37,33 @@ namespace xLib.Purchasing
 			if(CanDebug)
 			{
 				Debug.Log("----SubscriptionInfo----");
-				Debug.Log("product id is: " + subscriptionInfo.getProductId());
-				Debug.Log("purchase date is: " + subscriptionInfo.getPurchaseDate());
-				Debug.Log("subscription next billing date is: " + subscriptionInfo.getExpireDate());
-				Debug.Log("is subscribed? " + subscriptionInfo.isSubscribed().ToString());
-				Debug.Log("is expired? " + subscriptionInfo.isExpired().ToString());
-				Debug.Log("is cancelled? " + subscriptionInfo.isCancelled());
-				Debug.Log("product is in free trial peroid? " + subscriptionInfo.isFreeTrial());
-				Debug.Log("product is auto renewing? " + subscriptionInfo.isAutoRenewing());
-				Debug.Log("subscription remaining valid time until next billing date is: " + subscriptionInfo.getRemainingTime());
-				Debug.Log("is this product in introductory price period? " + subscriptionInfo.isIntroductoryPricePeriod());
-				Debug.Log("the product introductory localized price is: " + subscriptionInfo.getIntroductoryPrice());
-				Debug.Log("the product introductory price period is: " + subscriptionInfo.getIntroductoryPricePeriod());
-				Debug.Log("the number of product introductory price period cycles is: " + subscriptionInfo.getIntroductoryPricePeriodCycles());
+				Debug.Log($"getProductId:{subscriptionInfo.getProductId()}");
+				
+				Debug.Log($"isSubscribed:{subscriptionInfo.isSubscribed()}");
+				Debug.Log($"getPurchaseDate:{subscriptionInfo.getPurchaseDate().ToString()}");
+				Debug.Log($"getRemainingTime:{subscriptionInfo.getRemainingTime().TotalMinutes}");
+				
+				
+				Debug.Log($"isAutoRenewing:{subscriptionInfo.isAutoRenewing()}");
+				Debug.Log($"getSubscriptionPeriod:{subscriptionInfo.getSubscriptionPeriod().TotalMinutes}");
+				
+				Debug.Log($"isCancelled:{subscriptionInfo.isCancelled()}");
+				Debug.Log($"getCancelDate:{subscriptionInfo.getCancelDate().ToString()}");
+				
+				Debug.Log($"isExpired:{subscriptionInfo.isExpired()}");
+				Debug.Log($"getExpireDate:{subscriptionInfo.getExpireDate().ToString()}");
+				
+				Debug.Log($"isFreeTrial:{subscriptionInfo.isFreeTrial()}");
+				Debug.Log($"getFreeTrialPeriod:{subscriptionInfo.getFreeTrialPeriod().TotalMinutes}");
+				Debug.Log($"getFreeTrialPeriodString:{subscriptionInfo.getFreeTrialPeriodString()}");
+				
+				Debug.Log($"isIntroductoryPricePeriod:{subscriptionInfo.isIntroductoryPricePeriod()}");
+				Debug.Log($"getIntroductoryPrice:{subscriptionInfo.getIntroductoryPrice()}");
+				Debug.Log($"getIntroductoryPricePeriod:{subscriptionInfo.getIntroductoryPricePeriod().TotalMinutes}");
+				Debug.Log($"getIntroductoryPricePeriodCycles:{subscriptionInfo.getIntroductoryPricePeriodCycles()}");
+				
+				Debug.Log($"getSkuDetails:{subscriptionInfo.getSkuDetails()}");
+				Debug.Log($"getSubscriptionInfoJsonString:{subscriptionInfo.getSubscriptionInfoJsonString()}");
 			}
 			
 			return subscriptionInfo;

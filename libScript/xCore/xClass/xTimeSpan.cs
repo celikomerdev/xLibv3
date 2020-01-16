@@ -75,6 +75,8 @@ namespace xLib
 						break;
 				}
 			}
+			
+			// result = result.Replace("Max","'"+timeSpan.ToMax()+"'");
 			result = timeSpan.ToString(@result,provider);
 			return result;
 		}

@@ -81,7 +81,7 @@ namespace xLib
 		
 		public int CreateNotification(DateTime dateTime, string title, string message, string data = "")
 		{
-			if(CanDebug) Debug.Log($"{this.name}:CreateNotification:{title}:{message}:{dateTime.ToLongDateString()}:{dateTime.ToLongTimeString()}:{data}",this);
+			if(CanDebug) Debug.Log($"{this.name}:CreateNotification:{title}:{message}:{dateTime.ToString()}:{data}",this);
 			int id = UnityEngine.Random.Range(1,9999999);
 			
 			#if UNITY_ANDROID
