@@ -62,6 +62,14 @@ namespace xLib.Mathx
 			return from;
 		}
 		
+		public static Vector3 MoveTowardsAngle (Vector3 from, Vector3 to, float t)
+		{
+			from.x = Mathf.MoveTowardsAngle (from.x, to.x, t);
+			from.y = Mathf.MoveTowardsAngle (from.y, to.y, t);
+			from.z = Mathf.MoveTowardsAngle (from.z, to.z, t);
+			return from;
+		}
+		
 		public static Vector3 Lerp(Vector3 a, Vector3 b, Vector3 t)
 		{
 			Vector3 temp = Vector3.zero;

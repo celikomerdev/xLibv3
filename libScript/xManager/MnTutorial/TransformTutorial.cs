@@ -10,7 +10,6 @@ namespace xLib
 	{
 		public string[] messageString;
 		
-		
 		protected override bool OnRegister(bool register)
 		{
 			MnTutorial.ins.onTutorialClick.Listener(register,Void=>OnClick(),viewId:ViewId,order:baseRegister.order);

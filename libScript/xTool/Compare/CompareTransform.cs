@@ -9,8 +9,8 @@ namespace xLib
 		#region Values
 		[Header("Values")]
 		[UnityEngine.Serialization.FormerlySerializedAs("value")]
-		[SerializeField]private Texture left = null;
-		public Texture Left
+		[SerializeField]private Transform left = null;
+		public Transform Left
 		{
 			get
 			{
@@ -24,8 +24,8 @@ namespace xLib
 			}
 		}
 		
-		[SerializeField]private Texture right = null;
-		public Texture Right
+		[SerializeField]private Transform right = null;
+		public Transform Right
 		{
 			get
 			{
