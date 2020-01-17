@@ -9,19 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad218f9553c1811429833d03aa4b7c08, type: 3}
-  m_Name: Tutorial_Step
+  m_Script: {fileID: 11500000, guid: 9e8bf1502a1b9694c9c70a7bb8cc3987, type: 3}
+  m_Name: Tutorial_Close
   m_EditorClassIdentifier: 
   note:
     value: 
   baseWork:
-    canDebug: 1
+    canDebug: 0
     canWork: 1
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 78e4cbaf85e8310419d5e7d49edeef15
+      key: 697f3d73e937f7d44bc87b5c7e1b4826
       isMulti: 0
-    value: Null
-    skipCompareRpc: 1
-    isCompare: 1

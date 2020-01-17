@@ -29,7 +29,7 @@ namespace xLib
 		
 		public static int GetGroup(string key)
 		{
-			#if AnalyticsGuru
+			#if AnalyticsGuruTemp
 			int valueTemp = Gameguru.Analytics.Analytics.GetGroupForABTest(key);
 			if(valueTemp>0) return valueTemp;
 			#endif
