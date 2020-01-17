@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Profiling;
 using xLib.EventClass;
@@ -10,7 +11,7 @@ namespace xLib
 	{
 		[SerializeField]private bool isUnscaled = true;
 		[SerializeField]private bool isSingle = true;
-		[SerializeField]private bool isDisabled = false;
+		[SerializeField]private bool isDisabled = true;
 		
 		[UnityEngine.Serialization.FormerlySerializedAs("onWait")]
 		[SerializeField]private EventUnity eventWaited = new EventUnity();
@@ -19,36 +20,41 @@ namespace xLib
 		{
 			if(!CanWork) return;
 			
-			if(!gameObject.activeInHierarchy) return;
-			if(isSingle && processCount>0) return;
+			if(CanDebug) Debug.Log($"{this.name}:Count:{dictCoroutine.Count}",this);
+			if(isSingle && dictCoroutine.Count>0) return;
 			
-			if(isDisabled) MnCoroutine.ins.NewCoroutine(eWait(ViewCore.CurrentId,time),CanDebug);
-			else this.NewCoroutine(eWait(ViewCore.CurrentId,time),CanDebug);
+			if(lastCoroutine == ushort.MaxValue) lastCoroutine = 0;
+			lastCoroutine++;
+			
+			Coroutine tempCoroutine = MnCoroutine.ins.NewCoroutine(eWait(ViewCore.CurrentId,time),CanDebug);
+			if(tempCoroutine!=null) dictCoroutine.Add(lastCoroutine,tempCoroutine);
 		}
 		
 		public void CancelAll()
 		{
-			if(isDisabled) return;
-			if(processCount==0) return;
 			if(CanDebug) Debug.Log($"{this.name}:CancelAll",this);
-			StopAllCoroutines();
-			processCount = 0;
+			foreach (var item in dictCoroutine)
+			{
+				MnCoroutine.ins.KillCoroutine(item.Value);
+			}
+			dictCoroutine = new Dictionary<ushort,Coroutine>();
 		}
 		
-		private int processCount = 0;
+		private ushort lastCoroutine = 0;
+		private Dictionary<ushort,Coroutine> dictCoroutine = new Dictionary<ushort,Coroutine>();
 		private IEnumerator eWait(string invokeId,float time)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:Wait:{invokeId}:time:{time}",this);
+			ushort cacheCoroutine = lastCoroutine;
+			if(CanDebug) Debug.Log($"{this.name}:Wait:{invokeId}:time:{time}:cacheCoroutine:{cacheCoroutine}",this);
 			
-			processCount++;
 			if(isUnscaled) yield return new WaitForSecondsRealtime(time);
 			else yield return new WaitForSeconds(time);
-			processCount--;
+			dictCoroutine.Remove(cacheCoroutine);
 			
 			string tempId = ViewCore.CurrentId;
 			ViewCore.CurrentId = invokeId;
 			
-			if(CanDebug) Debug.Log($"{this.name}:OnWait:{invokeId}:time:{time}",this);
+			if(CanDebug) Debug.Log($"{this.name}:OnWait:{invokeId}:time:{time}:cacheCoroutine:{cacheCoroutine}",this);
 			Profiler.BeginSample($"{this.name}:OnWait:{invokeId}:time:{time}",this);
 			eventWaited.Invoke();
 			Profiler.EndSample();
@@ -58,6 +64,7 @@ namespace xLib
 		
 		private void OnDisable()
 		{
+			if(isDisabled) return;
 			CancelAll();
 		}
 		

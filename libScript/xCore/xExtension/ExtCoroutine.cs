@@ -14,7 +14,7 @@ namespace xLib
 		{
 			if(!mono)
 			{
-				xLogger.LogExceptionFormat("KillCoroutine:mono:null");
+				Debug.LogException(new UnityException($"{mono.name}:KillCoroutine:mono:null"),mono);
 				return;
 			}
 			
@@ -26,7 +26,7 @@ namespace xLib
 		{
 			if(!mono)
 			{
-				xLogger.LogExceptionFormat("NewCoroutine:mono:null");
+				Debug.LogException(new UnityException($"{mono.name}:NewCoroutine:mono:null"),mono);
 				return null;
 			}
 			
@@ -37,11 +37,11 @@ namespace xLib
 		{
 			if(!mono.isActiveAndEnabled)
 			{
-				xLogger.LogExceptionFormat(mono,mono.name+":!isActiveAndEnabled");
+				Debug.LogException(new UnityException($"{mono.name}:!isActiveAndEnabled"),mono);
 				return null;
 			}
 			
-			if(CanDebug) xLogger.Log($"{mono.name}:newCoroutine:{enumerator.ToString()}",mono);
+			if(CanDebug) Debug.Log($"{mono.name}:newCoroutine:{enumerator.ToString()}",mono);
 			return mono.StartCoroutine(enumerator);
 		}
 		#endregion
