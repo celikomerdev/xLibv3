@@ -24,6 +24,7 @@ namespace xLib.ToolFollow
 		
 		protected override void Tick(float tickTime)
 		{
+			if(!target) return;
 			if(lerp>0)
 			{
 				trans.SpacePositionSet(Vector3.Lerp(trans.SpacePositionGet(),target.SpacePositionGet(),lerp*tickTime));
