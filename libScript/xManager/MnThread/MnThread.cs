@@ -9,9 +9,9 @@ namespace xLib
 	public class MnThread : SingletonM<MnThread>
 	{
 		#region Mono
-		private void Update()
+		private void LateUpdate()
 		{
-			Call();
+			if(CanWork) Call();
 		}
 		
 		private static void Call()
