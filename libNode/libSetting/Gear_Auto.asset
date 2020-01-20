@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b513263c51538944bac985320074d3e0, type: 3}
-  m_Name: Setting-Camera-Index
+  m_Script: {fileID: 11500000, guid: c47f3d7fa3e3424439269f207f15244e, type: 3}
+  m_Name: Gear_Auto
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,11 +20,8 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: decad9a1829560148a77974ebfc36165
-      isMulti: 0
+      key: c3780ba0a127d934aa3dbeb2dabe704b
+      isMulti: 1
     value: 1
     skipCompareRpc: 1
     isCompare: 1
-    snapDefault: 0
-    useThreshold: 0
-    valueThreshold: 0

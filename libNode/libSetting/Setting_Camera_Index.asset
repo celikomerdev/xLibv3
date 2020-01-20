@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b513263c51538944bac985320074d3e0, type: 3}
-  m_Name: Control-Mode-Acceleration-Index
+  m_Name: Setting_Camera_Index
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,9 +20,9 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 331bdbcd5d3079743a24f4c58811c649
+      key: decad9a1829560148a77974ebfc36165
       isMulti: 0
-    value: 0
+    value: 1
     skipCompareRpc: 1
     isCompare: 1
     snapDefault: 0
