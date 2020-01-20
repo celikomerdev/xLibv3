@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2225de60c87cec046ac49a9aced7735c, type: 3}
-  m_Name: Loading-Progress
+  m_Script: {fileID: 11500000, guid: b513263c51538944bac985320074d3e0, type: 3}
+  m_Name: Load_Scene_Index
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,12 +20,11 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: ece5e6de8fd2b4c468c08e738bd4bca7
+      key: 78e7fa4cda3ab9640b8d955d41803539
       isMulti: 0
     value: 0
     skipCompareRpc: 1
-    isCompare: 1
+    isCompare: 0
     snapDefault: 1
     useThreshold: 1
     valueThreshold: 0
-    cacheGreater: 0
