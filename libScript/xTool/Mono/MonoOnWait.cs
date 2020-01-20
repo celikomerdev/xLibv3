@@ -69,7 +69,7 @@ namespace xLib
 		}
 		
 		[ContextMenu("Call")]
-		private void Call()
+		public void Call()
 		{
 			if(!CanWork) return;
 			eventWaited.Invoke();
