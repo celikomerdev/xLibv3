@@ -25,7 +25,7 @@ namespace xLib
 			set
 			{
 				if(baseWork.canDebug == value) return;
-				Debug.LogFormat(this,this.name+":CanDebug:{0}",value);
+				Debug.Log($"{this.name}:CanDebug:{value}",this);
 				baseWork.CanDebug = value;
 				SetDebug();
 				
@@ -59,7 +59,9 @@ namespace xLib
 			SetDebug();
 			
 			if(!CanWork) return;
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnValidate");
+			#if CanTrace
+			if(CanDebug) Debug.Log($"{this.name}:OnValidate",this);
+			#endif
 			OnValidated();
 		}
 		

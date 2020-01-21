@@ -50,7 +50,9 @@ namespace xLib
 		{
 			if(isInit == init) return;
 			isInit = init;
+			#if CanTrace
 			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Init:{isInit}",nodeSetting.objDebug);
+			#endif
 			OnInit(init);
 		}
 		
@@ -110,7 +112,10 @@ namespace xLib
 		{
 			Object objDebug = nodeSetting.objDebug;
 			if(worker!=null) objDebug = worker.UnityObject;
+			
+			#if CanTrace
 			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Listener:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",objDebug);
+			#endif
 			
 			#if UNITY_EDITOR
 			ListenerEditor(register,worker);
@@ -127,7 +132,10 @@ namespace xLib
 		{
 			Object objDebug = nodeSetting.objDebug;
 			if(worker!=null) objDebug = worker.UnityObject;
+			
+			#if CanTrace
 			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:ListenerCall:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",objDebug);
+			#endif
 			
 			#if UNITY_EDITOR
 			ListenerEditor(register,worker);
@@ -233,7 +241,9 @@ namespace xLib
 			{
 				if(!CanChange(value))
 				{
+					#if CanTrace
 					if(nodeSetting.canDebug) Debug.LogWarning($"{nodeSetting.objDebug.name}:!CanChange:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.objDebug);
+					#endif
 					return;
 				}
 				KeepProperties(value);

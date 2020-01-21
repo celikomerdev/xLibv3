@@ -10,7 +10,9 @@ namespace xLib
 		{
 			if(isInit == value) return;
 			isInit = value;
-			if(CanDebug) Debug.LogFormat(this,this.name+":Init:{0}",isInit);
+			#if CanTrace
+			if(CanDebug) Debug.Log($"{this.name}:Init:{isInit}",this);
+			#endif
 			OnInit(isInit);
 			SetDebug();
 		}
