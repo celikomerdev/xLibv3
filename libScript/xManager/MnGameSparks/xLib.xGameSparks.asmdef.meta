@@ -1,7 +1,6 @@
 fileFormatVersion: 2
 guid: 30427135da49c3c4aab9bc93cda802dd
 labels:
-- AsmDef
 - AsmRuntime
 AssemblyDefinitionImporter:
   externalObjects: {}

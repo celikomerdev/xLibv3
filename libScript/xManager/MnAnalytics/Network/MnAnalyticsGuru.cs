@@ -13,6 +13,14 @@ namespace xLib.xAnalytics
 		[SerializeField]private Object[] arrayIAnalyticObject = new Object[0];
 		[SerializeField]private IAnalyticObject[] m_arrayIAnalyticObject = new IAnalyticObject[0];
 		
+		[SerializeField]private GroupTest[] arrayGroupTest = new GroupTest[0];
+		[System.Serializable]private struct GroupTest
+		{
+			[SerializeField]internal string name;
+			[SerializeField]internal int groupCount;
+			[SerializeField]internal float percent;
+		}
+		
 		private Dictionary<string, object> Stamp(Dictionary<string, object> dict)
 		{
 			for (int i = 0; i < m_arrayIAnalyticObject.Length; i++)
@@ -32,6 +40,14 @@ namespace xLib.xAnalytics
 			AnalyticsBuilder builder = Analytics.Builder;
 			builder.SetLogLevel(LogLevel.WARNING);
 			if(CanDebug) builder.SetLogLevel(logLevel);
+			
+			List<ABTest> listGroupTest = new List<ABTest>();
+			foreach (GroupTest item in arrayGroupTest)
+			{
+				listGroupTest.Add(new ABTest(name:item.name,groupCount:item.groupCount,percent:item.percent));
+			}
+			
+			builder.SetAbTests(listGroupTest);
 			builder.Build();
 		}
 		
@@ -91,6 +107,13 @@ namespace xLib.xAnalytics
 	{
 		[SerializeField]private int logLevel = 3;
 		[SerializeField]private Object[] arrayIAnalyticObject = new Object[0];
+		[SerializeField]private GroupTest[] arrayGroupTest = new GroupTest[0];
+		[System.Serializable]private struct GroupTest
+		{
+			[SerializeField]internal string name;
+			[SerializeField]internal int groupCount;
+			[SerializeField]internal float percent;
+		}
 		[SerializeField]private EventString advertisingIDReceived = new EventString();
 	}
 }

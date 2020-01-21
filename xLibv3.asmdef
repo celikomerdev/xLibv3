@@ -25,27 +25,27 @@
     "versionDefines": [
         {
             "name": "com.unity.modules.ui",
-            "expression": "",
+            "expression": "0.0.0",
             "define": "ModUI"
         },
         {
             "name": "com.unity.modules.imageconversion",
-            "expression": "",
+            "expression": "0.0.0",
             "define": "ModImageConversion"
         },
         {
             "name": "com.unity.modules.unitywebrequestwww",
-            "expression": "",
+            "expression": "0.0.0",
             "define": "ModWebWWW"
         },
         {
             "name": "com.unity.ugui",
-            "expression": "",
+            "expression": "0.0.0",
             "define": "PackUI"
         },
         {
             "name": "com.unity.purchasing",
-            "expression": "",
+            "expression": "0.0.0",
             "define": "PackIAP"
         },
         {
