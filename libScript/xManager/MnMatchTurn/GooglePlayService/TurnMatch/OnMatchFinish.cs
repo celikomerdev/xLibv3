@@ -6,7 +6,7 @@ namespace xLib.UnityEvents
 {
 	public class OnMatchFinish : BaseRegisterM
 	{
-		protected override bool Register(bool value)
+		protected override bool TryRegister(bool value)
 		{
 			if (value) MnMatchTurn.ins.onMatchFinish += OnCall;
 			else MnMatchTurn.ins.onMatchFinish -= OnCall;

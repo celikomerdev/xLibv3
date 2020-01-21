@@ -132,7 +132,7 @@ namespace xLib.libAdvert.xGoogleAds
 {
 	public class AdNative : AdvertBase
 	{
-		protected override bool Register(bool value)
+		protected override bool TryRegister(bool value)
 		{
 			if(CanDebug) Debug.LogWarning("!GoogleAds");
 			return value;

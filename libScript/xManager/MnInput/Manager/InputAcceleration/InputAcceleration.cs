@@ -25,7 +25,7 @@ namespace xLib.xInput
 		
 		
 		#region Mono
-		protected override bool OnRegister(bool register)
+		protected override bool TryRegister(bool register)
 		{
 			if(register)
 			{
@@ -38,7 +38,7 @@ namespace xLib.xInput
 				SetAxis();
 			}
 			
-			return base.OnRegister(register);
+			return base.TryRegister(register);
 		}
 		
 		protected override void Tick(float tickTime)

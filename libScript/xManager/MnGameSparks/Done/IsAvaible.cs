@@ -10,7 +10,7 @@ namespace xLib.xGameSparks
 	{
 		[SerializeField]private NodeBool isAvaible;
 		
-		protected override bool Register(bool value)
+		protected override bool TryRegister(bool value)
 		{
 			if(value)
 			{

@@ -6,7 +6,7 @@ namespace xLib.xTool
 {
 	public class OnMemoryLow : BaseRegisterM
 	{
-		protected override bool OnRegister(bool register)
+		protected override bool TryRegister(bool register)
 		{
 			if(CanDebug) Debug.LogWarning($"{this.name}:systemMemorySize:{SystemInfo.systemMemorySize}:totalMemory:{totalMemory}",this);
 			if(register)

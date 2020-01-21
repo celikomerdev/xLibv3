@@ -12,8 +12,8 @@ namespace xLib.libAdvert.xGoogleAds
 		private BannerView advert;
 		private AdRequest request;
 		
-		#region Register
-		protected override bool Register(bool value)
+		#region TryRegister
+		protected override bool TryRegister(bool value)
 		{
 			if (value)
 			{
@@ -28,7 +28,7 @@ namespace xLib.libAdvert.xGoogleAds
 				
 				AdRequest.Builder builder = MnGoogleAds.ins.Builder();
 				request = builder.Build();
-				OnRegisterBase();
+				OnRegisteredBase();
 			}
 			else
 			{

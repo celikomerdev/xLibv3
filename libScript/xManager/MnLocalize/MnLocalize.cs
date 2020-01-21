@@ -76,7 +76,7 @@ namespace xLib
 		}
 		
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-		private static void Register()
+		private static void TryRegister()
 		{
 			LocalizationManager.OnLocalizeEvent += OnLocalize;
 			OnLocalize();

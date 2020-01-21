@@ -6,7 +6,7 @@ namespace xLib.UnityEvents
 {
 	public class OnInvitationAccept : BaseRegisterM
 	{
-		protected override bool Register(bool value)
+		protected override bool TryRegister(bool value)
 		{
 			if (value) MnMatchTurn.ins.onInvitationAccept += OnCall;
 			else MnMatchTurn.ins.onInvitationAccept -= OnCall;

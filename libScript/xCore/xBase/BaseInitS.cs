@@ -20,7 +20,7 @@ namespace xLib
 		#region Flow
 		// public BaseInitS()
 		// {
-		// 	MnThread.Register(OnEnable);
+		// 	MnThread.ScheduleLate(OnEnable);
 		// }
 		
 		protected virtual void OnEnable()

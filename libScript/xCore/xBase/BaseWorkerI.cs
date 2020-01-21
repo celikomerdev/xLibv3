@@ -8,6 +8,12 @@ namespace xLib
 			get;
 		}
 		
+		string ViewId
+		{
+			get;
+			set;
+		}
+		
 		void CheckErrors();
 	}
 }

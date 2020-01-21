@@ -6,10 +6,10 @@ namespace xLib.libAdvert.xIronSource
 {
 	public class AdRewarded : AdvertBase
 	{
-		#region Register
-		protected override bool OnRegister(bool register)
+		#region TryRegister
+		protected override bool TryRegister(bool register)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{register}",this);
+			if(CanDebug) Debug.Log($"{this.name}:TryRegister:{key}:{register}",this);
 			
 			if (register)
 			{
@@ -24,7 +24,7 @@ namespace xLib.libAdvert.xIronSource
 				IronSourceEvents.onRewardedVideoAdRewardedEvent += onRewardedVideoAdRewardedEvent;
 				IronSourceEvents.onRewardedVideoAdClosedEvent += onRewardedVideoAdClosedEvent;
 				
-				OnRegisterBase();
+				OnRegisteredBase();
 				onRewardedVideoAvailabilityChangedEvent(IronSource.Agent.isRewardedVideoAvailable());
 			}
 			else

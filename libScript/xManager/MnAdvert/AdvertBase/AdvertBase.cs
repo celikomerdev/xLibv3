@@ -40,10 +40,10 @@ namespace xLib.libAdvert
 			base.Awaked();
 		}
 		
-		#region Register
-		protected override bool OnRegister(bool register)
+		#region TryRegister
+		protected override bool TryRegister(bool register)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{register}",this);
+			if(CanDebug) Debug.Log($"{this.name}:TryRegister:{key}:{register}",this);
 			return register;
 		}
 		
@@ -54,9 +54,9 @@ namespace xLib.libAdvert
 			return idPlatform;
 		}
 		
-		protected void OnRegisterBase()
+		protected void OnRegisteredBase()
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnRegisterBase",this);
+			if(CanDebug) Debug.Log($"{this.name}:OnRegisteredBase",this);
 			isLoad = false;
 			inLoad = false;
 			if(baseRegister.onRegister) LoadBase();

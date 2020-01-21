@@ -14,7 +14,7 @@ namespace xLib.ToolPurchase
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
 		[SerializeField]private EventBool isSubscribed = new EventBool();
 		
-		protected override bool OnRegister(bool register)
+		protected override bool TryRegister(bool register)
 		{
 			MnProduct.ins.isInit.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:false);
 			MnProduct.ins.onRestore.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:false);
@@ -66,7 +66,7 @@ namespace xLib.ToolPurchase
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
 		[SerializeField]private EventBool isSubscribed = new EventBool();
 		
-		protected override bool OnRegister(bool register)
+		protected override bool TryRegister(bool register)
 		{
 			MnProduct.ins.onPurchase.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:true);
 			return register;

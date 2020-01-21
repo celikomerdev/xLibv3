@@ -1,7 +1,7 @@
 ﻿#if xLibv3
 namespace xLib
 {
-	public abstract class BaseRegisterM : BaseActiveM
+	public abstract class BaseRegisterM : BaseActiveM,BaseRegisterI
 	{
 		#region Object
 		[System.Serializable]
@@ -12,6 +12,30 @@ namespace xLib
 			internal bool isRegister;
 		}
 		public BaseRegisterInfo baseRegister = new BaseRegisterInfo();
+		
+		public int Order
+		{
+			get
+			{
+				return baseRegister.order;
+			}
+			set
+			{
+				baseRegister.order = value;
+			}
+		}
+		
+		public bool OnRegister
+		{
+			get
+			{
+				return baseRegister.onRegister;
+			}
+			set
+			{
+				baseRegister.onRegister = value;
+			}
+		}
 		#endregion
 		
 		
@@ -22,7 +46,7 @@ namespace xLib
 			IsRegister = value;
 		}
 		
-		protected abstract bool OnRegister(bool register);
+		protected abstract bool TryRegister(bool register);
 		public bool IsRegister
 		{
 			get
@@ -37,7 +61,7 @@ namespace xLib
 				string tempId = ViewCore.CurrentId;
 				ViewCore.CurrentId = ViewId;
 				
-				baseRegister.isRegister = OnRegister(value);
+				baseRegister.isRegister = TryRegister(value);
 				if(CanDebug) xLogger.LogFormat(this,this.name+":IsRegister:{0}",baseRegister.isRegister);
 				
 				ViewCore.CurrentId = tempId;

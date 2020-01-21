@@ -17,7 +17,7 @@ namespace xLib.xValueClass.Listener
 			TryRestoreLastClient();
 		}
 		
-		protected override bool OnRegister(bool register)
+		protected override bool TryRegister(bool register)
 		{
 			ICall[] array = target.GetGenericsArray<ICall>();
 			for (int i = 0; i < array.Length; i++)

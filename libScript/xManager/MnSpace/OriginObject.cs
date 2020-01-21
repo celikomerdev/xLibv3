@@ -7,7 +7,7 @@ namespace xLib.ToolSpace
 	{
 		public Transform trans;
 		
-		protected override bool Register(bool value)
+		protected override bool TryRegister(bool value)
 		{
 			if(!trans) trans = transform;
 			ExtSpace.Listener(OnCall,value);

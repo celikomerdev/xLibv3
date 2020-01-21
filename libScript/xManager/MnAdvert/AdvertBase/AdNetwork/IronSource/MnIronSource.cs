@@ -23,18 +23,18 @@ namespace xLib.libAdvert.xIronSource
 				IronSource.Agent.init(MnKey.GetValue(key),adUnits);
 				if(CanDebug) IronSource.Agent.validateIntegration();
 				if(CanDebug) Debug.Log($"MnIronSource:isInit:true",this);
-				Register(true);
+				TryRegister(true);
 			});
 		}
 		
 		private void OnDestroy()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnDestroy",this);
-			Register(false);
+			TryRegister(false);
 		}
 		
-		#region Register
-		private bool Register(bool value)
+		#region TryRegister
+		private bool TryRegister(bool value)
 		{
 			if (value)
 			{

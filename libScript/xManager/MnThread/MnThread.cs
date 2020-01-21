@@ -30,9 +30,9 @@ namespace xLib
 		#region Flow
 		private static bool willCall = false;
 		private static EventUnity listener = new EventUnity();
-		public static void Register(UnityAction call,IDebug iDebug=null)
+		public static void ScheduleLate(UnityAction call,IDebug iDebug=null)
 		{
-			if(iDebug.CanDebug) Debug.Log($"MnThread:Register:{call.Method}",iDebug.UnityObject);
+			if(iDebug.CanDebug) Debug.Log($"MnThread:ScheduleLate:{call.Method}",iDebug.UnityObject);
 			listener.eventUnity.AddListener(call);
 			willCall = true;
 		}

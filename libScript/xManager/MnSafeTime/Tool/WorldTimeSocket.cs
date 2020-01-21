@@ -49,7 +49,7 @@ namespace xLib.ToolWorldTime
 				long milliseconds = (long)((intc*1000) + ((frac*1000) / 0x100000000L));
 				DateTime dateTime = dateTimeOrigin.dateTime.AddMilliseconds(milliseconds);
 				
-				MnThread.Register(delegate
+				MnThread.ScheduleLate(delegate
 				{
 					if(CanDebug) Debug.LogFormat(this,this.name+":{0}",dateTime.ToString());
 					MnWorldTime.ins.DateTimeUtc = dateTime;
@@ -57,7 +57,7 @@ namespace xLib.ToolWorldTime
 			}
 			catch(Exception ex)
 			{
-				MnThread.Register(delegate
+				MnThread.ScheduleLate(delegate
 				{
 					xDebug.LogExceptionFormat(this,this.name+":Exception:{0}",ex.ToString());
 				});

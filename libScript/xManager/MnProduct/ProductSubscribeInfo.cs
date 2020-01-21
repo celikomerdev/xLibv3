@@ -12,7 +12,7 @@ namespace xLib.ToolPurchase
 		[SerializeField]public EventBool eventFreeTrialAvaible = new EventBool();
 		[SerializeField]public EventTimeSpan eventFreeTrialPeriod = new EventTimeSpan();
 		
-		protected override bool OnRegister(bool register)
+		protected override bool TryRegister(bool register)
 		{
 			MnProduct.ins.isInit.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:true);
 			return register;
@@ -70,7 +70,7 @@ namespace xLib.ToolPurchase
 		[SerializeField]public EventBool eventFreeTrialAvaible = new EventBool();
 		[SerializeField]public EventTimeSpan eventFreeTrialPeriod = new EventTimeSpan();
 		
-		protected override bool OnRegister(bool register)
+		protected override bool TryRegister(bool register)
 		{
 			eventFreeTrialAvaible.Value = true;
 			eventFreeTrialPeriod.Value = System.TimeSpan.FromDays(7);

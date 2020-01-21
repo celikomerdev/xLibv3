@@ -6,10 +6,10 @@ namespace xLib.libAdvert.xMoPub
 {
 	public class AdRewarded : AdvertBase
 	{
-		#region Register
-		protected override bool OnRegister(bool register)
+		#region TryRegister
+		protected override bool TryRegister(bool register)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{register}",this);
+			if(CanDebug) Debug.Log($"{this.name}:TryRegister:{key}:{register}",this);
 			
 			if (register)
 			{
@@ -25,7 +25,7 @@ namespace xLib.libAdvert.xMoPub
 				MoPubManager.OnRewardedVideoReceivedRewardEvent += OnRewardedVideoReceivedRewardEvent;
 				MoPubManager.OnRewardedVideoExpiredEvent += OnRewardedVideoExpiredEvent;
 				
-				OnRegisterBase();
+				OnRegisteredBase();
 				if(MnMoPub.isSdkInit)
 				{
 					if(MoPub.HasRewardedVideo(idPlatform)) OnRewardedVideoLoadedEvent(idPlatform);

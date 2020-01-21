@@ -6,10 +6,10 @@ namespace xLib.libAdvert.xIronSource
 {
 	public class AdInterstitial : AdvertBase
 	{
-		#region Register
-		protected override bool OnRegister(bool register)
+		#region TryRegister
+		protected override bool TryRegister(bool register)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:OnRegister:{key}:{register}",this);
+			if(CanDebug) Debug.Log($"{this.name}:TryRegister:{key}:{register}",this);
 			
 			if (register)
 			{
@@ -25,7 +25,7 @@ namespace xLib.libAdvert.xIronSource
 				IronSourceEvents.onInterstitialAdRewardedEvent += onInterstitialAdRewardedEvent;
 				IronSourceEvents.onInterstitialAdClosedEvent += onInterstitialAdClosedEvent;
 				
-				OnRegisterBase();
+				OnRegisteredBase();
 				if(IronSource.Agent.isInterstitialReady()) onInterstitialAdReadyEvent();
 			}
 			else

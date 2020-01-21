@@ -20,7 +20,7 @@ namespace xLib
 		#region Flow
 		public BaseInitM()
 		{
-			MnThread.Register(iDebug:this,call:delegate{Awake();});
+			MnThread.ScheduleLate(iDebug:this,call:delegate{Awake();});
 		}
 		
 		protected virtual void Awake()

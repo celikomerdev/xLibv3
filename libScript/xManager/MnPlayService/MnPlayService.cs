@@ -77,7 +77,7 @@ namespace xLib
 				
 				inInit = false;
 				isInit = true;
-				MnThread.Register(iDebug:this,call:delegate{LoginOut(true);});
+				MnThread.ScheduleLate(iDebug:this,call:delegate{LoginOut(true);});
 			});
 		}
 		#endregion
@@ -104,7 +104,7 @@ namespace xLib
 		
 		private void IsLogin(bool value)
 		{
-			MnThread.Register(iDebug:this,call:delegate
+			MnThread.ScheduleLate(iDebug:this,call:delegate
 			{
 				if(CanDebug) Debug.Log($"{this.name}:IsLogin:{value}",this);
 				

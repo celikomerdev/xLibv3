@@ -26,20 +26,20 @@ namespace xLib
 		protected override void Started()
 		{
 			StAdvert.Init();
-			Register(true);
+			TryRegister(true);
 		}
 		
 		protected override void OnDestroyed()
 		{
-			Register(false);
+			TryRegister(false);
 		}
 		#endregion
 		
 		
-		#region Register
-		private void Register(bool value)
+		#region TryRegister
+		private void TryRegister(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Register:{0}",value);
+			if(CanDebug) Debug.LogFormat(this,this.name+":TryRegister:{0}",value);
 			
 			if(value)
 			{
