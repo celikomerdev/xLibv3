@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b513263c51538944bac985320074d3e0, type: 3}
-  m_Name: WinMulti-Total
+  m_Script: {fileID: 11500000, guid: c72c3af8086079f478e96be5a851fbb8, type: 3}
+  m_Name: play_time_total
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,7 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: e29b9e0da75051042ab1278c4f257e45
+      key: c47332c88877c7d4abe90b8b8f7238ad
       isMulti: 0
     value: 0
     skipCompareRpc: 1
