@@ -26,5 +26,5 @@ MonoBehaviour:
       arrayObject:
       - {fileID: 11400000, guid: 6c4629b93b93bed44811f25812507fee, type: 2}
     cryptoVersion:
-    - keyEncrypt: MnConfig
+    - keyEncrypt: xProject
       nodeEncrypt: []
