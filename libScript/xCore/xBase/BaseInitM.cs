@@ -25,17 +25,18 @@ namespace xLib
 		
 		protected virtual void Awake()
 		{
-			Init(true);
+			if(CanWork) Init(true);
 		}
 		
 		protected virtual void OnDestroy()
 		{
-			Init(false);
+			if(CanWork) Init(false);
 		}
 		
 		[ContextMenu ("ReInit")]
 		private void ReInit()
 		{
+			if(!CanWork) return;
 			Init(!isInit);
 			Init(!isInit);
 		}

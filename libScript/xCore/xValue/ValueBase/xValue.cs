@@ -61,7 +61,8 @@ namespace xLib
 			CleanValue();
 			CleanListener();
 			
-			ValueDefaultReset(this.value);
+			ValueDefault = this.value;
+			valueBase.ValueSet(this.value,"Client");
 		}
 		
 		public void ValueDefaultReset(V value)
