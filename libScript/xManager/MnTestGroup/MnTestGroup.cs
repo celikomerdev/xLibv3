@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 using UnityEngine;
+using xLib.xAnalytics;
 using xLib.xNode.NodeObject;
 using xLib.xValueClass;
 
@@ -32,8 +33,11 @@ namespace xLib
 		public static int GetGroup(string key)
 		{
 			#if AnalyticsGuru
-			int valueTemp = Gameguru.Analytics.Analytics.GetGroupForABTest(key);
-			if(valueTemp>0) return valueTemp;
+			if(MnAnalyticsGuru.isInit)
+			{
+				int valueTemp = Gameguru.Analytics.Analytics.GetGroupForABTest(key);
+				if(valueTemp>0) return valueTemp;
+			}
 			#endif
 			
 			return 0;

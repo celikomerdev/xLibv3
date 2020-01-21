@@ -31,12 +31,10 @@ namespace xLib.xAnalytics
 			return dict;
 		}
 		
-		private static bool isInit = false;
+		public static bool isInit = false;
 		protected override void Inited()
 		{
 			if(isInit) return;
-			isInit = true;
-			
 			AnalyticsBuilder builder = Analytics.Builder;
 			builder.SetLogLevel(LogLevel.WARNING);
 			if(CanDebug) builder.SetLogLevel(logLevel);
@@ -49,6 +47,8 @@ namespace xLib.xAnalytics
 			
 			builder.SetAbTests(listGroupTest);
 			builder.Build();
+			isInit = true;
+			
 			MnTestGroup.onRefreshGroups.Call();
 		}
 		
