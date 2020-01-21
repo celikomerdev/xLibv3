@@ -1,6 +1,7 @@
 ﻿#if xLibv3
 using UnityEngine;
 using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {
@@ -27,6 +28,7 @@ namespace xLib
 			}
 		}
 		
+		public static ValueVoid onRefreshGroups = new ValueVoid();
 		public static int GetGroup(string key)
 		{
 			#if AnalyticsGuru

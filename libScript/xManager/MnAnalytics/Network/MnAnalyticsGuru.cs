@@ -49,6 +49,7 @@ namespace xLib.xAnalytics
 			
 			builder.SetAbTests(listGroupTest);
 			builder.Build();
+			MnTestGroup.onRefreshGroups.Call();
 		}
 		
 		protected override void OnEnabled()
