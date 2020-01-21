@@ -34,7 +34,7 @@ namespace xLib
 			
 			if(string.IsNullOrWhiteSpace(json))
 			{
-				xLogger.LogException($"{this.name}:LoadConfig:json:null");
+				Debug.LogException(new UnityException($"{this.name}:LoadConfig:json:null"),this);
 				return;
 			}
 			
@@ -45,7 +45,7 @@ namespace xLib
 			}
 			catch (Exception ex)
 			{
-				xLogger.LogException($"{this.name}:LoadConfig:{ex.Message}:json:{json}");
+				Debug.LogException(new UnityException($"{this.name}:LoadConfig:{ex.Message}",ex),this);
 				return;
 			}
 			
@@ -78,7 +78,7 @@ namespace xLib
 				UnityWebRequestAsyncOperation uwrOp = uwr.SendWebRequest();
 				while (!uwr.isDone)
 				{
-					if(CanDebug) xLogger.LogFormat($"{this.name}:UWRLoad:progress:{uwrOp.progress}");
+					if(CanDebug) Debug.Log($"{this.name}:UWRLoad:progress:{uwrOp.progress}");
 					yield return new WaitForSecondsRealtime(1f);
 				}
 				
@@ -90,7 +90,7 @@ namespace xLib
 				}
 				else
 				{
-					xLogger.LogException($"{this.name}:eLoad:error:{uwr.error}:url:{url}",this);
+					Debug.LogException(new UnityException($"{this.name}:eLoad:error:{uwr.error}:url:{url}"),this);
 				}
 				
 				uwr.Dispose();
