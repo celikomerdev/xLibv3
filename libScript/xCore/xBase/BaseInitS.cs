@@ -20,7 +20,7 @@ namespace xLib
 		#region Flow
 		// public BaseInitS()
 		// {
-		// 	MnThread.ScheduleLate(OnEnable);
+		// 	MnThread.ScheduleLate(iDebug:this,call:delegate{OnEnable();});
 		// }
 		
 		protected virtual void OnEnable()
