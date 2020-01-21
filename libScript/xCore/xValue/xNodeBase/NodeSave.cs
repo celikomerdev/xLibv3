@@ -8,10 +8,10 @@ namespace xLib.xNode.NodeObject
 		[ContextMenu("Save")]
 		public void Save()
 		{
+			if(CanDebug) Debug.Log($"{this.name}:Save:{Key}",this);
 			MnThread.StartThread(useThread:false,call:delegate
 			{
 				string value = SerializedObject.ToString();
-				if(CanDebug) Debug.LogFormat(this,this.name+":Save:{0}",value);
 				xPersistentData.SetString(Key,value,useThread:true);
 			});
 			
@@ -24,6 +24,7 @@ namespace xLib.xNode.NodeObject
 		[ContextMenu("Load")]
 		public void Load()
 		{
+			if(CanDebug) Debug.Log($"{this.name}:Load:{Key}",this);
 			string value = "";
 			
 			if(!string.IsNullOrEmpty(value)) value = "Test";
@@ -31,8 +32,6 @@ namespace xLib.xNode.NodeObject
 			else if(xPersistentData.HasKey(Name)) value = xPersistentData.GetString(Name);
 			else if(PlayerPrefs.HasKey(Key)) value = PlayerPrefs.GetString(Key);
 			else if(PlayerPrefs.HasKey(Name)) value = PlayerPrefs.GetString(Name);
-			
-			if(CanDebug) Debug.LogFormat(this,this.name+":Load:{0}",value);
 			SerializedObject = value;
 		}
 		
@@ -40,7 +39,7 @@ namespace xLib.xNode.NodeObject
 		public void Delete()
 		{
 			if(!xPersistentData.HasKey(Key)) return;
-			if(CanDebug) Debug.LogFormat(this,this.name+":Delete:{0}",Key);
+			if(CanDebug) Debug.Log($"{this.name}:Delete:{Key}",this);
 			xPersistentData.DeleteKey(Key);
 		}
 		
@@ -48,13 +47,13 @@ namespace xLib.xNode.NodeObject
 		[ContextMenu("DebugSerializedObjectRaw")]
 		private void DebugSerializedObjectRaw()
 		{
-			Debug.LogFormat(this,this.name+":SerializedObjectRaw:{0}",SerializedObjectRaw.ToString());
+			Debug.Log($"{this.name}:SerializedObjectRaw:{SerializedObjectRaw}",this);
 		}
 		
 		[ContextMenu("DebugSerializedObject")]
 		private void DebugSerializedObject()
 		{
-			Debug.LogFormat(this,this.name+":SerializedObject:{0}",SerializedObject.ToString());
+			Debug.Log($"{this.name}:SerializedObject:{SerializedObject}",this);
 		}
 		#endif
 	}
