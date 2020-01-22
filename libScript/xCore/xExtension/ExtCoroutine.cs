@@ -41,7 +41,7 @@ namespace xLib
 				return null;
 			}
 			
-			if(CanDebug) Debug.Log($"{mono.name}:newCoroutine:{enumerator.ToString()}",mono);
+			// if(CanDebug) Debug.Log($"{mono.name}:newCoroutine:{enumerator.ToString()}",mono);
 			return mono.StartCoroutine(enumerator);
 		}
 		#endregion

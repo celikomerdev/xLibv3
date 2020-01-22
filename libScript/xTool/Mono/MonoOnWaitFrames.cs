@@ -17,7 +17,7 @@ namespace xLib
 		{
 			if(!CanWork) return;
 			
-			if(CanDebug) Debug.Log($"{this.name}:Count:{dictCoroutine.Count}",this);
+			// if(CanDebug) Debug.Log($"{this.name}:Count:{dictCoroutine.Count}",this);
 			if(isSingle && dictCoroutine.Count>0) return;
 			
 			if(lastCoroutine == ushort.MaxValue) lastCoroutine = 0;
@@ -42,7 +42,7 @@ namespace xLib
 		private IEnumerator eWait(string invokeId,int frame)
 		{
 			ushort cacheCoroutine = lastCoroutine;
-			if(CanDebug) Debug.Log($"{this.name}:Wait:{invokeId}:frame:{frame}:cacheCoroutine:{cacheCoroutine}",this);
+			if(CanDebug) Debug.Log($"{this.name}:Wait:{invokeId}:frame:{frame}",this);
 			
 			yield return new WaitForFrames(frame);
 			dictCoroutine.Remove(cacheCoroutine);
@@ -50,7 +50,7 @@ namespace xLib
 			string tempId = ViewCore.CurrentId;
 			ViewCore.CurrentId = invokeId;
 			
-			if(CanDebug) Debug.Log($"{this.name}:OnWait:{invokeId}:frame:{frame}:cacheCoroutine:{cacheCoroutine}",this);
+			if(CanDebug) Debug.Log($"{this.name}:OnWait:{invokeId}:frame:{frame}",this);
 			Profiler.BeginSample($"{this.name}:OnWait:{invokeId}:frame:{frame}",this);
 			eventWaited.Invoke();
 			Profiler.EndSample();
