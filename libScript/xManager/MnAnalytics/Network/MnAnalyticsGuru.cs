@@ -13,6 +13,7 @@ namespace xLib.xAnalytics
 		[SerializeField]private Object[] arrayIAnalyticObject = new Object[0];
 		[SerializeField]private IAnalyticObject[] m_arrayIAnalyticObject = new IAnalyticObject[0];
 		
+		[SerializeField]private static List<string> listGroupKey = new List<string>();
 		[SerializeField]private GroupTest[] arrayGroupTest = new GroupTest[0];
 		[System.Serializable]private struct GroupTest
 		{
@@ -31,7 +32,7 @@ namespace xLib.xAnalytics
 			return dict;
 		}
 		
-		public static bool isInit = false;
+		private static bool isInit = false;
 		protected override void Inited()
 		{
 			if(isInit) return;
@@ -39,9 +40,11 @@ namespace xLib.xAnalytics
 			builder.SetLogLevel(LogLevel.FATAL);
 			if(CanDebug) builder.SetLogLevel(logLevel);
 			
+			listGroupKey = new List<string>();
 			List<ABTest> listGroupTest = new List<ABTest>();
 			foreach (GroupTest item in arrayGroupTest)
 			{
+				listGroupKey.Add(item.name);
 				listGroupTest.Add(new ABTest(name:item.name,groupCount:item.groupCount,percent:item.percent));
 			}
 			
@@ -73,6 +76,13 @@ namespace xLib.xAnalytics
 		{
 			if(string.IsNullOrWhiteSpace(value)) return;
 			advertisingIDReceived.Value = value;
+		}
+		
+		public static int GetGroup(string key)
+		{
+			if(!isInit) return 0;
+			if(!listGroupKey.Contains(key)) return 0;
+			return Analytics.GetGroupForABTest(key);
 		}
 		
 		public void LogScreen(string key)
@@ -116,6 +126,11 @@ namespace xLib.xAnalytics
 			[SerializeField]internal float percent;
 		}
 		[SerializeField]private EventString advertisingIDReceived = new EventString();
+		
+		public static int GetGroup(string key)
+		{
+			return 0;
+		}
 	}
 }
 #endif

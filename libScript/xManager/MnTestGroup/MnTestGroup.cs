@@ -32,13 +32,8 @@ namespace xLib
 		public static ValueVoid onRefreshGroups = new ValueVoid();
 		public static int GetGroup(string key)
 		{
-			#if AnalyticsGuru
-			if(MnAnalyticsGuru.isInit)
-			{
-				int valueTemp = Gameguru.Analytics.Analytics.GetGroupForABTest(key);
-				if(valueTemp>0) return valueTemp;
-			}
-			#endif
+			int valueTemp = MnAnalyticsGuru.GetGroup(key);
+			if(valueTemp>0) return valueTemp;
 			
 			return 0;
 		}
