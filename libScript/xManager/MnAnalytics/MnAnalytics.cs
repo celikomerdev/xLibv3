@@ -11,14 +11,15 @@ namespace xLib
 		[SerializeField]private Object[] arrayIAnalyticObject = new Object[0];
 		[SerializeField]private IAnalyticObject[] m_arrayIAnalyticObject = new IAnalyticObject[0];
 		
-		private Dictionary<string, object> Stamp(Dictionary<string, object> dict)
+		private Dictionary<string, object> Stamp(Dictionary<string, object> data)
 		{
+			if(data==null) data = new Dictionary<string,object>();
 			for (int i = 0; i < m_arrayIAnalyticObject.Length; i++)
 			{
 				IAnalyticObject analyticObject = m_arrayIAnalyticObject[i];
-				dict[analyticObject.Name] = analyticObject.AnalyticObject;
+				data[analyticObject.Name] = analyticObject.AnalyticObject;
 			}
-			return dict;
+			return data;
 		}
 		
 		protected override void OnEnabled()
@@ -34,7 +35,7 @@ namespace xLib
 		}
 		
 		public static Action<string,string,double,Dictionary<string,object>> logEvent = delegate{};
-		public void LogEvent(string key,string label,double digit,Dictionary<string,object> data)
+		public void LogEvent(string key="",string label="",double digit=0,Dictionary<string,object> data=null)
 		{
 			data = Stamp(data);
 			if(CanDebug) Debug.Log($"{this.name}:LogEvent:key:{key}:label:{label}:digit:{digit}:data:{data.ToJsonString()}",this);

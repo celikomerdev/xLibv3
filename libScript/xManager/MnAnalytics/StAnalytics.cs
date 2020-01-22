@@ -16,7 +16,6 @@ namespace xLib
 		{
 			if(!canSend) return;
 			if(!MnAnalytics.ins) return;
-			if(data==null) data = new Dictionary<string,object>();
 			MnAnalytics.ins.LogEvent(key,label,digit,data);
 		}
 		
@@ -24,7 +23,6 @@ namespace xLib
 		{
 			if(!canSend) return;
 			if(!MnAnalytics.ins) return;
-			if(data==null) data = new Dictionary<string,object>();
 			MnAnalytics.ins.LogPurchase(key,data);
 		}
 	}
