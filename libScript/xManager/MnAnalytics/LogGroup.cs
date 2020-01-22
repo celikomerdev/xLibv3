@@ -51,6 +51,19 @@ namespace xLib.ToolManager
 		}
 		
 		protected abstract void Send(IAnalyticObject analyticObject);
+		
+		#if UNITY_EDITOR
+		[ContextMenu("DistinctTarget")]
+		private void DistinctTarget()
+		{
+			List<Object> newList = new List<Object>();
+			foreach (Object element in arrayIAnalyticObject)
+			{
+				if (!newList.Contains(element)) newList.Add(element);
+			}
+			arrayIAnalyticObject = newList.ToArray();
+		}
+		#endif
 	}
 }
 #endif

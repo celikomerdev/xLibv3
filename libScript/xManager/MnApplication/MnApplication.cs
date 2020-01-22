@@ -6,6 +6,9 @@ namespace xLib
 {
 	public class MnApplication : SingletonM<MnApplication>
 	{
+		[Header("SystemInfo")]
+		[SerializeField]private NodeString SystemInfo_deviceUniqueIdentifier = null;
+		
 		[Header("Application")]
 		[SerializeField]private NodeString Application_buildGUID = null;
 		[SerializeField]private NodeString Application_genuine = null;
@@ -15,13 +18,13 @@ namespace xLib
 		[SerializeField]private NodeString Application_platform = null;
 		[SerializeField]private NodeString Application_productName = null;
 		[SerializeField]private NodeString Application_sandboxType = null;
+		[SerializeField]private NodeString Application_version_name = null;
 		[SerializeField]private NodeInt Application_version = null;
-		
-		[Header("SystemInfo")]
-		[SerializeField]private NodeString SystemInfo_deviceUniqueIdentifier = null;
 		
 		protected override void Awaked()
 		{
+			SystemInfo_deviceUniqueIdentifier.Value = SystemInfo.deviceUniqueIdentifier;
+			
 			Application_buildGUID.Value = Application.buildGUID;
 			Application_genuine.Value = Application.genuine.ToString();
 			Application_identifier.Value = Application.identifier;
@@ -30,9 +33,13 @@ namespace xLib
 			Application_platform.Value = Application.platform.ToString();
 			Application_productName.Value = Application.productName;
 			Application_sandboxType.Value = Application.sandboxType.ToString();
-			Application_version.Value = int.Parse(Application.version);
+			Application_version_name.Value = Application.version;
 			
-			SystemInfo_deviceUniqueIdentifier.Value = SystemInfo.deviceUniqueIdentifier;
+			int app_version = 0;
+			if(int.TryParse(Application.version, out app_version))
+			{
+				Application_version.Value = app_version;
+			}
 		}
 	}
 }
