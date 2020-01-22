@@ -110,7 +110,7 @@ namespace xLib
 			bool isValid = ProductValidator.IsValid(args);
 			
 			if(CanDebug) Debug.Log($"{this.name}:OnPurchaseProcess:{isValid}:{args.purchasedProduct.definition.id}",this);
-			StAnalytics.LogEvent(key:"IAP_On_Purchase_Process_"+isValid,label:args.purchasedProduct.definition.id);
+			StAnalytics.LogEvent(key:"iap_purchase_process_"+isValid,label:args.purchasedProduct.definition.id);
 			
 			OnPurchase(isValid,args.purchasedProduct.definition.id);
 			
@@ -122,7 +122,7 @@ namespace xLib
 			currentProduct = product;
 			
 			Debug.LogException(new UnityException($"{this.name}:OnPurchaseFailed:{productFailureReason}:{product.definition.id}"),this);
-			StAnalytics.LogEvent(key:"IAP_On_Purchase_Failed_"+productFailureReason,label:product.definition.id);
+			StAnalytics.LogEvent(key:"iap_purchase_fail_"+productFailureReason,label:product.definition.id);
 			
 			OnPurchase(false,product.definition.id);
 		}

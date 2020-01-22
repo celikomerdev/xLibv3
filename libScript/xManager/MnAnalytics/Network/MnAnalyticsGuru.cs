@@ -36,7 +36,7 @@ namespace xLib.xAnalytics
 		{
 			if(isInit) return;
 			AnalyticsBuilder builder = Analytics.Builder;
-			builder.SetLogLevel(LogLevel.WARNING);
+			builder.SetLogLevel(LogLevel.FATAL);
 			if(CanDebug) builder.SetLogLevel(logLevel);
 			
 			List<ABTest> listGroupTest = new List<ABTest>();

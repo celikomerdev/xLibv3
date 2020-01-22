@@ -149,6 +149,7 @@ namespace xLib.libAdvert
 			if(isLoad) return;
 			if(inLoad) return;
 			inLoad = true;
+			StAnalytics.LogEvent(key:"advert_request",label:this.name,data:Data,canSend:isAnalytics);
 			Load();
 		}
 		
