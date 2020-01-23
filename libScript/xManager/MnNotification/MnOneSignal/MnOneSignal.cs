@@ -17,11 +17,11 @@ namespace xLib
 			if(inInit) return;
 			inInit = true;
 			
-			string appId = MnKey.GetValue("OneSignal-Id");
-			string googleProjectNumber = MnKey.GetValue("Google-Project-Number");
+			string appId = MnKey.GetValue("OneSignal_Id");
+			string googleProjectNumber = MnKey.GetValue("Google_Project_Number");
 			
 			if(CanDebug) OneSignal.SetLogLevel(OneSignal.LOG_LEVEL.VERBOSE,OneSignal.LOG_LEVEL.NONE);
-			else OneSignal.SetLogLevel(OneSignal.LOG_LEVEL.NONE,OneSignal.LOG_LEVEL.NONE);
+			else OneSignal.SetLogLevel(OneSignal.LOG_LEVEL.WARN,OneSignal.LOG_LEVEL.NONE);
 			
 			OneSignal.inFocusDisplayType = OneSignal.OSInFocusDisplayOption.Notification;
 			

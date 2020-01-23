@@ -48,7 +48,7 @@ namespace xLib
 				StPopupWindow.Listener(false,Listener);
 				if(!result) return;
 				playerReview.Value = -1;
-				Application.OpenURL(MnKey.GetValue("App-Link"));
+				Application.OpenURL(MnKey.GetValue("App_Link"));
 			}
 			StPopupWindow.Show();
 			

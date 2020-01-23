@@ -49,7 +49,7 @@ namespace xLib.xAnalytics
 		
 		private void SetVersion()
 		{
-			string appBundleId = MnKey.GetValue("App-NameShort");
+			string appBundleId = MnKey.GetValue("App_NameShort");
 			tracker.appVersion = string.Format("{0}-{1}-{2}",appBundleId,Application.version,Application.platform);
 		}
 		
@@ -58,9 +58,9 @@ namespace xLib.xAnalytics
 			string trackingCode = "";
 			
 			#if CanDebug
-			trackingCode = MnKey.GetValue("Google-Analytics-Id-Editor");
+			trackingCode = MnKey.GetValue("Google_Analytics_Id_Editor");
 			#else
-			trackingCode = MnKey.GetValue("Google-Analytics-Id");
+			trackingCode = MnKey.GetValue("Google_Analytics_Id");
 			#endif
 			
 			tracker.trackingCode = trackingCode;

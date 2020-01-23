@@ -37,7 +37,7 @@ namespace xLib.libAdvert.xGoogleAds
 				
 				#if MedVungle
 				VungleRewardedVideoMediationExtras extrasVungle = new VungleRewardedVideoMediationExtras();
-				extrasVungle.SetAllPlacements(new string[] { MnKey.GetValue("Vungle-Rewarded") });
+				extrasVungle.SetAllPlacements(new string[] { MnKey.GetValue("Vungle_Rewarded") });
 				builder.AddMediationExtras(extrasVungle);
 				#endif
 				
