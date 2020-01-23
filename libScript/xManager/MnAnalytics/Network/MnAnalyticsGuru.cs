@@ -15,11 +15,11 @@ namespace xLib.xAnalytics
 		
 		[SerializeField]private static List<string> listGroupKey = new List<string>();
 		[SerializeField]private GroupTest[] arrayGroupTest = new GroupTest[0];
-		[System.Serializable]private struct GroupTest
+		[System.Serializable]public struct GroupTest
 		{
-			[SerializeField]internal string name;
-			[SerializeField]internal int groupCount;
-			[SerializeField]internal float percent;
+			[SerializeField]public string name;
+			[SerializeField]public int groupCount;
+			[SerializeField]public float percent;
 		}
 		
 		private Dictionary<string, object> Stamp(Dictionary<string, object> dict)
