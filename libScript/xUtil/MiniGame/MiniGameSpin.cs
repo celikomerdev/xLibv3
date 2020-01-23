@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using xLib.EventClass;
+using xLib.xNode.NodeObject;
 using xLib.xTween;
 
 namespace xLib
@@ -9,6 +10,7 @@ namespace xLib
 	public class MiniGameSpin : BaseWorkM
 	{
 		[SerializeField]private Transform trans = null;
+		[SerializeField]private NodeFloat tickTime = null;
 		[SerializeField]private Tween tween = null;
 		[SerializeField]private int loop = 2;
 		[SerializeField]private int duration = 1;
@@ -34,6 +36,7 @@ namespace xLib
 		
 		private IEnumerator eSpin(float value)
 		{
+			yield return new WaitForEndOfFrame();
 			Vector3 rotStart = trans.localEulerAngles;
 			rotStart.z %= 360f;
 			trans.localEulerAngles = rotStart;
@@ -50,7 +53,7 @@ namespace xLib
 				
 				float rotFrame = rotFinal*curveOutput;
 				trans.localEulerAngles = rotStart+Vector3.forward*rotFrame;
-				timer += Time.deltaTime;
+				timer += tickTime.Value;
 				yield return new WaitForEndOfFrame();
 			}
 			trans.localEulerAngles = rotStart+Vector3.forward*rotFinal;

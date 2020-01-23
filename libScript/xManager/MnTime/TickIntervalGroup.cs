@@ -24,7 +24,7 @@ namespace xLib.xTick
 				tickInterval.Value = interval;
 				
 				ViewCore.CurrentId = lastViewId;
-				yield return null;
+				yield return new WaitForEndOfFrame();
 			}
 		}
 		

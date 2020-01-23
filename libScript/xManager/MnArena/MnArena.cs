@@ -148,7 +148,7 @@ namespace xLib.xNew
 				tempStartTime--;
 				yield return new WaitForSecondsRealtime(1);
 			}
-			yield return null;
+			yield return new WaitForEndOfFrame();
 		}
 		
 		private bool inCounter;

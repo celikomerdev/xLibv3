@@ -21,7 +21,7 @@ namespace xLib
 					elapsedTime += ignoreTimeScale ? Time.unscaledDeltaTime : Time.deltaTime;
 					float percentage = Mathf.Clamp01(elapsedTime/duration);
 					graphic.color = Color.Lerp(m_StartColor,targetColor,percentage);
-					yield return null;
+					yield return new WaitForEndOfFrame();
 				}
 				graphic.color = targetColor;
 			}

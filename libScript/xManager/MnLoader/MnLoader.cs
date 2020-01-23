@@ -56,14 +56,14 @@ namespace xLib
 			loadingReal.Value = true;
 			ThreadPriority backgroundLoadingPriorityCache = Application.backgroundLoadingPriority;
 			Application.backgroundLoadingPriority = backgroundLoadingPriority;
-			yield return null;
+			yield return new WaitForEndOfFrame();
 			
 			if(!isAsync)
 			{
 				loadingProgress.Value = 0.5f;
-				yield return null;
+				yield return new WaitForEndOfFrame();
 				SceneManager.LoadScene(value);
-				yield return null;
+				yield return new WaitForEndOfFrame();
 			}
 			else
 			{
@@ -71,10 +71,10 @@ namespace xLib
 				while(!asyncLoad.isDone)
 				{
 					loadingProgress.Value = asyncLoad.progress + 0.1f;
-					yield return null;
+					yield return new WaitForEndOfFrame();
 				}
 			}
-			yield return null;
+			yield return new WaitForEndOfFrame();
 			Application.backgroundLoadingPriority = backgroundLoadingPriorityCache;
 			inLoad = false;
 			

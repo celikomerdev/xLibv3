@@ -20,7 +20,7 @@ namespace xLib
 					float ratio = Mathf.Clamp01(elapsedTime/duration);
 					ratio = curve.Evaluate(ratio);
 					call.Invoke(ratio);
-					yield return null;
+					yield return new WaitForEndOfFrame();
 				}
 			}
 		}

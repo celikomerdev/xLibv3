@@ -29,7 +29,7 @@ namespace xLib
 			}
 			www.Dispose();
 			www = null;
-			yield return null;
+			yield return new WaitForEndOfFrame();
 		}
 	}
 }

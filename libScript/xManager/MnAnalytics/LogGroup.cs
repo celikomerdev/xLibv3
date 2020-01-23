@@ -40,7 +40,7 @@ namespace xLib.ToolManager
 		
 		private IEnumerator SendDirty(List<IAnalyticObject> list)
 		{
-			yield return null;
+			yield return new WaitForEndOfFrame();
 			ClearAll();
 			
 			for (int i = 0; i < list.Count; i++)

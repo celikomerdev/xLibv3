@@ -85,7 +85,7 @@ namespace xLib
 				float ratio = Mathf.Clamp01(elapsedTime/duration);
 				valueTemp = Vector2.Lerp(valueTemp,newNormalizedPosition,ratio);
 				scrollRect.normalizedPosition = valueTemp;
-				yield return null;
+				yield return new WaitForEndOfFrame();
 			}
 			scrollRect.normalizedPosition = newNormalizedPosition;
 		}

@@ -39,7 +39,7 @@ namespace xLib
 				if (actions.Count > 0)
 					yield return m_Owner.NewCoroutine(actions.Dequeue());
 				else
-					yield return null;
+					yield return new WaitForEndOfFrame();
 			}
 		}
 	}
