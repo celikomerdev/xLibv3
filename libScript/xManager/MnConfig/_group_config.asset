@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dccd38bb97a206d43824303a6765a910, type: 3}
-  m_Name: MnConfig_Asset
+  m_Script: {fileID: 11500000, guid: 6d08c530b01949d44b2ba24e944a2436, type: 3}
+  m_Name: _group_config
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,8 +20,11 @@ MonoBehaviour:
     runInEditMode: 1
   nodeValue:
     nodeSetting:
-      key: 6c4629b93b93bed44811f25812507fee
+      key: b5c283b949447aa4788ee6949c05eccf
       isMulti: 0
-    value: {fileID: 4900000, guid: 86b35b43636e445448d14d88767a7731, type: 3}
-    skipCompareRpc: 1
-    isCompare: 1
+    value:
+      arrayObject:
+      - {fileID: 11400000, guid: 6c4629b93b93bed44811f25812507fee, type: 2}
+    cryptoVersion:
+    - keyEncrypt: xProject
+      nodeEncrypt: []

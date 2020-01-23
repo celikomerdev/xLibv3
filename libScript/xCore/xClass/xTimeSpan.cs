@@ -35,11 +35,11 @@ namespace xLib
 			if(provider == null) provider = CultureInfo.CurrentCulture;
 			string result = "";
 			
-			Regex reg_exp = new Regex("[A-Z]+|[^A-Z]+");
+			Regex reg_exp = new Regex("[A-Z.]+|[^A-Z.]+");
 			MatchCollection matches = reg_exp.Matches(@format);
 			foreach (Match piece in matches)
 			{
-				string piece_format = new string('0',piece.Value.Length);
+				string piece_format = Regex.Replace(piece.Value,"[A-Z]","0");
 				
 				switch (piece.Value[0])
 				{
@@ -52,19 +52,19 @@ namespace xLib
 						else result += "'+'";
 						break;
 					case 'F':
-						result += "'"+((int)timeSpan.TotalMilliseconds).ToString(piece_format)+"'";
+						result += "'"+timeSpan.TotalMilliseconds.ToString(piece_format)+"'";
 						break;
 					case 'S':
-						result += "'"+((int)timeSpan.TotalSeconds).ToString(piece_format)+"'";
+						result += "'"+timeSpan.TotalSeconds.ToString(piece_format)+"'";
 						break;
 					case 'M':
-						result += "'"+((int)timeSpan.TotalMinutes).ToString(piece_format)+"'";
+						result += "'"+timeSpan.TotalMinutes.ToString(piece_format)+"'";
 						break;
 					case 'H':
-						result += "'"+((int)timeSpan.TotalHours).ToString(piece_format)+"'";
+						result += "'"+timeSpan.TotalHours.ToString(piece_format)+"'";
 						break;
 					case 'D':
-						result += "'"+((int)timeSpan.TotalDays).ToString(piece_format)+"'";
+						result += "'"+timeSpan.TotalDays.ToString(piece_format)+"'";
 						break;
 					case 'X':
 						result += "'"+timeSpan.ToMax(piece_format)+"'";
