@@ -12,18 +12,18 @@ namespace xLib
 			MnAnalytics.ins.LogScreen(key);
 		}
 		
-		public static void LogEvent(string key="",string label="",double digit=0,Dictionary<string,object> data=null,bool canSend=true)
+		public static void LogEvent(string group="group",string key="",double digit=0,string data="",Dictionary<string,object> dict=null,bool canSend=true)
 		{
 			if(!canSend) return;
 			if(!MnAnalytics.ins) return;
-			MnAnalytics.ins.LogEvent(key,label,digit,data);
+			MnAnalytics.ins.LogEvent(group,key,digit,data,dict);
 		}
 		
-		public static void LogPurchase(string key="",Dictionary<string, object> data=null,bool canSend=true)
+		public static void LogPurchase(string key="",Dictionary<string, object> dict=null,bool canSend=true)
 		{
 			if(!canSend) return;
 			if(!MnAnalytics.ins) return;
-			MnAnalytics.ins.LogPurchase(key,data);
+			MnAnalytics.ins.LogPurchase(key,dict);
 		}
 	}
 }

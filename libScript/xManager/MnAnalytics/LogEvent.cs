@@ -1,11 +1,26 @@
 ﻿#if xLibv3
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace xLib.ToolManager
 {
 	public class LogEvent : BaseMainM
 	{
+		[FormerlySerializedAs("key")]
+		[SerializeField]private string group = "group";
+		public string Group
+		{
+			get
+			{
+				return group;
+			}
+			set
+			{
+				this.group = value;
+			}
+		}
+		
+		[FormerlySerializedAs("label")]
 		[SerializeField]private string key = "key";
 		public string Key
 		{
@@ -16,19 +31,6 @@ namespace xLib.ToolManager
 			set
 			{
 				this.key = value;
-			}
-		}
-		
-		[SerializeField]private string label = "label";
-		public string Label
-		{
-			get
-			{
-				return label;
-			}
-			set
-			{
-				this.label = value;
 			}
 		}
 		
@@ -60,7 +62,7 @@ namespace xLib.ToolManager
 		
 		public void Call()
 		{
-			StAnalytics.LogEvent(key:key,label:label,digit:digit,data:new Dictionary<string,object>{{"data",data}});
+			StAnalytics.LogEvent(group:group,key:key,digit:digit,data:data);
 		}
 	}
 }

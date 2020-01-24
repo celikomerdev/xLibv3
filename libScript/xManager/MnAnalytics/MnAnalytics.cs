@@ -34,12 +34,12 @@ namespace xLib
 			logScreen(key);
 		}
 		
-		public static Action<string,string,double,Dictionary<string,object>> logEvent = delegate{};
-		public void LogEvent(string key="",string label="",double digit=0,Dictionary<string,object> data=null)
+		public static Action<string,string,double,string,Dictionary<string,object>> logEvent = delegate{};
+		public void LogEvent(string group="",string key="",double digit=0,string data="",Dictionary<string,object> dict=null)
 		{
-			data = Stamp(data);
-			if(CanDebug) Debug.Log($"{this.name}:LogEvent:key:{key}:label:{label}:digit:{digit}:data:{data.ToJsonString()}",this);
-			logEvent(key,label,digit,data);
+			dict = Stamp(dict);
+			if(CanDebug) Debug.Log($"{this.name}:LogEvent:group:{group}:key:{key}:digit:{digit}:data:{data}:dict:{dict.ToJsonString()}",this);
+			logEvent(group,key,digit,data,dict);
 		}
 		
 		public static Action<string,Dictionary<string,object>> logPurchase = delegate{};

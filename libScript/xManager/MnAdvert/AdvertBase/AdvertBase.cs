@@ -26,7 +26,7 @@ namespace xLib.libAdvert
 		
 		[Header("Analytics")]
 		public bool isAnalytics = true;
-		private Dictionary<string,object> Data
+		private Dictionary<string,object> Dict
 		{
 			get
 			{
@@ -83,7 +83,7 @@ namespace xLib.libAdvert
 			if(isLoad == value) return;
 			isLoad = value;
 			
-			if(isLoad) StAnalytics.LogEvent(key:"advert_load_success",label:this.name,data:Data,canSend:isAnalytics);
+			if(isLoad) StAnalytics.LogEvent(group:"advert_load_success",key:this.name,dict:Dict,canSend:isAnalytics);
 			
 			SetLoaded(value);
 			onLoad.Invoke(isLoad);
@@ -93,7 +93,7 @@ namespace xLib.libAdvert
 		protected void OnLoadFailBase()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnLoadFailBase",this);
-			StAnalytics.LogEvent(key:"advert_load_fail",label:this.name,data:Data,canSend:isAnalytics);
+			StAnalytics.LogEvent(group:"advert_load_fail",key:this.name,dict:Dict,canSend:isAnalytics);
 			onLoadFail.Invoke();
 			SetLoadedBase(false);
 		}
@@ -102,7 +102,7 @@ namespace xLib.libAdvert
 		protected void OnShowBase()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnShowBase",this);
-			StAnalytics.LogEvent(key:"advert_show",label:this.name,data:Data,canSend:isAnalytics);
+			StAnalytics.LogEvent(group:"advert_show",key:this.name,dict:Dict,canSend:isAnalytics);
 			onShow.Invoke();
 		}
 		
@@ -110,7 +110,7 @@ namespace xLib.libAdvert
 		protected void OnRewardBase(int reward)
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnRewardBase:reward:{reward}",this);
-			StAnalytics.LogEvent(key:"advert_reward",label:this.name,digit:reward,data:Data,canSend:isAnalytics);
+			StAnalytics.LogEvent(group:"advert_reward",key:this.name,digit:reward,dict:Dict,canSend:isAnalytics);
 			onReward.Invoke(reward);
 		}
 		
@@ -119,14 +119,14 @@ namespace xLib.libAdvert
 		{
 
 			if(CanDebug) Debug.Log($"{this.name}:OnClickBase",this);
-			StAnalytics.LogEvent(key:"advert_click",label:this.name,data:Data,canSend:isAnalytics);
+			StAnalytics.LogEvent(group:"advert_click",key:this.name,dict:Dict,canSend:isAnalytics);
 			onClick.Invoke();
 		}
 		
 		protected void OnVisitBase()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnVisitBase",this);
-			StAnalytics.LogEvent(key:"advert_visit",label:this.name,data:Data,canSend:isAnalytics);
+			StAnalytics.LogEvent(group:"advert_visit",key:this.name,dict:Dict,canSend:isAnalytics);
 			// onVisit.Invoke();
 		}
 		
@@ -134,7 +134,7 @@ namespace xLib.libAdvert
 		protected void OnCloseBase()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnCloseBase",this);
-			StAnalytics.LogEvent(key:"advert_close",label:this.name,data:Data,canSend:isAnalytics);
+			StAnalytics.LogEvent(group:"advert_close",key:this.name,dict:Dict,canSend:isAnalytics);
 			onClose.Invoke();
 		}
 		#endregion
@@ -149,7 +149,7 @@ namespace xLib.libAdvert
 			if(isLoad) return;
 			if(inLoad) return;
 			inLoad = true;
-			StAnalytics.LogEvent(key:"advert_request",label:this.name,data:Data,canSend:isAnalytics);
+			StAnalytics.LogEvent(group:"advert_request",key:this.name,dict:Dict,canSend:isAnalytics);
 			Load();
 		}
 		

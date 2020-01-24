@@ -91,13 +91,14 @@ namespace xLib.xAnalytics
 			Analytics.LogScreen(key);
 		}
 		
-		public void LogEvent(string key,string label,double digit,Dictionary<string,object> data)
+		public void LogEvent(string group,string key,double digit,string data,Dictionary<string,object> dict)
 		{
-			data = Stamp(data);
-			data["label"] = label;
-			data["digit"] = digit;
-			if(CanDebug) Debug.Log($"{this.name}:LogEvent:{key}:data:{data.ToJsonString()}",this);
-			Analytics.LogEvent(key,data);
+			dict = Stamp(dict);
+			dict["key"] = key;
+			dict["digit"] = digit;
+			dict["data"] = data;
+			if(CanDebug) Debug.Log($"{this.name}:LogEvent:{group}:dict:{dict.ToJsonString()}",this);
+			Analytics.LogEvent(group,dict);
 		}
 		
 		public void LogPurchase(string sku, double price, string currency, string receipt, Dictionary<string, object> data)
