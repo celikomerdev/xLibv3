@@ -17,10 +17,12 @@ namespace xLib
 			{
 				return nodeSetting.Key;
 			}
+			#if UNITY_EDITOR
 			set
 			{
 				nodeSetting.Key = value;
 			}
+			#endif
 		}
 		
 		[Header("Value")]

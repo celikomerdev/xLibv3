@@ -9,7 +9,9 @@ namespace xLib.xNode.NodeObject
 		public abstract string Key
 		{
 			get;
+			#if UNITY_EDITOR
 			protected set;
+			#endif
 		}
 		
 		public abstract string Name

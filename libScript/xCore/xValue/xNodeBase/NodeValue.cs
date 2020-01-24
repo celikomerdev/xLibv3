@@ -23,10 +23,13 @@ namespace xLib.xNode.NodeObject
 			{
 				return Node.nodeSetting.Key;
 			}
+			#if UNITY_EDITOR
 			protected set
 			{
+				Init(true);
 				Node.nodeSetting.Key = value;
 			}
+			#endif
 		}
 		
 		public override string Name
