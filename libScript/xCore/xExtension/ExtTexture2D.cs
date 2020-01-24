@@ -30,8 +30,9 @@ namespace xLib
 			texture2D.ReadPixels(new Rect(0,0,renderTexture.width,renderTexture.height),0,0);
 			texture2D.Apply();
 			
-			RenderTexture.active = activeLast;
+			RenderTexture.active = activeLast; //TODO FATAL
 			RenderTexture.ReleaseTemporary(renderTexture);
+			RenderTexture.active = activeLast;
 			
 			return texture2D;
 		}

@@ -12,7 +12,7 @@ namespace xLib.xNode.NodeObject
 			MnThread.StartThread(useThread:false,call:delegate
 			{
 				string value = SerializedObject.ToString();
-				xPersistentData.SetString(Key,value,useThread:true);
+				xPersistentData.SetString(Key,value,useThread:false);
 			});
 			
 			// TODO enable

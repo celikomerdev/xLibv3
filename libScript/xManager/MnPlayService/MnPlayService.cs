@@ -58,7 +58,7 @@ namespace xLib
 			if(isInit) return;
 			inInit = true;
 			
-			MnThread.StartThread(iDebug:this,useThread:true,priority:1,call:delegate
+			MnThread.StartThread(iDebug:this,useThread:false,priority:1,call:delegate
 			{
 				PlayGamesPlatform.DebugLogEnabled = CanDebug;
 			

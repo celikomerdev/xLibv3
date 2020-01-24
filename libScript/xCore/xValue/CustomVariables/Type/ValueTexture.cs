@@ -15,19 +15,20 @@ namespace xLib.xValueClass
 			return (value == Value);
 		}
 		
-		protected override void KeepProperties(Texture value)
-		{
-			if(value == null) return;
-			if(ValueDefault != null)
-			{
-				value.filterMode = ValueDefault.filterMode;
-				value.anisoLevel = ValueDefault.anisoLevel;
-				value.mipMapBias = ValueDefault.mipMapBias;
-				value.wrapMode = ValueDefault.wrapMode;
-			}
-			((Texture2D)value).Compress(true);
-			((Texture2D)value).Apply();
-		}
+		//TODO FATAL
+		// protected override void KeepProperties(Texture value)
+		// {
+		// 	if(value == null) return;
+		// 	if(ValueDefault != null)
+		// 	{
+		// 		value.filterMode = ValueDefault.filterMode;
+		// 		value.anisoLevel = ValueDefault.anisoLevel;
+		// 		value.mipMapBias = ValueDefault.mipMapBias;
+		// 		value.wrapMode = ValueDefault.wrapMode;
+		// 	}
+		// 	((Texture2D)value).Compress(true);
+		// 	((Texture2D)value).Apply();
+		// }
 		#endregion
 		
 		#region Override
@@ -46,11 +47,13 @@ namespace xLib.xValueClass
 			get
 			{
 				string stringData = "";
-				if(Value!=null)
-				{
-					Texture2D texture2D = (Texture2D)Value;
-					stringData = System.Convert.ToBase64String(texture2D.xEncodeToPNG());
-				}
+				
+				//TODO FATAL
+				// if(Value!=null)
+				// {
+				// 	Texture2D texture2D = (Texture2D)Value;
+				// 	stringData = System.Convert.ToBase64String(texture2D.xEncodeToPNG());
+				// }
 				//if(CanDebug) Debug.Log(this.name+": DataLenghtGet: "+stringData.Length,this);
 				
 				JToken jToken;
@@ -65,10 +68,11 @@ namespace xLib.xValueClass
 				string stringData = JToken.FromObject(stringJson).ToObject<string>();
 				//if(CanDebug) Debug.Log(this.name+": DataLenghtSet: "+stringData.Length,this);
 				
-				Texture2D texture2D = new Texture2D(2,2);
-				texture2D.Load(System.Convert.FromBase64String(stringData));
+				//TODO FATAL
+				// Texture2D texture2D = new Texture2D(2,2);
+				// texture2D.Load(System.Convert.FromBase64String(stringData));
 				
-				Value = (Texture)texture2D;
+				// Value = (Texture)texture2D;
 			}
 		}
 		#endregion

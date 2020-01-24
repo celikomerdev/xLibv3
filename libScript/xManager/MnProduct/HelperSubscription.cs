@@ -14,19 +14,19 @@ namespace xLib.Purchasing
 		{
 			if (item.definition.type != ProductType.Subscription)
 			{
-				Debug.LogWarning("the product is not a subscription product");
+				if(CanDebug) Debug.LogWarning("the product is not a subscription product");
 				return null;
 			}
 			
 			if (item.receipt == null)
 			{
-				Debug.LogWarning("the product should have a valid receipt");
+				if(CanDebug) Debug.LogWarning("the product should have a valid receipt");
 				return null;
 			}
 			
 			if (!IsAvailableForSubscriptionManager(item.receipt))
 			{
-				Debug.LogWarning("IsAvailableForSubscriptionManager:false");
+				if(CanDebug) Debug.LogWarning("IsAvailableForSubscriptionManager:false");
 				return null;
 			}
 			
