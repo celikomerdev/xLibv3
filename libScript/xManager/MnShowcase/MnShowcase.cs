@@ -41,7 +41,7 @@ namespace xLib
 			}
 			www.Dispose();
 			www = null;
-			yield return null;
+			yield return new WaitForEndOfFrame();
 		}
 		#endregion
 		
@@ -54,7 +54,7 @@ namespace xLib
 			xSimpleJSON.JSONNode mnShowcase = xSimpleJSON.JSON.Parse(www.text);
 			xSimpleJSON.JSONNode infoShowcase = mnShowcase["infoShowcase"];
 			
-			string thisNameShort = MnKey.GetValue("App-NameShort");
+			string thisNameShort = MnKey.GetValue("App_NameShort");
 			
 			for (int indexShowcase = 0; indexShowcase < infoShowcase.Count; indexShowcase++)
 			{

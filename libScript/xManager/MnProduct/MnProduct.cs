@@ -1,6 +1,7 @@
 ﻿#if xLibv3
 #if IapUnity
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using xLib.Purchasing;
@@ -16,11 +17,11 @@ namespace xLib
 		[SerializeField]private FakeStoreUIMode fakeStoreUIMode = FakeStoreUIMode.StandardUser;
 		
 		#region Init
-		private bool inInit;
-		public override void Init()
+		private bool inInit = false;
+		public NodeBool isInit = null;
+		protected override void Inited()
 		{
-			base.Init();
-			if(onInit.Value) return;
+			if(isInit.Value) return;
 			if(inInit) return;
 			inInit = true;
 			
@@ -28,31 +29,26 @@ namespace xLib
 			ConfigurationBuilder builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 			
 			ProductCatalog catalog = ProductCatalog.LoadDefaultCatalog();
-			IAPConfigurationHelper.PopulateConfigurationBuilder(ref builder,catalog);
+			HelperCatalog.PopulateConfigurationBuilder(ref builder,catalog);
 			
 			HelperSubscription.CanDebug = CanDebug;
 			ProductValidator.CanDebug = CanDebug;
 			ProductValidator.UseValidate = useValidate;
 			ProductValidator.Init();
 			
-			UnityPurchasing.Initialize(this,builder);
+			MnThread.StartThread(iDebug:this,useThread:false,priority:1,call:delegate{UnityPurchasing.Initialize(this,builder);});
 		}
+		
 		#endregion
 		
 		
 		#region Implementation
-		private static IStoreController m_Controller;
-		private static IExtensionProvider m_extensions;
-		private static ITransactionHistoryExtensions m_TransactionHistoryExtensions;
+		private static IStoreController m_Controller = null;
+		private static IExtensionProvider m_extensions = null;
 		
-		#pragma warning disable
-		private static IGooglePlayStoreExtensions m_GooglePlayStoreExtensions;
-		//Dictionary<string, string> google_play_store_product_SKUDetails_json;
-		#pragma warning restore
-		
-		private static IAppleExtensions m_AppleExtensions;
-		//Dictionary<string, string> introductory_info_dict;
-		
+		public static Dictionary<string, string> productsDetails = new Dictionary<string,string>();
+		private static IGooglePlayStoreExtensions m_GooglePlayStoreExtensions = null;
+		private static IAppleExtensions m_AppleExtensions = null;
 		
 		void IStoreListener.OnInitialized(IStoreController controller,IExtensionProvider extensions)
 		{
@@ -62,34 +58,49 @@ namespace xLib
 			if(StandardPurchasingModule.Instance().appStore == AppStore.GooglePlay)
 			{
 				m_GooglePlayStoreExtensions = m_extensions.GetExtension<IGooglePlayStoreExtensions>();
-				//google_play_store_product_SKUDetails_json = m_GooglePlayStoreExtensions.GetProductJSONDictionary();
+				productsDetails = m_GooglePlayStoreExtensions.GetProductJSONDictionary();
 			}
 			else if(StandardPurchasingModule.Instance().appStore == AppStore.AppleAppStore)
 			{
 				m_AppleExtensions = m_extensions.GetExtension<IAppleExtensions>();
-				//introductory_info_dict = m_AppleExtensions.GetIntroductoryPriceDictionary();
+				// productDetails = m_AppleExtensions.GetIntroductoryPriceDictionary();
+				productsDetails = m_AppleExtensions.GetProductDetails();
+			}
+			
+			if(CanDebug)
+			{
+				foreach (var item in controller.products.all)
+				{
+					Debug.Log(string.Join("-",
+					new[]
+					{
+						item.definition.id,
+						item.definition.storeSpecificId,
+						item.definition.type.ToString(),
+						item.metadata.localizedPrice.ToString(),
+						item.metadata.localizedPriceString
+					}));
+				}
+				
+				if(productsDetails==null)
+				{
+					Debug.LogWarning($"{this.name}:productsDetails:null",this);
+				}
+				else
+				{
+					foreach (KeyValuePair<string,string> productDetails in productsDetails)
+					{
+						Debug.Log($"{this.name}:productsDetails:{productDetails.Key}:{productDetails.Value}",this);
+					}
+				}
 			}
 			
 			OnInit(true);
-			
-			if(!CanDebug) return;
-			foreach (var item in controller.products.all)
-			{
-				Debug.Log(string.Join("-",
-				new[]
-				{
-					item.definition.id,
-					item.definition.storeSpecificId,
-					item.definition.type.ToString(),
-					item.metadata.localizedPrice.ToString(),
-					item.metadata.localizedPriceString
-				}));
-			}
 		}
 		
 		void IStoreListener.OnInitializeFailed(InitializationFailureReason error)
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnInitializeFailed:{0}",error);
+			Debug.LogException(new UnityException($"{this.name}:OnInitializeFailed:{error}"),this);
 			OnInit(false);
 		}
 		
@@ -98,8 +109,8 @@ namespace xLib
 			currentProduct = args.purchasedProduct;
 			bool isValid = ProductValidator.IsValid(args);
 			
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchaseProcess:{0}:{1}",isValid,args.purchasedProduct.definition.id);
-			StAnalytics.LogEvent("IAP","OnPurchaseProcess:"+isValid,args.purchasedProduct.definition.id);
+			if(CanDebug) Debug.Log($"{this.name}:OnPurchaseProcess:{isValid}:{args.purchasedProduct.definition.id}",this);
+			StAnalytics.LogEvent(group:"iap_purchase_process_"+isValid,key:args.purchasedProduct.definition.id);
 			
 			OnPurchase(isValid,args.purchasedProduct.definition.id);
 			
@@ -110,8 +121,8 @@ namespace xLib
 		{
 			currentProduct = product;
 			
-			xDebug.LogExceptionFormat(this,this.name+":OnPurchaseFailed:{0}:{1}",productFailureReason,product.definition.id);
-			StAnalytics.LogEvent("IAP","OnPurchaseFailed:"+productFailureReason,product.definition.id);
+			Debug.LogException(new UnityException($"{this.name}:OnPurchaseFailed:{productFailureReason}:{product.definition.id}"),this);
+			StAnalytics.LogEvent(group:"iap_purchase_fail_"+productFailureReason,key:product.definition.id);
 			
 			OnPurchase(false,product.definition.id);
 		}
@@ -120,7 +131,7 @@ namespace xLib
 		
 		#region Fuctions
 		#region Purchase
-		public NodeBool inPurchase;
+		public NodeBool inPurchase = null;
 		public void Purchase(Product product)
 		{
 			currentProduct = product;
@@ -128,7 +139,7 @@ namespace xLib
 			if(product == null) return;
 			if(inPurchase.Value) return;
 			inPurchase.Value = true;
-			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",product.definition.id);
+			if(CanDebug) Debug.Log($"{this.name}:Purchase:{product.definition.id}",this);
 			
 			StPopupBar.QueueMessage(MnLocalize.GetValue("Please Wait"));
 			m_Controller.InitiatePurchase(product);
@@ -149,14 +160,14 @@ namespace xLib
 		#endregion
 		
 		#region Restore
-		public NodeBool inRestore;
+		public NodeBool inRestore = null;
 		public void Restore()
 		{
 			if(inRestore.Value) return;
 			inRestore.Value = true;
-			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
+			if(CanDebug) Debug.Log($"{this.name}:Restore",this);
 			
-			if(!onInit.Value)
+			if(!isInit.Value)
 			{
 				Init();
 				OnRestoreFalse();
@@ -173,7 +184,7 @@ namespace xLib
 			}
 			else
 			{
-				if(CanDebug) Debug.LogWarningFormat(this,this.name+":NotSupported:{0}",StandardPurchasingModule.Instance().appStore);
+				if(CanDebug) Debug.LogWarning($"{this.name}:NotSupported:{StandardPurchasingModule.Instance().appStore}",this);
 				OnRestoreFalse();
 			}
 		}
@@ -190,24 +201,23 @@ namespace xLib
 		
 		public Product GetProduct(string key)
 		{
-			if(onInit.Value) return m_Controller.products.WithID(key);
+			if(isInit.Value) return m_Controller.products.WithID(key);
 			else return null;
 		}
 		
-		public NodeBool onInit;
 		private void OnInit(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnInit:{0}",value);
+			if(CanDebug) Debug.Log($"{this.name}:OnInit:{value}",this);
 			inInit = false;
-			onInit.Value = value;
+			isInit.Value = value;
 			if(!value) return;
 		}
 		
-		public NodeBool onPurchase;
-		public static Action<bool,string> onPurchaseProduct;
+		public NodeBool onPurchase = null;
+		public static Action<bool,string> onPurchaseProduct = delegate{};
 		private void OnPurchase(bool result,string productId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchase:{0}:{1}",result,productId);
+			if(CanDebug) Debug.Log($"{this.name}:OnPurchase:{result}:{productId}",this);
 			
 			if(!result) StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Failed"));
 			else StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Successful"));
@@ -218,10 +228,10 @@ namespace xLib
 			inPurchase.Value = false;
 		}
 		
-		public NodeBool onRestore;
+		public NodeBool onRestore = null;
 		private void OnRestoreTrue(bool isContinue)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestore:True:isContinue:{0}",isContinue);
+			if(CanDebug) Debug.Log($"{this.name}:OnRestore:True:isContinue:{isContinue}",this);
 			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Successful"));
 			inRestore.Value = false;
 			onRestore.Value = true;
@@ -229,7 +239,7 @@ namespace xLib
 		
 		private void OnRestoreFalse()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRestore:False");
+			if(CanDebug) Debug.Log($"{this.name}:OnRestore:False",this);
 			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Failed"));
 			inRestore.Value = false;
 			onRestore.Value = false;
@@ -250,16 +260,16 @@ namespace xLib
 		[SerializeField]private bool useValidate = true;
 		[SerializeField]private int fakeStoreUIMode = 1;
 		
-		public NodeBool onInit = null;
-		public override void Init()
+		public NodeBool isInit = null;
+		protected override void Inited()
 		{
-			onInit.Value = true;
+			isInit.Value = true;
 		}
 		
 		public NodeBool inPurchase = null;
 		public void Purchase(string productId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Purchase:{0}",productId);
+			if(CanDebug) Debug.Log($"{this.name}:Purchase:{productId}",this);
 			currentProductId = productId;
 			
 			if(string.IsNullOrWhiteSpace(productId)) return;
@@ -270,7 +280,7 @@ namespace xLib
 			
 			StPopupWindow.Reset();
 			StPopupWindow.HeaderLocalized("warning");
-			StPopupWindow.Body(string.Format("{0}\n{1}\nbuy?",productId,"1.00$"));
+			StPopupWindow.Body(string.Format($"{productId}\n$1.00\nbuy?"));
 			StPopupWindow.AcceptLocalized("yes");
 			StPopupWindow.DeclineLocalized("no");
 			StPopupWindow.Listener(true,Listener);
@@ -283,10 +293,10 @@ namespace xLib
 		}
 		
 		public NodeBool onPurchase = null;
-		public static Action<bool,string> onPurchaseProduct;
+		public static Action<bool,string> onPurchaseProduct = delegate{};
 		private void OnPurchase(bool result,string productId)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnPurchase:{0}:{1}",result,productId);
+			if(CanDebug) Debug.Log($"{this.name}:OnPurchase:{result}:{productId}",this);
 			currentProductId = productId;
 			
 			if(!result) StPopupBar.QueueMessage(MnLocalize.GetValue("Purchase Failed"));
@@ -305,16 +315,17 @@ namespace xLib
 			if(inRestore.Value) return;
 			inRestore.Value = true;
 			
-			if(CanDebug) Debug.LogFormat(this,this.name+":Restore");
-			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Failed"));
+			if(CanDebug) Debug.Log($"{this.name}:Restore",this);
+			StPopupBar.QueueMessage(MnLocalize.GetValue("Restore Successful"));
+			
 			inRestore.Value = false;
-			onRestore.Value = false;
+			onRestore.Value = true;
 		}
 		
 		public static string currentProductId = null;
 		public string GetProduct(string key)
 		{
-			if(onInit.Value) return key;
+			if(isInit.Value) return key;
 			else return null;
 		}
 		#pragma warning restore

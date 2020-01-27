@@ -18,7 +18,7 @@ namespace xLib
 			}
 			set
 			{
-				if(left == value) return;
+				// if(left == value) return;
 				left = value;
 				Compare();
 			}
@@ -33,7 +33,7 @@ namespace xLib
 			}
 			set
 			{
-				if(right == value) return;
+				// if(right == value) return;
 				right = value;
 				Compare();
 			}

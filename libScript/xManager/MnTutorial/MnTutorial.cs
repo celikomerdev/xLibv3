@@ -5,11 +5,9 @@ namespace xLib
 {
 	public class MnTutorial : SingletonM<MnTutorial>
 	{
-		public NodeString nodeMessageString;
-		public NodeTransform tutorialTransformPoint;
-		public NodeVoid onTutorialClick;
-		
-		
+		public NodeString nodeMessageString = null;
+		public NodeTransform tutorialTransformPoint = null;
+		public NodeVoid onTutorialClick = null;
 	}
 }
 #endif

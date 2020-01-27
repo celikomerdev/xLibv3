@@ -21,7 +21,7 @@ namespace xLib
 			ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 			if(savedGameClient == null)
 			{
-				xDebug.LogExceptionFormat(this,this.name+":OpenSavedGamesPopup:null");
+				xLogger.LogExceptionFormat(this,this.name+":OpenSavedGamesPopup:null");
 				return;
 			}
 			savedGameClient.ShowSelectSavedGameUI(MnLocalize.GetValue("Select Your Saved Game"),maxDisplayedSavedGames,showCreateSaveUI,showDeleteSaveUI,OnGameSelected);
@@ -72,7 +72,8 @@ namespace xLib
 			ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 			
 			SavedGameMetadataUpdate.Builder builder = new SavedGameMetadataUpdate.Builder();
-			builder.WithUpdatedDescription("Play Time: "+ TimeSpan.FromTicks(MnSnapshot.PlayTime).ToStringCustom("HH:mm:ss"));
+			string description = string.Format(@"{0}: {1:HH\:mm\:ss}",MnLocalize.GetValue("Play Time"),(xTimeSpan)TimeSpan.FromTicks(MnSnapshot.PlayTime));
+			builder.WithUpdatedDescription(description);
 			builder.WithUpdatedPlayedTime(TimeSpan.FromTicks(MnSnapshot.PlayTime));
 			SavedGameMetadataUpdate updatedMetadata = builder.Build();
 			

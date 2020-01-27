@@ -1,34 +1,13 @@
 ﻿#if xLibv3
-using UnityEngine;
+using System.Collections.Generic;
 
 namespace xLib.ToolManager
 {
-	public class LogGroupKey : BaseWorkM
+	public class LogGroupKey : LogGroup
 	{
-		[SerializeField]private Object[] arrayIAnalyticObject = new Object[0];
-		[SerializeField]private IAnalyticObject[] m_arrayIAnalyticObject = new IAnalyticObject[0];
-		
-		private void Start()
+		protected override void Send(IAnalyticObject analyticObject)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Start");
-			m_arrayIAnalyticObject = m_arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>();
-		}
-		
-		private void OnCall()
-		{
-			for (int i = 0; i < m_arrayIAnalyticObject.Length; i++)
-			{
-				IAnalyticObject analyticObject = m_arrayIAnalyticObject[i];
-				if(!analyticObject.AnalyticDirty) continue;
-				analyticObject.AnalyticDirty = false;
-				if(CanDebug) Debug.LogFormat(analyticObject.UnityObject,"AnalyticsSend:{0}:{1}:{2}:{3}",ViewCore.CurrentId,analyticObject.Name,analyticObject.AnalyticString,analyticObject.AnalyticDigit);
-				Send(analyticObject);
-			}
-		}
-		
-		protected virtual void Send(IAnalyticObject analyticObject)
-		{
-			MnAnalytics.ins.LogEvent("Value",analyticObject.Key,analyticObject.AnalyticString,analyticObject.AnalyticDigit);
+			StAnalytics.LogEvent(group:"node",key:analyticObject.Key,digit:analyticObject.AnalyticDigit,data:analyticObject.AnalyticString,dict:new Dictionary<string,object>{{"value",analyticObject.AnalyticObject}});
 		}
 	}
 }

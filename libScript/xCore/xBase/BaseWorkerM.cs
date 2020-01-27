@@ -1,7 +1,7 @@
 ﻿#if xLibv3
 namespace xLib
 {
-	public abstract class BaseWorkerM : BaseWorkM
+	public abstract class BaseWorkerM : BaseWorkM, BaseWorkerI
 	{
 		internal View view = null;
 		protected bool isMy = true;
@@ -32,7 +32,7 @@ namespace xLib
 		public virtual void CheckErrors()
 		{
 			#if UNITY_EDITOR
-			if(ViewCore.CurrentId != ViewId) xDebug.LogExceptionFormat(this,$"{this.name}:CurrentId:{0}:ViewId:{1}",ViewCore.CurrentId,ViewId);
+			if(ViewCore.CurrentId != ViewId) xLogger.LogExceptionFormat(this,$"{this.name}:CurrentId:{0}:ViewId:{1}",ViewCore.CurrentId,ViewId);
 			#endif
 		}
 	}

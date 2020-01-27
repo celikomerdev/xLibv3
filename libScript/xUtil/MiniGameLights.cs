@@ -21,7 +21,7 @@ namespace xLib.xNew
 		
 		private void ResetState()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":ResetState");
+			if(CanDebug) xLogger.LogFormat(this,this.name+":ResetState");
 			StopAllCoroutines();
 			for (int i = 0; i < array.Length; i++)
 			{
@@ -31,7 +31,7 @@ namespace xLib.xNew
 		
 		public void Animate(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Animate:{0}",value);
+			if(CanDebug) xLogger.LogFormat(this,this.name+":Animate:{0}",value);
 			if(value) Symetric(durationTemp);
 			else Idle(Random.Range(1f,3f));
 		}
@@ -42,8 +42,8 @@ namespace xLib.xNew
 		public void Idle(float time)
 		{
 			ResetState();
-			if(CanDebug) Debug.LogFormat(this,this.name+":Idle:{0}",time);
-			StartCoroutine(FlowIdle());
+			if(CanDebug) xLogger.LogFormat(this,this.name+":Idle:{0}",time);
+			this.NewCoroutine(FlowIdle(),CanDebug);
 			this.WaitForSeconds(call:()=>Symetric(tick*array.Length*2),delay:time);
 		}
 		
@@ -67,8 +67,8 @@ namespace xLib.xNew
 		public void Symetric(float time)
 		{
 			ResetState();
-			if(CanDebug) Debug.LogFormat(this,this.name+":Symetric:{0}",time);
-			StartCoroutine(FlowSymetric());
+			if(CanDebug) xLogger.LogFormat(this,this.name+":Symetric:{0}",time);
+			this.NewCoroutine(FlowSymetric(),CanDebug);
 			this.WaitForSeconds(call:()=>Idle(Random.Range(1f,3f)),delay:time);
 		}
 		

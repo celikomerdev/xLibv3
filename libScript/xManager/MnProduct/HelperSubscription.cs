@@ -14,42 +14,56 @@ namespace xLib.Purchasing
 		{
 			if (item.definition.type != ProductType.Subscription)
 			{
-				Debug.LogWarningFormat("the product is not a subscription product");
+				if(CanDebug) Debug.LogWarning("the product is not a subscription product");
 				return null;
 			}
 			
 			if (item.receipt == null)
 			{
-				Debug.LogWarningFormat("the product should have a valid receipt");
+				if(CanDebug) Debug.LogWarning("the product should have a valid receipt");
 				return null;
 			}
 			
 			if (!IsAvailableForSubscriptionManager(item.receipt))
 			{
-				Debug.LogWarningFormat("IsAvailableForSubscriptionManager:false");
+				if(CanDebug) Debug.LogWarning("IsAvailableForSubscriptionManager:false");
 				return null;
 			}
 			
-			//string intro_json = (introductory_info_dict == null || !introductory_info_dict.ContainsKey(item.definition.storeSpecificId)) ? null : introductory_info_dict[item.definition.storeSpecificId];
-			SubscriptionManager subscriptionManager = new SubscriptionManager(item,null);
+			string productDetails = (MnProduct.productsDetails == null || !MnProduct.productsDetails.ContainsKey(item.definition.storeSpecificId))? null:MnProduct.productsDetails[item.definition.storeSpecificId];
+			SubscriptionManager subscriptionManager = new SubscriptionManager(item,productDetails);
 			SubscriptionInfo subscriptionInfo = subscriptionManager.getSubscriptionInfo();
 			
 			if(CanDebug)
 			{
 				Debug.Log("----SubscriptionInfo----");
-				Debug.Log("product id is: " + subscriptionInfo.getProductId());
-				Debug.Log("purchase date is: " + subscriptionInfo.getPurchaseDate());
-				Debug.Log("subscription next billing date is: " + subscriptionInfo.getExpireDate());
-				Debug.Log("is subscribed? " + subscriptionInfo.isSubscribed().ToString());
-				Debug.Log("is expired? " + subscriptionInfo.isExpired().ToString());
-				Debug.Log("is cancelled? " + subscriptionInfo.isCancelled());
-				Debug.Log("product is in free trial peroid? " + subscriptionInfo.isFreeTrial());
-				Debug.Log("product is auto renewing? " + subscriptionInfo.isAutoRenewing());
-				Debug.Log("subscription remaining valid time until next billing date is: " + subscriptionInfo.getRemainingTime());
-				Debug.Log("is this product in introductory price period? " + subscriptionInfo.isIntroductoryPricePeriod());
-				Debug.Log("the product introductory localized price is: " + subscriptionInfo.getIntroductoryPrice());
-				Debug.Log("the product introductory price period is: " + subscriptionInfo.getIntroductoryPricePeriod());
-				Debug.Log("the number of product introductory price period cycles is: " + subscriptionInfo.getIntroductoryPricePeriodCycles());
+				Debug.Log($"getProductId:{subscriptionInfo.getProductId()}");
+				
+				Debug.Log($"isSubscribed:{subscriptionInfo.isSubscribed()}");
+				Debug.Log($"getPurchaseDate:{subscriptionInfo.getPurchaseDate().ToString()}");
+				Debug.Log($"getRemainingTime:{subscriptionInfo.getRemainingTime().TotalMinutes}");
+				
+				
+				Debug.Log($"isAutoRenewing:{subscriptionInfo.isAutoRenewing()}");
+				Debug.Log($"getSubscriptionPeriod:{subscriptionInfo.getSubscriptionPeriod().TotalMinutes}");
+				
+				Debug.Log($"isCancelled:{subscriptionInfo.isCancelled()}");
+				Debug.Log($"getCancelDate:{subscriptionInfo.getCancelDate().ToString()}");
+				
+				Debug.Log($"isExpired:{subscriptionInfo.isExpired()}");
+				Debug.Log($"getExpireDate:{subscriptionInfo.getExpireDate().ToString()}");
+				
+				Debug.Log($"isFreeTrial:{subscriptionInfo.isFreeTrial()}");
+				Debug.Log($"getFreeTrialPeriod:{subscriptionInfo.getFreeTrialPeriod().TotalMinutes}");
+				Debug.Log($"getFreeTrialPeriodString:{subscriptionInfo.getFreeTrialPeriodString()}");
+				
+				Debug.Log($"isIntroductoryPricePeriod:{subscriptionInfo.isIntroductoryPricePeriod()}");
+				Debug.Log($"getIntroductoryPrice:{subscriptionInfo.getIntroductoryPrice()}");
+				Debug.Log($"getIntroductoryPricePeriod:{subscriptionInfo.getIntroductoryPricePeriod().TotalMinutes}");
+				Debug.Log($"getIntroductoryPricePeriodCycles:{subscriptionInfo.getIntroductoryPricePeriodCycles()}");
+				
+				Debug.Log($"getSkuDetails:{subscriptionInfo.getSkuDetails()}");
+				Debug.Log($"getSubscriptionInfoJsonString:{subscriptionInfo.getSubscriptionInfoJsonString()}");
 			}
 			
 			return subscriptionInfo;
@@ -61,16 +75,16 @@ namespace xLib.Purchasing
 			var receipt_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(receipt);
 			if (!receipt_wrapper.ContainsKey("Store") || !receipt_wrapper.ContainsKey("Payload"))
 			{
-				Debug.LogWarningFormat("The product receipt does not contain enough information");
+				Debug.LogWarning("The product receipt does not contain enough information");
 				return false;
 			}
 			var store = (string)receipt_wrapper["Store"];
 			var payload = (string)receipt_wrapper["Payload"];
 			
-			if(CanDebug) Debug.LogFormat("payload:{0}",payload);
+			if(CanDebug) Debug.Log($"payload:{payload}");
 			if (payload != null)
 			{
-				if(CanDebug) Debug.LogFormat("store:{0}",store);
+				if(CanDebug) Debug.Log($"store:{store}");
 				switch (store)
 				{
 					case GooglePlay.Name:
@@ -78,14 +92,14 @@ namespace xLib.Purchasing
 						var payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(payload);
 						if (!payload_wrapper.ContainsKey("json"))
 						{
-							Debug.LogWarningFormat("The product receipt does not contain enough information, the 'json' field is missing");
+							Debug.LogWarning("The product receipt does not contain enough information, the 'json' field is missing");
 							return false;
 						}
 						
 						var original_json_payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode((string)payload_wrapper["json"]);
 						if (original_json_payload_wrapper == null || !original_json_payload_wrapper.ContainsKey("developerPayload"))
 						{
-							Debug.LogWarningFormat("The product receipt does not contain enough information, the 'developerPayload' field is missing");
+							Debug.LogWarning("The product receipt does not contain enough information, the 'developerPayload' field is missing");
 							return false;
 						}
 						
@@ -93,7 +107,7 @@ namespace xLib.Purchasing
 						var developerPayload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(developerPayloadJSON);
 						if (developerPayload_wrapper == null || !developerPayload_wrapper.ContainsKey("is_free_trial") || !developerPayload_wrapper.ContainsKey("has_introductory_price_trial"))
 						{
-							Debug.LogWarningFormat("The product receipt does not contain enough information, the product is not purchased using 1.19 or later");
+							Debug.LogWarning("The product receipt does not contain enough information, the product is not purchased using 1.19 or later");
 							return false;
 						}
 						

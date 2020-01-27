@@ -19,7 +19,7 @@ namespace xLib
 				if(string.IsNullOrEmpty(value)) return;
 				if(url.ValueGet(viewId:ViewCore.CurrentId) == value) return;
 				url.ValueSet(value,viewId:ViewCore.CurrentId);
-				MnCoroutine.ins.NewCoroutine(eDownload(value,ViewCore.CurrentId));
+				MnCoroutine.ins.NewCoroutine(eDownload(value,ViewCore.CurrentId),CanDebug);
 			}
 		}
 		#endregion
@@ -32,7 +32,7 @@ namespace xLib
 			
 			while (!uwr.isDone)
 			{
-				if(CanDebug) Debug.LogFormat(this,this.name+"UWRLoad:{0}",uwrOp.progress);
+				if(CanDebug) xLogger.LogFormat(this,this.name+"UWRLoad:{0}",uwrOp.progress);
 				yield return new WaitForSecondsRealtime(1f);
 			}
 			
@@ -45,7 +45,7 @@ namespace xLib
 			}
 			else
 			{
-				xDebug.LogExceptionFormat(this,this.name+":Error:{0}:{1}",uwr.error,url);
+				xLogger.LogExceptionFormat(this,this.name+":Error:{0}:{1}",uwr.error,url);
 			}
 			
 			uwr.Dispose();

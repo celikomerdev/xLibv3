@@ -1,65 +1,68 @@
 ﻿#if xLibv3
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace xLib.ToolManager
 {
 	public class LogEvent : BaseMainM
 	{
-		[SerializeField]private string category = "category";
-		public string Category
+		[FormerlySerializedAs("key")]
+		[SerializeField]private string group = "group";
+		public string Group
 		{
 			get
 			{
-				return category;
+				return group;
 			}
 			set
 			{
-				this.category = value;
+				this.group = value;
 			}
 		}
 		
-		[SerializeField]private string action = "action";
-		public string Action
+		[FormerlySerializedAs("label")]
+		[SerializeField]private string key = "key";
+		public string Key
 		{
 			get
 			{
-				return action;
+				return key;
 			}
 			set
 			{
-				this.action = value;
+				this.key = value;
 			}
 		}
 		
-		[SerializeField]private string label = "label";
-		public string Label
+		[SerializeField]private double digit = 0;
+		public double Digit
 		{
 			get
 			{
-				return label;
+				return digit;
 			}
 			set
 			{
-				this.label = value;
+				this.digit = value;
 			}
 		}
 		
-		[SerializeField]private string value = "0";
-		public string Value
+		[SerializeField]private string data = "data";
+		public string Data
 		{
 			get
 			{
-				return value;
+				return data;
 			}
 			set
 			{
-				this.value = value;
+				this.data = value;
 			}
 		}
 		
 		public void Call()
 		{
-			StAnalytics.LogEvent(Category,Action,Label,Value);
+			StAnalytics.LogEvent(group:group,key:key,digit:digit,data:data);
 		}
 	}
 }

@@ -1,14 +1,14 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using System.Collections.Generic;
 using UnityEngine;
 using xLib.xNode.NodeObject;
 
 namespace xLib.xInput
 {
-	public class InputFinal : BaseTickM
+	public class InputFinal : BaseTickNodeM
 	{
 		[Header("Axis")]
-		[SerializeField]private NodeFloat[] axis;
+		[SerializeField]private NodeFloat[] axis = new NodeFloat[0];
 		private Dictionary<string,NodeFloat> dictionary = new Dictionary<string,NodeFloat>();
 		
 		protected override void Awaked()

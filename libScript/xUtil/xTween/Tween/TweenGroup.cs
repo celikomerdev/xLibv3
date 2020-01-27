@@ -40,10 +40,8 @@ namespace xLib.xTween
 			ApplyRatio(value);
 		}
 		
-		[NonSerialized]public float currentRatio = 0f;
 		protected virtual void ApplyRatio(float value)
 		{
-			currentRatio = value;
 			for(int i=0; i < tweens.Count; i++)
 			{
 				tweens[i].SetBaseRatio(value);

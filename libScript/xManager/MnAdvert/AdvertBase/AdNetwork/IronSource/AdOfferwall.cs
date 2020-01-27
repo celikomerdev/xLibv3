@@ -1,73 +1,81 @@
 ﻿#if xLibv3
 #if AdIronSource
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace xLib.libAdvert.xIronSource
 {
 	public class AdOfferwall : AdvertBase
 	{
-		#region Register
-		protected override bool OnRegister(bool value)
+		#region TryRegister
+		protected override bool TryRegister(bool register)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRegister:{0}:{1}",key,value);
+			if(CanDebug) Debug.Log($"{this.name}:TryRegister:{key}:{register}",this);
 			
-			if (value)
+			if (register)
 			{
-				IronSourceEvents.onOfferwallAvailableEvent += OnAdAvailabilityChanged;
-				IronSourceEvents.onOfferwallOpenedEvent += OnAdOpened;
-				IronSourceEvents.onOfferwallShowFailedEvent += OnAdShowFailed;
-				IronSourceEvents.onOfferwallClosedEvent += OnAdClosed;
+				IronSourceEvents.onOfferwallAvailableEvent += onOfferwallAvailableEvent;
 				
-				IronSourceEvents.onOfferwallAdCreditedEvent += OnAdRewarded;
-				IronSourceEvents.onGetOfferwallCreditsFailedEvent += OnAdRewardFailed;
+				IronSourceEvents.onOfferwallShowFailedEvent += onOfferwallShowFailedEvent;
+				IronSourceEvents.onOfferwallOpenedEvent += onOfferwallOpenedEvent;
 				
-				OnRegisterBase();
-				OnAdAvailabilityChanged(IronSource.Agent.isOfferwallAvailable());
+				IronSourceEvents.onGetOfferwallCreditsFailedEvent += onGetOfferwallCreditsFailedEvent;
+				IronSourceEvents.onOfferwallAdCreditedEvent += onOfferwallAdCreditedEvent;
+				
+				IronSourceEvents.onOfferwallClosedEvent += onOfferwallClosedEvent;
+				
+				OnRegisteredBase();
+				onOfferwallAvailableEvent(IronSource.Agent.isOfferwallAvailable());
 			}
 			else
 			{
-				IronSourceEvents.onOfferwallAvailableEvent -= OnAdAvailabilityChanged;
-				IronSourceEvents.onOfferwallOpenedEvent -= OnAdOpened;
-				IronSourceEvents.onOfferwallShowFailedEvent -= OnAdShowFailed;
-				IronSourceEvents.onOfferwallClosedEvent -= OnAdClosed;
+				IronSourceEvents.onOfferwallAvailableEvent -= onOfferwallAvailableEvent;
 				
-				IronSourceEvents.onOfferwallAdCreditedEvent -= OnAdRewarded;
-				IronSourceEvents.onGetOfferwallCreditsFailedEvent -= OnAdRewardFailed;
+				IronSourceEvents.onOfferwallShowFailedEvent -= onOfferwallShowFailedEvent;
+				IronSourceEvents.onOfferwallOpenedEvent -= onOfferwallOpenedEvent;
+				
+				IronSourceEvents.onGetOfferwallCreditsFailedEvent -= onGetOfferwallCreditsFailedEvent;
+				IronSourceEvents.onOfferwallAdCreditedEvent -= onOfferwallAdCreditedEvent;
+				
+				IronSourceEvents.onOfferwallClosedEvent -= onOfferwallClosedEvent;
 			}
-			return value;
+			return register;
 		}
 		#endregion
 		
 		
 		#region Callback
-		private void OnAdAvailabilityChanged(bool status)
+		// Invoked when there is a change in the Offerwall availability status.
+		private void onOfferwallAvailableEvent(bool status)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdAvailabilityChanged:{0}",status);
+			if(CanDebug) Debug.Log($"{this.name}:onOfferwallAvailableEvent:{status}",this);
 			SetLoadedBase(status);
 		}
 		
-		private void OnAdOpened()
+		// Invoked when the method 'showOfferWall' is called and the OfferWall fails to load.
+		private void onOfferwallShowFailedEvent(IronSourceError error)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdOpened");
-			OnShowBase();
-		}
-		
-		private void OnAdShowFailed(IronSourceError error)
-		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdShowFailed:{0}",error.ToString());
-		}
-		
-		private void OnAdClosed()
-		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdClosed");
+			xLogger.LogException($"{this.name}:onOfferwallShowFailedEvent:{error.ToString()}",this);
 			OnCloseBase();
 		}
 		
-		private void OnAdRewarded(Dictionary<string,object> rewards)
+		// Invoked when the Offerwall successfully loads for the user.
+		private void onOfferwallOpenedEvent()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdRewarded:{0}",Newtonsoft.Json.JsonConvert.SerializeObject(rewards));
+			if(CanDebug) Debug.Log($"{this.name}:onOfferwallOpenedEvent",this);
+			OnShowBase();
+		}
+		
+		// Invoked when the method 'getOfferWallCredits' fails to retrieve the user's credit balance info.
+		private void onGetOfferwallCreditsFailedEvent(IronSourceError error)
+		{
+			xLogger.LogException($"{this.name}:onGetOfferwallCreditsFailedEvent:{error.ToString()}",this);
+			OnRewardBase(0);
+		}
+		
+		// Invoked each time the user completes an offer.
+		private void onOfferwallAdCreditedEvent(System.Collections.Generic.Dictionary<string, object> rewards)
+		{
+			if(CanDebug) Debug.Log($"{this.name}:onOfferwallAdCreditedEvent:{rewards.ToJsonString()}",this);
 			
 			if(rewards.ContainsKey("totalCreditsFlag"))
 			{
@@ -79,9 +87,11 @@ namespace xLib.libAdvert.xIronSource
 			OnRewardBase(prize);
 		}
 		
-		private void OnAdRewardFailed(IronSourceError error)
+		// Invoked when the user is about to return to the application after closing the Offerwall.
+		private void onOfferwallClosedEvent()
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdRewardFailed:{0}",error.ToString());
+			if(CanDebug) Debug.Log($"{this.name}:onOfferwallClosedEvent",this);
+			OnCloseBase();
 		}
 		#endregion
 		
@@ -95,12 +105,12 @@ namespace xLib.libAdvert.xIronSource
 		
 		protected override void Load()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Load");
+			if(CanDebug) Debug.Log($"{this.name}:Load",this);
 		}
 		
 		protected override void Show()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Show");
+			if(CanDebug) Debug.Log($"{this.name}:Show",this);
 			if(string.IsNullOrEmpty(key)) IronSource.Agent.showOfferwall();
 			else IronSource.Agent.showOfferwall(key);
 		}
@@ -111,7 +121,7 @@ namespace xLib.libAdvert.xIronSource
 		#region Custom
 		public void RefreshRewards()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":RefreshRewards");
+			if(CanDebug) Debug.Log($"{this.name}:RefreshRewards",this);
 			IronSource.Agent.getOfferwallCredits();
 		}
 		#endregion

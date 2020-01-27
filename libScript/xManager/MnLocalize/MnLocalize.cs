@@ -76,7 +76,7 @@ namespace xLib
 		}
 		
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-		private static void Register()
+		private static void TryRegister()
 		{
 			LocalizationManager.OnLocalizeEvent += OnLocalize;
 			OnLocalize();
@@ -109,7 +109,7 @@ namespace xLib
 		
 		public static List<string> GetLanguages()
 		{
-			List<string> languages = new List<string>{"english"};
+			List<string> languages = new List<string>{"English"};
 			return languages;
 		}
 		
@@ -118,7 +118,7 @@ namespace xLib
 		{
 			get
 			{
-				return "english";
+				return "English";
 			}
 			set
 			{

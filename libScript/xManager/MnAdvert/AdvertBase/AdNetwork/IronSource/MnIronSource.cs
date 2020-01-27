@@ -2,18 +2,53 @@
 #if AdIronSource
 using UnityEngine;
 
-namespace xLib.xIronSource
+namespace xLib.libAdvert.xIronSource
 {
 	public class MnIronSource : BaseWorkM
 	{
-		[SerializeField]private string key;
+		[SerializeField]private string key = "";
+		[SerializeField]private string[] adUnits = new string[0];
 		
 		#region Mono
 		private void Awake()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Awake");
-			Init();
+			if(CanDebug) Debug.Log($"{this.name}:Awake",this);
+			IronSource.Agent.setAdaptersDebug(CanDebug);
+			
+			MnThread.StartThread(iDebug:this,useThread:false,priority:1,call:delegate
+			{
+				IronSource.Agent.shouldTrackNetworkState(true);
+				FillUser();
+				
+				IronSource.Agent.init(MnKey.GetValue(key),adUnits);
+				if(CanDebug) IronSource.Agent.validateIntegration();
+				if(CanDebug) Debug.Log($"MnIronSource:isInit:true",this);
+				TryRegister(true);
+			});
 		}
+		
+		private void OnDestroy()
+		{
+			if(CanDebug) Debug.Log($"{this.name}:OnDestroy",this);
+			TryRegister(false);
+		}
+		
+		#region TryRegister
+		private bool TryRegister(bool value)
+		{
+			if (value)
+			{
+				IronSourceEvents.onBannerAdLoadFailedEvent += onBannerAdLoadFailedEvent;
+				IronSourceEvents.onBannerAdLoadedEvent += onBannerAdLoadedEvent;
+			}
+			else
+			{
+				IronSourceEvents.onBannerAdLoadFailedEvent -= onBannerAdLoadFailedEvent;
+				IronSourceEvents.onBannerAdLoadedEvent -= onBannerAdLoadedEvent;
+			}
+			return value;
+		}
+		#endregion
 		
 		private void OnApplicationPause(bool value)
 		{
@@ -23,16 +58,6 @@ namespace xLib.xIronSource
 		
 		
 		#region Init
-		private void Init()
-		{
-			IronSource.Agent.setAdaptersDebug(CanDebug);
-			IronSource.Agent.shouldTrackNetworkState(true);
-			FillUser();
-			
-			IronSource.Agent.init(MnKey.GetValue(key),IronSourceAdUnits.REWARDED_VIDEO,IronSourceAdUnits.INTERSTITIAL,IronSourceAdUnits.OFFERWALL,IronSourceAdUnits.BANNER);
-			if(CanDebug) IronSource.Agent.validateIntegration();
-		}
-		
 		private void FillUser()
 		{
 			IronSource.Agent.setConsent(MnAdvert.ins.privacyAccepted);
@@ -45,16 +70,31 @@ namespace xLib.xIronSource
 			// if(MnAdvert.ins.isPaying) mIronSegment.isPaying = 1;
 		}
 		#endregion
+		
+		
+		#region Banner
+		public static bool hasBanner = false;
+		private void onBannerAdLoadFailedEvent(IronSourceError error)
+		{
+			hasBanner = false;
+		}
+		
+		private void onBannerAdLoadedEvent()
+		{
+			hasBanner = true;
+		}
+		#endregion
 	}
 }
 #else
 using UnityEngine;
 
-namespace xLib.xIronSource
+namespace xLib.libAdvert.xIronSource
 {
 	public class MnIronSource : BaseWorkM
 	{
-		[SerializeField]private string key;
+		[SerializeField]private string key = "";
+		[SerializeField]private string[] adUnits = new string[0];
 	}
 }
 #endif

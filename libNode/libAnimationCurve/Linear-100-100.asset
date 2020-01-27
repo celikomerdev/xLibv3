@@ -17,7 +17,7 @@ MonoBehaviour:
   baseWork:
     canDebug: 0
     canWork: 1
-    runInEditMode: 0
+    runInEditMode: 1
   nodeValue:
     nodeSetting:
       key: 1f6f9b41e808c504d8032a8132ec5b25

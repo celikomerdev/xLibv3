@@ -24,7 +24,7 @@ MonoBehaviour:
       isMulti: 0
     value: 0
     skipCompareRpc: 1
-    isCompare: 1
+    isCompare: 0
     snapDefault: 0
     useThreshold: 0
     valueThreshold: 0

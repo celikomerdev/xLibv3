@@ -1,81 +1,88 @@
 ﻿#if xLibv3
 #if AdIronSource
-using System;
 using UnityEngine;
-using xLib.xNode.NodeObject;
 
 namespace xLib.libAdvert.xIronSource
 {
 	public class AdBanner : AdvertBaseBanner
 	{
-		#region Register
-		protected override bool OnRegister(bool value)
+		#region TryRegister
+		protected override bool TryRegister(bool register)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRegister:{0}:{1}",key,value);
+			if(CanDebug) Debug.Log($"{this.name}:TryRegister:{key}:{register}",this);
 			
-			if (value)
+			if (register)
 			{
-				IronSourceEvents.onBannerAdLoadedEvent += OnAdLoaded;
-				IronSourceEvents.onBannerAdLoadFailedEvent += OnAdLoadFailed;
+				IronSourceEvents.onBannerAdLoadFailedEvent += onBannerAdLoadFailedEvent;
+				IronSourceEvents.onBannerAdLoadedEvent += onBannerAdLoadedEvent;
 				
-				IronSourceEvents.onBannerAdClickedEvent += OnAdClicked;
-				IronSourceEvents.onBannerAdScreenPresentedEvent += OnAdScreenPresented;
-				IronSourceEvents.onBannerAdLeftApplicationEvent += OnAdLeftApplication;
-				IronSourceEvents.onBannerAdScreenDismissedEvent += OnAdScreenDismissed;
+				IronSourceEvents.onBannerAdClickedEvent += onBannerAdClickedEvent;
+				IronSourceEvents.onBannerAdScreenPresentedEvent += onBannerAdScreenPresentedEvent;
 				
-				OnRegisterBase();
-				// if(IronSource.Agent.isInterstitialReady()) OnAdReady();
+				IronSourceEvents.onBannerAdLeftApplicationEvent += onBannerAdLeftApplicationEvent;
+				IronSourceEvents.onBannerAdScreenDismissedEvent += onBannerAdScreenDismissedEvent;
+				
+				OnRegisteredBase();
+				if(MnIronSource.hasBanner) onBannerAdLoadedEvent();
 			}
 			else
 			{
-				IronSourceEvents.onBannerAdLoadedEvent -= OnAdLoaded;
-				IronSourceEvents.onBannerAdLoadFailedEvent -= OnAdLoadFailed;
+				IronSourceEvents.onBannerAdLoadFailedEvent -= onBannerAdLoadFailedEvent;
+				IronSourceEvents.onBannerAdLoadedEvent -= onBannerAdLoadedEvent;
 				
-				IronSourceEvents.onBannerAdClickedEvent -= OnAdClicked;
-				IronSourceEvents.onBannerAdScreenPresentedEvent -= OnAdScreenPresented;
-				IronSourceEvents.onBannerAdLeftApplicationEvent -= OnAdLeftApplication;
-				IronSourceEvents.onBannerAdScreenDismissedEvent -= OnAdScreenDismissed;
+				IronSourceEvents.onBannerAdClickedEvent -= onBannerAdClickedEvent;
+				IronSourceEvents.onBannerAdScreenPresentedEvent -= onBannerAdScreenPresentedEvent;
+				
+				
+				IronSourceEvents.onBannerAdLeftApplicationEvent -= onBannerAdLeftApplicationEvent;
+				IronSourceEvents.onBannerAdScreenDismissedEvent -= onBannerAdScreenDismissedEvent;
 			}
-			return value;
+			return register;
 		}
 		#endregion
 		
 		
 		#region Callback
-		private void OnAdLoaded()
+		//Invoked when the banner loading process has failed.
+		private void onBannerAdLoadFailedEvent(IronSourceError error)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdLoaded");
+			xLogger.LogException($"{this.name}:onBannerAdLoadFailedEvent:{error.ToString()}",this);
+			OnLoadFailBase();
+		}
+		
+		//Invoked once the banner has loaded
+		private void onBannerAdLoadedEvent()
+		{
+			if(CanDebug) Debug.Log($"{this.name}:onBannerAdLoadedEvent",this);
 			SetLoadedBase(true);
 			IsDisplay = isDisplay;
 		}
 		
-		private void OnAdLoadFailed(IronSourceError error)
+		//Invoked when end user clicks on the banner ad
+		private void onBannerAdClickedEvent()
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdLoadFailed:{0}",error.ToString());
-			OnLoadFailBase();
-		}
-		
-		private void OnAdClicked()
-		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdClicked");
+			if(CanDebug) Debug.Log($"{this.name}:onBannerAdClickedEvent",this);
 			OnClickBase();
 		}
 		
-		private void OnAdScreenPresented()
+		//Notifies the presentation of a full screen content following user click
+		private void onBannerAdScreenPresentedEvent()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdScreenPresented");
+			if(CanDebug) Debug.Log($"{this.name}:onBannerAdScreenPresentedEvent",this);
 			OnShowBase();
 		}
 		
-		private void OnAdLeftApplication()
+		//Invoked when the user leaves the app
+		private void onBannerAdLeftApplicationEvent()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdLeftApplication");
+			if(CanDebug) Debug.Log($"{this.name}:onBannerAdLeftApplicationEvent",this);
 			OnVisitBase();
 		}
 		
-		private void OnAdScreenDismissed()
+		//Notifies the presented screen has been dismissed
+		private void onBannerAdScreenDismissedEvent()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdScreenDismissed");
+			if(CanDebug) Debug.Log($"{this.name}:onBannerAdScreenDismissedEvent",this);
 			OnCloseBase();
 		}
 		#endregion
@@ -90,13 +97,14 @@ namespace xLib.libAdvert.xIronSource
 		
 		protected override void Load()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Load");
+			if(CanDebug) Debug.Log($"{this.name}:Load",this);
 			IronSource.Agent.loadBanner(xAdSize,xAdPosition);
+			DebugBanner();
 		}
 		
 		protected override void Show()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Show");
+			if(CanDebug) Debug.Log($"{this.name}:Show",this);
 			IronSource.Agent.displayBanner();
 			OnDisplay = true;
 			OnWidth = width*multiplierPixel;
@@ -113,8 +121,21 @@ namespace xLib.libAdvert.xIronSource
 		
 		
 		#region Custom
-		private int width;
-		private int height;
+		private IronSourceBannerPosition xAdPosition
+		{
+			get
+			{
+				IronSourceBannerPosition returnObj = IronSourceBannerPosition.BOTTOM;
+				System.Enum.TryParse(adPosition,out IronSourceBannerPosition myStatus);
+				return returnObj;
+			}
+		}
+		// public enum IronSourceBannerPosition
+		// {
+		// 	TOP = 1,
+		// 	BOTTOM = 2
+		// }
+		
 		private IronSourceBannerSize xAdSize
 		{
 			get
@@ -126,28 +147,28 @@ namespace xLib.libAdvert.xIronSource
 				IronSourceBannerSize returnObj;
 				switch (adSize)
 				{
-					case "Banner":
+					case "BANNER":
 					{
 						width = 320;
 						height = 50;
 						returnObj = IronSourceBannerSize.BANNER;
 						break;
 					}
-					case "Large":
+					case "LARGE":
 					{
 						width = 320;
 						height = 90;
 						returnObj = IronSourceBannerSize.LARGE;
 						break;
 					}
-					case "Rectangle":
+					case "RECTANGLE":
 					{
 						width = 300;
 						height = 250;
 						returnObj = IronSourceBannerSize.RECTANGLE;
 						break;
 					}
-					case "Landscape":
+					case "LANDSCAPE":
 					{
 						if(heightInc>4.5f)
 						{
@@ -164,7 +185,7 @@ namespace xLib.libAdvert.xIronSource
 						returnObj = new IronSourceBannerSize(width,height);
 						break;
 					}
-					case "Portrait":
+					case "PORTRAIT":
 					{
 						if(heightInc>5.0f)
 						{
@@ -203,36 +224,7 @@ namespace xLib.libAdvert.xIronSource
 					}
 				}
 				
-				if(CanDebug)
-				{
-					Debug.LogFormat("Screen.currentResolution:{0}",Screen.currentResolution);
-					Debug.LogFormat("Screen.width:{0}",Screen.width);
-					Debug.LogFormat("Screen.height:{0}",Screen.height);
-					Debug.LogFormat("Screen.dpi:{0}",Screen.dpi);
-					Debug.LogFormat("ExtScreen.HeightInc:{0}",ExtScreen.HeightInc);
-					Debug.LogFormat("ExtScreen.WidthInc:{0}",ExtScreen.WidthInc);
-					Debug.LogFormat("Banner.width:{0}",width);
-					Debug.LogFormat("Banner.height:{0}",height);
-					Debug.LogFormat("DeviceDisplay.scaleFactor:{0}",DeviceDisplay.scaleFactor);
-				}
-				
 				return returnObj;
-			}
-		}
-		
-		private IronSourceBannerPosition xAdPosition
-		{
-			get
-			{
-				switch (adPosition)
-				{
-					case "Top":
-						return IronSourceBannerPosition.TOP;
-					case "Bottom":
-						return IronSourceBannerPosition.BOTTOM;
-					default:
-						return IronSourceBannerPosition.BOTTOM;
-				}
 			}
 		}
 		#endregion
@@ -241,7 +233,7 @@ namespace xLib.libAdvert.xIronSource
 #else
 namespace xLib.libAdvert.xIronSource
 {
-	public class AdBanner : AdvertBase
+	public class AdBanner : AdvertBaseBanner
 	{
 	}
 }

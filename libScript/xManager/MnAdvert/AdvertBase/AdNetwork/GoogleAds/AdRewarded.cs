@@ -16,8 +16,8 @@ namespace xLib.libAdvert.xGoogleAds
 		private AdRequest request;
 		
 		
-		#region Register
-		protected override bool Register(bool value)
+		#region TryRegister
+		protected override bool TryRegister(bool value)
 		{
 			if (value)
 			{
@@ -37,12 +37,12 @@ namespace xLib.libAdvert.xGoogleAds
 				
 				#if MedVungle
 				VungleRewardedVideoMediationExtras extrasVungle = new VungleRewardedVideoMediationExtras();
-				extrasVungle.SetAllPlacements(new string[] { MnKey.GetValue("Vungle-Rewarded") });
+				extrasVungle.SetAllPlacements(new string[] { MnKey.GetValue("Vungle_Rewarded") });
 				builder.AddMediationExtras(extrasVungle);
 				#endif
 				
 				request = builder.Build();
-				OnRegisterBase();
+				OnRegisteredBase();
 			}
 			else
 			{

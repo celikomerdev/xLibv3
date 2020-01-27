@@ -23,10 +23,13 @@ namespace xLib.xNode.NodeObject
 			{
 				return Node.nodeSetting.Key;
 			}
+			#if UNITY_EDITOR
 			protected set
 			{
+				Init(true);
 				Node.nodeSetting.Key = value;
 			}
+			#endif
 		}
 		
 		public override string Name
@@ -57,6 +60,14 @@ namespace xLib.xNode.NodeObject
 			}
 		}
 		
+		public override object AnalyticObject
+		{
+			get
+			{
+				return Node.AnalyticObject;
+			}
+		}
+		
 		public override string AnalyticString
 		{
 			get
@@ -65,7 +76,7 @@ namespace xLib.xNode.NodeObject
 			}
 		}
 		
-		public override string AnalyticDigit
+		public override double AnalyticDigit
 		{
 			get
 			{
@@ -157,6 +168,11 @@ namespace xLib.xNode.NodeObject
 			Node.ValueDefaultReset(value);
 		}
 		
+		public void ValueDefaultReset()
+		{
+			Node.ValueDefaultReset(Node.ValueDefault);
+		}
+		
 		public V ValueAdd
 		{
 			set
@@ -175,19 +191,14 @@ namespace xLib.xNode.NodeObject
 			Node.Consume();
 		}
 		
-		public void Listener(bool register,UnityAction<V> call,string viewId="Client",int order=0,bool onRegister=false)
+		public void Listener(bool register,UnityAction<V> call,string viewId="Client",int order=0,bool onRegister=false,BaseWorkerI worker=null)
 		{
-			Node.Listener(register,call,viewId,order,onRegister);
+			Node.Listener(register,call,viewId,order,onRegister,worker);
 		}
 		
-		public void ListenerCall(bool register,UnityAction<object> call,string viewId="Client",int order=0,bool onRegister=false)
+		public void ListenerCall(bool register,UnityAction<object> call,string viewId="Client",int order=0,bool onRegister=false,BaseWorkerI worker=null)
 		{
-			Node.ListenerCall(register,call,viewId,order,onRegister);
-		}
-		
-		public void ListenerEditor(bool register,BaseActiveM call)
-		{
-			Node.ListenerEditor(register, call);
+			Node.ListenerCall(register,call,viewId,order,onRegister,worker);
 		}
 		
 		public void CleanListener()

@@ -1,34 +1,53 @@
 ﻿#if xLibv3
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Object = System.Object;
 
 namespace xLib
 {
 	public class MnAnalytics : SingletonM<MnAnalytics>
 	{
-		protected override void Started()
+		[SerializeField]private Object[] arrayIAnalyticObject = new Object[0];
+		[SerializeField]private IAnalyticObject[] m_arrayIAnalyticObject = new IAnalyticObject[0];
+		
+		private Dictionary<string, object> Stamp(Dictionary<string, object> data)
 		{
-			// SetListen(true);
+			if(data==null) data = new Dictionary<string,object>();
+			for (int i = 0; i < m_arrayIAnalyticObject.Length; i++)
+			{
+				IAnalyticObject analyticObject = m_arrayIAnalyticObject[i];
+				data[analyticObject.Name] = analyticObject.AnalyticObject;
+			}
+			return data;
 		}
 		
-		protected override void OnDestroyed()
+		protected override void OnEnabled()
 		{
-			// SetListen(false);
+			m_arrayIAnalyticObject = arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>();
 		}
 		
-		public void AnalyticsSend()
+		public static Action<string> logScreen = delegate{};
+		public void LogScreen(string key)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":AnalyticsSend");
-			// StAnalytics.AnalyticsSend();
+			if(CanDebug) Debug.Log($"{this.name}:LogScreen:key:{key}",this);
+			logScreen(key);
 		}
 		
-		public void LogScreen(string valueName)
+		public static Action<string,string,double,string,Dictionary<string,object>> logEvent = delegate{};
+		public void LogEvent(string group="",string key="",double digit=0,string data="",Dictionary<string,object> dict=null)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":LogScreen:{0}",valueName);
+			dict = Stamp(dict);
+			if(CanDebug) Debug.Log($"{this.name}:LogEvent:group:{group}:key:{key}:digit:{digit}:data:{data}:dict:{dict.ToJsonString()}",this);
+			logEvent(group,key,digit,data,dict);
 		}
 		
-		public void LogEvent(string category,string action,string label,string value)
+		public static Action<string,Dictionary<string,object>> logPurchase = delegate{};
+		public void LogPurchase(string key,Dictionary<string, object> data)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":LogEvent:{0}:{1}:{2}:{3}",category,action,label,value);
+			data = Stamp(data);
+			if(CanDebug) Debug.Log($"{this.name}:LogPurchase:key:{key}:receipt:{data.ToJsonString()}",this);
+			logPurchase(key,data);
 		}
 	}
 }

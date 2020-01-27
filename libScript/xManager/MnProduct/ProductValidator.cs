@@ -15,76 +15,82 @@ namespace xLib.Purchasing.Security
 		
 		internal static void Init()
 		{
+			TryInit();
+			if(CanDebug) Debug.Log($"ProductValidator:Init:{UseValidate}");
+		}
+		
+		private static void TryInit()
+		{
 			if(!UseValidate) return;
-			if(CanDebug) Debug.LogFormat("ProductValidator:Init");
+			
+			UseValidate = false;
+			if(StandardPurchasingModule.Instance().appStore == AppStore.GooglePlay) UseValidate = true;
+			if(StandardPurchasingModule.Instance().appStore == AppStore.AppleAppStore) UseValidate = true;
+			if(!UseValidate) return;
 			
 			#if UNITY_ANDROID || UNITY_IPHONE || UNITY_STANDALONE_OSX || UNITY_TVOS
-			validator = new CrossPlatformValidator(GooglePlayTangle.Data(),AppleTangle.Data(),UnityChannelTangle.Data(),Application.identifier);
-			if(validator == null) xDebug.LogExceptionFormat("ProductValidator:validator=null!");
+			if(CanDebug) Debug.Log($"ProductValidator:GooglePlayTangle:{GooglePlayTangle.Data().HashSHA256()}");
+			if(CanDebug) Debug.Log($"ProductValidator:AppleTangle:{AppleTangle.Data().HashSHA256()}");
+			validator = new CrossPlatformValidator(GooglePlayTangle.Data(),AppleTangle.Data(),Application.identifier);
+			if(validator == null) Debug.LogException(new UnityException($"ProductValidator:validator:null"));
 			#endif
+			
+			if(validator==null) UseValidate = false;
+			if(Application.isEditor) UseValidate = false;
 		}
 		
 		internal static bool IsValid(PurchaseEventArgs args)
 		{
-			if(Application.isEditor) return true;
+			if(CanDebug) Debug.Log($"ProductValidator:receipt:{args.purchasedProduct.receipt}");
 			if(!UseValidate) return true;
 			
-			bool canValidate = false;
-			if(StandardPurchasingModule.Instance().appStore == AppStore.GooglePlay) canValidate = true;
-			if(StandardPurchasingModule.Instance().appStore == AppStore.AppleAppStore) canValidate = true;
-			if(!canValidate) return true;
-			
-			
-			IPurchaseReceipt[] receiptArray = null;
-			bool receiptResult = false;
 			try
 			{
-				receiptArray = validator.Validate(args.purchasedProduct.receipt);
-				if(receiptArray != null) receiptResult = true;
+				IPurchaseReceipt[] receiptArray = validator.Validate(args.purchasedProduct.receipt);
+				DebugReceipt(receiptArray);
+				return (receiptArray!=null);
 			}
 			catch(IAPSecurityException ex)
 			{
-				xDebug.LogExceptionFormat("ProductValidator:IAPSecurityException:{0}",ex);
+				Debug.LogException(new UnityException($"ProductValidator:IAPSecurityException",ex));
 			}
 			catch(Exception ex)
 			{
-				xDebug.LogExceptionFormat("ProductValidator:Exception:{0}",ex);
+				Debug.LogException(new UnityException($"ProductValidator:Exception",ex));
 			}
-			
-			DebugReceipt(receiptArray);
-			return receiptResult;
+			return false;
 		}
 		
 		private static void DebugReceipt(IPurchaseReceipt[] receiptArray)
 		{
 			if(receiptArray == null)
 			{
-				xDebug.LogExceptionFormat("ProductValidator:ReceiptArray=null");
+				Debug.LogException(new UnityException($"ProductValidator:ReceiptArray:null"));
 				return;
 			}
 			
 			if(!CanDebug) return;
 			foreach (IPurchaseReceipt productReceipt in receiptArray)
 			{
-				Debug.LogFormat("productID:{0}",productReceipt.productID);
-				Debug.LogFormat("purchaseDate:{0}",productReceipt.purchaseDate);
-				Debug.LogFormat("transactionID:{0}",productReceipt.transactionID);
+				Debug.Log($"productID:{productReceipt.productID}");
+				Debug.Log($"purchaseDate:{productReceipt.purchaseDate}");
+				Debug.Log($"transactionID:{productReceipt.transactionID}");
 				
 				GooglePlayReceipt google = productReceipt as GooglePlayReceipt;
 				if (google != null)
 				{
-					Debug.LogFormat("packageName:{0}",google.packageName);
-					Debug.LogFormat("purchaseState:{0}",google.purchaseState);
-					Debug.LogFormat("purchaseToken:{0}",google.purchaseToken);
+					Debug.Log($"packageName:{google.packageName}");
+					Debug.Log($"purchaseState:{google.purchaseState}");
+					Debug.Log($"purchaseToken:{google.purchaseToken}");
 				}
 				
 				AppleInAppPurchaseReceipt apple = productReceipt as AppleInAppPurchaseReceipt;
 				if (apple != null)
 				{
-					Debug.LogFormat("originalTransactionIdentifier:{0}",apple.originalTransactionIdentifier);
-					Debug.LogFormat("subscriptionExpirationDate:{0}",apple.subscriptionExpirationDate);
-					Debug.LogFormat("cancellationDate:{0}",apple.cancellationDate);
-					Debug.LogFormat("quantity:{0}",apple.quantity);
+					Debug.Log($"originalTransactionIdentifier:{apple.originalTransactionIdentifier}");
+					Debug.Log($"subscriptionExpirationDate:{apple.subscriptionExpirationDate}");
+					Debug.Log($"cancellationDate:{apple.cancellationDate}");
+					Debug.Log($"quantity:{apple.quantity}");
 				}
 				
 				UnityChannelReceipt unityChannel = productReceipt as UnityChannelReceipt;

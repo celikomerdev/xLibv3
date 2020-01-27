@@ -1,4 +1,4 @@
-﻿#if xLibv2
+﻿#if xLibv3
 namespace xLib
 {
 	public enum xRpcTarget

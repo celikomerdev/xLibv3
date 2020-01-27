@@ -1,35 +1,40 @@
 ﻿#if xLibv3
 using System;
+using System.Collections;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
-using xLib.xValueClass;
+using UnityEngine.Networking;
+using xLib.xNode.NodeObject;
 
 namespace xLib
 {
 	public class MnConfig : SingletonM<MnConfig>
 	{
-		public static JObject data = new JObject();
-		public static Action onUpdateConfig = delegate{};
+		private bool isLoaded = false;
+		[SerializeField]private bool forceLoad = false;
+		[SerializeField]private NodeGroup nodeGroup = null;
+		[SerializeField]private NodeTextAsset nodeTextAsset = null;
 		
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void LoadConfig()
+		#region Mono
+		protected override void Awaked()
 		{
-			xDebug.LogTempFormat("MnConfig:LoadConfig");
-			TextAsset textAsset = Resources.Load<TextAsset>("ConfigData");
-			if(!textAsset)
-			{
-				xDebug.LogExceptionFormat("MnConfig:textAsset:null");
-				return;
-			}
-			UpdateConfig(textAsset.text);
+			nodeGroup.Load();
+			LoadConfig(nodeTextAsset.Value.text);
+			if(!isLoaded) LoadConfig(nodeTextAsset.ValueDefault.text);
 		}
+		#endregion
 		
-		public static void UpdateConfig(string json)
+		
+		#region LoadConfig
+		public static JObject data = new JObject();
+		public static Action onLoadConfig = delegate{};
+		private void LoadConfig(string json)
 		{
-			// xDebug.LogTempFormat("MnConfig:UpdateConfig:{0}",json);
+			if(CanDebug) Debug.Log($"{this.name}:LoadConfig:json:{json}");
+			
 			if(string.IsNullOrWhiteSpace(json))
 			{
-				xDebug.LogExceptionFormat("MnConfig:UpdateConfig:json:null");
+				Debug.LogException(new UnityException($"{this.name}:LoadConfig:json:null"),this);
 				return;
 			}
 			
@@ -40,33 +45,59 @@ namespace xLib
 			}
 			catch (Exception ex)
 			{
-				xDebug.LogExceptionFormat("MnConfig:UpdateConfig:{0}:{1}",ex,json);
+				Debug.LogException(new UnityException($"{this.name}:LoadConfig:{ex.Message}",ex),this);
 				return;
 			}
 			
+			isLoaded = true;
 			data = newData;
-			onUpdateConfig.Invoke();
+			onLoadConfig.Invoke();
 		}
+		#endregion
 		
-		protected override void Started()
-		{
-			MnConfig.onUpdateConfig += OnUpdateConfigData; OnUpdateConfigData();
-		}
 		
-		protected override void OnDestroyed()
+		#region UpdateConfig
+		[SerializeField]private WwwFormGroup wwwFormGroup = new WwwFormGroup();
+		public void UpdateConfig()
 		{
-			MnConfig.onUpdateConfig -= OnUpdateConfigData;
-		}
-		
-		[SerializeField]private ObjectGroup objectGroup = null;
-		private void OnUpdateConfigData()
-		{
-			objectGroup.Init(true);
-			for (int i = 0; i < objectGroup.iSerializableObject.Length; i++)
+			if(CanDebug) Debug.Log($"{this.name}:UpdateConfig");
+			MnCoroutine.ins.NewCoroutine(eLoad());
+			
+			IEnumerator eLoad()
 			{
-				objectGroup.iSerializableObject[i].SerializedObjectRaw = data.SelectToken(objectGroup.iSerializableObject[i].Key);
+				string url = MnKey.GetValue("MnConfig");
+				if(string.IsNullOrEmpty(url)) yield break;
+				
+				WWWForm wwwForm = wwwFormGroup.FormData;
+				if(CanDebug) Debug.Log($"{this.name}:wwwFormGroup:Length:{wwwForm.data.Length}:headers:{wwwForm.headers.ToJsonString()}");
+				
+				UnityWebRequest uwr = null;
+				if(wwwForm.data.Length==0) uwr = UnityWebRequest.Get(url);
+				else uwr = UnityWebRequest.Post(url,wwwForm);
+				
+				UnityWebRequestAsyncOperation uwrOp = uwr.SendWebRequest();
+				while (!uwr.isDone)
+				{
+					if(CanDebug) Debug.Log($"{this.name}:UWRLoad:progress:{uwrOp.progress}");
+					yield return new WaitForSecondsRealtime(1f);
+				}
+				
+				if (string.IsNullOrEmpty(uwr.error))
+				{
+					nodeTextAsset.Value = new TextAsset(uwr.downloadHandler.text);
+					if(forceLoad) LoadConfig(nodeTextAsset.Value.text);
+					nodeGroup.Save();
+				}
+				else
+				{
+					Debug.LogException(new UnityException($"{this.name}:eLoad:error:{uwr.error}:url:{url}"),this);
+				}
+				
+				uwr.Dispose();
+				uwr = null;
 			}
 		}
+		#endregion
 	}
 }
 #endif

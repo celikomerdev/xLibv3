@@ -7,7 +7,13 @@
         "GUID:c08a66bac79dfab4d821f9c86537a689",
         "GUID:7f8b6ca5b46e18c4aa27c4cb75003931",
         "GUID:becef10a9e022d64b8a471657a35becc",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:2da172dc50a102243ac0dd03e888c945",
+        "GUID:ac145e6b8c6034cdbadc8c6e26aedbcf",
+        "GUID:1e8e55397bd004beaba78a667566665f",
+        "GUID:e0619fe3eb97f57448aac131ee9aa7de",
+        "GUID:dff6fc5cc2e77dc4c8c226ffaae10f4f",
+        "GUID:eea054514e5f44043913e171e8c4d7fa"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -18,19 +24,9 @@
     "defineConstraints": [],
     "versionDefines": [
         {
-            "name": "com.unity.ugui",
-            "expression": "0.0.0",
-            "define": "PackUI"
-        },
-        {
             "name": "com.unity.modules.ui",
             "expression": "0.0.0",
             "define": "ModUI"
-        },
-        {
-            "name": "com.unity.modules.unitywebrequestwww",
-            "expression": "0.0.0",
-            "define": "ModWebWWW"
         },
         {
             "name": "com.unity.modules.imageconversion",
@@ -38,14 +34,24 @@
             "define": "ModImageConversion"
         },
         {
+            "name": "com.unity.modules.unitywebrequestwww",
+            "expression": "0.0.0",
+            "define": "ModWebWWW"
+        },
+        {
+            "name": "com.unity.ugui",
+            "expression": "0.0.0",
+            "define": "PackUI"
+        },
+        {
             "name": "com.unity.purchasing",
             "expression": "0.0.0",
             "define": "PackIAP"
         },
         {
-            "name": "com.unity.textmeshpro",
-            "expression": "0.0.0",
-            "define": "TMPro"
+            "name": "mobi.gameguru.analytics",
+            "expression": "",
+            "define": "AnalyticsGuru"
         }
     ]
 }

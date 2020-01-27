@@ -12,8 +12,8 @@ namespace xLib.libAdvert.xGoogleAds
 		private BannerView advert;
 		private AdRequest request;
 		
-		#region Register
-		protected override bool Register(bool value)
+		#region TryRegister
+		protected override bool TryRegister(bool value)
 		{
 			if (value)
 			{
@@ -28,7 +28,7 @@ namespace xLib.libAdvert.xGoogleAds
 				
 				AdRequest.Builder builder = MnGoogleAds.ins.Builder();
 				request = builder.Build();
-				OnRegisterBase();
+				OnRegisteredBase();
 			}
 			else
 			{
@@ -107,28 +107,6 @@ namespace xLib.libAdvert.xGoogleAds
 		#endregion
 		
 		#region Custom
-		private AdSize xAdSize
-		{
-			get
-			{
-				switch (adSize)
-				{
-					case "Banner":
-						return AdSize.Banner;
-					case "MediumRectangle":
-						return AdSize.MediumRectangle;
-					case "IABBanner":
-						return AdSize.IABBanner;
-					case "Leaderboard":
-						return AdSize.Leaderboard;
-					case "SmartBanner":
-						return AdSize.SmartBanner;
-					default:
-						return AdSize.SmartBanner;
-				}
-			}
-		}
-		
 		private AdPosition xAdPosition
 		{
 			get
@@ -151,6 +129,28 @@ namespace xLib.libAdvert.xGoogleAds
 						return AdPosition.Center;
 					default:
 						return AdPosition.Bottom;
+				}
+			}
+		}
+		
+		private AdSize xAdSize
+		{
+			get
+			{
+				switch (adSize)
+				{
+					case "Banner":
+						return AdSize.Banner;
+					case "MediumRectangle":
+						return AdSize.MediumRectangle;
+					case "IABBanner":
+						return AdSize.IABBanner;
+					case "Leaderboard":
+						return AdSize.Leaderboard;
+					case "SmartBanner":
+						return AdSize.SmartBanner;
+					default:
+						return AdSize.SmartBanner;
 				}
 			}
 		}

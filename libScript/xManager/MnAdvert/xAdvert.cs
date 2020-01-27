@@ -12,8 +12,8 @@ namespace xLib.libAdvert
 		public byte[] arrayAdvertId;
 		
 		
-		#region Register
-		protected override bool Register(bool value)
+		#region TryRegister
+		protected override bool TryRegister(bool value)
 		{
 			mRegister(value);
 			return value;

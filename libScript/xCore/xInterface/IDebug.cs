@@ -3,6 +3,11 @@ namespace xLib
 {
 	public interface IDebug
 	{
+		UnityEngine.Object UnityObject
+		{
+			get;
+		}
+		
 		bool CanDebug
 		{
 			get;

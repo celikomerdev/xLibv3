@@ -2,13 +2,15 @@
 using System.Collections;
 using UnityEngine;
 using xLib.EventClass;
+using xLib.xNode.NodeObject;
 using xLib.xTween;
 
 namespace xLib
 {
-	public class MiniGameSpin : BaseMainM
+	public class MiniGameSpin : BaseWorkM
 	{
 		[SerializeField]private Transform trans = null;
+		[SerializeField]private NodeFloat tickTime = null;
 		[SerializeField]private Tween tween = null;
 		[SerializeField]private int loop = 2;
 		[SerializeField]private int duration = 1;
@@ -29,14 +31,15 @@ namespace xLib
 			if(inSpin) return;
 			inSpin = true;
 			onSpin.Invoke(inSpin);
-			StartCoroutine(eSpin(value));
+			this.NewCoroutine(eSpin(value),CanDebug);
 		}
 		
 		private IEnumerator eSpin(float value)
 		{
-			Vector3 rotStart = trans.eulerAngles;
+			yield return new WaitForEndOfFrame();
+			Vector3 rotStart = trans.localEulerAngles;
 			rotStart.z %= 360f;
-			trans.eulerAngles = rotStart;
+			trans.localEulerAngles = rotStart;
 			
 			float rotFinal = 360*loop;
 			rotFinal -= rotStart.z;
@@ -49,11 +52,11 @@ namespace xLib
 				tween.SetBaseRatio(curveOutput);
 				
 				float rotFrame = rotFinal*curveOutput;
-				trans.eulerAngles = rotStart+Vector3.forward*rotFrame;
-				timer += Time.deltaTime;
+				trans.localEulerAngles = rotStart+Vector3.forward*rotFrame;
+				timer += tickTime.Value;
 				yield return new WaitForEndOfFrame();
 			}
-			trans.eulerAngles = rotStart+Vector3.forward*rotFinal;
+			trans.localEulerAngles = rotStart+Vector3.forward*rotFinal;
 			
 			inSpin = false;
 			onSpin.Invoke(inSpin);

@@ -16,7 +16,7 @@ namespace xLib.ToolConvert
 			}
 			set
 			{
-				if(CanDebug) xDebug.LogTempFormat(this,this.name+":format:{0}:{1}",format,value);
+				if(CanDebug) xLogger.LogFormat(this,this.name+":format:{0}:{1}",format,value);
 				format = value;
 				FromString("");
 			}
@@ -27,8 +27,8 @@ namespace xLib.ToolConvert
 		{
 			set
 			{
-				if(result == value) return;
-				if(CanDebug) xDebug.LogTempFormat(this,this.name+":Result:{0}:{1}",result,value);
+				// if(result == value) return;
+				if(CanDebug) xLogger.LogFormat(this,this.name+":Result:{0}:{1}",result,value);
 				result = value;
 				eventResult.Invoke(result);
 			}

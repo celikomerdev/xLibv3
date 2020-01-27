@@ -24,7 +24,7 @@ namespace xLib.ToolApplication
 		
 		public void Quit()
 		{
-			if(CanDebug) Debug.LogWarningFormat(this,this.name+":Quit");
+			if(CanDebug) Debug.LogWarning($"{this.name}:Quit",this);
 			Application.Quit();
 		}
 	}

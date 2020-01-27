@@ -1,28 +1,27 @@
 ﻿#if xLibv3
 using System.Collections;
 using UnityEngine;
-using xLib.xTween;
+using UnityEngine.Events;
 
 namespace xLib
 {
 	public static class ExtTween
 	{
-		public static Coroutine CrossFade(this TweenGroup tween, float valueTarget, float duration = 0.1f, bool ignoreTimeScale=true)
+		public static Coroutine Tween(UnityAction<float> call,float duration = 0.1f, bool ignoreTimeScale=true,AnimationCurve curve=null)
 		{
+			if(curve==null) curve = AnimationCurve.Linear(0,0,1,1);
 			return MnCoroutine.ins.NewCoroutine(Flow());
-			
 			IEnumerator Flow()
 			{
-				float valueStart = tween.currentRatio;
 				float elapsedTime = 0.0f;
 				while (elapsedTime < duration)
 				{
-					elapsedTime += ignoreTimeScale ? Time.unscaledDeltaTime : Time.deltaTime;
+					elapsedTime += ignoreTimeScale? Time.unscaledDeltaTime:Time.deltaTime;
 					float ratio = Mathf.Clamp01(elapsedTime/duration);
-					tween.SetBaseRatio(Mathf.Lerp(valueStart,valueTarget,ratio));
-					yield return null;
+					ratio = curve.Evaluate(ratio);
+					call.Invoke(ratio);
+					yield return new WaitForEndOfFrame();
 				}
-				tween.SetBaseRatio(valueTarget);
 			}
 		}
 	}

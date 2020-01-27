@@ -24,7 +24,8 @@ namespace xLib.ToolFollow
 		
 		protected override void Tick(float tickTime)
 		{
-			if(lerp<100)
+			if(!target) return;
+			if(lerp>0)
 			{
 				trans.SpacePositionSet(Vector3.Lerp(trans.SpacePositionGet(),target.SpacePositionGet(),lerp*tickTime));
 				trans.eulerAngles = MathVector3.LerpAngle(trans.eulerAngles,target.eulerAngles,lerp*tickTime);

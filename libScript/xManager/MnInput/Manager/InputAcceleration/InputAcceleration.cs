@@ -1,31 +1,31 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 using xLib.xNode.NodeObject;
 
 namespace xLib.xInput
 {
-	public class InputAcceleration : BaseTickM
+	public class InputAcceleration : BaseTickNodeM
 	{
 		[Header("Input")]
-		[SerializeField]private NodeFloat multiplier;
-		[SerializeField]private NodeFloat lerp;
+		[SerializeField]private NodeFloat multiplier = null;
+		[SerializeField]private NodeFloat lerp = null;
 		
 		[SerializeField]private bool calibrateAuto = false;
-		private Vector3 valueZero;
+		private Vector3 valueZero = Vector3.zero;
 		
 		[Header("Output")]
-		[SerializeField]private InputFinal inputFinal;
-		[SerializeField]private Vector3 valueCurrent;
-		[SerializeField]private Vector3 valueSmooth;
+		[SerializeField]private InputFinal inputFinal = null;
+		private Vector3 valueCurrent = Vector3.zero;
+		private Vector3 valueSmooth = Vector3.zero;
 		
 		[Header("Axis")]
-		[SerializeField]private NodeFloat axisX;
-		[SerializeField]private NodeFloat axisY;
-		[SerializeField]private NodeFloat axisZ;
+		[SerializeField]private NodeFloat axisX = null;
+		[SerializeField]private NodeFloat axisY = null;
+		[SerializeField]private NodeFloat axisZ = null;
 		
 		
 		#region Mono
-		protected override bool Register(bool register)
+		protected override bool TryRegister(bool register)
 		{
 			if(register)
 			{
@@ -38,7 +38,7 @@ namespace xLib.xInput
 				SetAxis();
 			}
 			
-			return base.Register(register);
+			return base.TryRegister(register);
 		}
 		
 		protected override void Tick(float tickTime)

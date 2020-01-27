@@ -9,7 +9,7 @@ namespace xLib
 		protected virtual void Awaked(){}
 		internal virtual void Awake()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Awake");
+			if(CanDebug) Debug.Log($"{this.name}:Awake",this);
 			if(!CanWork) return;
 			
 			FindView();
@@ -25,7 +25,7 @@ namespace xLib
 		protected virtual void Started(){}
 		internal virtual void Start()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Start");
+			if(CanDebug) Debug.Log($"{this.name}:Start",this);
 			if(!CanWork) return;
 			
 			FindView();
@@ -42,7 +42,7 @@ namespace xLib
 		internal virtual void OnEnable()
 		{
 			if(!isStarted) return;
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnEnable");
+			if(CanDebug) Debug.Log($"{this.name}:OnEnable",this);
 			if(!CanWork) return;
 			
 			FindView();
@@ -57,7 +57,7 @@ namespace xLib
 		protected virtual void OnDisabled(){}
 		internal virtual void OnDisable()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnDisable");
+			if(CanDebug) Debug.Log($"{this.name}:OnDisable",this);
 			if(!CanWork) return;
 			
 			FindView();
@@ -72,7 +72,7 @@ namespace xLib
 		protected virtual void OnDestroyed(){}
 		internal virtual void OnDestroy()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnDestroy");
+			if(CanDebug) Debug.Log($"{this.name}:OnDestroy",this);
 			if(!CanWork) return;
 			
 			FindView();
@@ -99,7 +99,7 @@ namespace xLib
 				if(!CanWork) return;
 				if(isActive == value) return;
 				isActive = value;
-				if(CanDebug) Debug.LogFormat(this,this.name+":IsActive:{0}",value);
+				if(CanDebug) Debug.Log($"{this.name}:IsActive:{isActive}",this);
 				
 				FindView();
 				string tempId = ViewCore.CurrentId;

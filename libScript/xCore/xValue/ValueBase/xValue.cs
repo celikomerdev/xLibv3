@@ -17,10 +17,12 @@ namespace xLib
 			{
 				return nodeSetting.Key;
 			}
+			#if UNITY_EDITOR
 			set
 			{
 				nodeSetting.Key = value;
 			}
+			#endif
 		}
 		
 		[Header("Value")]
@@ -50,7 +52,9 @@ namespace xLib
 		{
 			if(isInit == init) return;
 			isInit = init;
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Init:{0}",isInit);
+			#if CanTrace
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Init:{isInit}",nodeSetting.objDebug);
+			#endif
 			OnInit(init);
 		}
 		
@@ -61,7 +65,8 @@ namespace xLib
 			CleanValue();
 			CleanListener();
 			
-			ValueDefaultReset(this.value);
+			ValueDefault = this.value;
+			valueBase.ValueSet(this.value,"Client");
 		}
 		
 		public void ValueDefaultReset(V value)
@@ -78,7 +83,7 @@ namespace xLib
 		#region Call
 		private void CallClient()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClient:{0}",ValueToString);
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallClient:{ValueToString}",nodeSetting.objDebug);
 			actionSortedBase.Invoke(Value,viewId:"Client");
 			actionSortedBaseCall.Invoke(Value,viewId:"Client");
 			analyticDirty = true;
@@ -86,7 +91,7 @@ namespace xLib
 		
 		private void CallClientFirst()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClientFirst:{0}",ValueToString);
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallClientFirst:{ValueToString}",nodeSetting.objDebug);
 			actionSortedBase.InvokeFirst(Value,viewId:"Client");
 			actionSortedBaseCall.InvokeFirst(Value,viewId:"Client");
 			analyticDirty = true;
@@ -94,7 +99,7 @@ namespace xLib
 		
 		private void CallClientLast()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallClientLast:{0}",ValueToString);
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallClientLast:{ValueToString}",nodeSetting.objDebug);
 			actionSortedBase.InvokeLast(Value,viewId:"Client");
 			actionSortedBaseCall.InvokeLast(Value,viewId:"Client");
 			analyticDirty = true;
@@ -105,22 +110,40 @@ namespace xLib
 		#region Listener
 		#region Runtime
 		private ActionSortedBase<V> actionSortedBase = new ActionSortedSingle<V>();
-		public void Listener(bool register,UnityAction<V> call,string viewId,int order,bool onRegister=false)
+		public void Listener(bool register,UnityAction<V> call,string viewId,int order,bool onRegister=false,BaseWorkerI worker=null)
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Listener:{0}:view:{1}:order:{2}:call:{3}",register,viewId,order,call.Target);
-			actionSortedBase.Listener(register,call,viewId,order);
+			Object objDebug = nodeSetting.objDebug;
+			if(worker!=null) objDebug = worker.UnityObject;
 			
+			#if CanTrace
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Listener:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",objDebug);
+			#endif
+			
+			#if UNITY_EDITOR
+			ListenerEditor(register,worker);
+			#endif
+			
+			actionSortedBase.Listener(register,call,viewId,order);
 			if(!register) return;
 			if(!onRegister) return;
 			call.Invoke(Value);
 		}
 		
 		private ActionSortedBase<object> actionSortedBaseCall = new ActionSortedSingle<object>();
-		public virtual void ListenerCall(bool register,UnityAction<object> call,string viewId,int order,bool onRegister=false)
+		public virtual void ListenerCall(bool register,UnityAction<object> call,string viewId,int order,bool onRegister=false,BaseWorkerI worker=null)
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":ListenerCall:{0}:view:{1}:order:{2}:call:{3}",register,viewId,order,call.Target);
-			actionSortedBaseCall.Listener(register,call,viewId,order);
+			Object objDebug = nodeSetting.objDebug;
+			if(worker!=null) objDebug = worker.UnityObject;
 			
+			#if CanTrace
+			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:ListenerCall:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",objDebug);
+			#endif
+			
+			#if UNITY_EDITOR
+			ListenerEditor(register,worker);
+			#endif
+			
+			actionSortedBaseCall.Listener(register,call,viewId,order);
 			if(!register) return;
 			if(!onRegister) return;
 			call.Invoke(Value);
@@ -129,31 +152,31 @@ namespace xLib
 		
 		#region Editor
 		#if UNITY_EDITOR
-		private List<BaseActiveM> listenerEditor = new List<BaseActiveM>();
-		public virtual void ListenerEditor(bool register,BaseActiveM call)
+		private List<Object> listenerEditor = new List<Object>();
+		private void ListenerEditor(bool register,BaseWorkerI worker)
 		{
-			call.CheckErrors();
+			if(!Application.isPlaying) return;
+			if(worker==null) return;
+			worker.CheckErrors();
 			if(register)
 			{
-				if(listenerEditor.Contains(call))
+				if(listenerEditor.Contains(worker.UnityObject))
 				{
-					xDebug.LogExceptionFormat(nodeSetting.objDebug,$"{nodeSetting.objDebug.name}:ListenerEditorAdd:Contains:{call.name}");
+					Debug.LogError($"{nodeSetting.objDebug.name}:ListenerEditor:++:{worker.UnityObject.name}",worker.UnityObject);
 					return;
 				}
-				listenerEditor.Add(call);
+				listenerEditor.Add(worker.UnityObject);
 			}
 			else
 			{
-				if(!listenerEditor.Contains(call))
+				if(!listenerEditor.Contains(worker.UnityObject))
 				{
-					xDebug.LogExceptionFormat(nodeSetting.objDebug,$"{nodeSetting.objDebug.name}:ListenerEditorAdd:NotContains:{call.name}");
+					Debug.LogError($"{nodeSetting.objDebug.name}:ListenerEditor:--:{worker.UnityObject.name}",worker.UnityObject);
 					return;
 				}
-				listenerEditor.Remove(call);
+				listenerEditor.Remove(worker.UnityObject);
 			}
 		}
-		#else
-		public virtual void ListenerEditor(bool addition,BaseActiveM call){}
 		#endif
 		#endregion
 		
@@ -178,7 +201,7 @@ namespace xLib
 			}
 			
 			#if UNITY_EDITOR
-			listenerEditor = new List<BaseActiveM>();
+			listenerEditor = new List<Object>();
 			#endif
 		}
 		#endregion
@@ -220,7 +243,9 @@ namespace xLib
 			{
 				if(!CanChange(value))
 				{
-					if(nodeSetting.canDebug) Debug.LogWarningFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":!CanChange:{0}:{1}",ViewCore.CurrentId,ValueToString);
+					#if CanTrace
+					if(nodeSetting.canDebug) Debug.LogWarning($"{nodeSetting.objDebug.name}:!CanChange:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.objDebug);
+					#endif
 					return;
 				}
 				KeepProperties(value);
@@ -249,7 +274,7 @@ namespace xLib
 			if(!nodeSetting.UseRpc) CallClient();
 			else
 			{
-				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Call:{0}:{1}",ViewCore.CurrentId,ValueToString);
+				if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Call:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.objDebug);
 				ViewCore.RPC(nodeSetting.RpcTarget,Key,SerializedObject.ToString());
 			}
 		}
@@ -259,7 +284,7 @@ namespace xLib
 			if(!nodeSetting.UseRpc) CallClientFirst();
 			else
 			{
-				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallFirst:{0}:{1}",ViewCore.CurrentId,ValueToString);
+				if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallFirst:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.objDebug);
 				ViewCore.RPC(nodeSetting.RpcTarget,Key,SerializedObject.ToString());
 			}
 		}
@@ -269,7 +294,7 @@ namespace xLib
 			if(!nodeSetting.UseRpc) CallClientLast();
 			else
 			{
-				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":CallLast:{0}:{1}",ViewCore.CurrentId,ValueToString);
+				if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallLast:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.objDebug);
 				ViewCore.RPC(nodeSetting.RpcTarget,Key,SerializedObject.ToString());
 			}
 		}
@@ -347,6 +372,13 @@ namespace xLib
 		
 		#region Analytics
 		internal bool analyticDirty = false;
+		internal virtual object AnalyticObject
+		{
+			get
+			{
+				return Value;
+			}
+		}
 		
 		internal virtual string AnalyticString
 		{
@@ -356,11 +388,11 @@ namespace xLib
 			}
 		}
 		
-		internal virtual string AnalyticDigit
+		internal virtual double AnalyticDigit
 		{
 			get
 			{
-				return "0";
+				return 0;
 			}
 		}
 		#endregion

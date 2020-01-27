@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace xLib
 {
-	public abstract class SingletonM<T> : BaseWorkM where T : Component
+	public abstract class SingletonBase : BaseWorkM{}
+	public abstract class SingletonM<T> : SingletonBase where T : Component
 	{
 		[Header("Singleton")]
 		[SerializeField]private bool isPrimary = false;
@@ -18,14 +19,14 @@ namespace xLib
 			TryReplace();
 			if(!ins)
 			{
-				if(CanDebug) Debug.LogWarningFormat(this,this.name+":Awaked");
+				if(CanDebug) Debug.LogWarning($"{this.name}:Awaked",this);
 				insBase = this;
 				ins = this as T;
 				Awaked();
 			}
 			else if(ins!=this)
 			{
-				DestroyImmediate();
+				Destroy();
 			}
 		}
 		
@@ -39,26 +40,28 @@ namespace xLib
 			if(!ins) return;
 			if(insBase.isPrimary && !isPrimary) return;
 			insBase.DestroyImmediate();
-			Debug.LogWarningFormat(this,this.name+":Replaced");
+			if(CanDebug) Debug.LogWarning($"{this.name}:Replaced",this);
 		}
 		
 		protected virtual void Started(){}
 		protected virtual void Start()
 		{
-			if(CanDebug) Debug.LogWarningFormat(this,this.name+":Started");
+			if(CanDebug) Debug.LogWarning($"{this.name}:Started",this);
 			Started();
 		}
 		
+		protected virtual void Inited(){}
 		public virtual void Init()
 		{
-			if(CanDebug) Debug.LogWarningFormat(this,this.name+":Init");
+			if(CanDebug) Debug.LogWarning($"{this.name}:TryInit",this);
+			Inited();
 		}
 		
 		protected virtual void OnEnabled(){}
 		protected virtual void OnEnable()
 		{
 			if(ins!=this) return;
-			if(CanDebug) Debug.LogWarningFormat(this,this.name+":OnEnabled");
+			if(CanDebug) Debug.LogWarning($"{this.name}:OnEnabled",this);
 			OnEnabled();
 		}
 		
@@ -66,7 +69,7 @@ namespace xLib
 		protected virtual void OnDisable()
 		{
 			if(ins!=this) return;
-			if(CanDebug) Debug.LogWarningFormat(this,this.name+":OnDisabled");
+			if(CanDebug) Debug.LogWarning($"{this.name}:OnDisabled",this);
 			OnDisabled();
 		}
 		
@@ -74,15 +77,22 @@ namespace xLib
 		protected virtual void OnDestroy()
 		{
 			if(ins!=this) return;
-			if(CanDebug) Debug.LogWarningFormat(this,this.name+":OnDestroyed");
+			if(CanDebug) Debug.LogWarning($"{this.name}:OnDestroyed",this);
 			OnDestroyed();
+		}
+		
+		private void Destroy()
+		{
+			if(CanDebug) Debug.LogWarning($"{this.name}:Destroy",this);
+			if(ins==this) ins = null;
+			Destroy(this.gameObject);
 		}
 		
 		private void DestroyImmediate()
 		{
-			if(CanDebug) Debug.LogWarningFormat(this,this.name+":DestroyImmediate");
-			DestroyImmediate(this.gameObject);
+			if(CanDebug) Debug.LogWarning($"{this.name}:DestroyImmediate",this);
 			if(ins==this) ins = null;
+			DestroyImmediate(this.gameObject);
 		}
 	}
 }

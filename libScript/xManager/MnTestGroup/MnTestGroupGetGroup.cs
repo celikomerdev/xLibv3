@@ -1,6 +1,7 @@
 ﻿#if xLibv3
 using UnityEngine;
 using xLib.EventClass;
+using xLib.xValueClass;
 
 namespace xLib
 {
@@ -13,20 +14,22 @@ namespace xLib
 			{
 				if(key == value) return;
 				key = value;
-				Work();
+				Work(new Void());
 			}
 		}
 		
 		[SerializeField]private EventInt eventGroup = new EventInt();
-		private void Work()
+		private void Work(Void value)
 		{
-			eventGroup.Invoke(MnTestGroup.GetGroup(key));
+			int group = MnTestGroup.GetGroup(key);
+			if(CanDebug) Debug.Log($"{this.name}:GetGroup:{key}:{group}",this);
+			eventGroup.Invoke(group);
 		}
 		
-		protected override bool OnRegister(bool value)
+		protected override bool TryRegister(bool register)
 		{
-			if(baseRegister.onRegister) Work();
-			return value;
+			MnTestGroup.onRefreshGroups.Listener(register:register,call:Work,viewId:ViewId,order:baseRegister.order,onRegister:baseRegister.onRegister,worker:this);
+			return register;
 		}
 	}
 }

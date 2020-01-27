@@ -5,12 +5,14 @@ namespace xLib
 {
 	public abstract class BaseInitS : BaseWorkS
 	{
-		protected bool isInit;
+		protected bool isInit = false;
 		public void Init(bool value)
 		{
 			if(isInit == value) return;
 			isInit = value;
-			if(CanDebug) Debug.LogFormat(this,this.name+":Init:{0}",isInit);
+			#if CanTrace
+			if(CanDebug) Debug.Log($"{this.name}:Init:{isInit}",this);
+			#endif
 			OnInit(isInit);
 			SetDebug();
 		}
@@ -20,22 +22,23 @@ namespace xLib
 		#region Flow
 		// public BaseInitS()
 		// {
-		// 	MnThread.Register(OnEnable);
+		// 	MnThread.ScheduleLate(iDebug:this,call:delegate{OnEnable();});
 		// }
 		
-		private void OnEnable()
+		protected virtual void OnEnable()
 		{
-			Init(true);
+			if(CanWork) Init(true);
 		}
 		
-		private void OnDisable()
+		protected virtual void OnDisable()
 		{
-			Init(false);
+			if(CanWork) Init(false);
 		}
 		
 		[ContextMenu ("ReInit")]
 		private void ReInit()
 		{
+			if(!CanWork) return;
 			Init(!isInit);
 			Init(!isInit);
 		}

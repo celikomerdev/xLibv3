@@ -26,7 +26,7 @@ namespace xLib.xGameSparks
 		[SerializeField]private EventBool eventBool;
 		
 		#region Mono
-		protected override bool Register(bool value)
+		protected override bool TryRegister(bool value)
 		{
 			if(value && baseRegister.onRegister)
 			{

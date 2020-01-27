@@ -7,6 +7,14 @@ namespace xLib
 	{
 		[SerializeField]private BaseWorkInfo baseWork = new BaseWorkInfo();
 		
+		public UnityEngine.Object UnityObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+		
 		protected virtual void SetDebug(){}
 		public bool CanDebug
 		{
@@ -17,7 +25,7 @@ namespace xLib
 			set
 			{
 				if(baseWork.canDebug == value) return;
-				Debug.LogFormat(this,this.name+":CanDebug:{0}",value);
+				Debug.Log($"{this.name}:CanDebug:{value}",this);
 				baseWork.CanDebug = value;
 				SetDebug();
 				
@@ -39,22 +47,6 @@ namespace xLib
 			}
 		}
 		
-		public bool Enabled
-		{
-			get
-			{
-				return enabled;
-			}
-			set
-			{
-				enabled = (value && CanEnable());
-			}
-		}
-		protected virtual bool CanEnable()
-		{
-			return true;
-		}
-		
 		protected virtual void OnValidatedForced(){}
 		protected virtual void OnValidated(){}
 		private void OnValidate()
@@ -67,8 +59,29 @@ namespace xLib
 			SetDebug();
 			
 			if(!CanWork) return;
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnValidate");
+			#if CanTrace
+			if(CanDebug) Debug.Log($"{this.name}:OnValidate",this);
+			#endif
 			OnValidated();
+		}
+		
+		public bool Enabled
+		{
+			get
+			{
+				return enabled;
+			}
+			set
+			{
+				enabled = (value && CanEnable);
+			}
+		}
+		protected virtual bool CanEnable
+		{
+			get
+			{
+				return true;
+			}
 		}
 	}
 }

@@ -14,121 +14,191 @@ namespace xLib
 		[SerializeField]private bool enableHidePopups = false;
 		[SerializeField]private bool savedGames = false;
 		[SerializeField]private bool requestIdToken = false;
-		[SerializeField]private bool requestServerAuthCode = false;
 		[SerializeField]private bool requestEmail = false;
+		[SerializeField]private bool requestServerAuthCode = false;
 		
 		[SerializeField]private NodeString displayName = null;
 		[SerializeField]private NodeString idToken = null;
 		[SerializeField]private NodeString authCode = null;
 		
+		
 		#region Mono
-		protected override void Awaked()
+		protected override void OnEnabled()
 		{
-			MnSocial.ins.eventInit.eventUnity.AddListener(Init);
-			MnSocial.ins.isLogin.Listener(true,OnLogin,true);
-			MnSocial.ins.eventShowLeaderboard.eventString.AddListener(ShowLeaderboardUI);
-			MnSocial.ins.eventShowAchievement.eventString.AddListener(ShowAchievementsUI);
+			// MnSocial.actionInit += Init;
+			MnSocial.actionLoginOut += LoginOut;
+			
+			MnSocial.actionShowLeaderboard += ShowLeaderboard;
+			MnSocial.actionReportLeaderboard += ReportLeaderboard;
+			
+			MnSocial.actionShowAchievement += ShowAchievement;
+			MnSocial.actionReportAchievement += ReportAchievement;
 		}
 		
-		protected override void OnDestroyed()
+		protected override void OnDisabled()
 		{
-			MnSocial.ins.eventInit.eventUnity.RemoveListener(Init);
-			MnSocial.ins.isLogin.Listener(false,OnLogin,true);
-			MnSocial.ins.eventShowLeaderboard.eventString.RemoveListener(ShowLeaderboardUI);
-			MnSocial.ins.eventShowAchievement.eventString.RemoveListener(ShowAchievementsUI);
+			// MnSocial.actionInit -= Init;
+			MnSocial.actionLoginOut -= LoginOut;
+			
+			MnSocial.actionShowLeaderboard -= ShowLeaderboard;
+			MnSocial.actionReportLeaderboard -= ReportLeaderboard;
+			
+			MnSocial.actionShowAchievement -= ShowAchievement;
+			MnSocial.actionReportAchievement -= ReportAchievement;
 		}
 		#endregion
+		
 		
 		#region Init
-		public override void Init()
+		private bool inInit = false;
+		private bool isInit = false;
+		protected override void Inited()
 		{
-			base.Init();
-			PlayGamesPlatform.DebugLogEnabled = CanDebug;
+			if(inInit) return;
+			if(isInit) return;
+			inInit = true;
 			
-			PlayGamesClientConfiguration.Builder builder = new PlayGamesClientConfiguration.Builder();
-			builder.WithInvitationDelegate(OnInvitationReceive);
-			builder.WithMatchDelegate(OnTurnMatchGot);
-			builder.RequestServerAuthCode(requestServerAuthCode);
+			MnThread.StartThread(iDebug:this,useThread:false,priority:1,call:delegate
+			{
+				PlayGamesPlatform.DebugLogEnabled = CanDebug;
 			
-			if(enableHidePopups) builder.EnableHidePopups();
-			if(savedGames) builder.EnableSavedGames();
-			if(requestIdToken) builder.RequestIdToken();
-			if(requestEmail) builder.RequestEmail();
-			
-			PlayGamesClientConfiguration config = builder.Build();
-			PlayGamesPlatform.InitializeInstance(config);
-			PlayGamesPlatform.Activate();
+				PlayGamesClientConfiguration.Builder builder = new PlayGamesClientConfiguration.Builder();
+				builder.WithInvitationDelegate(OnInvitationReceive);
+				builder.WithMatchDelegate(OnTurnMatchGot);
+				
+				if(enableHidePopups) builder.EnableHidePopups();
+				if(savedGames) builder.EnableSavedGames();
+				if(requestIdToken) builder.RequestIdToken();
+				if(requestEmail) builder.RequestEmail();
+				if(requestServerAuthCode) builder.RequestServerAuthCode(requestServerAuthCode);
+				
+				PlayGamesClientConfiguration config = builder.Build();
+				PlayGamesPlatform.InitializeInstance(config);
+				
+				inInit = false;
+				isInit = true;
+				MnThread.ScheduleLate(iDebug:this,call:delegate{LoginOut(true);});
+			});
 		}
 		#endregion
 		
-		#region Tokens
-		public void OnLogin(bool value)
+		
+		#region LoginOut
+		private void LoginOut(bool value)
 		{
+			Init();
+			if(!isInit) return;
+			if(CanDebug) Debug.Log($"{this.name}:LoginOut:{value}",this);
+			
 			if(value)
 			{
-				displayName.Value = PlayGamesPlatform.Instance.GetUserDisplayName();
-				if(requestIdToken) idToken.Value = PlayGamesPlatform.Instance.GetIdToken();
-				if(requestServerAuthCode) authCode.Value = PlayGamesPlatform.Instance.GetServerAuthCode();
+				MnSocial.ins.inLogin.Value = true;
+				MnThread.StartThread(iDebug:this,useThread:false,priority:1,call:delegate{PlayGamesPlatform.Instance.Authenticate(IsLogin);});
 			}
 			else
 			{
-				displayName.Value = "Guest";
-				idToken.Value = "";
-				authCode.Value = "";
+				MnThread.StartThread(iDebug:this,useThread:false,priority:1,call:delegate{PlayGamesPlatform.Instance.SignOut();});
+				IsLogin(false);
 			}
+		}
+		
+		private void IsLogin(bool value)
+		{
+			MnThread.ScheduleLate(iDebug:this,call:delegate
+			{
+				if(CanDebug) Debug.Log($"{this.name}:IsLogin:{value}",this);
+				
+				if(value)
+				{
+					// StartCoroutine(DownloadImage(PlayGamesPlatform.Instance.GetUserImageUrl())); //TODO
+					displayName.Value = PlayGamesPlatform.Instance.GetUserDisplayName();
+					if(requestIdToken) idToken.Value = PlayGamesPlatform.Instance.GetIdToken();
+					if(requestServerAuthCode) authCode.Value = PlayGamesPlatform.Instance.GetServerAuthCode();
+				}
+				else
+				{
+					displayName.ValueDefaultReset();
+					idToken.ValueDefaultReset();
+					authCode.ValueDefaultReset();
+				}
+				
+				MnSocial.ins.isLogin.Value = value;
+				MnSocial.ins.isSilent.Value = value;
+				MnSocial.ins.inLogin.Value = false;
+			});
 		}
 		#endregion
 		
 		
 		#region Leaderboard/Achievement
-		public void ShowLeaderboardUI(string id)
+		private void ShowLeaderboard(string key)
 		{
-			PlayGamesPlatform.Instance.ShowLeaderboardUI(id);
+			string idPlatform = MnKey.GetValue(key);
+			if(string.IsNullOrWhiteSpace(idPlatform)) idPlatform = null;
+			PlayGamesPlatform.Instance.ShowLeaderboardUI(idPlatform);
 		}
 		
-		public void ShowAchievementsUI(string id)
+		private void ReportLeaderboard(string key,long value)
+		{
+			string idPlatform = MnKey.GetValue(key);
+			PlayGamesPlatform.Instance.ReportScore(value,idPlatform,(bool success)=>
+			{
+				if(CanDebug) Debug.Log($"{this.name}:ReportLeaderboard:{success}:{key}:{value}",this);
+			});
+		}
+		
+		private void ShowAchievement(string key)
 		{
 			PlayGamesPlatform.Instance.ShowAchievementsUI();
+		}
+		
+		private void ReportAchievement(string key,float value)
+		{
+			string idPlatform = MnKey.GetValue(key);
+			PlayGamesPlatform.Instance.ReportProgress(idPlatform,value,(bool success)=>
+			{
+				if(CanDebug) Debug.Log($"{this.name}:ReportAchievement:{success}:{key}:{value}",this);
+			});
 		}
 		#endregion
 		
 		
 		#region Invitation
-		public Invitation invitation;
-		public UnityAction onInvitationReceive = delegate(){};
-		private void OnInvitationReceive(Invitation _invitation, bool _shouldAutoAccept)
+		private Invitation invitation;
+		private UnityAction onInvitationReceive = delegate(){};
+		private void OnInvitationReceive(Invitation value, bool shouldAutoAccept)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+": OnInvitationReceive:{0}",_shouldAutoAccept);
-			invitation = _invitation;
+			if(CanDebug) Debug.Log($"{this.name}:OnInvitationReceive:{shouldAutoAccept}:{value}",this);
+			invitation = value;
 			onInvitationReceive.Invoke();
-			if (_shouldAutoAccept) OnInvitationAccept();
+			if (shouldAutoAccept) OnInvitationAccept();
 		}
 		
-		public UnityAction onInvitationAccept = delegate(){};
+		private UnityAction onInvitationAccept = delegate(){};
 		private void OnInvitationAccept()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+": OnInvitationAccept");
+			if(CanDebug) Debug.Log($"{this.name}:OnInvitationAccept",this);
 			onInvitationAccept.Invoke();
 		}
 		
 		//PlayGamesPlatform.Instance.TurnBased.DeclineInvitation(mIncomingInvitation.InvitationId);
-		public UnityAction onInvitationDecline = delegate(){};
-		public void OnInvitationDecline()
+		private UnityAction onInvitationDecline = delegate(){};
+		private void OnInvitationDecline()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+": OnInvitationDecline");
+			if(CanDebug) Debug.Log($"{this.name}:OnInvitationDecline:",this);
 			onInvitationDecline.Invoke();
 		}
 		#endregion
 		
 		
 		#region Match
-		public UnityAction onTurnMatchGot = delegate(){};
-		private void OnTurnMatchGot(TurnBasedMatch _match, bool _shouldAutoLaunch)
+		private UnityAction onTurnMatchGot = delegate(){};
+		private void OnTurnMatchGot(TurnBasedMatch value, bool shouldAutoLaunch)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+": OnTurnMatchGot:{0}",_shouldAutoLaunch);
+			if(CanDebug) Debug.Log($"{this.name}:OnTurnMatchGot:{shouldAutoLaunch}:{value}",this);
 			onTurnMatchGot.Invoke();
-			// MnMatchTurn.ins.shouldAutoLaunch = _shouldAutoLaunch;
-			// MnMatchTurn.ins.match = _match;
+			// MnMatchTurn.ins.shouldAutoLaunch = shouldAutoLaunch;
+			// MnMatchTurn.ins.match = value;
 		}
 		#endregion
 	}
@@ -145,16 +215,12 @@ namespace xLib
 		[SerializeField]private bool enableHidePopups;
 		[SerializeField]private bool savedGames;
 		[SerializeField]private bool requestIdToken;
-		[SerializeField]private bool requestServerAuthCode;
 		[SerializeField]private bool requestEmail;
+		[SerializeField]private bool requestServerAuthCode;
 		
 		[SerializeField]private NodeString displayName;
 		[SerializeField]private NodeString idToken;
 		[SerializeField]private NodeString authCode;
-		
-		public void OnLogin(bool value){}
-		public void ShowLeaderboardUI(string id){}
-		public void ShowAchievementsUI(string id){}
 		#pragma warning restore
 	}
 }

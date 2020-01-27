@@ -12,7 +12,7 @@ namespace xLib
 		private void OnApplicationPause(bool value)
 		{
 			if(!CanWork) return;
-			if(CanDebug) Debug.LogFormat(this,this.name+":MonoOnApplicationPause:{0}",value);
+			if(CanDebug) Debug.LogFormat($"{this.name}:MonoOnApplicationPause:{value}",this);
 			eventApplicationPause.Invoke(value);
 		}
 	}

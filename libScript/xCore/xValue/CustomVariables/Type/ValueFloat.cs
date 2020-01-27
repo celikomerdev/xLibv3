@@ -47,15 +47,15 @@ namespace xLib.xValueClass
 		{
 			get
 			{
-				return "Float100x";
+				return "Float";
 			}
 		}
 		
-		internal override string AnalyticDigit
+		internal override double AnalyticDigit
 		{
 			get
 			{
-				return (Value*100).ToString("F0");
+				return Value;
 			}
 		}
 		#endregion

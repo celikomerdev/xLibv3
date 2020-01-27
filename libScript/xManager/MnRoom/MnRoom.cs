@@ -34,7 +34,7 @@ namespace xLib.xNew
 			timeWait.Value = 0;
 			
 			TryLockRoom();
-			yield return null;
+			yield return new WaitForEndOfFrame();
 		}
 		#endregion
 		

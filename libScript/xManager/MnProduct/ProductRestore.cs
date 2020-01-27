@@ -12,18 +12,24 @@ namespace xLib.ToolPurchase
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
 		[SerializeField]private EventBool eventRestore = new EventBool();
 		
-		protected override bool OnRegister(bool value)
+		protected override bool TryRegister(bool register)
 		{
-			MnProduct.ins.onInit.Listener(value,ListenResult,true);
-			MnProduct.ins.onRestore.Listener(value,ListenResult,true);
-			MnProduct.ins.onPurchase.Listener(value,ListenResult,true);
-			return value;
+			MnProduct.ins.isInit.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
+			MnProduct.ins.onRestore.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
+			MnProduct.ins.onPurchase.Listener(register:register, call:ListenPurchase, viewId:ViewId, order:baseRegister.order, onRegister:true);
+			return register;
+		}
+		
+		private void ListenRestore(bool value)
+		{
+			ListenPurchase(value);
 		}
 		
 		private Product product = null;
-		private void ListenResult(bool value)
+		private void ListenPurchase(bool value)
 		{
 			if(!value) return;
+			
 			if(product == null) product = MnProduct.ins.GetProduct(key);
 			if(product == null) return;
 			if(product.definition.type != ProductType.NonConsumable) return;
@@ -40,18 +46,26 @@ namespace xLib.ToolPurchase
 {
 	public class ProductRestore : BaseRegisterM
 	{
-		[SerializeField]private string key;
+		[SerializeField]private string key = "";
 		[UnityEngine.Serialization.FormerlySerializedAs("eventBool")]
 		[SerializeField]private EventBool eventRestore = new EventBool();
 		
-		protected override bool OnRegister(bool register)
+		protected override bool TryRegister(bool register)
 		{
-			MnProduct.ins.onPurchase.Listener(register,ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:true);
+			MnProduct.ins.onRestore.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
+			MnProduct.ins.onPurchase.Listener(register:register, call:ListenPurchase, viewId:ViewId, order:baseRegister.order, onRegister:true);
 			return register;
 		}
 		
-		private void ListenResult(bool value)
+		private void ListenRestore(bool value)
 		{
+			ListenPurchase(value);
+		}
+		
+		private void ListenPurchase(bool value)
+		{
+			if(!value) return;
+			if(MnProduct.currentProductId != key) return;
 			eventRestore.Invoke(value);
 		}
 	}

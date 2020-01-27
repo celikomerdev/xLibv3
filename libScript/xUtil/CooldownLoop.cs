@@ -40,7 +40,7 @@ namespace xLib.xNew
 			if(currentTime.Value == 0) return;
 			
 			long deltaTick = nextTime.Value-currentTime.Value;
-			if(CanDebug) Debug.LogFormat(this,this.name+":deltaTick:{0}",deltaTick);
+			if(CanDebug) xLogger.LogFormat(this,this.name+":deltaTick:{0}",deltaTick);
 			
 			if(deltaTick>0) return;
 			
@@ -52,35 +52,35 @@ namespace xLib.xNew
 				else nextTime.Value = currentTime.Value;
 				// else nextTime.Value = currentTime.Value+cooldown;
 				
-				if(CanDebug) Debug.LogFormat(this,this.name+":eventLoop:{0}",currentLoop);
+				if(CanDebug) xLogger.LogFormat(this,this.name+":eventLoop:{0}",currentLoop);
 				eventLoop.Invoke();
 			}
-			if(CanDebug) Debug.LogFormat(this,this.name+":eventLoopCount:{0}",currentLoop);
+			if(CanDebug) xLogger.LogFormat(this,this.name+":eventLoopCount:{0}",currentLoop);
 			eventLoopCount.Value = currentLoop;
 		}
 		
 		public void CooldownReStart()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":CooldownReStart");
+			if(CanDebug) xLogger.LogFormat(this,this.name+":CooldownReStart");
 			nextTime.Value = currentTime.Value+cooldown;
 		}
 		
 		public void CooldownStart()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":CooldownStart");
+			if(CanDebug) xLogger.LogFormat(this,this.name+":CooldownStart");
 			if(nextTime.Value>currentTime.Value) return;
 			CooldownReStart();
 		}
 		
 		public void TickAdd(long value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":TickAdd:{0}",value);
+			if(CanDebug) xLogger.LogFormat(this,this.name+":TickAdd:{0}",value);
 			nextTime.Value += value;
 		}
 		
 		public void TickMultiply(float value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":TickMultiply:{0}",value);
+			if(CanDebug) xLogger.LogFormat(this,this.name+":TickMultiply:{0}",value);
 			long deltaTick = nextTime.Value - currentTime.Value;
 			deltaTick = (long)(deltaTick*value);
 			TickAdd(deltaTick);

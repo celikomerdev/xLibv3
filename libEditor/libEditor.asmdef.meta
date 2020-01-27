@@ -1,7 +1,6 @@
 fileFormatVersion: 2
 guid: f3f3ff5c1bc57854c8c53abb05d80c8d
 labels:
-- AsmDef
 - AsmEditor
 AssemblyDefinitionImporter:
   externalObjects: {}

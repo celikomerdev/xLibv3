@@ -1,15 +1,17 @@
 ﻿#if xLibv3
 using System.Threading;
+using UnityEngine;
 using UnityEngine.Events;
+using xLib.EventClass;
 
 namespace xLib
 {
 	public class MnThread : SingletonM<MnThread>
 	{
 		#region Mono
-		private void Update()
+		private void LateUpdate()
 		{
-			Call();
+			if(CanWork) Call();
 		}
 		
 		private static void Call()
@@ -17,27 +19,35 @@ namespace xLib
 			if(!willCall) return;
 			willCall = false;
 			
-			UnityEvent tempListener = listener;
-			listener = new UnityEvent();
+			EventUnity cacheListener = listener;
+			listener = new EventUnity();
 			
-			tempListener.Invoke();
-			tempListener.RemoveAllListeners();
+			cacheListener.Invoke();
+			cacheListener.eventUnity.RemoveAllListeners();
 		}
 		#endregion
 		
 		#region Flow
-		private static bool willCall;
-		private static UnityEvent listener = new UnityEvent();
-		public static void Register(UnityAction call)
+		private static bool willCall = false;
+		private static EventUnity listener = new EventUnity();
+		public static void ScheduleLate(UnityAction call,IDebug iDebug=null)
 		{
-			listener.AddListener(call);
+			if(iDebug.CanDebug) Debug.Log($"MnThread:ScheduleLate:{call.Method}",iDebug.UnityObject);
+			listener.eventUnity.AddListener(call);
 			willCall = true;
 		}
 		
-		public static void StartThread(UnityAction call)
+		public static void StartThread(UnityAction call,bool useThread=true,int priority = 2,IDebug iDebug=null)
 		{
-			Thread t = new Thread(new ThreadStart(call));
-			t.Start();
+			if(iDebug!=null && iDebug.CanDebug) Debug.Log($"MnThread:StartThread:{useThread}:{call.Method}",iDebug.UnityObject);
+			if(!useThread)
+			{
+				call();
+				return;
+			}
+			Thread thread = new Thread(new ThreadStart(call));
+			thread.Priority = (System.Threading.ThreadPriority)priority;
+			thread.Start();
 		}
 		#endregion
 	}

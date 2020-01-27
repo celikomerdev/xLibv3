@@ -12,7 +12,7 @@ namespace xLib
 		private void OnVisible(bool value)
 		{
 			if(!CanWork) return;
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnVisible:{0}",value);
+			if(CanDebug) Debug.LogFormat($"{this.name}:MonoOnVisible:{value}",this);
 			eventVisible.Invoke(value);
 		}
 		

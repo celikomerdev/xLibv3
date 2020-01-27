@@ -1,6 +1,8 @@
 ﻿#if xLibv3
 using UnityEngine;
+using xLib.xAnalytics;
 using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {
@@ -14,7 +16,7 @@ namespace xLib
 		#region Work
 		private void Work()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Work");
+			if(CanDebug) Debug.Log($"{this.name}:Work",this);
 			WorkInt();
 		}
 		
@@ -23,19 +25,17 @@ namespace xLib
 		{
 			for (int i = 0; i < nodeInt.Length; i++)
 			{
-				#if GuruAnalytics
 				nodeInt[i].Value = GetGroup(nodeInt[i].Key);
-				#endif
 			}
 		}
 		
+		public static ValueVoid onRefreshGroups = new ValueVoid();
 		public static int GetGroup(string key)
 		{
-			#if GuruAnalytics
-			return Gameguru.Analytics.Analytics.GetGroupForABTest(key);
-			#else
+			int valueTemp = MnAnalyticsGuru.GetGroup(key);
+			if(valueTemp>0) return valueTemp;
+			
 			return 0;
-			#endif
 		}
 		#endregion
 	}

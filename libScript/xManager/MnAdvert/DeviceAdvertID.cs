@@ -17,7 +17,7 @@ namespace xLib
 			{
 				if(trackingEnabled == value) return;
 				trackingEnabled = value;
-				Debug.LogFormat("StAdvert:trackingEnabled:{0}",trackingEnabled);
+				xLogger.Log($"StAdvert:trackingEnabled:{trackingEnabled}");
 			}
 		}
 		
@@ -32,7 +32,7 @@ namespace xLib
 			{
 				if(advertisingID == value) return;
 				advertisingID = value;
-				Debug.LogFormat("StAdvert:advertisingID:{0}",advertisingID);
+				xLogger.Log($"StAdvert:advertisingID:{advertisingID}");
 				
 				if(string.IsNullOrEmpty(advertisingID)) TestDeviceID = "";
 				else TestDeviceID = advertisingID.HashMD5UTF8();
@@ -52,7 +52,7 @@ namespace xLib
 				
 				if(testDeviceID == value) return;
 				testDeviceID = value;
-				Debug.LogFormat("StAdvert:testDeviceID:{0}",testDeviceID);
+				xLogger.Log($"StAdvert:testDeviceID:{testDeviceID}");
 			}
 		}
 		#endregion
@@ -73,11 +73,9 @@ namespace xLib
 			CallAdvertisingIdentifierUnity();
 		}
 		
-		
-		
 		private static void CallAdvertisingIdentifierNative()
 		{
-			if(xDebug.CanDebug) Debug.LogFormat("DeviceAdvertID:CallAdvertisingIdentifierNative");
+			xLogger.Log($"DeviceAdvertID:CallAdvertisingIdentifierNative");
 			
 			string value = "";
 			
@@ -98,21 +96,19 @@ namespace xLib
 			StAdvert.AdvertisingID = value;
 		}
 		
-		
-		
 		private static void CallAdvertisingIdentifierUnity()
 		{
-			if(xDebug.CanDebug) Debug.LogFormat("DeviceAdvertID:CallAdvertisingIdentifierUnity");
+			xLogger.Log($"DeviceAdvertID:CallAdvertisingIdentifierUnity");
 			Application.RequestAdvertisingIdentifierAsync(CallbackAdvertisingIdentifierUnity);
 		}
 		
 		private static void CallbackAdvertisingIdentifierUnity(string advertisingId, bool trackingEnabled, string errorMsg)
 		{
-			if(xDebug.CanDebug) Debug.LogFormat("DeviceAdvertID:CallbackAdvertisingIdentifierUnity");
+			xLogger.Log($"DeviceAdvertID:CallbackAdvertisingIdentifierUnity");
 			
 			if(!string.IsNullOrEmpty(errorMsg))
 			{
-				xDebug.LogExceptionFormat("DeviceAdvertID:errorMsg:{0}",errorMsg);
+				xLogger.LogException($"DeviceAdvertID:errorMsg:{errorMsg}");
 				StAdvert.TrackingEnabled = false;
 				StAdvert.AdvertisingID = "";
 				return;

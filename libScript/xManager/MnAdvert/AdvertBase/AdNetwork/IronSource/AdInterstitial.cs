@@ -1,100 +1,108 @@
 ﻿#if xLibv3
 #if AdIronSource
-using System;
 using UnityEngine;
 
 namespace xLib.libAdvert.xIronSource
 {
 	public class AdInterstitial : AdvertBase
 	{
-		#region Register
-		protected override bool OnRegister(bool value)
+		#region TryRegister
+		protected override bool TryRegister(bool register)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnRegister:{0}:{1}",key,value);
+			if(CanDebug) Debug.Log($"{this.name}:TryRegister:{key}:{register}",this);
 			
-			if (value)
+			if (register)
 			{
-				IronSourceEvents.onInterstitialAdReadyEvent += OnAdReady;
-				IronSourceEvents.onInterstitialAdLoadFailedEvent += OnAdLoadFailed;
+				IronSourceEvents.onInterstitialAdLoadFailedEvent += onInterstitialAdLoadFailedEvent;
+				IronSourceEvents.onInterstitialAdReadyEvent += onInterstitialAdReadyEvent;
 				
-				IronSourceEvents.onInterstitialAdShowSucceededEvent += OnAdShowSucceeded;
-				IronSourceEvents.onInterstitialAdShowFailedEvent += OnAdShowFailed;
+				IronSourceEvents.onInterstitialAdShowFailedEvent += onInterstitialAdShowFailedEvent;
+				IronSourceEvents.onInterstitialAdShowSucceededEvent += onInterstitialAdShowSucceededEvent;
 				
-				IronSourceEvents.onInterstitialAdClickedEvent += OnAdClicked;
-				IronSourceEvents.onInterstitialAdOpenedEvent += OnAdOpened;
-				IronSourceEvents.onInterstitialAdClosedEvent += OnAdClosed;
+				IronSourceEvents.onInterstitialAdClickedEvent += onInterstitialAdClickedEvent;
+				IronSourceEvents.onInterstitialAdOpenedEvent += onInterstitialAdOpenedEvent;
 				
-				IronSourceEvents.onInterstitialAdRewardedEvent += OnAdRewarded;
+				IronSourceEvents.onInterstitialAdRewardedEvent += onInterstitialAdRewardedEvent;
+				IronSourceEvents.onInterstitialAdClosedEvent += onInterstitialAdClosedEvent;
 				
-				OnRegisterBase();
-				if(IronSource.Agent.isInterstitialReady()) OnAdReady();
+				OnRegisteredBase();
+				if(IronSource.Agent.isInterstitialReady()) onInterstitialAdReadyEvent();
 			}
 			else
 			{
-				IronSourceEvents.onInterstitialAdReadyEvent -= OnAdReady;
-				IronSourceEvents.onInterstitialAdLoadFailedEvent -= OnAdLoadFailed;
+				IronSourceEvents.onInterstitialAdLoadFailedEvent -= onInterstitialAdLoadFailedEvent;
+				IronSourceEvents.onInterstitialAdReadyEvent -= onInterstitialAdReadyEvent;
 				
-				IronSourceEvents.onInterstitialAdShowSucceededEvent -= OnAdShowSucceeded;
-				IronSourceEvents.onInterstitialAdShowFailedEvent -= OnAdShowFailed;
+				IronSourceEvents.onInterstitialAdShowFailedEvent -= onInterstitialAdShowFailedEvent;
+				IronSourceEvents.onInterstitialAdShowSucceededEvent -= onInterstitialAdShowSucceededEvent;
 				
-				IronSourceEvents.onInterstitialAdClickedEvent -= OnAdClicked;
-				IronSourceEvents.onInterstitialAdOpenedEvent -= OnAdOpened;
-				IronSourceEvents.onInterstitialAdClosedEvent -= OnAdClosed;
+				IronSourceEvents.onInterstitialAdClickedEvent -= onInterstitialAdClickedEvent;
+				IronSourceEvents.onInterstitialAdOpenedEvent -= onInterstitialAdOpenedEvent;
 				
-				IronSourceEvents.onInterstitialAdRewardedEvent -= OnAdRewarded;
+				IronSourceEvents.onInterstitialAdRewardedEvent -= onInterstitialAdRewardedEvent;
+				IronSourceEvents.onInterstitialAdClosedEvent -= onInterstitialAdClosedEvent;
 			}
-			return value;
+			return register;
 		}
 		#endregion
 		
 		
 		#region Callback
-		private void OnAdReady()
+		//Invoked when the initialization process has failed.
+		private void onInterstitialAdLoadFailedEvent(IronSourceError error)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdReady");
-			SetLoadedBase(true);
-		}
-		
-		private void OnAdLoadFailed(IronSourceError error)
-		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdLoadFailed:{0}",error.ToString());
+			xLogger.LogException($"{this.name}:onInterstitialAdLoadFailedEvent:{error.ToString()}",this);
 			OnLoadFailBase();
 		}
 		
-		private void OnAdShowSucceeded()
+		//Invoked when the Interstitial is Ready to shown after load function is called
+		private void onInterstitialAdReadyEvent()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdShowSucceeded");
+			if(CanDebug) Debug.Log($"{this.name}:onInterstitialAdReadyEvent",this);
+			SetLoadedBase(true);
+		}
+		
+		//Invoked when the ad fails to show.
+		private void onInterstitialAdShowFailedEvent(IronSourceError error)
+		{
+			xLogger.LogException($"{this.name}:onInterstitialAdShowFailedEvent:{error.ToString()}",this);
+			OnCloseBase();
+		}
+		
+		//Invoked right before the Interstitial screen is about to open.
+		private void onInterstitialAdShowSucceededEvent()
+		{
+			if(CanDebug) Debug.Log($"{this.name}:onInterstitialAdShowSucceededEvent",this);
 			OnShowBase();
 		}
 		
-		private void OnAdShowFailed(IronSourceError error)
+		// Invoked when end user clicked on the interstitial ad
+		private void onInterstitialAdClickedEvent()
 		{
-			xDebug.LogExceptionFormat(this,this.name+":OnAdShowFailed:{0}",error.ToString());
-		}
-		
-		private void OnAdClicked()
-		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdClicked");
+			if(CanDebug) Debug.Log($"{this.name}:onInterstitialAdClickedEvent",this);
 			OnClickBase();
 		}
 		
-		private void OnAdOpened()
+		//Invoked when the Interstitial Ad Unit has opened
+		private void onInterstitialAdOpenedEvent()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdOpened");
-			OnVisitBase();
+			if(CanDebug) Debug.Log($"{this.name}:onInterstitialAdOpenedEvent",this);
+			// OnVisitBase();
 		}
 		
-		private void OnAdClosed()
+		//Invoked when the user completed the video and should be rewarded. 
+		private void onInterstitialAdRewardedEvent()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdClosed");
+			if(CanDebug) Debug.Log($"{this.name}:onInterstitialAdRewardedEvent",this);
+			OnRewardBase(1);
+		}
+		
+		//Invoked when the interstitial ad closed and the user goes back to the application screen.
+		private void onInterstitialAdClosedEvent()
+		{
+			if(CanDebug) Debug.Log($"{this.name}:onInterstitialAdClosedEvent",this);
 			OnCloseBase();
 			SetLoadedBase(false);
-		}
-		
-		private void OnAdRewarded()
-		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnAdRewarded");
-			OnRewardBase(1);
 		}
 		#endregion
 		
@@ -108,13 +116,13 @@ namespace xLib.libAdvert.xIronSource
 		
 		protected override void Load()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Load");
+			if(CanDebug) Debug.Log($"{this.name}:Load",this);
 			IronSource.Agent.loadInterstitial();
 		}
 		
 		protected override void Show()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Show");
+			if(CanDebug) Debug.Log($"{this.name}:Show",this);
 			IronSource.Agent.showInterstitial();
 		}
 		#endif

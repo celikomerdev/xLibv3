@@ -1,18 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿#if xLibv3
 using UnityEngine;
+using xLib.xNode.NodeObject;
 
-public class BaseTickNodeS : MonoBehaviour
+namespace xLib
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public abstract class BaseTickNodeS : BaseTickS
+	{
+		[SerializeField]private NodeFloat tickTime = null;
+		
+		#region Custom
+		protected override bool TryRegister(bool register)
+		{
+			tickTime.Listener(register:register,call:TickMulti,viewId:ViewId,order:baseRegister.order,onRegister:baseRegister.onRegister,worker:this);
+			return register;
+		}
+		#endregion
+	}
 }
+#endif

@@ -32,7 +32,7 @@ namespace xLib
 		#region Mono
 		protected override void Started()
 		{
-			Register(true);
+			TryRegister(true);
 		}
 		
 		protected override void OnDisabled()
@@ -42,10 +42,10 @@ namespace xLib
 		
 		protected override void OnDestroyed()
 		{
-			Register(false);
+			TryRegister(false);
 		}
 		
-		private void Register(bool value)
+		private void TryRegister(bool value)
 		{
 			if (value)
 			{

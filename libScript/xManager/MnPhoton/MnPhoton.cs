@@ -1,4 +1,4 @@
-﻿#if xLibv2
+﻿#if xLibv3
 #if Photon
 using ExitGames.Client.Photon;
 using Photon.Pun;
@@ -11,7 +11,7 @@ namespace xLib
 {
 	public class MnPhoton : SingletonM<MnPhoton>
 	{
-		public PhotonView photonView;
+		public PhotonView photonView = null;
 		
 		
 		#region Mono
@@ -187,10 +187,14 @@ namespace xLib
 	}
 }
 #else
+using UnityEngine;
+
 namespace xLib
 {
 	public class MnPhoton : SingletonM<MnPhoton>
 	{
+		public MonoBehaviour photonView = null;
+		
 		public void Connect(bool value){}
 		public void SetCustomProperties(){}
 		public void GetCustomProperties(){}

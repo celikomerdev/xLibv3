@@ -5,19 +5,13 @@ namespace xLib.xNode.NodeObject
 {
 	public abstract class NodeBase : BaseInitS, ISerializableObject, IRpc, IAnalyticObject
 	{
-		public Object UnityObject
-		{
-			get
-			{
-				return this;
-			}
-		}
-		
 		#region Key
 		public abstract string Key
 		{
 			get;
+			#if UNITY_EDITOR
 			protected set;
+			#endif
 		}
 		
 		public abstract string Name
@@ -104,12 +98,17 @@ namespace xLib.xNode.NodeObject
 			set;
 		}
 		
+		public abstract object AnalyticObject
+		{
+			get;
+		}
+		
 		public abstract string AnalyticString
 		{
 			get;
 		}
 		
-		public abstract string AnalyticDigit
+		public abstract double AnalyticDigit
 		{
 			get;
 		}

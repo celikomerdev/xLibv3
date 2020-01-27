@@ -18,17 +18,17 @@ namespace xLib
 			{
 				return key;
 			}
+			#if UNITY_EDITOR
 			set
 			{
-				#if UNITY_EDITOR
 				if(string.IsNullOrEmpty(value)) return;
 				if(key==value) return;
 				Debug.LogWarningFormat(objDebug,Name+":KeyChange:{0}:{1}",key,value);
 				key = value;
 				
 				UnityEditor.EditorUtility.SetDirty(objDebug);
-				#endif
 			}
+			#endif
 		}
 		
 		public string Name

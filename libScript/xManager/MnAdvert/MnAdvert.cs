@@ -8,63 +8,65 @@ namespace xLib
 {
 	public class MnAdvert : SingletonM<MnAdvert>
 	{
-		public NodeBool inShow;
-		public AdvertBase interstitial;
-		public AdvertBase rewarded;
+		public NodeBool inShow = null;
+		public AdvertBase interstitial = null;
+		public AdvertBase rewarded = null;
 		
 		public bool privacyAccepted = true;
 		public bool ageRestiction = false;
 		
-		public int age;
-		public string gender;
-		public bool isPaying;
+		public int age = 25;
+		public string gender = "";
+		public bool isPaying = true;
 		
-		public string[] keyword;
+		public string[] keyword = new string[0];
 		
 		
 		#region Mono
 		protected override void Started()
 		{
 			StAdvert.Init();
-			Register(true);
+			TryRegister(true);
 		}
 		
 		protected override void OnDestroyed()
 		{
-			Register(false);
+			TryRegister(false);
 		}
 		#endregion
 		
 		
-		#region Register
-		private void Register(bool value)
+		#region TryRegister
+		private void TryRegister(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Register:{0}",value);
+			if(CanDebug) Debug.LogFormat(this,this.name+":TryRegister:{0}",value);
 			
 			if(value)
 			{
 				interstitial.onShow.eventUnity.AddListener(OnShow);
+				interstitial.onReward.eventInt.AddListener(OnReward);
 				interstitial.onClose.eventUnity.AddListener(OnClose);
 				
 				rewarded.onShow.eventUnity.AddListener(OnShow);
-				rewarded.onClose.eventUnity.AddListener(OnClose);
 				rewarded.onReward.eventInt.AddListener(OnReward);
+				rewarded.onClose.eventUnity.AddListener(OnClose);
 			}
 			else
 			{
 				interstitial.onShow.eventUnity.RemoveListener(OnShow);
+				interstitial.onReward.eventInt.RemoveListener(OnReward);
 				interstitial.onClose.eventUnity.RemoveListener(OnClose);
 				
 				rewarded.onShow.eventUnity.RemoveListener(OnShow);
-				rewarded.onClose.eventUnity.RemoveListener(OnClose);
 				rewarded.onReward.eventInt.RemoveListener(OnReward);
+				rewarded.onClose.eventUnity.RemoveListener(OnClose);
 			}
 		}
 		#endregion
 		
 		
 		#region Callback
-		public EventUnity onShow;
+		public EventUnity onShow = new EventUnity();
 		public void OnShow()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnShow");
@@ -72,15 +74,7 @@ namespace xLib
 			onShow.Invoke();
 		}
 		
-		public EventUnity onClose;
-		public void OnClose()
-		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnClose");
-			inShow.Value = false;
-			onClose.Invoke();
-		}
-		
-		public EventInt onReward;
+		public EventInt onReward = new EventInt();
 		public void OnReward(int value)
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":OnReward:{0}",value);
@@ -91,12 +85,20 @@ namespace xLib
 			onReward.Invoke(value);
 		}
 		
+		public EventUnity onClose = new EventUnity();
+		public void OnClose()
+		{
+			if(CanDebug) Debug.LogFormat(this,this.name+":OnClose");
+			inShow.Value = false;
+			onClose.Invoke();
+		}
+		
 		public void RemoveAllListeners()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":RemoveAllListeners");
 			onShow.eventUnity.RemoveAllListeners();
-			onClose.eventUnity.RemoveAllListeners();
 			onReward.eventInt.RemoveAllListeners();
+			onClose.eventUnity.RemoveAllListeners();
 		}
 		#endregion
 	}

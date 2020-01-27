@@ -10,7 +10,7 @@ namespace xLib
 			Texture2D texture2D = new Texture2D(value.width,value.height);
 			if(value==null)
 			{
-				xDebug.LogExceptionFormat("ExtTexture2D:Uncompress:null");
+				xLogger.LogExceptionFormat("ExtTexture2D:Uncompress:null");
 				return texture2D;
 			}
 			
@@ -30,8 +30,9 @@ namespace xLib
 			texture2D.ReadPixels(new Rect(0,0,renderTexture.width,renderTexture.height),0,0);
 			texture2D.Apply();
 			
-			RenderTexture.active = activeLast;
+			RenderTexture.active = activeLast; //TODO FATAL
 			RenderTexture.ReleaseTemporary(renderTexture);
+			RenderTexture.active = activeLast;
 			
 			return texture2D;
 		}
@@ -41,7 +42,7 @@ namespace xLib
 			byte[] bytes = new byte[0];
 			if(value==null)
 			{
-				xDebug.LogExceptionFormat("ExtTexture2D:xEncodeToPNG:null");
+				xLogger.LogExceptionFormat("ExtTexture2D:xEncodeToPNG:null");
 				return bytes;
 			}
 			

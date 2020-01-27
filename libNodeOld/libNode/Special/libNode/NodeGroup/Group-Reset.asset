@@ -24,5 +24,6 @@ MonoBehaviour:
       isMulti: 0
     value:
       arrayObject: []
-    keyEncrypt: GreenGateCompany
-    nodeEncrypt: []
+    cryptoVersion:
+    - keyEncrypt: xProject
+      nodeEncrypt: []

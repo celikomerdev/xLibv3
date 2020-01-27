@@ -8,7 +8,7 @@ namespace xLib.xTick
 {
 	[Serializable]public class TickIntervalGroup
 	{
-		private MonoBehaviour mono = null;
+		private BaseWorkM mono = null;
 		[SerializeField]private TickInterval[] tickInterval = new TickInterval[0];
 		[Serializable]public class TickInterval
 		{
@@ -24,7 +24,7 @@ namespace xLib.xTick
 				tickInterval.Value = interval;
 				
 				ViewCore.CurrentId = lastViewId;
-				yield return null;
+				yield return new WaitForEndOfFrame();
 			}
 		}
 		
@@ -36,16 +36,16 @@ namespace xLib.xTick
 				else yield return new WaitForSeconds(value.interval);
 				
 				yield return new WaitForEndOfFrame();
-				yield return mono.StartCoroutine(value.Tick());
+				yield return mono.NewCoroutine(value.Tick(),mono.CanDebug);
 			}
 		}
 		
-		internal void IntervalStart(BaseMainM monoBehaviour)
+		internal void IntervalStart(BaseWorkM monoBehaviour)
 		{
 			mono = monoBehaviour;
 			for (int i = 0; i < tickInterval.Length; i++)
 			{
-				mono.StartCoroutine(IntervalUpdate(tickInterval[i]));
+				mono.NewCoroutine(IntervalUpdate(tickInterval[i]),mono.CanDebug);
 			}
 		}
 	}

@@ -19,7 +19,7 @@ namespace xLib.xGameSparks
 		[SerializeField]private NodeString[] keyValue;
 		
 		#region Mono
-		protected override bool Register(bool value)
+		protected override bool TryRegister(bool value)
 		{
 			if(value && baseRegister.onRegister)
 			{

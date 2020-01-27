@@ -19,7 +19,6 @@ namespace xLib.ToolPurchase
 			set
 			{
 				key = value;
-				ClearProduct();
 				RefreshProduct();
 			}
 		}
@@ -33,75 +32,75 @@ namespace xLib.ToolPurchase
 		[SerializeField]public EventBool eventPurchase = new EventBool();
 		
 		#region Behavior
-		protected override void Started()
-		{
-			MnProduct.ins.onInit.Listener(true,ListenInit,true);
-		}
-		
 		protected override void OnEnabled()
 		{
-			RefreshProduct();
+			MnProduct.ins.Init();
+			MnProduct.ins.isInit.Listener(register:true,call:ListenInit,onRegister:true);
 		}
 		
-		protected override void OnDestroyed()
+		protected override void OnDisabled()
 		{
-			MnProduct.ins.onInit.Listener(false,ListenInit);
+			MnProduct.ins.isInit.Listener(register:false,call:ListenInit,onRegister:true);
 		}
 		
 		private void ListenInit(bool value)
 		{
-			if(!value) return;
-			MnProduct.ins.onInit.Listener(false,ListenInit);
-			RefreshProduct();
+			if(value) RefreshProduct();
 		}
 		
 		private void ClearProduct()
 		{
 			product = null;
 			eventPrice.Value = 1.00f;
-			eventPriceString.Value = "1.00$";
+			eventPriceString.Value = "$1.00";
 		}
 		
-		private void RefreshProduct()
+		public void RefreshProduct()
 		{
+			ClearProduct();
 			if(product == null) product = MnProduct.ins.GetProduct(key);
 			if(product == null) return;
-			eventPrice.Value = product.metadata.localizedPrice;
+			eventPrice.Value = (float)product.metadata.localizedPrice;
 			eventPriceString.Value = product.metadata.localizedPriceString;
 		}
 		#endregion
 		
-		#region Register
-		private bool isRegister;
-		private void Register(bool value)
+		#region ListenPurchase
+		private bool isListenPurchase = false;
+		private void ListenPurchase(bool value)
 		{
-			if(isRegister == value) return;
-			isRegister = value;
-			MnProduct.ins.onPurchase.Listener(value,IsPuchase);
+			if(isListenPurchase == value) return;
+			isListenPurchase = value;
+			MnProduct.ins.onPurchase.Listener(register:value,call:IsPuchase);
 		}
 		#endregion
 		
 		#region Fuction
 		public void Purchase()
 		{
-			if(Application.internetReachability == NetworkReachability.NotReachable) return;
+			MnProduct.ins.Init();
+			if(Application.internetReachability == NetworkReachability.NotReachable)
+			{
+				StPopupBar.QueueMessage(MnLocalize.GetValue("Please Check Your Connection"));
+				Debug.LogException(new UnityException($"Purchase:internetReachability:NotReachable"),this);
+				return;
+			}
 			RefreshProduct();
 			
 			if(product == null) return;
-			Register(true);
+			ListenPurchase(true);
 			MnProduct.ins.Purchase(product);
 		}
 		
 		private void IsPuchase(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":IsPuchase:{0}",value);
+			ListenPurchase(false);
+			if(CanDebug) Debug.Log($"{this.name}:IsPuchase:{value}",this);
 			if(product != MnProduct.currentProduct)
 			{
-				xDebug.LogExceptionFormat(this,"product id does not match:{0}",product);
+				Debug.LogException(new UnityException($"product id does not match:{product}"),this);
 				return;
 			}
-			
-			Register(false);
 			eventPurchase.Invoke(value);
 		}
 		#endregion
@@ -126,7 +125,6 @@ namespace xLib.ToolPurchase
 			set
 			{
 				key = value;
-				ClearProduct();
 				RefreshProduct();
 			}
 		}
@@ -140,75 +138,74 @@ namespace xLib.ToolPurchase
 		[SerializeField]public EventBool eventPurchase = new EventBool();
 		
 		#region Behavior
-		protected override void Started()
-		{
-			MnProduct.ins.onInit.Listener(true,ListenInit,viewId:ViewId,onRegister:true);
-		}
-		
 		protected override void OnEnabled()
 		{
-			RefreshProduct();
+			MnProduct.ins.isInit.Listener(register:true,call:ListenInit,onRegister:true);
 		}
 		
-		protected override void OnDestroyed()
+		protected override void OnDisabled()
 		{
-			MnProduct.ins.onInit.Listener(false,ListenInit,viewId:ViewId);
+			MnProduct.ins.isInit.Listener(register:false,call:ListenInit,onRegister:true);
 		}
 		
 		private void ListenInit(bool value)
 		{
-			if(!value) return;
-			MnProduct.ins.onInit.Listener(false,ListenInit,viewId:ViewId);
-			RefreshProduct();
+			if(value) RefreshProduct();
 		}
 		
 		private void ClearProduct()
 		{
 			product = null;
 			eventPrice.Value = 1.00f;
-			eventPriceString.Value = "1.00$";
+			eventPriceString.Value = "$1.00";
 		}
 		
-		private void RefreshProduct()
+		public void RefreshProduct()
 		{
+			ClearProduct();
 			if(product == null) product = MnProduct.ins.GetProduct(key);
 			if(product == null) return;
 			eventPrice.Value = 1.00f;
-			eventPriceString.Value = "1.00$";
+			eventPriceString.Value = "$1.00";
 		}
 		#endregion
 		
-		#region Register
-		private bool isRegister;
-		private void Register(bool register)
+		#region ListenPurchase
+		private bool isListenPurchase = false;
+		private void ListenPurchase(bool register)
 		{
-			if(isRegister == register) return;
-			isRegister = register;
-			MnProduct.ins.onPurchase.Listener(register,IsPuchase,viewId:ViewId);
+			if(isListenPurchase == register) return;
+			isListenPurchase = register;
+			MnProduct.ins.onPurchase.Listener(register:register,call:IsPuchase);
 		}
 		#endregion
 		
 		#region Fuction
 		public void Purchase()
 		{
-			if(Application.internetReachability == NetworkReachability.NotReachable) return;
+			if(Application.internetReachability == NetworkReachability.NotReachable)
+			{
+				StPopupBar.QueueMessage(MnLocalize.GetValue("Please Check Your Connection"));
+				Debug.LogException(new UnityException($"Purchase:internetReachability:NotReachable"),this);
+				return;
+			}
+			
 			RefreshProduct();
 			
 			if(product == null) return;
-			Register(true);
+			ListenPurchase(true);
 			MnProduct.ins.Purchase(product);
 		}
 		
 		private void IsPuchase(bool value)
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":IsPuchase:{0}",value);
+			ListenPurchase(false);
+			if(CanDebug) Debug.Log($"{this.name}:IsPuchase:{value}",this);
 			if(product != MnProduct.currentProductId)
 			{
-				xDebug.LogExceptionFormat(this,"product id does not match:{0}",product);
+				Debug.LogException(new UnityException($"product id does not match:{product}"),this);
 				return;
 			}
-			
-			Register(false);
 			eventPurchase.Invoke(value);
 		}
 		#endregion

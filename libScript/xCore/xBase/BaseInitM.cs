@@ -5,12 +5,14 @@ namespace xLib
 {
 	public abstract class BaseInitM : BaseWorkM
 	{
-		protected bool isInit;
+		protected bool isInit = false;
 		public void Init(bool value)
 		{
 			if(isInit == value) return;
 			isInit = value;
-			if(CanDebug) Debug.LogFormat(this,this.name+":Init:{0}",isInit);
+			#if CanTrace
+			if(CanDebug) Debug.Log($"{this.name}:Init:{isInit}",this);
+			#endif
 			OnInit(isInit);
 			SetDebug();
 		}
@@ -20,22 +22,23 @@ namespace xLib
 		#region Flow
 		public BaseInitM()
 		{
-			MnThread.Register(Awake);
+			MnThread.ScheduleLate(iDebug:this,call:delegate{Awake();});
 		}
 		
-		private void Awake()
+		protected virtual void Awake()
 		{
-			Init(true);
+			if(CanWork) Init(true);
 		}
 		
-		private void OnDestroy()
+		protected virtual void OnDestroy()
 		{
-			Init(false);
+			if(CanWork) Init(false);
 		}
 		
 		[ContextMenu ("ReInit")]
 		private void ReInit()
 		{
+			if(!CanWork) return;
 			Init(!isInit);
 			Init(!isInit);
 		}

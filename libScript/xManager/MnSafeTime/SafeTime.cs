@@ -1,38 +1,46 @@
 ﻿#if xLibv3
 using System;
 using UnityEngine;
-using UnityEngine.Events;
+using xLib.EventClass;
 
 namespace xLib
 {
 	public static class SafeTime
 	{
-		public static UnityEvent onCalibrate = new UnityEvent();
+		public static EventUnity onCalibrate = new EventUnity();
 		
 		private static DateTime dateTimeAnchor = DateTime.MinValue;
 		public static DateTime UtcNow
 		{
-			set
-			{
-				if(xDebug.CanDebug) Debug.LogFormat("SafeTime:UtcNow:{0}",value.ToString());
-				dateTimeAnchor = value.AddSeconds(-Time.unscaledTime);
-				onCalibrate.Invoke();
-			}
 			get
 			{
 				return dateTimeAnchor.AddSeconds(Time.unscaledTime);
+			}
+			set
+			{
+				if(xLogger.CanDebug) Debug.Log($"SafeTime:{value.ToString()}:UtcNow");
+				dateTimeAnchor = value.AddSeconds(-Time.unscaledTime);
+				onCalibrate.Invoke();
 			}
 		}
 		
 		public static DateTime Now
 		{
+			get
+			{
+				return UtcNow.ToLocalTime();
+			}
 			set
 			{
 				UtcNow = value.ToUniversalTime();
 			}
+		}
+		
+		public static DateTime Today
+		{
 			get
 			{
-				return UtcNow.ToLocalTime();
+				return UtcNow.StartOfDay();
 			}
 		}
 	}

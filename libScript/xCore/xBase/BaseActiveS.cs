@@ -9,26 +9,30 @@ namespace xLib
 		protected virtual void Awaked(){}
 		internal virtual void Awake()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Awake");
+			if(CanDebug) Debug.Log($"{this.name}:Awake",this);
 			if(!CanWork) return;
-			FindView();
 			
-			ViewIdApply();
+			FindView();
+			string tempId = ViewCore.CurrentId;
+			ViewCore.CurrentId = ViewId;
 			Awaked();
-			ViewIdRestore();
+			ViewCore.CurrentId = tempId;
+			
+			IsActive = false;
 		}
 		
 		private bool isStarted = false;
 		protected virtual void Started(){}
 		internal virtual void Start()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":Start");
+			if(CanDebug) Debug.Log($"{this.name}:Start",this);
 			if(!CanWork) return;
-			FindView();
 			
-			ViewIdApply();
+			FindView();
+			string tempId = ViewCore.CurrentId;
+			ViewCore.CurrentId = ViewId;
 			Started();
-			ViewIdRestore();
+			ViewCore.CurrentId = tempId;
 			
 			isStarted = true;
 			OnEnable();
@@ -38,13 +42,14 @@ namespace xLib
 		internal virtual void OnEnable()
 		{
 			if(!isStarted) return;
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnEnable");
+			if(CanDebug) Debug.Log($"{this.name}:OnEnable",this);
 			if(!CanWork) return;
-			FindView();
 			
-			ViewIdApply();
+			FindView();
+			string tempId = ViewCore.CurrentId;
+			ViewCore.CurrentId = ViewId;
 			OnEnabled();
-			ViewIdRestore();
+			ViewCore.CurrentId = tempId;
 			
 			IsActive = true;
 		}
@@ -52,13 +57,14 @@ namespace xLib
 		protected virtual void OnDisabled(){}
 		internal virtual void OnDisable()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnDisable");
+			if(CanDebug) Debug.Log($"{this.name}:OnDisable",this);
 			if(!CanWork) return;
-			FindView();
 			
-			ViewIdApply();
+			FindView();
+			string tempId = ViewCore.CurrentId;
+			ViewCore.CurrentId = ViewId;
 			OnDisabled();
-			ViewIdRestore();
+			ViewCore.CurrentId = tempId;
 			
 			IsActive = false;
 		}
@@ -66,13 +72,14 @@ namespace xLib
 		protected virtual void OnDestroyed(){}
 		internal virtual void OnDestroy()
 		{
-			if(CanDebug) Debug.LogFormat(this,this.name+":OnDestroy");
+			if(CanDebug) Debug.Log($"{this.name}:OnDestroy",this);
 			if(!CanWork) return;
-			FindView();
 			
-			ViewIdApply();
+			FindView();
+			string tempId = ViewCore.CurrentId;
+			ViewCore.CurrentId = ViewId;
 			OnDestroyed();
-			ViewIdRestore();
+			ViewCore.CurrentId = tempId;
 			
 			IsActive = false;
 		}
@@ -92,11 +99,13 @@ namespace xLib
 				if(!CanWork) return;
 				if(isActive == value) return;
 				isActive = value;
-				FindView();
+				if(CanDebug) Debug.Log($"{this.name}:IsActive:{isActive}",this);
 				
-				ViewIdApply();
+				FindView();
+				string tempId = ViewCore.CurrentId;
+				ViewCore.CurrentId = ViewId;
 				OnActive(value);
-				ViewIdRestore();
+				ViewCore.CurrentId = tempId;
 			}
 		}
 		protected virtual void OnActive(bool value){}

@@ -23,7 +23,7 @@ namespace xLib.xTween
 			set
 			{
 				if (!CanWork) return;
-				if (CanDebug) Debug.LogFormat(this,this.name+":BaseRatio:{0}",value);
+				if (CanDebug) xLogger.LogFormat(this,this.name+":BaseRatio:{0}",value);
 				if (isClamped) value = Mathf.Clamp01(value);
 				SetRatio(value);
 			}

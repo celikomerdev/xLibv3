@@ -14,7 +14,7 @@ namespace xLib.ToolOperation
 		}
 		
 		#region Property
-		[SerializeField]private float left;
+		[SerializeField]private float left = 0;
 		public float Left
 		{
 			get
@@ -29,7 +29,7 @@ namespace xLib.ToolOperation
 			}
 		}
 		
-		[SerializeField]private float right;
+		[SerializeField]private float right = 0;
 		public float Right
 		{
 			get
@@ -44,7 +44,7 @@ namespace xLib.ToolOperation
 			}
 		}
 		
-		[SerializeField]private string operation;
+		[SerializeField]private string operation = "";
 		public string Operation
 		{
 			get
@@ -131,7 +131,7 @@ namespace xLib.ToolOperation
 		
 		private void Op_Null()
 		{
-			xDebug.LogTempFormat(this,this.name+":Op_Null");
+			xLogger.LogFormat(this,this.name+":Op_Null");
 		}
 		#endregion
 		

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Profiling;
 
 namespace xLib
 {
@@ -13,7 +14,7 @@ namespace xLib
 		{
 			if(!mono)
 			{
-				xDebug.LogExceptionFormat("KillCoroutine:mono:null");
+				Debug.LogException(new UnityException($"{mono.name}:KillCoroutine:mono:null"),mono);
 				return;
 			}
 			
@@ -21,26 +22,26 @@ namespace xLib
 			mono.StopCoroutine(coroutine);
 		}
 		
-		public static Coroutine NewCoroutine(this MonoBehaviour mono,IEnumerator enumerator)
+		public static Coroutine NewCoroutine(this MonoBehaviour mono,IEnumerator enumerator,bool CanDebug = false)
 		{
 			if(!mono)
 			{
-				xDebug.LogExceptionFormat("NewCoroutine:mono:null");
+				Debug.LogException(new UnityException($"{mono.name}:NewCoroutine:mono:null"),mono);
 				return null;
 			}
 			
-			return newCoroutine(mono,enumerator);
+			return newCoroutine(mono,enumerator,CanDebug);
 		}
 		
-		private static Coroutine newCoroutine(MonoBehaviour mono,IEnumerator enumerator)
+		private static Coroutine newCoroutine(MonoBehaviour mono,IEnumerator enumerator,bool CanDebug)
 		{
 			if(!mono.isActiveAndEnabled)
 			{
-				xDebug.LogExceptionFormat(mono,mono.name+":!isActiveAndEnabled");
+				Debug.LogException(new UnityException($"{mono.name}:!isActiveAndEnabled"),mono);
 				return null;
 			}
 			
-			// if(xDebug.CanDebug) Debug.LogFormat(mono,mono.name+":newCoroutine:{0}",enumerator.ToString());
+			// if(CanDebug) Debug.Log($"{mono.name}:newCoroutine:{enumerator.ToString()}",mono);
 			return mono.StartCoroutine(enumerator);
 		}
 		#endregion
@@ -55,7 +56,9 @@ namespace xLib
 		{
 			if(unscaled)yield return new WaitForSecondsRealtime(delay);
 			else yield return new WaitForSeconds(delay);
+			Profiler.BeginSample($"{call.Method.Name}:waitForSeconds:{delay}");
 			call();
+			Profiler.EndSample();
 		}
 		#endregion
 		
@@ -70,7 +73,9 @@ namespace xLib
 			yield return new WaitUntil(predicate);
 			if(unscaled)yield return new WaitForSecondsRealtime(delay);
 			else yield return new WaitForSeconds(delay);
+			Profiler.BeginSample($"{call.Method.Name}:waitUntil:{delay}");
 			call();
+			Profiler.EndSample();
 		}
 		#endregion
 		
@@ -85,7 +90,9 @@ namespace xLib
 			yield return new WaitWhile(predicate);
 			if(unscaled)yield return new WaitForSecondsRealtime(delay);
 			else yield return new WaitForSeconds(delay);
+			Profiler.BeginSample($"{call.Method.Name}:waitWhile:{delay}");
 			call();
+			Profiler.EndSample();
 		}
 		#endregion
 	}

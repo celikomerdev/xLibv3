@@ -1,5 +1,5 @@
 ﻿#if xLibv3
-#if ModUI
+#if PackUI
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,6 +43,7 @@ namespace xLib
 		public void Call()
 		{
 			if(!CanWork) return;
+			if(CanDebug) Debug.Log($"{this.name}:ScrollRectFocus:Call",this);
 			if(!transScrollRect) return;
 			Vector3 itemCenterPositionInScroll = GetWorldPointInWidget(transScrollRect, GetWidgetWorldPoint(Target));
 			Vector3 targetPositionInScroll = GetWorldPointInWidget(transScrollRect, GetWidgetWorldPoint(transViewport));
@@ -67,10 +68,11 @@ namespace xLib
 			
 			eventNormalizedPosition.Invoke(newNormalizedPosition);
 			
-			if(gameObject.activeInHierarchy) StartCoroutine(LerpFocus(newNormalizedPosition));
-			else MnCoroutine.ins.NewCoroutine(LerpFocus(newNormalizedPosition));
+			if(gameObject.activeInHierarchy) this.NewCoroutine(LerpFocus(newNormalizedPosition),CanDebug);
+			else MnCoroutine.ins.NewCoroutine(LerpFocus(newNormalizedPosition),CanDebug);
 		}
 		
+		//TODO Tween
 		private IEnumerator LerpFocus(Vector2 newNormalizedPosition)
 		{
 			float duration = 0.5f;
@@ -83,7 +85,7 @@ namespace xLib
 				float ratio = Mathf.Clamp01(elapsedTime/duration);
 				valueTemp = Vector2.Lerp(valueTemp,newNormalizedPosition,ratio);
 				scrollRect.normalizedPosition = valueTemp;
-				yield return null;
+				yield return new WaitForEndOfFrame();
 			}
 			scrollRect.normalizedPosition = newNormalizedPosition;
 		}
