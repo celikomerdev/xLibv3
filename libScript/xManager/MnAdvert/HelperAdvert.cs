@@ -34,7 +34,8 @@ namespace xLib.libAdvert
 				{
 					if(canMessage)
 					{
-						StPopupBar.QueueMessage(string.Format(MnLocalize.GetValue("Please Wait {0} Seconds"),remainingTime.ToString("F0")));
+						string durationString = MnLocalize.GetValue("{Seconds} Seconds").Replace("{Seconds}",remainingTime.ToString("F0"));
+						StPopupBar.QueueMessage(MnLocalize.GetValue("Please Wait For {WaitFor}").Replace("{WaitFor}",durationString));
 					}
 					return false;
 				}

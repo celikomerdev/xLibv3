@@ -14,6 +14,7 @@ namespace xLib.ToolConvert
 			set
 			{
 				if(CanDebug) xLogger.LogFormat(this,this.name+":GetString:Value:{0}",value);
+				if(string.IsNullOrWhiteSpace(value)) return;
 				eventResult.Invoke(value);
 			}
 		}

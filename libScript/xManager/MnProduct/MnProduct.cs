@@ -279,10 +279,10 @@ namespace xLib
 			StPopupBar.QueueMessage(MnLocalize.GetValue("Please Wait"));
 			
 			StPopupWindow.Reset();
-			StPopupWindow.HeaderLocalized("warning");
-			StPopupWindow.Body(string.Format($"{productId}\n$1.00\nbuy?"));
-			StPopupWindow.AcceptLocalized("yes");
-			StPopupWindow.DeclineLocalized("no");
+			StPopupWindow.HeaderLocalized("Warning");
+			StPopupWindow.Body(MnLocalize.GetValue("Do You Want To Buy?")+$"\n{productId}\n$1.00"));
+			StPopupWindow.AcceptLocalized("Yes");
+			StPopupWindow.DeclineLocalized("No");
 			StPopupWindow.Listener(true,Listener);
 			void Listener(bool result)
 			{

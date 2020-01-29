@@ -37,44 +37,38 @@ namespace xLib.ToolConvert
 		[UnityEngine.Serialization.FormerlySerializedAs("onConvert")]
 		[SerializeField]private EventString eventResult = new EventString();
 		
+		public void FromObjectSafe(object value)
+		{
+			if(string.IsNullOrWhiteSpace(@format)) return;
+			Result = string.Format(@format,value);
+		}
+		
 		public void FromString(string value)
 		{
-			Result = string.Format(@format,value);
+			FromObjectSafe(value);
 		}
 		
 		public void FromByte(byte value)
 		{
-			Result = string.Format(@format,value);
+			FromObjectSafe(value);
 		}
 		
 		public void FromInt(int value)
 		{
-			Result = string.Format(@format,value);
+			FromObjectSafe(value);
 		}
 		
 		public void FromFloat(float value)
 		{
-			Result = string.Format(@format,value);
-		}
-		
-		public void FromTimeSpan(TimeSpan value)
-		{
-			Result = string.Format(@format,(xTimeSpan)value);
-		}
-		
-		#if ModWebWWW
-		public void FromWWW(WWW value)
-		{
-			Result = string.Format(@format,value);
-		}
-		#endif
-		
-		public void FromUWR(UnityEngine.Networking.UnityWebRequest value)
-		{
-			Result = string.Format(@format,value);
+			FromObjectSafe(value);
 		}
 		
 		#region FromTime
+		public void FromTimeSpan(TimeSpan value)
+		{
+			FromObjectSafe((xTimeSpan)value);
+		}
+		
 		public void FromTimeTick(long value)
 		{
 			FromTimeSpan(TimeSpan.FromTicks(value));
@@ -90,6 +84,18 @@ namespace xLib.ToolConvert
 			FromTimeSpan(TimeSpan.FromSeconds(value));
 		}
 		#endregion
+		
+		public void FromUWR(UnityEngine.Networking.UnityWebRequest value)
+		{
+			FromObjectSafe(value);
+		}
+		
+		#if ModWebWWW
+		public void FromWWW(WWW value)
+		{
+			FromObjectSafe(value);
+		}
+		#endif
 	}
 }
 #endif

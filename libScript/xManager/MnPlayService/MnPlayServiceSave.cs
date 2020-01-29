@@ -24,17 +24,17 @@ namespace xLib
 				xLogger.LogExceptionFormat(this,this.name+":OpenSavedGamesPopup:null");
 				return;
 			}
-			savedGameClient.ShowSelectSavedGameUI(MnLocalize.GetValue("Select Your Saved Game"),maxDisplayedSavedGames,showCreateSaveUI,showDeleteSaveUI,OnGameSelected);
+			savedGameClient.ShowSelectSavedGameUI(MnLocalize.GetValue("Select File"),maxDisplayedSavedGames,showCreateSaveUI,showDeleteSaveUI,OnGameSelected);
 		}
 		
 		private void OnGameSelected(SelectUIStatus status, ISavedGameMetadata game)
 		{
 			if(status != SelectUIStatus.SavedGameSelected)
 			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("Game Could Not Be Selected")+"\n"+status.ToString());
+				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed to Select File")+"\n"+status.ToString());
 				return;
 			}
-			StPopupBar.QueueMessage(MnLocalize.GetValue("Game Selected"));
+			StPopupBar.QueueMessage(MnLocalize.GetValue("File Selected"));
 			
 			OpenSavedGame(game.Filename);
 			
@@ -55,10 +55,10 @@ namespace xLib
 		{
 			if(status != SavedGameRequestStatus.Success)
 			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("Game Could Not Be Opened")+"\n"+status.ToString());
+				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed to Open File")+"\n"+status.ToString());
 				return;
 			}
-			StPopupBar.QueueMessage(MnLocalize.GetValue("Game Opened"));
+			StPopupBar.QueueMessage(MnLocalize.GetValue("File Opened"));
 			
 			if(string.IsNullOrWhiteSpace(game.Filename)) SaveGame(game);
 			else LoadGame(game);
@@ -72,7 +72,7 @@ namespace xLib
 			ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 			
 			SavedGameMetadataUpdate.Builder builder = new SavedGameMetadataUpdate.Builder();
-			string description = string.Format(@"{0}: {1:HH\:mm\:ss}",MnLocalize.GetValue("Play Time"),(xTimeSpan)TimeSpan.FromTicks(MnSnapshot.PlayTime));
+			string description = string.Format(@"{0}: {1:HH\:mm\:ss}",MnLocalize.GetValue("Total Time"),(xTimeSpan)TimeSpan.FromTicks(MnSnapshot.PlayTime));
 			builder.WithUpdatedDescription(description);
 			builder.WithUpdatedPlayedTime(TimeSpan.FromTicks(MnSnapshot.PlayTime));
 			SavedGameMetadataUpdate updatedMetadata = builder.Build();
@@ -84,10 +84,10 @@ namespace xLib
 		{
 			if (status != SavedGameRequestStatus.Success)
 			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("Game Could Not Be Saved")+"\n"+status.ToString());
+				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed to Save File")+"\n"+status.ToString());
 				return;
 			}
-			StPopupBar.QueueMessage(MnLocalize.GetValue("Game Saved"));
+			StPopupBar.QueueMessage(MnLocalize.GetValue("File Saved"));
 		}
 		#endregion
 		
@@ -103,10 +103,10 @@ namespace xLib
 		{
 			if(status != SavedGameRequestStatus.Success)
 			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("Game Could Not Be Loaded")+"\n"+status.ToString());
+				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed to Load File")+"\n"+status.ToString());
 				return;
 			}
-			StPopupBar.QueueMessage(MnLocalize.GetValue("Game Loaded"));
+			StPopupBar.QueueMessage(MnLocalize.GetValue("File Loaded"));
 			MnSnapshot.SnapshotByte = data;
 		}
 		#endregion

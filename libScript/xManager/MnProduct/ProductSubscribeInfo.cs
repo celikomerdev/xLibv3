@@ -32,7 +32,7 @@ namespace xLib.ToolPurchase
 		
 		private TimeSpan FreeTrialPeriod(Product product)
 		{
-			TimeSpan returnValue = TimeSpan.FromTicks(0);
+			TimeSpan returnValue = TimeSpan.FromHours(3);
 			if(product == null) return returnValue;
 			
 			if(MnProduct.productsDetails == null)
@@ -72,7 +72,7 @@ namespace xLib.ToolPurchase
 		
 		protected override bool TryRegister(bool register)
 		{
-			eventFreeTrialPeriod.Value = TimeSpan.FromDays(1);
+			eventFreeTrialPeriod.Value = TimeSpan.FromHours(3);
 			return register;
 		}
 	}
