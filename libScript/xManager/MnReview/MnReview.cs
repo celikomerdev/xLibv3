@@ -37,9 +37,9 @@ namespace xLib
 		{
 			if(!useStandard) return;
 			StPopupWindow.Reset();
-			StPopupWindow.Header(MnLocalize.GetValue(""));
-			StPopupWindow.Body(MnLocalize.GetValue("Please Rate and Write What You Think to Support"));
-			StPopupWindow.Accept(MnLocalize.GetValue("Submit"));
+			StPopupWindow.Header(MnLocalize.GetValue("Please Rate Us"));
+			StPopupWindow.Body(MnLocalize.GetValue("Please Rate And Write What You Think To Support"));
+			StPopupWindow.Accept(MnLocalize.GetValue("Store"));
 			StPopupWindow.Decline(MnLocalize.GetValue("Close"));
 			
 			StPopupWindow.Listener(true,Listener);

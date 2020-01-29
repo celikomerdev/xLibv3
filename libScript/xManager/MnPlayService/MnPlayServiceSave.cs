@@ -31,7 +31,7 @@ namespace xLib
 		{
 			if(status != SelectUIStatus.SavedGameSelected)
 			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed to Select File")+"\n"+status.ToString());
+				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed To Select File")+"\n"+status.ToString());
 				return;
 			}
 			StPopupBar.QueueMessage(MnLocalize.GetValue("File Selected"));
@@ -55,7 +55,7 @@ namespace xLib
 		{
 			if(status != SavedGameRequestStatus.Success)
 			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed to Open File")+"\n"+status.ToString());
+				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed To Open File")+"\n"+status.ToString());
 				return;
 			}
 			StPopupBar.QueueMessage(MnLocalize.GetValue("File Opened"));
@@ -84,7 +84,7 @@ namespace xLib
 		{
 			if (status != SavedGameRequestStatus.Success)
 			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed to Save File")+"\n"+status.ToString());
+				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed To Save File")+"\n"+status.ToString());
 				return;
 			}
 			StPopupBar.QueueMessage(MnLocalize.GetValue("File Saved"));
@@ -103,7 +103,7 @@ namespace xLib
 		{
 			if(status != SavedGameRequestStatus.Success)
 			{
-				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed to Load File")+"\n"+status.ToString());
+				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed To Load File")+"\n"+status.ToString());
 				return;
 			}
 			StPopupBar.QueueMessage(MnLocalize.GetValue("File Loaded"));
