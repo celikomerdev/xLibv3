@@ -10,7 +10,7 @@ namespace xLib.xDictionary
 		public T[] array;
 		public Dictionary<K,V> dictionary = new Dictionary<K,V>();
 		
-		private bool isInit;
+		private bool isInit = false;
 		public void Init()
 		{
 			if(isInit) return;
