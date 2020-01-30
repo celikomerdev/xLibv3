@@ -48,6 +48,7 @@ namespace xLib.xAnalytics
 				listGroupTest.Add(new ABTest(name:item.name,groupCount:item.groupCount,percent:item.percent));
 			}
 			
+			builder.SetKochovaAndroidGUID(MnKey.GetValue("Kochava_ID"));
 			builder.SetAbTests(listGroupTest);
 			builder.Build();
 			isInit = true;
