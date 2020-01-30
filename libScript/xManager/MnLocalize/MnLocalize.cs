@@ -10,6 +10,18 @@ namespace xLib
 {
 	public class MnLocalize : SingletonM<MnLocalize>
 	{
+		#region Mono
+		protected override void Started()
+		{
+			LocalizationManager.OnLocalizeEvent += OnLocalize; OnLocalize();
+		}
+		
+		protected override void OnDestroyed()
+		{
+			LocalizationManager.OnLocalizeEvent -= OnLocalize;
+		}
+		#endregion
+		
 		[SerializeField]private StringModification stringModification = StringModification.DontModify;
 		public static string GetValue(string key)
 		{
@@ -61,32 +73,23 @@ namespace xLib
 			}
 		}
 		
-		public static CultureInfo CurrentUICulture
-		{
-			get
-			{
-				return LocalizationManager.CurrentCulture;
-			}
-			set
-			{
-				if(value == null) value = CultureInfo.InvariantCulture;
-				if(CultureInfo.CurrentUICulture == value) return;
-				CultureInfo.CurrentUICulture = value;
-			}
-		}
-		
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-		private static void TryRegister()
-		{
-			LocalizationManager.OnLocalizeEvent += OnLocalize;
-			OnLocalize();
-		}
-		
 		[SerializeField]public NodeVoid eventLocalize = null;
-		private static void OnLocalize()
+		private void OnLocalize()
 		{
-			CurrentUICulture = CurrentUICulture;
-			ins?.eventLocalize.Call();
+			SetUICulture(LocalizationManager.CurrentCulture);
+			eventLocalize.Call();
+		}
+		
+		private void SetUICulture(CultureInfo cultureInfo)
+		{
+			if(cultureInfo==null) cultureInfo = CultureInfo.InvariantCulture;
+			if(CanDebug) Debug.Log($"{this.name}:SetUICulture:{cultureInfo.ToString()}",this);
+			
+			CultureInfo.CurrentUICulture = cultureInfo;
+			// CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+			
+			CultureInfo.CurrentCulture = cultureInfo;
+			// CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 		}
 	}
 }
@@ -134,20 +137,6 @@ namespace xLib
 			}
 			set
 			{
-			}
-		}
-		
-		public static CultureInfo CurrentUICulture
-		{
-			get
-			{
-				return CultureInfo.CurrentUICulture;
-			}
-			set
-			{
-				if(value == null) value = CultureInfo.InvariantCulture;
-				if(CultureInfo.CurrentUICulture == value) return;
-				CultureInfo.CurrentUICulture = value;
 			}
 		}
 		
