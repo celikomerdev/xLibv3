@@ -6,12 +6,44 @@ namespace xLib
 {
 	public static class xApp
 	{
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
-		private static void FillApp()
+		static xApp()
 		{
-			Debug.LogWarning($"xApp:FillApp");
+			Debug.Log($"xApp:Reset");
+			// xApp.FillAppVersion();
+		}
+		
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
+		public static void BeforeSplashScreen()
+		{
+			Debug.Log($"xApp:BeforeSplashScreen");
 			persistentDataPath = Application.persistentDataPath;
 		}
+		
+		#region Version
+		private static int m_app_version = 0;
+		public static int app_version
+		{
+			get
+			{
+				return m_app_version;
+			}
+			private set
+			{
+				m_app_version = value;
+			}
+		}
+		
+		public static void FillAppVersion()
+		{
+			#if UNITY_EDITOR
+			int bundleVersionCode = UnityEditor.PlayerSettings.Android.bundleVersionCode;
+			if(app_version == bundleVersionCode) return;
+			app_version = bundleVersionCode;
+			Debug.Log($"app_version:{app_version}");
+			#endif
+		}
+		#endregion
+		
 		
 		#region Platform
 		public static RuntimePlatform platformTarget

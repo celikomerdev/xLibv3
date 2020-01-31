@@ -20,6 +20,7 @@ namespace xLib.libEditor
 		
 		static AsmdefDebug()
 		{
+			xApp.FillAppVersion();
 			CompilationPipeline.assemblyCompilationStarted += CompilationPipelineOnAssemblyCompilationStarted;
 			CompilationPipeline.assemblyCompilationFinished += CompilationPipelineOnAssemblyCompilationFinished;
 			AssemblyReloadEvents.beforeAssemblyReload += AssemblyReloadEventsOnBeforeAssemblyReload;

@@ -2,18 +2,9 @@
 using UnityEngine;
 using xLib.xNode.NodeObject;
 
-#if UNITY_EDITOR
-using UnityEditor;
-using UnityEditor.Build;
-using UnityEditor.Build.Reporting;
-#endif
-
 namespace xLib
 {
-	public class MnApplication : SingletonM<MnApplication>,
-	#if UNITY_EDITOR
-	IPreprocessBuildWithReport
-	#endif
+	public class MnApplication : SingletonM<MnApplication>,ISerializationCallbackReceiver
 	{
 		[Header("SystemInfo")]
 		[SerializeField]private NodeString SystemInfo_deviceUniqueIdentifier = null;
@@ -46,10 +37,7 @@ namespace xLib
 			Application_sandboxType.Value = Application.sandboxType.ToString();
 			Application_version_name.Value = Application.version;
 			
-			#if UNITY_EDITOR
-			app_version = PlayerSettings.Android.bundleVersionCode;
-			#endif
-			
+			FillAppVersion();
 			int app_version_parse = 0;
 			if(int.TryParse(Application.version, out app_version_parse))
 			{
@@ -59,22 +47,24 @@ namespace xLib
 			Application_version.Value = app_version;
 		}
 		
-		
-		#if UNITY_EDITOR
-		int IOrderedCallback.callbackOrder
+		private void FillAppVersion()
 		{
-			get
-			{
-				return 0;
-			}
+			#if UNITY_EDITOR
+			if(app_version == xApp.app_version) return;
+			app_version = xApp.app_version;
+			Debug.Log($"MnApplication:app_version:{app_version}",this);
+			#endif
 		}
 		
-		void IPreprocessBuildWithReport.OnPreprocessBuild(BuildReport report)
+		void ISerializationCallbackReceiver.OnBeforeSerialize()
 		{
-			app_version = PlayerSettings.Android.bundleVersionCode;
-			Debug.Log($"{this.name}:OnPreprocessBuild:app_version:{app_version}",this);
+			FillAppVersion();
 		}
-		#endif
+		
+		void ISerializationCallbackReceiver.OnAfterDeserialize()
+		{
+			FillAppVersion();
+		}
 	}
 }
 #endif

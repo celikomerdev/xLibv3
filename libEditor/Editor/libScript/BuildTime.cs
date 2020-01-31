@@ -24,11 +24,13 @@ namespace xLib.libEditor
 		{
 			Debug.Log($"{DateTime.Now.ToString()}:OnPreprocessBuild");
 			EditorPrefs.SetString("BuildStartTime",DateTime.UtcNow.ToString());
+			xApp.FillAppVersion();
 		}
 		
 		void IProcessSceneWithReport.OnProcessScene(Scene scene, BuildReport report)
 		{
 			Debug.Log($"{DateTime.Now.ToString()}:OnProcessScene:{scene.name}");
+			xApp.FillAppVersion();
 		}
 		
 		void IPostprocessBuildWithReport.OnPostprocessBuild(BuildReport report)
