@@ -21,7 +21,6 @@ namespace xLib
 		
 		private void CreateId(string viewId)
 		{
-			ViewCore.FinalizeId();
 			if(valueMulti.ContainsKey(viewId)) return;
 			valueMulti.Add(viewId,valueDefault);
 		}

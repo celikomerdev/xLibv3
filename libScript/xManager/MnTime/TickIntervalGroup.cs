@@ -18,12 +18,12 @@ namespace xLib.xTick
 			
 			internal IEnumerator Tick()
 			{
-				string lastViewId = ViewCore.CurrentId;
-				ViewCore.CurrentId = "Client";
+				string tempViewId = ViewCore.CurrentId;
+				ViewCore.CurrentId = string.Empty;
 			
 				tickInterval.Value = interval;
 				
-				ViewCore.CurrentId = lastViewId;
+				ViewCore.CurrentId = tempViewId;
 				yield return new WaitForEndOfFrame();
 			}
 		}

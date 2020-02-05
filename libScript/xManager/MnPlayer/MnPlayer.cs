@@ -13,14 +13,14 @@ namespace xLib
 		{
 			canDebug = CanDebug;
 			
-			CurrentId = "Client";
+			CurrentId = string.Empty;
 			isMy = true;
 			nodeIsMy.Value = true;
 		}
 		
 		protected override void OnDestroyed()
 		{
-			CurrentId = "Client";
+			CurrentId = string.Empty;
 			isMy = false;
 			nodeIsMy.Value = false;
 			

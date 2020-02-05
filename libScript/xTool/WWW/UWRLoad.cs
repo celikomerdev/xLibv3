@@ -18,7 +18,7 @@ namespace xLib
 			{
 				if(string.IsNullOrEmpty(value)) return;
 				if(url.ValueGet(viewId:ViewCore.CurrentId) == value) return;
-				url.ValueSet(value,viewId:ViewCore.CurrentId);
+				url.ValueSet(value:value,viewId:ViewCore.CurrentId);
 				MnCoroutine.ins.NewCoroutine(eDownload(value,ViewCore.CurrentId),CanDebug);
 			}
 		}
@@ -38,10 +38,10 @@ namespace xLib
 			
 			if (string.IsNullOrEmpty(uwr.error))
 			{
-				string tempId = ViewCore.CurrentId;
+				string tempViewId = ViewCore.CurrentId;
 				ViewCore.CurrentId = viewId;
 				eventUWR.Invoke(uwr);
-				ViewCore.CurrentId = tempId;
+				ViewCore.CurrentId = tempViewId;
 			}
 			else
 			{

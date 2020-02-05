@@ -3,28 +3,28 @@ using UnityEngine.Events;
 
 namespace xLib
 {
-	public class ActionSortedSingle<T0>:ActionSortedBase<T0>
+	public class ActionSortedSingle<V> : ActionSortedBase<V>
 	{
-		private ActionSorted<T0> actionSortedSingle = new ActionSorted<T0>();
+		private ActionSorted<V> actionSortedSingle = new ActionSorted<V>();
 		
-		public override void Listener(bool register,UnityAction<T0> call,string viewId,int order)
+		public override void Listener(bool register,UnityAction<V> call,string viewId,int order)
 		{
 			actionSortedSingle.Listener(register,call,order);
 		}
 		
-		public override void Invoke(T0 arg0,string viewId)
+		public override void Invoke(V value,string viewId)
 		{
-			actionSortedSingle.Invoke(arg0);
+			actionSortedSingle.Invoke(value);
 		}
 		
-		public override void InvokeFirst(T0 arg0,string viewId)
+		public override void InvokeFirst(V value,string viewId)
 		{
-			actionSortedSingle.InvokeFirst(arg0);
+			actionSortedSingle.InvokeFirst(value);
 		}
 		
-		public override void InvokeLast(T0 arg0,string viewId)
+		public override void InvokeLast(V value,string viewId)
 		{
-			actionSortedSingle.InvokeLast(arg0);
+			actionSortedSingle.InvokeLast(value);
 		}
 	}
 }

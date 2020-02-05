@@ -74,13 +74,13 @@ namespace xLib
 			Dictionary<string,object> dict = new Dictionary<string,object>();
 			dict = dict.FromJsonStringSafe(data);
 			
-			string tempId = ViewCore.CurrentId;
-			ViewCore.CurrentId = "Client";
+			string tempViewId = ViewCore.CurrentId;
+			ViewCore.CurrentId = string.Empty;
 			foreach (KeyValuePair<string,ISerializableObject> pair in dictPayload)
 			{
 				if(dict.ContainsKey(pair.Key)) pair.Value.SerializedObjectRaw = dict[pair.Key];
 			}
-			ViewCore.CurrentId = tempId;
+			ViewCore.CurrentId = tempViewId;
 		}
 		#endregion
 	}

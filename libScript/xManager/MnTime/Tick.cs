@@ -46,8 +46,8 @@ namespace xLib.xTick
 			if(!CanWork) return;
 			if(Time.unscaledDeltaTime == 0) return;
 			
-			string lastViewId = ViewCore.CurrentId;
-			ViewCore.CurrentId = "Client";
+			string tempViewId = ViewCore.CurrentId;
+			ViewCore.CurrentId = string.Empty;
 			
 			tickUnscaledUpdate.Value = Time.unscaledDeltaTime;
 			tickUnscaledSmooth.Value = Mathf.Lerp(tickUnscaledSmooth.Value,tickUnscaledUpdate.Value,0.5f);
@@ -62,7 +62,7 @@ namespace xLib.xTick
 				tickLevel.Value += tickUpdate.Value;
 			}
 			
-			ViewCore.CurrentId = lastViewId;
+			ViewCore.CurrentId = tempViewId;
 		}
 		
 		private void LateUpdate()
@@ -70,8 +70,8 @@ namespace xLib.xTick
 			if(!CanWork) return;
 			if(Time.unscaledDeltaTime == 0) return;
 			
-			string lastViewId = ViewCore.CurrentId;
-			ViewCore.CurrentId = "Client";
+			string tempViewId = ViewCore.CurrentId;
+			ViewCore.CurrentId = string.Empty;
 			
 			tickUnscaledLate.Value = Time.unscaledDeltaTime;
 			
@@ -80,7 +80,7 @@ namespace xLib.xTick
 				tickLate.Value = timeScale*tickUnscaledLate.Value;
 			}
 			
-			ViewCore.CurrentId = lastViewId;
+			ViewCore.CurrentId = tempViewId;
 		}
 		
 		private void FixedUpdate()
@@ -88,8 +88,8 @@ namespace xLib.xTick
 			if(!CanWork) return;
 			if(Time.fixedUnscaledDeltaTime == 0) return;
 			
-			string lastViewId = ViewCore.CurrentId;
-			ViewCore.CurrentId = "Client";
+			string tempViewId = ViewCore.CurrentId;
+			ViewCore.CurrentId = string.Empty;
 			
 			tickUnscaledFixed.Value = Time.fixedUnscaledDeltaTime;
 			
@@ -98,7 +98,7 @@ namespace xLib.xTick
 				tickFixed.Value = Time.fixedDeltaTime;
 			}
 			
-			ViewCore.CurrentId = lastViewId;
+			ViewCore.CurrentId = tempViewId;
 		}
 	}
 }

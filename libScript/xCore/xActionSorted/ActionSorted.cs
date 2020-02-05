@@ -5,11 +5,11 @@ using UnityEngine.Events;
 
 namespace xLib
 {
-	public class ActionSorted<T0>
+	public class ActionSorted<V>
 	{
-		private SortedList<int,UnityAction<T0>> sortedList = new SortedList<int,UnityAction<T0>>();
+		private SortedList<int,UnityAction<V>> sortedList = new SortedList<int,UnityAction<V>>();
 		
-		public void Listener(bool register,UnityAction<T0> call,int order)
+		public void Listener(bool register,UnityAction<V> call,int order)
 		{
 			if(register)
 			{
@@ -24,26 +24,26 @@ namespace xLib
 			}
 		}
 		
-		public void Invoke(T0 arg0)
+		public void Invoke(V value)
 		{
 			for (int i = 0; i < sortedList.Count; i++)
 			{
-				sortedList.ElementAt(i).Value.Invoke(arg0);
+				sortedList.ElementAt(i).Value.Invoke(value);
 			}
 		}
 		
-		public void InvokeFirst(T0 arg0)
+		public void InvokeFirst(V value)
 		{
 			if(sortedList.Count==0) return;
-			UnityAction<T0> temp = (UnityAction<T0>)sortedList.FirstOrDefault().Value.GetInvocationList().FirstOrDefault();
-			temp.Invoke(arg0);
+			UnityAction<V> temp = (UnityAction<V>)sortedList.FirstOrDefault().Value.GetInvocationList().FirstOrDefault();
+			temp.Invoke(value);
 		}
 		
-		public void InvokeLast(T0 arg0)
+		public void InvokeLast(V value)
 		{
 			if(sortedList.Count==0) return;
-			UnityAction<T0> temp = (UnityAction<T0>)sortedList.LastOrDefault().Value.GetInvocationList().LastOrDefault();
-			temp.Invoke(arg0);
+			UnityAction<V> temp = (UnityAction<V>)sortedList.LastOrDefault().Value.GetInvocationList().LastOrDefault();
+			temp.Invoke(value);
 		}
 		
 		private void CreateOrder(int order)

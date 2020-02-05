@@ -191,12 +191,12 @@ namespace xLib.xNode.NodeObject
 			Node.Consume();
 		}
 		
-		public void Listener(bool register,UnityAction<V> call,string viewId="Client",int order=0,bool onRegister=false,BaseWorkerI worker=null)
+		public void Listener(bool register,UnityAction<V> call,string viewId="",int order=0,bool onRegister=false,BaseWorkerI worker=null)
 		{
 			Node.Listener(register,call,viewId,order,onRegister,worker);
 		}
 		
-		public void ListenerCall(bool register,UnityAction<object> call,string viewId="Client",int order=0,bool onRegister=false,BaseWorkerI worker=null)
+		public void ListenerCall(bool register,UnityAction<object> call,string viewId="",int order=0,bool onRegister=false,BaseWorkerI worker=null)
 		{
 			Node.ListenerCall(register,call,viewId,order,onRegister,worker);
 		}

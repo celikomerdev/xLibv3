@@ -18,7 +18,7 @@ namespace xLib
 		private static void CheckIsMy()
 		{
 			isMy = (myId == currentId);
-			if(currentId == "Client") isMy = true;
+			if(currentId == string.Empty) isMy = true;
 			
 			// if(ins) ins.nodeIsMy.Value = isMy;
 		}
@@ -27,7 +27,7 @@ namespace xLib
 		
 		#region CurrentId
 		internal static bool canDebug = false;
-		private static string myId = "Client";
+		private static string myId = string.Empty;
 		public static string MyId
 		{
 			get
@@ -43,7 +43,7 @@ namespace xLib
 			}
 		}
 		
-		private static string currentId = "Client";
+		private static string currentId = string.Empty;
 		public static string CurrentId
 		{
 			get
@@ -63,25 +63,6 @@ namespace xLib
 		public static bool inRoom;
 		public static bool inRpc;
 		public static void RPC(string target,string key,string data){}
-		
-		private static string finalId;
-		public static string FinalId
-		{
-			get
-			{
-				return finalId;
-			}
-			private set
-			{
-				finalId = value;
-			}
-		}
-		
-		public static void FinalizeId()
-		{
-			if(isMy) FinalId = "Client";
-			else FinalId = CurrentId;
-		}
 	}
 }
 #endif

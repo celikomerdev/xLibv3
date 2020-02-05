@@ -47,7 +47,7 @@ namespace xLib
 			yield return new WaitForFrames(frame);
 			dictCoroutine.Remove(cacheCoroutine);
 			
-			string tempId = ViewCore.CurrentId;
+			string tempViewId = ViewCore.CurrentId;
 			ViewCore.CurrentId = invokeId;
 			
 			if(CanDebug) Debug.Log($"{this.name}:OnWait:{invokeId}:frame:{frame}",this);
@@ -55,7 +55,7 @@ namespace xLib
 			eventWaited.Invoke();
 			Profiler.EndSample();
 			
-			ViewCore.CurrentId = tempId;
+			ViewCore.CurrentId = tempViewId;
 		}
 		
 		private void OnDisable()

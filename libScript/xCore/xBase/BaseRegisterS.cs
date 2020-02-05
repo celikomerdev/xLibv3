@@ -58,13 +58,13 @@ namespace xLib
 				if(baseRegister.isRegister == value) return;
 				
 				FindView();
-				string tempId = ViewCore.CurrentId;
+				string tempViewId = ViewCore.CurrentId;
 				ViewCore.CurrentId = ViewId;
 				
 				baseRegister.isRegister = TryRegister(value);
 				if(CanDebug) xLogger.LogFormat(this,this.name+":IsRegister:{0}",baseRegister.isRegister);
 				
-				ViewCore.CurrentId = tempId;
+				ViewCore.CurrentId = tempViewId;
 			}
 		}
 		#endregion

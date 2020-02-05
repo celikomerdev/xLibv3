@@ -5,8 +5,7 @@ namespace xLib
 	{
 		internal View view = null;
 		protected bool isMy = true;
-		private string viewId = "Client";
-		protected string lastViewId = "Client";
+		private string viewId = string.Empty;
 		public string ViewId
 		{
 			get

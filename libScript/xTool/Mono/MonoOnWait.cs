@@ -51,7 +51,7 @@ namespace xLib
 			else yield return new WaitForSeconds(time);
 			dictCoroutine.Remove(cacheCoroutine);
 			
-			string tempId = ViewCore.CurrentId;
+			string tempViewId = ViewCore.CurrentId;
 			ViewCore.CurrentId = invokeId;
 			
 			if(CanDebug) Debug.Log($"{this.name}:OnWait:{invokeId}:time:{time}:cacheCoroutine:{cacheCoroutine}",this);
@@ -59,7 +59,7 @@ namespace xLib
 			eventWaited.Invoke();
 			Profiler.EndSample();
 			
-			ViewCore.CurrentId = tempId;
+			ViewCore.CurrentId = tempViewId;
 		}
 		
 		private void OnDisable()

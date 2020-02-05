@@ -10,11 +10,12 @@ namespace xLib.xValueClass.Listener
 		//private IValue<T>[] target = new IValue<T>[0];
 		[SerializeField]internal bool forceClient = false;
 		
+		protected string lastViewId = string.Empty;
 		protected void TryForceClient()
 		{
 			if(!forceClient) return;
 			lastViewId = ViewCore.CurrentId;
-			ViewCore.CurrentId = "Client";
+			ViewCore.CurrentId = string.Empty;
 		}
 		
 		protected void TryRestoreLastClient()

@@ -4,42 +4,38 @@ using UnityEngine.Events;
 
 namespace xLib
 {
-	public class ActionSortedMulti<T0>:ActionSortedBase<T0>
+	public class ActionSortedMulti<V> : ActionSortedBase<V>
 	{
-		private Dictionary<string,ActionSorted<T0>> actionSortedMulti = new Dictionary<string,ActionSorted<T0>>();
+		private Dictionary<string,ActionSorted<V>> actionSortedMulti = new Dictionary<string,ActionSorted<V>>();
 		
-		public override void Listener(bool register,UnityAction<T0> call,string viewId,int order)
+		public override void Listener(bool register,UnityAction<V> call,string viewId,int order)
 		{
-			ViewCore.FinalizeId();
 			if(register) CreateId(viewId);
 			actionSortedMulti[viewId].Listener(register,call,order);
 		}
 		
-		public override void Invoke(T0 arg0,string viewId)
+		public override void Invoke(V value,string viewId)
 		{
-			ViewCore.FinalizeId();
 			if(!actionSortedMulti.ContainsKey(viewId)) return;
-			actionSortedMulti[viewId].Invoke(arg0);
+			actionSortedMulti[viewId].Invoke(value);
 		}
 		
-		public override void InvokeFirst(T0 arg0,string viewId)
+		public override void InvokeFirst(V value,string viewId)
 		{
-			ViewCore.FinalizeId();
 			if(!actionSortedMulti.ContainsKey(viewId)) return;
-			actionSortedMulti[viewId].InvokeFirst(arg0);
+			actionSortedMulti[viewId].InvokeFirst(value);
 		}
 		
-		public override void InvokeLast(T0 arg0,string viewId)
+		public override void InvokeLast(V value,string viewId)
 		{
-			ViewCore.FinalizeId();
 			if(!actionSortedMulti.ContainsKey(viewId)) return;
-			actionSortedMulti[viewId].InvokeLast(arg0);
+			actionSortedMulti[viewId].InvokeLast(value);
 		}
 		
 		private void CreateId(string viewId)
 		{
 			if(actionSortedMulti.ContainsKey(viewId)) return;
-			actionSortedMulti.Add(viewId,new ActionSorted<T0>());
+			actionSortedMulti.Add(viewId,new ActionSorted<V>());
 		}
 	}
 }
