@@ -70,7 +70,7 @@ namespace xLib
 			return path;
 		}
 		
-		public static string customFolder = "/xProject/";
+		public const string customFolder = "/xProject/";
 		private static string persistentDataPath = "";
 		private static string xPersistentDataPath
 		{
@@ -85,11 +85,12 @@ namespace xLib
 			try
 			{
 				FileInfo fileInfo = new FileInfo(path);
+				if (string.IsNullOrEmpty(fileInfo.DirectoryName)) return;
 				Directory.CreateDirectory(fileInfo.DirectoryName);
 			}
 			catch (System.Exception ex)
 			{
-				xLogger.LogException($"xApp.CreateDirectory:{ex.Message}");
+				Debug.LogException(new UnityException($"xApp.CreateDirectory:{ex.Message}",ex));
 			}
 		}
 		#endregion

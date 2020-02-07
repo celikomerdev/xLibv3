@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 using xLib.ToolCrypto;
 
 namespace xLib.xValueClass
@@ -29,7 +30,7 @@ namespace xLib.xValueClass
 				string Content = jObject.GetValue("Content").ToString();
 				string stringJObject = "";
 				
-				if(stringJObject != "") xLogger.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Test!!!");
+				if(stringJObject != "") Debug.LogException(new UnityException($"{nodeSetting.objDebug.name}:Test!!!"),nodeSetting.objDebug);
 				
 				SerializedObjectRaw = Decrypt(Content);
 			}
@@ -46,7 +47,7 @@ namespace xLib.xValueClass
 				if(!string.IsNullOrEmpty(stringJObject)) return stringJObject;
 			}
 			
-			xLogger.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":HackDetected!!!");
+			Debug.LogException(new UnityException($"{nodeSetting.objDebug.name}:HackDetected!!!"),nodeSetting.objDebug);
 			return "";
 		}
 		#endregion

@@ -12,14 +12,14 @@ namespace xLib
 		[SerializeField]private EventWWW eventWWW = new EventWWW();
 		
 		#region Url
-		private ValueBase<string> url = new ValueMulti<string>();
+		private ValueBase<string> valueUrl = new ValueMulti<string>();
 		public string Url
 		{
 			set
 			{
 				if(string.IsNullOrEmpty(value)) return;
-				if(url.ValueGet(viewId:ViewCore.CurrentId) == value) return;
-				url.ValueSet(value:value,viewId:ViewCore.CurrentId);
+				if(valueUrl.ValueGet(viewId:ViewCore.CurrentId) == value) return;
+				valueUrl.ValueSet(value:value,viewId:ViewCore.CurrentId);
 				MnCoroutine.ins.NewCoroutine(eDownload(ViewCore.CurrentId,value),CanDebug);
 			}
 		}
@@ -40,7 +40,7 @@ namespace xLib
 			}
 			else
 			{
-				xLogger.LogExceptionFormat(this,this.name+":Error:{0}:{1}",www.error,url);
+				Debug.LogException(new UnityException($"{name}:error:{www.error}:url:{url}"),this);
 			}
 			
 			www.Dispose();

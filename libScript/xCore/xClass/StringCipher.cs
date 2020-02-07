@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using UnityEngine;
 
 namespace xLib.ToolCrypto
 {
@@ -33,7 +34,7 @@ namespace xLib.ToolCrypto
 			}
 			catch(Exception ex)
 			{
-				xLogger.LogException($"StringCipher.Encrypt:Exception:{ex.Message}");
+				Debug.LogException(new UnityException($"StringCipher.Encrypt:{ex.Message}",ex));
 			}
 			
 			return output;
@@ -65,7 +66,7 @@ namespace xLib.ToolCrypto
 			}
 			catch(Exception ex)
 			{
-				xLogger.LogException($"StringCipher.Decrypt:Exception:{ex.Message}");
+				Debug.LogException(new UnityException($"StringCipher.Decrypt:{ex.Message}",ex));
 			}
 			return output;
 		}

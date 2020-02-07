@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 namespace xLib.xValueClass
 {
@@ -44,7 +45,7 @@ namespace xLib.xValueClass
 				if(hash == (KeyEncryptVersion(i)+content).HashSHA256UTF8()) return true;
 			}
 			
-			xLogger.LogExceptionFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":HackDetected!!!");
+			Debug.LogException(new UnityException($"{nodeSetting.objDebug.name}:HackDetected!!!"),nodeSetting.objDebug);
 			return false;
 		}
 		#endregion

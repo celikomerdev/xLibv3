@@ -9,7 +9,7 @@ namespace xLib.libAdvert.xIronSource
 		#region TryRegister
 		protected override bool TryRegister(bool register)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:TryRegister:{key}:{register}",this);
+			if(CanDebug) Debug.Log($"{name}:TryRegister:{key}:{register}",this);
 			
 			if (register)
 			{
@@ -46,14 +46,14 @@ namespace xLib.libAdvert.xIronSource
 		//Invoked when the banner loading process has failed.
 		private void onBannerAdLoadFailedEvent(IronSourceError error)
 		{
-			xLogger.LogException($"{this.name}:onBannerAdLoadFailedEvent:{error.ToString()}",this);
+			Debug.LogException(new UnityException($"{name}:onBannerAdLoadFailedEvent:{error}"),this);
 			OnLoadFailBase();
 		}
 		
 		//Invoked once the banner has loaded
 		private void onBannerAdLoadedEvent()
 		{
-			if(CanDebug) Debug.Log($"{this.name}:onBannerAdLoadedEvent",this);
+			if(CanDebug) Debug.Log($"{name}:onBannerAdLoadedEvent",this);
 			SetLoadedBase(true);
 			IsDisplay = isDisplay;
 		}
@@ -61,28 +61,28 @@ namespace xLib.libAdvert.xIronSource
 		//Invoked when end user clicks on the banner ad
 		private void onBannerAdClickedEvent()
 		{
-			if(CanDebug) Debug.Log($"{this.name}:onBannerAdClickedEvent",this);
+			if(CanDebug) Debug.Log($"{name}:onBannerAdClickedEvent",this);
 			OnClickBase();
 		}
 		
 		//Notifies the presentation of a full screen content following user click
 		private void onBannerAdScreenPresentedEvent()
 		{
-			if(CanDebug) Debug.Log($"{this.name}:onBannerAdScreenPresentedEvent",this);
+			if(CanDebug) Debug.Log($"{name}:onBannerAdScreenPresentedEvent",this);
 			OnShowBase();
 		}
 		
 		//Invoked when the user leaves the app
 		private void onBannerAdLeftApplicationEvent()
 		{
-			if(CanDebug) Debug.Log($"{this.name}:onBannerAdLeftApplicationEvent",this);
+			if(CanDebug) Debug.Log($"{name}:onBannerAdLeftApplicationEvent",this);
 			OnVisitBase();
 		}
 		
 		//Notifies the presented screen has been dismissed
 		private void onBannerAdScreenDismissedEvent()
 		{
-			if(CanDebug) Debug.Log($"{this.name}:onBannerAdScreenDismissedEvent",this);
+			if(CanDebug) Debug.Log($"{name}:onBannerAdScreenDismissedEvent",this);
 			OnCloseBase();
 		}
 		#endregion
@@ -97,14 +97,14 @@ namespace xLib.libAdvert.xIronSource
 		
 		protected override void Load()
 		{
-			if(CanDebug) Debug.Log($"{this.name}:Load",this);
+			if(CanDebug) Debug.Log($"{name}:Load",this);
 			IronSource.Agent.loadBanner(xAdSize,xAdPosition);
 			DebugBanner();
 		}
 		
 		protected override void Show()
 		{
-			if(CanDebug) Debug.Log($"{this.name}:Show",this);
+			if(CanDebug) Debug.Log($"{name}:Show",this);
 			IronSource.Agent.displayBanner();
 			OnDisplay = true;
 			OnWidth = width*multiplierPixel;
@@ -125,8 +125,8 @@ namespace xLib.libAdvert.xIronSource
 		{
 			get
 			{
-				IronSourceBannerPosition returnObj = IronSourceBannerPosition.BOTTOM;
-				System.Enum.TryParse(adPosition,out IronSourceBannerPosition myStatus);
+				const IronSourceBannerPosition returnObj = IronSourceBannerPosition.BOTTOM;
+				if (System.Enum.TryParse(adPosition, out IronSourceBannerPosition outputObj)) return outputObj;
 				return returnObj;
 			}
 		}

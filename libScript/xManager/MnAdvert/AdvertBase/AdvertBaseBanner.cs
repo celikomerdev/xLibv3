@@ -26,7 +26,7 @@ namespace xLib.libAdvert
 		
 		public void HideBase()
 		{
-			if(CanDebug) Debug.Log($"{this.name}:HideBase",this);
+			if(CanDebug) Debug.Log($"{name}:HideBase",this);
 			if(!isLoad) return;
 			Hide();
 		}
@@ -61,7 +61,7 @@ namespace xLib.libAdvert
 		{
 			set
 			{
-				if(CanDebug) Debug.Log($"{this.name}:OnWidth:{value}",this);
+				if(CanDebug) Debug.Log($"{name}:OnWidth:{value}",this);
 				onDisplayWidth.Invoke(value);
 			}
 		}
@@ -72,7 +72,7 @@ namespace xLib.libAdvert
 		{
 			set
 			{
-				if(CanDebug) Debug.Log($"{this.name}:OnHeight:{value}",this);
+				if(CanDebug) Debug.Log($"{name}:OnHeight:{value}",this);
 				onDisplayHeight.Invoke(value);
 			}
 		}
@@ -95,15 +95,15 @@ namespace xLib.libAdvert
 		{
 			if(CanDebug)
 			{
-				Debug.Log($"{this.name}:Screen.currentResolution:{Screen.currentResolution}",this);
-				Debug.Log($"{this.name}:Screen.width:{Screen.width}",this);
-				Debug.Log($"{this.name}:Screen.height:{Screen.height}",this);
-				Debug.Log($"{this.name}:Screen.dpi:{Screen.dpi}",this);
-				Debug.Log($"{this.name}:ExtScreen.HeightInc:{ExtScreen.HeightInc}",this);
-				Debug.Log($"{this.name}:ExtScreen.WidthInc:{ExtScreen.WidthInc}",this);
-				Debug.Log($"{this.name}:Banner.width:{width}",this);
-				Debug.Log($"{this.name}:Banner.height:{height}",this);
-				Debug.Log($"{this.name}:DeviceDisplay.scaleFactor:{DeviceDisplay.scaleFactor}",this);
+				Debug.Log($"{name}:Screen.currentResolution:{Screen.currentResolution}",this);
+				Debug.Log($"{name}:Screen.width:{Screen.width}",this);
+				Debug.Log($"{name}:Screen.height:{Screen.height}",this);
+				Debug.Log($"{name}:Screen.dpi:{Screen.dpi}",this);
+				Debug.Log($"{name}:ExtScreen.HeightInc:{ExtScreen.HeightInc}",this);
+				Debug.Log($"{name}:ExtScreen.WidthInc:{ExtScreen.WidthInc}",this);
+				Debug.Log($"{name}:Banner.width:{width}",this);
+				Debug.Log($"{name}:Banner.height:{height}",this);
+				Debug.Log($"{name}:DeviceDisplay.scaleFactor:{DeviceDisplay.scaleFactor}",this);
 			}
 		}
 	}

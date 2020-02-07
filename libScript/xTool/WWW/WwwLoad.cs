@@ -39,7 +39,7 @@ namespace xLib
 			}
 			else
 			{
-				xLogger.LogExceptionFormat(this,this.name+":Error:{0}:{1}",www.error,url);
+				Debug.LogException(new UnityException($"{this.name}:error:{www.error}:url:{url}"),this);
 			}
 			
 			www.Dispose();

@@ -63,7 +63,7 @@ namespace xLib.xValueClass
 				}
 				catch (System.Exception ex)
 				{
-					xLogger.LogException($"GetByKey:{ex.Message}");
+					Debug.LogException(new UnityException($"GetByKey:{ex.Message}",ex));
 				}
 			}
 			if(indexCurrent==-1) indexCurrent=0;

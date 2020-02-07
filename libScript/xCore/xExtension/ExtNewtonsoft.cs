@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 using xLib.xNode.NodeObject;
 
 namespace xLib
@@ -87,7 +88,7 @@ namespace xLib
 			}
 			catch (System.Exception ex)
 			{
-				xLogger.LogException($"FromJsonString:{ex.Message}:data:{data}");
+				Debug.LogException(new UnityException($"FromJsonString:{ex.Message}:data:{data}",ex));
 			}
 			return output;
 		}

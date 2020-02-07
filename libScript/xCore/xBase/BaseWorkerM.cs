@@ -1,4 +1,6 @@
 ﻿#if xLibv3
+using UnityEngine;
+
 namespace xLib
 {
 	public abstract class BaseWorkerM : BaseWorkM, BaseWorkerI
@@ -31,7 +33,7 @@ namespace xLib
 		public virtual void CheckErrors()
 		{
 			#if UNITY_EDITOR
-			if(ViewCore.CurrentId != ViewId) xLogger.LogExceptionFormat(this,$"{this.name}:CurrentId:{0}:ViewId:{1}",ViewCore.CurrentId,ViewId);
+			if(ViewCore.CurrentId != ViewId) Debug.LogException(new UnityException($"{this.name}:CurrentId:{ViewCore.CurrentId}:ViewId:{ViewId}"),this);
 			#endif
 		}
 	}
