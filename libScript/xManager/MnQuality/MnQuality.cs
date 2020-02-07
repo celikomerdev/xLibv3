@@ -1,4 +1,4 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using System;
 using UnityEngine;
 using xLib.xNode.NodeObject;
@@ -9,49 +9,27 @@ namespace xLib
 	{
 		#region Field
 		[Header("Nodes")]
-		public NodeInt qualityAuto;
-		
-		[SerializeField]private NodeInt qualitySetting;
-		private int QualitySetting
-		{
-			get
-			{
-				return qualitySetting.Value;
-			}
-			set
-			{
-				if(value==qualityAuto.Value) qualitySetting.Value = -1;
-				else qualitySetting.Value = value;
-			}
-		}
-		
-		public NodeInt qualityLevel;
+		[SerializeField]private NodeInt qualityAuto = null;
+		[SerializeField]private NodeInt qualitySetting = null;
+		[SerializeField]private NodeInt qualityLevel = null;
 		public int QualityLevel
 		{
-			get
-			{
-				qualityLevel.Value = QualitySettings.GetQualityLevel();
-				return qualityLevel.Value;
-			}
 			set
 			{
 				if(value == -1) value = qualityAuto.Value;
-				if(value==QualityLevel) return;
 				
-				QualitySettings.SetQualityLevel(value,applyExpensive);
+				if(value == qualityAuto.Value) qualitySetting.Value = -1;
+				else qualitySetting.Value = value;
+				
 				qualityLevel.Value = value;
-				QualitySetting = value;
 			}
 		}
 		
 		[Header("System Default")]
-		public bool neverSleep = true;
-		public int targetFrameRate = 30;
-		public bool applyExpensive = true;
-		public SystemDefault systemDefault;
-		public ScoreSystem scoreSystem;
-		public ScorePlatform scorePlatform;
-		public float[] scoreQuality;
+		private ScoreSystem scoreSystem = new ScoreSystem();
+		[SerializeField]private SystemDefault systemDefault = new SystemDefault();
+		[SerializeField]private ScorePlatform scorePlatform = new ScorePlatform();
+		[SerializeField]private float[] scoreQuality;
 		#endregion
 		
 		
@@ -64,17 +42,10 @@ namespace xLib
 		
 		
 		#region Setup
-		public override void Init()
+		protected override void Inited()
 		{
-			base.Init();
-			if(neverSleep) Screen.sleepTimeout = SleepTimeout.NeverSleep;
-			Application.targetFrameRate = targetFrameRate;
-			
 			CalculateScoreSystem();
 			ValueAuto();
-			
-			QualityLevel = qualitySetting.Value;
-			
 			TryDebug();
 		}
 		
@@ -111,53 +82,52 @@ namespace xLib
 		private void TryDebug()
 		{
 			if(!CanDebug) return;
-			Debug.LogFormat(this,this.name+":TryDebug");
-			Debug.LogFormat(this,"SystemInfo.processorCount:{0}",SystemInfo.processorCount);
-			Debug.LogFormat(this,"SystemInfo.systemMemorySize:{0}",SystemInfo.systemMemorySize);
-			Debug.LogFormat(this,"SystemInfo.graphicsMemorySize:{0}",SystemInfo.graphicsMemorySize);
-			Debug.LogFormat(this,"SystemInfo.graphicsShaderLevel:{0}",SystemInfo.graphicsShaderLevel);
-			Debug.LogFormat(this,"Screen.width:{0}",Screen.width);
-			Debug.LogFormat(this,"Screen.height:{0}",Screen.height);
-			Debug.LogFormat(this,"Screen.dpi:{0}",Screen.dpi);
+			Debug.LogFormat($"{this.name}:SystemInfo.processorCount:{SystemInfo.processorCount}",this);
+			Debug.LogFormat($"{this.name}:SystemInfo.systemMemorySize:{SystemInfo.systemMemorySize}",this);
+			Debug.LogFormat($"{this.name}:SystemInfo.graphicsMemorySize:{SystemInfo.graphicsMemorySize}",this);
+			Debug.LogFormat($"{this.name}:SystemInfo.graphicsShaderLevel:{SystemInfo.graphicsShaderLevel}",this);
+			Debug.LogFormat($"{this.name}:Screen.width:{Screen.width}",this);
+			Debug.LogFormat($"{this.name}:Screen.height:{Screen.height}",this);
+			Debug.LogFormat($"{this.name}:Screen.dpi:{Screen.dpi}",this);
 			
-			Debug.LogFormat(this,"scoreSystem.processorCount:{0}",scoreSystem.processorCount);
-			Debug.LogFormat(this,"scoreSystem.systemMemorySize:{0}",scoreSystem.systemMemorySize);
-			Debug.LogFormat(this,"scoreSystem.graphicsMemorySize:{0}",scoreSystem.graphicsMemorySize);
-			Debug.LogFormat(this,"scoreSystem.graphicsShaderLevel:{0}",scoreSystem.graphicsShaderLevel);
-			Debug.LogFormat(this,"scoreSystem.screen:{0}",scoreSystem.screen);
+			Debug.LogFormat($"{this.name}:scoreSystem.processorCount:{scoreSystem.processorCount}",this);
+			Debug.LogFormat($"{this.name}:scoreSystem.systemMemorySize:{scoreSystem.systemMemorySize}",this);
+			Debug.LogFormat($"{this.name}:scoreSystem.graphicsMemorySize:{scoreSystem.graphicsMemorySize}",this);
+			Debug.LogFormat($"{this.name}:scoreSystem.graphicsShaderLevel:{scoreSystem.graphicsShaderLevel}",this);
+			Debug.LogFormat($"{this.name}:scoreSystem.screen:{scoreSystem.screen}");
 			
-			Debug.LogFormat(this,"scoreSystem.hardware:{0}",scoreSystem.hardware);
-			Debug.LogFormat(this,"scoreSystem.system:{0}",scoreSystem.system);
-			Debug.LogFormat(this,"valueAuto:{0}",qualityAuto.Value);
-			Debug.LogFormat(this,"graphicsDeviceType:{0}",SystemInfo.graphicsDeviceType);
+			Debug.LogFormat($"{this.name}:scoreSystem.hardware:{scoreSystem.hardware}",this);
+			Debug.LogFormat($"{this.name}:scoreSystem.system:{scoreSystem.system}",this);
+			Debug.LogFormat($"{this.name}:valueAuto:{qualityAuto.Value}",this);
+			Debug.LogFormat($"{this.name}:graphicsDeviceType:{SystemInfo.graphicsDeviceType}",this);
 		}
 		#endregion
 		
 		
 		#region Class
-		[Serializable]public class SystemDefault
+		[Serializable]internal class SystemDefault
 		{
-			public float scoreMax = 1.25f;
-			public float processorCount = 4;
-			public float systemMemorySize = 2048;
-			public float graphicsMemorySize = 1024;
-			public float graphicsShaderLevel = 30;
-			public Vector2 screen = new Vector2(1600,900);
+			[SerializeField]internal float scoreMax = 1.25f;
+			[SerializeField]internal float processorCount = 4;
+			[SerializeField]internal float systemMemorySize = 2048;
+			[SerializeField]internal float graphicsMemorySize = 1024;
+			[SerializeField]internal float graphicsShaderLevel = 30;
+			[SerializeField]internal Vector2 screen = new Vector2(1600,900);
 		}
 		
-		[Serializable]public class ScoreSystem
+		[Serializable]internal class ScoreSystem
 		{
-			public float processorCount;
-			public float systemMemorySize;
-			public float graphicsMemorySize;
-			public float graphicsShaderLevel;
-			public float screen;
-			public float hardware;
-			public float system;
-			public float final;
+			[SerializeField]internal float processorCount;
+			[SerializeField]internal float systemMemorySize;
+			[SerializeField]internal float graphicsMemorySize;
+			[SerializeField]internal float graphicsShaderLevel;
+			[SerializeField]internal float screen;
+			[SerializeField]internal float hardware;
+			[SerializeField]internal float system;
+			[SerializeField]internal float final;
 		}
 		
-		[Serializable]public class ScorePlatform
+		[Serializable]internal class ScorePlatform
 		{
 			#pragma warning disable
 			[SerializeField]private float scoreAndroid = 0.5f;

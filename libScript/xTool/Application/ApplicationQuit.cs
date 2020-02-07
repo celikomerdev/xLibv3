@@ -8,18 +8,18 @@ namespace xLib.ToolApplication
 		public void TryQuit()
 		{
 			StPopupWindow.Reset();
-			StPopupWindow.HeaderLocalized("warning");
-			StPopupWindow.BodyLocalized("do you want to quit?");
-			StPopupWindow.AcceptLocalized("quit");
+			StPopupWindow.Header(MnLocalize.GetValue("Warning"));
+			StPopupWindow.Body(MnLocalize.GetValue("Do You Want To Quit?"));
+			StPopupWindow.Accept(MnLocalize.GetValue("Yes"));
+			StPopupWindow.Decline(MnLocalize.GetValue("No"));
 			
-			StPopupWindow.Listener(true,call:Listener);
+			StPopupWindow.Listener(register:true,call:Listener);
+			void Listener(bool value)
+			{
+				StPopupWindow.Listener(register:false,call:Listener);
+				if(value) Quit();
+			}
 			StPopupWindow.Show();
-		}
-		
-		private void Listener(bool value)
-		{
-			StPopupWindow.Listener(false,call:Listener);
-			if(value) Quit();
 		}
 		
 		public void Quit()

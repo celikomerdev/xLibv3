@@ -45,12 +45,6 @@ namespace xLib
 			if(MnPopupWindow.ins==null) return;
 			MnPopupWindow.ins.Header(value);
 		}
-		
-		public static void HeaderLocalized(string value)
-		{
-			if(MnPopupWindow.ins==null) return;
-			MnPopupWindow.ins.HeaderLocalized(value);
-		}
 		#endregion
 		
 		
@@ -59,12 +53,6 @@ namespace xLib
 		{
 			if(MnPopupWindow.ins==null) return;
 			MnPopupWindow.ins.Body(value);
-		}
-		
-		public static void BodyLocalized(string value)
-		{
-			if(MnPopupWindow.ins==null) return;
-			MnPopupWindow.ins.BodyLocalized(value);
 		}
 		#endregion
 		
@@ -75,12 +63,6 @@ namespace xLib
 			if(MnPopupWindow.ins==null) return;
 			MnPopupWindow.ins.Accept(value);
 		}
-		
-		public static void AcceptLocalized(string value)
-		{
-			if(MnPopupWindow.ins==null) return;
-			MnPopupWindow.ins.AcceptLocalized(value);
-		}
 		#endregion
 		
 		#region Accept
@@ -88,12 +70,6 @@ namespace xLib
 		{
 			if(MnPopupWindow.ins==null) return;
 			MnPopupWindow.ins.Decline(value);
-		}
-		
-		public static void DeclineLocalized(string value)
-		{
-			if(MnPopupWindow.ins==null) return;
-			MnPopupWindow.ins.DeclineLocalized(value);
 		}
 		#endregion
 	}

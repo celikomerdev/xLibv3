@@ -1613,6 +1613,7 @@ Transform:
   - {fileID: 1351950147}
   - {fileID: 1857433763}
   - {fileID: 1283424068}
+  - {fileID: 758744807}
   m_Father: {fileID: 318953777}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1740,6 +1741,7 @@ MonoBehaviour:
     canWork: 1
     runInEditMode: 0
   key: IronSource_Id
+  adUnits: []
 --- !u!1 &232548538
 GameObject:
   m_ObjectHideFlags: 0
@@ -4600,8 +4602,6 @@ MonoBehaviour:
   wwwFormGroup:
     arrayObjectKey: []
     arrayObjectName: []
-  objectGroup:
-    arrayObject: []
 --- !u!1 &620872638
 GameObject:
   m_ObjectHideFlags: 0
@@ -5549,6 +5549,160 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!4 &758744807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4181648915215830, guid: 16ba6e43bbabc4c95b669aa52a0eb93a,
+    type: 2}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936309128}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 804550699}
+  - {fileID: 1538795831}
+  m_Father: {fileID: 198376311}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &771113660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 771113661}
+  - component: {fileID: 771113662}
+  m_Layer: 0
+  m_Name: Quality_Level_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &771113661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771113660}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1538795831}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &771113662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771113660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33dab4e14cee9bd4da6d69c5d057c3f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  eventActive:
+    eventBool:
+      m_PersistentCalls:
+        m_Calls: []
+    eventReverse:
+      m_PersistentCalls:
+        m_Calls: []
+    eventTrue:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 804550698}
+          m_MethodName: SleepTimeout
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 804550698}
+          m_MethodName: TargetFrameRate
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 804550698}
+          m_MethodName: SetQualityLevel
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    eventFalse:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!1 &804550697
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 804550699}
+  - component: {fileID: 804550698}
+  m_Layer: 0
+  m_Name: Quality_Options_Expensive
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &804550698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804550697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7aa5f506d5be541b8e24ff78d1ddf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applyExpensive: 1
+--- !u!4 &804550699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804550697}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 758744807}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &820216215
 GameObject:
   m_ObjectHideFlags: 0
@@ -6345,6 +6499,154 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!1 &936309128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1706149488431660, guid: 16ba6e43bbabc4c95b669aa52a0eb93a,
+    type: 2}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 758744807}
+  - component: {fileID: 936309129}
+  m_Layer: 0
+  m_Name: MnQuality
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &936309129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114204840652598552, guid: 16ba6e43bbabc4c95b669aa52a0eb93a,
+    type: 2}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936309128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8d543074b17477795bd3249fe4b638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 1
+    canWork: 1
+    runInEditMode: 0
+  isPrimary: 0
+  qualityAuto: {fileID: 11400000, guid: d3bdd72ce58481b4181738209417645d, type: 2}
+  qualitySetting: {fileID: 11400000, guid: 4cb35d5be029dd646b193ff29e1a3c20, type: 2}
+  qualityLevel: {fileID: 11400000, guid: ee1c7e1fadcf85b4189d4873e21b70c3, type: 2}
+  systemDefault:
+    scoreMax: 1.25
+    processorCount: 4
+    systemMemorySize: 2048
+    graphicsMemorySize: 1024
+    graphicsShaderLevel: 30
+    screen: {x: 1600, y: 900}
+  scorePlatform:
+    scoreAndroid: 0.5
+    scoreIOS: 1
+    scoreDefault: 1
+  scoreQuality:
+  - 0.2
+  - 0.4
+  - 0.6
+  - 0.8
+--- !u!1 &950573118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 950573119}
+  - component: {fileID: 950573120}
+  m_Layer: 0
+  m_Name: Quality_Level_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &950573119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950573118}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1538795831}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &950573120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950573118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33dab4e14cee9bd4da6d69c5d057c3f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  eventActive:
+    eventBool:
+      m_PersistentCalls:
+        m_Calls: []
+    eventReverse:
+      m_PersistentCalls:
+        m_Calls: []
+    eventTrue:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 804550698}
+          m_MethodName: SleepTimeout
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 804550698}
+          m_MethodName: TargetFrameRate
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 804550698}
+          m_MethodName: SetQualityLevel
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    eventFalse:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &981625127
 GameObject:
   m_ObjectHideFlags: 0
@@ -6395,6 +6697,8 @@ MonoBehaviour:
     canWork: 1
     runInEditMode: 0
   isPrimary: 0
+  SystemInfo_deviceUniqueIdentifier: {fileID: 11400000, guid: 4fd4c79896d058b4e8919c5370f67d95,
+    type: 2}
   Application_buildGUID: {fileID: 11400000, guid: 1aea1b73e9f4cb24d89dacffd14c88ac,
     type: 2}
   Application_genuine: {fileID: 11400000, guid: b60ebc21d68238c41ab8fec5857a3492,
@@ -6411,9 +6715,9 @@ MonoBehaviour:
     type: 2}
   Application_sandboxType: {fileID: 11400000, guid: a555dcf4a51c04a40a24378b8539e0e8,
     type: 2}
+  Application_version_name: {fileID: 0}
+  app_version: 74
   Application_version: {fileID: 11400000, guid: 601077eb478ff0049a83a6143cba2296,
-    type: 2}
-  SystemInfo_deviceUniqueIdentifier: {fileID: 11400000, guid: 4fd4c79896d058b4e8919c5370f67d95,
     type: 2}
 --- !u!1 &982375934
 GameObject:
@@ -8798,7 +9102,8 @@ MonoBehaviour:
     runInEditMode: 0
   isPrimary: 0
   isAsync: 0
-  delay: 1
+  delayStart: 1
+  delayEnd: 1
   backgroundLoadingPriority: 2
   loadedLevel: {fileID: 11400000, guid: e8db9576ac17bcb4396cc05090514635, type: 2}
   loadingProgress: {fileID: 11400000, guid: ece5e6de8fd2b4c468c08e738bd4bca7, type: 2}
@@ -9876,6 +10181,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   note:
     value: Only Enable For Testing!
+--- !u!1 &1538795830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1538795831}
+  m_Layer: 0
+  m_Name: Quality_Levels
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1538795831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538795830}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2007575569}
+  - {fileID: 950573119}
+  - {fileID: 2134366840}
+  - {fileID: 771113661}
+  m_Father: {fileID: 758744807}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1542915643
 GameObject:
   m_ObjectHideFlags: 0
@@ -11134,21 +11473,10 @@ MonoBehaviour:
     order: 0
     onRegister: 0
   key: store.subscribe
-  eventStringFreeTrialPeriod:
-    eventString:
+  eventFreeTrialPeriod:
+    eventLong:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 899703792}
-          m_MethodName: set_text
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!1 &1667941835
 GameObject:
   m_ObjectHideFlags: 0
@@ -13592,6 +13920,99 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2007575568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2007575569}
+  - component: {fileID: 2007575570}
+  m_Layer: 0
+  m_Name: Quality_Level_0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2007575569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007575568}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1538795831}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2007575570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007575568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33dab4e14cee9bd4da6d69c5d057c3f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  eventActive:
+    eventBool:
+      m_PersistentCalls:
+        m_Calls: []
+    eventReverse:
+      m_PersistentCalls:
+        m_Calls: []
+    eventTrue:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 804550698}
+          m_MethodName: SleepTimeout
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 804550698}
+          m_MethodName: TargetFrameRate
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 804550698}
+          m_MethodName: SetQualityLevel
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    eventFalse:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &2040729099
 GameObject:
   m_ObjectHideFlags: 0
@@ -14199,6 +14620,99 @@ MonoBehaviour:
     eventTrue:
       m_PersistentCalls:
         m_Calls: []
+    eventFalse:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!1 &2134366839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2134366840}
+  - component: {fileID: 2134366841}
+  m_Layer: 0
+  m_Name: Quality_Level_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2134366840
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134366839}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1538795831}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2134366841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134366839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33dab4e14cee9bd4da6d69c5d057c3f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseWork:
+    canDebug: 0
+    canWork: 1
+    runInEditMode: 0
+  eventActive:
+    eventBool:
+      m_PersistentCalls:
+        m_Calls: []
+    eventReverse:
+      m_PersistentCalls:
+        m_Calls: []
+    eventTrue:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 804550698}
+          m_MethodName: SleepTimeout
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 804550698}
+          m_MethodName: TargetFrameRate
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 804550698}
+          m_MethodName: SetQualityLevel
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     eventFalse:
       m_PersistentCalls:
         m_Calls: []

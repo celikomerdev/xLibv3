@@ -44,11 +44,6 @@ namespace xLib
 			if(CanDebug) Debug.LogFormat(this,this.name+":Header:{0}",value);
 			stringHeader.Invoke(value);
 		}
-		
-		public void HeaderLocalized(string value)
-		{
-			Header(MnLocalize.GetValue(value));
-		}
 		#endregion
 		
 		#region Body
@@ -57,11 +52,6 @@ namespace xLib
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":Body:{0}",value);
 			stringBody.Invoke(value);
-		}
-		
-		public void BodyLocalized(string value)
-		{
-			Body(MnLocalize.GetValue(value));
 		}
 		#endregion
 		
@@ -75,11 +65,6 @@ namespace xLib
 			stringAccept.Invoke(value);
 			activeAccept.Invoke(!string.IsNullOrEmpty(value));
 		}
-		
-		public void AcceptLocalized(string value)
-		{
-			Accept(MnLocalize.GetValue(value));
-		}
 		#endregion
 		
 		#region Decline
@@ -91,11 +76,6 @@ namespace xLib
 			if(CanDebug) Debug.LogFormat(this,this.name+":Decline:{0}",value);
 			stringDecline.Invoke(value);
 			activeDecline.Invoke(!string.IsNullOrEmpty(value));
-		}
-		
-		public void DeclineLocalized(string value)
-		{
-			Decline(MnLocalize.GetValue(value));
 		}
 		#endregion
 	}

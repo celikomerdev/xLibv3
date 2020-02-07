@@ -1,50 +1,45 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
-using xLib.ToolEventClass;
+using xLib.EventClass;
+using xLib.xNode.NodeObject;
 
 namespace xLib.ToolMnQuality
 {
 	public class MnQualityChange : BaseActiveM
 	{
-		public EventInt qualityLevel;
-		
-		public void Set(int value)
-		{
-			MnQuality.ins.QualityLevel = value;
-			qualityLevel.Invoke(value);
-		}
+		[SerializeField]private NodeInt qualityLevel = null;
+		[SerializeField]private NodeInt qualityAuto = null;
+		[SerializeField]private EventInt eventQualityLevel = new EventInt();
 		
 		#region TrySet
-		private int qualityTemp;
 		public void TrySet(int value)
 		{
-			qualityTemp = value;
-			
-			if(qualityTemp <= MnQuality.ins.qualityAuto.Value)
+			if(value <= qualityLevel.Value)
 			{
-				Set(qualityTemp);
+				eventQualityLevel.Value = value;
 				return;
 			}
 			
-			if(qualityTemp <= MnQuality.ins.qualityLevel.Value)
+			if(value <= qualityAuto.Value)
 			{
-				Set(qualityTemp);
+				eventQualityLevel.Value = value;
 				return;
 			}
 			
 			StPopupWindow.Reset();
-			StPopupWindow.HeaderLocalized("warning");
-			StPopupWindow.BodyLocalized("you may lose performance");
-			StPopupWindow.AcceptLocalized("accept");
-			StPopupWindow.Listener(Listener,true);
+			StPopupWindow.Header(MnLocalize.GetValue("Warning"));
+			StPopupWindow.Body(MnLocalize.GetValue("You May Lose Performance"));
+			StPopupWindow.Accept(MnLocalize.GetValue("Accept"));
+			StPopupWindow.Decline(MnLocalize.GetValue("Decline"));
+			StPopupWindow.Listener(register:true,call:Listener);
+			void Listener(bool result)
+			{
+				StPopupWindow.Listener(register:false,Listener);
+				
+				if(result) eventQualityLevel.Value = value;
+				else eventQualityLevel.Value = qualityLevel.Value;
+			}
 			StPopupWindow.Show();
-		}
-		
-		private void Listener(bool value)
-		{
-			StPopupWindow.Listener(Listener,false);
-			if(value) Set(qualityTemp);
-			else Set(MnQuality.ins.QualityLevel);
 		}
 		#endregion
 	}

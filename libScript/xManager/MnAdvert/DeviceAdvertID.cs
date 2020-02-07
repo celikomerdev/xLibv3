@@ -108,7 +108,7 @@ namespace xLib
 			
 			if(!string.IsNullOrEmpty(errorMsg))
 			{
-				xLogger.LogException($"DeviceAdvertID:errorMsg:{errorMsg}");
+				Debug.LogException(new UnityException($"DeviceAdvertID:errorMsg:{errorMsg}"));
 				StAdvert.TrackingEnabled = false;
 				StAdvert.AdvertisingID = "";
 				return;
