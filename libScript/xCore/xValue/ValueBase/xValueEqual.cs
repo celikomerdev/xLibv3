@@ -32,7 +32,7 @@ namespace xLib
 		
 		
 		#region Virtual
-		protected virtual bool IsEqual(V value)
+		protected virtual bool IsEqual(V valueNew)
 		{
 			return false;
 		}
@@ -40,10 +40,10 @@ namespace xLib
 		
 		
 		#region CanChange
-		protected override bool CanChange(V value)
+		protected override bool CanChange(V valueNew)
 		{
 			if(!IsCompare) return true;
-			if(IsEqual(value)) return false;
+			if(IsEqual(valueNew)) return false;
 			return true;
 		}
 		#endregion

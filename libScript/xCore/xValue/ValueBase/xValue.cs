@@ -217,17 +217,17 @@ namespace xLib
 			}
 		}
 		
-		protected virtual bool CanChange(V value)
+		protected virtual bool CanChange(V valueNew)
 		{
 			return true;
 		}
 		
-		protected virtual bool CanCache(V value)
+		protected virtual bool CanCache(V valueNew)
 		{
 			return true;
 		}
 		
-		protected virtual void KeepProperties(V value){}
+		protected virtual void KeepProperties(V valueNew){}
 		#endregion
 		
 		

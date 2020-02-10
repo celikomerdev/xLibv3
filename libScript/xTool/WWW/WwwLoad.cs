@@ -11,7 +11,7 @@ namespace xLib
 		[SerializeField]private EventWWW eventWWW = new EventWWW();
 		
 		#region Url
-		private ValueBase<string> url = new ValueMulti<string>();
+		private readonly ValueBase<string> url = new ValueMulti<string>();
 		public string Url
 		{
 			set
@@ -25,9 +25,9 @@ namespace xLib
 		#endregion
 		
 		#region Download
-		private IEnumerator eDownload(string url,string viewId)
+		private IEnumerator eDownload(string valueUrl,string viewId)
 		{
-			WWW www = new WWW(url);
+			WWW www = new WWW(valueUrl);
 			yield return www;
 			
 			if (string.IsNullOrEmpty(www.error))
@@ -39,7 +39,7 @@ namespace xLib
 			}
 			else
 			{
-				Debug.LogException(new UnityException($"{this.name}:error:{www.error}:url:{url}"),this);
+				Debug.LogException(new UnityException($"{this.name}:error:{www.error}:url:{valueUrl}"),this);
 			}
 			
 			www.Dispose();

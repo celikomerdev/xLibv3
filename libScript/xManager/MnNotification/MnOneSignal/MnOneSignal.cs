@@ -61,10 +61,10 @@ namespace xLib
 		[SerializeField]private NodeString userID = null;
 		[SerializeField]private NodeString pushToken = null;
 		[SerializeField]private NodeString lastNotificationId = null;
-		private void IdsAvailable(string userID, string pushToken)
+		private void IdsAvailable(string valueUserID, string valuePushToken)
 		{
-			this.userID.Value = userID;
-			this.pushToken.Value = pushToken;
+			this.userID.Value = valueUserID;
+			this.pushToken.Value = valuePushToken;
 			OnInit();
 		}
 		

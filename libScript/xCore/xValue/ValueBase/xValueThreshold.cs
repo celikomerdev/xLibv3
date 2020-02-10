@@ -8,7 +8,7 @@ namespace xLib
 		#region Virtual
 		[Header("Snap")]
 		[SerializeField]internal bool snapDefault = false;
-		protected virtual bool IsDefault(V value)
+		protected virtual bool IsDefault(V valueNew)
 		{
 			return false;
 		}
@@ -16,7 +16,7 @@ namespace xLib
 		[Header("Threshold")]
 		[SerializeField]internal bool useThreshold = false;
 		[SerializeField]protected V valueThreshold = default(V);
-		protected virtual bool IsThreshold(V value)
+		protected virtual bool IsThreshold(V valueNew)
 		{
 			return false;
 		}
@@ -24,12 +24,12 @@ namespace xLib
 		
 		
 		#region CanChange
-		protected override bool CanChange(V value)
+		protected override bool CanChange(V valueNew)
 		{
 			if(!IsCompare) return true;
-			if(IsEqual(value)) return false;
-			if(snapDefault && IsDefault(value)) return true;
-			if(useThreshold && IsThreshold(value)) return false;
+			if(IsEqual(valueNew)) return false;
+			if(snapDefault && IsDefault(valueNew)) return true;
+			if(useThreshold && IsThreshold(valueNew)) return false;
 			return true;
 		}
 		#endregion

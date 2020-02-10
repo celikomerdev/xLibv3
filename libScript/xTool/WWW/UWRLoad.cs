@@ -11,7 +11,7 @@ namespace xLib
 		[SerializeField]private EventUWR eventUWR = new EventUWR();
 		
 		#region Url
-		private ValueBase<string> url = new ValueMulti<string>();
+		private readonly ValueBase<string> url = new ValueMulti<string>();
 		public string Url
 		{
 			set
@@ -25,9 +25,9 @@ namespace xLib
 		#endregion
 		
 		#region Download
-		private IEnumerator eDownload(string url,string viewId)
+		private IEnumerator eDownload(string valueUrl,string viewId)
 		{
-			UnityWebRequest uwr = UnityWebRequest.Get(url);
+			UnityWebRequest uwr = UnityWebRequest.Get(valueUrl);
 			UnityWebRequestAsyncOperation uwrOp = uwr.SendWebRequest();
 			
 			while (!uwr.isDone)
@@ -45,7 +45,7 @@ namespace xLib
 			}
 			else
 			{
-				Debug.LogException(new UnityException($"{this.name}:error:{uwr.error}:url:{url}"),this);
+				Debug.LogException(new UnityException($"{this.name}:error:{uwr.error}:url:{valueUrl}"),this);
 			}
 			
 			uwr.Dispose();

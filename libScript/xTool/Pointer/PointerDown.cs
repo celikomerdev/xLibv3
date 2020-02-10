@@ -24,8 +24,15 @@ namespace xLib.ToolPointer
 				
 				if(cumulative)
 				{
-					if(value==1) CallPointerDown(true);
-					if(value==0) CallPointerDown(false);
+					switch (value)
+					{
+						case 1:
+							CallPointerDown(true);
+							break;
+						case 0:
+							CallPointerDown(false);
+							break;
+					}
 				}
 				else
 				{

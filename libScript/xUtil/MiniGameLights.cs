@@ -50,7 +50,7 @@ namespace xLib.xNew
 		private IEnumerator FlowIdle()
 		{
 			bool state = defaultState;
-			while(true)
+			while(enabled)
 			{
 				for (int i = 0; i < array.Length; i++)
 				{
@@ -75,7 +75,7 @@ namespace xLib.xNew
 		private IEnumerator FlowSymetric()
 		{
 			int offset = 0;
-			while(true)
+			while(enabled)
 			{
 				for (int i = 0; i < array.Length; i++)
 				{
