@@ -96,7 +96,7 @@ namespace xLib.ToolPurchase
 		{
 			ListenPurchase(false);
 			if(CanDebug) Debug.Log($"{this.name}:IsPuchase:{value}",this);
-			if(product != MnProduct.currentProduct)
+			if(!Equals(product,MnProduct.currentProduct))
 			{
 				Debug.LogException(new UnityException($"product id does not match:{product}"),this);
 				return;

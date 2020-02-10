@@ -59,7 +59,7 @@ namespace xLib.xValueClass
 			{
 				try
 				{
-					indexCurrent = iSerializableObject.FindIndex(asset => ((ISerializableObject)asset).Key == value);
+					indexCurrent = iSerializableObject.FindIndex(asset=>asset.Key==value);
 				}
 				catch (System.Exception ex)
 				{

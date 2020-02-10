@@ -33,7 +33,7 @@ namespace xLib
 			return newCoroutine(mono,enumerator,CanDebug);
 		}
 		
-		private static Coroutine newCoroutine(MonoBehaviour mono,IEnumerator enumerator,bool CanDebug)
+		private static Coroutine newCoroutine(MonoBehaviour mono,IEnumerator enumerator,bool CanDebug=false)
 		{
 			if(!mono.isActiveAndEnabled)
 			{

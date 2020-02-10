@@ -7,14 +7,14 @@ namespace xLib
 	{
 		#region Virtual
 		[Header("Snap")]
-		[SerializeField]internal bool snapDefault = false;
+		[SerializeField]private bool snapDefault = false;
 		protected virtual bool IsDefault(V valueNew)
 		{
 			return false;
 		}
 		
 		[Header("Threshold")]
-		[SerializeField]internal bool useThreshold = false;
+		[SerializeField]private bool useThreshold = false;
 		[SerializeField]protected V valueThreshold = default(V);
 		protected virtual bool IsThreshold(V valueNew)
 		{

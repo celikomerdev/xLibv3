@@ -13,7 +13,7 @@ namespace xLib.xAnalytics
 		[SerializeField]private Object[] arrayIAnalyticObject = new Object[0];
 		[SerializeField]private IAnalyticObject[] m_arrayIAnalyticObject = new IAnalyticObject[0];
 		
-		[SerializeField]private static List<string> listGroupKey = new List<string>();
+		private static List<string> listGroupKey = new List<string>();
 		[SerializeField]private GroupTest[] arrayGroupTest = new GroupTest[0];
 		[System.Serializable]public struct GroupTest
 		{

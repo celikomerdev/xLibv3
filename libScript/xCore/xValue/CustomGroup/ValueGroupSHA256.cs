@@ -16,7 +16,7 @@ namespace xLib.xValueClass
 				JToken Content = (JToken)SerializedObjectRaw;
 				
 				jObject.Add("WARNING!!","Your data will be deleted if you edit this file!!!!");
-				jObject.Add("Hash",(KeyEncrypt+Content.ToString()).HashSHA256UTF8());
+				jObject.Add("Hash",(KeyEncrypt+Content).HashSHA256UTF8());
 				jObject.Add("Content",Content);
 				
 				return jObject;

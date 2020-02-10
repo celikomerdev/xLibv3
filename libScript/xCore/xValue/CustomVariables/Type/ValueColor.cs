@@ -35,8 +35,7 @@ namespace xLib.xValueClass
 			get
 			{
 				string stringData = "#"+ColorUtility.ToHtmlStringRGBA(Value);
-				JToken jToken;
-				jToken = JToken.FromObject(stringData);
+				JToken jToken = JToken.FromObject(stringData);
 				return jToken;
 			}
 			set
@@ -46,8 +45,7 @@ namespace xLib.xValueClass
 				if(string.IsNullOrEmpty(stringJson)) return;
 				string stringData = JToken.FromObject(stringJson).ToObject<string>();
 				
-				Color tempValue = Color.white;
-				if(ColorUtility.TryParseHtmlString(stringData,out tempValue))
+				if(ColorUtility.TryParseHtmlString(stringData,out Color tempValue))
 				{
 					Value = tempValue;
 				}

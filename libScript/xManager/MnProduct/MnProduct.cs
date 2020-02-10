@@ -210,7 +210,6 @@ namespace xLib
 			if(CanDebug) Debug.Log($"{this.name}:OnInit:{value}",this);
 			inInit = false;
 			isInit.Value = value;
-			if(!value) return;
 		}
 		
 		public NodeBool onPurchase = null;

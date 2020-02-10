@@ -62,7 +62,6 @@ namespace xLib
 			bool fallback = true;
 			if(excludeTag.Length>0)
 			{
-				fallback = true;
 				for(int i = 0; i < excludeTag.Length; i++)
 				{
 					if(trans.CompareTag(excludeTag[i])) return false;
@@ -70,7 +69,6 @@ namespace xLib
 			}
 			if(excludeName.Length>0)
 			{
-				fallback = true;
 				for(int i = 0; i < excludeName.Length; i++)
 				{
 					if(trans.name == excludeName[i]) return false;

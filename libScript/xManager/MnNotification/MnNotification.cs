@@ -40,7 +40,7 @@ namespace xLib
 			ISerializableObject[] array = arrayTag.GetGenericsArray<ISerializableObject>();
 			for (int i = 0; i < array.Length; i++)
 			{
-				if(CanDebug) Debug.LogFormat(this,this.name+":InitDictionary:{0}",array[i].Key,array[i].SerializedObjectRaw.ToString());
+				if(CanDebug) Debug.LogFormat(this,this.name+":InitDictionary:{0}",array[i].Key,array[i].SerializedObjectRaw);
 				dict.Add(array[i].Key,array[i].SerializedObjectRaw.ToString());
 			}
 			actionSendTags(dict);

@@ -8,7 +8,7 @@ namespace xLib
 {
 	public abstract class xValue<V>
 	{
-		[SerializeField]public NodeSetting nodeSetting = new NodeSetting();
+		public NodeSetting nodeSetting = new NodeSetting();
 		
 		#region Field
 		public string Key
@@ -112,10 +112,9 @@ namespace xLib
 		private ActionSortedBase<V> actionSortedBase = new ActionSortedSingle<V>();
 		public void Listener(bool register,UnityAction<V> call,string viewId,int order,bool onRegister=false,BaseWorkerI worker=null)
 		{
+			#if CanTrace
 			Object objDebug = nodeSetting.objDebug;
 			if(worker!=null) objDebug = worker.UnityObject;
-			
-			#if CanTrace
 			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Listener:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",objDebug);
 			#endif
 			
@@ -132,10 +131,9 @@ namespace xLib
 		private ActionSortedBase<object> actionSortedBaseCall = new ActionSortedSingle<object>();
 		public virtual void ListenerCall(bool register,UnityAction<object> call,string viewId,int order,bool onRegister=false,BaseWorkerI worker=null)
 		{
+			#if CanTrace
 			Object objDebug = nodeSetting.objDebug;
 			if(worker!=null) objDebug = worker.UnityObject;
-			
-			#if CanTrace
 			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:ListenerCall:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",objDebug);
 			#endif
 			

@@ -83,7 +83,7 @@ namespace xLib
 		private void SetUICulture(CultureInfo cultureInfo)
 		{
 			if(cultureInfo==null) cultureInfo = CultureInfo.InvariantCulture;
-			if(CanDebug) Debug.Log($"{this.name}:SetUICulture:{cultureInfo.ToString()}",this);
+			if(CanDebug) Debug.Log($"{this.name}:SetUICulture:{cultureInfo}",this);
 			
 			CultureInfo.CurrentUICulture = cultureInfo;
 			// CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;

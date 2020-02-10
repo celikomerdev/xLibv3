@@ -49,7 +49,6 @@ namespace xLib
 			}
 			
 			uwr.Dispose();
-			uwr = null;
 		}
 		#endregion
 	}

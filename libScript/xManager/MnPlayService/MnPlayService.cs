@@ -141,7 +141,7 @@ namespace xLib
 		private void ReportLeaderboard(string key,long value)
 		{
 			string idPlatform = MnKey.GetValue(key);
-			PlayGamesPlatform.Instance.ReportScore(value,idPlatform,(bool success)=>
+			PlayGamesPlatform.Instance.ReportScore(value,idPlatform,callback:(bool success)=>
 			{
 				if(CanDebug) Debug.Log($"{this.name}:ReportLeaderboard:{success}:{key}:{value}",this);
 			});
@@ -155,7 +155,7 @@ namespace xLib
 		private void ReportAchievement(string key,float value)
 		{
 			string idPlatform = MnKey.GetValue(key);
-			PlayGamesPlatform.Instance.ReportProgress(idPlatform,value,(bool success)=>
+			PlayGamesPlatform.Instance.ReportProgress(idPlatform,value,callback:(bool success)=>
 			{
 				if(CanDebug) Debug.Log($"{this.name}:ReportAchievement:{success}:{key}:{value}",this);
 			});

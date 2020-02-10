@@ -48,7 +48,7 @@ namespace xLib
 			int childCount = trans.childCount;
 			for (int i=startAfter; i<childCount-endBefore; i++)
 			{
-				GameObject.Destroy(trans.GetChild(i).gameObject);
+				Object.Destroy(trans.GetChild(i).gameObject);
 			}
 		}
 		

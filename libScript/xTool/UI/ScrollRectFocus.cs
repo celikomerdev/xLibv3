@@ -1,6 +1,5 @@
 ﻿#if xLibv3
 #if PackUI
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using xLib.EventClass;
@@ -53,10 +52,12 @@ namespace xLib
 			if (!scrollRect.horizontal) difference.x = 0f;
 			if (!scrollRect.vertical) difference.y = 0f;
 			
+			Rect rectContent = transContent.rect;
+			Rect rectScroll = transScrollRect.rect;
 			Vector2 normalizedDifference = new Vector2
 			(
-				difference.x/(transContent.rect.size.x-transScrollRect.rect.size.x),
-				difference.y/(transContent.rect.size.y-transScrollRect.rect.size.y)
+				difference.x/(rectContent.size.x-rectScroll.size.x),
+				difference.y/(rectContent.size.y-rectScroll.size.y)
 			);
 			
 			Vector2 newNormalizedPosition = scrollRect.normalizedPosition - normalizedDifference;

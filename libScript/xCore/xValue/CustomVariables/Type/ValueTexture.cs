@@ -52,9 +52,8 @@ namespace xLib.xValueClass
 					stringData = System.Convert.ToBase64String(texture2D.xEncodeToPNG());
 				}
 				if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:DataLenghtGet:{stringData.Length}",nodeSetting.objDebug);
-				
-				JToken jToken;
-				jToken = JToken.FromObject(stringData);
+
+				JToken jToken = JToken.FromObject(stringData);
 				return jToken;
 			}
 			set
@@ -68,7 +67,7 @@ namespace xLib.xValueClass
 				Texture2D texture2D = new Texture2D(2,2);
 				texture2D.Load(System.Convert.FromBase64String(stringData));
 				
-				Value = (Texture)texture2D;
+				Value = texture2D;
 			}
 		}
 		#endregion

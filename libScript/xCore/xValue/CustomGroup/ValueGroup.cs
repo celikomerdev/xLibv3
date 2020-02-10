@@ -47,7 +47,7 @@ namespace xLib
 				}
 				jObject.Add("Values",Values);
 				
-				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":SerializedObject:Get:{0}:{1}",ViewCore.CurrentId,jObject.ToString());
+				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":SerializedObject:Get:{0}:{1}",ViewCore.CurrentId,jObject);
 				return jObject;
 			}
 			set
@@ -109,7 +109,7 @@ namespace xLib
 					ISerializableObject jsonInterface = Value.iSerializableObject[i];
 					jObject.Add(jsonInterface.Name,(JToken)jsonInterface.SerializedObjectName);
 				}
-				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":SerializedObjectName:Get:{0}:{1}",ViewCore.CurrentId,jObject.ToString());
+				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":SerializedObjectName:Get:{0}:{1}",ViewCore.CurrentId,jObject);
 				return jObject;
 			}
 		}

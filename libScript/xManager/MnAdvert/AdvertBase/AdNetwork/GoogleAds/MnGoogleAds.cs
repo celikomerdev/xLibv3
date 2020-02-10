@@ -121,8 +121,6 @@ namespace xLib.libAdvert.xGoogleAds
 	}
 }
 #else
-using UnityEngine;
-
 namespace xLib.libAdvert.xGoogleAds
 {
 	public class MnGoogleAds : SingletonM<MnGoogleAds>

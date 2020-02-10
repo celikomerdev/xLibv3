@@ -82,7 +82,7 @@ namespace xLib.libAdvert.xIronSource
 		//Invoked when the user completed the video and should be rewarded. 
 		private void onRewardedVideoAdRewardedEvent(IronSourcePlacement placement)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:onRewardedVideoAdRewardedEvent:{placement.ToString()}",this);
+			if(CanDebug) Debug.Log($"{this.name}:onRewardedVideoAdRewardedEvent:{placement}",this);
 			int prize = placement.getRewardAmount();
 			OnRewardBase(prize);
 		}
