@@ -20,9 +20,9 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 4cb35d5be029dd646b193ff29e1a3c20
+      key: ee1c7e1fadcf85b4189d4873e21b70c3
       isMulti: 0
-    value: -1
+    value: 0
     skipCompareRpc: 1
     isCompare: 1
     snapDefault: 0

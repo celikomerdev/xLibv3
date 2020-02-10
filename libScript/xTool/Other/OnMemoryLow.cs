@@ -23,7 +23,6 @@ namespace xLib.xTool
 		[SerializeField]private EventUnity eventMemoryLow = new EventUnity();
 		private void MemoryLowCallback()
 		{
-			
 			if(CanDebug) Debug.LogWarning($"{this.name}:MemoryLowCallback:systemMemorySize:{SystemInfo.systemMemorySize}:totalMemory:{totalMemory}",this);
 			eventMemoryLow.Invoke();
 		}

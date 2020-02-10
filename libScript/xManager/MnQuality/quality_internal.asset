@@ -10,19 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b513263c51538944bac985320074d3e0, type: 3}
-  m_Name: quality_current
+  m_Name: quality_internal
   m_EditorClassIdentifier: 
   note:
-    value: 
+    value: 'current quality auto set while this value -1
+
+      this will be -1 when selected quality equals to auto quality
+
+      only used for internal save'
   baseWork:
     canDebug: 1
     canWork: 1
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: ee1c7e1fadcf85b4189d4873e21b70c3
+      key: 4cb35d5be029dd646b193ff29e1a3c20
       isMulti: 0
-    value: 0
+    value: -1
     skipCompareRpc: 1
     isCompare: 1
     snapDefault: 0
