@@ -19,10 +19,10 @@ namespace xLib.xValueClass
 		#endregion
 		
 		#region Compare
-		protected override bool IsEqual(ValueCustom.Token value)
+		protected override bool IsEqual(ValueCustom.Token valueNew)
 		{
-			if(value.xHashCode() != Value.xHashCode()) return false;
-			return value.Equals(Value);
+			if(valueNew.xHashCode() != Value.xHashCode()) return false;
+			return valueNew.Equals(Value);
 		}
 		#endregion
 	}

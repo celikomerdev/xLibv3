@@ -9,10 +9,10 @@ namespace xLib.xValueClass
 	public class ValueColor : xValueEqual<Color>
 	{
 		#region Compare
-		protected override bool IsEqual(Color value)
+		protected override bool IsEqual(Color valueNew)
 		{
-			if(value.xHashCode() != Value.xHashCode()) return false;
-			return (value == Value);
+			if(valueNew.xHashCode() != Value.xHashCode()) return false;
+			return (valueNew == Value);
 		}
 		#endregion
 		

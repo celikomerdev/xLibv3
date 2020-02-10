@@ -7,10 +7,10 @@ namespace xLib.xValueClass
 	public class ValueIntArray : xValueEqual<int[]>
 	{
 		#region Compare
-		protected override bool IsEqual(int[] value)
+		protected override bool IsEqual(int[] valueNew)
 		{
-			if(value.xHashCode() != Value.xHashCode()) return false;
-			return (value == Value);
+			if(valueNew.xHashCode() != Value.xHashCode()) return false;
+			return (valueNew == Value);
 		}
 		#endregion
 	}

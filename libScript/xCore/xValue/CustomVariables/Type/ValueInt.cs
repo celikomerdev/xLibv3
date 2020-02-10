@@ -8,19 +8,19 @@ namespace xLib.xValueClass
 	public class ValueInt : xValueThreshold<int>
 	{
 		#region Compare
-		protected override bool IsEqual(int value)
+		protected override bool IsEqual(int valueNew)
 		{
-			return (value == Value);
+			return (valueNew == Value);
 		}
 		
-		protected override bool IsDefault(int value)
+		protected override bool IsDefault(int valueNew)
 		{
-			return (value == ValueDefault);
+			return (valueNew == ValueDefault);
 		}
 		
-		protected override bool IsThreshold(int value)
+		protected override bool IsThreshold(int valueNew)
 		{
-			return (valueThreshold > Mathf.Abs(value-Value));
+			return (valueThreshold > Mathf.Abs(valueNew-Value));
 		}
 		#endregion
 		

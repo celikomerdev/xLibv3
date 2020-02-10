@@ -8,19 +8,19 @@ namespace xLib.xValueClass
 	public class ValueLong : xValueThreshold<long>
 	{
 		#region Compare
-		protected override bool IsEqual(long value)
+		protected override bool IsEqual(long valueNew)
 		{
-			return (value == Value);
+			return (valueNew == Value);
 		}
 		
-		protected override bool IsDefault(long value)
+		protected override bool IsDefault(long valueNew)
 		{
-			return (value == ValueDefault);
+			return (valueNew == ValueDefault);
 		}
 		
-		protected override bool IsThreshold(long value)
+		protected override bool IsThreshold(long valueNew)
 		{
-			return (valueThreshold > Mathf.Abs(value-Value));
+			return (valueThreshold > Mathf.Abs(valueNew-Value));
 		}
 		#endregion
 		

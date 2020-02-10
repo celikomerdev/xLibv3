@@ -7,9 +7,9 @@ namespace xLib.xValueClass
 	public class ValueBool : xValueEqual<bool>
 	{
 		#region Compare
-		protected override bool IsEqual(bool value)
+		protected override bool IsEqual(bool valueNew)
 		{
-			return (value == Value);
+			return (valueNew == Value);
 		}
 		#endregion
 		

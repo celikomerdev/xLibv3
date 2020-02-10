@@ -8,10 +8,10 @@ namespace xLib.xValueClass
 	public class ValueAnimationCurve : xValueEqual<AnimationCurve>
 	{
 		#region Compare
-		protected override bool IsEqual(AnimationCurve value)
+		protected override bool IsEqual(AnimationCurve valueNew)
 		{
-			if(value.xHashCode() != Value.xHashCode()) return false;
-			return (value == Value);
+			if(valueNew.xHashCode() != Value.xHashCode()) return false;
+			return (valueNew.Equals(Value));
 		}
 		#endregion
 	}

@@ -8,19 +8,19 @@ namespace xLib.xValueClass
 	public class ValueByte : xValueThreshold<byte>
 	{
 		#region Compare
-		protected override bool IsEqual(byte value)
+		protected override bool IsEqual(byte valueNew)
 		{
-			return (value == Value);
+			return (valueNew == Value);
 		}
 		
-		protected override bool IsDefault(byte value)
+		protected override bool IsDefault(byte valueNew)
 		{
-			return (value == ValueDefault);
+			return (valueNew == ValueDefault);
 		}
 		
-		protected override bool IsThreshold(byte value)
+		protected override bool IsThreshold(byte valueNew)
 		{
-			return (valueThreshold > Mathf.Abs(value-Value));
+			return (valueThreshold > Mathf.Abs(valueNew-Value));
 		}
 		#endregion
 		

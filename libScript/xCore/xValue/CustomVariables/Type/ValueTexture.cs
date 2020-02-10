@@ -9,24 +9,24 @@ namespace xLib.xValueClass
 	public class ValueTexture : xValueEqual<Texture>
 	{
 		#region Compare
-		protected override bool IsEqual(Texture value)
+		protected override bool IsEqual(Texture valueNew)
 		{
-			if(value.xHashCode() != Value.xHashCode()) return false;
-			return (value == Value);
+			if(valueNew.xHashCode() != Value.xHashCode()) return false;
+			return (valueNew == Value);
 		}
 		
-		protected override void KeepProperties(Texture value)
+		protected override void KeepProperties(Texture valueNew)
 		{
-			if(value == null) return;
+			if(valueNew == null) return;
 			if(ValueDefault != null)
 			{
-				value.filterMode = ValueDefault.filterMode;
-				value.anisoLevel = ValueDefault.anisoLevel;
-				value.mipMapBias = ValueDefault.mipMapBias;
-				value.wrapMode = ValueDefault.wrapMode;
+				valueNew.filterMode = ValueDefault.filterMode;
+				valueNew.anisoLevel = ValueDefault.anisoLevel;
+				valueNew.mipMapBias = ValueDefault.mipMapBias;
+				valueNew.wrapMode = ValueDefault.wrapMode;
 			}
-			((Texture2D)value).Compress(true);
-			((Texture2D)value).Apply();
+			((Texture2D)valueNew).Compress(true);
+			((Texture2D)valueNew).Apply();
 		}
 		#endregion
 		

@@ -13,10 +13,10 @@ namespace xLib.xValueClass
 		}
 		
 		#region Compare
-		protected override bool IsEqual(JObject value)
+		protected override bool IsEqual(JObject valueNew)
 		{
-			if(value.xHashCode() != Value.xHashCode()) return false;
-			return (value == Value);
+			if(valueNew.xHashCode() != Value.xHashCode()) return false;
+			return (valueNew == Value);
 		}
 		#endregion
 		
