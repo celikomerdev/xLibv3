@@ -8,9 +8,9 @@ namespace xLib.Mathx
 		#region Operation
 		public static Vector3 Divide(Vector3 valueA,Vector3 valueB)
 		{
-			valueA.x = valueA.x / valueB.x;
-			valueA.y = valueA.y / valueB.y;
-			valueA.z = valueA.z / valueB.z;
+			valueA.x /= valueB.x;
+			valueA.y /= valueB.y;
+			valueA.z /= valueB.z;
 			return valueA;
 		}
 		#endregion

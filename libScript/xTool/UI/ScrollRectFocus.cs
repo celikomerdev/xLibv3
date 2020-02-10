@@ -81,7 +81,7 @@ namespace xLib
 		
 		private Vector3 GetWidgetWorldPoint(RectTransform target)
 		{
-			var pivotOffset = new Vector3
+			Vector3 pivotOffset = new Vector3
 			(
 				target.rect.size.x*(0.5f-target.pivot.x),
 				target.rect.size.y*(0.5f-target.pivot.y),

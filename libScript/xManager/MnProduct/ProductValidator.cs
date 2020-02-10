@@ -75,26 +75,23 @@ namespace xLib.Purchasing.Security
 				Debug.Log($"productID:{productReceipt.productID}");
 				Debug.Log($"purchaseDate:{productReceipt.purchaseDate}");
 				Debug.Log($"transactionID:{productReceipt.transactionID}");
-				
-				GooglePlayReceipt google = productReceipt as GooglePlayReceipt;
-				if (google != null)
+
+				switch (productReceipt)
 				{
-					Debug.Log($"packageName:{google.packageName}");
-					Debug.Log($"purchaseState:{google.purchaseState}");
-					Debug.Log($"purchaseToken:{google.purchaseToken}");
+					case GooglePlayReceipt google:
+						Debug.Log($"packageName:{google.packageName}");
+						Debug.Log($"purchaseState:{google.purchaseState}");
+						Debug.Log($"purchaseToken:{google.purchaseToken}");
+						break;
+					case AppleInAppPurchaseReceipt apple:
+						Debug.Log($"originalTransactionIdentifier:{apple.originalTransactionIdentifier}");
+						Debug.Log($"subscriptionExpirationDate:{apple.subscriptionExpirationDate}");
+						Debug.Log($"cancellationDate:{apple.cancellationDate}");
+						Debug.Log($"quantity:{apple.quantity}");
+						break;
+					case UnityChannelReceipt unityChannel:
+						break;
 				}
-				
-				AppleInAppPurchaseReceipt apple = productReceipt as AppleInAppPurchaseReceipt;
-				if (apple != null)
-				{
-					Debug.Log($"originalTransactionIdentifier:{apple.originalTransactionIdentifier}");
-					Debug.Log($"subscriptionExpirationDate:{apple.subscriptionExpirationDate}");
-					Debug.Log($"cancellationDate:{apple.cancellationDate}");
-					Debug.Log($"quantity:{apple.quantity}");
-				}
-				
-				UnityChannelReceipt unityChannel = productReceipt as UnityChannelReceipt;
-				if (unityChannel != null){}
 			}
 		}
 	}

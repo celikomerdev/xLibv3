@@ -72,14 +72,14 @@ namespace xLib.Purchasing
 		
 		private static bool IsAvailableForSubscriptionManager(string receipt)
 		{
-			var receipt_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(receipt);
+			Dictionary<string,object> receipt_wrapper = (Dictionary<string,object>)MiniJson.JsonDecode(receipt);
 			if (!receipt_wrapper.ContainsKey("Store") || !receipt_wrapper.ContainsKey("Payload"))
 			{
 				Debug.LogWarning("The product receipt does not contain enough information");
 				return false;
 			}
-			var store = (string)receipt_wrapper["Store"];
-			var payload = (string)receipt_wrapper["Payload"];
+			string store = (string)receipt_wrapper["Store"];
+			string payload = (string)receipt_wrapper["Payload"];
 			
 			if(CanDebug) Debug.Log($"payload:{payload}");
 			if (payload != null)
@@ -89,22 +89,22 @@ namespace xLib.Purchasing
 				{
 					case GooglePlay.Name:
 					{
-						var payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(payload);
+						Dictionary<string,object> payload_wrapper = (Dictionary<string,object>)MiniJson.JsonDecode(payload);
 						if (!payload_wrapper.ContainsKey("json"))
 						{
 							Debug.LogWarning("The product receipt does not contain enough information, the 'json' field is missing");
 							return false;
 						}
 						
-						var original_json_payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode((string)payload_wrapper["json"]);
+						Dictionary<string,object> original_json_payload_wrapper = (Dictionary<string,object>)MiniJson.JsonDecode((string)payload_wrapper["json"]);
 						if (original_json_payload_wrapper == null || !original_json_payload_wrapper.ContainsKey("developerPayload"))
 						{
 							Debug.LogWarning("The product receipt does not contain enough information, the 'developerPayload' field is missing");
 							return false;
 						}
 						
-						var developerPayloadJSON = (string)original_json_payload_wrapper["developerPayload"];
-						var developerPayload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(developerPayloadJSON);
+						string developerPayloadJSON = (string)original_json_payload_wrapper["developerPayload"];
+						Dictionary<string,object> developerPayload_wrapper = (Dictionary<string,object>)MiniJson.JsonDecode(developerPayloadJSON);
 						if (developerPayload_wrapper == null || !developerPayload_wrapper.ContainsKey("is_free_trial") || !developerPayload_wrapper.ContainsKey("has_introductory_price_trial"))
 						{
 							Debug.LogWarning("The product receipt does not contain enough information, the product is not purchased using 1.19 or later");

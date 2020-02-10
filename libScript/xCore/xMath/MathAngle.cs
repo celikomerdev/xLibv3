@@ -21,7 +21,7 @@ namespace xLib.Mathx
 				if (angle > max || angle < min)
 				{
 					if (Mathf.Abs(Mathf.DeltaAngle(angle, min)) < Mathf.Abs(Mathf.DeltaAngle(angle, max))) return min;
-					else return max;
+					return max;
 				}
 			}
 			else if(min > 0 && (angle > max || angle < min))
@@ -30,13 +30,13 @@ namespace xLib.Mathx
 				if (angle > max || angle < min)
 				{
 					if (Mathf.Abs(Mathf.DeltaAngle(angle, min)) < Mathf.Abs(Mathf.DeltaAngle(angle, max))) return min;
-					else return max;
+					return max;
 				}
 			}
 			
 			if (angle < min) return min;
-			else if (angle > max) return max;
-			else return angle;
+			if (angle > max) return max;
+			return angle;
 		}
 		
 		public static float DeltaAngle(float prevAngle,float curAngle)

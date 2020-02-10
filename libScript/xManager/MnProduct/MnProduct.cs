@@ -69,7 +69,7 @@ namespace xLib
 			
 			if(CanDebug)
 			{
-				foreach (var item in controller.products.all)
+				foreach(Product item in controller.products.all)
 				{
 					Debug.Log(string.Join("-",
 					new[]
@@ -202,7 +202,7 @@ namespace xLib
 		public Product GetProduct(string key)
 		{
 			if(isInit.Value) return m_Controller.products.WithID(key);
-			else return null;
+			return null;
 		}
 		
 		private void OnInit(bool value)

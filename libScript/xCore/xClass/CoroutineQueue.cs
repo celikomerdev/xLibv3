@@ -7,39 +7,43 @@ namespace xLib
 {
 	public class CoroutineQueue
 	{
-		MonoBehaviour m_Owner = null;
-		Coroutine m_InternalCoroutine = null;
-		Queue<IEnumerator> actions = new Queue<IEnumerator>();
+		private readonly MonoBehaviour owner = null;
+		private Coroutine internalCoroutine = null;
+		private readonly Queue<IEnumerator> actions = new Queue<IEnumerator>();
 		
-		public CoroutineQueue(MonoBehaviour aCoroutineOwner)
+		public CoroutineQueue(MonoBehaviour coroutineOwner)
 		{
-			m_Owner = aCoroutineOwner;
+			owner = coroutineOwner;
 		}
 		
 		public void StartLoop()
 		{
-			m_InternalCoroutine = m_Owner.NewCoroutine(Process());
+			internalCoroutine = owner.NewCoroutine(Process());
 		}
 		
 		public void StopLoop()
 		{
-			m_Owner.StopCoroutine(m_InternalCoroutine);
-			m_InternalCoroutine = null;
+			owner.StopCoroutine(internalCoroutine);
+			internalCoroutine = null;
 		}
 		
-		public void EnqueueAction(IEnumerator aAction)
+		public void EnqueueAction(IEnumerator valueAction)
 		{
-			actions.Enqueue(aAction);
+			actions.Enqueue(valueAction);
 		}
 		
 		private IEnumerator Process()
 		{
-			while (true)
+			while(true)
 			{
 				if (actions.Count > 0)
-					yield return m_Owner.NewCoroutine(actions.Dequeue());
+				{
+					yield return owner.NewCoroutine(actions.Dequeue());
+				}
 				else
+				{
 					yield return new WaitForEndOfFrame();
+				}
 			}
 		}
 	}

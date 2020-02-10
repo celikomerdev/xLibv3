@@ -24,7 +24,7 @@ namespace xLib.Purchasing
 				
 				#if UNITY_2017_2_OR_NEWER
 				List<PayoutDefinition> payoutDefinitions = new List<PayoutDefinition>();
-				foreach (var payout in product.Payouts)
+				foreach (ProductCatalogPayout payout in product.Payouts)
 				{
 					payoutDefinitions.Add(new PayoutDefinition(payout.typeString, payout.subtype, payout.quantity, payout.data));
 				}

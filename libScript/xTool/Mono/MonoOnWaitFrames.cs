@@ -30,7 +30,7 @@ namespace xLib
 		public void CancelAll()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:CancelAll",this);
-			foreach (var item in dictCoroutine)
+			foreach (KeyValuePair<ushort,Coroutine> item in dictCoroutine)
 			{
 				MnCoroutine.ins.KillCoroutine(item.Value);
 			}

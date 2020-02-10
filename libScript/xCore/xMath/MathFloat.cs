@@ -35,20 +35,17 @@ namespace xLib.Mathx
 		public static float Remap(float minOutput,float medOutput,float maxOutput,float minInput,float medInput,float maxInput,float input)
 		{
 			if(input==medInput) return medOutput;
+			if(input>medInput)
+			{
+				minInput=medInput;
+				minOutput=medOutput;
+			}
 			else
 			{
-				if(input>medInput)
-				{
-					minInput=medInput;
-					minOutput=medOutput;
-				}
-				else
-				{
-					maxInput=medInput;
-					maxOutput=medOutput;
-				}
-				return Remap(minOutput,maxOutput,minInput,maxInput,input);
+				maxInput=medInput;
+				maxOutput=medOutput;
 			}
+			return Remap(minOutput,maxOutput,minInput,maxInput,input);
 		}
 		
 		public static float Remap(float minOutput,float maxOutput,float minInput,float maxInput,float input)
