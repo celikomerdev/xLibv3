@@ -5,7 +5,7 @@ using xLib.EventClass;
 
 namespace xLib.xValueClass.Listener
 {
-	//TODO public class OnValueFloat : OnValue<float>
+	//TODO generic //public class OnValueFloat : OnValue<float>
 	public class OnValueFloat : OnValue
 	{
 		[SerializeField]private NodeFloat[] target = new NodeFloat[0];

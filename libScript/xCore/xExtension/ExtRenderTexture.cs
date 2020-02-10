@@ -5,7 +5,7 @@ namespace xLib
 {
 	public static class ExtRenderTexture
 	{
-		public static Texture2D ToTexture2D(this RenderTexture renderTexture)
+		public static Texture2D ToTexture2D(this RenderTexture renderTexture,bool compress=true)
 		{
 			if(renderTexture==null)
 			{
@@ -18,7 +18,7 @@ namespace xLib
 			
 			Texture2D texture2D = new Texture2D(renderTexture.width,renderTexture.height,TextureFormat.ARGB32,true);
 			texture2D.ReadPixels(new Rect(0,0,renderTexture.width,renderTexture.height),0,0);
-			texture2D.Compress(true);
+			if(compress) texture2D.Compress(true);
 			texture2D.Apply(true);
 			
 			RenderTexture.active = activeLast;

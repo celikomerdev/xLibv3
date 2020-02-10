@@ -5,34 +5,19 @@ namespace xLib
 {
 	public static class ExtTexture2D
 	{
-		public static Texture2D Uncompress(this Texture2D value)
+		public static Texture2D Decompress(this Texture2D value)
 		{
 			Texture2D texture2D = new Texture2D(value.width,value.height);
 			if(value==null)
 			{
-				Debug.LogException(new UnityException($"ExtTexture2D.Uncompress:null"));
+				Debug.LogException(new UnityException($"ExtTexture2D.Decompress:null"));
 				return texture2D;
 			}
 			
-			RenderTexture renderTexture = RenderTexture.GetTemporary
-			(
-				value.width,
-				value.height,
-				0,
-				RenderTextureFormat.Default,
-				RenderTextureReadWrite.Linear
-			);
+			RenderTexture renderTexture = RenderTexture.GetTemporary(value.width,value.height,0,RenderTextureFormat.ARGB32);
 			Graphics.Blit(value,renderTexture);
-			
-			RenderTexture activeLast = RenderTexture.active;
-			RenderTexture.active = renderTexture;
-			
-			texture2D.ReadPixels(new Rect(0,0,renderTexture.width,renderTexture.height),0,0);
-			texture2D.Apply();
-			
-			RenderTexture.active = activeLast; //TODO FATAL
+			texture2D = renderTexture.ToTexture2D(compress:false);
 			RenderTexture.ReleaseTemporary(renderTexture);
-			RenderTexture.active = activeLast;
 			
 			return texture2D;
 		}
@@ -46,13 +31,13 @@ namespace xLib
 				return bytes;
 			}
 			
-			Texture2D texture2D = value.Uncompress();
+			Texture2D texture2D = value.Decompress();
 			
 			#if ModImageConversion
 			bytes = texture2D.EncodeToPNG();
 			#else
-			xDebug.LogTempFormat("!ModImageConversion");
-			// bytes = texture2D.GetRawTextureData();
+			xLogger.Log("!ModImageConversion");
+			bytes = texture2D.GetRawTextureData();
 			#endif
 			
 			texture2D.Compress(true);
@@ -68,8 +53,8 @@ namespace xLib
 			#if ModImageConversion
 			value.LoadImage(data);
 			#else
-			xDebug.LogTempFormat("!ModImageConversion");
-			// value.LoadRawTextureData(data);
+			xLogger.Log("!ModImageConversion");
+			value.LoadRawTextureData(data);
 			#endif
 			
 			if(value==null) return;

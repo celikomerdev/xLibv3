@@ -68,26 +68,10 @@ namespace xLib
 			
 			eventNormalizedPosition.Invoke(newNormalizedPosition);
 			
-			if(gameObject.activeInHierarchy) this.NewCoroutine(LerpFocus(newNormalizedPosition),CanDebug);
-			else MnCoroutine.ins.NewCoroutine(LerpFocus(newNormalizedPosition),CanDebug);
-		}
-		
-		//TODO Tween
-		private IEnumerator LerpFocus(Vector2 newNormalizedPosition)
-		{
-			float duration = 0.5f;
-			float elapsedTime = 0.0f;
-			
-			Vector2 valueTemp = scrollRect.normalizedPosition;
-			while (elapsedTime < duration)
+			ExtTween.Tween(duration:0.5f,call:(ratio)=>
 			{
-				elapsedTime += Time.unscaledDeltaTime;
-				float ratio = Mathf.Clamp01(elapsedTime/duration);
-				valueTemp = Vector2.Lerp(valueTemp,newNormalizedPosition,ratio);
-				scrollRect.normalizedPosition = valueTemp;
-				yield return new WaitForEndOfFrame();
-			}
-			scrollRect.normalizedPosition = newNormalizedPosition;
+				scrollRect.normalizedPosition = Vector2.Lerp(scrollRect.normalizedPosition,newNormalizedPosition,ratio);
+			});
 		}
 		
 		private Vector3 GetWorldPointInWidget(RectTransform target, Vector3 worldPoint)

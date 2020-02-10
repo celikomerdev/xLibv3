@@ -7,6 +7,7 @@ namespace xLib
 {
 	public static class ExtTween
 	{
+		//TODO constant default curve
 		public static Coroutine Tween(UnityAction<float> call,float duration = 0.1f, bool ignoreTimeScale=true,AnimationCurve curve=null)
 		{
 			if(curve==null) curve = AnimationCurve.Linear(0,0,1,1);
