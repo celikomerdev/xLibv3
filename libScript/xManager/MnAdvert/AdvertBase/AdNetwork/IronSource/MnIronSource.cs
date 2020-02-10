@@ -12,7 +12,7 @@ namespace xLib.libAdvert.xIronSource
 		#region Mono
 		private void Awake()
 		{
-			if(CanDebug) Debug.Log($"{name}:Awake",this);
+			if(CanDebug) Debug.Log($"{this.name}:Awake",this);
 			IronSource.Agent.setAdaptersDebug(CanDebug);
 			
 			MnThread.StartThread(iDebug:this,useThread:false,priority:1,call:delegate
@@ -29,7 +29,7 @@ namespace xLib.libAdvert.xIronSource
 		
 		private void OnDestroy()
 		{
-			if(CanDebug) Debug.Log($"{name}:OnDestroy",this);
+			if(CanDebug) Debug.Log($"{this.name}:OnDestroy",this);
 			TryRegister(false);
 		}
 		

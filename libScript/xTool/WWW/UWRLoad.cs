@@ -45,7 +45,7 @@ namespace xLib
 			}
 			else
 			{
-				Debug.LogException(new UnityException($"{name}:error:{uwr.error}:url:{url}"),this);
+				Debug.LogException(new UnityException($"{this.name}:error:{uwr.error}:url:{url}"),this);
 			}
 			
 			uwr.Dispose();
