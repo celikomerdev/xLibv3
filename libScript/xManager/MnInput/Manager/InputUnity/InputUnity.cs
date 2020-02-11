@@ -6,9 +6,6 @@ namespace xLib.xInput
 {
 	public class InputUnity : BaseTickNodeM
 	{
-		[Header("Output")]
-		[SerializeField]private InputFinal inputFinal = null;
-		
 		[Header("Axis")]
 		[SerializeField]private NodeFloat[] axis = new NodeFloat[0];
 		
@@ -17,7 +14,6 @@ namespace xLib.xInput
 			for (int i = 0; i < axis.Length; i++)
 			{
 				axis[i].Value = Input.GetAxis(axis[i].Key);
-				inputFinal.Cache(axis[i]);
 			}
 		}
 	}

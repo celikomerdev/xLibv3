@@ -14,7 +14,6 @@ namespace xLib.xInput
 		private Vector3 valueZero = Vector3.zero;
 		
 		[Header("Output")]
-		[SerializeField]private InputFinal inputFinal = null;
 		private Vector3 valueCurrent = Vector3.zero;
 		private Vector3 valueSmooth = Vector3.zero;
 		
@@ -65,10 +64,6 @@ namespace xLib.xInput
 			axisX.Value = valueSmooth.x;
 			axisY.Value = valueSmooth.y;
 			axisZ.Value = valueSmooth.z;
-			
-			inputFinal.Cache(axisX);
-			inputFinal.Cache(axisY);
-			inputFinal.Cache(axisZ);
 		}
 		#endregion
 		

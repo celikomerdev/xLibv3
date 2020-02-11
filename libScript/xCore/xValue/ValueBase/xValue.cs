@@ -297,20 +297,6 @@ namespace xLib
 				ViewCore.RPC(nodeSetting.RpcTarget,Key,SerializedObject.ToString());
 			}
 		}
-		
-		private V valueCache;
-		public virtual V ValueCache
-		{
-			get
-			{
-				return valueCache;
-			}
-			set
-			{
-				if(!CanCache(value)) return;
-				valueCache = value;
-			}
-		}
 		#endregion
 		
 		
@@ -321,20 +307,6 @@ namespace xLib
 			{
 				Value = value;
 			}
-		}
-		#endregion
-		
-		
-		#region ValueUpdate
-		public void Refresh()
-		{
-			Value = valueCache;
-		}
-		
-		public void Consume()
-		{
-			Value = valueCache;
-			valueCache = ValueDefault;
 		}
 		#endregion
 		#endregion

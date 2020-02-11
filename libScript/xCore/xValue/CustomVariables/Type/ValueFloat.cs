@@ -22,13 +22,6 @@ namespace xLib.xValueClass
 		{
 			return (valueThreshold > Mathf.Abs(valueNew-Value));
 		}
-		
-		public bool cacheGreater;
-		protected override bool CanCache(float valueNew)
-		{
-			if(cacheGreater) return (Mathf.Abs(valueNew) > Mathf.Abs(ValueCache));
-			return true;
-		}
 		#endregion
 		
 		#region Function

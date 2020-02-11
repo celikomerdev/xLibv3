@@ -139,18 +139,6 @@ namespace xLib.xNode.NodeObject
 			}
 		}
 		
-		public V ValueCache
-		{
-			get
-			{
-				return Node.ValueCache;
-			}
-			set
-			{
-				Node.ValueCache = value;
-			}
-		}
-		
 		public V ValueDefault
 		{
 			get
@@ -179,16 +167,6 @@ namespace xLib.xNode.NodeObject
 			{
 				Node.ValueAdd = value;
 			}
-		}
-		
-		public void Refresh()
-		{
-			Node.Refresh();
-		}
-		
-		public void Consume()
-		{
-			Node.Consume();
 		}
 		
 		public void Listener(bool register,UnityAction<V> call,string viewId="",int order=0,bool onRegister=false,BaseWorkerI worker=null)

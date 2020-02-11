@@ -6,6 +6,7 @@ namespace xLib
 {
 	public abstract class BaseTickNodeS : BaseTickS
 	{
+		[Header("TickTime")]
 		[SerializeField]private NodeFloat tickTime = null;
 		
 		#region Custom

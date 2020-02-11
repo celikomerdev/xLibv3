@@ -1,13 +1,13 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 using xLib.xNode.NodeObject;
 
 namespace xLib.xInput
 {
-	public class InputMicrophone : BaseTickM
+	public class InputMicrophone : BaseTickNodeM
 	{
 		[Header("Input")]
-		[SerializeField]private xMicrophone microphone;
+		[SerializeField]private xMicrophone microphone = null;
 		[SerializeField]private bool calibrateAuto = false;
 		
 		[SerializeField]private float multiplier = 1;
@@ -17,12 +17,11 @@ namespace xLib.xInput
 		private float valueZero;
 		
 		[Header("Output")]
-		[SerializeField]private InputFinal inputFinal;
-		private float valueSmooth;
-		private float valueCurrent;
+		private float valueSmooth = 0;
+		private float valueCurrent = 0;
 		
 		[Header("Axis")]
-		[SerializeField]private NodeFloat axis;
+		[SerializeField]private NodeFloat axis = null;
 		
 		
 		#region Mono
@@ -62,7 +61,6 @@ namespace xLib.xInput
 		private void SetAxis()
 		{
 			axis.Value = valueCurrent;
-			inputFinal.Cache(axis);
 		}
 		#endregion
 		
