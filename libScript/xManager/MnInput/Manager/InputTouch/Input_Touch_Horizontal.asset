@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2225de60c87cec046ac49a9aced7735c, type: 3}
-  m_Name: Input-Null
+  m_Name: Input_Touch_Horizontal
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,12 +20,11 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: Null
-      isMulti: 1
+      key: Horizontal
+      isMulti: 0
     value: 0
     skipCompareRpc: 1
     isCompare: 1
     snapDefault: 0
     useThreshold: 0
     valueThreshold: 0
-    cacheGreater: 0

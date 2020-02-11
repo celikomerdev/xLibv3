@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c47f3d7fa3e3424439269f207f15244e, type: 3}
-  m_Name: Input-Active
+  m_Script: {fileID: 11500000, guid: 2225de60c87cec046ac49a9aced7735c, type: 3}
+  m_Name: Input_Sprint
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,8 +20,11 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 4051ee95b4ac4a248bb531392325580f
-      isMulti: 0
+      key: Sprint
+      isMulti: 1
     value: 0
     skipCompareRpc: 1
     isCompare: 1
+    snapDefault: 0
+    useThreshold: 0
+    valueThreshold: 0
