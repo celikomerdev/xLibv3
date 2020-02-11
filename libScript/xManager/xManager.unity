@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 1431634625}
   - component: {fileID: 30139994}
   m_Layer: 5
-  m_Name: Input-Unity
+  m_Name: Input_Unity
   m_TagString: Singleton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1489,7 +1489,7 @@ GameObject:
   - component: {fileID: 190821438}
   - component: {fileID: 190821437}
   m_Layer: 5
-  m_Name: LoadLevel-String
+  m_Name: LoadLevel_String
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2811,7 +2811,7 @@ GameObject:
   - component: {fileID: 343775492}
   - component: {fileID: 343775493}
   m_Layer: 5
-  m_Name: MnAnalytics-Init
+  m_Name: MnAnalytics_Init
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3439,7 +3439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 423871864}
   m_Layer: 5
-  m_Name: Input-Group
+  m_Name: Input_Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3763,7 +3763,7 @@ GameObject:
   - component: {fileID: 897280662}
   - component: {fileID: 447644632}
   m_Layer: 5
-  m_Name: Input-Acceleration
+  m_Name: Input_Acceleration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6274,7 +6274,7 @@ GameObject:
   - component: {fileID: 899703793}
   - component: {fileID: 899703792}
   m_Layer: 5
-  m_Name: Text-Dyn-Info
+  m_Name: Text_Dyn_Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6716,7 +6716,7 @@ MonoBehaviour:
   Application_sandboxType: {fileID: 11400000, guid: a555dcf4a51c04a40a24378b8539e0e8,
     type: 2}
   Application_version_name: {fileID: 0}
-  app_version: 74
+  app_version: 76
   Application_version: {fileID: 11400000, guid: 601077eb478ff0049a83a6143cba2296,
     type: 2}
 --- !u!1 &982375934
@@ -6977,7 +6977,7 @@ GameObject:
   - component: {fileID: 1057145143}
   - component: {fileID: 1057145144}
   m_Layer: 5
-  m_Name: LoadLevel-Int
+  m_Name: LoadLevel_Int
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7049,7 +7049,7 @@ GameObject:
   - component: {fileID: 1074035363}
   - component: {fileID: 1074035364}
   m_Layer: 5
-  m_Name: MnProduct-Init
+  m_Name: MnProduct_Init
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7262,7 +7262,7 @@ GameObject:
   - component: {fileID: 1091827671}
   - component: {fileID: 1091827672}
   m_Layer: 5
-  m_Name: Input-Active?
+  m_Name: Input_Active?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7340,7 +7340,7 @@ GameObject:
   - component: {fileID: 1097378963}
   - component: {fileID: 1097378964}
   m_Layer: 5
-  m_Name: Privacy-Accepted
+  m_Name: Privacy_Accepted
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7608,7 +7608,7 @@ GameObject:
   - component: {fileID: 1149852722}
   - component: {fileID: 1149852723}
   m_Layer: 5
-  m_Name: Input-Acc-Active?
+  m_Name: Input_Acc_Active?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8689,6 +8689,7 @@ MonoBehaviour:
     canWork: 1
     runInEditMode: 0
   isPrimary: 0
+  arrayIAnalyticObject: []
 --- !u!1 &1283424067
 GameObject:
   m_ObjectHideFlags: 0
@@ -10042,7 +10043,7 @@ GameObject:
   - component: {fileID: 1522631233}
   - component: {fileID: 1522631234}
   m_Layer: 5
-  m_Name: Input-Final
+  m_Name: Input_Final
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10105,7 +10106,7 @@ GameObject:
   - component: {fileID: 1524474782}
   - component: {fileID: 1524474780}
   m_Layer: 5
-  m_Name: Set-Debug
+  m_Name: Set_Debug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10813,7 +10814,7 @@ GameObject:
   - component: {fileID: 1605365886}
   - component: {fileID: 1605365887}
   m_Layer: 5
-  m_Name: Input-Unity-Active?
+  m_Name: Input_Unity_Active?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10996,7 +10997,7 @@ GameObject:
   - component: {fileID: 1637002041}
   - component: {fileID: 1637002040}
   m_Layer: 5
-  m_Name: Text-Dyn-Price
+  m_Name: Text_Dyn_Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11347,7 +11348,7 @@ GameObject:
   - component: {fileID: 1660263027}
   - component: {fileID: 1660263026}
   m_Layer: 5
-  m_Name: Text-Dyn-Price
+  m_Name: Text_Dyn_Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11426,7 +11427,7 @@ GameObject:
   - component: {fileID: 1665129954}
   - component: {fileID: 1665129955}
   m_Layer: 5
-  m_Name: Button_Product_Subscribe-Info
+  m_Name: Button_Product_Subscribe_Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12454,7 +12455,7 @@ GameObject:
   - component: {fileID: 1835592059}
   - component: {fileID: 1835592060}
   m_Layer: 5
-  m_Name: Button-FPS
+  m_Name: Button_FPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12562,7 +12563,7 @@ GameObject:
   - component: {fileID: 1862658893}
   - component: {fileID: 1862658894}
   m_Layer: 5
-  m_Name: Group-Player-IsLoad?
+  m_Name: Group_Player_IsLoad?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13813,7 +13814,7 @@ GameObject:
   - component: {fileID: 2002242512}
   - component: {fileID: 2002242513}
   m_Layer: 5
-  m_Name: Privacy-Accepted?
+  m_Name: Privacy_Accepted?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14395,7 +14396,7 @@ GameObject:
   - component: {fileID: 581184852}
   - component: {fileID: 2112447109}
   m_Layer: 5
-  m_Name: Input-Touch
+  m_Name: Input_Touch
   m_TagString: Singleton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

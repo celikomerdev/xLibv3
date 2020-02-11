@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 6819182}
   - component: {fileID: 6819183}
   m_Layer: 0
-  m_Name: Login-Day-Total-Add
+  m_Name: Login_Day_Total_Add
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 25518366}
   - component: {fileID: 25518367}
   m_Layer: 0
-  m_Name: GameSparks-IsAvaible
+  m_Name: GameSparks_IsAvaible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 1431634625}
   - component: {fileID: 30139994}
   m_Layer: 0
-  m_Name: Input-Unity
+  m_Name: Input_Unity
   m_TagString: Singleton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 37175216}
   - component: {fileID: 37175217}
   m_Layer: 0
-  m_Name: MnFacebook-PersonPicture
+  m_Name: MnFacebook_PersonPicture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 64225338}
   - component: {fileID: 64225339}
   m_Layer: 0
-  m_Name: MnArena-Round-Start-Time
+  m_Name: MnArena_Round_Start_Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -868,7 +868,7 @@ GameObject:
   - component: {fileID: 140676537}
   - component: {fileID: 140676538}
   m_Layer: 0
-  m_Name: MnSocial-LoginSilent
+  m_Name: MnSocial_LoginSilent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -997,7 +997,7 @@ GameObject:
   - component: {fileID: 190094714}
   - component: {fileID: 190094713}
   m_Layer: 0
-  m_Name: Login-Day-Diff-Set
+  m_Name: Login_Day_Diff_Set
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1155,7 +1155,7 @@ GameObject:
   - component: {fileID: 190821438}
   - component: {fileID: 190821437}
   m_Layer: 0
-  m_Name: LoadLevel-String
+  m_Name: LoadLevel_String
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1562,7 +1562,7 @@ GameObject:
   - component: {fileID: 332399789}
   - component: {fileID: 332399790}
   m_Layer: 0
-  m_Name: Group-Player-IsLoad?
+  m_Name: Group_Player_IsLoad?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1658,7 +1658,7 @@ GameObject:
   - component: {fileID: 343775492}
   - component: {fileID: 343775493}
   m_Layer: 0
-  m_Name: MnAnalytics-Init
+  m_Name: MnAnalytics_Init
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1739,7 +1739,7 @@ GameObject:
   - component: {fileID: 345543490}
   - component: {fileID: 345543491}
   m_Layer: 0
-  m_Name: MnSocial-ShowLeaderboard
+  m_Name: MnSocial_ShowLeaderboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2065,7 +2065,7 @@ GameObject:
   m_Component:
   - component: {fileID: 423871864}
   m_Layer: 0
-  m_Name: Input-Group
+  m_Name: Input_Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2101,7 +2101,7 @@ GameObject:
   - component: {fileID: 897280662}
   - component: {fileID: 447644632}
   m_Layer: 0
-  m_Name: Input-Acceleration
+  m_Name: Input_Acceleration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2311,7 +2311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 467877687}
   m_Layer: 0
-  m_Name: Flow-Daily
+  m_Name: Flow_Daily
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2343,7 +2343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 472813558}
   m_Layer: 0
-  m_Name: Singleton-Main
+  m_Name: Singleton_Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2529,7 +2529,7 @@ GameObject:
   - component: {fileID: 539549232}
   - component: {fileID: 539549233}
   m_Layer: 0
-  m_Name: Login-Day-Serie-Add
+  m_Name: Login_Day_Serie_Add
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2634,7 +2634,7 @@ GameObject:
   - component: {fileID: 555117396}
   - component: {fileID: 555117397}
   m_Layer: 0
-  m_Name: MnFacebook-LoginSilent
+  m_Name: MnFacebook_LoginSilent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2707,7 +2707,7 @@ GameObject:
   - component: {fileID: 561040369}
   - component: {fileID: 561040370}
   m_Layer: 0
-  m_Name: GameSparks-IsAuth
+  m_Name: GameSparks_IsAuth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3227,7 +3227,7 @@ GameObject:
   - component: {fileID: 659131473}
   - component: {fileID: 659131474}
   m_Layer: 0
-  m_Name: MnSocial-PersonName
+  m_Name: MnSocial_PersonName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3328,7 +3328,7 @@ GameObject:
   - component: {fileID: 714850592}
   - component: {fileID: 714850593}
   m_Layer: 0
-  m_Name: Showcase-Active?
+  m_Name: Showcase_Active?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3446,7 +3446,7 @@ GameObject:
   - component: {fileID: 738293308}
   - component: {fileID: 738293309}
   m_Layer: 0
-  m_Name: MnSocial-ShowAchievement
+  m_Name: MnSocial_ShowAchievement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3830,7 +3830,7 @@ GameObject:
   - component: {fileID: 849397149}
   - component: {fileID: 849397150}
   m_Layer: 0
-  m_Name: Login-Day-Diff
+  m_Name: Login_Day_Diff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3943,7 +3943,7 @@ GameObject:
   - component: {fileID: 862989895}
   - component: {fileID: 862989896}
   m_Layer: 0
-  m_Name: MnSocial-Init
+  m_Name: MnSocial_Init
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4178,7 +4178,7 @@ GameObject:
   - component: {fileID: 909554735}
   - component: {fileID: 909554736}
   m_Layer: 0
-  m_Name: Service-IsLogin?
+  m_Name: Service_IsLogin?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4416,7 +4416,7 @@ GameObject:
   - component: {fileID: 967937304}
   - component: {fileID: 967937305}
   m_Layer: 5
-  m_Name: Service-UserId
+  m_Name: Service_UserId
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4566,7 +4566,7 @@ GameObject:
   - component: {fileID: 991636587}
   - component: {fileID: 991636588}
   m_Layer: 5
-  m_Name: MnWorldTime-Refresh-OnStart
+  m_Name: MnWorldTime_Refresh_OnStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4628,7 +4628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1017328861}
   m_Layer: 0
-  m_Name: UserInfo-Listen
+  m_Name: UserInfo_Listen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4737,7 +4737,7 @@ GameObject:
   - component: {fileID: 1057145143}
   - component: {fileID: 1057145144}
   m_Layer: 0
-  m_Name: LoadLevel-Int
+  m_Name: LoadLevel_Int
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4866,7 +4866,7 @@ MonoBehaviour:
   Application_sandboxType: {fileID: 11400000, guid: a555dcf4a51c04a40a24378b8539e0e8,
     type: 2}
   Application_version_name: {fileID: 0}
-  app_version: 74
+  app_version: 76
   Application_version: {fileID: 11400000, guid: 601077eb478ff0049a83a6143cba2296,
     type: 2}
 --- !u!1 &1074035362
@@ -4881,7 +4881,7 @@ GameObject:
   - component: {fileID: 1074035363}
   - component: {fileID: 1074035364}
   m_Layer: 0
-  m_Name: MnProduct-Init
+  m_Name: MnProduct_Init
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4952,7 +4952,7 @@ GameObject:
   - component: {fileID: 1091827671}
   - component: {fileID: 1091827672}
   m_Layer: 0
-  m_Name: Input-Active?
+  m_Name: Input_Active?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5031,7 +5031,7 @@ GameObject:
   - component: {fileID: 1097378963}
   - component: {fileID: 1097378964}
   m_Layer: 0
-  m_Name: Privacy-Accepted
+  m_Name: Privacy_Accepted
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5192,7 +5192,7 @@ GameObject:
   - component: {fileID: 1101805924}
   - component: {fileID: 1101805925}
   m_Layer: 0
-  m_Name: MnFacebook-PersonName
+  m_Name: MnFacebook_PersonName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5375,7 +5375,7 @@ GameObject:
   - component: {fileID: 1149852722}
   - component: {fileID: 1149852723}
   m_Layer: 0
-  m_Name: Input-Acceleration-Active?
+  m_Name: Input_Acceleration_Active?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5630,7 +5630,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1202134712}
   m_Layer: 0
-  m_Name: Service-IsLogin
+  m_Name: Service_IsLogin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5771,7 +5771,7 @@ GameObject:
   - component: {fileID: 1207507441}
   - component: {fileID: 1207507442}
   m_Layer: 0
-  m_Name: MnRoom-SetWait
+  m_Name: MnRoom_SetWait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6023,6 +6023,7 @@ MonoBehaviour:
     canWork: 1
     runInEditMode: 0
   isPrimary: 0
+  arrayIAnalyticObject: []
 --- !u!1 &1283424067
 GameObject:
   m_ObjectHideFlags: 0
@@ -6155,7 +6156,7 @@ GameObject:
   - component: {fileID: 1300666420}
   - component: {fileID: 1300666421}
   m_Layer: 0
-  m_Name: MnFacebook-LoginOut
+  m_Name: MnFacebook_LoginOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6247,7 +6248,7 @@ GameObject:
   - component: {fileID: 1305022511}
   - component: {fileID: 1305022512}
   m_Layer: 5
-  m_Name: Multi-IsConnect?
+  m_Name: Multi_IsConnect?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6709,7 +6710,7 @@ GameObject:
   - component: {fileID: 1391174906}
   - component: {fileID: 1391174907}
   m_Layer: 0
-  m_Name: Login-Day-Current-Set
+  m_Name: Login_Day_Current_Set
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7086,7 +7087,7 @@ GameObject:
   - component: {fileID: 1517909234}
   - component: {fileID: 1517909235}
   m_Layer: 0
-  m_Name: xRpc-AllBufferedViaServer
+  m_Name: xRpc_AllBufferedViaServer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7130,7 +7131,7 @@ GameObject:
   - component: {fileID: 2140635795}
   - component: {fileID: 1522631233}
   m_Layer: 0
-  m_Name: Input-Final
+  m_Name: Input_Final
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7710,7 +7711,7 @@ GameObject:
   - component: {fileID: 1621235865}
   - component: {fileID: 1621235866}
   m_Layer: 0
-  m_Name: Ads-Active?
+  m_Name: Ads_Active?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7811,7 +7812,7 @@ GameObject:
   - component: {fileID: 1671609321}
   - component: {fileID: 1671609322}
   m_Layer: 0
-  m_Name: MnSocial-LoginOut
+  m_Name: MnSocial_LoginOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8087,7 +8088,7 @@ GameObject:
   - component: {fileID: 1691620436}
   - component: {fileID: 1691620437}
   m_Layer: 0
-  m_Name: MnWorldTime-Refresh
+  m_Name: MnWorldTime_Refresh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8870,7 +8871,7 @@ GameObject:
   - component: {fileID: 1862658893}
   - component: {fileID: 1862658894}
   m_Layer: 0
-  m_Name: Group-Player-IsLoad?
+  m_Name: Group_Player_IsLoad?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9225,7 +9226,7 @@ GameObject:
   - component: {fileID: 1938487723}
   - component: {fileID: 1938487724}
   m_Layer: 0
-  m_Name: MnSocial-PersonPicture
+  m_Name: MnSocial_PersonPicture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9480,7 +9481,7 @@ GameObject:
   - component: {fileID: 1961727168}
   - component: {fileID: 1961727169}
   m_Layer: 0
-  m_Name: Login-Day-Serie-Reset
+  m_Name: Login_Day_Serie_Reset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9717,7 +9718,7 @@ GameObject:
   - component: {fileID: 1987513452}
   - component: {fileID: 1987513453}
   m_Layer: 0
-  m_Name: MnFacebook-Init
+  m_Name: MnFacebook_Init
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9945,7 +9946,7 @@ GameObject:
   - component: {fileID: 2002242512}
   - component: {fileID: 2002242513}
   m_Layer: 5
-  m_Name: Privacy-Accepted?
+  m_Name: Privacy_Accepted?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10104,7 +10105,7 @@ GameObject:
   - component: {fileID: 2004967411}
   - component: {fileID: 2004967410}
   m_Layer: 0
-  m_Name: GameSparks-Reset
+  m_Name: GameSparks_Reset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10248,7 +10249,7 @@ GameObject:
   - component: {fileID: 2041062463}
   - component: {fileID: 2041062464}
   m_Layer: 0
-  m_Name: MnArena-OnRoundStarted
+  m_Name: MnArena_OnRoundStarted
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10384,7 +10385,7 @@ GameObject:
   - component: {fileID: 2056669781}
   - component: {fileID: 2056669780}
   m_Layer: 5
-  m_Name: OnlineCountAdd-1
+  m_Name: OnlineCountAdd_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10713,7 +10714,7 @@ GameObject:
   - component: {fileID: 2100310933}
   - component: {fileID: 2100310934}
   m_Layer: 0
-  m_Name: xRpc-AllBuffered
+  m_Name: xRpc_AllBuffered
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10790,7 +10791,7 @@ GameObject:
   - component: {fileID: 581184852}
   - component: {fileID: 2112447109}
   m_Layer: 0
-  m_Name: Input-Touch
+  m_Name: Input_Touch
   m_TagString: Singleton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
