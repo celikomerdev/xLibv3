@@ -5,8 +5,8 @@ namespace xLib
 {
 	public abstract class BaseWorkerS : BaseWorkS, BaseWorkerI
 	{
-		internal readonly View view = null;
 		protected bool isMy = true;
+		
 		private string viewId = string.Empty;
 		public string ViewId
 		{
@@ -20,14 +20,15 @@ namespace xLib
 			}
 		}
 		
-		protected void FindView()
+		// internal View view = null;
+		protected virtual void FindView()
 		{
-			// if(!view) GetComponentInParent<View>();
-			if(!view) return;
-			
-			view.FindId();
-			ViewId = view.Id;
-			isMy = view.IsMy;
+			// if(!view) view = GetComponentInParent<View>();
+			// if(!view) return;
+			//
+			// view.FindId();
+			// ViewId = view.Id;
+			// isMy = view.IsMy;
 		}
 		
 		public virtual void CheckErrors()
