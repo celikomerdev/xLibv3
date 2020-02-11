@@ -26,8 +26,7 @@ namespace xLib.ToolPurchase
 		{
 			if(!value) return;
 			
-			Product product = null;
-			if(product == null) product = MnProduct.ins.GetProduct(key);
+			Product product = MnProduct.ins.GetProduct(key);
 			if(product == null) return;
 			if(product.definition.type != ProductType.Subscription) return;
 			

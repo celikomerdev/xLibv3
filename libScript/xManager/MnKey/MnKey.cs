@@ -41,7 +41,7 @@ namespace xLib
 			if(CanDebug) Debug.LogFormat(this,this.name+":Dictionary:{0}",Newtonsoft.Json.JsonConvert.SerializeObject(dictionary));
 		}
 		
-		private void AddAsset(TextAsset value)
+		private static void AddAsset(TextAsset value)
 		{
 			if(!value) return;
 			JObject root = JObject.Parse(value.text);

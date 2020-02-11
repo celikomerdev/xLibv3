@@ -27,7 +27,7 @@ namespace xLib
 			savedGameClient.ShowSelectSavedGameUI(MnLocalize.GetValue("Select File"),maxDisplayedSavedGames,showCreateSaveUI,showDeleteSaveUI,OnGameSelected);
 		}
 		
-		private void OnGameSelected(SelectUIStatus status, ISavedGameMetadata game)
+		private static void OnGameSelected(SelectUIStatus status, ISavedGameMetadata game)
 		{
 			if(status != SelectUIStatus.SavedGameSelected)
 			{
@@ -45,13 +45,13 @@ namespace xLib
 		
 		
 		#region Open
-		private void OpenSavedGame(string filename)
+		private static void OpenSavedGame(string filename)
 		{
 			ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 			savedGameClient.OpenWithAutomaticConflictResolution(filename,DataSource.ReadCacheOrNetwork,ConflictResolutionStrategy.UseLongestPlaytime,OnGameOpened);
 		}
 		
-		private void OnGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game)
+		private static void OnGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game)
 		{
 			if(status != SavedGameRequestStatus.Success)
 			{
@@ -67,20 +67,20 @@ namespace xLib
 		
 		
 		#region Save
-		private void SaveGame(ISavedGameMetadata game)
+		private static void SaveGame(ISavedGameMetadata game)
 		{
+			xTimeSpan playTime = TimeSpan.FromTicks(MnSnapshot.PlayTime);
+			string description = $"{MnLocalize.GetValue("Total Time")}: {playTime.ToString(@"HH\:mm\:ss")}";
+			
 			ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
-			
 			SavedGameMetadataUpdate.Builder builder = new SavedGameMetadataUpdate.Builder();
-			string description = string.Format(@"{0}: {1:HH\:mm\:ss}",MnLocalize.GetValue("Total Time"),(xTimeSpan)TimeSpan.FromTicks(MnSnapshot.PlayTime));
+			builder.WithUpdatedPlayedTime(playTime);
 			builder.WithUpdatedDescription(description);
-			builder.WithUpdatedPlayedTime(TimeSpan.FromTicks(MnSnapshot.PlayTime));
 			SavedGameMetadataUpdate updatedMetadata = builder.Build();
-			
-			savedGameClient.CommitUpdate(game, updatedMetadata, MnSnapshot.SnapshotByte, OnGameSaved);
+			savedGameClient.CommitUpdate(game,updatedMetadata,MnSnapshot.SnapshotByte,OnGameSaved);
 		}
 		
-		private void OnGameSaved(SavedGameRequestStatus status, ISavedGameMetadata game)
+		private static void OnGameSaved(SavedGameRequestStatus status, ISavedGameMetadata game)
 		{
 			if (status != SavedGameRequestStatus.Success)
 			{
@@ -93,13 +93,13 @@ namespace xLib
 		
 		
 		#region Load
-		private void LoadGame(ISavedGameMetadata game)
+		private static void LoadGame(ISavedGameMetadata game)
 		{
 			ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 			savedGameClient.ReadBinaryData(game,OnGameLoaded);
 		}
 		
-		private void OnGameLoaded(SavedGameRequestStatus status, byte[] data)
+		private static void OnGameLoaded(SavedGameRequestStatus status, byte[] data)
 		{
 			if(status != SavedGameRequestStatus.Success)
 			{

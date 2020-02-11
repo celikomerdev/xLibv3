@@ -23,7 +23,7 @@ namespace xLib
 		
 		
 		#region OnTransform
-		private void OnTransform(Transform trans,bool status)
+		private void OnTransform(Component trans,bool status)
 		{
 			if(Comparision(trans)) eventCollider.Invoke(status);
 		}
@@ -57,7 +57,7 @@ namespace xLib
 		
 		
 		#region Comparison
-		private bool Comparision(Transform trans)
+		private bool Comparision(Component trans)
 		{
 			bool fallback = true;
 			if(excludeTag.Length>0)

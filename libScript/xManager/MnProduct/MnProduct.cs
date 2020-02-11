@@ -71,15 +71,15 @@ namespace xLib
 			{
 				foreach(Product item in controller.products.all)
 				{
-					Debug.Log(string.Join("-",
-					new[]
-					{
+					Debug.Log(string.Join
+					(
+						"-",
 						item.definition.id,
 						item.definition.storeSpecificId,
-						item.definition.type.ToString(),
-						item.metadata.localizedPrice.ToString(),
+						item.definition.type,
+						item.metadata.localizedPrice,
 						item.metadata.localizedPriceString
-					}));
+					));
 				}
 				
 				if(productsDetails==null)

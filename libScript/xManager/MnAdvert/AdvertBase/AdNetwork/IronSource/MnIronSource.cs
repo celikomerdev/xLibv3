@@ -22,7 +22,7 @@ namespace xLib.libAdvert.xIronSource
 				
 				IronSource.Agent.init(MnKey.GetValue(key),adUnits);
 				if(CanDebug) IronSource.Agent.validateIntegration();
-				if(CanDebug) Debug.Log($"MnIronSource:isInit:true",this);
+				if(CanDebug) Debug.Log("MnIronSource:isInit:true",this);
 				TryRegister(true);
 			});
 		}
@@ -34,7 +34,7 @@ namespace xLib.libAdvert.xIronSource
 		}
 		
 		#region TryRegister
-		private bool TryRegister(bool value)
+		private static bool TryRegister(bool value)
 		{
 			if (value)
 			{
@@ -58,7 +58,7 @@ namespace xLib.libAdvert.xIronSource
 		
 		
 		#region Init
-		private void FillUser()
+		private static void FillUser()
 		{
 			IronSource.Agent.setConsent(MnAdvert.ins.privacyAccepted);
 			// IronSource.Agent.setUserId(SystemInfo.deviceUniqueIdentifier);
@@ -74,12 +74,12 @@ namespace xLib.libAdvert.xIronSource
 		
 		#region Banner
 		public static bool hasBanner = false;
-		private void onBannerAdLoadFailedEvent(IronSourceError error)
+		private static void onBannerAdLoadFailedEvent(IronSourceError error)
 		{
 			hasBanner = false;
 		}
 		
-		private void onBannerAdLoadedEvent()
+		private static void onBannerAdLoadedEvent()
 		{
 			hasBanner = true;
 		}

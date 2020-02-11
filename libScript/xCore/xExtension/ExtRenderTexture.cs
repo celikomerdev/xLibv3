@@ -9,7 +9,7 @@ namespace xLib
 		{
 			if(renderTexture==null)
 			{
-				Debug.LogException(new UnityException($"ExtRenderTexture.ToTexture2D:null"));
+				Debug.LogException(new UnityException("ExtRenderTexture.ToTexture2D:null"));
 				return null;
 			}
 			

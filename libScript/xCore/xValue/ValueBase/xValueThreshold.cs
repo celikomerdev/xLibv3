@@ -15,7 +15,7 @@ namespace xLib
 		
 		[Header("Threshold")]
 		[SerializeField]private bool useThreshold = false;
-		[SerializeField]protected V valueThreshold = default(V);
+		[SerializeField]protected V valueThreshold = default;
 		protected virtual bool IsThreshold(V valueNew)
 		{
 			return false;

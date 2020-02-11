@@ -71,7 +71,7 @@ namespace xLib
 		private void OnNotificationReceive(OSNotification notification)
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnNotificationReceive:{notification}",this);
-			MnNotification.ins.NotificationReceive();
+			MnNotification.NotificationReceive();
 		}
 		
 		private void OnNotificationOpen(OSNotificationOpenedResult result)

@@ -75,7 +75,7 @@ namespace xLib.ToolOperation
 		
 		
 		#region Operation
-		private Action operationAction = delegate(){};
+		private Action operationAction = delegate{};
 		private Action CreateOperation()
 		{
 			switch(operation)

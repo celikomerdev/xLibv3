@@ -131,7 +131,7 @@ namespace xLib
 		
 		
 		#region Leaderboard/Achievement
-		private void ShowLeaderboard(string key)
+		private static void ShowLeaderboard(string key)
 		{
 			string idPlatform = MnKey.GetValue(key);
 			if(string.IsNullOrWhiteSpace(idPlatform)) idPlatform = null;
@@ -147,7 +147,7 @@ namespace xLib
 			});
 		}
 		
-		private void ShowAchievement(string key)
+		private static void ShowAchievement(string key)
 		{
 			PlayGamesPlatform.Instance.ShowAchievementsUI();
 		}

@@ -71,12 +71,13 @@ namespace xLib
 		
 		private void ValueAuto()
 		{
-			int i = 0;
-			for (i = 0; i < scoreQuality.Length-1; i++)
+			int output = 0;
+			for(int i = 0; i<scoreQuality.Length-1; i++)
 			{
-				if(scoreSystem.final < scoreQuality[i]) break;
+				output = i;
+				if(scoreSystem.final<scoreQuality[i]) break;
 			}
-			qualityAuto.Value = i;
+			qualityAuto.Value = output;
 		}
 		
 		private void TryDebug()

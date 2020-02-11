@@ -22,7 +22,7 @@ namespace xLib
 			SafeTime.onCalibrate.eventUnity.RemoveListener(OnCalibrate);
 		}
 		
-		public DateTime UtcNow
+		public static DateTime UtcNow
 		{
 			get
 			{

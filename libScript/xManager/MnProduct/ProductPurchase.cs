@@ -82,7 +82,7 @@ namespace xLib.ToolPurchase
 			if(Application.internetReachability == NetworkReachability.NotReachable)
 			{
 				StPopupBar.QueueMessage(MnLocalize.GetValue("Please Check Your Connection"));
-				Debug.LogException(new UnityException($"Purchase:internetReachability:NotReachable"),this);
+				Debug.LogException(new UnityException("Purchase:internetReachability:NotReachable"),this);
 				return;
 			}
 			RefreshProduct();

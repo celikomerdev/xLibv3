@@ -27,7 +27,7 @@ namespace xLib.xTool
 			eventMemoryLow.Invoke();
 		}
 		
-		private long totalMemory
+		private static long totalMemory
 		{
 			get
 			{

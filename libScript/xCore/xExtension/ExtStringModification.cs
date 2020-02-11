@@ -35,8 +35,9 @@ namespace xLib
 					return value.ToUpperExt();
 				case StringModification.ToLower:
 					return value.ToLowerExt();
+				default:
+					return value;
 			}
-			return value;
 		}
 	}
 	

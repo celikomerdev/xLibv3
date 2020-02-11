@@ -39,8 +39,8 @@ namespace xLib.ToolConvert
 		
 		public void FromObjectSafe(object value)
 		{
-			if(string.IsNullOrWhiteSpace(@format)) return;
-			Result = string.Format(@format,value);
+			if(string.IsNullOrWhiteSpace(format)) return;
+			Result = string.Format(format,value);
 		}
 		
 		public void FromString(string value)

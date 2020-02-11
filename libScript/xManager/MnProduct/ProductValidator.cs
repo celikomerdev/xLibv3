@@ -32,7 +32,7 @@ namespace xLib.Purchasing.Security
 			if(CanDebug) Debug.Log($"ProductValidator:GooglePlayTangle:{GooglePlayTangle.Data().HashSHA256()}");
 			if(CanDebug) Debug.Log($"ProductValidator:AppleTangle:{AppleTangle.Data().HashSHA256()}");
 			validator = new CrossPlatformValidator(GooglePlayTangle.Data(),AppleTangle.Data(),Application.identifier);
-			if(validator == null) Debug.LogException(new UnityException($"ProductValidator:validator:null"));
+			if(validator == null) Debug.LogException(new UnityException("ProductValidator:validator:null"));
 			#endif
 			
 			if(validator==null) UseValidate = false;
@@ -52,11 +52,11 @@ namespace xLib.Purchasing.Security
 			}
 			catch(IAPSecurityException ex)
 			{
-				Debug.LogException(new UnityException($"ProductValidator:IAPSecurityException",ex));
+				Debug.LogException(new UnityException("ProductValidator:IAPSecurityException",ex));
 			}
 			catch(Exception ex)
 			{
-				Debug.LogException(new UnityException($"ProductValidator:Exception",ex));
+				Debug.LogException(new UnityException("ProductValidator:Exception",ex));
 			}
 			return false;
 		}
@@ -65,7 +65,7 @@ namespace xLib.Purchasing.Security
 		{
 			if(receiptArray == null)
 			{
-				Debug.LogException(new UnityException($"ProductValidator:ReceiptArray:null"));
+				Debug.LogException(new UnityException("ProductValidator:ReceiptArray:null"));
 				return;
 			}
 			

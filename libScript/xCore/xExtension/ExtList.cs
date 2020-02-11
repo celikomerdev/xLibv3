@@ -12,7 +12,7 @@ namespace xLib
 		{
 			if(target.Count<(index+1))
 			{
-				T _temp = default(T);
+				T _temp = default;
 				
 				while(target.Count<(index+1))
 				{
@@ -27,7 +27,7 @@ namespace xLib
 		/// <summary>
 		/// Get object even if null;
 		/// </summary>
-		public static T Get<T>(this List<T> source,int index,T defaultValue=default(T))
+		public static T Get<T>(this List<T> source,int index,T defaultValue=default)
 		{
 			if(source==null) return defaultValue;
 			if(source.Count>index) return source[index];

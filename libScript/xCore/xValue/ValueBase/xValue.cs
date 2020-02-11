@@ -26,7 +26,7 @@ namespace xLib
 		}
 		
 		[Header("Value")]
-		[SerializeField]internal V value = default(V);
+		[SerializeField]internal V value = default;
 		#if UNITY_EDITOR
 		private V valueDebug;
 		#endif

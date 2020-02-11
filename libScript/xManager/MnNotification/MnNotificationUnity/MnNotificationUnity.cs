@@ -117,7 +117,7 @@ namespace xLib
 		private void NotificationReceive()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:NotificationReceive",this);
-			MnNotification.ins.NotificationReceive();
+			MnNotification.NotificationReceive();
 		}
 		
 		private void NotificationOpen(int id,string data)
@@ -126,7 +126,7 @@ namespace xLib
 			bool useData = (lastNotificationId.Value != id.ToString());
 			lastNotificationId.Value = id.ToString();
 			if(!useData) return;
-			MnNotification.ins.NotificationOpen(useData,data);
+			MnNotification.ins.NotificationOpen(true,data);
 		}
 		
 		public void CancelNotification(int id)

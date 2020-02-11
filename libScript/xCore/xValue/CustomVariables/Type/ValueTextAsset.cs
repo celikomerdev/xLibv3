@@ -36,8 +36,8 @@ namespace xLib.xValueClass
 				{
 					stringData = Value.text;
 				}
-				JToken jToken;
-				jToken = JToken.FromObject(stringData);
+
+				JToken jToken = JToken.FromObject(stringData);
 				return jToken;
 			}
 			set

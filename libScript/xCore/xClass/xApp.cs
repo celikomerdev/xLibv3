@@ -8,14 +8,14 @@ namespace xLib
 	{
 		static xApp()
 		{
-			Debug.Log($"xApp:Reset");
+			Debug.Log("xApp:Reset");
 			// xApp.FillAppVersion();
 		}
 		
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
 		public static void BeforeSplashScreen()
 		{
-			Debug.Log($"xApp:BeforeSplashScreen");
+			Debug.Log("xApp:BeforeSplashScreen");
 			persistentDataPath = Application.persistentDataPath;
 		}
 		

@@ -35,12 +35,12 @@ namespace xLib
 		}
 		
 		private static Queue<UnityAction> queue = new Queue<UnityAction>();
-		private void OnClick()
+		private static void OnClick()
 		{
 			queue.Dequeue().Invoke();
 		}
 		
-		private void ShowMessage(string value)
+		private static void ShowMessage(string value)
 		{
 			Debug.LogFormat("ShowMessage:{0}",value);
 			MnTutorial.ins.nodeMessageString.Value = value;

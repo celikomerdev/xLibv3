@@ -51,7 +51,7 @@ namespace xLib.ToolPurchase
 			if(CanDebug) Debug.Log($"{key}:productDetailsString:{productDetailsString}",this);
 			JObject productDetails = JObject.Parse(productDetailsString);
 			
-			string stringFreeTrial = productDetails.GetTokenSafe<string>("freeTrialPeriod","");
+			string stringFreeTrial = productDetails.GetTokenSafe("freeTrialPeriod","");
 			if(CanDebug) Debug.Log($"{key}:stringFreeTrial:{stringFreeTrial}",this);
 			
 			returnValue = System.Xml.XmlConvert.ToTimeSpan(stringFreeTrial);

@@ -52,9 +52,8 @@ namespace xLib.xValueClass
 					stringData = System.Convert.ToBase64String(texture2D.xEncodeToPNG());
 				}
 				if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:DataLenghtGet:{stringData.Length}",nodeSetting.objDebug);
-				
-				JToken jToken;
-				jToken = JToken.FromObject(stringData);
+
+				JToken jToken = JToken.FromObject(stringData);
 				return jToken;
 			}
 			set

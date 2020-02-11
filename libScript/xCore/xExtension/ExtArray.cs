@@ -5,27 +5,27 @@ namespace xLib
 {
 	public static class ExtArray
 	{
-		public static T Get<T>(this T[] source,int index,T defaultValue=default(T))
+		public static T Get<T>(this T[] source,int index,T defaultValue=default)
 		{
 			if(source==null) return defaultValue;
 			if(source.Length>index) return source[index];
 			return defaultValue;
 		}
 		
-		public static void Set<T>(ref T[] target,int index,T value,T defaultValue=default(T),bool initialize=true)
+		public static void Set<T>(ref T[] target,int index,T value,T defaultValue=default,bool initialize=true)
 		{
 			if(index<0) return;
 			IncreaseLenght(ref target,index,defaultValue,initialize);
 			target[index] = value;
 		}
 		
-		public static T GetSet<T>(ref T[] source,int index,T defaultValue=default(T),bool setNull=true,bool initilize=true)
+		public static T GetSet<T>(ref T[] source,int index,T defaultValue=default,bool setNull=true,bool initilize=true)
 		{
 			if(setNull) Set(ref source,index,defaultValue,defaultValue,initilize);
 			return source.Get(index,defaultValue);
 		}
 		
-		public static void IncreaseLenght<T>(ref T[] target,int index,T defaultValue=default(T),bool initialize=true)
+		public static void IncreaseLenght<T>(ref T[] target,int index,T defaultValue=default,bool initialize=true)
 		{
 			if(index<0) return;
 			if(target==null) target=new T[index+1];
@@ -41,7 +41,7 @@ namespace xLib
 			if(initialize) Initalize(ref target,defaultValue);
 		}
 		
-		public static void Initalize<T>(ref T[] target,T defaultValue=default(T))
+		public static void Initalize<T>(ref T[] target,T defaultValue=default)
 		{
 			if(target==null) target=new T[0];
 			

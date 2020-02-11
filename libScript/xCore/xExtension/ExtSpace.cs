@@ -8,7 +8,7 @@ namespace xLib
 	{
 		public static Vector3 origin = Vector3.zero;
 		
-		private static UnityAction<Vector3> listener = delegate(Vector3 arg){};
+		private static UnityAction<Vector3> listener = delegate{};
 		public static void Listener(UnityAction<Vector3> call,bool addition)
 		{
 			if(addition) listener += call;

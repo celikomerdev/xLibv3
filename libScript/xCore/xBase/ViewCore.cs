@@ -6,7 +6,7 @@ namespace xLib
 	public static class ViewCore
 	{
 		#region IsMy
-		private static bool isMy;
+		private static bool isMy = false;
 		public static bool IsMy
 		{
 			get
@@ -60,8 +60,8 @@ namespace xLib
 		#endregion
 		
 		
-		public static bool inRoom;
-		public static bool inRpc;
+		public static bool inRoom = false;
+		public static bool inRpc = false;
 		public static void RPC(string target,string key,string data){}
 	}
 }

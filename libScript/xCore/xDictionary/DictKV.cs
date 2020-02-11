@@ -22,7 +22,7 @@ namespace xLib.xDictionary
 			}
 		}
 		
-		public V GetValue(K key,V defaultCustom = default(V))
+		public V GetValue(K key,V defaultCustom = default)
 		{
 			if(key==null) return defaultValue;
 			if(dictionary.ContainsKey(key)) return dictionary[key];

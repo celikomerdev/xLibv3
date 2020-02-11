@@ -30,13 +30,13 @@ namespace xLib
 			return timeSpan.ToString();
 		}
 		
-		public string ToString(string @format,IFormatProvider provider=null)
+		public string ToString(string format,IFormatProvider provider=null)
 		{
 			if(provider == null) provider = CultureInfo.CurrentCulture;
 			string result = "";
 			
 			Regex reg_exp = new Regex("[A-Z.]+|[^A-Z.]+");
-			MatchCollection matches = reg_exp.Matches(@format);
+			MatchCollection matches = reg_exp.Matches(format);
 			foreach (Match piece in matches)
 			{
 				string piece_format = Regex.Replace(piece.Value,"[A-Z]","0");
@@ -75,7 +75,7 @@ namespace xLib
 				}
 			}
 			
-			result = timeSpan.ToString(@result,provider);
+			result = timeSpan.ToString(result,provider);
 			return result;
 		}
 	}

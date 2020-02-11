@@ -32,7 +32,7 @@ namespace xLib
 		
 		public static void DeleteAll()
 		{
-			Debug.Log($"xPersistentData:DeleteAll");
+			Debug.Log("xPersistentData:DeleteAll");
 			DirectoryInfo directoryInfo = new DirectoryInfo(xApp.xPath(""));
 			directoryInfo.Delete(true);
 		}

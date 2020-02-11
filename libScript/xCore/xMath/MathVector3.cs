@@ -37,9 +37,9 @@ namespace xLib.Mathx
 		public static bool IsClamp(ref Vector3 value, Vector3 min, Vector3 max)
 		{
 			bool returnValue = false;
-			if( MathFloat.IsClamp(ref value.x, min.x, max.x) ) returnValue = true;
-			if( MathFloat.IsClamp(ref value.y, min.y, max.y) ) returnValue = true;
-			if( MathFloat.IsClamp(ref value.z, min.z, max.z) ) returnValue = true;
+			if(MathFloat.IsClamp(ref value.x,min.x,max.x)) returnValue = true;
+			if(MathFloat.IsClamp(ref value.y,min.y,max.y)) returnValue = true;
+			if(MathFloat.IsClamp(ref value.z,min.z,max.z)) returnValue = true;
 			return returnValue;
 		}
 		#endregion

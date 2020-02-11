@@ -71,18 +71,15 @@ namespace xLib
 				JObject Values = (JObject)jObject.GetValue("Values");
 				if(Values==null) Values = jObject;
 				
-				if(Values != null)
+				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Values:true:{0}",ViewCore.CurrentId);
+				for (int i = 0; i < Value.iSerializableObject.Length; i++)
 				{
-					if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Values:true:{0}",ViewCore.CurrentId);
-					for (int i = 0; i < Value.iSerializableObject.Length; i++)
-					{
-						ISerializableObject jsonInterface = Value.iSerializableObject[i];
-						
-						JToken token = Values.GetValue(jsonInterface.Key);
-						if(token==null) token = Values.GetValue(jsonInterface.Name);
-						
-						jsonInterface.SerializedObjectRaw = token;
-					}
+					ISerializableObject jsonInterface = Value.iSerializableObject[i];
+					
+					JToken token = Values.GetValue(jsonInterface.Key);
+					if(token==null) token = Values.GetValue(jsonInterface.Name);
+					
+					jsonInterface.SerializedObjectRaw = token;
 				}
 			}
 		}

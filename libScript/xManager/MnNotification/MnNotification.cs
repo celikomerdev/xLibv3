@@ -16,7 +16,7 @@ namespace xLib
 		}
 		
 		public static Action actionNotificationReceive = delegate{};
-		public void NotificationReceive()
+		public static void NotificationReceive()
 		{
 			StPopupBar.QueueMessage(MnLocalize.GetValue("You Have New Notification"));
 			actionNotificationReceive();

@@ -75,12 +75,12 @@ namespace xLib
 			});
 		}
 		
-		private Vector3 GetWorldPointInWidget(RectTransform target, Vector3 worldPoint)
+		private static Vector3 GetWorldPointInWidget(Transform target, Vector3 worldPoint)
 		{
 			return target.InverseTransformPoint(worldPoint);
 		}
 		
-		private Vector3 GetWidgetWorldPoint(RectTransform target)
+		private static Vector3 GetWidgetWorldPoint(RectTransform target)
 		{
 			Vector3 pivotOffset = new Vector3
 			(
