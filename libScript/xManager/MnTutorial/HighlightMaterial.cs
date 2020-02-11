@@ -27,8 +27,12 @@ namespace xLib
 		protected override void Tick(float tickTime)
 		{
 			Vector2 screenPoint = targetCamera.WorldToScreenPoint(target.position);
+			
+			Vector2 position = new Vector2();
 			int pixelWidth = targetCamera.pixelWidth;
-			Vector2 position = new Vector4(screenPoint.x / pixelWidth, (screenPoint.y + (pixelWidth - targetCamera.pixelHeight) / 2f) / targetCamera.pixelWidth);
+			position.x = screenPoint.x/pixelWidth;
+			position.y = ((pixelWidth-targetCamera.pixelHeight)*0.5f+screenPoint.y)/pixelWidth;
+			
 			targetMaterial.SetVector(Center,position);
 			targetMaterial.SetFloat(Radius,target.lossyScale.z);
 		}
