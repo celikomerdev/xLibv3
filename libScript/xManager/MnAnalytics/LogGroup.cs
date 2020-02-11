@@ -38,7 +38,7 @@ namespace xLib.ToolManager
 			}
 		}
 		
-		private IEnumerator SendDirty(List<IAnalyticObject> list)
+		private IEnumerator SendDirty(IReadOnlyList<IAnalyticObject> list)
 		{
 			yield return new WaitForEndOfFrame();
 			ClearAll();

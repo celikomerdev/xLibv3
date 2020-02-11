@@ -8,7 +8,7 @@ namespace xLib
 	{
 		#region Init
 		private bool isInit = false;
-		public static System.Action actionInit = delegate{};
+		public static readonly System.Action actionInit = delegate{};
 		protected override void Inited()
 		{
 			if(isInit) return;

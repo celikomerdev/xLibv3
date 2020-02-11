@@ -40,7 +40,7 @@ namespace xLib
 			logEvent(group,key,digit,data,dict);
 		}
 		
-		public static System.Action<string,Dictionary<string,object>> logPurchase = delegate{};
+		public static readonly System.Action<string,Dictionary<string,object>> logPurchase = delegate{};
 		public void LogPurchase(string key,Dictionary<string,object> data)
 		{
 			data = Stamp(data);

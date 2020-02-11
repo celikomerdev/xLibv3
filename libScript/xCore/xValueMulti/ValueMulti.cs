@@ -5,7 +5,7 @@ namespace xLib
 {
 	public class ValueMulti<T0> : ValueBase<T0>
 	{
-		private Dictionary<string,T0> valueMulti = new Dictionary<string,T0>();
+		private readonly Dictionary<string,T0> valueMulti = new Dictionary<string,T0>();
 		
 		public override T0 ValueGet(string viewId)
 		{

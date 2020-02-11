@@ -5,7 +5,7 @@ namespace xLib
 {
 	public class WaitForFrames : CustomYieldInstruction
 	{
-		private int targetFrameCount;
+		private readonly int targetFrameCount;
 		
 		public WaitForFrames(int frame)
 		{

@@ -10,7 +10,7 @@ namespace xLib
 		[SerializeField]private Transform container = null;
 		
 		#region Collection
-		private Dictionary<GameObject,Stack<GameObject>> dictionary = new Dictionary<GameObject,Stack<GameObject>>();
+		private readonly Dictionary<GameObject,Stack<GameObject>> dictionary = new Dictionary<GameObject,Stack<GameObject>>();
 		private Stack<GameObject> GetStack(GameObject key)
 		{
 			if(dictionary.ContainsKey(key)) return dictionary[key];

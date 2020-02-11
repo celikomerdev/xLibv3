@@ -8,7 +8,7 @@ namespace xLib
 {
 	public class MnAction : SingletonM<MnAction>
 	{
-		public static List<UnityAction> listAction = new List<UnityAction>();
+		public static readonly List<UnityAction> listAction = new List<UnityAction>();
 		
 		public void CallActionNextStatic(float delay = 0)
 		{

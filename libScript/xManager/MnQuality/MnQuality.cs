@@ -26,7 +26,7 @@ namespace xLib
 		}
 		
 		[Header("System Default")]
-		private ScoreSystem scoreSystem = new ScoreSystem();
+		private readonly ScoreSystem scoreSystem = new ScoreSystem();
 		[SerializeField]private SystemDefault systemDefault = new SystemDefault();
 		[SerializeField]private ScorePlatform scorePlatform = new ScorePlatform();
 		[SerializeField]private float[] scoreQuality;

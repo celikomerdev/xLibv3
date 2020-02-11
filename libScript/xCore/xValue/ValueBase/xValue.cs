@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+// ReSharper disable FieldCanBeMadeReadOnly.Global
 
 namespace xLib
 {

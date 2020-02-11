@@ -1,4 +1,5 @@
 ﻿#if xLibv3
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -67,9 +68,9 @@ namespace xLib
 		}
 		
 		#region ToStringx2
-		public static string ToStringx2(this byte[] input)
+		public static string ToStringx2(this IEnumerable<byte> input)
 		{
-			var stringBuilder = new StringBuilder();
+			StringBuilder stringBuilder = new StringBuilder();
 			foreach (byte element in input)
 			{
 				stringBuilder.Append(element.ToString("x2"));

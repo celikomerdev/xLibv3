@@ -6,7 +6,7 @@ namespace xLib
 {
 	public class ActionSortedMulti<V> : ActionSortedBase<V>
 	{
-		private Dictionary<string,ActionSorted<V>> actionSortedMulti = new Dictionary<string,ActionSorted<V>>();
+		private readonly Dictionary<string,ActionSorted<V>> actionSortedMulti = new Dictionary<string,ActionSorted<V>>();
 		
 		public override void Listener(bool register,UnityAction<V> call,string viewId,int order)
 		{

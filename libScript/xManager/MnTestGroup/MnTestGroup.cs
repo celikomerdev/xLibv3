@@ -29,7 +29,7 @@ namespace xLib
 			}
 		}
 		
-		public static ValueVoid onRefreshGroups = new ValueVoid();
+		public static readonly ValueVoid onRefreshGroups = new ValueVoid();
 		public static int GetGroup(string key)
 		{
 			int valueTemp = MnAnalyticsGuru.GetGroup(key);

@@ -7,7 +7,7 @@ namespace xLib
 {
 	public class ActionSorted<V>
 	{
-		private SortedList<int,UnityAction<V>> sortedList = new SortedList<int,UnityAction<V>>();
+		private readonly SortedList<int,UnityAction<V>> sortedList = new SortedList<int,UnityAction<V>>();
 		
 		public void Listener(bool register,UnityAction<V> call,int order)
 		{

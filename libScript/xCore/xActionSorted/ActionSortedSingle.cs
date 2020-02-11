@@ -5,7 +5,7 @@ namespace xLib
 {
 	public class ActionSortedSingle<V> : ActionSortedBase<V>
 	{
-		private ActionSorted<V> actionSortedSingle = new ActionSorted<V>();
+		private readonly ActionSorted<V> actionSortedSingle = new ActionSorted<V>();
 		
 		public override void Listener(bool register,UnityAction<V> call,string viewId,int order)
 		{

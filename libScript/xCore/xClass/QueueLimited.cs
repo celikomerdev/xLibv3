@@ -5,8 +5,8 @@ namespace xLib
 {
 	public struct QueueLimited<T>
 	{
-		public Queue<T> queue;
-		public int limit;
+		public readonly Queue<T> queue;
+		public readonly int limit;
 		
 		public QueueLimited(int limit = int.MaxValue)
 		{

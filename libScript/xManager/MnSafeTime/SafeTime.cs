@@ -7,7 +7,7 @@ namespace xLib
 {
 	public static class SafeTime
 	{
-		public static EventUnity onCalibrate = new EventUnity();
+		public static readonly EventUnity onCalibrate = new EventUnity();
 		
 		private static DateTime dateTimeAnchor = DateTime.MinValue;
 		public static DateTime UtcNow

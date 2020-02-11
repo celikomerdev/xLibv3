@@ -5,7 +5,7 @@ namespace xLib
 {
 	public abstract class BaseWorkerM : BaseWorkM, BaseWorkerI
 	{
-		internal View view = null;
+		internal readonly View view = null;
 		protected bool isMy = true;
 		private string viewId = string.Empty;
 		public string ViewId

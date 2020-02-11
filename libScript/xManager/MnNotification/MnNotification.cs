@@ -15,7 +15,7 @@ namespace xLib
 			InitPayload();
 		}
 		
-		public static Action actionNotificationReceive = delegate{};
+		public static readonly Action actionNotificationReceive = delegate{};
 		public static void NotificationReceive()
 		{
 			StPopupBar.QueueMessage(MnLocalize.GetValue("You Have New Notification"));
@@ -50,7 +50,7 @@ namespace xLib
 		
 		#region Payload
 		[SerializeField]private UnityEngine.Object[] arrayPayload = new UnityEngine.Object[0];
-		private Dictionary<string,ISerializableObject> dictPayload = new Dictionary<string,ISerializableObject>();
+		private readonly Dictionary<string,ISerializableObject> dictPayload = new Dictionary<string,ISerializableObject>();
 		private void InitPayload()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":InitPayload");

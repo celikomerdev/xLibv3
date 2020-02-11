@@ -9,7 +9,7 @@ namespace xLib.ToolPointer
 {
 	public class PointerPinch : BaseWorkM, IPointerDownHandler, IPointerUpHandler, IDragHandler
 	{
-		private Dictionary<int,PointerData> dictionary = new Dictionary<int, PointerData>();
+		private readonly Dictionary<int,PointerData> dictionary = new Dictionary<int, PointerData>();
 		public EventFloat pointerPinch = new EventFloat();
 		
 		void IPointerDownHandler.OnPointerDown(PointerEventData value)

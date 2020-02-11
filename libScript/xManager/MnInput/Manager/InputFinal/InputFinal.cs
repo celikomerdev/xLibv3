@@ -9,7 +9,7 @@ namespace xLib.xInput
 	{
 		[Header("Axis")]
 		[SerializeField]private NodeFloat[] axis = new NodeFloat[0];
-		private Dictionary<string,NodeFloat> dictionary = new Dictionary<string,NodeFloat>();
+		private readonly Dictionary<string,NodeFloat> dictionary = new Dictionary<string,NodeFloat>();
 		
 		protected override void Awaked()
 		{

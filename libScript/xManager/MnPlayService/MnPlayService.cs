@@ -165,7 +165,7 @@ namespace xLib
 		
 		#region Invitation
 		private Invitation invitation;
-		private UnityAction onInvitationReceive = delegate(){};
+		private readonly UnityAction onInvitationReceive = delegate{};
 		private void OnInvitationReceive(Invitation value, bool shouldAutoAccept)
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnInvitationReceive:{shouldAutoAccept}:{value}",this);
@@ -174,7 +174,7 @@ namespace xLib
 			if (shouldAutoAccept) OnInvitationAccept();
 		}
 		
-		private UnityAction onInvitationAccept = delegate(){};
+		private readonly UnityAction onInvitationAccept = delegate{};
 		private void OnInvitationAccept()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnInvitationAccept",this);
@@ -182,7 +182,7 @@ namespace xLib
 		}
 		
 		//PlayGamesPlatform.Instance.TurnBased.DeclineInvitation(mIncomingInvitation.InvitationId);
-		private UnityAction onInvitationDecline = delegate(){};
+		private readonly UnityAction onInvitationDecline = delegate{};
 		private void OnInvitationDecline()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnInvitationDecline:",this);
@@ -192,7 +192,7 @@ namespace xLib
 		
 		
 		#region Match
-		private UnityAction onTurnMatchGot = delegate(){};
+		private readonly UnityAction onTurnMatchGot = delegate{};
 		private void OnTurnMatchGot(TurnBasedMatch value, bool shouldAutoLaunch)
 		{
 			if(CanDebug) Debug.Log($"{this.name}:OnTurnMatchGot:{shouldAutoLaunch}:{value}",this);

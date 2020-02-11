@@ -12,7 +12,7 @@ namespace xLib
 		[SerializeField]private EventWWW eventWWW = new EventWWW();
 		
 		#region Url
-		private ValueBase<string> valueUrl = new ValueMulti<string>();
+		private readonly ValueBase<string> valueUrl = new ValueMulti<string>();
 		public string Url
 		{
 			set
