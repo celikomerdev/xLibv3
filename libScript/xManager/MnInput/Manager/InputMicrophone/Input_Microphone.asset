@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2225de60c87cec046ac49a9aced7735c, type: 3}
-  m_Name: Input_Unity_Sprint
+  m_Name: Input_Microphone
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,7 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: Sprint
+      key: 6580275e0af8fd54f85402ac2da8b96e
       isMulti: 0
     value: 0
     skipCompareRpc: 1
