@@ -20,7 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: Jump
+      key: 769c28caa3b0b07428bcc1801b852123
       isMulti: 0
     value: 0
     skipCompareRpc: 1

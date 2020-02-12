@@ -20,7 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: Crouch
+      key: 13f0327e73add60428ff9a110ec4a49b
       isMulti: 0
     value: 0
     skipCompareRpc: 1
