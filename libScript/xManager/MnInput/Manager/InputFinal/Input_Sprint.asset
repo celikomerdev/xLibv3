@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2225de60c87cec046ac49a9aced7735c, type: 3}
-  m_Name: Input_Vertical
+  m_Name: Input_Sprint
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,7 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: d02bbf93967b6f44d94ff17c94b1ce01
+      key: 027c693c332b0254998a22c51ce7e2d8
       isMulti: 1
     value: 0
     skipCompareRpc: 1

@@ -25,6 +25,6 @@ MonoBehaviour:
     value: 0
     skipCompareRpc: 1
     isCompare: 1
-    snapDefault: 0
+    snapDefault: 1
     useThreshold: 0
     valueThreshold: 0

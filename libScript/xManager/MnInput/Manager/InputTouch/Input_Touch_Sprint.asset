@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2225de60c87cec046ac49a9aced7735c, type: 3}
-  m_Name: Input_Fire2
+  m_Name: Input_Touch_Sprint
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,8 +20,8 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: 464eaa06f37b25a4d85c1f62b001499c
-      isMulti: 1
+      key: c31006fae5994e04bb99f43917c4f30f
+      isMulti: 0
     value: 0
     skipCompareRpc: 1
     isCompare: 1
