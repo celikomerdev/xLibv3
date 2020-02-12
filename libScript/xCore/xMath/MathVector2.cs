@@ -26,20 +26,6 @@ namespace xLib.Mathx
 			if( MathFloat.IsClamp(ref value.y, min.y, max.y) ) returnValue = true;
 			return returnValue;
 		}
-		
-		public static Vector2 LerpAngle (Vector2 from, Vector2 to, float t)
-		{
-			from.x = Mathf.LerpAngle (from.x, to.x, t);
-			from.y = Mathf.LerpAngle (from.y, to.y, t);
-			return from;
-		}
-		
-		public static Vector2 SmoothDampAngle (Vector2 current, Vector2 target, ref Vector2 vel, float t)
-		{
-			current.x = Mathf.SmoothDampAngle (current.x, target.x, ref vel.x, t);
-			current.y = Mathf.SmoothDampAngle (current.y, target.y, ref vel.y, t);
-			return current;
-		}
 	}
 }
 #endif

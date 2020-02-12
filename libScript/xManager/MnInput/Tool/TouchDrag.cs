@@ -1,15 +1,15 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 using UnityEngine.EventSystems;
 using xLib.xNode.NodeObject;
 
 namespace xLib.xInput
 {
-	public class TouchDrag : BaseM, IPointerDownHandler, IPointerUpHandler, IDragHandler
+	public class TouchDrag : BaseWorkM, IPointerDownHandler, IPointerUpHandler, IDragHandler
 	{
-		public NodeFloat axisX;
-		public NodeFloat axisY;
-		public Vector2 multiplier;
+		[SerializeField]private NodeFloat axisX = null;
+		[SerializeField]private NodeFloat axisY = null;
+		[SerializeField]private Vector2 multiplier = Vector2.one;
 		
 		#region Pointer
 		void IPointerDownHandler.OnPointerDown(PointerEventData pointer)
@@ -32,9 +32,9 @@ namespace xLib.xInput
 		#endregion
 		
 		#region Refresh
-		private Vector2 vectorDelta;
-		private Vector2 vectorPrev;
-		private Vector2 vectorOutput;
+		private Vector2 vectorDelta = Vector2.zero;
+		private Vector2 vectorPrev = Vector2.zero;
+		private Vector2 vectorOutput = Vector2.zero;
 		private void Refresh(PointerEventData pointer)
 		{
 			vectorDelta = pointer.position - vectorPrev;

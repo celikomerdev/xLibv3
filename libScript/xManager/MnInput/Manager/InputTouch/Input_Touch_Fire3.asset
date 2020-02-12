@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2225de60c87cec046ac49a9aced7735c, type: 3}
-  m_Name: Input_Unity_Horizontal
+  m_Name: Input_Touch_Fire3
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -20,7 +20,7 @@ MonoBehaviour:
     runInEditMode: 0
   nodeValue:
     nodeSetting:
-      key: Horizontal
+      key: c622e0ca3a91aa445a9e15e1680add18
       isMulti: 0
     value: 0
     skipCompareRpc: 1

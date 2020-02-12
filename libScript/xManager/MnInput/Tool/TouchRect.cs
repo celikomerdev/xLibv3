@@ -1,19 +1,19 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 using UnityEngine.EventSystems;
 using xLib.xNode.NodeObject;
 
 namespace xLib.xTool.xInput
 {
-	public class TouchRect : BaseM, IPointerDownHandler, IPointerUpHandler, IDragHandler
+	public class TouchRect : BaseWorkM, IPointerDownHandler, IPointerUpHandler, IDragHandler
 	{
-		public NodeFloat axisX;
-		public NodeFloat axisY;
-		public Transform visual;
-		public Transform handle;
-		public bool canSnap = true;
-		public bool canMove = true;
-		public Vector3 range;
+		[SerializeField]private NodeFloat axisX = null;
+		[SerializeField]private NodeFloat axisY = null;
+		[SerializeField]private Transform visual = null;
+		[SerializeField]private Transform handle = null;
+		[SerializeField]private bool canSnap = true;
+		[SerializeField]private bool canMove = true;
+		[SerializeField]private Vector2 range = Vector2.zero;
 		
 		#region Mono
 		private void OnDisable()

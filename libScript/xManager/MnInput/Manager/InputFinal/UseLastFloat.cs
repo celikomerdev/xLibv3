@@ -15,11 +15,9 @@ namespace xLib.xInput
 			for (int i = input.Length-1; i >= 0 ; i--)
 			{
 				NodeFloat tempNode = input[i];
-				if(tempNode.Value != tempNode.ValueDefault)
-				{
-					output.Value = tempNode.Value;
-					break;
-				}
+				if(tempNode.Value == tempNode.ValueDefault) continue;
+				output.Value = tempNode.Value;
+				return;
 			}
 			output.Value = output.ValueDefault;
 		}

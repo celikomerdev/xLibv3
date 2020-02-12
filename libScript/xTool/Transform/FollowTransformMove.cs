@@ -27,7 +27,7 @@ namespace xLib.ToolFollow
 			if(lerp>0)
 			{
 				trans.SpacePositionSet(Vector3.MoveTowards(trans.SpacePositionGet(),target.SpacePositionGet(),lerp*tickTime));
-				trans.eulerAngles = MathVector3.MoveTowardsAngle(trans.eulerAngles,target.eulerAngles,lerp*tickTime);
+				trans.eulerAngles = MathAngle.MoveTowardsAngle(trans.eulerAngles,target.eulerAngles,lerp*tickTime);
 				trans.localScale = Vector3.MoveTowards(trans.localScale,target.localScale,lerp*tickTime);
 			}
 			else

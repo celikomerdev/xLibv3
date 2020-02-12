@@ -1,40 +1,42 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 using UnityEngine.EventSystems;
+using xLib.EventClass;
 using xLib.Mathx;
-using xLib.xInput;
-using xLib.xNode.NodeObject;
 
 namespace xLib.xTool.xInput
 {
-	public class TouchWheel : BaseM, IPointerDownHandler, IPointerUpHandler, IDragHandler
+	public class TouchWheel : BaseWorkM, IPointerDownHandler, IPointerUpHandler, IDragHandler
 	{
-		public NodeFloat axis;
-		public Transform pivot;
-		public float rangeAngle = 480;
+		[SerializeField]private float rangeAngle = 480f;
+		[SerializeField]private Transform pivot = null;
+		[SerializeField]private EventFloat axis = new EventFloat();
 		
 		#region Pointer
-		private Vector2 pivotScreenPos;
-		public void OnPointerDown(PointerEventData pointer)
+		private Vector2 pivotScreenPos = Vector2.zero;
+		void IPointerDownHandler.OnPointerDown(PointerEventData pointer)
 		{
-			angleTarget = -rangeAngle*axis.Value;
+			if(CanDebug) Debug.Log($"{this.name}:OnPointerDown",this);
+			angleTarget = 0;//*axis.Value;
 			Refresh();
 			
 			pivotScreenPos = pointer.pressEventCamera.WorldToScreenPoint(pivot.position);
 			anglePrevious = MathAngle.Angle360(pivotScreenPos,pointer.position);
 		}
 		
-		public void OnPointerUp(PointerEventData pointer)
+		void IPointerUpHandler.OnPointerUp(PointerEventData pointer)
 		{
+			if(CanDebug) Debug.Log($"{this.name}:OnPointerUp",this);
 			angleTarget = 0;
 			Refresh();
 		}
 		
-		private float angleTarget;
-		private float anglePrevious;
-		private float angleCurrent;
-		public void OnDrag(PointerEventData pointer)
+		private float angleTarget = 0;
+		private float anglePrevious = 0;
+		private float angleCurrent = 0;
+		void IDragHandler.OnDrag(PointerEventData pointer)
 		{
+			if(CanDebug) Debug.Log($"{this.name}:OnDrag",this);
 			angleCurrent = MathAngle.Angle360(pivotScreenPos,pointer.position);
 			angleTarget += MathAngle.DeltaAngle(anglePrevious,angleCurrent);
 			anglePrevious = angleCurrent;

@@ -44,52 +44,6 @@ namespace xLib.Mathx
 		}
 		#endregion
 		
-		
-		#region Angle
-		public static Vector3 ClampAngle (Vector3 value, Vector3 min, Vector3 max)
-		{
-			value.x = MathAngle.ClampAngle (value.x, min.x, max.x);
-			value.y = MathAngle.ClampAngle (value.y, min.y, max.y);
-			value.z = MathAngle.ClampAngle (value.z, min.z, max.z);
-			return value;
-		}
-		
-		public static Vector3 LerpAngle (Vector3 from, Vector3 to, float t)
-		{
-			from.x = Mathf.LerpAngle (from.x, to.x, t);
-			from.y = Mathf.LerpAngle (from.y, to.y, t);
-			from.z = Mathf.LerpAngle (from.z, to.z, t);
-			return from;
-		}
-		
-		public static Vector3 MoveTowardsAngle (Vector3 from, Vector3 to, float t)
-		{
-			from.x = Mathf.MoveTowardsAngle (from.x, to.x, t);
-			from.y = Mathf.MoveTowardsAngle (from.y, to.y, t);
-			from.z = Mathf.MoveTowardsAngle (from.z, to.z, t);
-			return from;
-		}
-		
-		public static Vector3 Lerp(Vector3 a, Vector3 b, Vector3 t)
-		{
-			Vector3 temp = Vector3.zero;
-			
-			temp.x = Mathf.LerpUnclamped(a.x, b.x, t.x);
-			temp.y = Mathf.LerpUnclamped(a.y, b.y, t.y);
-			temp.z = Mathf.LerpUnclamped(a.z, b.z, t.z);
-			
-			return temp;
-		}
-		
-		public static Vector3 SmoothDampAngle (Vector3 current, Vector3 target, ref Vector3 vel, float t)
-		{
-			current.x = Mathf.SmoothDampAngle (current.x, target.x, ref vel.x, t);
-			current.y = Mathf.SmoothDampAngle (current.y, target.y, ref vel.y, t);
-			current.z = Mathf.SmoothDampAngle (current.z, target.z, ref vel.z, t);
-			return current;
-		}
-		#endregion
-		
 		public static float Remap(Vector3 a, Vector3 b, Vector3 value)
 		{
 			Vector3 AB = b-a;

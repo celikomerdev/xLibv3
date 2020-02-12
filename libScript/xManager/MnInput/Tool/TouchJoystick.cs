@@ -1,18 +1,17 @@
-﻿#if xLibv2
+﻿#if xLibv3
 using UnityEngine;
 using UnityEngine.EventSystems;
 using xLib.xNode.NodeObject;
 
 namespace xLib.xTool.xInput
 {
-	public class TouchJoystick : BaseM, IPointerDownHandler, IPointerUpHandler, IDragHandler
+	public class TouchJoystick : BaseWorkM, IPointerDownHandler, IPointerUpHandler, IDragHandler
 	{
-		//[Separator("Try TouchRect")]
-		public NodeFloat axisX;
-		public NodeFloat axisY;
-		public float range;
-		private Vector2 vectorOutput;
-		public Transform handle;
+		[SerializeField]private NodeFloat axisX = null;
+		[SerializeField]private NodeFloat axisY = null;
+		[SerializeField]private float range = 100;
+		[SerializeField]private Transform handle = null;
+		private Vector2 vectorOutput = Vector2.zero;
 		
 		#region Pointer
 		void IPointerDownHandler.OnPointerDown(PointerEventData pointer)
