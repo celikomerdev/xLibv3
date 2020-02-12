@@ -9,7 +9,7 @@ namespace xLib.ToolTweener
 	{
 		[SerializeField]private NodeFloat assetFloat = null;
 		[SerializeField]private Tween target = null;
-		[SerializeField]private float lerp = 4;
+		[SerializeField]private float speed = 4;
 		[SerializeField]private float multiplier = 1;
 		[SerializeField]private bool isAbsolute = false;
 		
@@ -28,7 +28,7 @@ namespace xLib.ToolTweener
 			valueCurrent = multiplier*assetFloat.Value;
 			if(isAbsolute) valueCurrent = Mathf.Abs(valueCurrent);
 			
-			if(lerp<100) valueSmooth = Mathf.Lerp(valueSmooth,valueCurrent,tickTime*lerp);
+			if(speed<100) valueSmooth = Mathf.Lerp(valueSmooth,valueCurrent,tickTime*speed);
 			else valueSmooth = valueCurrent;
 			
 			target.SetBaseRatio(valueSmooth);

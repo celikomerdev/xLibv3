@@ -8,7 +8,7 @@ namespace xLib.xInput
 	{
 		[Header("Input")]
 		[SerializeField]private NodeFloat multiplier = null;
-		[SerializeField]private NodeFloat lerp = null;
+		[SerializeField]private NodeFloat speed = null;
 		
 		[SerializeField]private bool calibrateAuto = false;
 		private Vector3 valueZero = Vector3.zero;
@@ -55,7 +55,7 @@ namespace xLib.xInput
 			valueCurrent *= multiplier.Value;
 			valueCurrent = Mathx.MathVector3.Clamp(valueCurrent);
 			
-			if(lerp.Value<100) valueSmooth = Vector3.Lerp(valueSmooth,valueCurrent,lerp.Value*tickTime);
+			if(speed.Value<100) valueSmooth = Vector3.Lerp(valueSmooth,valueCurrent,tickTime*speed.Value);
 			else valueSmooth = valueCurrent;
 		}
 		

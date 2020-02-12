@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 using UnityEngine;
+using xLib.EventClass;
 using xLib.xNode.NodeObject;
 
 namespace xLib.xInput
@@ -7,19 +8,20 @@ namespace xLib.xInput
 	public class UseLastFloat : BaseTickNodeM
 	{
 		[Header("Node")]
-		[SerializeField]private NodeFloat output = null;
 		[SerializeField]private NodeFloat[] input = new NodeFloat[0];
+		[SerializeField]private EventFloat eventFloat = new EventFloat();
 		
 		protected override void Tick(float tickTime)
 		{
+			float tempOutput = 0;
 			for (int i = input.Length-1; i >= 0 ; i--)
 			{
 				NodeFloat tempNode = input[i];
 				if(tempNode.Value == tempNode.ValueDefault) continue;
-				output.Value = tempNode.Value;
-				return;
+				tempOutput = tempNode.Value;
+				break;
 			}
-			output.Value = output.ValueDefault;
+			eventFloat.Invoke(tempOutput);
 		}
 	}
 }

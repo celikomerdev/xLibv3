@@ -11,7 +11,7 @@ namespace xLib.xInput
 		[SerializeField]private bool calibrateAuto = false;
 		
 		[SerializeField]private float multiplier = 1;
-		[SerializeField]private float lerp = 10;
+		[SerializeField]private float speed = 10;
 		
 		[SerializeField]private float threshold = 0.1f;
 		private float valueZero;
@@ -51,7 +51,7 @@ namespace xLib.xInput
 		#region Work
 		private void Work(float tickTime)
 		{
-			valueSmooth = Mathf.Lerp(valueSmooth,microphone.valueOutput-valueZero,lerp*tickTime);
+			valueSmooth = Mathf.Lerp(valueSmooth,microphone.valueOutput-valueZero,tickTime*speed);
 			valueCurrent = valueSmooth*multiplier;
 			if(threshold>valueCurrent) valueCurrent = 0;
 			valueCurrent = Mathf.Clamp01(valueCurrent);

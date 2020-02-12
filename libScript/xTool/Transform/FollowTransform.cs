@@ -20,16 +20,16 @@ namespace xLib.ToolFollow
 				this.enabled = (value!=null);
 			}
 		}
-		[SerializeField]private float lerp = 1;
+		[SerializeField]private float speed = 1;
 		
 		protected override void Tick(float tickTime)
 		{
 			if(!target) return;
-			if(lerp>0)
+			if(speed<100)
 			{
-				trans.SpacePositionSet(Vector3.Lerp(trans.SpacePositionGet(),target.SpacePositionGet(),lerp*tickTime));
-				trans.eulerAngles = MathAngle.LerpAngle(trans.eulerAngles,target.eulerAngles,lerp*tickTime);
-				trans.localScale = Vector3.Lerp(trans.localScale,target.localScale,lerp*tickTime);
+				trans.SpacePositionSet(Vector3.Lerp(trans.SpacePositionGet(),target.SpacePositionGet(),tickTime*speed));
+				trans.eulerAngles = MathAngle.LerpAngle(trans.eulerAngles,target.eulerAngles,tickTime*speed);
+				trans.localScale = Vector3.Lerp(trans.localScale,target.localScale,tickTime*speed);
 			}
 			else
 			{
