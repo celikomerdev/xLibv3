@@ -11,6 +11,7 @@ namespace xLib.ToolOperation
 		{
 			if(!init) return;
 			operationAction = CreateOperation();
+			operationAction();
 		}
 		
 		#region Property
