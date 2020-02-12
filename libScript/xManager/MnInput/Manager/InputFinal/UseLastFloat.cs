@@ -4,7 +4,7 @@ using xLib.xNode.NodeObject;
 
 namespace xLib.xInput
 {
-	public class UseFirstFloat : BaseTickNodeM
+	public class UseLastFloat : BaseTickNodeM
 	{
 		[Header("Node")]
 		[SerializeField]private NodeFloat output = null;
@@ -12,7 +12,7 @@ namespace xLib.xInput
 		
 		protected override void Tick(float tickTime)
 		{
-			for (int i = 0; i < input.Length; i++)
+			for (int i = input.Length-1; i >= 0 ; i--)
 			{
 				NodeFloat tempNode = input[i];
 				if(tempNode.Value != tempNode.ValueDefault)

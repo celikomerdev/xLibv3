@@ -14,7 +14,7 @@ namespace xLib.xInput
 		protected override void Tick(float tickTime)
 		{
 			float tempOutput = output.ValueDefault;
-			for (int i = 0; i < input.Length; i++)
+			for (int i = input.Length-1; i >= 0 ; i--)
 			{
 				NodeFloat tempNode = input[i];
 				if(tempOutput*multiplier<tempNode.Value*multiplier) tempOutput = tempNode.Value;
