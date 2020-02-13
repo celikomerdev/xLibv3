@@ -60,6 +60,7 @@ namespace xLib.ToolPurchase
 	}
 }
 #else
+using System;
 using UnityEngine;
 using xLib.EventClass;
 
