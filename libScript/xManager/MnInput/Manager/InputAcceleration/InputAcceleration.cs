@@ -1,80 +1,54 @@
 ﻿#if xLibv3
 using UnityEngine;
-using xLib.xNode.NodeObject;
+using xLib.EventClass;
 
 namespace xLib.xInput
 {
 	public class InputAcceleration : BaseTickNodeM
 	{
 		[Header("Input")]
-		[SerializeField]private NodeFloat multiplier = null;
-		[SerializeField]private NodeFloat speed = null;
-		
 		[SerializeField]private bool calibrateAuto = false;
 		private Vector3 valueZero = Vector3.zero;
 		
 		[Header("Output")]
 		private Vector3 valueCurrent = Vector3.zero;
-		private Vector3 valueSmooth = Vector3.zero;
 		
 		[Header("Axis")]
-		[SerializeField]private NodeFloat axisX = null;
-		[SerializeField]private NodeFloat axisY = null;
-		[SerializeField]private NodeFloat axisZ = null;
+		[SerializeField]private EventFloat axisX = new EventFloat();
+		[SerializeField]private EventFloat axisY = new EventFloat();
+		[SerializeField]private EventFloat axisZ = new EventFloat();
 		
 		
 		#region Mono
 		protected override bool TryRegister(bool register)
 		{
-			if(register)
-			{
-				Calibrate(false);
-			}
-			else
-			{
-				valueCurrent = Vector3.zero;
-				valueSmooth = Vector3.zero;
-				SetAxis();
-			}
-			
+			Calibrate(false);
+			valueCurrent = Vector3.zero;
+			SetAxis();
 			return base.TryRegister(register);
 		}
 		
 		protected override void Tick(float tickTime)
 		{
-			Work(tickTime);
+			valueCurrent = Input.acceleration-valueZero;
 			SetAxis();
 		}
 		#endregion
 		
 		
-		#region Work
-		private void Work(float tickTime)
-		{
-			valueCurrent = Input.acceleration-valueZero;
-			valueCurrent *= multiplier.Value;
-			valueCurrent = Mathx.MathVector3.Clamp(valueCurrent);
-			
-			if(speed.Value<100) valueSmooth = Vector3.Lerp(valueSmooth,valueCurrent,tickTime*speed.Value);
-			else valueSmooth = valueCurrent;
-		}
-		
+		#region Custom
 		private void SetAxis()
 		{
-			axisX.Value = valueSmooth.x;
-			axisY.Value = valueSmooth.y;
-			axisZ.Value = valueSmooth.z;
+			axisX.Value = valueCurrent.x;
+			axisY.Value = valueCurrent.y;
+			axisZ.Value = valueCurrent.z;
 		}
-		#endregion
 		
-		
-		#region Calibrate
 		public void Calibrate(bool calibrateForced)
 		{
 			if(calibrateAuto || calibrateForced)
 			{
 				valueZero = Input.acceleration;
-				valueSmooth = Vector3.zero;
 			}
 		}
 		#endregion
