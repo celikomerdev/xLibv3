@@ -1,13 +1,53 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &-7728359331726938689
+--- !u!28 &-5030517234213618348
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NotoSansKR-Regular Atlas
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 0
+  m_Height: 0
+  m_CompleteImageSize: 0
+  m_TextureFormat: 1
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 0
+  image data: 0
+  _typelessdata: 
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
+--- !u!21 &-4963183717084021566
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kanit-Regular Atlas Material
+  m_Name: NotoSansKR-Regular Atlas Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -32,7 +72,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: -1166086996466018045}
+        m_Texture: {fileID: -5030517234213618348}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineTex:
@@ -68,8 +108,8 @@ Material:
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.8888889
-    - _ScaleRatioB: 0.7222222
-    - _ScaleRatioC: 0.7222222
+    - _ScaleRatioB: 0.7777778
+    - _ScaleRatioC: 0.7777778
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -101,46 +141,6 @@ Material:
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
---- !u!28 &-1166086996466018045
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Kanit-Regular Atlas
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 0
-  m_Height: 0
-  m_CompleteImageSize: 0
-  m_TextureFormat: 1
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 0
-  image data: 0
-  _typelessdata: 
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,41 +151,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: Kanit-Regular SDF
+  m_Name: NotoSansKR_Regular SDF
   m_EditorClassIdentifier: 
-  hashCode: 239877087
-  material: {fileID: -7728359331726938689}
-  materialHashCode: 41949710
+  hashCode: -1620562568
+  material: {fileID: -4963183717084021566}
+  materialHashCode: 1474868667
   m_Version: 1.1.0
-  m_SourceFontFileGUID: 71195dbb459890440aab8619ab65f467
-  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 71195dbb459890440aab8619ab65f467,
+  m_SourceFontFileGUID: 163b11114fc79ae4bb520e4a5b217ae5
+  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 163b11114fc79ae4bb520e4a5b217ae5,
     type: 3}
-  m_SourceFontFile: {fileID: 12800000, guid: 71195dbb459890440aab8619ab65f467, type: 3}
+  m_SourceFontFile: {fileID: 12800000, guid: 163b11114fc79ae4bb520e4a5b217ae5, type: 3}
   m_AtlasPopulationMode: 1
   m_FaceInfo:
-    m_FamilyName: Kanit
+    m_FamilyName: Noto Sans KR
     m_StyleName: Regular
     m_PointSize: 40
     m_Scale: 1
-    m_LineHeight: 59.8
-    m_AscentLine: 44
-    m_CapLine: 25
-    m_MeanLine: 19
+    m_LineHeight: 59.2
+    m_AscentLine: 46.4
+    m_CapLine: 29
+    m_MeanLine: 22
     m_Baseline: 0
-    m_DescentLine: -15.8
-    m_SuperscriptOffset: 44
+    m_DescentLine: -12.8
+    m_SuperscriptOffset: 46.4
     m_SuperscriptSize: 0.5
-    m_SubscriptOffset: -15.8
+    m_SubscriptOffset: -12.8
     m_SubscriptSize: 0.5
-    m_UnderlineOffset: -4
+    m_UnderlineOffset: -6
     m_UnderlineThickness: 2
-    m_StrikethroughOffset: 7.6
+    m_StrikethroughOffset: 8.8
     m_StrikethroughThickness: 2
-    m_TabWidth: 15
+    m_TabWidth: 9
   m_GlyphTable: []
   m_CharacterTable: []
   m_AtlasTextures:
-  - {fileID: -1166086996466018045}
+  - {fileID: -5030517234213618348}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 1
   m_UsedGlyphRects: []
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_FallbackFontAssetTable: []
   m_CreationSettings:
     sourceFontFileName: 
-    sourceFontFileGUID: 71195dbb459890440aab8619ab65f467
+    sourceFontFileGUID: 163b11114fc79ae4bb520e4a5b217ae5
     pointSizeSamplingMode: 0
     pointSize: 40
     padding: 8

@@ -1,53 +1,13 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!28 &-5736510506974000940
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: NotoSansSC-Regular Atlas
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 0
-  m_Height: 0
-  m_CompleteImageSize: 0
-  m_TextureFormat: 1
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 0
-  image data: 0
-  _typelessdata: 
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
---- !u!21 &-1079868071325245199
+--- !u!21 &-1522903182929935663
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NotoSansSC-Regular Atlas Material
+  m_Name: Barlow_Condensed_Regular Atlas Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -72,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: -5736510506974000940}
+        m_Texture: {fileID: 5087019103448877261}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineTex:
@@ -108,8 +68,8 @@ Material:
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.8888889
-    - _ScaleRatioB: 0.7777778
-    - _ScaleRatioC: 0.7777778
+    - _ScaleRatioB: 0.7222222
+    - _ScaleRatioC: 0.7222222
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -151,41 +111,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: NotoSansSC-Regular SDF
+  m_Name: Barlow_Condensed_Regular SDF
   m_EditorClassIdentifier: 
-  hashCode: -185755261
-  material: {fileID: -1079868071325245199}
-  materialHashCode: -1965093038
+  hashCode: 1480660241
+  material: {fileID: -1522903182929935663}
+  materialHashCode: 162583936
   m_Version: 1.1.0
-  m_SourceFontFileGUID: 3b64e8d41f7746d4ebaed7a9c7ab74f2
-  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 3b64e8d41f7746d4ebaed7a9c7ab74f2,
+  m_SourceFontFileGUID: 2a9d9e05e167f194fb0314d9ad7db07d
+  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 2a9d9e05e167f194fb0314d9ad7db07d,
     type: 3}
-  m_SourceFontFile: {fileID: 12800000, guid: 3b64e8d41f7746d4ebaed7a9c7ab74f2, type: 3}
+  m_SourceFontFile: {fileID: 12800000, guid: 2a9d9e05e167f194fb0314d9ad7db07d, type: 3}
   m_AtlasPopulationMode: 1
   m_FaceInfo:
-    m_FamilyName: Noto Sans SC
+    m_FamilyName: Barlow Condensed
     m_StyleName: Regular
     m_PointSize: 40
     m_Scale: 1
-    m_LineHeight: 59.2
-    m_AscentLine: 46.4
+    m_LineHeight: 48
+    m_AscentLine: 40
     m_CapLine: 29
-    m_MeanLine: 22
+    m_MeanLine: 21
     m_Baseline: 0
-    m_DescentLine: -12.8
-    m_SuperscriptOffset: 46.4
+    m_DescentLine: -8
+    m_SuperscriptOffset: 40
     m_SuperscriptSize: 0.5
-    m_SubscriptOffset: -12.8
+    m_SubscriptOffset: -8
     m_SubscriptSize: 0.5
-    m_UnderlineOffset: -6
+    m_UnderlineOffset: -4
     m_UnderlineThickness: 2
-    m_StrikethroughOffset: 8.8
+    m_StrikethroughOffset: 8.4
     m_StrikethroughThickness: 2
-    m_TabWidth: 9
+    m_TabWidth: 8
   m_GlyphTable: []
   m_CharacterTable: []
   m_AtlasTextures:
-  - {fileID: -5736510506974000940}
+  - {fileID: 5087019103448877261}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 1
   m_UsedGlyphRects: []
@@ -230,7 +190,7 @@ MonoBehaviour:
   m_FallbackFontAssetTable: []
   m_CreationSettings:
     sourceFontFileName: 
-    sourceFontFileGUID: 3b64e8d41f7746d4ebaed7a9c7ab74f2
+    sourceFontFileGUID: 2a9d9e05e167f194fb0314d9ad7db07d
     pointSizeSamplingMode: 0
     pointSize: 40
     padding: 8
@@ -273,3 +233,43 @@ MonoBehaviour:
   boldSpacing: 5
   italicStyle: 35
   tabSize: 10
+--- !u!28 &5087019103448877261
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Barlow_Condensed_Regular Atlas
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 0
+  m_Height: 0
+  m_CompleteImageSize: 0
+  m_TextureFormat: 1
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 0
+  image data: 0
+  _typelessdata: 
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 

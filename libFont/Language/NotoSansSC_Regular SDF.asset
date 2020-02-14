@@ -1,12 +1,12 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!28 &-5030517234213618348
+--- !u!28 &-5736510506974000940
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NotoSansKR-Regular Atlas
+  m_Name: NotoSansSC-Regular Atlas
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -40,14 +40,14 @@ Texture2D:
     offset: 0
     size: 0
     path: 
---- !u!21 &-4963183717084021566
+--- !u!21 &-1079868071325245199
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NotoSansKR-Regular Atlas Material
+  m_Name: NotoSansSC-Regular Atlas Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -72,7 +72,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: -5030517234213618348}
+        m_Texture: {fileID: -5736510506974000940}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineTex:
@@ -151,19 +151,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: NotoSansKR-Regular SDF
+  m_Name: NotoSansSC_Regular SDF
   m_EditorClassIdentifier: 
-  hashCode: -887855542
-  material: {fileID: -4963183717084021566}
-  materialHashCode: 1474868667
+  hashCode: 1477073393
+  material: {fileID: -1079868071325245199}
+  materialHashCode: -1965093038
   m_Version: 1.1.0
-  m_SourceFontFileGUID: 163b11114fc79ae4bb520e4a5b217ae5
-  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 163b11114fc79ae4bb520e4a5b217ae5,
+  m_SourceFontFileGUID: 3b64e8d41f7746d4ebaed7a9c7ab74f2
+  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 3b64e8d41f7746d4ebaed7a9c7ab74f2,
     type: 3}
-  m_SourceFontFile: {fileID: 12800000, guid: 163b11114fc79ae4bb520e4a5b217ae5, type: 3}
+  m_SourceFontFile: {fileID: 12800000, guid: 3b64e8d41f7746d4ebaed7a9c7ab74f2, type: 3}
   m_AtlasPopulationMode: 1
   m_FaceInfo:
-    m_FamilyName: Noto Sans KR
+    m_FamilyName: Noto Sans SC
     m_StyleName: Regular
     m_PointSize: 40
     m_Scale: 1
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_GlyphTable: []
   m_CharacterTable: []
   m_AtlasTextures:
-  - {fileID: -5030517234213618348}
+  - {fileID: -5736510506974000940}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 1
   m_UsedGlyphRects: []
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_FallbackFontAssetTable: []
   m_CreationSettings:
     sourceFontFileName: 
-    sourceFontFileGUID: 163b11114fc79ae4bb520e4a5b217ae5
+    sourceFontFileGUID: 3b64e8d41f7746d4ebaed7a9c7ab74f2
     pointSizeSamplingMode: 0
     pointSize: 40
     padding: 8

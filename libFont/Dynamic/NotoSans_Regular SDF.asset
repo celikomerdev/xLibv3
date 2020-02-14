@@ -1,12 +1,12 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!28 &-3368350036082889766
+--- !u!28 &-9054197136000892344
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: arial-unicode-ms Atlas
+  m_Name: NotoSans_Regular SDF Atlas
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -40,14 +40,14 @@ Texture2D:
     offset: 0
     size: 0
     path: 
---- !u!21 &-758433169523747302
+--- !u!21 &-8057945017909032370
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: arial-unicode-ms Atlas Material
+  m_Name: NotoSans_Regular Atlas Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -72,7 +72,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: -3368350036082889766}
+        m_Texture: {fileID: -9054197136000892344}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineTex:
@@ -107,9 +107,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 0.85714287
-    - _ScaleRatioB: 0.75
-    - _ScaleRatioC: 0.75
+    - _ScaleRatioA: 0.8888889
+    - _ScaleRatioB: 0.7222222
+    - _ScaleRatioC: 0.7222222
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -151,41 +151,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: arial-unicode-ms SDF
+  m_Name: NotoSans_Regular SDF
   m_EditorClassIdentifier: 
-  hashCode: 340927495
-  material: {fileID: -758433169523747302}
-  materialHashCode: -509650602
+  hashCode: 2030715457
+  material: {fileID: -8057945017909032370}
+  materialHashCode: -1270024752
   m_Version: 1.1.0
-  m_SourceFontFileGUID: ea5889fa611fd4140a85d82b4afac640
-  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: ea5889fa611fd4140a85d82b4afac640,
+  m_SourceFontFileGUID: eb6c6a6b87078a94995dcf156fb2e657
+  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: eb6c6a6b87078a94995dcf156fb2e657,
     type: 3}
-  m_SourceFontFile: {fileID: 12800000, guid: ea5889fa611fd4140a85d82b4afac640, type: 3}
+  m_SourceFontFile: {fileID: 12800000, guid: eb6c6a6b87078a94995dcf156fb2e657, type: 3}
   m_AtlasPopulationMode: 1
   m_FaceInfo:
-    m_FamilyName: Arial Unicode MS
+    m_FamilyName: Noto Sans
     m_StyleName: Regular
     m_PointSize: 40
     m_Scale: 1
-    m_LineHeight: 53.59375
+    m_LineHeight: 54.472656
     m_AscentLine: 42.753906
     m_CapLine: 29
     m_MeanLine: 21
     m_Baseline: 0
-    m_DescentLine: -10.839844
+    m_DescentLine: -11.71875
     m_SuperscriptOffset: 42.753906
     m_SuperscriptSize: 0.5
-    m_SubscriptOffset: -10.839844
+    m_SubscriptOffset: -11.71875
     m_SubscriptSize: 0.5
-    m_UnderlineOffset: -5
+    m_UnderlineOffset: -4.0039062
     m_UnderlineThickness: 1.9921875
     m_StrikethroughOffset: 8.4
     m_StrikethroughThickness: 1.9921875
-    m_TabWidth: 11
+    m_TabWidth: 10
   m_GlyphTable: []
   m_CharacterTable: []
   m_AtlasTextures:
-  - {fileID: -3368350036082889766}
+  - {fileID: -9054197136000892344}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 1
   m_UsedGlyphRects: []
@@ -230,16 +230,16 @@ MonoBehaviour:
   m_FallbackFontAssetTable: []
   m_CreationSettings:
     sourceFontFileName: 
-    sourceFontFileGUID: ea5889fa611fd4140a85d82b4afac640
+    sourceFontFileGUID: eb6c6a6b87078a94995dcf156fb2e657
     pointSizeSamplingMode: 0
     pointSize: 40
     padding: 8
     packingMode: 0
     atlasWidth: 1024
     atlasHeight: 1024
-    characterSetSelectionMode: 7
+    characterSetSelectionMode: 6
     characterSequence: 
-    referencedFontAssetGUID: 
+    referencedFontAssetGUID: 8ca76353966daee4ab4de04e371e82c1
     referencedTextAssetGUID: 
     fontStyle: 0
     fontStyleModifier: 0
