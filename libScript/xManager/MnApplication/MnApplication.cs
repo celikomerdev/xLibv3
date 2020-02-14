@@ -51,8 +51,8 @@ namespace xLib
 		{
 			#if UNITY_EDITOR
 			if(app_version == xApp.app_version) return;
+			if(CanDebug) Debug.Log($"MnApplication:app_version:{app_version}:change:{xApp.app_version}",this);
 			app_version = xApp.app_version;
-			Debug.Log($"MnApplication:app_version:{app_version}",this);
 			#endif
 		}
 		

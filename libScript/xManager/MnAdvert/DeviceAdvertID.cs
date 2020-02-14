@@ -16,8 +16,8 @@ namespace xLib
 			set
 			{
 				if(trackingEnabled == value) return;
+				Debug.Log($"StAdvert:trackingEnabled:{trackingEnabled}:change:{value}");
 				trackingEnabled = value;
-				xLogger.Log($"StAdvert:trackingEnabled:{trackingEnabled}");
 			}
 		}
 		
@@ -31,8 +31,8 @@ namespace xLib
 			set
 			{
 				if(advertisingID == value) return;
+				Debug.Log($"StAdvert:advertisingID:{advertisingID}:change:{value}");
 				advertisingID = value;
-				xLogger.Log($"StAdvert:advertisingID:{advertisingID}");
 				
 				if(string.IsNullOrEmpty(advertisingID)) TestDeviceID = "";
 				else TestDeviceID = advertisingID.HashMD5UTF8();
@@ -51,8 +51,8 @@ namespace xLib
 				if(Application.platform == RuntimePlatform.Android) value = value.ToUpper();
 				
 				if(testDeviceID == value) return;
+				Debug.Log($"StAdvert:testDeviceID:{testDeviceID}:change:{value}");
 				testDeviceID = value;
-				xLogger.Log($"StAdvert:testDeviceID:{testDeviceID}");
 			}
 		}
 		#endregion
@@ -75,13 +75,13 @@ namespace xLib
 		
 		private static void CallAdvertisingIdentifierNative()
 		{
-			xLogger.Log("DeviceAdvertID:CallAdvertisingIdentifierNative");
-			
 			string value = "";
 			
 			#if UNITY_EDITOR
-			value = "";
-			#elif UNITY_ANDROID
+			if(Application.isEditor) return;
+			#endif
+			
+			#if UNITY_ANDROID
 			AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 			AndroidJavaObject currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 			AndroidJavaObject contentResolver = currentActivity.Call<AndroidJavaObject>("getContentResolver");
@@ -89,38 +89,32 @@ namespace xLib
 			string name = secure.GetStatic<string>("ANDROID_ID");
 			string androidId = secure.CallStatic<string>("getString", contentResolver, name);
 			value = androidId;
-			#elif UNITY_IOS
+			#endif
+			
+			#if UNITY_IOS
 			value = UnityEngine.iOS.Device.advertisingIdentifier;
 			#endif
 			
+			if(string.IsNullOrWhiteSpace(value)) return;
 			StAdvert.AdvertisingID = value;
+			StAdvert.TrackingEnabled = true;
 		}
 		
 		private static void CallAdvertisingIdentifierUnity()
 		{
-			xLogger.Log("DeviceAdvertID:CallAdvertisingIdentifierUnity");
-			Application.RequestAdvertisingIdentifierAsync(CallbackAdvertisingIdentifierUnity);
-		}
-		
-		private static void CallbackAdvertisingIdentifierUnity(string advertisingId, bool trackingEnabled, string errorMsg)
-		{
-			xLogger.Log("DeviceAdvertID:CallbackAdvertisingIdentifierUnity");
-			
-			if(!string.IsNullOrEmpty(errorMsg))
+			Application.RequestAdvertisingIdentifierAsync(delegate(string advertisingId, bool trackingEnabled, string errorMsg)
 			{
-				Debug.LogException(new UnityException($"DeviceAdvertID:errorMsg:{errorMsg}"));
-				StAdvert.TrackingEnabled = false;
-				StAdvert.AdvertisingID = "";
-				return;
-			}
-			
-			StAdvert.TrackingEnabled = trackingEnabled;
-			StAdvert.AdvertisingID = advertisingId;
+				if(!string.IsNullOrEmpty(errorMsg))
+				{
+					Debug.LogException(new UnityException($"DeviceAdvertID:errorMsg:{errorMsg}"));
+					return;
+				}
+				StAdvert.AdvertisingID = advertisingId;
+				StAdvert.TrackingEnabled = trackingEnabled;
+			});
 		}
 		#else
-		internal static void Init()
-		{
-		}
+		internal static void Init(){}
 		#endif
 	}
 }

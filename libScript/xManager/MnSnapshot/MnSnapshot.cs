@@ -1,11 +1,24 @@
 ﻿#if xLibv3
 using System;
+using UnityEngine;
 
 namespace xLib
 {
 	public class MnSnapshot : SingletonM<MnSnapshot>
 	{
-		public static SnapshotBase snapshot = new SnapshotBase();
+		public static SnapshotBase m_snapshot = new SnapshotBase();
+		public static SnapshotBase snapshot
+		{
+			get
+			{
+				return m_snapshot;
+			}
+			set
+			{
+				if(ins && ins.CanDebug) Debug.Log("OverrideSnaphot:SnapshotCustom");
+				m_snapshot = value;
+			}
+		}
 		
 		public static long PlayTime
 		{

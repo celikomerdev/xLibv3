@@ -26,7 +26,7 @@ namespace xLib
 		[InitializeOnLoadMethod]
 		private static void FillKeystore()
 		{
-			Debug.LogWarning($"HelperKeystore:FillKeystore");
+			Debug.Log($"HelperKeystore:FillKeystore");
 			PlayerSettings.Android.keystorePass = EditorPrefs.GetString("keystorePass","");
 			PlayerSettings.Android.keyaliasPass = EditorPrefs.GetString("keyaliasPass","");
 		}
