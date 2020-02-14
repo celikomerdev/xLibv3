@@ -17,6 +17,14 @@ namespace xLib.xTween
 			if(!target) return;
 			target.SetActive(result);
 		}
+		
+		#if UNITY_EDITOR
+		[ContextMenu("Fill")]
+		private void Fill()
+		{
+			if(!target) target = this.gameObject;
+		}
+		#endif
 	}
 }
 #endif
