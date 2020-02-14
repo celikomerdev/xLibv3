@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2225de60c87cec046ac49a9aced7735c, type: 3}
-  m_Name: CurrentSpeedx2
+  m_Name: CurrentSpeedCulture
   m_EditorClassIdentifier: 
   note:
     value: 
@@ -28,4 +28,3 @@ MonoBehaviour:
     snapDefault: 1
     useThreshold: 1
     valueThreshold: 0
-    cacheGreater: 0

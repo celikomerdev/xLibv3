@@ -19,6 +19,9 @@ namespace xLib
 		protected override void OnDestroyed()
 		{
 			LocalizationManager.OnLocalizeEvent -= OnLocalize;
+			#if UNITY_EDITOR
+			SetUICulture(null);
+			#endif
 		}
 		#endregion
 		
