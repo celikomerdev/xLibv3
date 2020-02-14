@@ -8,7 +8,7 @@ namespace xLib.xTool
 	{
 		protected override bool TryRegister(bool register)
 		{
-			if(CanDebug) Debug.LogWarning($"{this.name}:systemMemorySize:{SystemInfo.systemMemorySize}:totalMemory:{totalMemory}",this);
+			if(CanDebug) Debug.Log($"{this.name}:systemMemorySize:{SystemInfo.systemMemorySize}:currentMemory:{currentMemory}",this);
 			if(register)
 			{
 				Application.lowMemory += MemoryLowCallback;
@@ -20,18 +20,19 @@ namespace xLib.xTool
 			return register;
 		}
 		
+		[SerializeField]private bool forceFullCollection = false;
 		[SerializeField]private EventUnity eventMemoryLow = new EventUnity();
 		private void MemoryLowCallback()
 		{
-			if(CanDebug) Debug.LogWarning($"{this.name}:MemoryLowCallback:systemMemorySize:{SystemInfo.systemMemorySize}:totalMemory:{totalMemory}",this);
+			Debug.LogWarning($"{this.name}:MemoryLowCallback:systemMemorySize:{SystemInfo.systemMemorySize}:currentMemory:{currentMemory}",this);
 			eventMemoryLow.Invoke();
 		}
 		
-		private static long totalMemory
+		private long currentMemory
 		{
 			get
 			{
-				return System.GC.GetTotalMemory(false)/(1048576);
+				return System.GC.GetTotalMemory(forceFullCollection)/(1048576);
 			}
 		}
 	}
