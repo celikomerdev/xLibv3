@@ -1,7 +1,6 @@
 ﻿#if xLibv3
 using UnityEngine;
 using xLib.xAnalytics;
-using xLib.xNode.NodeObject;
 using xLib.xValueClass;
 
 namespace xLib

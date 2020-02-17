@@ -1,5 +1,5 @@
 ﻿#if xLibv3
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {

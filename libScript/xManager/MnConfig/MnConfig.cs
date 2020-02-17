@@ -4,7 +4,7 @@ using System.Collections;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {

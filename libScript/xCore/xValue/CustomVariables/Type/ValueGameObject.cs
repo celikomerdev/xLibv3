@@ -7,6 +7,15 @@ namespace xLib.xValueClass
 	[Serializable]
 	public class ValueGameObject : xValueEqual<GameObject>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueGameObject global = new ValueGameObject();
+			global.Globalize();
+		}
+		#endregion
+		
 		#region Compare
 		protected override bool IsEqual(GameObject valueNew)
 		{

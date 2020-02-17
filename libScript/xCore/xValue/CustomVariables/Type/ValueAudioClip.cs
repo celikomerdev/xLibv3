@@ -8,6 +8,15 @@ namespace xLib.xValueClass
 	[Serializable]
 	public class ValueAudioClip : xValueEqual<AudioClip>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueAudioClip global = new ValueAudioClip();
+			global.Globalize();
+		}
+		#endregion
+		
 		#region Compare
 		protected override bool IsEqual(AudioClip value)
 		{

@@ -8,6 +8,15 @@ namespace xLib.xValueClass
 	[Serializable]
 	public class ValueSprite : xValueEqual<Sprite>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueSprite global = new ValueSprite();
+			global.Globalize();
+		}
+		#endregion
+		
 		#region Compare
 		protected override bool IsEqual(Sprite valueNew)
 		{

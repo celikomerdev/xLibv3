@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-// ReSharper disable FieldCanBeMadeReadOnly.Global
 
 namespace xLib
 {
@@ -365,6 +364,29 @@ namespace xLib
 			{
 				return 0;
 			}
+		}
+		#endregion
+		
+		
+		#region Global
+		private static Dictionary<string,xValue<V>> globals = new Dictionary<string,xValue<V>>();
+		public void Globalize()
+		{
+			if(globals.ContainsKey(Key))
+			{
+				Debug.LogWarning(new UnityException($"Globals:Override:{Key}:type:{typeof(V)}"),nodeSetting.objDebug);
+			}
+			globals[Key] = this;
+		}
+		
+		public static xValue<V> GetGlobal(string key)
+		{
+			if(!globals.ContainsKey(key))
+			{
+				Debug.LogException(new UnityException($"Globals:GetFail:{key}"));
+				return globals[""];
+			}
+			return globals[key];
 		}
 		#endregion
 	}

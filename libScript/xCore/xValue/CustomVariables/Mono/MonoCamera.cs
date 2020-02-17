@@ -1,8 +1,7 @@
 ﻿#if xLibv3
 using UnityEngine;
-using xLib.xValueClass;
 
-namespace xLib.xNode.NodeObject
+namespace xLib.xValueClass
 {
 	// [CreateAssetMenu(menuName = "xLib/Node/Unity/Camera")]
 	public class MonoCamera : MonoValue<Camera>

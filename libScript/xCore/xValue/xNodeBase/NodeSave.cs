@@ -1,7 +1,7 @@
 ﻿#if xLibv3
 using UnityEngine;
 
-namespace xLib.xNode.NodeObject
+namespace xLib.xValueClass
 {
 	public abstract class NodeSave : NodeBase
 	{

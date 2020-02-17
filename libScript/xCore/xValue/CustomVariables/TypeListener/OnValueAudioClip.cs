@@ -1,7 +1,6 @@
 ﻿#if xLibv3
 #if ModAudio
 using UnityEngine;
-using xLib.xNode.NodeObject;
 using xLib.EventClass;
 
 namespace xLib.xValueClass.Listener

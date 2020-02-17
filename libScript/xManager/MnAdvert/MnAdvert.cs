@@ -2,7 +2,7 @@
 using UnityEngine;
 using xLib.EventClass;
 using xLib.libAdvert;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {

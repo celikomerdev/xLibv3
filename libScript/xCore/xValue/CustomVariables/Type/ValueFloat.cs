@@ -7,6 +7,15 @@ namespace xLib.xValueClass
 	[Serializable]
 	public class ValueFloat : xValueThreshold<float>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueFloat global = new ValueFloat();
+			global.Globalize();
+		}
+		#endregion
+		
 		#region Compare
 		protected override bool IsEqual(float valueNew)
 		{

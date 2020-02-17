@@ -7,6 +7,15 @@ namespace xLib.xValueClass
 	[Serializable]
 	public class ValueMaterial : xValueEqual<Material>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueMaterial global = new ValueMaterial();
+			global.Globalize();
+		}
+		#endregion
+		
 		#region Compare
 		protected override bool IsEqual(Material valueNew)
 		{

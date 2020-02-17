@@ -1,9 +1,8 @@
 ﻿#if xLibv3
 #if ModAudio
 using UnityEngine;
-using xLib.xValueClass;
 
-namespace xLib.xNode.NodeObject
+namespace xLib.xValueClass
 {
 	// [CreateAssetMenu(menuName = "xLib/Node/Unity/AudioClip")]
 	public class MonoAudioClip : MonoValue<AudioClip>

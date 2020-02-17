@@ -7,6 +7,15 @@ namespace xLib.xValueClass
 	[Serializable]
 	public class ValueByte : xValueThreshold<byte>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueByte global = new ValueByte();
+			global.Globalize();
+		}
+		#endregion
+		
 		#region Compare
 		protected override bool IsEqual(byte valueNew)
 		{

@@ -8,6 +8,15 @@ namespace xLib.xValueClass
 	[Serializable]
 	public class ValueTextAsset : xValueEqual<TextAsset>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueTextAsset global = new ValueTextAsset();
+			global.Globalize();
+		}
+		#endregion
+		
 		#region Compare
 		protected override bool IsEqual(TextAsset valueNew)
 		{

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {

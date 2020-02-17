@@ -8,6 +8,15 @@ namespace xLib.xValueClass
 	[Serializable]
 	public class ValueColor : xValueEqual<Color>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueColor global = new ValueColor();
+			global.Globalize();
+		}
+		#endregion
+		
 		#region Compare
 		protected override bool IsEqual(Color valueNew)
 		{

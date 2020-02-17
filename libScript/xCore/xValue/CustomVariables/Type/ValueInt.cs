@@ -7,6 +7,15 @@ namespace xLib.xValueClass
 	[Serializable]
 	public class ValueInt : xValueThreshold<int>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueInt global = new ValueInt();
+			global.Globalize();
+		}
+		#endregion
+		
 		#region Compare
 		protected override bool IsEqual(int valueNew)
 		{

@@ -1,7 +1,7 @@
 ﻿#if xLibv3
 using UnityEngine;
 using UnityEngine.EventSystems;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib.xTool.xInput
 {

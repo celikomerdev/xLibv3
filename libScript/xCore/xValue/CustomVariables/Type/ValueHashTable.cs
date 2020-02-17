@@ -10,6 +10,15 @@ namespace xLib.xValueClass
 	[Serializable]
 	public class ValueHashTable : xValueEqual<Hashtable>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueHashTable global = new ValueHashTable();
+			global.Globalize();
+		}
+		#endregion
+		
 		protected override void CreateDefault()
 		{
 			if(value==null) value = new Hashtable();

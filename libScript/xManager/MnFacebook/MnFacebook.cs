@@ -2,7 +2,7 @@
 #if Facebook
 using UnityEngine;
 using Facebook.Unity;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {
@@ -158,7 +158,7 @@ namespace xLib
 }
 #else
 using UnityEngine;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {

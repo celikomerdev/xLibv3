@@ -1,7 +1,7 @@
 ﻿#if xLibv3
 using UnityEngine;
 
-namespace xLib.xNode.NodeObject
+namespace xLib.xValueClass
 {
 	public abstract class MonoBase : BaseInitM, ISerializableObject, IRpc, IAnalyticObject
 	{
@@ -89,6 +89,7 @@ namespace xLib.xNode.NodeObject
 		public virtual void Call(){}
 		public virtual void CallFirst(){}
 		public virtual void CallLast(){}
+		public virtual void Globalize(){}
 		
 		
 		#region IAnalyticObject

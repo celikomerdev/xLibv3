@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using GooglePlayGames.BasicApi.Multiplayer;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {
@@ -205,7 +205,7 @@ namespace xLib
 }
 #else
 using UnityEngine;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {

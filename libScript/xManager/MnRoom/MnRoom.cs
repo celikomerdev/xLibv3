@@ -1,7 +1,6 @@
 ﻿#if xLibv2
 using System.Collections;
 using UnityEngine;
-using xLib.xNode.NodeObject;
 
 namespace xLib.xNew
 {

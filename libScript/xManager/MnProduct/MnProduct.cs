@@ -6,8 +6,7 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 using xLib.Purchasing;
 using xLib.Purchasing.Security;
-using xLib.xNode.NodeObject;
-
+using xLib.xValueClass;
 
 namespace xLib
 {
@@ -249,7 +248,7 @@ namespace xLib
 #else
 using System;
 using UnityEngine;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {

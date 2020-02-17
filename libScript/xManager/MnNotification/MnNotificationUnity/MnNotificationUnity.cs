@@ -2,7 +2,7 @@
 #if NotificationUnity
 using UnityEngine;
 using System;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 #if UNITY_IOS
 using Unity.Notifications.iOS;
@@ -160,7 +160,7 @@ namespace xLib
 #else
 using UnityEngine;
 using System;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {

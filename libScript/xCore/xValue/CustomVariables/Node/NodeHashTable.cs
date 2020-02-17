@@ -1,9 +1,8 @@
 ﻿#if xLibv2
 using System.Collections;
 using UnityEngine;
-using xLib.xValueClass;
 
-namespace xLib.xNode.NodeObject
+namespace xLib.xValueClass
 {
 	[CreateAssetMenu(menuName = "xLib/Node/HashTable")]
 	public class NodeHashTable : NodeValue<Hashtable>

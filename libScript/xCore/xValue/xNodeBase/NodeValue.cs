@@ -1,7 +1,7 @@
 ﻿#if xLibv3
 using UnityEngine.Events;
 
-namespace xLib.xNode.NodeObject
+namespace xLib.xValueClass
 {
 	public abstract class NodeValue<V> : NodeSave, ICall
 	{
@@ -197,6 +197,11 @@ namespace xLib.xNode.NodeObject
 		public override void CallLast()
 		{
 			Node.CallLast();
+		}
+		
+		public override void Globalize()
+		{
+			Node.Globalize();
 		}
 	}
 }

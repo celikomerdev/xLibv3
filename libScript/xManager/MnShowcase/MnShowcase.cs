@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using xLib.ToolShowcase;
 using xLib.ToolWWW;
-using xLib.xNode.NodeObject;
 
 namespace xLib
 {

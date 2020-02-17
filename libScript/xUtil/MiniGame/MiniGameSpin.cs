@@ -2,8 +2,8 @@
 using System.Collections;
 using UnityEngine;
 using xLib.EventClass;
-using xLib.xNode.NodeObject;
 using xLib.xTween;
+using xLib.xValueClass;
 
 namespace xLib
 {

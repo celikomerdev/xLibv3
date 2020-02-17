@@ -1,6 +1,5 @@
 ﻿#if xLibv3
 using UnityEngine;
-using xLib.xNode.NodeObject;
 using xLib.EventClass;
 
 namespace xLib.xValueClass.Listener

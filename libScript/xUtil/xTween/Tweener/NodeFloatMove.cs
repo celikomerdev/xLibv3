@@ -1,7 +1,7 @@
 ﻿#if xLibv3
 using UnityEngine;
-using xLib.xNode.NodeObject;
 using xLib.xTween;
+using xLib.xValueClass;
 
 namespace xLib.ToolTweener
 {

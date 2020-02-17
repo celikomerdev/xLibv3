@@ -2,7 +2,7 @@
 #if OneSignal
 using System.Collections.Generic;
 using UnityEngine;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {
@@ -147,7 +147,7 @@ namespace xLib
 }
 #else
 using UnityEngine;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {

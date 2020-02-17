@@ -1,9 +1,8 @@
 ﻿#if xLibv3
 using Newtonsoft.Json.Linq;
 using UnityEngine;
-using xLib.xValueClass;
 
-namespace xLib.xNode.NodeObject
+namespace xLib.xValueClass
 {
 	[CreateAssetMenu(menuName = "xLib/Node/JObject")]
 	public class NodeJObject : NodeValue<JObject>

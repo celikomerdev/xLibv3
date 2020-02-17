@@ -1,11 +1,21 @@
 ﻿#if xLibv3
 using System;
+using UnityEngine;
 
 namespace xLib.xValueClass
 {
 	[Serializable]
 	public class ValueBool : xValueEqual<bool>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueBool global = new ValueBool();
+			global.Globalize();
+		}
+		#endregion
+		
 		#region Compare
 		protected override bool IsEqual(bool valueNew)
 		{

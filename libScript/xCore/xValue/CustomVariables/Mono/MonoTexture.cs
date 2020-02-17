@@ -1,8 +1,7 @@
 ﻿#if xLibv3
 using UnityEngine;
-using xLib.xValueClass;
 
-namespace xLib.xNode.NodeObject
+namespace xLib.xValueClass
 {
 	// [CreateAssetMenu(menuName = "xLib/Node/Unity/Texture")]
 	public class MonoTexture : MonoValue<Texture>

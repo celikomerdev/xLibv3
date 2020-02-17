@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using I2.Loc;
 using UnityEngine;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {
@@ -100,7 +100,7 @@ namespace xLib
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
-using xLib.xNode.NodeObject;
+using xLib.xValueClass;
 
 namespace xLib
 {

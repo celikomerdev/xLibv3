@@ -9,12 +9,20 @@ namespace xLib
 	[System.Serializable]
 	public class ValueGroup : xValue<ObjectGroup>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueGroup global = new ValueGroup();
+			global.Globalize();
+		}
+		#endregion
+		
 		protected override void OnInit(bool init)
 		{
 			base.OnInit(init);
 			Value.Init(init);
 		}
-		
 		
 		#region Call
 		public override void Call()

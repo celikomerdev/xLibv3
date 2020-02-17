@@ -1,12 +1,22 @@
 ﻿#if xLibv3
 using System;
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 namespace xLib.xValueClass
 {
 	[Serializable]
 	public class ValueJObject : xValueEqual<JObject>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueJObject global = new ValueJObject();
+			global.Globalize();
+		}
+		#endregion
+		
 		protected override void CreateDefault()
 		{
 			if(value==null) value = new JObject();

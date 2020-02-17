@@ -8,6 +8,15 @@ namespace xLib.xValueClass
 	[Serializable]
 	public class ValueTexture2D : xValueEqual<Texture2D>
 	{
+		#region Global
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void SetDefaultGlobal()
+		{
+			ValueTexture2D global = new ValueTexture2D();
+			global.Globalize();
+		}
+		#endregion
+		
 		#region Compare
 		protected override bool IsEqual(Texture2D valueNew)
 		{

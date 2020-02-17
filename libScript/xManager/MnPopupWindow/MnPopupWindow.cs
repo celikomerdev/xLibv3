@@ -1,8 +1,8 @@
 ﻿#if xLibv3
 using UnityEngine;
 using xLib.EventClass;
-using xLib.xNode.NodeObject;
 using xLib.xTweener;
+using xLib.xValueClass;
 
 namespace xLib
 {

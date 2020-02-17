@@ -5,7 +5,6 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using xLib.xNew;
-using xLib.xNode.NodeObject;
 
 namespace xLib
 {
