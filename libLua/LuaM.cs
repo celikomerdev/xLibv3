@@ -9,28 +9,32 @@ namespace xLib.libLua
 	public class LuaM : BaseWorkM
 	{
 		[SerializeField]private TextAsset luaScript = null;
+		
+		[TextArea(20,100)]
+		[SerializeField]private string @script;
 		public void Call(string functionName)
 		{
 			//Local
-			LuaTable envScrip = xLua.envLua.NewTable();
+			LuaTable envLocal = xLua.envLua.NewTable();
 			
 			//Meta
 			LuaTable envMeta = xLua.envLua.NewTable();
 			envMeta.Set("__index",xLua.envLua.Global);
-			envScrip.SetMetaTable(envMeta);
+			envLocal.SetMetaTable(envMeta);
 			envMeta.Dispose();
 			
 			//Injection
-			envScrip.Set("self", this);
+			envLocal.Set("self", this);
 			
 			//Parse
-			xLua.envLua.DoString(luaScript.text,luaScript.name,env:envScrip);
+			// xLua.envLua.DoString(luaScript.text,luaScript.name,env:envLocal);
+			xLua.envLua.DoString(script,env:envLocal);
 			
 			//Call
-			envScrip.Get<Action>(functionName)();
+			envLocal.Get<Action>(functionName)();
 			
 			//Dispose
-			envScrip.Dispose();
+			envLocal.Dispose();
 		}
 	}
 }

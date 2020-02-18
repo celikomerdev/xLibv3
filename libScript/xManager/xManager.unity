@@ -7497,6 +7497,14 @@ MonoBehaviour:
     canWork: 1
     runInEditMode: 0
   luaScript: {fileID: 4900000, guid: 4fc7dc27e424293468bbe9a799581aa8, type: 3}
+  script: "-- LuaTest\r\nlocal UnityEngine = CS.UnityEngine\r\nlocal xLib = CS.xLib\r\nlocal
+    Debug = UnityEngine.Debug\r\nlocal xValueClass = xLib.xValueClass\r\nlocal ValueInt
+    = xLib.xValueClass.ValueInt\r\n\r\n\nfunction Call()\r\n\tDebug.Log(\"Call2\",self)\r\n\t\r\n\tValueInt.GetGlobal(\"DefaultGlobal\").Value
+    = 8\r\n\tDebug.Log(ValueInt.GetGlobal(\"DefaultGlobal\").Value)\r\n\t\r\n\tlocal
+    DefaultGlobal = ValueInt.GetGlobal(\"DefaultGlobal\")\r.Value\n\t\r\n\tif DefaultGlobal
+    >=5 then\r\n\t\tDebug.Log(\"DefaultGlobal >= 5\")\r\n\telseif DefaultGlobal >=0
+    then\r\n\t\tDebug.Log(\"DefaultGlobal >= 0\")\r\n\telse\r\n\t\tDebug.Log(\"DefaultGlobal
+    <= 0\")\r\n\tend\r\n\t\r\nend"
 --- !u!1 &1006927695
 GameObject:
   m_ObjectHideFlags: 0

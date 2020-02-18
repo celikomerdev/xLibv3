@@ -1,19 +1,31 @@
--- Lua Tests
-
+-- LuaTest
 local UnityEngine = CS.UnityEngine
 local xLib = CS.xLib
 local Debug = UnityEngine.Debug
 local xValueClass = xLib.xValueClass
+local ValueInt = xLib.xValueClass.ValueInt
+
+
 
 function Call()
-	Debug.Log("Call")
-	xValueClass.ValueInt.GetGlobal("DefaultGlobal").Value = 8
-	Debug.Log(xValueClass.ValueInt.GetGlobal("DefaultGlobal").Value)
+	Debug.Log("Call",self)
 end
 
 
 function Call2()
-	Debug.Log("Call2")
-	xValueClass.ValueInt.GetGlobal("DefaultGlobal").Value = 5
-	Debug.Log(xValueClass.ValueInt.GetGlobal("DefaultGlobal").Value)
+	Debug.Log("Call2",self)
+	
+	ValueInt.GetGlobal("DefaultGlobal").Value = 8
+	Debug.Log(ValueInt.GetGlobal("DefaultGlobal").Value)
+	
+	local DefaultGlobal = ValueInt.GetGlobal("DefaultGlobal").Value
+	
+	if DefaultGlobal >=5 then
+		Debug.Log("DefaultGlobal >= 5")
+	elseif DefaultGlobal >=0 then
+		Debug.Log("DefaultGlobal >= 0")
+	else
+		Debug.Log("DefaultGlobal <= 0")
+	end
+	
 end
