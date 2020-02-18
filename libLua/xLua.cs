@@ -5,14 +5,14 @@ using XLua;
 
 namespace xLib.libLua
 {
-	public static class xLuaInit
+	public static class xLua
 	{
-		public static LuaEnv luaEnv = null;
+		public static LuaEnv envLua = null;
 		
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		private static void InitEnvironment()
 		{
-			luaEnv = new LuaEnv();
+			envLua = new LuaEnv();
 		}
 	}
 }
