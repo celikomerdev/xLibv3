@@ -1,0 +1,12 @@
+-- Lua Tests
+
+local UnityEngine = CS.UnityEngine
+local xLib = CS.xLib
+local Debug = UnityEngine.Debug
+local xValueClass = xLib.xValueClass
+
+-- function Call()
+	Debug.Log("Call")
+	xValueClass.ValueInt.GetGlobal("DefaultGlobal").Value = 8
+	Debug.Log(xValueClass.ValueInt.GetGlobal("DefaultGlobal").Value)
+-- end
