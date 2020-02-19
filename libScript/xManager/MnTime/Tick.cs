@@ -6,8 +6,6 @@ namespace xLib.xTick
 {
 	public class Tick : BaseWorkM
 	{
-		private static float timeScale = 1;
-		
 		[Header("Update")]
 		[SerializeField]private NodeFloat tickUpdate = null;
 		[SerializeField]private NodeFloat tickUnscaledUpdate = null;
@@ -54,10 +52,10 @@ namespace xLib.xTick
 			tickUnscaledStart.Value += tickUnscaledUpdate.Value;
 			tickUnscaledLevel.Value += tickUnscaledUpdate.Value;
 			
-			if(timeScale != 0)
+			if(Time.timeScale != 0)
 			{
-				tickUpdate.Value = timeScale*tickUnscaledUpdate.Value;
-				tickSmooth.Value = timeScale*tickUnscaledSmooth.Value;
+				tickUpdate.Value = Time.timeScale*tickUnscaledUpdate.Value;
+				tickSmooth.Value = Time.timeScale*tickUnscaledSmooth.Value;
 				tickStart.Value += tickUpdate.Value;
 				tickLevel.Value += tickUpdate.Value;
 			}
@@ -75,9 +73,9 @@ namespace xLib.xTick
 			
 			tickUnscaledLate.Value = Time.unscaledDeltaTime;
 			
-			if(timeScale != 0)
+			if(Time.timeScale != 0)
 			{
-				tickLate.Value = timeScale*tickUnscaledLate.Value;
+				tickLate.Value = Time.timeScale*tickUnscaledLate.Value;
 			}
 			
 			ViewCore.CurrentId = tempViewId;
@@ -93,7 +91,7 @@ namespace xLib.xTick
 			
 			tickUnscaledFixed.Value = Time.fixedUnscaledDeltaTime;
 			
-			if(timeScale == 0)
+			if(Time.timeScale == 0)
 			{
 				tickFixed.Value = Time.fixedDeltaTime;
 			}

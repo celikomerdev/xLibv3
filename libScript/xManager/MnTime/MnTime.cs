@@ -7,58 +7,37 @@ namespace xLib
 	public class MnTime : SingletonM<MnTime>
 	{
 		[Header("Manager")]
-		[SerializeField]private NodeBool timePause = null;
-		[SerializeField]private NodeFloat timeScale = null;
-		[SerializeField]private NodeFloat timeScaleCache = null;
+		[SerializeField]public NodeFloat timeScale = null;
+		[SerializeField]public NodeBool timePause = null;
 		
-		public float TimeScale
+		protected override void OnEnabled()
 		{
-			get
-			{
-				return StTime.timeScale;
-			}
-			set
-			{
-				if(StTime.timeScale == value) return;
-				if(timeScale.Value!=0) timeScaleCache.Value = StTime.timeScale;
-				StTime.timeScale = value;
-				timeScale.Value = value;
-				TimePause = (value==0);
-			}
+			timeScale.Listener(register:true,call:SetTimeScale,onRegister:false);
+			timePause.Listener(register:true,call:SetTimePause,onRegister:false);
 		}
 		
-		public bool TimePause
+		protected override void OnDisabled()
 		{
-			get
-			{
-				return timePause.Value;
-			}
-			set
-			{
-				if(timePause.Value == value) return;
-				timePause.Value = value;
-				TimeScale = (value? 0:timeScaleCache.Value);
-			}
+			timeScale.Listener(register:true,call:SetTimeScale,onRegister:false);
+			timePause.Listener(register:false,call:SetTimePause,onRegister:false);
 		}
-	}
-	
-	public static class StTime
-	{
-		private static float m_timeScale = 1f;
-		public static float timeScale
+		
+		private void SetTimeScale(float value)
 		{
-			get
+			Time.timeScale = value;
+		}
+		
+		private float timeScaleCache = 1f;
+		private void SetTimePause(bool value)
+		{
+			if(value)
 			{
-				return m_timeScale;
+				if(timeScale.Value!=0) timeScaleCache = timeScale.Value;
+				timeScale.Value = 0;
 			}
-			set
+			else
 			{
-				if(m_timeScale == value) return;
-				m_timeScale = value;
-				
-				value = Mathf.LerpUnclamped(0.001f,1f,value);
-				xLogger.Log($"Time.timeScale:{Time.timeScale}:{value}");
-				Time.timeScale = value;
+				timeScale.Value = timeScaleCache;
 			}
 		}
 	}
