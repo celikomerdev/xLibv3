@@ -110,7 +110,7 @@ namespace xLib
 		#region Listener
 		#region Runtime
 		private ActionSortedBase<V> actionSortedBase = new ActionSortedSingle<V>();
-		public void Listener(bool register,UnityAction<V> call,string viewId,int order,bool onRegister=false,BaseWorkerI worker=null)
+		public void Listener(bool register,UnityAction<V> call,string viewId="",int order=0,bool onRegister=false,BaseWorkerI worker=null)
 		{
 			#if CanTrace
 			Object objDebug = nodeSetting.objDebug;

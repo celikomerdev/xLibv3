@@ -27,14 +27,14 @@ namespace xLib.libLua
 			envLocal.Set("self", this);
 			
 			//Parse
-			// xLua.envLua.DoString(luaScript.text,luaScript.name,env:envLocal);
-			xLua.envLua.DoString(script,env:envLocal);
+			xLua.envLua.DoString(luaScript.text,luaScript.name,env:envLocal);
+			// xLua.envLua.DoString(script,env:envLocal);
 			
 			//Call
 			envLocal.Get<Action>(functionName)();
 			
 			//Dispose
-			envLocal.Dispose();
+			// envLocal.Dispose();
 		}
 	}
 }

@@ -7,25 +7,128 @@ local ValueInt = xLib.xValueClass.ValueInt
 
 
 
+
+
+
+
+-- --return object with key
+-- function Call()
+-- 	Debug.Log("Call")
+-- 	ValueInt.GetGlobal("DefaultGlobal").Value = 8
+-- 	ValueIntListener{item=ValueInt.GetGlobal("DefaultGlobal"),register=true,call=ListenerItem}
+-- end
+
+
+-- function ValueIntListener(table)
+-- 	table.item.Listener(table.register,table.call)
+-- end
+
+
+-- function ListenerItem()
+-- 	-- Debug.Log("Listener:"..valueInt)
+-- end
+
+
+
+
+
+
+
 function Call()
-	Debug.Log("Call",self)
-end
-
-
-function Call2()
-	Debug.Log("Call2",self)
-	
+	Debug.Log("Call")
 	ValueInt.GetGlobal("DefaultGlobal").Value = 8
-	Debug.Log(ValueInt.GetGlobal("DefaultGlobal").Value)
-	
-	local DefaultGlobal = ValueInt.GetGlobal("DefaultGlobal").Value
-	
-	if DefaultGlobal >=5 then
-		Debug.Log("DefaultGlobal >= 5")
-	elseif DefaultGlobal >=0 then
-		Debug.Log("DefaultGlobal >= 0")
-	else
-		Debug.Log("DefaultGlobal <= 0")
-	end
-	
+	ValueInt.GetGlobal("DefaultGlobal"):Listener(true,ListenerItem)
+	ValueInt.GetGlobal("DefaultGlobal").Value = 9
 end
+
+function ListenerFunction(valueListen)
+	Debug.Log("Listener:"..valueInt)
+end
+
+
+
+
+
+-- function Call()
+-- 	Debug.Log("Call")
+	
+-- 	ValueInt.GetGlobal("DefaultGlobal"):Listener(true,
+-- 	function()
+-- 		Debug.Log("ListenResult")
+-- 	end)
+-- end
+
+
+
+
+
+
+
+
+-- --return object with key
+-- function Call()
+-- 	Debug.Log("Call")
+	
+-- 	GetGlobalValueInt{key="DefaultGlobal"}.Value = 8
+-- 	local returnValue = GetGlobalValueInt{key="DefaultGlobal"}
+-- 	Debug.Log("returnValue:"..returnValue.Value)
+-- end
+
+-- function GetGlobalValueInt(table)
+-- 	Debug.Log("GetGlobalValueInt:"..table.key)
+-- 	return ValueInt.GetGlobal(table.key)
+-- end
+
+
+
+
+
+
+-- --return string with key
+-- function Call()
+-- 	Debug.Log("Call")
+	
+-- 	local returnValue = GetValueWith{key="DefaultGlobal"}
+-- 	Debug.Log("returnValue:"..returnValue)
+-- end
+
+-- function GetValueWith(table)
+-- 	Debug.Log("GetValueWith:"..table.key)
+-- 	return table.key
+-- end
+
+
+
+
+-- --call with table
+-- function CallWithValue(table)
+-- 	-- CallWithValue{key=135} named args
+-- 	Debug.Log("CallWithValue"..table.key)
+-- end
+
+
+
+-- --int comparision
+-- function Call_3()
+-- 	Debug.Log("Call")
+	
+-- 	ValueInt.GetGlobal("DefaultGlobal").Value = 8
+-- 	Debug.Log(ValueInt.GetGlobal("DefaultGlobal").Value)
+	
+-- 	local DefaultGlobal = ValueInt.GetGlobal("DefaultGlobal").Value
+	
+-- 	if DefaultGlobal >=5 then
+-- 		Debug.Log("DefaultGlobal >= 5")
+-- 	elseif DefaultGlobal >=0 then
+-- 		Debug.Log("DefaultGlobal >= 0")
+-- 	else
+-- 		Debug.Log("DefaultGlobal <= 0")
+-- 	end
+	
+-- end
+
+
+-- --basic debug
+-- function Call_2()
+-- 	Debug.Log("Call",self)
+-- end
