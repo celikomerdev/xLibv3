@@ -374,7 +374,7 @@ namespace xLib
 		{
 			if(globals.ContainsKey(Key))
 			{
-				Debug.LogWarning(new UnityException($"Globals:Override:{Key}:type:{typeof(V)}"),nodeSetting.objDebug);
+				Debug.LogWarning($"Globals:Override:{Key}:type:{typeof(V)}",nodeSetting.objDebug);
 			}
 			globals[Key] = this;
 		}

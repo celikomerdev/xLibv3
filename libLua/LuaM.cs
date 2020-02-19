@@ -8,6 +8,7 @@ namespace xLib.libLua
 {
 	public class LuaM : BaseWorkM
 	{
+		[SerializeField]private GameObject self = null;
 		[SerializeField]private TextAsset luaScript = null;
 		
 		[TextArea(20,100)]
@@ -24,7 +25,7 @@ namespace xLib.libLua
 			envMeta.Dispose();
 			
 			//Injection
-			envLocal.Set("self", this);
+			envLocal.Set("self",self);
 			
 			//Parse
 			xLua.envLua.DoString(luaScript.text,luaScript.name,env:envLocal);

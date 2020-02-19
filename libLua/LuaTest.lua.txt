@@ -3,7 +3,7 @@ local UnityEngine = CS.UnityEngine
 local xLib = CS.xLib
 local Debug = UnityEngine.Debug
 local xValueClass = xLib.xValueClass
-local ValueInt = xLib.xValueClass.ValueInt
+local ValueFloat = xLib.xValueClass.ValueFloat
 
 
 
@@ -14,36 +14,63 @@ local ValueInt = xLib.xValueClass.ValueInt
 -- --return object with key
 -- function Call()
 -- 	Debug.Log("Call")
--- 	ValueInt.GetGlobal("DefaultGlobal").Value = 8
--- 	ValueIntListener{item=ValueInt.GetGlobal("DefaultGlobal"),register=true,call=ListenerItem}
+-- 	ValueFloat.GetGlobal("DefaultGlobal").Value = 8
+-- 	ValueFloatListener{item=ValueFloat.GetGlobal("DefaultGlobal"),register=true,call=ListenerItem}
 -- end
 
 
--- function ValueIntListener(table)
+-- function ValueFloatListener(table)
 -- 	table.item.Listener(table.register,table.call)
 -- end
 
 
 -- function ListenerItem()
--- 	-- Debug.Log("Listener:"..valueInt)
+-- 	-- Debug.Log("Listener:"..ValueFloat)
+-- end
+
+
+
+
+--register listener to button
+function Call()
+	Debug.Log("Call")
+	
+	self:GetComponent("Slider").onValueChanged:AddListener
+	(
+		function()
+			Debug.Log("Callback")
+		end
+	)
+end
+
+
+
+-- --register listener to button
+-- function Call()
+-- 	Debug.Log("Call")
+	
+-- 	self:GetComponent("Button").onClick:AddListener
+-- 	(
+-- 		function()
+-- 			Debug.Log("Callback")
+-- 		end
+-- 	)
 -- end
 
 
 
 
 
+-- function Call()
+-- 	Debug.Log("Call")
+-- 	ValueFloat.GetGlobal("DefaultGlobal").Value = 8
+-- 	ValueFloat.GetGlobal("DefaultGlobal"):Listener(true,ListenerItem)
+-- 	ValueFloat.GetGlobal("DefaultGlobal").Value = 9
+-- end
 
-
-function Call()
-	Debug.Log("Call")
-	ValueInt.GetGlobal("DefaultGlobal").Value = 8
-	ValueInt.GetGlobal("DefaultGlobal"):Listener(true,ListenerItem)
-	ValueInt.GetGlobal("DefaultGlobal").Value = 9
-end
-
-function ListenerFunction(valueListen)
-	Debug.Log("Listener:"..valueInt)
-end
+-- function ListenerFunction(valueListen)
+-- 	Debug.Log("Listener:"..ValueFloat)
+-- end
 
 
 
@@ -52,7 +79,7 @@ end
 -- function Call()
 -- 	Debug.Log("Call")
 	
--- 	ValueInt.GetGlobal("DefaultGlobal"):Listener(true,
+-- 	ValueFloat.GetGlobal("DefaultGlobal"):Listener(true,
 -- 	function()
 -- 		Debug.Log("ListenResult")
 -- 	end)
@@ -69,14 +96,14 @@ end
 -- function Call()
 -- 	Debug.Log("Call")
 	
--- 	GetGlobalValueInt{key="DefaultGlobal"}.Value = 8
--- 	local returnValue = GetGlobalValueInt{key="DefaultGlobal"}
+-- 	GetGlobalValueFloat{key="DefaultGlobal"}.Value = 8
+-- 	local returnValue = GetGlobalValueFloat{key="DefaultGlobal"}
 -- 	Debug.Log("returnValue:"..returnValue.Value)
 -- end
 
--- function GetGlobalValueInt(table)
--- 	Debug.Log("GetGlobalValueInt:"..table.key)
--- 	return ValueInt.GetGlobal(table.key)
+-- function GetGlobalValueFloat(table)
+-- 	Debug.Log("GetGlobalValueFloat:"..table.key)
+-- 	return ValueFloat.GetGlobal(table.key)
 -- end
 
 
@@ -112,10 +139,10 @@ end
 -- function Call_3()
 -- 	Debug.Log("Call")
 	
--- 	ValueInt.GetGlobal("DefaultGlobal").Value = 8
--- 	Debug.Log(ValueInt.GetGlobal("DefaultGlobal").Value)
+-- 	ValueFloat.GetGlobal("DefaultGlobal").Value = 8
+-- 	Debug.Log(ValueFloat.GetGlobal("DefaultGlobal").Value)
 	
--- 	local DefaultGlobal = ValueInt.GetGlobal("DefaultGlobal").Value
+-- 	local DefaultGlobal = ValueFloat.GetGlobal("DefaultGlobal").Value
 	
 -- 	if DefaultGlobal >=5 then
 -- 		Debug.Log("DefaultGlobal >= 5")
