@@ -11,37 +11,41 @@ local ValueFloat = xLib.xValueClass.ValueFloat
 
 
 
--- --return object with key
--- function Call()
--- 	Debug.Log("Call")
--- 	ValueFloat.GetGlobal("DefaultGlobal").Value = 8
--- 	ValueFloatListener{item=ValueFloat.GetGlobal("DefaultGlobal"),register=true,call=ListenerItem}
--- end
-
-
--- function ValueFloatListener(table)
--- 	table.item.Listener(table.register,table.call)
--- end
-
-
--- function ListenerItem()
--- 	-- Debug.Log("Listener:"..ValueFloat)
--- end
-
-
-
-
---register listener to button
+--return object with key
 function Call()
 	Debug.Log("Call")
-	
-	self:GetComponent("Slider").onValueChanged:AddListener
-	(
-		function()
-			Debug.Log("Callback")
-		end
-	)
+	ValueFloat.GetGlobal("DefaultGlobal").Value = 8
+	ValueFloatListener{item=ValueFloat.GetGlobal("DefaultGlobal"),register=true,onRegister=true,call=ListenerItem}
+	ValueFloat.GetGlobal("DefaultGlobal").Value = 9
+	ValueFloatListener{item=ValueFloat.GetGlobal("DefaultGlobal"),register=false,onRegister=true,call=ListenerItem}
+	ValueFloat.GetGlobal("DefaultGlobal").Value = 10
 end
+
+
+function ValueFloatListener(table)
+	setmetatable(table,{__index={viewId="",order=0,onRegister=false,worker=nil}})
+	table.item:Listener(table.register,table.call,table.viewId,table.order,table.onRegister,table.worker)
+end
+
+
+function ListenerItem(valueCall)
+	Debug.Log("Listener:"..valueCall)
+end
+
+
+
+
+-- --register listener to slider
+-- function Call()
+-- 	Debug.Log("Call")
+	
+-- 	self:GetComponent("Slider").onValueChanged:AddListener
+-- 	(
+-- 		function(valueCall)
+-- 			Debug.Log("Callback:"..valueCall)
+-- 		end
+-- 	)
+-- end
 
 
 
