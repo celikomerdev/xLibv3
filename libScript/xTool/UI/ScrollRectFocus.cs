@@ -27,6 +27,8 @@ namespace xLib
 			}
 		}
 		
+		public float duration = 1f;
+		
 		protected override void OnInit(bool init)
 		{
 			if(init)
@@ -39,13 +41,16 @@ namespace xLib
 		}
 		
 		[SerializeField]private EventVector2 eventNormalizedPosition = new EventVector2();
+		
+		private Coroutine cTween = null;
+		[ContextMenu("Call")]
 		public void Call()
 		{
 			if(!CanWork) return;
 			if(CanDebug) Debug.Log($"{this.name}:ScrollRectFocus:Call",this);
 			if(!transScrollRect) return;
-			Vector3 itemCenterPositionInScroll = GetWorldPointInWidget(transScrollRect, GetWidgetWorldPoint(Target));
-			Vector3 targetPositionInScroll = GetWorldPointInWidget(transScrollRect, GetWidgetWorldPoint(transViewport));
+			Vector3 itemCenterPositionInScroll = transScrollRect.InverseTransformPoint(GetWidgetWorldPoint(Target));
+			Vector3 targetPositionInScroll = transScrollRect.InverseTransformPoint(GetWidgetWorldPoint(transViewport));
 			Vector3 difference = targetPositionInScroll - itemCenterPositionInScroll;
 			difference.z = 0f;
 			
@@ -60,24 +65,20 @@ namespace xLib
 				difference.y/(rectContent.size.y-rectScroll.size.y)
 			);
 			
-			Vector2 newNormalizedPosition = scrollRect.normalizedPosition - normalizedDifference;
+			// Vector2 valueStart = scrollRect.normalizedPosition;
+			Vector2 valueTarget = scrollRect.normalizedPosition - normalizedDifference;
 			if (scrollRect.movementType != ScrollRect.MovementType.Unrestricted)
 			{
-				newNormalizedPosition.x = Mathf.Clamp01(newNormalizedPosition.x);
-				newNormalizedPosition.y = Mathf.Clamp01(newNormalizedPosition.y);
+				valueTarget.x = Mathf.Clamp01(valueTarget.x);
+				valueTarget.y = Mathf.Clamp01(valueTarget.y);
 			}
 			
-			eventNormalizedPosition.Invoke(newNormalizedPosition);
-			
-			ExtTween.Tween(duration:0.5f,call:(ratio)=>
+			MnCoroutine.ins.KillCoroutine(cTween);
+			cTween = ExtTween.TweenDelta(duration:duration,call:(ratio)=>
 			{
-				scrollRect.normalizedPosition = Vector2.Lerp(scrollRect.normalizedPosition,newNormalizedPosition,ratio);
+				scrollRect.normalizedPosition = Vector2.Lerp(scrollRect.normalizedPosition,valueTarget,ratio);
+				// eventNormalizedPosition.Invoke(valueTarget);
 			});
-		}
-		
-		private static Vector3 GetWorldPointInWidget(Transform target, Vector3 worldPoint)
-		{
-			return target.InverseTransformPoint(worldPoint);
 		}
 		
 		private static Vector3 GetWidgetWorldPoint(RectTransform target)

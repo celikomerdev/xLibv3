@@ -26,17 +26,18 @@ namespace xLib.xUtil
 		}
 		
 		private float currentRatio = 0f;
-		private Coroutine coroutine = null;
+		private Coroutine cTween = null;
 		private void Work(bool value)
 		{
 			if(!CanWork) return;
 			if(!tween) return;
 			
+			// float valueStart = currentRatio;
 			float valueTarget = 1f;
 			if(!toggle.isOn) valueTarget = 0f;
 			
-			MnCoroutine.ins.KillCoroutine(coroutine);
-			coroutine = ExtTween.Tween(duration:duration,ignoreTimeScale:ignoreTimeScale,call:(ratio)=>
+			MnCoroutine.ins.KillCoroutine(cTween);
+			cTween = ExtTween.Tween(duration:duration,ignoreTimeScale:ignoreTimeScale,call:(ratio)=>
 			{
 				currentRatio = Mathf.Lerp(currentRatio,valueTarget,ratio);
 				tween.SetBaseRatio(currentRatio);
