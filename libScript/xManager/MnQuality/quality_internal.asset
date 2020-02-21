@@ -19,7 +19,7 @@ MonoBehaviour:
 
       only used for internal save'
   baseWork:
-    canDebug: 0
+    canDebug: 1
     canWork: 1
     runInEditMode: 0
   nodeValue:

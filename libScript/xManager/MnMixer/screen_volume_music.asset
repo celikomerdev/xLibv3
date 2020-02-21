@@ -15,7 +15,7 @@ MonoBehaviour:
   note:
     value: 
   baseWork:
-    canDebug: 0
+    canDebug: 1
     canWork: 1
     runInEditMode: 0
   nodeValue:
@@ -28,4 +28,3 @@ MonoBehaviour:
     snapDefault: 0
     useThreshold: 0
     valueThreshold: 0
-    cacheGreater: 0
