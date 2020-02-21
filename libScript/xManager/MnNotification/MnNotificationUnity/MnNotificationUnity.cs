@@ -33,7 +33,7 @@ namespace xLib
 			
 			CheckLast();
 			CancelAllNotifications();
-			if(CanDebug) CreateNotification(dateTime:SafeTime.Now.AddSeconds(30),title:"MnNotificationUnity",message:"Test",data:"Test");
+			if(CanDebug) CreateNotification(dateTime:SafeTime.NowLocal.AddSeconds(30),title:"MnNotificationUnity",message:"Test",data:"Test");
 		}
 		
 		private void OnApplicationFocus(bool value)
