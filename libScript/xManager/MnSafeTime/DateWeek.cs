@@ -10,7 +10,7 @@ namespace xLib.ToolDate
 		
 		protected override void Tick(float tickTime)
 		{
-			eventResult.Invoke(SafeTime.UtcNow.StartOfWeek().Ticks);
+			eventResult.Invoke(SafeTime.NowUtc.StartOfWeek().Ticks);
 		}
 	}
 }

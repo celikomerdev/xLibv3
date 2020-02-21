@@ -46,7 +46,10 @@ namespace xLib.libLua
 {
 	public class LuaM : BaseWorkM
 	{
+		#pragma warning disable
 		[SerializeField]private TextAsset luaScript = null;
+		#pragma warning restore
+		
 		public void Call(string functionName)
 		{
 			Debug.Log($"LuaM:{functionName}");

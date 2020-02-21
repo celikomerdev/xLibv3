@@ -4,13 +4,13 @@ using xLib.EventClass;
 
 namespace xLib.ToolDate
 {
-	public class DateNow : BaseTickNodeM
+	public class DateNowLocal : BaseTickNodeM
 	{
 		[SerializeField]private EventLong eventResult = null;
 		
 		protected override void Tick(float tickTime)
 		{
-			eventResult.Invoke(SafeTime.UtcNow.Ticks);
+			eventResult.Invoke(SafeTime.NowLocal.Ticks);
 		}
 	}
 }

@@ -81,7 +81,7 @@ namespace xLib
 		{
 			get
 			{
-				return SafeTime.UtcNow.Ticks;
+				return SafeTime.NowUtc.Ticks;
 			}
 			set
 			{

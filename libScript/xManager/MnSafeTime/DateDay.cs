@@ -10,7 +10,7 @@ namespace xLib.ToolDate
 		
 		protected override void Tick(float tickTime)
 		{
-			eventResult.Invoke(SafeTime.UtcNow.StartOfDay().Ticks);
+			eventResult.Invoke(SafeTime.NowUtc.StartOfDay().Ticks);
 		}
 	}
 }

@@ -18,6 +18,7 @@ namespace xLib
 		{
 			if(!willCall) return;
 			willCall = false;
+			if(ins.CanDebug) Debug.Log($"{ins.name}:Call",ins);
 			
 			EventUnity cacheListener = listener;
 			listener = new EventUnity();
@@ -32,14 +33,14 @@ namespace xLib
 		private static EventUnity listener = new EventUnity();
 		public static void ScheduleLate(UnityAction call,IDebug iDebug=null)
 		{
-			if(iDebug.CanDebug) Debug.Log($"MnThread:ScheduleLate:{call.Method}",iDebug.UnityObject);
+			// if(iDebug.CanDebug) Debug.Log($"MnThread:ScheduleLate:{call.Method}",iDebug.UnityObject);
 			listener.eventUnity.AddListener(call);
 			willCall = true;
 		}
 		
 		public static void StartThread(UnityAction call,bool useThread=true,int priority = 2,IDebug iDebug=null)
 		{
-			if(iDebug!=null && iDebug.CanDebug) Debug.Log($"MnThread:StartThread:{useThread}:{call.Method}",iDebug.UnityObject);
+			// if(iDebug!=null && iDebug.CanDebug) Debug.Log($"MnThread:StartThread:{useThread}:{call.Method}",iDebug.UnityObject);
 			if(!useThread)
 			{
 				call();

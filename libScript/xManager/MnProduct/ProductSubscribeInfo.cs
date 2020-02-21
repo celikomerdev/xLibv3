@@ -68,8 +68,10 @@ namespace xLib.ToolPurchase
 {
 	public class ProductSubscribeInfo : BaseRegisterM
 	{
+		#pragma warning disable
 		[SerializeField]private string key = "";
 		[SerializeField]public EventTimeSpan eventFreeTrialPeriod = new EventTimeSpan();
+		#pragma warning restore
 		
 		protected override bool TryRegister(bool register)
 		{

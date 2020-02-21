@@ -29,7 +29,7 @@ namespace xLib
 		private readonly ScoreSystem scoreSystem = new ScoreSystem();
 		[SerializeField]private SystemDefault systemDefault = new SystemDefault();
 		[SerializeField]private ScorePlatform scorePlatform = new ScorePlatform();
-		[SerializeField]private float[] scoreQuality;
+		[SerializeField]private float[] scoreQuality = new float[0];
 		#endregion
 		
 		

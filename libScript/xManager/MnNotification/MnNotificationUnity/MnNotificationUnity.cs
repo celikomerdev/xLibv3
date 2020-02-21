@@ -166,6 +166,7 @@ namespace xLib
 {
 	public class MnNotificationUnity : SingletonM<MnNotificationUnity>
 	{
+		#pragma warning disable
 		[SerializeField]private NodeString lastNotificationId = null;
 		
 		[Header("Android")]
@@ -173,6 +174,7 @@ namespace xLib
 		[SerializeField]private string channelName = "Unity Channel Name";
 		[SerializeField]private string channelDescription = "Unity Channel Description";
 		[SerializeField]private int channelImportance = 4;
+		#pragma warning restore
 		
 		public int CreateNotification(DateTime dateTime, string title, string message, string data = "")
 		{

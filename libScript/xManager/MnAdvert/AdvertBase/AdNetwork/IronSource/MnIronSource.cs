@@ -93,8 +93,10 @@ namespace xLib.libAdvert.xIronSource
 {
 	public class MnIronSource : BaseWorkM
 	{
+		#pragma warning disable
 		[SerializeField]private string key = "";
 		[SerializeField]private string[] adUnits = new string[0];
+		#pragma warning restore
 	}
 }
 #endif

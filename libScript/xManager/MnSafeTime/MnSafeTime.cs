@@ -7,7 +7,7 @@ namespace xLib
 {
 	public class MnSafeTime : SingletonM<MnSafeTime>
 	{
-		[SerializeField]private xDateTime dateTimeDefault;
+		[SerializeField]private xDateTime dateTimeDefault = new xDateTime();
 		[SerializeField]private EventUnity onCalibrate = new EventUnity();
 		
 		protected override void Awaked()
@@ -26,11 +26,11 @@ namespace xLib
 		{
 			get
 			{
-				return SafeTime.UtcNow;
+				return SafeTime.NowUtc;
 			}
 			set
 			{
-				SafeTime.UtcNow = value;
+				SafeTime.NowUtc = value;
 			}
 		}
 		

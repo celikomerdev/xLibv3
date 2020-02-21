@@ -5,7 +5,7 @@ namespace xLib
 {
 	[System.Serializable]internal class BaseWorkInfo
 	{
-		[SerializeField]internal bool canDebug = false;
+		[SerializeField]internal bool canDebug = true;
 		public bool CanDebug
 		{
 			get

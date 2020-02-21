@@ -10,7 +10,7 @@ namespace xLib
 		public static readonly EventUnity onCalibrate = new EventUnity();
 		
 		private static DateTime dateTimeAnchor = DateTime.MinValue;
-		public static DateTime UtcNow
+		public static DateTime NowUtc
 		{
 			get
 			{
@@ -18,21 +18,22 @@ namespace xLib
 			}
 			set
 			{
-				if(xLogger.CanDebug) Debug.Log($"SafeTime:{value.ToString()}:UtcNow");
+				if(xLogger.CanDebug) Debug.Log($"SafeTime:{value.ToString()}:NowUtc");
 				dateTimeAnchor = value.AddSeconds(-Time.unscaledTime);
 				onCalibrate.Invoke();
 			}
 		}
 		
-		public static DateTime Now
+		public static DateTime NowLocal
 		{
 			get
 			{
-				return UtcNow.ToLocalTime();
+				return NowUtc.ToLocalTime();
 			}
 			set
 			{
-				UtcNow = value.ToUniversalTime();
+				if(xLogger.CanDebug) Debug.Log($"SafeTime:{value.ToString()}:NowLocal");
+				NowUtc = value.ToUniversalTime();
 			}
 		}
 		
@@ -40,7 +41,7 @@ namespace xLib
 		{
 			get
 			{
-				return UtcNow.StartOfDay();
+				return NowUtc.StartOfDay();
 			}
 		}
 	}
