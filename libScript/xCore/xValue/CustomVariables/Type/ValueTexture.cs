@@ -60,7 +60,7 @@ namespace xLib.xValueClass
 					Texture2D texture2D = (Texture2D)Value;
 					stringData = System.Convert.ToBase64String(texture2D.xEncodeToPNG());
 				}
-				if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:DataLenghtGet:{stringData.Length}",nodeSetting.objDebug);
+				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:DataLenghtGet:{stringData.Length}",nodeSetting.UnityObject);
 
 				JToken jToken = JToken.FromObject(stringData);
 				return jToken;
@@ -71,7 +71,7 @@ namespace xLib.xValueClass
 				string stringJson = value.ToString();
 				if(string.IsNullOrWhiteSpace(stringJson)) return;
 				string stringData = JToken.FromObject(stringJson).ToObject<string>();
-				if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:DataLenghtSet:{stringData.Length}",nodeSetting.objDebug);
+				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:DataLenghtSet:{stringData.Length}",nodeSetting.UnityObject);
 				
 				Texture2D texture2D = new Texture2D(2,2);
 				texture2D.Load(System.Convert.FromBase64String(stringData));

@@ -45,7 +45,7 @@ namespace xLib.xValueClass
 				if(hash == (KeyEncryptVersion(i)+content).HashSHA256UTF8()) return true;
 			}
 			
-			Debug.LogException(new UnityException($"{nodeSetting.objDebug.name}:HackDetected!!!"),nodeSetting.objDebug);
+			Debug.LogException(new UnityException($"{nodeSetting.UnityObject.name}:HackDetected!!!"),nodeSetting.UnityObject);
 			return false;
 		}
 		#endregion

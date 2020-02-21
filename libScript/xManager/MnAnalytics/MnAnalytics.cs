@@ -22,7 +22,7 @@ namespace xLib
 		
 		protected override void OnEnabled()
 		{
-			m_arrayIAnalyticObject = arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>();
+			m_arrayIAnalyticObject = arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>(this);
 		}
 		
 		public static System.Action<string> logScreen = delegate{};

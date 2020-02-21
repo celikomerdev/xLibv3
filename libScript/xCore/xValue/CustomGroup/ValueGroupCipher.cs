@@ -30,7 +30,7 @@ namespace xLib.xValueClass
 				string Content = jObject.GetValue("Content").ToString();
 				string stringJObject = "";
 				
-				if(stringJObject != "") Debug.LogException(new UnityException($"{nodeSetting.objDebug.name}:Test!!!"),nodeSetting.objDebug);
+				if(stringJObject != "") Debug.LogException(new UnityException($"{nodeSetting.UnityObject.name}:Test!!!"),nodeSetting.UnityObject);
 				
 				SerializedObjectRaw = Decrypt(Content);
 			}
@@ -41,13 +41,13 @@ namespace xLib.xValueClass
 		#region CheckValid
 		private string Decrypt(string content)
 		{
-			for (int i = 0; i < cryptoVersion.Length; i++)
+			for (int i=cryptoVersion.Length-1; i>=0; i--)
 			{
 				string stringJObject = StringCipher.Decrypt(content,KeyEncryptVersion(i));
 				if(!string.IsNullOrEmpty(stringJObject)) return stringJObject;
 			}
 			
-			Debug.LogException(new UnityException($"{nodeSetting.objDebug.name}:HackDetected!!!"),nodeSetting.objDebug);
+			Debug.LogException(new UnityException($"{nodeSetting.UnityObject.name}:HackDetected!!!"),nodeSetting.UnityObject);
 			return "";
 		}
 		#endregion

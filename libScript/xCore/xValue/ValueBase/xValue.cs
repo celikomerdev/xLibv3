@@ -83,7 +83,7 @@ namespace xLib
 		#region Call
 		private void CallClient()
 		{
-			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallClient:{ValueToString}",nodeSetting.objDebug);
+			if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:CallClient:{ValueToString}",nodeSetting.UnityObject);
 			actionSortedBase.Invoke(value:Value,viewId:string.Empty);
 			actionSortedBaseCall.Invoke(value:Value,viewId:string.Empty);
 			analyticDirty = true;
@@ -91,7 +91,7 @@ namespace xLib
 		
 		private void CallClientFirst()
 		{
-			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallClientFirst:{ValueToString}",nodeSetting.objDebug);
+			if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:CallClientFirst:{ValueToString}",nodeSetting.UnityObject);
 			actionSortedBase.InvokeFirst(value:Value,viewId:string.Empty);
 			actionSortedBaseCall.InvokeFirst(value:Value,viewId:string.Empty);
 			analyticDirty = true;
@@ -99,7 +99,7 @@ namespace xLib
 		
 		private void CallClientLast()
 		{
-			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallClientLast:{ValueToString}",nodeSetting.objDebug);
+			if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:CallClientLast:{ValueToString}",nodeSetting.UnityObject);
 			actionSortedBase.InvokeLast(value:Value,viewId:string.Empty);
 			actionSortedBaseCall.InvokeLast(value:Value,viewId:string.Empty);
 			analyticDirty = true;
@@ -160,7 +160,7 @@ namespace xLib
 			{
 				if(listenerEditor.Contains(worker.UnityObject))
 				{
-					Debug.LogError($"{nodeSetting.objDebug.name}:ListenerEditor:++:{worker.UnityObject.name}",worker.UnityObject);
+					Debug.LogError($"{nodeSetting.UnityObject.name}:ListenerEditor:++:{worker.UnityObject.name}",worker.UnityObject);
 					return;
 				}
 				listenerEditor.Add(worker.UnityObject);
@@ -169,7 +169,7 @@ namespace xLib
 			{
 				if(!listenerEditor.Contains(worker.UnityObject))
 				{
-					Debug.LogError($"{nodeSetting.objDebug.name}:ListenerEditor:--:{worker.UnityObject.name}",worker.UnityObject);
+					Debug.LogError($"{nodeSetting.UnityObject.name}:ListenerEditor:--:{worker.UnityObject.name}",worker.UnityObject);
 					return;
 				}
 				listenerEditor.Remove(worker.UnityObject);
@@ -272,7 +272,7 @@ namespace xLib
 			if(!nodeSetting.UseRpc) CallClient();
 			else
 			{
-				if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Call:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.objDebug);
+				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:Call:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.UnityObject);
 				ViewCore.RPC(nodeSetting.RpcTarget,Key,SerializedObject.ToString());
 			}
 		}
@@ -282,7 +282,7 @@ namespace xLib
 			if(!nodeSetting.UseRpc) CallClientFirst();
 			else
 			{
-				if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallFirst:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.objDebug);
+				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:CallFirst:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.UnityObject);
 				ViewCore.RPC(nodeSetting.RpcTarget,Key,SerializedObject.ToString());
 			}
 		}
@@ -292,7 +292,7 @@ namespace xLib
 			if(!nodeSetting.UseRpc) CallClientLast();
 			else
 			{
-				if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:CallLast:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.objDebug);
+				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:CallLast:{ViewCore.CurrentId}:{ValueToString}",nodeSetting.UnityObject);
 				ViewCore.RPC(nodeSetting.RpcTarget,Key,SerializedObject.ToString());
 			}
 		}
@@ -374,7 +374,7 @@ namespace xLib
 		{
 			if(globals.ContainsKey(Key))
 			{
-				Debug.LogWarning($"Globals:Override:{Key}:type:{typeof(V)}",nodeSetting.objDebug);
+				Debug.LogWarning($"Globals:Override:{Key}:type:{typeof(V)}",nodeSetting.UnityObject);
 			}
 			globals[Key] = this;
 		}

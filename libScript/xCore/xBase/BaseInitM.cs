@@ -13,8 +13,8 @@ namespace xLib
 			#if CanTrace
 			if(CanDebug) Debug.Log($"{this.name}:Init:{isInit}",this);
 			#endif
-			OnInit(isInit);
 			SetDebug();
+			OnInit(isInit);
 		}
 		protected virtual void OnInit(bool init){}
 		

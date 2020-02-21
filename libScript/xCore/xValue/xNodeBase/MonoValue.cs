@@ -12,8 +12,8 @@ namespace xLib.xValueClass
 		
 		protected override void SetDebug()
 		{
-			Node.nodeSetting.canDebug = CanDebug;
-			Node.nodeSetting.objDebug = this;
+			Node.nodeSetting.CanDebug = CanDebug;
+			Node.nodeSetting.UnityObject = this;
 			if(string.IsNullOrEmpty(Key)) KeyGuid();
 		}
 		
@@ -30,14 +30,6 @@ namespace xLib.xValueClass
 				Node.nodeSetting.Key = value;
 			}
 			#endif
-		}
-		
-		public override string Name
-		{
-			get
-			{
-				return Node.nodeSetting.Name;
-			}
 		}
 		
 		public override string ValueToString

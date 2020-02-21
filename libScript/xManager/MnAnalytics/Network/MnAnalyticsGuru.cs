@@ -59,7 +59,7 @@ namespace xLib.xAnalytics
 		protected override void OnEnabled()
 		{
 			Init();
-			m_arrayIAnalyticObject = arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>();
+			m_arrayIAnalyticObject = arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>(this);
 			MnAnalytics.logScreen += LogScreen;
 			MnAnalytics.logEvent += LogEvent;
 			Analytics.AdvertisingIDReceived += AdvertisingIDReceived;

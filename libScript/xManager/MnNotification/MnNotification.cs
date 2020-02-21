@@ -37,7 +37,7 @@ namespace xLib
 		{
 			if(CanDebug) Debug.Log($"{this.name}:SendTags",this);
 			Dictionary<string,string> dict = new Dictionary<string,string>();
-			ISerializableObject[] array = arrayTag.GetGenericsArray<ISerializableObject>();
+			ISerializableObject[] array = arrayTag.GetGenericsArray<ISerializableObject>(this);
 			for (int i = 0; i < array.Length; i++)
 			{
 				if(CanDebug) Debug.LogFormat(this,this.name+":InitDictionary:{0}",array[i].Key,array[i].SerializedObjectRaw);
@@ -54,7 +54,7 @@ namespace xLib
 		private void InitPayload()
 		{
 			if(CanDebug) Debug.LogFormat(this,this.name+":InitPayload");
-			ISerializableObject[] array = arrayPayload.GetGenericsArray<ISerializableObject>();
+			ISerializableObject[] array = arrayPayload.GetGenericsArray<ISerializableObject>(this);
 			for (int i = 0; i < array.Length; i++)
 			{
 				if(CanDebug) Debug.LogFormat(this,this.name+":InitPayload:{0}",array[i].Key);

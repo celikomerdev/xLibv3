@@ -14,9 +14,12 @@ namespace xLib.xValueClass
 			#endif
 		}
 		
-		public abstract string Name
+		public string Name
 		{
-			get;
+			get
+			{
+				return this.name;
+			}
 		}
 		
 		public virtual string ValueToString

@@ -6,10 +6,7 @@ namespace xLib
 	[System.Serializable]internal class BaseWorkInfo
 	{
 		[SerializeField]internal bool canDebug = false;
-		[SerializeField]private bool canWork = true;
-		[SerializeField]private bool runInEditMode = false;
-		
-		internal bool CanDebug
+		public bool CanDebug
 		{
 			get
 			{
@@ -25,6 +22,7 @@ namespace xLib
 			}
 		}
 		
+		[SerializeField]private bool canWork = true;
 		internal bool CanWork
 		{
 			get
@@ -43,6 +41,7 @@ namespace xLib
 			}
 		}
 		
+		[SerializeField]private bool runInEditMode = false;
 		internal bool RunInEditMode
 		{
 			get

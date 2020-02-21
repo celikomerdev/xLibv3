@@ -4,8 +4,11 @@ using UnityEngine;
 namespace xLib
 {
 	[System.Serializable]
-	public class WwwFormGroup
+	public class WwwFormGroup : IDebug
 	{
+		public Object UnityObject{get;set;}
+		public bool CanDebug{get;set;}
+		
 		[Header("ISerializableObject")]
 		[SerializeField]private Object[] arrayObjectKey = new Object[0];
 		[SerializeField]private Object[] arrayObjectName = new Object[0];
@@ -16,13 +19,13 @@ namespace xLib
 			{
 				WWWForm form = new WWWForm();
 				
-				ISerializableObject[] iSerializableObjectKey = arrayObjectKey.GetGenericsArray<ISerializableObject>();
+				ISerializableObject[] iSerializableObjectKey = arrayObjectKey.GetGenericsArray<ISerializableObject>(UnityObject);
 				for (int i = 0; i < iSerializableObjectKey.Length; i++)
 				{
 					form.AddField(iSerializableObjectKey[i].Key,iSerializableObjectKey[i].SerializedObjectRaw.ToString());
 				}
 				
-				ISerializableObject[] iSerializableObjectName = arrayObjectName.GetGenericsArray<ISerializableObject>();
+				ISerializableObject[] iSerializableObjectName = arrayObjectName.GetGenericsArray<ISerializableObject>(UnityObject);
 				for (int i = 0; i < iSerializableObjectName.Length; i++)
 				{
 					form.AddField(iSerializableObjectName[i].Name,iSerializableObjectName[i].SerializedObjectName.ToString());

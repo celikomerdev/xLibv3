@@ -23,7 +23,7 @@ namespace xLib.xTween
 			tweens = new List<Tween>();
 			for (int i = 0; i < target.Length; i++)
 			{
-				tweens.AddRange(target[i].GetGenerics<Tween>());
+				tweens.AddRange(target[i].GetGenerics<Tween>(this));
 			}
 			tweens.Remove(this);
 			tweens.RemoveAll(item => item.CanWork == false);

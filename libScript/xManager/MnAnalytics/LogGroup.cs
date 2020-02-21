@@ -14,7 +14,7 @@ namespace xLib.ToolManager
 		private void Awake()
 		{
 			if(CanDebug) Debug.Log($"{this.name}:Awake",this);
-			m_arrayIAnalyticObject = arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>();
+			m_arrayIAnalyticObject = arrayIAnalyticObject.GetGenericsArray<IAnalyticObject>(this);
 		}
 		
 		public void SendAll()

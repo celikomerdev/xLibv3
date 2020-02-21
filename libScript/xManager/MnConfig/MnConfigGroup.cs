@@ -21,6 +21,7 @@ namespace xLib
 		[SerializeField]private ObjectGroup objectGroup = null;
 		private void OnLoadConfig()
 		{
+			objectGroup.UnityObject = this;
 			objectGroup.Init(true);
 			for (int i = 0; i < objectGroup.iSerializableObject.Length; i++)
 			{

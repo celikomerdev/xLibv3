@@ -28,6 +28,7 @@ namespace xLib
 		#region Download
 		private IEnumerator eDownload(string url,string viewId)
 		{
+			wwwFormGroup.UnityObject = UnityObject;
 			WWW www = new WWW(url,wwwFormGroup.FormData);
 			yield return www;
 			

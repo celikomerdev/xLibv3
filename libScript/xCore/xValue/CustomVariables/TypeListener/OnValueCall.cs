@@ -19,7 +19,7 @@ namespace xLib.xValueClass.Listener
 		
 		protected override bool TryRegister(bool register)
 		{
-			ICall[] array = target.GetGenericsArray<ICall>();
+			ICall[] array = target.GetGenericsArray<ICall>(this);
 			for (int i = 0; i < array.Length; i++)
 			{
 				array[i].ListenerCall(register:register,call:OnCall,viewId:ViewId,order:baseRegister.order,onRegister:baseRegister.onRegister,worker:this);

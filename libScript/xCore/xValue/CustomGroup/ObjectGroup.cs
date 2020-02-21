@@ -4,8 +4,11 @@ using UnityEngine;
 namespace xLib.xValueClass
 {
 	[System.Serializable]
-	public class ObjectGroup
+	public class ObjectGroup : IDebug
 	{
+		public Object UnityObject{get;set;}
+		public bool CanDebug{get;set;}
+		
 		internal int indexCurrent = 0;
 		internal ISerializableObject[] iSerializableObject = new ISerializableObject[0];
 		internal ICall[] iCall = new ICall[0];
@@ -29,8 +32,8 @@ namespace xLib.xValueClass
 			isInit = value;
 			
 			indexCurrent = 0;
-			iSerializableObject = arrayObject.GetGenericsArray<ISerializableObject>();
-			iCall = arrayObject.GetGenericsArray<ICall>();
+			iSerializableObject = arrayObject.GetGenericsArray<ISerializableObject>(UnityObject);
+			iCall = arrayObject.GetGenericsArray<ICall>(UnityObject);
 		}
 		#endregion
 		

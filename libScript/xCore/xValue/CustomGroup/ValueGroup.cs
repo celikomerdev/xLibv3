@@ -21,13 +21,15 @@ namespace xLib
 		protected override void OnInit(bool init)
 		{
 			base.OnInit(init);
+			Value.UnityObject = nodeSetting.UnityObject;
+			Value.CanDebug = nodeSetting.CanDebug;
 			Value.Init(init);
 		}
 		
 		#region Call
 		public override void Call()
 		{
-			if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Call:{0}",ViewCore.CurrentId);
+			if(nodeSetting.CanDebug) Debug.LogFormat(nodeSetting.UnityObject,nodeSetting.UnityObject.name+":Call:{0}",ViewCore.CurrentId);
 			ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObjectRaw.ToString());
 		}
 		
@@ -55,21 +57,21 @@ namespace xLib
 				}
 				jObject.Add("Values",Values);
 				
-				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":SerializedObject:Get:{0}:{1}",ViewCore.CurrentId,jObject);
+				if(nodeSetting.CanDebug) Debug.LogFormat(nodeSetting.UnityObject,nodeSetting.UnityObject.name+":SerializedObject:Get:{0}:{1}",ViewCore.CurrentId,jObject);
 				return jObject;
 			}
 			set
 			{
 				if(value==null) return;
 				string stringJson = value.ToString();
-				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":SerializedObject:Set:{0}:{1}",ViewCore.CurrentId,value);
+				if(nodeSetting.CanDebug) Debug.LogFormat(nodeSetting.UnityObject,nodeSetting.UnityObject.name+":SerializedObject:Set:{0}:{1}",ViewCore.CurrentId,value);
 				if(string.IsNullOrEmpty(stringJson)) return;
 				
 				if(nodeSetting.UseRpc && !ViewCore.inRpc)
 				{
 					if(ViewCore.IsMy)
 					{
-						if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Call:{0}",ViewCore.CurrentId);
+						if(nodeSetting.CanDebug) Debug.LogFormat(nodeSetting.UnityObject,nodeSetting.UnityObject.name+":Call:{0}",ViewCore.CurrentId);
 						ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,stringJson);
 						return;
 					}
@@ -79,7 +81,7 @@ namespace xLib
 				JObject Values = (JObject)jObject.GetValue("Values");
 				if(Values==null) Values = jObject;
 				
-				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":Values:true:{0}",ViewCore.CurrentId);
+				if(nodeSetting.CanDebug) Debug.LogFormat(nodeSetting.UnityObject,nodeSetting.UnityObject.name+":Values:true:{0}",ViewCore.CurrentId);
 				for (int i = 0; i < Value.iSerializableObject.Length; i++)
 				{
 					ISerializableObject jsonInterface = Value.iSerializableObject[i];
@@ -114,7 +116,7 @@ namespace xLib
 					ISerializableObject jsonInterface = Value.iSerializableObject[i];
 					jObject.Add(jsonInterface.Name,(JToken)jsonInterface.SerializedObjectName);
 				}
-				if(nodeSetting.canDebug) Debug.LogFormat(nodeSetting.objDebug,nodeSetting.objDebug.name+":SerializedObjectName:Get:{0}:{1}",ViewCore.CurrentId,jObject);
+				if(nodeSetting.CanDebug) Debug.LogFormat(nodeSetting.UnityObject,nodeSetting.UnityObject.name+":SerializedObjectName:Get:{0}:{1}",ViewCore.CurrentId,jObject);
 				return jObject;
 			}
 		}

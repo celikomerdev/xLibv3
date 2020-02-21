@@ -68,6 +68,7 @@ namespace xLib
 				string url = MnKey.GetValue("MnConfig");
 				if(string.IsNullOrEmpty(url)) yield break;
 				
+				wwwFormGroup.UnityObject = UnityObject;
 				WWWForm wwwForm = wwwFormGroup.FormData;
 				if(CanDebug) Debug.Log($"{this.name}:wwwFormGroup:Length:{wwwForm.data.Length}:headers:{wwwForm.headers.ToJsonString()}");
 				

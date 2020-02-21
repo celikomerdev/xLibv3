@@ -3,12 +3,10 @@ using UnityEngine;
 
 namespace xLib
 {
-	[System.Serializable]public class NodeSetting
+	[System.Serializable]public class NodeSetting : IDebug
 	{
-		[Header("Debug")]
-		[System.NonSerialized]public bool canDebug = false;
-		[System.NonSerialized]public Object objDebug = null;
-		
+		public Object UnityObject{get;set;}
+		public bool CanDebug{get;set;}
 		
 		[Header("Key")]
 		[SerializeField]private string key = "";
@@ -23,20 +21,12 @@ namespace xLib
 			{
 				if(string.IsNullOrEmpty(value)) return;
 				if(key==value) return;
-				Debug.LogWarningFormat(objDebug,Name+":KeyChange:{0}:{1}",key,value);
+				Debug.Log($"{UnityObject.name}:KeyChange:{key}:{value}",UnityObject);
 				key = value;
 				
-				UnityEditor.EditorUtility.SetDirty(objDebug);
+				UnityEditor.EditorUtility.SetDirty(UnityObject);
 			}
 			#endif
-		}
-		
-		public string Name
-		{
-			get
-			{
-				return objDebug.name;
-			}
 		}
 		
 		[Header("Multi")]
@@ -53,7 +43,7 @@ namespace xLib
 			set
 			{
 				rpcTarget = value;
-				if(canDebug) Debug.LogFormat(objDebug,Name+":RpcTarget:{0}",rpcTarget);
+				if(CanDebug) Debug.Log($"{UnityObject.name}:RpcTarget:{rpcTarget}",UnityObject);
 			}
 		}
 		
@@ -69,7 +59,7 @@ namespace xLib
 			set
 			{
 				useRpc = value;
-				if(canDebug) Debug.LogFormat(objDebug,Name+":UseRpc:{0}",useRpc);
+				if(CanDebug) Debug.Log($"{UnityObject.name}:UseRpc:{useRpc}",UnityObject);
 			}
 		}
 	}

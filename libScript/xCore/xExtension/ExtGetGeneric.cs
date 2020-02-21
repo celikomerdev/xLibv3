@@ -24,10 +24,14 @@ namespace xLib
 			return genericClass;
 		}
 		
-		public static V[] GetGenerics<V>(this Object target)
+		public static V[] GetGenerics<V>(this Object target,Object unityObject=null)
 		{
 			List<V> genericClass = new List<V>();
-			if(target==null) return genericClass.ToArray();
+			if(target==null)
+			{
+				Debug.LogException(new UnityException($"GetGenerics:null:{unityObject.name}"),unityObject);
+				return genericClass.ToArray();
+			}
 			
 			switch(target)
 			{
@@ -47,13 +51,17 @@ namespace xLib
 			return genericClass.ToArray();
 		}
 		
-		public static V[] GetGenericsArray<V>(this Object[] target)
+		public static V[] GetGenericsArray<V>(this Object[] target,Object unityObject=null)
 		{
 			List<V> genericClass = new List<V>();
 			for (int i = 0; i < target.Length; i++)
 			{
-				if(target[i] == null) continue;
-				genericClass.AddRange(target[i].GetGenerics<V>());
+				if(target[i]==null)
+				{
+					Debug.LogException(new UnityException($"GetGenericsArray:null:{unityObject.name}:index:{i}"),unityObject);
+					continue;
+				}
+				genericClass.AddRange(target[i].GetGenerics<V>(target[i]));
 			}
 			return genericClass.ToArray();
 		}
