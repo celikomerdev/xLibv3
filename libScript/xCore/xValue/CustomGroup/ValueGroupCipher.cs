@@ -1,7 +1,7 @@
 ﻿#if xLibv3
 using Newtonsoft.Json.Linq;
 using UnityEngine;
-using xLib.ToolCrypto;
+using UnityEngine.Profiling;
 
 namespace xLib.xValueClass
 {
@@ -13,40 +13,44 @@ namespace xLib.xValueClass
 		{
 			get
 			{
+				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueGroupCipher:Get",nodeSetting.UnityObject);
 				JObject jObject = new JObject();
+				string Content = ToolCrypto.StringCipher.Encrypt(SerializedObjectRaw.ToString(),KeyEncrypt);
 				
-				string Content = StringCipher.Encrypt(SerializedObjectRaw.ToString(),KeyEncrypt);
+				jObject.Add("WARNING!!","Your data will be deleted if you edit this file!!!!");
+				jObject.Add("Hash","");
 				jObject.Add("Content",Content);
 				
+				Profiler.EndSample();
 				return jObject;
 			}
 			set
 			{
 				if(value==null) return;
 				string stringJson = value.ToString();
-				if(string.IsNullOrEmpty(stringJson)) return;
+				if(string.IsNullOrWhiteSpace(stringJson)) return;
+				
+				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueGroupCipher:Set",nodeSetting.UnityObject);
 				JObject jObject = JObject.Parse(stringJson);
 				
+				string Hash = jObject.GetValue("Hash").ToString();
 				string Content = jObject.GetValue("Content").ToString();
-				string stringJObject = "";
-				
-				if(stringJObject != "") Debug.LogException(new UnityException($"{nodeSetting.UnityObject.name}:Test!!!"),nodeSetting.UnityObject);
 				
 				SerializedObjectRaw = Decrypt(Content);
+				Profiler.EndSample();
 			}
 		}
 		#endregion
 		
 		
-		#region CheckValid
+		#region Validate
 		private string Decrypt(string content)
 		{
-			for (int i=cryptoVersion.Length-1; i>=0; i--)
+			for (int i = 0; i < cryptoVersion.Length; i++)
 			{
-				string stringJObject = StringCipher.Decrypt(content,KeyEncryptVersion(i));
+				string stringJObject = ToolCrypto.StringCipher.Decrypt(content,KeyEncryptVersion(i));
 				if(!string.IsNullOrEmpty(stringJObject)) return stringJObject;
 			}
-			
 			Debug.LogException(new UnityException($"{nodeSetting.UnityObject.name}:HackDetected!!!"),nodeSetting.UnityObject);
 			return "";
 		}

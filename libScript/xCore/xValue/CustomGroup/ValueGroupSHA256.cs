@@ -1,6 +1,7 @@
 ﻿#if xLibv3
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace xLib.xValueClass
 {
@@ -12,6 +13,7 @@ namespace xLib.xValueClass
 		{
 			get
 			{
+				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueGroupSHA256:Get",nodeSetting.UnityObject);
 				JObject jObject = new JObject();
 				JToken Content = (JToken)SerializedObjectRaw;
 				
@@ -19,6 +21,7 @@ namespace xLib.xValueClass
 				jObject.Add("Hash",(KeyEncrypt+Content).HashSHA256UTF8());
 				jObject.Add("Content",Content);
 				
+				Profiler.EndSample();
 				return jObject;
 			}
 			set
@@ -26,18 +29,21 @@ namespace xLib.xValueClass
 				if(value==null) return;
 				string stringJson = value.ToString();
 				if(string.IsNullOrWhiteSpace(stringJson)) return;
+				
+				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueGroupSHA256:Set",nodeSetting.UnityObject);
 				JObject jObject = JObject.Parse(stringJson);
 				
 				string Hash = jObject.GetValue("Hash").ToString();
 				string Content = jObject.GetValue("Content").ToString();
 				
 				if(IsValid(Hash,Content)) SerializedObjectRaw = Content;
+				Profiler.EndSample();
 			}
 		}
 		#endregion
 		
 		
-		#region CheckValid
+		#region Validate
 		private bool IsValid(string hash,string content)
 		{
 			for (int i = 0; i < cryptoVersion.Length; i++)
