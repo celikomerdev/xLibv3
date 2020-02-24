@@ -70,13 +70,20 @@ namespace xLib
 		
 		public static Transform FindChildDeep(this Transform trans,string name)
 		{
+			Transform returnTrans = trans.FindChildRecursive(name);
+			if(returnTrans == null) Debug.LogException(new UnityException($"{trans.name}:FindChildDeep:null:{name}"),trans);
+			return returnTrans;
+		}
+		
+		private static Transform FindChildRecursive(this Transform trans,string name)
+		{
 			foreach(Transform child in trans)
 			{
 				if(child.name == name) return child;
 			}
 			foreach(Transform child in trans)
 			{
-				Transform result = child.FindChildDeep(name);
+				Transform result = child.FindChildRecursive(name);
 				if(result != null) return result;
 			}
 			return null;
