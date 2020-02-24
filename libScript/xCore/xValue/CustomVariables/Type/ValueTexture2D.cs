@@ -2,6 +2,7 @@
 using System;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace xLib.xValueClass
 {
@@ -54,6 +55,8 @@ namespace xLib.xValueClass
 		{
 			get
 			{
+				return JToken.FromObject("");
+				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueTexture2D:Get",nodeSetting.UnityObject);
 				string stringData = "";
 				if(Value!=null)
 				{
@@ -61,15 +64,19 @@ namespace xLib.xValueClass
 					stringData = System.Convert.ToBase64String(texture2D.xEncodeToPNG());
 				}
 				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:DataLenghtGet:{stringData.Length}",nodeSetting.UnityObject);
-
+				
 				JToken jToken = JToken.FromObject(stringData);
+				Profiler.EndSample();
 				return jToken;
 			}
 			set
 			{
+				return;
 				if(value==null) return;
 				string stringJson = value.ToString();
 				if(string.IsNullOrWhiteSpace(stringJson)) return;
+				
+				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueTexture2D:Set",nodeSetting.UnityObject);
 				string stringData = JToken.FromObject(stringJson).ToObject<string>();
 				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:DataLenghtSet:{stringData.Length}",nodeSetting.UnityObject);
 				
@@ -77,6 +84,7 @@ namespace xLib.xValueClass
 				texture2D.Load(System.Convert.FromBase64String(stringData));
 				
 				Value = texture2D;
+				Profiler.EndSample();
 			}
 		}
 		#endregion
