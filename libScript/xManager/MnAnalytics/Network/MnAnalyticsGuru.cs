@@ -36,17 +36,19 @@ namespace xLib.xAnalytics
 		{
 			if(isInit) return;
 			AnalyticsBuilder builder = Analytics.Builder;
+			
 			if(!CanDebug) logLevel = LogLevel.FATAL;
 			builder.SetLogLevel(logLevel);
+			builder.SetEnableAppLogHandling(false);
 			
 			List<ABTest> listGroupTest = new List<ABTest>();
 			foreach (GroupTest item in arrayGroupTest)
 			{
 				listGroupTest.Add(new ABTest(name:item.name,groupCount:item.groupCount,percent:item.percent));
 			}
+			builder.SetAbTests(listGroupTest);
 			
 			builder.SetKochovaAndroidGUID(MnKey.GetValue("Kochava_ID"));
-			builder.SetAbTests(listGroupTest);
 			builder.Build();
 			isInit = true;
 			
