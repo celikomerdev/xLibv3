@@ -8,15 +8,16 @@ namespace xLib
 {
 	public static class ExtNewtonsoft
 	{
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void JsonSerializerSettingsSet()
+		private static JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings()
 		{
-			Debug.Log("JsonSerializerSettingsSet");
-			JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings();
-			jsonSerializerSettings.Formatting = Formatting.None;
-			jsonSerializerSettings.DefaultValueHandling = DefaultValueHandling.Ignore;
-			jsonSerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-			JsonConvert.DefaultSettings = () => jsonSerializerSettings;
+			Formatting = Formatting.None,
+			DefaultValueHandling = DefaultValueHandling.Ignore,
+			NullValueHandling = NullValueHandling.Ignore
+		};
+		
+		public static string ToJsonString(this object obj)
+		{
+			return JsonConvert.SerializeObject(obj,jsonSerializerSettings);
 		}
 		
 		public static bool TryGetToken<T>(this JObject jObject,string path,ref T outValue)
@@ -83,11 +84,6 @@ namespace xLib
 		{
 			jObject.Value.TryGetToken(path,ref defaultValue);
 			return defaultValue;
-		}
-		
-		public static string ToJsonString(this object obj)
-		{
-			return JsonConvert.SerializeObject(obj);
 		}
 		
 		public static T FromJsonStringSafe<T>(this T output,string data)
