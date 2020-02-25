@@ -41,7 +41,7 @@ namespace xLib.xValueClass
 		{
 			get
 			{
-				return JToken.FromObject("");
+				return null;
 				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueSprite:Get",nodeSetting.UnityObject);
 				string stringData = "";
 				if(Value!=null)

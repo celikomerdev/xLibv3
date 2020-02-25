@@ -55,7 +55,7 @@ namespace xLib.xValueClass
 		{
 			get
 			{
-				return JToken.FromObject("");
+				return null;
 				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueTexture2D:Get",nodeSetting.UnityObject);
 				string stringData = "";
 				if(Value!=null)
