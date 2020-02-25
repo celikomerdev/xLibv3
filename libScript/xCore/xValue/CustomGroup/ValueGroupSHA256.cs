@@ -18,7 +18,7 @@ namespace xLib.xValueClass
 				JToken Content = (JToken)SerializedObjectRaw;
 				
 				jObject.Add("WARNING!!","Your data will be deleted if you edit this file!!!!");
-				jObject.Add("Hash",(KeyEncrypt+Content).HashSHA256UTF8());
+				jObject.Add("Hash",(KeyEncrypt+Content.ToJsonString()).HashSHA256UTF8());
 				jObject.Add("Content",Content);
 				
 				Profiler.EndSample();
@@ -33,8 +33,8 @@ namespace xLib.xValueClass
 				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueGroupSHA256:Set",nodeSetting.UnityObject);
 				JObject jObject = JObject.Parse(stringJson);
 				
-				string Hash = jObject.GetValue("Hash").ToString();
-				string Content = jObject.GetValue("Content").ToString();
+				string Hash = (string)jObject.GetValue("Hash");
+				string Content = jObject.GetValue("Content").ToJsonString();
 				
 				if(IsValid(Hash,Content)) SerializedObjectRaw = Content;
 				Profiler.EndSample();

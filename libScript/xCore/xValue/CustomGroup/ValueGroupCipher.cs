@@ -15,11 +15,11 @@ namespace xLib.xValueClass
 			{
 				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueGroupCipher:Get",nodeSetting.UnityObject);
 				JObject jObject = new JObject();
-				string Content = ToolCrypto.StringCipher.Encrypt(SerializedObjectRaw.ToString(),KeyEncrypt);
+				JToken Content = (JToken)SerializedObjectRaw;
 				
 				jObject.Add("WARNING!!","Your data will be deleted if you edit this file!!!!");
 				jObject.Add("Hash","");
-				jObject.Add("Content",Content);
+				jObject.Add("Content",ToolCrypto.StringCipher.Encrypt(Content.ToJsonString(),KeyEncrypt));
 				
 				Profiler.EndSample();
 				return jObject;
@@ -33,8 +33,8 @@ namespace xLib.xValueClass
 				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueGroupCipher:Set",nodeSetting.UnityObject);
 				JObject jObject = JObject.Parse(stringJson);
 				
-				string Hash = jObject.GetValue("Hash").ToString();
-				string Content = jObject.GetValue("Content").ToString();
+				string Hash = (string)jObject.GetValue("Hash");
+				string Content = (string)jObject.GetValue("Content");
 				
 				SerializedObjectRaw = Decrypt(Content);
 				Profiler.EndSample();
