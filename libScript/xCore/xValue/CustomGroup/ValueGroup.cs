@@ -49,9 +49,10 @@ namespace xLib
 		{
 			get
 			{
-				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueGroup:Get",nodeSetting.UnityObject);
 				JObject jObject = new JObject();
 				JObject Values = new JObject();
+				
+				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueGroup:Get",nodeSetting.UnityObject);
 				for (int i = 0; i < Value.iSerializableObject.Length; i++)
 				{
 					ISerializableObject jsonInterface = Value.iSerializableObject[i];
@@ -59,8 +60,10 @@ namespace xLib
 					if(tempToken==null) continue;
 					Values.Add(jsonInterface.Key,tempToken);
 				}
-				if(Values.HasValues) jObject.Add("Values",Values);
 				Profiler.EndSample();
+				
+				if(!Values.HasValues) return null;
+				jObject.Add("Values",Values);
 				
 				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:SerializedObject:Get:CurrentId:{ViewCore.CurrentId}:jObject:{jObject}",nodeSetting.UnityObject);
 				return jObject;
