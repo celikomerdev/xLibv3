@@ -11,7 +11,7 @@ namespace xLib.xValueClass
 			if(CanDebug) Debug.Log($"{this.name}:Save:{Key}",this);
 			MnThread.StartThread(useThread:false,call:delegate
 			{
-				string value = SerializedObject.ToString();
+				string value = SerializedObject.ToJsonString();
 				xPersistentData.SetString(Key,value,useThread:false);
 			});
 			

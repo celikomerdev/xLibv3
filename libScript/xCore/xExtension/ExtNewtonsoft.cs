@@ -1,5 +1,4 @@
 ﻿#if xLibv3
-using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -9,6 +8,17 @@ namespace xLib
 {
 	public static class ExtNewtonsoft
 	{
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void JsonSerializerSettingsSet()
+		{
+			Debug.Log("JsonSerializerSettingsSet");
+			JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings();
+			jsonSerializerSettings.Formatting = Formatting.None;
+			jsonSerializerSettings.DefaultValueHandling = DefaultValueHandling.Ignore;
+			jsonSerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+			JsonConvert.DefaultSettings = () => jsonSerializerSettings;
+		}
+		
 		public static bool TryGetToken<T>(this JObject jObject,string path,ref T outValue)
 		{
 			if(jObject == null) return false;
@@ -75,9 +85,9 @@ namespace xLib
 			return defaultValue;
 		}
 		
-		public static string ToJsonString<TKey,TValue> (this IDictionary<TKey,TValue> dictionary)
+		public static string ToJsonString(this object obj)
 		{
-			return JsonConvert.SerializeObject(dictionary);
+			return JsonConvert.SerializeObject(obj);
 		}
 		
 		public static T FromJsonStringSafe<T>(this T output,string data)

@@ -25,19 +25,6 @@ namespace xLib.xValueClass
 		}
 		#endregion
 		
-		#region Override
-		// protected override string ValueString
-		// {
-		// 	get
-		// 	{
-		// 		//Color.RGBToHSV(Value,H,S,V)
-		// 		ColorHSVA temp = new ColorHSVA();
-		// 		temp.Color = Value;
-		// 		return temp.HSV.ToString();
-		// 	}
-		// }
-		#endregion
-		
 		#region ISerializableBase
 		public override object SerializedObject
 		{

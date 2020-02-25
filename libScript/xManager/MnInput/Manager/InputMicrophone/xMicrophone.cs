@@ -40,7 +40,7 @@ namespace xLib
 		
 		private void OnApplicationFocus(bool value)
 		{
-			//Init(value);
+			Init(value);
 		}
 		
 		private void OnDisable()

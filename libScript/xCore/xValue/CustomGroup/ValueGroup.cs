@@ -31,7 +31,7 @@ namespace xLib
 		public override void Call()
 		{
 			if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:Call:CurrentId:{ViewCore.CurrentId}",nodeSetting.UnityObject);
-			ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObjectRaw.ToString());
+			ViewCore.RPC(nodeSetting.RpcTarget,nodeSetting.Key,SerializedObjectRaw.ToJsonString());
 		}
 		
 		public override void ListenerCall(bool register,UnityAction<object> call,string view,int order,bool onRegister=false,BaseWorkerI worker=null)
