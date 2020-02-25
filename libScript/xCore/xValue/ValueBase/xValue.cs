@@ -26,7 +26,7 @@ namespace xLib
 		}
 		
 		[Header("Value")]
-		[SerializeField]internal V value = default;
+		[SerializeField]internal V value = default(V);
 		#if UNITY_EDITOR
 		private V valueDebug;
 		#endif
@@ -316,15 +316,13 @@ namespace xLib
 		{
 			get
 			{
-				JToken jToken;
-				if(Value.Equals(null)) jToken = JToken.FromObject("");
-				else jToken = JToken.FromObject(Value);
-				return jToken;
+				if(Value.Equals(null)) return null;
+				if(Value.Equals(default(V))) return null;
+				return JToken.FromObject(Value);
 			}
 			set
 			{
 				if(value==null) return;
-				if(string.IsNullOrEmpty(value.ToString())) return;
 				JToken jToken = JToken.FromObject(value);
 				Value = jToken.ToObject<V>();
 			}

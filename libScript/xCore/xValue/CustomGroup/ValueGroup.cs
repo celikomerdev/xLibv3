@@ -55,12 +55,14 @@ namespace xLib
 				for (int i = 0; i < Value.iSerializableObject.Length; i++)
 				{
 					ISerializableObject jsonInterface = Value.iSerializableObject[i];
-					Values.Add(jsonInterface.Key,(JToken)jsonInterface.SerializedObjectRaw);
+					JToken tempToken = (JToken)jsonInterface.SerializedObjectRaw;
+					if(tempToken==null) continue;
+					Values.Add(jsonInterface.Key,tempToken);
 				}
-				jObject.Add("Values",Values);
+				if(Values.HasValues) jObject.Add("Values",Values);
+				Profiler.EndSample();
 				
 				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:SerializedObject:Get:CurrentId:{ViewCore.CurrentId}:jObject:{jObject}",nodeSetting.UnityObject);
-				Profiler.EndSample();
 				return jObject;
 			}
 			set

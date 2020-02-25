@@ -22,13 +22,13 @@ namespace xLib
 				ISerializableObject[] iSerializableObjectKey = arrayObjectKey.GetGenericsArray<ISerializableObject>(UnityObject);
 				for (int i = 0; i < iSerializableObjectKey.Length; i++)
 				{
-					form.AddField(iSerializableObjectKey[i].Key,iSerializableObjectKey[i].SerializedObjectRaw.ToString());
+					form.AddField(iSerializableObjectKey[i].Key,iSerializableObjectKey[i].SerializedObjectRaw.ToJsonString());
 				}
 				
 				ISerializableObject[] iSerializableObjectName = arrayObjectName.GetGenericsArray<ISerializableObject>(UnityObject);
 				for (int i = 0; i < iSerializableObjectName.Length; i++)
 				{
-					form.AddField(iSerializableObjectName[i].Name,iSerializableObjectName[i].SerializedObjectName.ToString());
+					form.AddField(iSerializableObjectName[i].Name,iSerializableObjectName[i].SerializedObjectName.ToJsonString());
 				}
 				
 				return form;

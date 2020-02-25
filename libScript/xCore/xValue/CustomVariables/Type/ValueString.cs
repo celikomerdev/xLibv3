@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 using System;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace xLib.xValueClass
@@ -40,6 +41,23 @@ namespace xLib.xValueClass
 			get
 			{
 				return Value;
+			}
+		}
+		#endregion
+		
+		#region ISerializableBase
+		public override object SerializedObject
+		{
+			get
+			{
+				if(string.IsNullOrWhiteSpace(Value)) return null;
+				return JToken.FromObject(Value);
+			}
+			set
+			{
+				if(value==null) return;
+				JToken jToken = JToken.FromObject(value);
+				Value = jToken.ToObject<string>();
 			}
 		}
 		#endregion
