@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 namespace xLib
 {
+	//TODO clean by id
 	public class ActionSortedMulti<V> : ActionSortedBase<V>
 	{
 		private readonly Dictionary<string,ActionSorted<V>> actionSortedMulti = new Dictionary<string,ActionSorted<V>>();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace xLib
 {
+	//TODO clean by id
 	public class ValueMulti<T0> : ValueBase<T0>
 	{
 		private readonly Dictionary<string,T0> valueMulti = new Dictionary<string,T0>();

@@ -128,6 +128,7 @@ namespace xLib
 			call.Invoke(Value);
 		}
 		
+		//TODO merge with actionSortedBase
 		private ActionSortedBase<object> actionSortedBaseCall = new ActionSortedSingle<object>();
 		public virtual void ListenerCall(bool register,UnityAction<object> call,string viewId,int order,bool onRegister=false,BaseWorkerI worker=null)
 		{
@@ -179,6 +180,7 @@ namespace xLib
 		#endregion
 		
 		#region Clean
+		//TODO clean by id
 		private void CleanValue()
 		{
 			if(nodeSetting.isMulti) valueBase = new ValueMulti<V>();
