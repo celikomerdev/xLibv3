@@ -1,5 +1,6 @@
 ﻿#if xLibv3
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace xLib
 {
@@ -13,12 +14,12 @@ namespace xLib
 				Debug.LogException(new UnityException("ExtTexture2D.Decompress:null"));
 				return texture2D;
 			}
-			
 			if(value.format == texture2D.format)
 			{
 				if(xLogger.CanDebug) Debug.Log($"Decompress:Already:{value.name}",value);
 				return value;
 			}
+			Profiler.BeginSample($"{value.name}:ExtTexture2D:Decompress",value);
 			
 			//Please note that due to API limitations, this function is not supported on DX9 or Mac+OpenGL.
 			// Graphics.ConvertTexture(texture2D,value);
@@ -32,6 +33,7 @@ namespace xLib
 			// texture2D = renderTexture.ToTexture2D(compress:false);
 			// RenderTexture.ReleaseTemporary(renderTexture);
 			
+			Profiler.EndSample();
 			return texture2D;
 		}
 		
