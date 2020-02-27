@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace xLib
 {
-	[CreateAssetMenu(menuName = "xLib/Helper/Keystore")]
+	[CreateAssetMenu(menuName = "xLib/Helper/Keystore",order = 99)]
 	public class HelperKeystore : BaseWorkS
 	{
 		[SerializeField]private string keystorePass = "keystorePass";

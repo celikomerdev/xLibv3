@@ -14,10 +14,23 @@ namespace xLib
 				return texture2D;
 			}
 			
-			RenderTexture renderTexture = RenderTexture.GetTemporary(value.width,value.height,0,RenderTextureFormat.ARGB32);
-			Graphics.Blit(value,renderTexture);
-			texture2D = renderTexture.ToTexture2D(compress:false);
-			RenderTexture.ReleaseTemporary(renderTexture);
+			if(value.format == texture2D.format)
+			{
+				if(xLogger.CanDebug) Debug.Log($"Decompress:Already:{value.name}",value);
+				return value;
+			}
+			
+			//Please note that due to API limitations, this function is not supported on DX9 or Mac+OpenGL.
+			// Graphics.ConvertTexture(texture2D,value);
+			
+			texture2D.SetPixels32(value.GetPixels32());
+			texture2D.Apply();
+			
+			// last option
+			// RenderTexture renderTexture = RenderTexture.GetTemporary(value.width,value.height,0,RenderTextureFormat.ARGB32);
+			// Graphics.Blit(value,renderTexture);
+			// texture2D = renderTexture.ToTexture2D(compress:false);
+			// RenderTexture.ReleaseTemporary(renderTexture);
 			
 			return texture2D;
 		}
@@ -31,17 +44,15 @@ namespace xLib
 				return bytes;
 			}
 			
-			Texture2D texture2D = value.Decompress();
-			
 			#if ModImageConversion
-			bytes = texture2D.EncodeToPNG();
+			Texture2D valueRaw = value.Decompress();
+			bytes = valueRaw.EncodeToPNG();
+			valueRaw = null;
 			#else
-			xLogger.Log("!ModImageConversion");
-			bytes = texture2D.GetRawTextureData();
+			Debug.LogWarning($"!ModImageConversion");
+			// bytes = value.GetRawTextureData(); //TODO
 			#endif
 			
-			texture2D.Compress(true);
-			texture2D.Apply(true);
 			return bytes;
 		}
 		
@@ -53,8 +64,8 @@ namespace xLib
 			#if ModImageConversion
 			value.LoadImage(data);
 			#else
-			xLogger.Log("!ModImageConversion");
-			value.LoadRawTextureData(data);
+			Debug.LogWarning($"!ModImageConversion");
+			// value.LoadRawTextureData(data); //TODO
 			#endif
 			
 			if(value==null) return;

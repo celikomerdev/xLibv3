@@ -55,36 +55,33 @@ namespace xLib.xValueClass
 		{
 			get
 			{
-				return null;
-				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueTexture:Get",nodeSetting.UnityObject);
-				string stringData = "";
-				if(Value!=null)
-				{
-					Texture2D texture2D = (Texture2D)Value;
-					stringData = System.Convert.ToBase64String(texture2D.xEncodeToPNG());
-				}
-				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:DataLenghtGet:{stringData.Length}",nodeSetting.UnityObject);
+				// return null;
+				if(Value==null) return null;
+				Texture2D texture2D = (Texture2D)Value;
 				
+				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueTexture:Get",nodeSetting.UnityObject);
+				string stringData = System.Convert.ToBase64String(texture2D.xEncodeToPNG());
 				JToken jToken = JToken.FromObject(stringData);
 				Profiler.EndSample();
+				
+				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:DataLenghtGet:{stringData.Length}",nodeSetting.UnityObject);
 				return jToken;
 			}
 			set
 			{
-				return;
+				// return;
 				if(value==null) return;
 				string stringJson = value.ToString();
 				if(string.IsNullOrWhiteSpace(stringJson)) return;
 				
 				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueTexture:Set",nodeSetting.UnityObject);
 				string stringData = JToken.FromObject(stringJson).ToObject<string>();
-				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:DataLenghtSet:{stringData.Length}",nodeSetting.UnityObject);
-				
 				Texture2D texture2D = new Texture2D(2,2);
 				texture2D.Load(System.Convert.FromBase64String(stringData));
-				
-				Value = texture2D;
 				Profiler.EndSample();
+				
+				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:DataLenghtSet:{stringData.Length}",nodeSetting.UnityObject);
+				Value = texture2D;
 			}
 		}
 		#endregion
