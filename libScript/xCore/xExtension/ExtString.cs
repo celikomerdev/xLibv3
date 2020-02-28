@@ -31,20 +31,6 @@ namespace xLib
 			return result;
 		}
 		
-		public static string Rasterize(this string value)
-		{
-			string temp = value.RasterizeLocalize();
-			return temp;
-		}
-		
-		// private const string regexFormatLocalize = @"\b<loc>\S*</loc>\b";
-		private const string regexFormatLocalize = "<loc>(.*?)</loc>";
-		private static string RasterizeLocalize(this string value)
-		{
-			Regex regex = new Regex(regexFormatLocalize);
-			return value;
-		}
-		
 		public static string RemoveSpecials(this string input)
 		{
 			string returnValue = input;
