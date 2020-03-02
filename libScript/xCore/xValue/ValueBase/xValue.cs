@@ -319,7 +319,7 @@ namespace xLib
 			get
 			{
 				if(Value.Equals(null)) return null;
-				if(Value.Equals(default(V))) return null;
+				if(Value.Equals(ValueDefault)) return null;
 				return JToken.FromObject(Value);
 			}
 			set
