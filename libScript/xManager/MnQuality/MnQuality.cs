@@ -63,19 +63,22 @@ namespace xLib
 			scoreSystem.graphicsShaderLevel = Mathf.Clamp(scoreSystem.graphicsShaderLevel, 0, systemDefault.scoreMax);
 			scoreSystem.screen = Mathf.Clamp(scoreSystem.screen, 0, systemDefault.scoreMax);
 			
-			scoreSystem.hardware = (scoreSystem.processorCount + scoreSystem.systemMemorySize + scoreSystem.graphicsMemorySize + scoreSystem.graphicsShaderLevel) / 4f;
-			scoreSystem.system = (scoreSystem.processorCount + scoreSystem.systemMemorySize + scoreSystem.graphicsMemorySize + scoreSystem.graphicsShaderLevel + scoreSystem.screen) / 5f;
-			scoreSystem.final = scoreSystem.hardware;
-			scoreSystem.final *= scorePlatform.score;
+			scoreSystem.score += scorePlatform.score;
+			scoreSystem.score += scoreSystem.processorCount;
+			scoreSystem.score += scoreSystem.systemMemorySize;
+			scoreSystem.score += scoreSystem.graphicsMemorySize;
+			scoreSystem.score += scoreSystem.graphicsShaderLevel;
+			scoreSystem.score += scoreSystem.screen;
+			scoreSystem.score /= 6;
 		}
 		
 		private void ValueAuto()
 		{
 			int output = 0;
-			for(int i = 0; i<scoreQuality.Length-1; i++)
+			for(int i = 0; i<scoreQuality.Length; i++)
 			{
+				if(scoreSystem.score<scoreQuality[i]) break;
 				output = i;
-				if(scoreSystem.final<scoreQuality[i]) break;
 			}
 			qualityAuto.Value = output;
 		}
@@ -97,8 +100,7 @@ namespace xLib
 			Debug.LogFormat($"{this.name}:scoreSystem.graphicsShaderLevel:{scoreSystem.graphicsShaderLevel}",this);
 			Debug.LogFormat($"{this.name}:scoreSystem.screen:{scoreSystem.screen}");
 			
-			Debug.LogFormat($"{this.name}:scoreSystem.hardware:{scoreSystem.hardware}",this);
-			Debug.LogFormat($"{this.name}:scoreSystem.system:{scoreSystem.system}",this);
+			Debug.LogFormat($"{this.name}:scoreSystem.score:{scoreSystem.score}",this);
 			Debug.LogFormat($"{this.name}:valueAuto:{qualityAuto.Value}",this);
 			Debug.LogFormat($"{this.name}:graphicsDeviceType:{SystemInfo.graphicsDeviceType}",this);
 		}
@@ -108,7 +110,7 @@ namespace xLib
 		#region Class
 		[Serializable]internal class SystemDefault
 		{
-			[SerializeField]internal float scoreMax = 1.25f;
+			internal float scoreMax = 1.25f;
 			[SerializeField]internal float processorCount = 4;
 			[SerializeField]internal float systemMemorySize = 2048;
 			[SerializeField]internal float graphicsMemorySize = 1024;
@@ -123,17 +125,15 @@ namespace xLib
 			[SerializeField]internal float graphicsMemorySize;
 			[SerializeField]internal float graphicsShaderLevel;
 			[SerializeField]internal float screen;
-			[SerializeField]internal float hardware;
-			[SerializeField]internal float system;
-			[SerializeField]internal float final;
+			[SerializeField]internal float score;
 		}
 		
 		[Serializable]internal class ScorePlatform
 		{
 			#pragma warning disable
-			[SerializeField]private float scoreAndroid = 0.5f;
-			[SerializeField]private float scoreIOS = 1f;
-			[SerializeField]private float scoreDefault = 1f;
+			[SerializeField]private float scoreAndroid = 1.0f;
+			[SerializeField]private float scoreIOS = 1.5f;
+			[SerializeField]private float scoreDefault = 1.0f;
 			#pragma warning restore
 			
 			public float score
