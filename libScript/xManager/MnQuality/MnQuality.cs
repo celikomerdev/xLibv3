@@ -63,13 +63,13 @@ namespace xLib
 			scoreSystem.graphicsShaderLevel = Mathf.Clamp(scoreSystem.graphicsShaderLevel, 0, systemDefault.scoreMax);
 			scoreSystem.screen = Mathf.Clamp(scoreSystem.screen, 0, systemDefault.scoreMax);
 			
-			scoreSystem.score += scorePlatform.score;
+			scoreSystem.score = scorePlatform.score;
 			scoreSystem.score += scoreSystem.processorCount;
 			scoreSystem.score += scoreSystem.systemMemorySize;
 			scoreSystem.score += scoreSystem.graphicsMemorySize;
 			scoreSystem.score += scoreSystem.graphicsShaderLevel;
-			scoreSystem.score += scoreSystem.screen;
-			scoreSystem.score /= 6;
+			// scoreSystem.score += scoreSystem.screen;
+			scoreSystem.score /= 5;
 		}
 		
 		private void ValueAuto()
