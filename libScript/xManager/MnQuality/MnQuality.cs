@@ -52,12 +52,15 @@ namespace xLib
 		private void CalculateScoreSystem()
 		{
 			scoreSystem.processorCount = SystemInfo.processorCount / systemDefault.processorCount;
+			scoreSystem.processorFrequency = SystemInfo.processorFrequency / systemDefault.processorFrequency;
+			
 			scoreSystem.systemMemorySize = SystemInfo.systemMemorySize / systemDefault.systemMemorySize;
 			scoreSystem.graphicsMemorySize = SystemInfo.graphicsMemorySize / systemDefault.graphicsMemorySize;
 			scoreSystem.graphicsShaderLevel = SystemInfo.graphicsShaderLevel / systemDefault.graphicsShaderLevel;
 			scoreSystem.screen = (systemDefault.screen.x*systemDefault.screen.y) / (Screen.width*Screen.height);
 			
 			scoreSystem.processorCount = Mathf.Clamp(scoreSystem.processorCount, 0, systemDefault.scoreMax);
+			scoreSystem.processorFrequency = Mathf.Clamp(scoreSystem.processorFrequency, 0, systemDefault.scoreMax);
 			scoreSystem.systemMemorySize = Mathf.Clamp(scoreSystem.systemMemorySize, 0, systemDefault.scoreMax);
 			scoreSystem.graphicsMemorySize = Mathf.Clamp(scoreSystem.graphicsMemorySize, 0, systemDefault.scoreMax);
 			scoreSystem.graphicsShaderLevel = Mathf.Clamp(scoreSystem.graphicsShaderLevel, 0, systemDefault.scoreMax);
@@ -65,11 +68,12 @@ namespace xLib
 			
 			scoreSystem.score = scorePlatform.score;
 			scoreSystem.score += scoreSystem.processorCount;
+			scoreSystem.score += scoreSystem.processorFrequency;
 			scoreSystem.score += scoreSystem.systemMemorySize;
 			scoreSystem.score += scoreSystem.graphicsMemorySize;
 			scoreSystem.score += scoreSystem.graphicsShaderLevel;
 			// scoreSystem.score += scoreSystem.screen;
-			scoreSystem.score /= 5;
+			scoreSystem.score /= 6;
 		}
 		
 		private void ValueAuto()
@@ -87,6 +91,7 @@ namespace xLib
 		{
 			if(!CanDebug) return;
 			Debug.LogFormat($"{this.name}:SystemInfo.processorCount:{SystemInfo.processorCount}",this);
+			Debug.LogFormat($"{this.name}:SystemInfo.processorFrequency:{SystemInfo.processorFrequency}",this);
 			Debug.LogFormat($"{this.name}:SystemInfo.systemMemorySize:{SystemInfo.systemMemorySize}",this);
 			Debug.LogFormat($"{this.name}:SystemInfo.graphicsMemorySize:{SystemInfo.graphicsMemorySize}",this);
 			Debug.LogFormat($"{this.name}:SystemInfo.graphicsShaderLevel:{SystemInfo.graphicsShaderLevel}",this);
@@ -95,6 +100,7 @@ namespace xLib
 			Debug.LogFormat($"{this.name}:Screen.dpi:{Screen.dpi}",this);
 			
 			Debug.LogFormat($"{this.name}:scoreSystem.processorCount:{scoreSystem.processorCount}",this);
+			Debug.LogFormat($"{this.name}:scoreSystem.processorFrequency:{scoreSystem.processorFrequency}",this);
 			Debug.LogFormat($"{this.name}:scoreSystem.systemMemorySize:{scoreSystem.systemMemorySize}",this);
 			Debug.LogFormat($"{this.name}:scoreSystem.graphicsMemorySize:{scoreSystem.graphicsMemorySize}",this);
 			Debug.LogFormat($"{this.name}:scoreSystem.graphicsShaderLevel:{scoreSystem.graphicsShaderLevel}",this);
@@ -112,6 +118,7 @@ namespace xLib
 		{
 			internal float scoreMax = 1.25f;
 			[SerializeField]internal float processorCount = 4;
+			[SerializeField]internal float processorFrequency = 1000;
 			[SerializeField]internal float systemMemorySize = 2048;
 			[SerializeField]internal float graphicsMemorySize = 1024;
 			[SerializeField]internal float graphicsShaderLevel = 30;
@@ -120,12 +127,13 @@ namespace xLib
 		
 		[Serializable]internal class ScoreSystem
 		{
-			[SerializeField]internal float processorCount;
-			[SerializeField]internal float systemMemorySize;
-			[SerializeField]internal float graphicsMemorySize;
-			[SerializeField]internal float graphicsShaderLevel;
-			[SerializeField]internal float screen;
-			[SerializeField]internal float score;
+			[SerializeField]internal float processorCount = 0;
+			[SerializeField]internal float processorFrequency = 0;
+			[SerializeField]internal float systemMemorySize = 0;
+			[SerializeField]internal float graphicsMemorySize = 0;
+			[SerializeField]internal float graphicsShaderLevel = 0;
+			[SerializeField]internal float screen = 0;
+			[SerializeField]internal float score = 0;
 		}
 		
 		[Serializable]internal class ScorePlatform
