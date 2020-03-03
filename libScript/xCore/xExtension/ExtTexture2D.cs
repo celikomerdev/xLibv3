@@ -21,17 +21,18 @@ namespace xLib
 			}
 			Profiler.BeginSample($"{value.name}:ExtTexture2D:Decompress",value);
 			
-			//Please note that due to API limitations, this function is not supported on DX9 or Mac+OpenGL.
+			// please note that due to API limitations, this function is not supported on DX9 or Mac+OpenGL.
 			// Graphics.ConvertTexture(texture2D,value);
 			
-			texture2D.SetPixels32(value.GetPixels32());
-			texture2D.Apply();
+			// glitches
+			// texture2D.SetPixels32(value.GetPixels32());
+			// texture2D.Apply();
 			
 			// last option
-			// RenderTexture renderTexture = RenderTexture.GetTemporary(value.width,value.height,0,RenderTextureFormat.ARGB32);
-			// Graphics.Blit(value,renderTexture);
-			// texture2D = renderTexture.ToTexture2D(compress:false);
-			// RenderTexture.ReleaseTemporary(renderTexture);
+			RenderTexture renderTexture = RenderTexture.GetTemporary(value.width,value.height,0,RenderTextureFormat.ARGB32);
+			Graphics.Blit(value,renderTexture);
+			texture2D = renderTexture.ToTexture2D(compress:false);
+			RenderTexture.ReleaseTemporary(renderTexture);
 			
 			Profiler.EndSample();
 			return texture2D;
