@@ -18,7 +18,7 @@ namespace xLib
 		[SerializeField]private bool requestServerAuthCode = false;
 		
 		[SerializeField]private NodeString displayName = null;
-		[SerializeField]private NodeTexture2D displayPhoto = null;
+		[SerializeField]private NodeTexture displayPhoto = null;
 		[SerializeField]private NodeString idToken = null;
 		[SerializeField]private NodeString authCode = null;
 		
