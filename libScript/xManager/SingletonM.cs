@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace xLib
 {
-	public abstract class SingletonBase : BaseWorkM{}
+	public abstract class SingletonBase : BaseWorkerM{}
 	public abstract class SingletonM<T> : SingletonBase where T : Component
 	{
 		[Header("Singleton")]

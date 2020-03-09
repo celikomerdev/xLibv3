@@ -18,6 +18,7 @@ namespace xLib
 		[SerializeField]private bool requestServerAuthCode = false;
 		
 		[SerializeField]private NodeString displayName = null;
+		[SerializeField]private NodeTexture2D displayPhoto = null;
 		[SerializeField]private NodeString idToken = null;
 		[SerializeField]private NodeString authCode = null;
 		
@@ -25,7 +26,6 @@ namespace xLib
 		#region Mono
 		protected override void OnEnabled()
 		{
-			// MnSocial.actionInit += Init;
 			MnSocial.actionLoginOut += LoginOut;
 			
 			MnSocial.actionShowLeaderboard += ShowLeaderboard;
@@ -37,7 +37,6 @@ namespace xLib
 		
 		protected override void OnDisabled()
 		{
-			// MnSocial.actionInit -= Init;
 			MnSocial.actionLoginOut -= LoginOut;
 			
 			MnSocial.actionShowLeaderboard -= ShowLeaderboard;
@@ -110,14 +109,19 @@ namespace xLib
 				
 				if(value)
 				{
-					// StartCoroutine(DownloadImage(PlayGamesPlatform.Instance.GetUserImageUrl())); //TODO
 					displayName.Value = PlayGamesPlatform.Instance.GetUserDisplayName();
 					if(requestIdToken) idToken.Value = PlayGamesPlatform.Instance.GetIdToken();
 					if(requestServerAuthCode) authCode.Value = PlayGamesPlatform.Instance.GetServerAuthCode();
+					
+					this.WwwYield(url:PlayGamesPlatform.Instance.GetUserImageUrl(),call:(www)=>
+					{
+						displayPhoto.Value = www.texture;
+					});
 				}
 				else
 				{
 					displayName.ValueDefaultReset();
+					displayPhoto.ValueDefaultReset();
 					idToken.ValueDefaultReset();
 					authCode.ValueDefaultReset();
 				}

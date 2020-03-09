@@ -1,13 +1,8 @@
 ﻿#if xLibv3
 namespace xLib
 {
-	public interface BaseWorkerI
+	public interface BaseWorkerI : IDebug
 	{
-		UnityEngine.Object UnityObject
-		{
-			get;
-		}
-		
 		string ViewId
 		{
 			get;
