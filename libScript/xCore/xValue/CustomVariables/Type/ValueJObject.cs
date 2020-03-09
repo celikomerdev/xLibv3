@@ -19,7 +19,7 @@ namespace xLib.xValueClass
 		
 		protected override void CreateDefault()
 		{
-			if(value==null) value = new JObject();
+			if(value.IsNull()) value = new JObject();
 		}
 		
 		#region Compare
@@ -39,9 +39,10 @@ namespace xLib.xValueClass
 			}
 			set
 			{
-				if(value==null) return;
+				if(value.IsNull()) return;
 				string stringJson = value.ToString();
-				if(string.IsNullOrEmpty(stringJson)) return;
+				if(string.IsNullOrWhiteSpace(stringJson)) return;
+				
 				Value = JObject.Parse(stringJson);
 			}
 		}

@@ -58,7 +58,7 @@ namespace xLib.xValueClass
 		public ISerializableObject GetByKey(string value)
 		{
 			indexCurrent = -1;
-			if(iSerializableObject!=null && iSerializableObject.Length>0)
+			if(!iSerializableObject.IsNull() && iSerializableObject.Length>0)
 			{
 				try
 				{

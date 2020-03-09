@@ -7,8 +7,13 @@ namespace xLib
 	{
 		public static int xHashCode(this object value)
 		{
-			if(value==null) return 0;
+			if (value == null) return 0;
 			return value.GetHashCode();
+		}
+		
+		public static bool IsNull(this object value)
+		{
+			return (value == null);
 		}
 		
 		public static bool IsNumeric(this object value)

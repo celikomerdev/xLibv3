@@ -40,24 +40,18 @@ namespace xLib.xValueClass
 		{
 			get
 			{
-				string stringData = "";
-				if(Value!=null)
-				{
-					stringData = Value.text;
-				}
-
-				JToken jToken = JToken.FromObject(stringData);
-				return jToken;
+				if(Value.IsNull()) return null;
+				if(Value.Equals(ValueDefault)) return null;
+				
+				return JToken.FromObject(Value.text);
 			}
 			set
 			{
-				if(value==null) return;
+				if(value.IsNull()) return;
 				string stringJson = value.ToString();
-				if(string.IsNullOrEmpty(stringJson)) return;
-				string stringData = JToken.FromObject(stringJson).ToObject<string>();
+				// if(string.IsNullOrWhiteSpace(stringJson)) return;
 				
-				TextAsset textAsset = new TextAsset(stringData);
-				Value = textAsset;
+				Value = new TextAsset(stringJson);
 			}
 		}
 		#endregion

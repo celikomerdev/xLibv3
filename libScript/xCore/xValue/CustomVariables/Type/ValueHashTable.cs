@@ -21,7 +21,7 @@ namespace xLib.xValueClass
 		
 		protected override void CreateDefault()
 		{
-			if(value==null) value = new Hashtable();
+			if(value.IsNull()) value = new Hashtable();
 		}
 		
 		#region Compare
@@ -58,7 +58,7 @@ namespace xLib.xValueClass
 			}
 			set
 			{
-				if(value==null) return;
+				if(value.IsNull()) return;
 				string stringJson = value.ToString();
 				if(string.IsNullOrEmpty(stringJson)) return;
 				string stringData = JToken.FromObject(stringJson).ToObject<string>();

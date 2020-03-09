@@ -30,18 +30,19 @@ namespace xLib.xValueClass
 		{
 			get
 			{
+				if(Value.IsNull()) return null;
+				if(Value.Equals(ValueDefault)) return null;
+				
 				string stringData = "#"+ColorUtility.ToHtmlStringRGBA(Value);
-				JToken jToken = JToken.FromObject(stringData);
-				return jToken;
+				return JToken.FromObject(stringData);
 			}
 			set
 			{
-				if(value==null) return;
+				if(value.IsNull()) return;
 				string stringJson = value.ToString();
-				if(string.IsNullOrEmpty(stringJson)) return;
-				string stringData = JToken.FromObject(stringJson).ToObject<string>();
+				if(string.IsNullOrWhiteSpace(stringJson)) return;
 				
-				if(ColorUtility.TryParseHtmlString(stringData,out Color tempValue))
+				if(ColorUtility.TryParseHtmlString(stringJson,out Color tempValue))
 				{
 					Value = tempValue;
 				}

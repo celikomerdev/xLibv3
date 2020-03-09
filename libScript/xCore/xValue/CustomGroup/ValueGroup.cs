@@ -57,7 +57,7 @@ namespace xLib
 				{
 					ISerializableObject jsonInterface = Value.iSerializableObject[i];
 					JToken tempToken = (JToken)jsonInterface.SerializedObjectRaw;
-					if(tempToken==null) continue;
+					if(tempToken.IsNull()) continue;
 					Values.Add(jsonInterface.Key,tempToken);
 				}
 				Profiler.EndSample();
@@ -70,11 +70,11 @@ namespace xLib
 			}
 			set
 			{
-				if(value==null) return;
+				if(value.IsNull()) return;;
 				string stringJson = value.ToString();
-				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:SerializedObject:Set:CurrentId:{ViewCore.CurrentId}:jObject:{value}",nodeSetting.UnityObject);
-				if(string.IsNullOrEmpty(stringJson)) return;
+				if(string.IsNullOrWhiteSpace(stringJson)) return;
 				
+				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:SerializedObject:Set:CurrentId:{ViewCore.CurrentId}:jObject:{value}",nodeSetting.UnityObject);
 				if(nodeSetting.UseRpc && !ViewCore.inRpc)
 				{
 					if(ViewCore.IsMy)
@@ -88,7 +88,7 @@ namespace xLib
 				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueGroup:Set",nodeSetting.UnityObject);
 				JObject jObject = JObject.Parse(stringJson);
 				JObject Values = (JObject)jObject.GetValue("Values");
-				if(Values==null) Values = jObject;
+				if(Values.IsNull()) Values = jObject;
 				
 				if(nodeSetting.CanDebug) Debug.Log($"{nodeSetting.UnityObject.name}:Distribute:CurrentId:{ViewCore.CurrentId}",nodeSetting.UnityObject);
 				for (int i = 0; i < Value.iSerializableObject.Length; i++)
@@ -96,7 +96,7 @@ namespace xLib
 					ISerializableObject jsonInterface = Value.iSerializableObject[i];
 					
 					JToken token = Values.GetValue(jsonInterface.Key);
-					if(token==null) token = Values.GetValue(jsonInterface.Name);
+					if(token.IsNull()) token = Values.GetValue(jsonInterface.Name);
 					
 					jsonInterface.SerializedObjectRaw = token;
 				}

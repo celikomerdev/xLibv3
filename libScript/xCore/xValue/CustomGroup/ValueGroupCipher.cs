@@ -26,7 +26,7 @@ namespace xLib.xValueClass
 			}
 			set
 			{
-				if(value==null) return;
+				if(value.IsNull()) return;
 				string stringJson = value.ToString();
 				if(string.IsNullOrWhiteSpace(stringJson)) return;
 				

@@ -114,7 +114,7 @@ namespace xLib
 		{
 			#if CanTrace
 			Object objDebug = nodeSetting.objDebug;
-			if(worker!=null) objDebug = worker.UnityObject;
+			if(!worker.IsNull()) objDebug = worker.UnityObject;
 			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:Listener:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",objDebug);
 			#endif
 			
@@ -134,7 +134,7 @@ namespace xLib
 		{
 			#if CanTrace
 			Object objDebug = nodeSetting.objDebug;
-			if(worker!=null) objDebug = worker.UnityObject;
+			if(!worker.IsNull()) objDebug = worker.UnityObject;
 			if(nodeSetting.canDebug) Debug.Log($"{nodeSetting.objDebug.name}:ListenerCall:register:{register}:view:{viewId}:order:{order}:call:{call.Target}",objDebug);
 			#endif
 			
@@ -155,7 +155,7 @@ namespace xLib
 		private void ListenerEditor(bool register,BaseWorkerI worker)
 		{
 			if(!Application.isPlaying) return;
-			if(worker==null) return;
+			if(worker.IsNull()) return;
 			worker.CheckErrors();
 			if(register)
 			{
@@ -318,13 +318,15 @@ namespace xLib
 		{
 			get
 			{
-				if(Value.Equals(null)) return null;
+				if(Value.IsNull()) return null;
 				if(Value.Equals(ValueDefault)) return null;
+				
 				return JToken.FromObject(Value);
 			}
 			set
 			{
-				if(value==null) return;
+				if(value.IsNull()) return;
+				
 				JToken jToken = JToken.FromObject(value);
 				Value = jToken.ToObject<V>();
 			}

@@ -41,11 +41,11 @@ namespace xLib.xValueClass
 		{
 			get
 			{
-				// return null;
-				if(Value==null) return null;
-				Texture2D texture2D = Value.texture;
+				if(Value.IsNull()) return null;
+				if(Value.Equals(ValueDefault)) return null;
 				
 				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueSprite:Get",nodeSetting.UnityObject);
+				Texture2D texture2D = Value.texture;
 				string stringData = System.Convert.ToBase64String(texture2D.xEncodeToPNG());
 				JToken jToken = JToken.FromObject(stringData);
 				Profiler.EndSample();
@@ -55,8 +55,7 @@ namespace xLib.xValueClass
 			}
 			set
 			{
-				// return;
-				if(value==null) return;
+				if(value.IsNull()) return;
 				string stringJson = value.ToString();
 				if(string.IsNullOrWhiteSpace(stringJson)) return;
 				

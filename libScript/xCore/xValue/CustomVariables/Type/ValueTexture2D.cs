@@ -27,8 +27,8 @@ namespace xLib.xValueClass
 		
 		protected override void KeepProperties(Texture2D valueNew)
 		{
-			if(valueNew == null) return;
-			if(ValueDefault != null)
+			if(valueNew.IsNull()) return;
+			if(!ValueDefault.IsNull())
 			{
 				valueNew.filterMode = ValueDefault.filterMode;
 				valueNew.anisoLevel = ValueDefault.anisoLevel;
@@ -55,11 +55,11 @@ namespace xLib.xValueClass
 		{
 			get
 			{
-				// return null;
-				if(Value==null) return null;
-				Texture2D texture2D = Value;
+				if(Value.IsNull()) return null;
+				if(Value.Equals(ValueDefault)) return null;
 				
 				Profiler.BeginSample($"{nodeSetting.UnityObject.name}:ValueTexture2D:Get",nodeSetting.UnityObject);
+				Texture2D texture2D = Value;
 				string stringData = System.Convert.ToBase64String(texture2D.xEncodeToPNG());
 				JToken jToken = JToken.FromObject(stringData);
 				Profiler.EndSample();
@@ -69,8 +69,7 @@ namespace xLib.xValueClass
 			}
 			set
 			{
-				// return;
-				if(value==null) return;
+				if(value.IsNull()) return;
 				string stringJson = value.ToString();
 				if(string.IsNullOrWhiteSpace(stringJson)) return;
 				

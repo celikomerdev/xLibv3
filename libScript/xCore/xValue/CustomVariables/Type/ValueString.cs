@@ -50,14 +50,18 @@ namespace xLib.xValueClass
 		{
 			get
 			{
-				if(string.IsNullOrWhiteSpace(Value)) return null;
+				if(Value.IsNull()) return null;
+				if(Value.Equals(ValueDefault)) return null;
+				
 				return JToken.FromObject(Value);
 			}
 			set
 			{
-				if(value==null) return;
-				JToken jToken = JToken.FromObject(value);
-				Value = jToken.ToObject<string>();
+				if(value.IsNull()) return;
+				string stringJson = value.ToString();
+				// if(string.IsNullOrWhiteSpace(stringJson)) return;
+				
+				Value = stringJson;
 			}
 		}
 		#endregion
