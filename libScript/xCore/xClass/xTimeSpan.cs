@@ -30,9 +30,9 @@ namespace xLib
 			return timeSpan.ToString();
 		}
 		
-		public string ToString(string format,IFormatProvider provider=null)
+		public string ToString(string format,IFormatProvider provider = null)
 		{
-			if(provider == null) provider = CultureInfo.CurrentCulture;
+			if(provider.IsNull()) provider = CultureInfo.InvariantCulture;
 			string result = "";
 			
 			Regex reg_exp = new Regex("[A-Z.]+|[^A-Z.]+");

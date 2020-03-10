@@ -30,13 +30,12 @@ namespace xLib
 		public static Action onLoadConfig = delegate{};
 		private void LoadConfig(string json)
 		{
-			if(CanDebug) Debug.Log($"{this.name}:LoadConfig:json:{json}");
-			
 			if(string.IsNullOrWhiteSpace(json))
 			{
-				Debug.LogException(new UnityException($"{this.name}:LoadConfig:json:null"),this);
+				Debug.LogWarning(new UnityException($"{this.name}:LoadConfig:json:null"),this);
 				return;
 			}
+			if(CanDebug) Debug.Log($"{this.name}:LoadConfig:json.Length:{json.Length}");
 			
 			JObject newData = null;
 			try
@@ -77,10 +76,17 @@ namespace xLib
 				else uwr = UnityWebRequest.Post(url,wwwForm);
 				
 				UnityWebRequestAsyncOperation uwrOp = uwr.SendWebRequest();
-				while (!uwr.isDone)
+				// yield return uwrOp;
+				
+				float progress = -1f;
+				while (!uwrOp.isDone)
 				{
+					yield return new WaitForSecondsRealtime(2f);
+					
+					if(progress == uwrOp.progress) continue;
+					progress = uwrOp.progress;
+					
 					if(CanDebug) Debug.Log($"{this.name}:UWRLoad:progress:{uwrOp.progress}");
-					yield return new WaitForSecondsRealtime(1f);
 				}
 				
 				if (string.IsNullOrEmpty(uwr.error))
