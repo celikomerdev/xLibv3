@@ -12,7 +12,7 @@ namespace xLib.xValueClass
 			MnThread.StartThread(useThread:false,call:delegate
 			{
 				string value = SerializedObject.ToJsonString();
-				xPersistentData.SetString(Key,value,useThread:false);
+				xPersistentData.SetString(Key,value,useThread:true);
 			});
 			
 			// TODO enable

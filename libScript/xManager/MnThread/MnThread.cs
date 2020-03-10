@@ -8,6 +8,8 @@ namespace xLib
 {
 	public class MnThread : SingletonM<MnThread>
 	{
+		[SerializeField]private bool forceSingle = false;
+		
 		#region Mono
 		private void LateUpdate()
 		{
@@ -40,12 +42,19 @@ namespace xLib
 		
 		public static void StartThread(UnityAction call,bool useThread=true,int priority = 2,IDebug iDebug=null)
 		{
-			// if(iDebug!=null && iDebug.CanDebug) Debug.Log($"MnThread:StartThread:{useThread}:{call.Method}",iDebug.UnityObject);
+			if(ins.forceSingle) useThread = false;
+			if(ins.CanDebug && useThread)
+			{
+				if(iDebug!=null) Debug.Log($"MnThread:StartThread:{useThread}:{call.Method}",iDebug.UnityObject);
+				else Debug.Log($"MnThread:StartThread:{useThread}:{call.Method}");
+			}
+			
 			if(!useThread)
 			{
 				call();
 				return;
 			}
+			
 			Thread thread = new Thread(new ThreadStart(call));
 			thread.Priority = (System.Threading.ThreadPriority)priority;
 			thread.Start();
