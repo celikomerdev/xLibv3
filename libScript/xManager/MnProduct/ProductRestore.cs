@@ -34,6 +34,11 @@ namespace xLib.ToolPurchase
 			if(product == null) return;
 			if(product.definition.type != ProductType.NonConsumable) return;
 			
+			// if(Application.isEditor)
+			// {
+			// 	eventRestore.Invoke(value);
+			// 	return;
+			// }
 			eventRestore.Invoke(product.hasReceipt);
 		}
 	}
