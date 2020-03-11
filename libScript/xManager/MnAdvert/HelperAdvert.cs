@@ -45,7 +45,7 @@ namespace xLib.libAdvert
 		
 		private void MessageNotLoaded()
 		{
-			if(canMessage) StPopupBar.QueueMessage("Downloading Ads");
+			if(canMessage) StPopupBar.QueueMessage("Please Try Again Later");
 		}
 		#endregion
 		

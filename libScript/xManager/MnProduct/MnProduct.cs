@@ -123,7 +123,8 @@ namespace xLib
 			Debug.LogException(new UnityException($"{this.name}:OnPurchaseFailed:{productFailureReason}:{product.definition.id}"),this);
 			StAnalytics.LogEvent(group:"iap_purchase_fail_"+productFailureReason,key:product.definition.id);
 			
-			OnPurchase(false,product.definition.id);
+			bool canUnlock = (productFailureReason == PurchaseFailureReason.DuplicateTransaction);
+			OnPurchase(canUnlock,product.definition.id);
 		}
 		#endregion
 		
