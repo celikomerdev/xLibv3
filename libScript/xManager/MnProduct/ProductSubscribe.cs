@@ -16,7 +16,7 @@ namespace xLib.ToolPurchase
 		
 		protected override bool TryRegister(bool register)
 		{
-			MnProduct.ins.isInit.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:false);
+			MnProduct.ins.isInit.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:OnRegister);
 			MnProduct.ins.onRestore.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:false);
 			MnProduct.ins.onPurchase.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:false);
 			return register;
@@ -67,7 +67,7 @@ namespace xLib.ToolPurchase
 		
 		protected override bool TryRegister(bool register)
 		{
-			MnProduct.ins.onPurchase.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:true);
+			MnProduct.ins.onPurchase.Listener(register:register,call:ListenResult,viewId:ViewId,order:baseRegister.order,onRegister:false);
 			return register;
 		}
 		
