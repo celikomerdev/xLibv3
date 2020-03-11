@@ -14,9 +14,9 @@ namespace xLib.ToolPurchase
 		
 		protected override bool TryRegister(bool register)
 		{
-			MnProduct.ins.isInit.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
-			MnProduct.ins.onRestore.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
-			MnProduct.ins.onPurchase.Listener(register:register, call:ListenPurchase, viewId:ViewId, order:baseRegister.order, onRegister:true);
+			if(OnRegister) MnProduct.ins.isInit.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
+			MnProduct.ins.onRestore.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:false);
+			MnProduct.ins.onPurchase.Listener(register:register, call:ListenPurchase, viewId:ViewId, order:baseRegister.order, onRegister:false);
 			return register;
 		}
 		
@@ -34,11 +34,11 @@ namespace xLib.ToolPurchase
 			if(product == null) return;
 			if(product.definition.type != ProductType.NonConsumable) return;
 			
-			// if(Application.isEditor)
-			// {
-			// 	eventRestore.Invoke(value);
-			// 	return;
-			// }
+			if(CanDebug && value)
+			{
+				eventRestore.Invoke(value);
+				return;
+			}
 			eventRestore.Invoke(product.hasReceipt);
 		}
 	}
@@ -57,8 +57,9 @@ namespace xLib.ToolPurchase
 		
 		protected override bool TryRegister(bool register)
 		{
-			MnProduct.ins.onRestore.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
-			MnProduct.ins.onPurchase.Listener(register:register, call:ListenPurchase, viewId:ViewId, order:baseRegister.order, onRegister:true);
+			if(OnRegister) MnProduct.ins.isInit.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:true);
+			MnProduct.ins.onRestore.Listener(register:register, call:ListenRestore, viewId:ViewId, order:baseRegister.order, onRegister:false);
+			MnProduct.ins.onPurchase.Listener(register:register, call:ListenPurchase, viewId:ViewId, order:baseRegister.order, onRegister:false);
 			return register;
 		}
 		
@@ -71,6 +72,7 @@ namespace xLib.ToolPurchase
 		{
 			if(!value) return;
 			if(MnProduct.currentProductId != key) return;
+			
 			eventRestore.Invoke(value);
 		}
 	}
