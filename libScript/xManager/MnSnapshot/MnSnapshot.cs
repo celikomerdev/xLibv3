@@ -1,41 +1,33 @@
 ﻿#if xLibv3
 using System;
 using UnityEngine;
+using xLib.EventClass;
+using xLib.xValueClass;
 
 namespace xLib
 {
 	public class MnSnapshot : SingletonM<MnSnapshot>
 	{
-		public static SnapshotBase m_snapshot = new SnapshotBase();
-		public static SnapshotBase snapshot
+		[SerializeField]private NodeLong playTime = null;
+		[SerializeField]private NodeGroup saveGroup = null;
+		[SerializeField]private EventUnity onLoadComplete = new EventUnity();
+		
+		public static Action<long> onLoadPlayTime = delegate{};
+		public long PlayTime
 		{
 			get
 			{
-				return m_snapshot;
+				return playTime.Value;
 			}
 			set
 			{
-				if(ins && ins.CanDebug) Debug.Log("OverrideSnaphot:SnapshotCustom");
-				m_snapshot = value;
+				onLoadPlayTime(value);
+				playTime.Value = value;
 			}
 		}
 		
-		public static long PlayTime
-		{
-			get
-			{
-				long value = snapshot.PlayTime;
-				Debug.Log($"PlayTime:Get:{value}");
-				return value;
-			}
-			set
-			{
-				Debug.Log($"PlayTime:Set:{value}");
-				snapshot.PlayTime = value;
-			}
-		}
-		
-		public static byte[] SnapshotByte
+		public static Action<byte[]> onLoadBytes = delegate{};
+		public byte[] SnapshotByte
 		{
 			get
 			{
@@ -46,25 +38,23 @@ namespace xLib
 			}
 			set
 			{
+				onLoadBytes(value);
 				char[] chars = new char[value.Length / sizeof(char)];
 				Buffer.BlockCopy(value, 0, chars, 0, value.Length);
 				SnapshotString = new string(chars);
 			}
 		}
 		
-		public static string SnapshotString
+		public static Action<string> onLoadJson = delegate{};
+		public string SnapshotString
 		{
 			get
 			{
-				string value = snapshot.JsonString;
-				Debug.Log($"SnapshotString:Get:{value}");
-				return value;
+				return saveGroup.SerializedObject.ToJsonString();
 			}
 			set
 			{
 				if(string.IsNullOrWhiteSpace(value)) return;
-				Debug.Log($"SnapshotString:Set:{value}");
-				
 				StPopupWindow.Reset();
 				StPopupWindow.Header(MnLocalize.GetValue("Warning"));
 				StPopupWindow.Body(MnLocalize.GetValue("Everything Will Be Deleted"));
@@ -75,31 +65,13 @@ namespace xLib
 				{
 					StPopupWindow.Listener(false,Listener);
 					if(!result) return;
-					snapshot.JsonString = value;
+					onLoadJson(value);
+					saveGroup.ValueDefaultReset();
+					saveGroup.SerializedObject = value;
+					onLoadComplete.Invoke();
 				}
 				StPopupWindow.Show();
 			}
-		}
-	}
-	
-	public class SnapshotBase
-	{
-		public virtual long PlayTime
-		{
-			get
-			{
-				return SafeTime.NowUtc.Ticks;
-			}
-			set{}
-		}
-		
-		public virtual string JsonString
-		{
-			get
-			{
-				return "";
-			}
-			set{}
 		}
 	}
 }

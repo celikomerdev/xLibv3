@@ -69,13 +69,18 @@ namespace xLib
 			valueBase.ValueSet(value:value,viewId:string.Empty);
 		}
 		
-		public void ValueDefaultReset(V valueNew)
+		public virtual void ValueDefaultReset(V valueNew)
 		{
 			ValueDefault = valueNew;
 			string tempViewId = ViewCore.CurrentId;
 			ViewCore.CurrentId = string.Empty;
 			Value = ValueDefault;
 			ViewCore.CurrentId = tempViewId;
+		}
+		
+		public virtual void ValueDefaultReset()
+		{
+			ValueDefaultReset(ValueDefault);
 		}
 		#endregion
 		

@@ -85,7 +85,7 @@ namespace xLib
 		private void SaveGame(ISavedGameMetadata game)
 		{
 			if(CanDebug) Debug.Log($"{this.name}:SaveGame:game:{game}",this);
-			xTimeSpan playTime = TimeSpan.FromTicks(MnSnapshot.PlayTime);
+			xTimeSpan playTime = TimeSpan.FromTicks(MnSnapshot.ins.PlayTime);
 			string description = $"{MnLocalize.GetValue("Total Time")}: {playTime.ToString(@"HH\:mm\:ss")}";
 			
 			ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
@@ -93,7 +93,7 @@ namespace xLib
 			builder.WithUpdatedPlayedTime(playTime);
 			builder.WithUpdatedDescription(description);
 			SavedGameMetadataUpdate updatedMetadata = builder.Build();
-			savedGameClient.CommitUpdate(game,updatedMetadata,MnSnapshot.SnapshotByte,OnGameSaved);
+			savedGameClient.CommitUpdate(game,updatedMetadata,MnSnapshot.ins.SnapshotByte,OnGameSaved);
 		}
 		
 		private void OnGameSaved(SavedGameRequestStatus status, ISavedGameMetadata game)
@@ -126,7 +126,7 @@ namespace xLib
 				return;
 			}
 			StPopupBar.QueueMessage(MnLocalize.GetValue("File Loaded"));
-			MnSnapshot.SnapshotByte = data;
+			MnSnapshot.ins.SnapshotByte = data;
 		}
 		#endregion
 	}

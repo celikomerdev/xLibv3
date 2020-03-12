@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace xLib.xValueClass
 {
-	public abstract class MonoValue<V> : MonoSave, ICall
+	public abstract class MonoValue<V> : MonoSave, ICall, IResetDefault
 	{
 		protected abstract xValue<V> Node
 		{
@@ -150,7 +150,7 @@ namespace xLib.xValueClass
 		
 		public void ValueDefaultReset()
 		{
-			Node.ValueDefaultReset(Node.ValueDefault);
+			Node.ValueDefaultReset();
 		}
 		
 		public V ValueAdd

@@ -131,6 +131,15 @@ namespace xLib
 			}
 		}
 		#endregion
+		
+		public override void ValueDefaultReset()
+		{
+			IResetDefault[] iResetDefault = Value.ArrayObject.GetGenericsArray<IResetDefault>(nodeSetting.UnityObject);
+			for (int i = 0; i < iResetDefault.Length; i++)
+			{
+				iResetDefault[i].ValueDefaultReset();
+			}
+		}
 	}
 }
 #endif
