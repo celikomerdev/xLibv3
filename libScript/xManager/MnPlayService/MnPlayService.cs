@@ -1,10 +1,8 @@
 ﻿#if xLibv3
 #if GooglePlayService
 using UnityEngine;
-using UnityEngine.Events;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
-using GooglePlayGames.BasicApi.Multiplayer;
 using xLib.xValueClass;
 
 namespace xLib
@@ -62,8 +60,8 @@ namespace xLib
 				PlayGamesPlatform.DebugLogEnabled = CanDebug;
 			
 				PlayGamesClientConfiguration.Builder builder = new PlayGamesClientConfiguration.Builder();
-				builder.WithInvitationDelegate(OnInvitationReceive);
-				builder.WithMatchDelegate(OnTurnMatchGot);
+				builder.WithMatchDelegate(MnPlayServiceMatch.MatchDelegate);
+				builder.WithInvitationDelegate(MnPlayServiceInvitation.InvitationDelegate);
 				
 				if(enableHidePopups) builder.EnableHidePopups();
 				if(savedGames) builder.EnableSavedGames();
@@ -165,46 +163,6 @@ namespace xLib
 			});
 		}
 		#endregion
-		
-		
-		#region Invitation
-		private Invitation invitation;
-		private readonly UnityAction onInvitationReceive = delegate{};
-		private void OnInvitationReceive(Invitation value, bool shouldAutoAccept)
-		{
-			if(CanDebug) Debug.Log($"{this.name}:OnInvitationReceive:{shouldAutoAccept}:{value}",this);
-			invitation = value;
-			onInvitationReceive.Invoke();
-			if (shouldAutoAccept) OnInvitationAccept();
-		}
-		
-		private readonly UnityAction onInvitationAccept = delegate{};
-		private void OnInvitationAccept()
-		{
-			if(CanDebug) Debug.Log($"{this.name}:OnInvitationAccept",this);
-			onInvitationAccept.Invoke();
-		}
-		
-		//PlayGamesPlatform.Instance.TurnBased.DeclineInvitation(mIncomingInvitation.InvitationId);
-		private readonly UnityAction onInvitationDecline = delegate{};
-		private void OnInvitationDecline()
-		{
-			if(CanDebug) Debug.Log($"{this.name}:OnInvitationDecline:",this);
-			onInvitationDecline.Invoke();
-		}
-		#endregion
-		
-		
-		#region Match
-		private readonly UnityAction onTurnMatchGot = delegate{};
-		private void OnTurnMatchGot(TurnBasedMatch value, bool shouldAutoLaunch)
-		{
-			if(CanDebug) Debug.Log($"{this.name}:OnTurnMatchGot:{shouldAutoLaunch}:{value}",this);
-			onTurnMatchGot.Invoke();
-			// MnMatchTurn.ins.shouldAutoLaunch = shouldAutoLaunch;
-			// MnMatchTurn.ins.match = value;
-		}
-		#endregion
 	}
 }
 #else
@@ -216,15 +174,16 @@ namespace xLib
 	public class MnPlayService : SingletonM<MnPlayService>
 	{
 		#pragma warning disable
-		[SerializeField]private bool enableHidePopups;
-		[SerializeField]private bool savedGames;
-		[SerializeField]private bool requestIdToken;
-		[SerializeField]private bool requestEmail;
-		[SerializeField]private bool requestServerAuthCode;
+		[SerializeField]private bool enableHidePopups = false;
+		[SerializeField]private bool savedGames = false;
+		[SerializeField]private bool requestIdToken = false;
+		[SerializeField]private bool requestEmail = false;
+		[SerializeField]private bool requestServerAuthCode = false;
 		
-		[SerializeField]private NodeString displayName;
-		[SerializeField]private NodeString idToken;
-		[SerializeField]private NodeString authCode;
+		[SerializeField]private NodeString displayName = null;
+		[SerializeField]private NodeTexture displayPhoto = null;
+		[SerializeField]private NodeString idToken = null;
+		[SerializeField]private NodeString authCode = null;
 		#pragma warning restore
 	}
 }

@@ -24,10 +24,13 @@ namespace xLib
 		{
 			get
 			{
-				return snapshot.PlayTime;
+				long value = snapshot.PlayTime;
+				Debug.Log($"PlayTime:Get:{value}");
+				return value;
 			}
 			set
 			{
+				Debug.Log($"PlayTime:Set:{value}");
 				snapshot.PlayTime = value;
 			}
 		}
@@ -36,9 +39,9 @@ namespace xLib
 		{
 			get
 			{
-				string tempString = SnapshotString;
-				byte[] bytes = new byte[tempString.Length*sizeof(char)];
-				Buffer.BlockCopy(tempString.ToCharArray(), 0, bytes, 0, bytes.Length);
+				string snapshotString = SnapshotString;
+				byte[] bytes = new byte[snapshotString.Length*sizeof(char)];
+				Buffer.BlockCopy(snapshotString.ToCharArray(), 0, bytes, 0, bytes.Length);
 				return bytes;
 			}
 			set
@@ -53,11 +56,15 @@ namespace xLib
 		{
 			get
 			{
-				return snapshot.JsonString;
+				string value = snapshot.JsonString;
+				Debug.Log($"SnapshotString:Get:{value}");
+				return value;
 			}
 			set
 			{
 				if(string.IsNullOrWhiteSpace(value)) return;
+				Debug.Log($"SnapshotString:Set:{value}");
+				
 				StPopupWindow.Reset();
 				StPopupWindow.Header(MnLocalize.GetValue("Warning"));
 				StPopupWindow.Body(MnLocalize.GetValue("Everything Will Be Deleted"));
@@ -83,10 +90,7 @@ namespace xLib
 			{
 				return SafeTime.NowUtc.Ticks;
 			}
-			set
-			{
-				xLogger.LogFormat($"SetPlayTime:{value}");
-			}
+			set{}
 		}
 		
 		public virtual string JsonString

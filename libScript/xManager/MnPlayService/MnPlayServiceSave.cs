@@ -10,14 +10,21 @@ namespace xLib
 {
 	public class MnPlayServiceSave : SingletonM<MnPlayServiceSave>
 	{
+		[SerializeField]private string saveName = "SaveFile";
 		[SerializeField]private uint maxDisplayedSavedGames = 5;
 		[SerializeField]private bool showCreateSaveUI = true;
 		[SerializeField]private bool showDeleteSaveUI = true;
 		
-		
 		#region Select
 		public void ShowSavesUI()
 		{
+			if(CanDebug) Debug.Log($"{this.name}:ShowSavesUI",this);
+			if(!PlayGamesPlatform.Instance.IsAuthenticated())
+			{
+				StPopupBar.QueueMessage(MnLocalize.GetValue("Please Login"));
+				return;
+			}
+			
 			ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 			if(savedGameClient == null)
 			{
@@ -27,8 +34,10 @@ namespace xLib
 			savedGameClient.ShowSelectSavedGameUI(MnLocalize.GetValue("Select File"),maxDisplayedSavedGames,showCreateSaveUI,showDeleteSaveUI,OnGameSelected);
 		}
 		
-		private static void OnGameSelected(SelectUIStatus status, ISavedGameMetadata game)
+		private void OnGameSelected(SelectUIStatus status, ISavedGameMetadata game)
 		{
+			if(CanDebug) Debug.Log($"{this.name}:OnGameSelected:status:{status}:game:{game}",this);
+			
 			if(status != SelectUIStatus.SavedGameSelected)
 			{
 				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed To Select File")+"\n"+status);
@@ -36,23 +45,29 @@ namespace xLib
 			}
 			StPopupBar.QueueMessage(MnLocalize.GetValue("File Selected"));
 			
-			OpenSavedGame(game.Filename);
+			bool hasData = !game.IsNull();
+			if(hasData && game.IsOpen)
+			{
+				OnGameOpened(SavedGameRequestStatus.Success,game,hasData);
+				return;
+			}
 			
-			// if(!game.IsOpen) OnGameOpened(SavedGameRequestStatus.Success,game);
-			// else OpenSavedGame(game.Filename);
+			string saveNameNew = saveName;
+			if(maxDisplayedSavedGames>1) saveNameNew = saveName+"_"+DateTime.UtcNow.Ticks.ToString();
+			
+			ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+			savedGameClient.OpenWithAutomaticConflictResolution(saveNameNew,DataSource.ReadCacheOrNetwork,ConflictResolutionStrategy.UseLongestPlaytime,
+			(SavedGameRequestStatus statusOpen, ISavedGameMetadata gameOpen) =>
+			{
+				OnGameOpened(statusOpen,gameOpen,hasData);
+			});
 		}
 		#endregion
 		
-		
 		#region Open
-		private static void OpenSavedGame(string filename)
+		private void OnGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game,bool hasData)
 		{
-			ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
-			savedGameClient.OpenWithAutomaticConflictResolution(filename,DataSource.ReadCacheOrNetwork,ConflictResolutionStrategy.UseLongestPlaytime,OnGameOpened);
-		}
-		
-		private static void OnGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game)
-		{
+			if(CanDebug) Debug.Log($"{this.name}:OnGameOpened:status:{status}:game:{game}:hasData:{hasData}",this);
 			if(status != SavedGameRequestStatus.Success)
 			{
 				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed To Open File")+"\n"+status);
@@ -60,15 +75,16 @@ namespace xLib
 			}
 			StPopupBar.QueueMessage(MnLocalize.GetValue("File Opened"));
 			
-			if(string.IsNullOrWhiteSpace(game.Filename)) SaveGame(game);
-			else LoadGame(game);
+			if(hasData) LoadGame(game);
+			else SaveGame(game);
 		}
 		#endregion
 		
 		
 		#region Save
-		private static void SaveGame(ISavedGameMetadata game)
+		private void SaveGame(ISavedGameMetadata game)
 		{
+			if(CanDebug) Debug.Log($"{this.name}:SaveGame:game:{game}",this);
 			xTimeSpan playTime = TimeSpan.FromTicks(MnSnapshot.PlayTime);
 			string description = $"{MnLocalize.GetValue("Total Time")}: {playTime.ToString(@"HH\:mm\:ss")}";
 			
@@ -80,8 +96,9 @@ namespace xLib
 			savedGameClient.CommitUpdate(game,updatedMetadata,MnSnapshot.SnapshotByte,OnGameSaved);
 		}
 		
-		private static void OnGameSaved(SavedGameRequestStatus status, ISavedGameMetadata game)
+		private void OnGameSaved(SavedGameRequestStatus status, ISavedGameMetadata game)
 		{
+			if(CanDebug) Debug.Log($"{this.name}:OnGameSaved:status:{status}:game:{game}",this);
 			if (status != SavedGameRequestStatus.Success)
 			{
 				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed To Save File")+"\n"+status);
@@ -93,14 +110,16 @@ namespace xLib
 		
 		
 		#region Load
-		private static void LoadGame(ISavedGameMetadata game)
+		private void LoadGame(ISavedGameMetadata game)
 		{
+			if(CanDebug) Debug.Log($"{this.name}:LoadGame:game:{game}",this);
 			ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 			savedGameClient.ReadBinaryData(game,OnGameLoaded);
 		}
 		
-		private static void OnGameLoaded(SavedGameRequestStatus status, byte[] data)
+		private void OnGameLoaded(SavedGameRequestStatus status, byte[] data)
 		{
+			if(CanDebug) Debug.Log($"{this.name}:OnGameLoaded:status:{status}:lenght:{data.Length}",this);
 			if(status != SavedGameRequestStatus.Success)
 			{
 				StPopupBar.QueueMessage(MnLocalize.GetValue("Failed To Load File")+"\n"+status);
@@ -120,6 +139,7 @@ namespace xLib
 	public class MnPlayServiceSave : SingletonM<MnPlayServiceSave>
 	{
 		#pragma warning disable
+		[SerializeField]private string saveName = "SaveFile";
 		[SerializeField]private uint maxDisplayedSavedGames = 5;
 		[SerializeField]private bool showCreateSaveUI = true;
 		[SerializeField]private bool showDeleteSaveUI = true;
