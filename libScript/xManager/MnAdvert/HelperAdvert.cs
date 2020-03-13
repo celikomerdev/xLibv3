@@ -45,7 +45,7 @@ namespace xLib.libAdvert
 		
 		private void MessageNotLoaded()
 		{
-			if(canMessage) StPopupBar.QueueMessage("Please Try Again Later");
+			if(canMessage) StPopupBar.QueueMessage(MnLocalize.GetValue("Please Try Again Soon"));
 		}
 		#endregion
 		
